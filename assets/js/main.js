@@ -209,6 +209,51 @@
 })();
 
 
+
+/* Slick Slider*/
+var swiper = new Swiper('.bk-slider .swiper', {
+  slidesPerView: 3,
+  centeredSlides: true,
+  loop: true,
+  spaceBetween: 20,
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+    renderBullet: function (index, className) {
+      return '<span class="' + className + '">' + (index + 1) + '</span>';
+    },
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+});
+
+
+/* Underline Animation */
+document.addEventListener('DOMContentLoaded', function() {
+  window.addEventListener('scroll', function() {
+    var currentSection = '';
+
+    // Get the id of the section currently in view
+    document.querySelectorAll('.section-container').forEach(function(section) {
+      var rect = section.getBoundingClientRect();
+      if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+        currentSection = section.getAttribute('id');
+      }
+    });
+
+    // Remove active class from all h2 tags
+    document.querySelectorAll('h3').forEach(function(h3) {
+      h3.classList.remove('active');
+    });
+
+    // Add active class to the current section's h2
+    document.querySelector('h3[data-target="' + currentSection + '"]').classList.add('active');
+  });
+});
+
+// 
 // Menu
 
 const dropdownBtn = document.querySelectorAll(".dropdown-btn");
@@ -280,16 +325,50 @@ hamburgerBtn.addEventListener("click", toggleHamburger);
 
 // 
 $(document).ready(function() {
-  if ($('.menu').hasClass('show')) {
-   $('#hamburger i').removeClass('bx-menu');
-   $('#hamburger i').addClass('bx-x');
-  }
+
+ $(".menu-bar > li").click (function () {
+  $ (".menu").addClass('menu-expanded');
 });
+
+$(".nav-end").click (function () {
+  $ (".menu").removeClass('menu-expanded');
+  // $ (".menu").toggleClass('show');
+});
+
+});
+
+
+
 
 
 // Services
 
-$(".box") .click (function () {
-  $ (".box") .removeClass ("active");
-  $ (this) .addClass ("active");
-});
+// $(".menu-bar > li").click (function () {
+//   $ (".menu").css('display', 'none');
+// });
+
+// $(".nav-end,").click (function () {
+//   $ (".menu").css('display', 'block');
+// });
+
+
+
+/*tabs */
+// Tabs
+
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
