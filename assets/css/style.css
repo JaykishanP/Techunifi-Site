@@ -675,6 +675,10 @@ section#how-it-works {
   cursor: pointer;
 }
 
+.subject-message input#subject {
+  border: 1px solid var(--black);
+}
+
 .form-group textarea {
   resize: vertical;
   min-height: 100px;
@@ -704,14 +708,16 @@ section#how-it-works {
 }
 
 #contact-submit button {
+  background-color: var(--black);
+  color: var(--gray);
   border: 1px solid var(--black);
   border-radius: var(--border-radius);
   margin: 30px 0 0 0;
 }
 
 #contact-submit button:hover{
-  color: var(--gray);
-  background-color: var(--black);
+  background-color: var(--gray);
+  color: var(--black);
 }
 
 .contact .prod-heading h3::before {
@@ -750,6 +756,10 @@ footer.footer {
   max-width: 281px;
 }
 
+.what-we-do p {
+  max-width: 314px;
+}
+
 .footer ul.links-footer li {
   padding: 0 0 30px 0;
   font-weight: 500;
@@ -769,11 +779,17 @@ footer.footer {
   padding: 10px 0 0 0;
 }
 
+.email-subscribe label{
+  display: block;
+}
+
 .email-subscribe input {
   background: transparent;
   border: var(--border);
   border-radius: 0;
   margin: 10px 0;
+  width: 45%;
+  display: inline;
 }
 
 .email-subscribe button {
@@ -782,7 +798,8 @@ footer.footer {
   border-radius: var(--border-radius);
   border: var(--border);
   padding: 10px 30px;
-  margin: 20px 0 0 0;
+  margin: 0 0 0 10px;
+  display: inline;
 }
 
 .email-subscribe button:hover {
@@ -857,6 +874,11 @@ p.social {
 .connect-details a span {
   padding: 0 10px 0 0;
   font-size: 20px;
+  position: relative;
+  top: 3px;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .footer .connect-details a {
@@ -914,6 +936,7 @@ ul.list-unstyled.connect-details {
 
 .tab button.active {
   position: relative;
+  font-weight: 800;
 }
 
 .tab button.active::after {
@@ -926,6 +949,72 @@ ul.list-unstyled.connect-details {
   position: absolute;
   right: 0;
 }
+
+.tabcontent .prod-heading h3::before {
+  content: "";
+  height: 0.8px;
+  width: 106px;
+  display: inline-block;
+  background-color: var(--black);
+  position: absolute;
+  bottom: -20px;
+  left: 1%;
+  z-index: -1;
+}
+
+.tabs-para {
+  padding: 20px 0 0 0;
+}
+
+.tabs-story-column .service-col {
+  text-align: left;
+  margin: 0;
+}
+
+.tabs-story-column .service-col p {
+  max-width: 248px;
+  margin: 0;
+}
+
+.tabs-story-column .service-col h3{
+  position: relative;
+}
+
+.tabs-story-column .service-col h3::before {
+  content: url('../img/how-it-works/go-live.png');
+  position: absolute;
+  left: -11%;
+  z-index: -1;
+}
+
+.news-section {
+  padding: 30px 0 0 0;
+}
+
+.tabcontent .news-section .prod-heading h3::before {
+  width: 100%;
+}
+
+.news-rows {
+  padding: 20px;
+  background-color: #fff;
+  margin: 15px 0 25px 0;
+  display: inline-block;
+}
+
+.news-company {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.news-content p {
+  padding: 20px 0 15px 0;
+}
+
+.expand summary {
+  color: #2A7AFF;
+}
+
 
 /*--------------------------------------------------------------
 # Clients
@@ -956,6 +1045,7 @@ ul.list-unstyled.connect-details {
     /* transform: scale(1.4); */
     z-index: 2;
     width: 400px !important;
+    min-height: 487px;
     /* margin: 0 auto !important; */
     /* padding: 0 67px; */
   }
