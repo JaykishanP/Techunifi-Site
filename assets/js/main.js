@@ -213,7 +213,13 @@
 /* Slick Slider*/
 var swiper = new Swiper('.bk-slider .swiper', {
   slidesPerView: 3,
+  speed: 500,
   centeredSlides: true,
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+    pauseOnMouseEnter: true
+  },
   loop: true,
   spaceBetween: 20,
   pagination: {
@@ -228,6 +234,7 @@ var swiper = new Swiper('.bk-slider .swiper', {
     prevEl: '.swiper-button-prev',
   },
 });
+
 
 
 /* Underline Animation */
