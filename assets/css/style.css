@@ -54,12 +54,6 @@ img{
   max-width: 100%;
 }
 
-@media (min-width: 576px){
-  .container {
-    max-width: unset !important;
-  }
-}
-
 @media (min-width: 1200px){
   .container {
     max-width: 1315px !important;
@@ -320,6 +314,9 @@ section {
 }
 
 @media (max-width: 1100px) {
+  #nav-menu {
+    padding: 15px 0;
+  }
   .menu-expanded.menu.show{
     display: none;
   }
@@ -336,8 +333,8 @@ section {
   .menu {
     display: none;
     position: absolute;
-    top: 77px;
-    left: 0;
+    top: 79px;
+    left: unset;
     min-height: 100vh;
     width: 100vw;
   }
@@ -494,14 +491,13 @@ section {
 }
 
 #landing-services{
-  padding: 20px 0 0 0;
   display: block;
 }
 
 #landing-services::before{
   content: '';
   display: block;
-  height: 111px;
+  height: 75px;
   margin-top: -55px;
   visibility: hidden;
 }
@@ -788,7 +784,7 @@ footer.footer {
   border: var(--border);
   border-radius: 0;
   margin: 10px 0;
-  width: 45%;
+  width: 65%;
   display: inline;
 }
 
@@ -941,13 +937,14 @@ ul.list-unstyled.connect-details {
 
 .tab button.active::after {
   content: "";
-  content: "";
   height: 29px;
   width: 6px;
   display: inline-block;
   background-color: var(--black);
   position: absolute;
   right: 0;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
 }
 
 .tabcontent .prod-heading h3::before {
@@ -1183,54 +1180,180 @@ section.ticket-form {
   height: 0.8px;
 }
 
-.section{
-  width:80%;
-  margin:0 auto;
-  height:400px;
-  position:relative;
-  padding:0
+/* Responsive */
+/* Mobile */
+
+@media only screen and (max-width: 767.9px){
+
+  .hero-sub {
+    padding: 123px 0 0 0;
+  }
+  .hero-logo {
+    max-width: 86%;
+    margin: 0 auto;
+  }
+  .hero-line-parent {
+    padding: 20px 0;
+  }
+  .hero-line {
+    height: 64px;
+  }
+  .hero-heading h3 {
+    font-size: 35px;
+    margin: 0 0 20px 0;
+  }
+  .section-container h3::after {
+    bottom: -10px;
+  }
+  .service-img {
+    padding: 10px 0;
+  }
+  .service-col h3 {
+    padding: 10px 0 0 0;
+  }
+  .service-col p {
+    max-width: 100%;
+  }
+  .service-more {
+    padding: 15px 0 0 0;
+  }
+  section#hero {
+    padding-bottom: 13px;
+  }
+  section#product-section {
+    padding: 41px 0 14px 0;
+  }
+  .prod-heading h3,
+  .how-heading h3 {
+    font-size: 35px;
+    margin: 0 0 24px 0;
+  }
+  .how-img-text {
+    padding: 5px 0 10px 0;
+  }
+  #how-it-works::before, #contact::before {
+    height: 111px;
+  }
+  .how-img-col {
+    padding: 25px 20px 7px 25px;
+  }
+  .how-work-text p {
+    max-width: 100%;
+    margin: 0 0 27px 0;
+  }
+  .how-section-desc .hero-line {
+    height: 50px;
+  }
+  .how-section-desc .service-col p {
+    max-width: 100%;
+  }
+  .service-col {
+    padding: 15px 16px;
+  }
+  section#how-it-works {
+    padding: 0;
+  }
+  section.contact {
+    padding: 30px 0;
+  }
+  .php-email-form {
+    margin: 10px 0 0 0;
+  }
+  .contact .prod-heading h3::before {
+    bottom: -11px;
+  }
+  .col-md-8.text-message {
+    padding: 0 14px;
+  }
+  .subject-message input#subject {
+    border: 0;
+    border-bottom: 1px solid var(--black);
+  }
+  #contact-submit button {
+    margin: 0;
+  }
+  .contact-submit {
+    padding: 0 15px;
+  }
+  footer.footer {
+    padding: 20px 10px 36px 10px;
+  }
+  .email-subscribe input {
+    width: 76%;
+  }
+  .email-subscribe button {
+    margin: 10px 0 0 0;
+    display: inline-block;
+  }
+  .footer ul.links-footer li {
+    padding: 0 0 20px 0;
+  }
+  #aboutUs {
+    margin: 0 !important;
+  }
+  .social-us {
+    margin: 0 !important;
+  }
+
 }
 
-.hscroll-line {
-	bottom:30px;
-	right: 50%;
-	height: 1px;
-	position: absolute;
-	overflow: hidden;
-  width:60px;
-  transform: rotate(90deg);
-  tranform-origin:50% 50%;
- 
+
+/* Ipad Mini - Air */
+@media only screen and (min-width: 768px) and (max-width: 1023px){
+  .what-we-do p {
+    max-width: 183px;
+  }
+  .email-subscribe input {
+    width: 77%;
+  }
+  .email-subscribe button {
+    margin: 10px 0 0 0;
+  }
+  p.social {
+    margin: 15px 0 0 0;
+  }
+  .service-col h3 {
+    padding: 21px 0 4px 0;
+  }
+  .hero-sub .col-container {
+    display: contents;
+  }
+  .service-col {
+    padding: 16px 14px;
+  }
+  .tabs-story-column .service-col h3::before {
+    left: -19%;
+  }
+  .bk-slider .swiper-slide.swiper-slide-active{
+    width: 200px !important;
+    min-height: 576px;
+  }
+  .tab {
+    width: 20%;
+  }
+  .tabcontent {
+    padding: 0 0 0 20px;
+    width: 80%;
+  }
+  .bk-slider {
+    height: auto;
+    padding: 0 0 36px;
+  }
+  .aboutUsPage #hero {
+    padding-top: 20px;
+  }
+
 }
 
 
-.hscroll-line::before,
-.hscroll-line::after {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	content: ""
+/* Ipad Pro */
+@media only screen and (min-width: 1024px) and (max-width: 1199px){
+
+.email-subscribe input {
+  width: 52%;
+}
+.tabs-story-column .service-col h3::before {
+  left: -15%;
 }
 
-.hscroll-line:before {
-	background: #ffffff3b;
-}
-
-.hscroll-line::after {
-	background: #FFD92A;
-	animation: move 3s infinite
-}
-
-@keyframes move {
-	0% {
-		transform: translate3d(-200%, 0, 0)
-	}
-	60% {
-		transform: translate3d(100%, 0, 0)
-	}
-	100% {
-		transform: translate3d(100%, 0, 0)
-	}
 }

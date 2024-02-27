@@ -243,10 +243,10 @@ document.addEventListener('DOMContentLoaded', function() {
     var currentSection = '';
 
     // Get the id of the section currently in view
-    document.querySelectorAll('.section-container').forEach(function(section) {
-      var rect = section.getBoundingClientRect();
+    document.querySelectorAll('.section-container').forEach(function(div) {
+      var rect = div.getBoundingClientRect();
       if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
-        currentSection = section.getAttribute('id');
+        currentSection = div.getAttribute('id');
       }
     });
 
