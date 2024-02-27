@@ -344,8 +344,28 @@ $(".nav-end").click (function () {
 
 });
 
+// 
+function checkMenuShow() {
+  if($('.menu').hasClass('show')) {
+    $('body, html').css('overflow', 'hidden');
+    $('#hamburger i').removeClass('bx-menu').addClass('bx-x');
 
+    $(".menu-bar li").click (function () {
+      $('#hamburger i').removeClass('bx-x').addClass('bx-menu');
+      $('#hamburger i').removeClass('bx-menu').addClass('bx-x');
+    });
 
+  } else {
+    $('body, html').css('overflow', 'auto');
+    $('#hamburger i').removeClass('bx-x').addClass('bx-menu');
+  }
+}
+
+// Check menu show status initially
+checkMenuShow();
+
+// Check menu show status periodically, for example, every 500 milliseconds
+setInterval(checkMenuShow, 500);
 
 
 // Services
