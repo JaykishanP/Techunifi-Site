@@ -316,6 +316,7 @@ section {
 @media (max-width: 1100px) {
   #nav-menu {
     padding: 15px 0;
+    z-index: 4;
   }
   .menu-expanded.menu.show{
     display: none;
@@ -334,7 +335,7 @@ section {
     display: none;
     position: absolute;
     top: 79px;
-    left: unset;
+    left: 0;
     min-height: 100vh;
     width: 100vw;
   }
@@ -371,9 +372,9 @@ section {
   .menu-bar {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    row-gap: 1.3rem;
-    padding: 1rem 1.5rem;
+    align-items: center;
+    row-gap: 2.3rem;
+    padding: 16px 0;
   }
 
   .menu-bar .nav-link {
@@ -589,7 +590,7 @@ section#product-section {
 }
 
 /* How it works */
-section#how-it-works {
+section.howItworks {
   padding: 0 0 60px 0;
 }
 
@@ -597,7 +598,7 @@ section#how-it-works {
 #contact::before {
   content: '';
   display: block;
-  height: 140px;
+  height: 108px;
   margin-top: -70px;
   visibility: hidden;
 }
@@ -906,6 +907,7 @@ ul.list-unstyled.connect-details {
   font-size: 17px;
   border-right: var(--border);
   background: #ededed;
+  letter-spacing: 1px;
 }
 
 .tab button:hover {
@@ -1095,6 +1097,7 @@ ul.list-unstyled.connect-details {
 .client-card p{
   font-size: 12px;
   line-height: 14px;
+  letter-spacing: 0.4px;
 }
 
 /*--------------------------------------------------------------
@@ -1231,9 +1234,6 @@ section.ticket-form {
   .how-img-text {
     padding: 5px 0 10px 0;
   }
-  #how-it-works::before, #contact::before {
-    height: 111px;
-  }
   .how-img-col {
     padding: 25px 20px 7px 25px;
   }
@@ -1250,7 +1250,7 @@ section.ticket-form {
   .service-col {
     padding: 15px 16px;
   }
-  section#how-it-works {
+  section.howItworks{
     padding: 0;
   }
   section.contact {
@@ -1294,6 +1294,92 @@ section.ticket-form {
   .social-us {
     margin: 0 !important;
   }
+
+  section.tab-section {
+    padding: 10px 0 40px;
+}
+
+.tab {
+    width: 100%;
+    display: flex;
+    padding: 0 27px;
+    position: fixed;
+    background: linear-gradient(to bottom, rgba(237, 237, 237, 1),  rgba(237, 237, 237, 1));
+    z-index: 2;
+    margin: -2px 0;
+}
+
+.tab button {
+    padding: 15px 10px 5px 10px;
+    text-align: center;
+    border-bottom: var(--border);
+    border-right: none;
+}
+
+.tab button.active::after {
+    height: 4px;
+    width: 50px;
+    right: 34px;
+    bottom: 0;
+}
+
+.tab button:hover {
+    border-bottom: var(--border);
+    border-right: none
+}
+
+.tabcontent {
+    padding: 105px 20px 0;
+    width: 100%;
+}
+
+.tabs-story-column .service-col {
+  padding: 15px 46px;
+}
+
+.tab1-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.tabs-story-column.how-section-desc {
+  order: 3;
+}
+
+.tab1-section .prod-img {
+  padding: 25px 0;
+}
+
+#nav-menu.header-scrolled {
+  background: linear-gradient(to bottom, rgba(237, 237, 237, 1),  rgba(237, 237, 237, 1));
+}
+
+.bk-slider .swiper-slide .client-card img {
+  margin: 40px 0 0 0;
+}
+.bk-slider {
+  padding: 0;
+}
+.bk-slider .swiper-slide.swiper-slide-active {
+  width: 200px !important; 
+  min-height: 487px;
+}
+.bk-slider .swiper-slide.swiper-slide-active .client-card img {
+  transform: scale(1);
+  padding: 0 0 20px 0;
+  margin: 0;
+}
+.bk-slider .swiper-slide .client-card img {
+  margin: 87px 0 0 0;
+}
+.client-card {
+  padding: 0;
+}
+.bk-slider .swiper-slide {
+  padding: 0 5px;
+  margin: 0 4px 0 0 !important;
+}
+
 
 }
 
