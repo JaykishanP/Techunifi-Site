@@ -314,6 +314,12 @@ section {
 }
 
 @media (max-width: 993px) {
+  .menu-bar li .nav-link.underline,
+  .aboutUsPage .menu-about {
+    text-decoration: underline;
+    text-underline-offset: 7px;
+  }
+
   #nav-menu {
     padding: 15px 0;
     z-index: 4;
@@ -483,6 +489,27 @@ section {
   letter-spacing: 5px;
 }
 
+.section-container h3{
+  position: relative;
+}
+
+.section-container h3::before {
+  content: "";
+  height: 1px;
+  width: 106px;
+  display: inline-block;
+  background-color: var(--black);
+  position: absolute;
+  bottom: -20px;
+  left: 1%;
+  z-index: -1;
+}
+
+.section-container.we-head h3::before {
+  left: 46%;
+}
+
+
 .service-img {
   padding: 40px 0 20px;
 }
@@ -610,6 +637,10 @@ section.howItworks {
   padding: 0 0 10px 0;
   letter-spacing: 5px;
   text-align: center;
+}
+
+.section-container.how-head-sec h3::before {
+  width: 0;
 }
 
 .how-heading hr{
@@ -1044,7 +1075,7 @@ ul.list-unstyled.connect-details {
     /* transform: scale(1.4); */
     z-index: 2;
     width: 400px !important;
-    min-height: 487px;
+    min-height: 500px;
     /* margin: 0 auto !important; */
     /* padding: 0 67px; */
   }
@@ -1103,8 +1134,61 @@ ul.list-unstyled.connect-details {
 /*--------------------------------------------------------------
 # Ticket
 --------------------------------------------------------------*/
+.submit-banner img {
+  max-width: 82%;
+  margin: 0 auto;
+  display: block;
+  padding: 80px 0 0 0;
+}
+
+section#hero.submit-banner {
+  padding: 82px 0 20px 0;
+}
+
+.submit-head-para {
+  margin: 0 0 60px 0;
+}
+
+.submit-head-para .prod-heading h3{
+  position: relative;
+}
+
+.submit-head-para .prod-heading h3::before {
+  content: "";
+  height: 1px;
+  width: 106px;
+  display: inline-block;
+  background-color: var(--black);
+  position: absolute;
+  bottom: -20px;
+  left: 1%;
+  z-index: -1;
+}
+
 section.ticket-form {
-  margin: 80px 0 0 0;
+  padding: 60px 0 100px 0;
+}
+
+.submit-sub-section {
+  background-color: #fff;
+  padding: 25px 30px 15px;
+}
+
+.submit-ticket-info {
+  margin: 30px 0 0 0;
+}
+
+.cont-row-head h4 {
+  font-size: 33px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  padding: 0 0 20px 0;
+}
+
+.post-form-para p {
+  text-align: center;
+  padding: 30px 10px;
+  margin: 0 auto;
 }
 
 .ticket-form form button, 
@@ -1122,11 +1206,11 @@ section.ticket-form {
 
 .ticket-form form label {
   display: block;
-  margin: 0 0 10px 0;
+  margin: 0 0 3px 0;
 }
 
 .form-parent {
-  max-width: 600px;
+  max-width: 1086px;
   margin: 0 auto;
 }
 
@@ -1146,42 +1230,6 @@ section.ticket-form {
   color: var(--black);
 }
 
-/* Underline Animation */
-
-.section-container h3 {
-  position: relative;
-  display: inline-block; 
-}
-
-.section-container h3::after {
-  content: "";
-  position: absolute;
-  left: 32%;
-  bottom: -20px;
-  height: 1px;
-  width: 0;
-  background-color: var(--black);
-  transition: width 1.5s ease;
-}
-
-.section-container h3.active::after {
-  width: 40%; 
-}
-
-.prod-heading .section-container h3.active::after {
-  left: 0;
-}
-
-.how-heading .section-container h3 {
-  display: block;
-}
-
-.how-heading .section-container h3.active::after {
-  width: 100%;
-  left: 0;
-  bottom: -7px;
-  height: 0.8px;
-}
 
 /* Responsive */
 /* Mobile */
@@ -1205,8 +1253,12 @@ section.ticket-form {
     font-size: 35px;
     margin: 0 0 20px 0;
   }
-  .section-container h3::after {
-    bottom: -10px;
+  .section-container h3::before {
+    bottom: -7px;
+  }
+  .section-container.we-head h3::before {
+    left: 36%;
+    bottom: -7px;
   }
   .service-img {
     padding: 10px 0;
@@ -1226,10 +1278,15 @@ section.ticket-form {
   section#product-section {
     padding: 41px 0 14px 0;
   }
-  .prod-heading h3,
-  .how-heading h3 {
+  .prod-heading h3 {
     font-size: 35px;
     margin: 0 0 24px 0;
+  }
+  .how-heading h3{
+    padding: 0;
+  }
+  .how-heading hr {
+    margin: 0 31px 13px;
   }
   .how-img-text {
     padding: 5px 0 10px 0;
@@ -1353,15 +1410,11 @@ section.ticket-form {
 #nav-menu.header-scrolled {
   background: linear-gradient(to bottom, rgba(237, 237, 237, 1),  rgba(237, 237, 237, 1));
 }
-
-.bk-slider .swiper-slide .client-card img {
-  margin: 40px 0 0 0;
-}
 .bk-slider {
   padding: 0;
 }
 .bk-slider .swiper-slide.swiper-slide-active {
-  width: 200px !important; 
+  width: 103% !important;
   min-height: 487px;
 }
 .bk-slider .swiper-slide.swiper-slide-active .client-card img {
@@ -1370,16 +1423,46 @@ section.ticket-form {
   margin: 0;
 }
 .bk-slider .swiper-slide .client-card img {
-  margin: 87px 0 0 0;
+  margin: 0 0 0 0;
 }
 .client-card {
   padding: 0;
 }
 .bk-slider .swiper-slide {
   padding: 0 5px;
-  margin: 0 4px 0 0 !important;
+  /* margin: 0 4px 0 0 !important; */
+}
+.submit-banner img {
+  max-width: 93%;
+  padding: 10px 0 0 0;
+}
+section.ticket-form {
+  padding: 20px 0 60px 0;
+}
+.submit-head-para {
+  margin: 0 0 20px 0;
+}
+.cont-row-head h4 {
+  font-size: 24px;
 }
 
+}
+
+
+/* Higher Mobile */
+@media only screen and (min-width: 601px) and (max-width: 767px){
+
+   .hero-sub .col-container {
+      display: contents;
+   }
+
+   .service-col {
+     padding: 16px 14px;
+   }
+
+   .service-col h3 {
+     padding: 21px 0 4px 0;
+   }
 
 }
 
@@ -1404,6 +1487,9 @@ section.ticket-form {
   .hero-sub .col-container {
     display: contents;
   }
+  .section-container.we-head h3::before {
+    left: 42%;
+  }
   .service-col {
     padding: 16px 14px;
   }
@@ -1411,8 +1497,8 @@ section.ticket-form {
     left: -19%;
   }
   .bk-slider .swiper-slide.swiper-slide-active{
-    width: 200px !important;
-    min-height: 576px;
+    width: 92% !important;
+    min-height: 530px;
   }
   .tab {
     width: 20%;
@@ -1423,10 +1509,17 @@ section.ticket-form {
   }
   .bk-slider {
     height: auto;
-    padding: 0 0 36px;
+    padding: 40px 0 36px;
   }
   .aboutUsPage #hero {
     padding-top: 20px;
+  }
+
+  .submit-banner img {
+    padding: 38px 0 0 0;
+  }
+  section.ticket-form {
+    padding: 40px 0 60px 0;
   }
 
 }
