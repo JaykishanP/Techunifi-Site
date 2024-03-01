@@ -313,7 +313,26 @@ section {
   font-weight: 600;
 }
 
+.nav-end .raise-btn{
+  display: none;
+}
+
 @media (max-width: 993px) {
+  .nav-end .raise-btn {
+    display: block;
+    background-color: var(--black);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 13px;
+    color: #fff;
+    border: 1px solid var(--black);
+   }
+
+   .nav-end .raise-btn:hover{
+    background-color: var(--gray);
+    color: var(--black);
+   }
+
   .menu-bar li .nav-link.underline,
   .aboutUsPage .menu-about {
     text-decoration: underline;

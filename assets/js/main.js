@@ -84,6 +84,17 @@
     onscroll(document, toggleBacktotop);
   }
 
+  $('.back-to-top').click(function(event) {
+    event.preventDefault();
+  
+    $('html,body').animate({scrollTop:0}, 400); 
+  });
+  
+
+
+
+
+
   /**
    * Scroll with offset on page load with hash links in the URL
    */
@@ -122,11 +133,11 @@ var swiper = new Swiper('.bk-slider .swiper', {
   slidesPerView: 3,
   speed: 500,
   centeredSlides: true,
-  // autoplay: {
-  //   delay: 3000,
-  //   disableOnInteraction: false,
-  //   pauseOnMouseEnter: true
-  // },
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+    pauseOnMouseEnter: true
+  },
   loop: true,
   spaceBetween: 20,
   pagination: {
@@ -161,6 +172,9 @@ var swiper = new Swiper('.bk-slider .swiper', {
 });
 
 
+/**
+   * Menu
+   */
 // Menu
 
 const dropdownBtn = document.querySelectorAll(".dropdown-btn");
@@ -266,8 +280,7 @@ function toggleUnderline(event) {
 // });
 
 
-
-/*tabs */
+/* tabs */
 // Tabs
 
 function openTab(evt, tabName) {
@@ -285,7 +298,17 @@ function openTab(evt, tabName) {
 }
 
 // Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
+// document.getElementById("defaultOpen").click();
+
+document.addEventListener('DOMContentLoaded', function() {
+  var defaultOpenButton = document.getElementById("defaultOpen");
+  if (defaultOpenButton) {
+      defaultOpenButton.click();
+  } else {
+      // console.error("Element with ID 'defaultOpen' not found.");
+  }
+});
+
 
 //scroll to top on tab click
 $('.tab button').click(function(event) {
@@ -295,3 +318,31 @@ $('.tab button').click(function(event) {
 });
 
 
+/**
+   * Products -left Nav
+*/
+// Products -left Nav
+  document.addEventListener('DOMContentLoaded', function () {
+      function highlightNavLink() {
+          const sections = document.querySelectorAll('.right-content');
+          const navLinks = document.querySelectorAll('.sidebar a');
+  
+          // Check if elements are found
+          if (sections.length === 0 || navLinks.length === 0) {
+              // Exit early if elements are not found
+              return;
+          }
+  
+          let index = sections.length;
+  
+          while (--index && window.scrollY + 50 < sections[index].offsetTop) {}
+  
+          navLinks.forEach(link => link.classList.remove('active'));
+          if (index >= 0) {
+              navLinks[index].classList.add('active');
+          }
+      }
+  
+      window.addEventListener('scroll', highlightNavLink);
+  });
+  
