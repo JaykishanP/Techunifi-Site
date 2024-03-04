@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8"> 
-    <title>Ticket</title>
+    <title>Products</title>
      <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/favicon.png" rel="apple-touch-icon">
@@ -24,30 +24,6 @@
   <!-- Script JS  -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-  <style>
-
-
-.sidebar {
-    width: 200px;
-    position: sticky;
-    top: 100px; /* Height of the header */
-    bottom: 50px;
-    overflow-y: auto;
-    background-color: #f1f1f1;
-}
-
-main {
-    flex: 1;
-    padding-top: 50px; /* Height of the header */
-    padding-bottom: 50px; /* Height of the footer */
-}
-
-.sidebar li a.active {
-    text-decoration: underline;
-    color: var(--orange);
-}
-
-  </style>
 </head>
 <body class="productPage">
     
@@ -166,165 +142,333 @@ main {
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="submit-banner" data-aos="zoom-in" data-aos-delay="50">
-      <img src="assets/img/prod_main_img.png" alt="banner">
   </section><!-- End Hero -->
 
   <!--  -->
-  <div class="container">
+   
+  <section class="product-tab-section">
+    <div class="container">
 
-    <!-- <div class="right-content">
+      <div class="row">
 
-        <aside class="sidebar">
-            <ul>
-                <li><a href="#section1">Section 1</a></li>
-                <li><a href="#section2">Section 2</a></li>
-            </ul>
-        </aside>
-    
-        <main>
-            <div class="right-content" id="section1">
-                <p>
-                    Techunifi offers end-to-end support for businesses, guiding them through design, construction, installation, and operations of high-rise buildings.
-                    <br><br>
-                    During design, construction, and installation phases, we handle critical elements like structured cabling, ISP contracts, and surveillance installations. Our go-live support includes property management systems deployment and comprehensive training.
-                    <br><br>
-                    For ongoing operations, Techunifi provides managed IT solutions, remote support, and 24/7 assistance, along with technology refresh initiatives to keep businesses ahead in the ever-evolving tech landscape.
-                    <br><br>
-                    Our consultancy services tailored IT solutions to each business's needs, ensuring alignment with their objectives. Book an appointment now!
-                  </p>
-                  <p>
-                    Techunifi offers end-to-end support for businesses, guiding them through design, construction, installation, and operations of high-rise buildings.
-                    <br><br>
-                    During design, construction, and installation phases, we handle critical elements like structured cabling, ISP contracts, and surveillance installations. Our go-live support includes property management systems deployment and comprehensive training.
-                    <br><br>
-                    For ongoing operations, Techunifi provides managed IT solutions, remote support, and 24/7 assistance, along with technology refresh initiatives to keep businesses ahead in the ever-evolving tech landscape.
-                    <br><br>
-                    Our consultancy services tailored IT solutions to each business's needs, ensuring alignment with their objectives. Book an appointment now!
-                  </p>
-                  <p>
-                    Techunifi offers end-to-end support for businesses, guiding them through design, construction, installation, and operations of high-rise buildings.
-                    <br><br>
-                    During design, construction, and installation phases, we handle critical elements like structured cabling, ISP contracts, and surveillance installations. Our go-live support includes property management systems deployment and comprehensive training.
-                    <br><br>
-                    For ongoing operations, Techunifi provides managed IT solutions, remote support, and 24/7 assistance, along with technology refresh initiatives to keep businesses ahead in the ever-evolving tech landscape.
-                    <br><br>
-                    Our consultancy services tailored IT solutions to each business's needs, ensuring alignment with their objectives. Book an appointment now!
-                  </p>
+        <div class="col-md-12">
+          <div class="prod-fixed">
+            <div class="product-tab">
+              <button class="prod-tablinks active" onclick="openProd(event, 'telecom')" id="productOpen"><img src="assets/img/services/deskphone.png" alt=""><p>Telecomm</p></button>
+              <button class="prod-tablinks" onclick="openProd(event, 'light')"><img src="assets/img/services/wb_incandescent.png" alt=""><p>Lightning</p></button>
+              <button class="prod-tablinks" onclick="openProd(event, 'energy')"><img src="assets/img/services/bolt.png" alt=""><p>Energy</p></button>
+              <button class="prod-tablinks" onclick="openProd(event, 'wifi')"><img src="assets/img/services/wifi.png" alt=""><p>Wifi</p></button>
+              <button class="prod-tablinks" onclick="openProd(event, 'audi-vide')"><img src="assets/img/services/google_home_devices.png" alt=""><p>Audio - Video</p></button>
+              <button class="prod-tablinks" onclick="openProd(event, 'low-Voltage')"><img src="assets/img/services/cable.png" alt=""><p>Low Voltage</p></button>
+              <button class="prod-tablinks" onclick="openProd(event, 'security')"><img src="assets/img/services/nest_cam_iq_outdoor.png" alt=""><p>Security</p></button>
+              <button class="prod-tablinks" onclick="openProd(event, 'other-info')"><img src="assets/img/services/info.png" alt=""><p>Other</p></button>
             </div>
-    
-            <div class="right-content" id="section2">
-                <p>
-                    Techunifi offers end-to-end support for businesses, guiding them through design, construction, installation, and operations of high-rise buildings.
-                    <br><br>
-                    During design, construction, and installation phases, we handle critical elements like structured cabling, ISP contracts, and surveillance installations. Our go-live support includes property management systems deployment and comprehensive training.
-                    <br><br>
-                    For ongoing operations, Techunifi provides managed IT solutions, remote support, and 24/7 assistance, along with technology refresh initiatives to keep businesses ahead in the ever-evolving tech landscape.
-                    <br><br>
-                    Our consultancy services tailored IT solutions to each business's needs, ensuring alignment with their objectives. Book an appointment now!
-                  </p>
-                  <p>
-                    Techunifi offers end-to-end support for businesses, guiding them through design, construction, installation, and operations of high-rise buildings.
-                    <br><br>
-                    During design, construction, and installation phases, we handle critical elements like structured cabling, ISP contracts, and surveillance installations. Our go-live support includes property management systems deployment and comprehensive training.
-                    <br><br>
-                    For ongoing operations, Techunifi provides managed IT solutions, remote support, and 24/7 assistance, along with technology refresh initiatives to keep businesses ahead in the ever-evolving tech landscape.
-                    <br><br>
-                    Our consultancy services tailored IT solutions to each business's needs, ensuring alignment with their objectives. Book an appointment now!
-                  </p>
-                  <p>
-                    Techunifi offers end-to-end support for businesses, guiding them through design, construction, installation, and operations of high-rise buildings.
-                    <br><br>
-                    During design, construction, and installation phases, we handle critical elements like structured cabling, ISP contracts, and surveillance installations. Our go-live support includes property management systems deployment and comprehensive training.
-                    <br><br>
-                    For ongoing operations, Techunifi provides managed IT solutions, remote support, and 24/7 assistance, along with technology refresh initiatives to keep businesses ahead in the ever-evolving tech landscape.
-                    <br><br>
-                    Our consultancy services tailored IT solutions to each business's needs, ensuring alignment with their objectives. Book an appointment now!
-                  </p>
-            </div>
-        </main>
+          </div>
 
-    </div> -->
+        </div> 
+      </div>
 
-    <div class="row left-right">
+       <div class="row">
+        <div class="col-md-12">
+          <!-- Tab1 -->
+          <div id="telecom" class="product-tabcontent">
 
-        <div class="col-md-2">
-            <aside class="sidebar">
-                <ul>
-                    <li><a href="#section1">Section 1</a></li>
-                    <li><a href="#section2">Section 2</a></li>
-                    <!-- Add more menu items as needed -->
-                </ul>
-            </aside>
-        </div>
-
-        <div class="col-md-10">
-            <main>
-                <div class="right-content" id="section1">
-                    <p>
-                        Techunifi offers end-to-end support for businesses, guiding them through design, construction, installation, and operations of high-rise buildings.
-                        <br><br>
-                        During design, construction, and installation phases, we handle critical elements like structured cabling, ISP contracts, and surveillance installations. Our go-live support includes property management systems deployment and comprehensive training.
-                        <br><br>
-                        For ongoing operations, Techunifi provides managed IT solutions, remote support, and 24/7 assistance, along with technology refresh initiatives to keep businesses ahead in the ever-evolving tech landscape.
-                        <br><br>
-                        Our consultancy services tailored IT solutions to each business's needs, ensuring alignment with their objectives. Book an appointment now!
-                      </p>
-                      <p>
-                        Techunifi offers end-to-end support for businesses, guiding them through design, construction, installation, and operations of high-rise buildings.
-                        <br><br>
-                        During design, construction, and installation phases, we handle critical elements like structured cabling, ISP contracts, and surveillance installations. Our go-live support includes property management systems deployment and comprehensive training.
-                        <br><br>
-                        For ongoing operations, Techunifi provides managed IT solutions, remote support, and 24/7 assistance, along with technology refresh initiatives to keep businesses ahead in the ever-evolving tech landscape.
-                        <br><br>
-                        Our consultancy services tailored IT solutions to each business's needs, ensuring alignment with their objectives. Book an appointment now!
-                      </p>
-                      <p>
-                        Techunifi offers end-to-end support for businesses, guiding them through design, construction, installation, and operations of high-rise buildings.
-                        <br><br>
-                        During design, construction, and installation phases, we handle critical elements like structured cabling, ISP contracts, and surveillance installations. Our go-live support includes property management systems deployment and comprehensive training.
-                        <br><br>
-                        For ongoing operations, Techunifi provides managed IT solutions, remote support, and 24/7 assistance, along with technology refresh initiatives to keep businesses ahead in the ever-evolving tech landscape.
-                        <br><br>
-                        Our consultancy services tailored IT solutions to each business's needs, ensuring alignment with their objectives. Book an appointment now!
-                      </p>
+            <div class="row bread-crumb-row">
+              <div class="col-md-12">
+                <div class="bread-crumb">
+                  <p class="bread-parent"><span>Products</span>/<span class="bread-inner">Telecomm</span></p>
                 </div>
+              </div>
+            </div>
+          
+          <div class="row head-para-row">
+            <div class="col-md-12">
+               <!--  -->
+               <div class="submit-head-para" data-aos="zoom-in" data-aos-delay="50">
+                <div class="prod-heading aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
+                  <h3>Telecomm</h3>
+                </div>
+                <p class="tabs-para aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">Techunifi collaborates with renowned industry leaders such as Samsung and Dell, known for their innovative contributions to the tech landscape. As your trusted partner, we strive to empower you in making informed decisions tailored to your business requirements. Below, we've curated a selection of products and brands categorized by service. Don't hesitate to contact us for further information or to inquire about any specific product. We're here to assist you every step of the way in finding the perfect tech solutions for your business.</p>
+                <img src="assets/img/prod_main_img.png" alt="banner">
+              </div>
+              <!--  -->
+            </div>
+          </div>
+           
+          <div class="row left-right">
+
+           <div class="col-md-2">
+              <aside class="sidebar">
+                 <ul>
+                     <li><a href="#section1">Section 1</a></li>
+                     <li><a href="#section2">Section 2</a></li>
+                     <!-- Add more menu items as needed -->
+                 </ul>
+             </aside>
+           </div>
+
+      <div class="col-md-10">
+          <main>
+              <div class="right-content" id="section1">
+                  <p>
+                      Techunifi offers end-to-end support for businesses, guiding them through design, construction, installation, and operations of high-rise buildings.
+                      <br><br>
+                      During design, construction, and installation phases, we handle critical elements like structured cabling, ISP contracts, and surveillance installations. Our go-live support includes property management systems deployment and comprehensive training.
+                      <br><br>
+                      For ongoing operations, Techunifi provides managed IT solutions, remote support, and 24/7 assistance, along with technology refresh initiatives to keep businesses ahead in the ever-evolving tech landscape.
+                      <br><br>
+                      Our consultancy services tailored IT solutions to each business's needs, ensuring alignment with their objectives. Book an appointment now!
+                    </p>
+                    <p>
+                      Techunifi offers end-to-end support for businesses, guiding them through design, construction, installation, and operations of high-rise buildings.
+                      <br><br>
+                      During design, construction, and installation phases, we handle critical elements like structured cabling, ISP contracts, and surveillance installations. Our go-live support includes property management systems deployment and comprehensive training.
+                      <br><br>
+                      For ongoing operations, Techunifi provides managed IT solutions, remote support, and 24/7 assistance, along with technology refresh initiatives to keep businesses ahead in the ever-evolving tech landscape.
+                      <br><br>
+                      Our consultancy services tailored IT solutions to each business's needs, ensuring alignment with their objectives. Book an appointment now!
+                    </p>
+                    <p>
+                      Techunifi offers end-to-end support for businesses, guiding them through design, construction, installation, and operations of high-rise buildings.
+                      <br><br>
+                      During design, construction, and installation phases, we handle critical elements like structured cabling, ISP contracts, and surveillance installations. Our go-live support includes property management systems deployment and comprehensive training.
+                      <br><br>
+                      For ongoing operations, Techunifi provides managed IT solutions, remote support, and 24/7 assistance, along with technology refresh initiatives to keep businesses ahead in the ever-evolving tech landscape.
+                      <br><br>
+                      Our consultancy services tailored IT solutions to each business's needs, ensuring alignment with their objectives. Book an appointment now!
+                    </p>
+              </div>
+      
+              <div class="right-content" id="section2">
+                  <p>
+                      Techunifi offers end-to-end support for businesses, guiding them through design, construction, installation, and operations of high-rise buildings.
+                      <br><br>
+                      During design, construction, and installation phases, we handle critical elements like structured cabling, ISP contracts, and surveillance installations. Our go-live support includes property management systems deployment and comprehensive training.
+                      <br><br>
+                      For ongoing operations, Techunifi provides managed IT solutions, remote support, and 24/7 assistance, along with technology refresh initiatives to keep businesses ahead in the ever-evolving tech landscape.
+                      <br><br>
+                      Our consultancy services tailored IT solutions to each business's needs, ensuring alignment with their objectives. Book an appointment now!
+                    </p>
+                    <p>
+                      Techunifi offers end-to-end support for businesses, guiding them through design, construction, installation, and operations of high-rise buildings.
+                      <br><br>
+                      During design, construction, and installation phases, we handle critical elements like structured cabling, ISP contracts, and surveillance installations. Our go-live support includes property management systems deployment and comprehensive training.
+                      <br><br>
+                      For ongoing operations, Techunifi provides managed IT solutions, remote support, and 24/7 assistance, along with technology refresh initiatives to keep businesses ahead in the ever-evolving tech landscape.
+                      <br><br>
+                      Our consultancy services tailored IT solutions to each business's needs, ensuring alignment with their objectives. Book an appointment now!
+                    </p>
+                    <p>
+                      Techunifi offers end-to-end support for businesses, guiding them through design, construction, installation, and operations of high-rise buildings.
+                      <br><br>
+                      During design, construction, and installation phases, we handle critical elements like structured cabling, ISP contracts, and surveillance installations. Our go-live support includes property management systems deployment and comprehensive training.
+                      <br><br>
+                      For ongoing operations, Techunifi provides managed IT solutions, remote support, and 24/7 assistance, along with technology refresh initiatives to keep businesses ahead in the ever-evolving tech landscape.
+                      <br><br>
+                      Our consultancy services tailored IT solutions to each business's needs, ensuring alignment with their objectives. Book an appointment now!
+                    </p>
+              </div>
+              <!-- Add more sections as needed -->
+          </main>
+      </div>
+
+          </div>
+          </div>
+          
+           <!-- Tab2 -->
+          <div id="light" class="product-tabcontent">
+
+            <div class="row bread-crumb-row">
+              <div class="col-md-12">
+                <div class="bread-crumb">
+                  <p class="bread-parent"><span>Products</span>/<span class="bread-inner">Lighting</span></p>
+                </div>
+              </div>
+            </div>
+          
+          <div class="row head-para-row">
+            <div class="col-md-12">
+               <!--  -->
+               <div class="submit-head-para" data-aos="zoom-in" data-aos-delay="50">
+                <div class="prod-heading aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
+                  <h3>Lighting</h3>
+                </div>
+                <p class="tabs-para aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">Techunifi collaborates with renowned industry leaders such as Samsung and Dell, known for their innovative contributions to the tech landscape. As your trusted partner, we strive to empower you in making informed decisions tailored to your business requirements. Below, we've curated a selection of products and brands categorized by service. Don't hesitate to contact us for further information or to inquire about any specific product. We're here to assist you every step of the way in finding the perfect tech solutions for your business.</p>
+                <img src="assets/img/prod_main_img.png" alt="banner">
+              </div>
+              <!--  -->
+            </div>
+          </div>
+
+          </div>
+          
+           <!-- Tab3 -->
+          <div id="energy" class="product-tabcontent">
+
+            <div class="row bread-crumb-row">
+              <div class="col-md-12">
+                <div class="bread-crumb">
+                  <p class="bread-parent"><span>Products</span>/<span class="bread-inner">Energy</span></p>
+                </div>
+              </div>
+            </div>
+          
+          <div class="row head-para-row">
+            <div class="col-md-12">
+               <!--  -->
+               <div class="submit-head-para" data-aos="zoom-in" data-aos-delay="50">
+                <div class="prod-heading aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
+                  <h3>Energy</h3>
+                </div>
+                <p class="tabs-para aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">Techunifi collaborates with renowned industry leaders such as Samsung and Dell, known for their innovative contributions to the tech landscape. As your trusted partner, we strive to empower you in making informed decisions tailored to your business requirements. Below, we've curated a selection of products and brands categorized by service. Don't hesitate to contact us for further information or to inquire about any specific product. We're here to assist you every step of the way in finding the perfect tech solutions for your business.</p>
+                <img src="assets/img/prod_main_img.png" alt="banner">
+              </div>
+              <!--  -->
+            </div>
+          </div>
+
+          </div>
+
+           <!-- Tab4 -->
+           <div id="wifi" class="product-tabcontent">
+
+            <div class="row bread-crumb-row">
+              <div class="col-md-12">
+                <div class="bread-crumb">
+                  <p class="bread-parent"><span>Products</span>/<span class="bread-inner">Wifi</span></p>
+                </div>
+              </div>
+            </div>
+          
+          <div class="row head-para-row">
+            <div class="col-md-12">
+               <!--  -->
+               <div class="submit-head-para" data-aos="zoom-in" data-aos-delay="50">
+                <div class="prod-heading aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
+                  <h3>Wifi</h3>
+                </div>
+                <p class="tabs-para aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">Techunifi collaborates with renowned industry leaders such as Samsung and Dell, known for their innovative contributions to the tech landscape. As your trusted partner, we strive to empower you in making informed decisions tailored to your business requirements. Below, we've curated a selection of products and brands categorized by service. Don't hesitate to contact us for further information or to inquire about any specific product. We're here to assist you every step of the way in finding the perfect tech solutions for your business.</p>
+                <img src="assets/img/prod_main_img.png" alt="banner">
+              </div>
+              <!--  -->
+            </div>
+          </div>
+
+           </div>
+
+           <!-- Tab5 -->
+           <div id="audi-vide" class="product-tabcontent">
+
+            <div class="row bread-crumb-row">
+              <div class="col-md-12">
+                <div class="bread-crumb">
+                  <p class="bread-parent"><span>Products</span>/<span class="bread-inner">Audio - Video</span></p>
+                </div>
+              </div>
+            </div>
+          
+          <div class="row head-para-row">
+            <div class="col-md-12">
+               <!--  -->
+               <div class="submit-head-para" data-aos="zoom-in" data-aos-delay="50">
+                <div class="prod-heading aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
+                  <h3>Audio - Vide</h3>
+                </div>
+                <p class="tabs-para aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">Techunifi collaborates with renowned industry leaders such as Samsung and Dell, known for their innovative contributions to the tech landscape. As your trusted partner, we strive to empower you in making informed decisions tailored to your business requirements. Below, we've curated a selection of products and brands categorized by service. Don't hesitate to contact us for further information or to inquire about any specific product. We're here to assist you every step of the way in finding the perfect tech solutions for your business.</p>
+                <img src="assets/img/prod_main_img.png" alt="banner">
+              </div>
+              <!--  -->
+            </div>
+          </div>
+
+           </div>
+
+            <!-- Tab6 -->
+            <div id="low-Voltage" class="product-tabcontent">
+
+              <div class="row bread-crumb-row">
+                <div class="col-md-12">
+                  <div class="bread-crumb">
+                    <p class="bread-parent"><span>Products</span>/<span class="bread-inner">Low Voltage</span></p>
+                  </div>
+                </div>
+              </div>
+            
+            <div class="row head-para-row">
+              <div class="col-md-12">
+                 <!--  -->
+                 <div class="submit-head-para" data-aos="zoom-in" data-aos-delay="50">
+                  <div class="prod-heading aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
+                    <h3>Low Voltage</h3>
+                  </div>
+                  <p class="tabs-para aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">Techunifi collaborates with renowned industry leaders such as Samsung and Dell, known for their innovative contributions to the tech landscape. As your trusted partner, we strive to empower you in making informed decisions tailored to your business requirements. Below, we've curated a selection of products and brands categorized by service. Don't hesitate to contact us for further information or to inquire about any specific product. We're here to assist you every step of the way in finding the perfect tech solutions for your business.</p>
+                  <img src="assets/img/prod_main_img.png" alt="banner">
+                </div>
+                <!--  -->
+              </div>
+            </div>
+
+            </div>
+          
+            <!-- Tab7 -->
+            <div id="security" class="product-tabcontent">
+
+              <div class="row bread-crumb-row">
+                <div class="col-md-12">
+                  <div class="bread-crumb">
+                    <p class="bread-parent"><span>Products</span>/<span class="bread-inner">Security</span></p>
+                  </div>
+                </div>
+              </div>
+            
+            <div class="row head-para-row">
+              <div class="col-md-12">
+                 <!--  -->
+                 <div class="submit-head-para" data-aos="zoom-in" data-aos-delay="50">
+                  <div class="prod-heading aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
+                    <h3>Security</h3>
+                  </div>
+                  <p class="tabs-para aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">Techunifi collaborates with renowned industry leaders such as Samsung and Dell, known for their innovative contributions to the tech landscape. As your trusted partner, we strive to empower you in making informed decisions tailored to your business requirements. Below, we've curated a selection of products and brands categorized by service. Don't hesitate to contact us for further information or to inquire about any specific product. We're here to assist you every step of the way in finding the perfect tech solutions for your business.</p>
+                  <img src="assets/img/prod_main_img.png" alt="banner">
+                </div>
+                <!--  -->
+              </div>
+            </div>
+
+            </div>
+
+             <!-- Tab8 -->
+             <div id="other-info" class="product-tabcontent">
+
+              <div class="row bread-crumb-row">
+                <div class="col-md-12">
+                  <div class="bread-crumb">
+                    <p class="bread-parent"><span>Products</span>/<span class="bread-inner">Other</span></p>
+                  </div>
+                </div>
+              </div>
+            
+            <div class="row head-para-row">
+              <div class="col-md-12">
+                 <!--  -->
+                 <div class="submit-head-para" data-aos="zoom-in" data-aos-delay="50">
+                  <div class="prod-heading aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
+                    <h3>Other</h3>
+                  </div>
+                  <p class="tabs-para aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">Techunifi collaborates with renowned industry leaders such as Samsung and Dell, known for their innovative contributions to the tech landscape. As your trusted partner, we strive to empower you in making informed decisions tailored to your business requirements. Below, we've curated a selection of products and brands categorized by service. Don't hesitate to contact us for further information or to inquire about any specific product. We're here to assist you every step of the way in finding the perfect tech solutions for your business.</p>
+                  <img src="assets/img/prod_main_img.png" alt="banner">
+                </div>
+                <!--  -->
+              </div>
+            </div>
+
+             </div>
+
+        </div>
+       </div>
         
-                <div class="right-content" id="section2">
-                    <p>
-                        Techunifi offers end-to-end support for businesses, guiding them through design, construction, installation, and operations of high-rise buildings.
-                        <br><br>
-                        During design, construction, and installation phases, we handle critical elements like structured cabling, ISP contracts, and surveillance installations. Our go-live support includes property management systems deployment and comprehensive training.
-                        <br><br>
-                        For ongoing operations, Techunifi provides managed IT solutions, remote support, and 24/7 assistance, along with technology refresh initiatives to keep businesses ahead in the ever-evolving tech landscape.
-                        <br><br>
-                        Our consultancy services tailored IT solutions to each business's needs, ensuring alignment with their objectives. Book an appointment now!
-                      </p>
-                      <p>
-                        Techunifi offers end-to-end support for businesses, guiding them through design, construction, installation, and operations of high-rise buildings.
-                        <br><br>
-                        During design, construction, and installation phases, we handle critical elements like structured cabling, ISP contracts, and surveillance installations. Our go-live support includes property management systems deployment and comprehensive training.
-                        <br><br>
-                        For ongoing operations, Techunifi provides managed IT solutions, remote support, and 24/7 assistance, along with technology refresh initiatives to keep businesses ahead in the ever-evolving tech landscape.
-                        <br><br>
-                        Our consultancy services tailored IT solutions to each business's needs, ensuring alignment with their objectives. Book an appointment now!
-                      </p>
-                      <p>
-                        Techunifi offers end-to-end support for businesses, guiding them through design, construction, installation, and operations of high-rise buildings.
-                        <br><br>
-                        During design, construction, and installation phases, we handle critical elements like structured cabling, ISP contracts, and surveillance installations. Our go-live support includes property management systems deployment and comprehensive training.
-                        <br><br>
-                        For ongoing operations, Techunifi provides managed IT solutions, remote support, and 24/7 assistance, along with technology refresh initiatives to keep businesses ahead in the ever-evolving tech landscape.
-                        <br><br>
-                        Our consultancy services tailored IT solutions to each business's needs, ensuring alignment with their objectives. Book an appointment now!
-                      </p>
-                </div>
-                <!-- Add more sections as needed -->
-            </main>
-        </div>
-
-    </div>
-  
-  </div>
+      </div>
+  </section>
 
   <!--  -->
 
@@ -429,11 +573,6 @@ main {
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-
-  <script>
- 
-
-  </script>
 
 </body>
 </html>
