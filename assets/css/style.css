@@ -334,7 +334,8 @@ section {
    }
 
   .menu-bar li .nav-link.underline,
-  .aboutUsPage .menu-about {
+  .aboutUsPage .menu-about,
+  .productPage .menu-products {
     text-decoration: underline;
     text-underline-offset: 7px;
   }
@@ -940,14 +941,10 @@ ul.list-unstyled.connect-details {
 /*--------------------------------------------------------------
 # Tabs
 --------------------------------------------------------------*/
-.tab {
-  float: left;
-  width: 15%;
-}
 
 .tab button {
   display: block;
-  padding: 22px 16px;
+  padding: 22px 64px 22px 16px;
   width: 100%;
   border: none;
   outline: none;
@@ -965,9 +962,7 @@ ul.list-unstyled.connect-details {
 }
 
 .tabcontent {
-  float: left;
   padding: 0 0 0 40px;
-  width: 85%;
 }
 
 .tab1-section .prod-img {
@@ -1249,6 +1244,87 @@ section.ticket-form {
   color: var(--black);
 }
 
+/* Product Page */
+.left-right{
+  position: relative;
+}
+
+.sidebar{
+  /* position: sticky;
+  top: 100px; 
+  bottom: 50px; */
+  overflow-y: auto;
+}
+
+/* main {
+  flex: 1;
+  padding-top: 50px; 
+  padding-bottom: 50px; 
+} */
+
+.sidebar li a.active {
+  text-decoration: underline;
+  color: var(--orange);
+}
+
+section.product-tab-section {
+  padding: 0 0 60px 0;
+  position: relative;
+}
+
+.prod-fixed {
+  position: fixed;
+  width: 100%;
+  z-index: 9;
+  left: 0;
+  right: 0;
+}
+
+.bread-crumb-row {
+  padding: 130px 0 0 0;
+}
+
+.product-tab {
+  overflow: hidden;
+  border-bottom: 1px solid var(--black);
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin: 0 75px;
+}
+
+.product-tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.prod-tablinks p {
+  display: none;
+}
+
+.product-tab button.active  p{
+  display: block;
+  font-size: 14px;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 5px 0 0 0;
+}
+
+.product-tabcontent {
+  display: none;
+  padding: 6px 12px;
+}
+
+.head-para-row {
+  padding: 30px 0 0 0;
+}
+
+
 
 /* Responsive */
 /* Mobile */
@@ -1383,6 +1459,9 @@ section.ticket-form {
     background: linear-gradient(to bottom, rgba(237, 237, 237, 1),  rgba(237, 237, 237, 1));
     z-index: 2;
     margin: -2px 0;
+    left: 0;
+    right: 0;
+    height: unset !important;
 }
 
 .tab button {
@@ -1405,7 +1484,7 @@ section.ticket-form {
 }
 
 .tabcontent {
-    padding: 105px 20px 0;
+    padding: 80px 20px 0;
     width: 100%;
 }
 
@@ -1519,12 +1598,14 @@ section.ticket-form {
     width: 92% !important;
     min-height: 530px;
   }
-  .tab {
-    width: 20%;
+  .tab button {
+    padding: 22px 4px;
   }
   .tabcontent {
     padding: 0 0 0 20px;
-    width: 80%;
+  }
+  .tab button.active::after {
+    width: 3px;
   }
   .bk-slider {
     height: auto;
