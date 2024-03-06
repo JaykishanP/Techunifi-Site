@@ -56,6 +56,18 @@ img{
 
 @media (min-width: 1200px){
   .container {
+    max-width: 1110px !important;
+  }
+}
+
+@media (min-width: 1300px){
+  .container {
+    max-width: 1180px !important;
+  }
+}
+
+@media (min-width: 1500px){
+  .container {
     max-width: 1315px !important;
   }
 }
@@ -606,7 +618,7 @@ section {
 /* Product Section */
 
 .prod-head-text {
-  padding: 40px 0 0 0;
+  padding: 60px 0 0 0;
 }
 
 .prod-para p {
@@ -633,7 +645,7 @@ section {
 }
 
 section#product-section {
-  padding: 60px 0 50px 0;
+  padding: 20px 0 50px 0;
 }
 
 /* How it works */
@@ -669,8 +681,14 @@ section.howItworks {
   opacity: 1;
 }
 
+.prod-img video{
+  max-width: 100%;
+  margin: 0 auto;
+  display: block;
+}
+
 .how-img-text {
-  padding: 30px 0 50px 0;
+  padding: 30px 0 0 0;
 }
 
 .how-img-col {
@@ -679,10 +697,13 @@ section.howItworks {
   align-items: center;
 }
 
+.how-work-text{
+  text-align: center;
+}
+
 .how-work-text p {
   font-weight: 500;
-  max-width: 650px;
-  margin: 0 0 50px 0;
+  margin: 0 142px 20px;
 }
 
 .how-section-desc .hero-line-parent {
@@ -800,12 +821,16 @@ footer.footer {
   margin: 40px 0 14px 0;
 }
 
+.footer .what-we-do {
+  padding-left: 157px;
+}
+
 .what-we-do p, .what-we-do a {
   max-width: 281px;
 }
 
 .what-we-do p {
-  max-width: 314px;
+  max-width: 270px;
 }
 
 .footer ul.links-footer li {
@@ -836,7 +861,7 @@ footer.footer {
   border: var(--border);
   border-radius: 0;
   margin: 10px 0;
-  width: 65%;
+  width: 58%;
   display: inline;
 }
 
@@ -1059,6 +1084,21 @@ ul.list-unstyled.connect-details {
   color: #2A7AFF;
 }
 
+.news-pagination {
+  text-align: center;
+}
+
+.news-pagination button {
+  font-size: 18px;
+  border-right: 1px solid var(--black);
+  padding: 0 20px;
+  margin: 20px 0 0 0;
+}
+
+.news-pagination button:last-child {
+  border: none;
+}
+
 
 /*--------------------------------------------------------------
 # Clients
@@ -1148,11 +1188,11 @@ ul.list-unstyled.connect-details {
 /*--------------------------------------------------------------
 # Ticket
 --------------------------------------------------------------*/
-.submit-banner img {
-  max-width: 82%;
-  margin: 0 auto;
+
+.submit-banner video{
+  max-width: 80%;
+  margin: 30px auto 0;
   display: block;
-  padding: 80px 0 0 0;
 }
 
 section#hero.submit-banner {
@@ -1267,6 +1307,10 @@ section.ticket-form {
   color: var(--orange);
 }
 
+.productPage #nav-menu.header-scrolled {
+  background: #ededed;
+}
+
 section.product-tab-section {
   padding: 0 0 60px 0;
   position: relative;
@@ -1279,6 +1323,7 @@ section.product-tab-section {
   left: 0;
   right: 0;
   background: linear-gradient(#ededed, transparent);
+  margin-top: -4px;
 }
 
 .bread-crumb-row {
@@ -1460,6 +1505,9 @@ span.bread-inner {
   footer.footer {
     padding: 20px 10px 36px 10px;
   }
+  .footer .what-we-do {
+    padding-left: 12px;
+  }
   .email-subscribe input {
     width: 76%;
   }
@@ -1598,7 +1646,7 @@ section.ticket-form {
 /* Ipad Mini - Air */
 @media only screen and (min-width: 768px) and (max-width: 1023px){
   .what-we-do p {
-    max-width: 183px;
+    max-width: 300px;
   }
   .email-subscribe input {
     width: 77%;
@@ -1651,6 +1699,9 @@ section.ticket-form {
   section.ticket-form {
     padding: 40px 0 60px 0;
   }
+  .footer .what-we-do {
+    padding-left: unset;
+  }
 
 }
 
@@ -1663,6 +1714,9 @@ section.ticket-form {
 }
 .tabs-story-column .service-col h3::before {
   left: -15%;
+}
+.footer .what-we-do {
+  padding-left: unset;
 }
 
 }
