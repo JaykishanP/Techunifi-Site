@@ -1278,10 +1278,11 @@ section.product-tab-section {
   z-index: 9;
   left: 0;
   right: 0;
+  background: linear-gradient(#ededed, transparent);
 }
 
 .bread-crumb-row {
-  padding: 130px 0 0 0;
+  padding: 150px 0 0 0;
 }
 
 .product-tab {
@@ -1290,7 +1291,7 @@ section.product-tab-section {
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
-  margin: 0 75px;
+  margin: 0 120px;
 }
 
 .product-tab button {
@@ -1300,6 +1301,9 @@ section.product-tab-section {
   outline: none;
   cursor: pointer;
   transition: 0.3s;
+  min-height: 80px;
+  padding: 0;
+  min-width: 110px;
 }
 
 .prod-tablinks p {
@@ -1315,15 +1319,41 @@ section.product-tab-section {
   padding: 5px 0 0 0;
 }
 
+.product-tab button.active span {
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
 .product-tabcontent {
   display: none;
   padding: 6px 12px;
+}
+
+span.bread-inner {
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.bread-parent span a {
+  padding: 0;
+  letter-spacing: 1px;
+  font-size: 16px;
+}
+
+.bread-parent span a:hover {
+  color: var(--black);
+  text-decoration: underline;
+  transition: 0.3s all;
+  text-underline-offset: 3px;
 }
 
 .head-para-row {
   padding: 30px 0 0 0;
 }
 
+.prod-prev-button, .prod-next-button {
+  display: none;
+}
 
 
 /* Responsive */
@@ -1634,5 +1664,62 @@ section.ticket-form {
 .tabs-story-column .service-col h3::before {
   left: -15%;
 }
+
+}
+
+
+/* Prod tab mobile slide */
+@media only screen and (max-width: 1023px){
+
+  .productPage #nav-menu {
+    padding: 26px 0 26px 0;
+  }
+
+  .mobile-fixed-tab-arrow{
+    position: fixed;
+    background: linear-gradient(#ededed, transparent);
+    z-index: 9;
+  }
+
+  .prod-fixed {
+    position: unset;
+    width: 100%;
+    z-index: 9;
+  }
+
+  .product-tab {
+    overflow: auto;
+    justify-content: unset; 
+    align-items: unset;
+    margin: 0;
+  }
+
+  .tabs-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+  }
+  
+  .tab-buttons {
+    display: inline-flex;
+  }
+  
+  .prod-prev-button, .prod-next-button {
+    border: none;
+    color: black;
+    cursor: pointer;
+    padding: 7px;
+    font-size: 20px;
+    position: relative;
+    display: inline-block;
+  }
+
+  .prod-next-button {
+    float: right;
+  }
+
+  .prod-prev-button{
+    float: left;
+  }
 
 }

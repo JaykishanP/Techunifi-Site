@@ -319,29 +319,9 @@ $('.tab button').click(function(event) {
    * Products -left Nav
 */
 // Products -left Nav
-  document.addEventListener('DOMContentLoaded', function () {
-      function highlightNavLink() {
-          const sections = document.querySelectorAll('.right-content');
-          const navLinks = document.querySelectorAll('.sidebar a');
-  
-          // Check if elements are found
-          if (sections.length === 0 || navLinks.length === 0) {
-              // Exit early if elements are not found
-              return;
-          }
-  
-          let index = sections.length;
-  
-          while (--index && window.scrollY + 50 < sections[index].offsetTop) {}
-  
-          navLinks.forEach(link => link.classList.remove('active'));
-          if (index >= 0) {
-              navLinks[index].classList.add('active');
-          }
-      }
-  
-      window.addEventListener('scroll', highlightNavLink);
-  });
+
+
+
 
 
 //Product - Tabs
@@ -371,3 +351,27 @@ document.addEventListener('DOMContentLoaded', function() {
       // console.error("Element with ID 'defaultOpen' not found.");
   }
 });
+
+
+//Prod tab Mobile slide
+// Previous and Next Button functionality
+
+document.addEventListener("DOMContentLoaded", function() {
+  // Add event listener for the previous button
+  document.querySelector(".prod-prev-button").addEventListener("click", function() {
+    const tabsContainer = document.querySelector(".tabs-container");
+    tabsContainer.scrollLeft -= 200; // Scroll left by 200 pixels
+  });
+
+  // Add event listener for the next button
+  document.querySelector(".prod-next-button").addEventListener("click", function() {
+    const tabsContainer = document.querySelector(".tabs-container");
+    tabsContainer.scrollLeft += 200; // Scroll right by 200 pixels
+  });
+});
+
+
+
+
+
+
