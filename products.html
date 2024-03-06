@@ -151,32 +151,73 @@
 
       <div class="row">
 
-        <div class="col-md-12">
-          <div class="prod-fixed">
-            <div class="product-tab">
-              <button class="prod-tablinks active" onclick="openProd(event, 'telecom')" id="productOpen"><img src="assets/img/services/deskphone.png" alt=""><p>Telecomm</p></button>
-              <button class="prod-tablinks" onclick="openProd(event, 'light')"><img src="assets/img/services/wb_incandescent.png" alt=""><p>Lightning</p></button>
-              <button class="prod-tablinks" onclick="openProd(event, 'energy')"><img src="assets/img/services/bolt.png" alt=""><p>Energy</p></button>
-              <button class="prod-tablinks" onclick="openProd(event, 'wifi')"><img src="assets/img/services/wifi.png" alt=""><p>Wifi</p></button>
-              <button class="prod-tablinks" onclick="openProd(event, 'audi-vide')"><img src="assets/img/services/google_home_devices.png" alt=""><p>Audio - Video</p></button>
-              <button class="prod-tablinks" onclick="openProd(event, 'low-Voltage')"><img src="assets/img/services/cable.png" alt=""><p>Low Voltage</p></button>
-              <button class="prod-tablinks" onclick="openProd(event, 'security')"><img src="assets/img/services/nest_cam_iq_outdoor.png" alt=""><p>Security</p></button>
-              <button class="prod-tablinks" onclick="openProd(event, 'other-info')"><img src="assets/img/services/info.png" alt=""><p>Other</p></button>
+        <div class="col-md-12 mobile-fixed-tab-arrow">
+
+          <button class="prod-prev-button">&#10094;</button>
+          <button class="prod-next-button">&#10095;</button>
+
+          <div class="tabs-container">
+            <div class="tab-buttons">
+              
+              <div class="prod-fixed">
+               
+                <div class="product-tab">
+                  <button class="prod-tablinks active" onclick="openProd(event, 'tab-overview')" id="productOpen"><span>Overview</span></button>
+                  <button class="prod-tablinks" onclick="openProd(event, 'telecom')"><img src="assets/img/services/deskphone.png" alt=""><p>Telecomm</p></button>
+                  <button class="prod-tablinks" onclick="openProd(event, 'light')"><img src="assets/img/services/wb_incandescent.png" alt=""><p>Lightning</p></button>
+                  <button class="prod-tablinks" onclick="openProd(event, 'energy')"><img src="assets/img/services/bolt.png" alt=""><p>Energy</p></button>
+                  <button class="prod-tablinks" onclick="openProd(event, 'wifi')"><img src="assets/img/services/wifi.png" alt=""><p>Wifi</p></button>
+                  <button class="prod-tablinks" onclick="openProd(event, 'audi-vide')"><img src="assets/img/services/google_home_devices.png" alt=""><p>Audio - Video</p></button>
+                  <button class="prod-tablinks" onclick="openProd(event, 'low-Voltage')"><img src="assets/img/services/cable.png" alt=""><p>Low Voltage</p></button>
+                  <button class="prod-tablinks" onclick="openProd(event, 'security')"><img src="assets/img/services/nest_cam_iq_outdoor.png" alt=""><p>Security</p></button>
+                  <button class="prod-tablinks" onclick="openProd(event, 'other-info')"><img src="assets/img/services/info.png" alt=""><p>Other</p></button>
+                </div>
+              </div>
+            
             </div>
           </div>
+
 
         </div> 
       </div>
 
        <div class="row">
         <div class="col-md-12">
-          <!-- Tab1 -->
+             <!-- Tab1 -->
+             <div id="tab-overview" class="product-tabcontent">
+
+              <div class="row bread-crumb-row">
+                <div class="col-md-12">
+                  <div class="bread-crumb">
+                    <p class="bread-parent"><span><a href="products.html">Products</a></span>/<span class="bread-inner">Overview</span></p>
+                  </div>
+                </div>
+              </div>
+            
+            <div class="row head-para-row">
+              <div class="col-md-12">
+                 <!--  -->
+                 <div class="submit-head-para" data-aos="zoom-in" data-aos-delay="50">
+                  <div class="prod-heading aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
+                    <h3>Overview</h3>
+                  </div>
+                  <p class="tabs-para aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">Techunifi collaborates with renowned industry leaders such as Samsung and Dell, known for their innovative contributions to the tech landscape. As your trusted partner, we strive to empower you in making informed decisions tailored to your business requirements. Below, we've curated a selection of products and brands categorized by service. Don't hesitate to contact us for further information or to inquire about any specific product. We're here to assist you every step of the way in finding the perfect tech solutions for your business.</p>
+                  <img src="assets/img/prod_main_img.png" alt="banner">
+                </div>
+                <!--  -->
+              </div>
+            </div>
+  
+             </div>
+
+
+          <!-- Tab1.1 -->
           <div id="telecom" class="product-tabcontent">
 
             <div class="row bread-crumb-row">
               <div class="col-md-12">
                 <div class="bread-crumb">
-                  <p class="bread-parent"><span>Products</span>/<span class="bread-inner">Telecomm</span></p>
+                  <p class="bread-parent"><span><a href="products.html">Products</a></span>/<span class="bread-inner">Telecomm</span></p>
                 </div>
               </div>
             </div>
@@ -281,7 +322,7 @@
             <div class="row bread-crumb-row">
               <div class="col-md-12">
                 <div class="bread-crumb">
-                  <p class="bread-parent"><span>Products</span>/<span class="bread-inner">Lighting</span></p>
+                  <p class="bread-parent"><span><a href="products.html">Products</a></span>/<span class="bread-inner">Lighting</span></p>
                 </div>
               </div>
             </div>
@@ -308,7 +349,7 @@
             <div class="row bread-crumb-row">
               <div class="col-md-12">
                 <div class="bread-crumb">
-                  <p class="bread-parent"><span>Products</span>/<span class="bread-inner">Energy</span></p>
+                  <p class="bread-parent"><span><a href="products.html">Products</a></span>/<span class="bread-inner">Energy</span></p>
                 </div>
               </div>
             </div>
@@ -335,7 +376,7 @@
             <div class="row bread-crumb-row">
               <div class="col-md-12">
                 <div class="bread-crumb">
-                  <p class="bread-parent"><span>Products</span>/<span class="bread-inner">Wifi</span></p>
+                  <p class="bread-parent"><span><a href="products.html">Products</a></span>/<span class="bread-inner">Wifi</span></p>
                 </div>
               </div>
             </div>
@@ -362,7 +403,7 @@
             <div class="row bread-crumb-row">
               <div class="col-md-12">
                 <div class="bread-crumb">
-                  <p class="bread-parent"><span>Products</span>/<span class="bread-inner">Audio - Video</span></p>
+                  <p class="bread-parent"><span><a href="products.html">Products</a></span>/<span class="bread-inner">Audio - Video</span></p>
                 </div>
               </div>
             </div>
@@ -389,7 +430,7 @@
               <div class="row bread-crumb-row">
                 <div class="col-md-12">
                   <div class="bread-crumb">
-                    <p class="bread-parent"><span>Products</span>/<span class="bread-inner">Low Voltage</span></p>
+                    <p class="bread-parent"><span><a href="products.html">Products</a></span>/<span class="bread-inner">Low Voltage</span></p>
                   </div>
                 </div>
               </div>
@@ -416,7 +457,7 @@
               <div class="row bread-crumb-row">
                 <div class="col-md-12">
                   <div class="bread-crumb">
-                    <p class="bread-parent"><span>Products</span>/<span class="bread-inner">Security</span></p>
+                    <p class="bread-parent"><span><a href="products.html">Products</a></span>/<span class="bread-inner">Security</span></p>
                   </div>
                 </div>
               </div>
@@ -443,7 +484,7 @@
               <div class="row bread-crumb-row">
                 <div class="col-md-12">
                   <div class="bread-crumb">
-                    <p class="bread-parent"><span>Products</span>/<span class="bread-inner">Other</span></p>
+                    <p class="bread-parent"><span><a href="products.html">Products</a></span>/<span class="bread-inner">Other</span></p>
                   </div>
                 </div>
               </div>
