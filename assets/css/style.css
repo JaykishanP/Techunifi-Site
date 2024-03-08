@@ -572,6 +572,17 @@ section {
   padding: 16px;
   text-align: center;
 }
+
+.service-section-desc .service-col {
+  cursor: pointer;
+}
+
+.service-section-desc .service-col:hover h3 {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-skip: auto;
+}
+
 .service-col h3 {
   font-size: 16px;
   padding: 40px 0 12px 0;
@@ -588,7 +599,7 @@ section {
   opacity: 0.4;
 }
 
-.service-col img:hover {
+.service-section-desc .service-col:hover img {
   opacity: 1;
 }
 
@@ -1756,7 +1767,7 @@ section.ticket-form {
   .mobile-fixed-tab-arrow{
     position: fixed;
     background: linear-gradient(#ededed, transparent);
-    z-index: 9;
+    z-index: 2;
   }
 
   .prod-fixed {

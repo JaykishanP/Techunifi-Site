@@ -365,7 +365,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 //scroll to top on tab click
-$('.tab button').click(function(event) {
+$('.tab button, .prod-tablinks').click(function(event) {
   event.preventDefault();
 
   $('html,body').animate({scrollTop:0}, 400); 
@@ -412,10 +412,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //Prod tab Mobile slide
 // Previous and Next Button functionality
-document.addEventListener("DOMContentLoaded", function() {
-  setTimeout(function() {
-
-    document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function() {
       // Add event listener for the previous button
       document.querySelector(".prod-prev-button").addEventListener("click", function() {
         const tabsContainer = document.querySelector(".tabs-container");
@@ -429,11 +426,55 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     });
 
-  }, 500); 
+
+/* ======== ============ */
+// redirect from h to p
+
+function redirectToPage(page, section) {
+  window.location.href = `${page}?section=${section}`;
+}
+
+function openProd(event, tabName) {
+  // Get all elements with class "prod-tablinks" and remove the class "active"
+  const tabLinks = document.querySelectorAll('.prod-tablinks');
+  tabLinks.forEach(link => link.classList.remove('active'));
+
+  // Get all elements with class "product-tabcontent" and hide them
+  const tabContents = document.querySelectorAll('.product-tabcontent');
+  tabContents.forEach(content => content.style.display = 'none');
+
+  // Add the "active" class to the button that opened the tab
+  const activeButton = document.querySelector(`.prod-tablinks[id="prod-${tabName}"]`);
+  if (activeButton) {
+    activeButton.classList.add('active');
+  }
+
+  // Show the specific tab content
+  document.getElementById(tabName).style.display = 'block';
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const section = urlParams.get('section');
+
+  if (section) {
+    openProd(null, section);
+  }
 });
 
+function redirectToPage(page, section) {
+  window.location.href = `${page}?section=${section}`;
+}
 
 
-
-
-
+/* == == */
+window.onload = function() {
+  if (performance.navigation.type === 1) {
+      // Page is being reloaded
+      // Remove the query parameter from the URL
+      var currentUrl = window.location.href;
+      var cleanUrl = currentUrl.split('?')[0];
+      window.history.replaceState({}, document.title, cleanUrl);
+  }
+};
