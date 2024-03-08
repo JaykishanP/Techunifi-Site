@@ -168,6 +168,63 @@ var swiper = new Swiper('.bk-slider .swiper', {
   }
 });
 
+// About pagination
+
+function showPage(pageNumber) {
+  var newsSections = document.querySelectorAll('.news-section');
+  var itemsPerPage = 3; // Change this value to adjust the number of items per page
+
+  for (var i = 0; i < newsSections.length; i++) {
+      if (i < pageNumber * itemsPerPage && i >= (pageNumber - 1) * itemsPerPage) {
+          newsSections[i].style.display = 'block';
+      } else {
+          newsSections[i].style.display = 'none';
+      }
+  }
+
+  // Scroll to the top of the news section
+  document.getElementById('tab2').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Function to generate pagination controls
+function setupPagination() {
+  var newsSections = document.querySelectorAll('.news-section');
+  var itemsPerPage = 2; // Change this value to adjust the number of items per page
+  var numPages = Math.ceil(newsSections.length / itemsPerPage);
+
+  var pagination = document.getElementById('news-pagination');
+  pagination.innerHTML = '';
+
+  for (var i = 1; i <= numPages; i++) {
+      var button = document.createElement('button');
+      button.textContent = i;
+      button.addEventListener('click', function() {
+          showPage(parseInt(this.textContent));
+      });
+      pagination.appendChild(button);
+  }
+
+  // Show the first page by default
+  showPage(1);
+}
+
+// Call the setupPagination function when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    if(document.getElementById('news-pagination')) {
+        setupPagination();
+    }
+});
+
+
+
+/* ==== Submit ticket ===== */
+
+$('option').mousedown(function(e) {
+  e.preventDefault();
+  $(this).prop('selected', !$(this).prop('selected'));
+  return false;
+});
+
 
 /**
    * Menu
@@ -355,19 +412,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //Prod tab Mobile slide
 // Previous and Next Button functionality
-
 document.addEventListener("DOMContentLoaded", function() {
-  // Add event listener for the previous button
-  document.querySelector(".prod-prev-button").addEventListener("click", function() {
-    const tabsContainer = document.querySelector(".tabs-container");
-    tabsContainer.scrollLeft -= 200; // Scroll left by 200 pixels
-  });
+  setTimeout(function() {
 
-  // Add event listener for the next button
-  document.querySelector(".prod-next-button").addEventListener("click", function() {
-    const tabsContainer = document.querySelector(".tabs-container");
-    tabsContainer.scrollLeft += 200; // Scroll right by 200 pixels
-  });
+    document.addEventListener("DOMContentLoaded", function() {
+      // Add event listener for the previous button
+      document.querySelector(".prod-prev-button").addEventListener("click", function() {
+        const tabsContainer = document.querySelector(".tabs-container");
+        tabsContainer.scrollLeft -= 200; // Scroll left by 200 pixels
+      });
+    
+      // Add event listener for the next button
+      document.querySelector(".prod-next-button").addEventListener("click", function() {
+        const tabsContainer = document.querySelector(".tabs-container");
+        tabsContainer.scrollLeft += 200; // Scroll right by 200 pixels
+      });
+    });
+
+  }, 500); 
 });
 
 
