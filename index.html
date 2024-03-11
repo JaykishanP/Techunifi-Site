@@ -462,34 +462,120 @@
          </div>
        </div>
 
-        <div class="row" data-aos="zoom-in" data-aos-delay="50">
+        <div class="row ticket-form" data-aos="zoom-in" data-aos-delay="50">
 
-            <form action="sahanalrgowda@gmail.com" method="post" role="form" class="php-email-form">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="col form-group">
-                    <input type="text" name="name" class="form-control" id="name" placeholder="Name" required>
-                  </div>
-                  <div class="col form-group">
-                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
-                  </div>
-                  <div class="col form-group">
-                    <input type="tel" class="form-control" name="tel" id="tel" placeholder="Phone" required>
-                  </div>
-                </div>
+          <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DHo000002fpJX" method="POST">
 
+            <input type=hidden name="oid" value="00DHo000002fpJX">
+            <input type=hidden name="retURL" value="https://www.techunifi.com/">
+            
+            <!--  ----------------------------------------------------------------------  -->
+            <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
+            <!--  these lines if you wish to test in debug mode.                          -->
+            <!--  <input type="hidden" name="debug" value=1>                              -->
+            <!--  <input type="hidden" name="debugEmail"                                  -->
+            <!--  value="corey@inovisolutions.com">                                       -->
+            <!--  ----------------------------------------------------------------------  -->
 
-              <div class="col-md-8 text-message subject-message">
-                <div class="col form-group">
-                  <input type="text" name="subject" class="form-control" id="subject" placeholder="Subject" required="">
-                </div>
-                <div class="form-group">
-                  <textarea class="form-control" name="message"  rows="4" placeholder="Message" required></textarea>
+            <div class="submit-sub-section submit-contact-info aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
+
+              <div class="row cont-row-head">
+                <div class="col-md-12">
+                    <h4>Contact information</h4>
                 </div>
               </div>
-              <div class="contact-submit" id="contact-submit"><button type="submit">Submit</button></div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="company">Company</label>
+                  <input  id="company" maxlength="40" name="company" size="20" type="text" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="first_name">First Name</label>
+                  <input  id="first_name" maxlength="40" name="first_name" size="20" type="text" />
+                </div>
+                <div class="col-md-6">
+                  <label for="last_name">Last Name</label>
+                  <input  id="last_name" maxlength="80" name="last_name" size="20" type="text" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="email">Email</label>
+                  <input  id="email" maxlength="80" name="email" size="20" type="text" />
+                </div>
+              </div>
+
+            </div>
+            
+            <div class="submit-sub-section submit-ticket-info aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
+
+              <div class="row cont-row-head">
+                <div class="col-md-12">
+                    <h4>Inquiry</h4>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                   <label>Number of Rooms</label>
+                   <input  id="00NHo00000XG1Nf" name="00NHo00000XG1Nf" size="20" type="text" />
+                </div>
+                <div class="col-md-6">
+                   <label>Number of Apartments</label>
+                   <input  id="00NHo00000XG1Nk" name="00NHo00000XG1Nk" size="20" type="text" />
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <label>Service Needed</label>
+                  <select class="contact-form-home" id="00NHo00000XG1Na" name="00NHo00000XG1Na" title="Service Needed" multiple="multiple">
+                    <option class="first-select" value="">--None--</option>
+                    <option value="EV Charging">EV Charging</option>
+                    <option value="Phone">Phone</option>
+                    <option value="TV">TV</option>
+                    <option value="Wifi">Wifi</option>
+                    <option value="Cabling">Cabling</option>
+                    <option value="Surveillance System">Surveillance System</option>
+                    <option value="Audio Visual System">Audio Visual System</option>
+                    <option value="IT Services">IT Services</option>
+                    </select>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="description">Description</label>
+                  <textarea rows="7" name="description"></textarea>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-12 home-contact-submit">
+                  <input type="submit" name="submit">
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Type:<select  id="00NHo00000XG1NV" name="00NHo00000XG1NV" title="Type"><option value="">--None--</option><option value="Hotel">Hotel</option>
+            <option value="Apartments">Apartments</option>
+            <option value="Senior Housing">Senior Housing</option>
+            <option value="Other">Other</option>
+            </select><br> -->
+            
+            
+            <!-- # of Housing:<input  id="00NHo00000XG1Np" name="00NHo00000XG1Np" size="20" type="text" /><br> -->
+            
             </form>
-          </div>
+            
+
+        </div>
 
         </div>
 
