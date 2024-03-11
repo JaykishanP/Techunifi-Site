@@ -1293,6 +1293,28 @@ section.ticket-form {
   padding: 5px 10px;
 }
 
+.ticket-form form select {
+  min-height: 148px;
+  overflow-y: auto;
+}
+
+.ticket-form select.contact-form-home {
+  overflow-y: auto;
+  min-height: 170px;
+}
+
+.ticket-form .home-contact-submit input[type="submit"] {
+  margin: 0 0 10px auto;
+}
+
+.ticket-form .first-select{
+  font-size: 0;
+}
+
+.ticket-form .home-contact-submit input[type="submit"]:hover {
+  background-color: #fff;
+}
+
 .ticket-form form label {
   display: block;
   margin: 0 0 3px 0;
@@ -1319,7 +1341,21 @@ section.ticket-form {
   color: var(--black);
 }
 
-/* Product Page */
+section.thank-section {
+  text-align: center;
+}
+
+.thank-section a {
+  text-decoration: underline;
+  font-weight: 700;
+  padding: 10px 5px;
+}
+
+.thank-section a:hover {
+  color: var(--black);
+}
+
+/* ======== Product Page ========= */
 .left-right{
   position: relative;
 }
