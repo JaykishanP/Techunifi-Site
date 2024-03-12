@@ -365,7 +365,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 //scroll to top on tab click
-$('.tab button, .prod-tablinks').click(function(event) {
+$('.tablinks, .prod-tablinks').click(function(event) {
   event.preventDefault();
 
   $('html,body').animate({scrollTop:0}, 400); 
@@ -478,3 +478,70 @@ window.onload = function() {
       window.history.replaceState({}, document.title, cleanUrl);
   }
 };
+
+
+/**
+   * Submit Tab
+*/
+
+function subTicket(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("sub-tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("sub-tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+// document.getElementById("productOpen").click();
+
+document.addEventListener('DOMContentLoaded', function() {
+  var productOpenButton = document.getElementById("sub-defaultOpen");
+  if (productOpenButton) {
+    productOpenButton.click();
+  } else {
+      // console.error("Element with ID 'defaultOpen' not found.");
+  }
+});
+
+/**
+   * Home img Slider
+   */
+new Swiper('.home-img-slider', {
+  speed: 400,
+  loop: true,
+  // autoplay: {
+  //   delay: 5000,
+  //   disableOnInteraction: false
+  // },
+  slidesPerView: 'auto',
+  pagination: {
+    el: '.swiper-pagination',
+    type: 'bullets',
+    clickable: true
+  },
+  breakpoints: {
+    320: {
+      slidesPerView: 1,
+      spaceBetween: 40
+    },
+    480: {
+      slidesPerView: 1,
+      spaceBetween: 60
+    },
+    640: {
+      slidesPerView: 1,
+      spaceBetween: 80
+    },
+    992: {
+      slidesPerView: 3,
+      spaceBetween: 120
+    }
+  }
+});
