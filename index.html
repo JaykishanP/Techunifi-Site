@@ -405,51 +405,27 @@
         <div class="row">
           <div class="col-md-12">
             <div class="prod-img" data-aos="zoom-in" data-aos-delay="50">
-              <!-- <img src="assets/img/home-abv-contact.png" alt="product"> -->
+    
+            <!-- ======= Clients Section ======= -->
+    <section id="home-slider" class="home-slider">
+      <div class="container" data-aos="zoom-in">
 
-              <!-- Carousel -->
-<div id="demo" class="carousel slide" data-bs-ride="carousel">
+        <div class="home-img-slider swiper">
+          <div class="swiper-wrapper align-items-center">
+            <div class="swiper-slide"><img src="assets/img/home-images/1.Lobby Market_blurred7.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide active"><img src="assets/img/home-images/2.Lobby Market_blurred6.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/home-images/3.Lobby Market_blurred5.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/home-images/4.Lobby Market_blurred4.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/home-images/5.Lobby Market_blurred3.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/home-images/6.Lobby Market_blurred2.png" class="img-fluid" alt=""></div>
+            <div class="swiper-slide"><img src="assets/img/home-images/7.Lobby Market_blurred1.png" class="img-fluid" alt=""></div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
 
-  <!-- Indicators/dots -->
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
-    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
-    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
-    <button type="button" data-bs-target="#demo" data-bs-slide-to="3"></button>
-    <button type="button" data-bs-target="#demo" data-bs-slide-to="4"></button>
-    <button type="button" data-bs-target="#demo" data-bs-slide-to="5"></button>
-    <button type="button" data-bs-target="#demo" data-bs-slide-to="6"></button>
-  </div>
-  
-  <!-- The slideshow/carousel -->
-  <div class="carousel-inner">
-
-    <div class="carousel-item active">
-      <img src="assets/img/home-images/1.Lobby Market_blurred7.png" alt="techunifi">
-    </div>
-    <div class="carousel-item">
-      <img src="assets/img/home-images/2.Lobby Market_blurred6.png" alt="techunifi">
-    </div>
-    <div class="carousel-item">
-      <img src="assets/img/home-images/3.Lobby Market_blurred5.png" alt="techunifi">
-    </div>
-    <div class="carousel-item">
-      <img src="assets/img/home-images/4.Lobby Market_blurred4.png" alt="techunifi">
-    </div>
-    <div class="carousel-item">
-      <img src="assets/img/home-images/5.Lobby Market_blurred3.png" alt="techunifi">
-    </div>
-    <div class="carousel-item">
-      <img src="assets/img/home-images/6.Lobby Market_blurred2.png" alt="techunifi">
-    </div>
-    <div class="carousel-item">
-      <img src="assets/img/home-images/7.Lobby Market_blurred1.png" alt="techunifi">
-    </div>
-
-  </div>
-
-</div>
-               
+      </div>
+    </section>
+    <!-- End Clients Section -->
 
             </div>
           </div>
@@ -488,25 +464,25 @@
               <div class="row">
                 <div class="col-md-12">
                   <label for="company">Company</label>
-                  <input  id="company" maxlength="40" name="company" size="20" type="text" />
+                  <input  id="company" maxlength="40" name="company" size="20" type="text" required/>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-6">
                   <label for="first_name">First Name</label>
-                  <input  id="first_name" maxlength="40" name="first_name" size="20" type="text" />
+                  <input  id="first_name" maxlength="40" name="first_name" size="20" type="text" required/>
                 </div>
                 <div class="col-md-6">
                   <label for="last_name">Last Name</label>
-                  <input  id="last_name" maxlength="80" name="last_name" size="20" type="text" />
+                  <input  id="last_name" maxlength="80" name="last_name" size="20" type="text" required/>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-12">
                   <label for="email">Email</label>
-                  <input  id="email" maxlength="80" name="email" size="20" type="text" />
+                  <input  id="email" maxlength="80" name="email" size="20" type="text"required />
                 </div>
               </div>
 
@@ -521,20 +497,37 @@
               </div>
 
               <div class="row">
-                <div class="col-md-6">
-                   <label>Number of Rooms</label>
-                   <input  id="00NHo00000XG1Nf" name="00NHo00000XG1Nf" size="20" type="text" />
+                <div class="col-md-12">
+                  <label>Business</label>
+                  <select class="ticket-business-select" id="00NHo00000XG1NV" name="00NHo00000XG1NV" title="Type" multiple required>
+                    <option class="first-select" value="">--None--</option>
+                    <option value="Hotel">Hotel</option>
+                    <option value="Apartments">Apartments</option>
+                    <option value="Senior Housing">Senior Housing</option>
+                    <option value="Other">Other</option>
+                  </select>
                 </div>
-                <div class="col-md-6">
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                   <label>Number of Rooms</label>
+                   <input  id="00NHo00000XG1Nf" name="00NHo00000XG1Nf" size="20" type="text" required/>
+                </div>
+                <div class="col-md-4">
                    <label>Number of Apartments</label>
-                   <input  id="00NHo00000XG1Nk" name="00NHo00000XG1Nk" size="20" type="text" />
+                   <input  id="00NHo00000XG1Nk" name="00NHo00000XG1Nk" size="20" type="text" required/>
+                </div>
+                <div class="col-md-4">
+                  <label>Number of Housing</label>
+                  <input  id="00NHo00000XG1Np" name="00NHo00000XG1Np" size="20" type="text" required/>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-12">
                   <label>Service Needed</label>
-                  <select class="contact-form-home" id="00NHo00000XG1Na" name="00NHo00000XG1Na" title="Service Needed" multiple="multiple">
+                  <select class="contact-form-home" id="00NHo00000XG1Na" name="00NHo00000XG1Na" title="Service Needed" multiple="multiple" required>
                     <option class="first-select" value="">--None--</option>
                     <option value="EV Charging">EV Charging</option>
                     <option value="Phone">Phone</option>
@@ -551,7 +544,7 @@
               <div class="row">
                 <div class="col-md-12">
                   <label for="description">Description</label>
-                  <textarea rows="7" name="description"></textarea>
+                  <textarea rows="7" name="description" required></textarea>
                 </div>
               </div>
               
@@ -562,16 +555,7 @@
               </div>
 
             </div>
-
-            <!-- Type:<select  id="00NHo00000XG1NV" name="00NHo00000XG1NV" title="Type"><option value="">--None--</option><option value="Hotel">Hotel</option>
-            <option value="Apartments">Apartments</option>
-            <option value="Senior Housing">Senior Housing</option>
-            <option value="Other">Other</option>
-            </select><br> -->
-            
-            
-            <!-- # of Housing:<input  id="00NHo00000XG1Np" name="00NHo00000XG1Np" size="20" type="text" /><br> -->
-            
+                  
             </form>
             
 

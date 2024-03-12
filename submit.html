@@ -141,13 +141,193 @@
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="submit-banner" data-aos="zoom-in" data-aos-delay="50">
-    <video controls loop autoplay muted>
-      <source src="assets/img/video/Submit a ticket.mp4" type="video/mp4">
-    </video>
-  </section><!-- End Hero -->
+    <img src="assets/img/submit-banner.png" alt="techunifi">
+  </section>
+  <!-- End Hero -->
 
 
-  <!-- =======  Form =======  -->
+  <section class="sub-tab-section">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tab">
+            <button class="sub-tablinks" onclick="subTicket(event, 'sub-tab1')" id="sub-defaultOpen">Submit an Inquiry</button>
+            <button class="sub-tablinks" onclick="subTicket(event, 'sub-tab2')">Submit a Ticket</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+
+          <!-- Tab1 -->
+          <div id="sub-tab1" class="sub-tabcontent">
+   
+           <div class="sub-tab1-section">
+
+            <section class="ticket-form">
+              <div class="container">
+                  <div class="row">
+                      <div class="col-md-12">
+                        
+                          <div class="form-parent">
+          
+                            <!--  -->
+                            <div class="submit-head-para">
+                              <div class="prod-heading">
+                                <h3>Submit an Inquiry</h3>
+                              </div>
+                              <p class="tabs-para aos-init">
+                                Techunifi collaborates with renowned industry leaders such as Samsung and Dell, known for their innovative contributions to the tech landscape. As your trusted partner, we strive to empower you in making informed decisions tailored to your business requirements. Below, we've curated a selection of products and brands categorized by service. Don't hesitate to contact us for further information or to inquire about any specific product. We're here to assist you every step of the way in finding the perfect tech solutions for your business.
+                              </p>
+                            </div>
+                            <!--  -->
+          
+                            <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DHo000002fpJX" method="POST">
+
+                              <input type=hidden name="oid" value="00DHo000002fpJX">
+                              <input type=hidden name="retURL" value="https://www.techunifi.com/">
+                              
+                              <!--  ----------------------------------------------------------------------  -->
+                              <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
+                              <!--  these lines if you wish to test in debug mode.                          -->
+                              <!--  <input type="hidden" name="debug" value=1>                              -->
+                              <!--  <input type="hidden" name="debugEmail"                                  -->
+                              <!--  value="corey@inovisolutions.com">                                       -->
+                              <!--  ----------------------------------------------------------------------  -->
+                  
+                              <div class="submit-sub-section submit-contact-info aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
+                  
+                                <div class="row cont-row-head">
+                                  <div class="col-md-12">
+                                      <h4>Contact information</h4>
+                                  </div>
+                                </div>
+                  
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <label for="company">Company</label>
+                                    <input  id="company" maxlength="40" name="company" size="20" type="text" required/>
+                                  </div>
+                                </div>
+                  
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <label for="first_name">First Name</label>
+                                    <input  id="first_name" maxlength="40" name="first_name" size="20" type="text" required/>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <label for="last_name">Last Name</label>
+                                    <input  id="last_name" maxlength="80" name="last_name" size="20" type="text" required/>
+                                  </div>
+                                </div>
+                  
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <label for="email">Email</label>
+                                    <input  id="email" maxlength="80" name="email" size="20" type="text"required />
+                                  </div>
+                                </div>
+                  
+                              </div>
+                              
+                              <div class="submit-sub-section submit-ticket-info aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
+                  
+                                <div class="row cont-row-head">
+                                  <div class="col-md-12">
+                                      <h4>Inquiry</h4>
+                                  </div>
+                                </div>
+                  
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <label>Business</label>
+                                    <select class="ticket-business-select" id="00NHo00000XG1NV" name="00NHo00000XG1NV" title="Type" multiple required>
+                                      <option class="first-select" value="">--None--</option>
+                                      <option value="Hotel">Hotel</option>
+                                      <option value="Apartments">Apartments</option>
+                                      <option value="Senior Housing">Senior Housing</option>
+                                      <option value="Other">Other</option>
+                                    </select>
+                                  </div>
+                                </div>
+                  
+                                <div class="row">
+                                  <div class="col-md-4">
+                                     <label>Number of Rooms</label>
+                                     <input  id="00NHo00000XG1Nf" name="00NHo00000XG1Nf" size="20" type="text" required/>
+                                  </div>
+                                  <div class="col-md-4">
+                                     <label>Number of Apartments</label>
+                                     <input  id="00NHo00000XG1Nk" name="00NHo00000XG1Nk" size="20" type="text" required/>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <label>Number of Housing</label>
+                                    <input  id="00NHo00000XG1Np" name="00NHo00000XG1Np" size="20" type="text" required/>
+                                  </div>
+                                </div>
+                  
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <label>Service Needed</label>
+                                    <select class="contact-form-home" id="00NHo00000XG1Na" name="00NHo00000XG1Na" title="Service Needed" multiple="multiple" required>
+                                      <option class="first-select" value="">--None--</option>
+                                      <option value="EV Charging">EV Charging</option>
+                                      <option value="Phone">Phone</option>
+                                      <option value="TV">TV</option>
+                                      <option value="Wifi">Wifi</option>
+                                      <option value="Cabling">Cabling</option>
+                                      <option value="Surveillance System">Surveillance System</option>
+                                      <option value="Audio Visual System">Audio Visual System</option>
+                                      <option value="IT Services">IT Services</option>
+                                      </select>
+                                  </div>
+                                </div>
+                  
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <label for="description">Description</label>
+                                    <textarea rows="7" name="description" required></textarea>
+                                  </div>
+                                </div>
+                  
+                              </div>
+
+                              <div class="post-form-para">
+                                <p>
+                                  Techunifi collaborates with renowned industry leaders such as Samsung and Dell
+                                </p>
+                              </div>
+
+                              <div class="row">
+                                <div class="col-md-12 home-contact-submit">
+                                  <input type="submit" name="submit" value="Submit An Inquiry">
+                                </div>
+                              </div>
+                                    
+                              </form>
+                              
+
+                      
+                            </div>
+                      
+                      </div>
+                  </div>
+              </div>
+            </section>
+            <!-- =======  Form =======  -->
+
+          </div>
+        
+         </div>
+       
+         
+         <!-- Tab2 -->
+         <div id="sub-tab2" class="sub-tabcontent">
+           <div class="sub-tab2-section">
+   
+              <!-- =======  Form =======  -->
   <section class="ticket-form">
     <div class="container">
         <div class="row">
@@ -267,7 +447,7 @@
                         
                         <div class="post-form-para">
                           <p>
-                            Techunifi collaborates with renowned industry leaders such as Samsung and Dell, known for their innovative contributions to the tech landscape. As your trusted partner, we strive to empower you in making informed decisions tailored to your business requirements. Below, we've curated a selection of products and brands categorized by service. Don't hesitate to contact us for further information or to inquire about any specific product. We're here to assist you every step of the way in finding the perfect tech solutions for your business.
+                            Techunifi collaborates with renowned industry leaders such as Samsung and Dell
                           </p>
                         </div>
                  
@@ -282,6 +462,18 @@
     </div>
   </section>
   <!-- =======  Form =======  -->
+   
+           </div>
+         </div>
+   
+        </div>
+           
+      </div>
+
+    </div>
+  </section>
+
+
 
  <!-- ======= Footer ======= -->
  <footer class="footer" role="contentinfo">
