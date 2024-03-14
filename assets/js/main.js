@@ -513,7 +513,7 @@ document.addEventListener('DOMContentLoaded', function() {
 /**
    * Home img Slider
    */
-new Swiper('.home-img-slider', {
+new Swiper('.home-clients-slider', {
   speed: 400,
   loop: true,
   // autoplay: {
@@ -525,6 +525,10 @@ new Swiper('.home-img-slider', {
     el: '.swiper-pagination',
     type: 'bullets',
     clickable: true
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev'
   },
   breakpoints: {
     320: {
@@ -541,7 +545,15 @@ new Swiper('.home-img-slider', {
     },
     992: {
       slidesPerView: 3,
-      spaceBetween: 120
+      centeredSlides: true,
+      spaceBetween: 40,
+      slidesOffsetBefore: -40,
+      slidesOffsetAfter: -40
     }
   }
 });
+
+
+
+
+
