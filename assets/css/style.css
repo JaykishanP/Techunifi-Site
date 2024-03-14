@@ -569,7 +569,7 @@ section {
 }
 .service-col {
   display: table-cell;
-  padding: 16px;
+  padding: 16px 8px;
   text-align: center;
 }
 
@@ -782,12 +782,23 @@ section#home-clients {
   transition: 0.3s;
 }
 
-.home-clients-slider .swiper-slide {
+/* .home-clients-slider .swiper-slide {
   margin-right: 30px !important;
+} */
+
+.home-clients-slider .swiper-slide.swiper-slide-prev img,
+.home-clients-slider .swiper-slide.swiper-slide-next img{
+  width: 200px !important;
 }
 
+/* .home-clients-slider .swiper-slide.swiper-slide-next{
+  margin-left: 30px !important;
+} */
+
 .home-clients-slider .swiper-slide.swiper-slide-active {
-  width: 650px !important;
+  width: 700px !important;
+  position: relative;
+  left: -93px;
 }
 
 .home-clients-slider .swiper-button-next, 
@@ -1339,6 +1350,11 @@ section.ticket-form {
   overflow-y: auto;
 }
 
+.sub-tab2-section .ticket-form form select {
+  min-height: 90px;
+  overflow-y: auto;
+}
+
 .ticket-form select.ticket-business-select{
   min-height: unset;
   overflow-y: auto;
@@ -1359,7 +1375,8 @@ section.ticket-form {
 
 .sub-tab-section .tab button {
   display: block;
-  margin: 10px;
+  margin: 4px;
+  border-radius: 50px;
   padding: 10px 20px;
   width: unset;
   border-right: 0;
@@ -1559,22 +1576,62 @@ span.bread-inner {
   display: none;
 }
 
+.tab4-section .tabs-para {
+  border-bottom: 1px solid var(--black);
+  padding-bottom: 40px;
+}
+
+.list-img {
+  padding: 35px 0 35px;
+}
+
+.hilton-stay,
+.marriot-hotels,
+.hotels-others{
+  padding-top: 45px;
+}
+
+.hilton-stay .list-img,
+.marriot-hotels .list-img,
+.hotels-others .list-img{
+  padding-bottom: 50px;
+}
+
 
 /* Responsive */
 /* Mobile */
 
 @media only screen and (max-width: 767.9px){
+
+.hilton-stay,
+.marriot-hotels,
+.hotels-others{
+  padding-top: 10px;
+}
+
+.hilton-stay .list-img,
+.marriot-hotels .list-img,
+.hotels-others .list-img{
+  padding-bottom: 30px;
+}
+section.sub-tab-section {
+  padding: 20px 0 0 0;
+}
   .sub-tab-section .tab {
-    padding: 0 5px;
+    padding: 0;
   }
   .sub-tab-section .tab button {
     border-bottom: 0;
     padding: 10px 15px;
     font-size: 14px;
   }
+  .list-img{
+    text-align: left !important;
+  }
   .home-clients-slider .swiper-slide.swiper-slide-active {
     width: 400px !important;
-    margin-right: 68px !important;
+    position: unset;
+    left: unset;
   }
   .home-clients-slider .swiper-slide {
     margin-right: 40px !important;
@@ -1654,6 +1711,7 @@ span.bread-inner {
   }
   .service-col {
     padding: 15px 16px;
+    display: block;
   }
   section.howItworks{
     padding: 0;
@@ -1791,7 +1849,7 @@ span.bread-inner {
   padding: 10px 0 0 0;
 }
 section.ticket-form {
-  padding: 20px 0 60px 0;
+  padding: 30px 0 60px 0;
 }
 .submit-head-para {
   margin: 0 0 20px 0;
@@ -1802,6 +1860,12 @@ section.ticket-form {
 
 }
 
+/*  */
+@media only screen and (min-width: 451px) and (max-width: 767px){
+  .home-clients-slider .swiper-slide.swiper-slide-active {
+    width: 600px !important;
+  }
+}
 
 /* Higher Mobile */
 @media only screen and (min-width: 601px) and (max-width: 767px){
@@ -1855,7 +1919,7 @@ section.ticket-form {
     min-height: 530px;
   }
   .tab button {
-    padding: 22px 4px;
+    padding: 22px 10px 22px 4px;
   }
   .tabcontent {
     padding: 0 0 0 20px;
@@ -1895,6 +1959,18 @@ section.ticket-form {
 }
 .footer .what-we-do {
   padding-left: unset;
+}
+.tab button {
+  padding: 22px 14px 22px 16px;
+}
+.tabcontent {
+  padding: 0 0 0 20px;
+}
+.home-clients-slider .swiper-slide.swiper-slide-active {
+  width: 555px !important;
+  position: relative;
+  left: -62px;
+  margin-right: 0 !important;
 }
 
 }
@@ -1953,5 +2029,15 @@ section.ticket-form {
   .prod-prev-button{
     float: left;
   }
+
+  .home-clients-slider .swiper-slide.swiper-slide-active {
+    width: 800px !important;
+    position: relative;
+    left: -93px;
+  }
+  .home-clients-slider .swiper-button-next, .home-clients-slider .swiper-button-prev {
+    color: var(--orange);
+    display: block;
+  } 
 
 }
