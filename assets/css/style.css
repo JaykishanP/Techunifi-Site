@@ -1050,14 +1050,14 @@ ul.list-unstyled.connect-details {
 
 .tab button {
   display: block;
-  padding: 22px 64px 22px 16px;
+  padding: 22px 57px 22px 16px;
   width: 100%;
   border: none;
   outline: none;
   text-align: left;
   cursor: pointer;
   transition: 0.3s;
-  font-size: 17px;
+  font-size: 14px;
   border-right: var(--border);
   background: #ededed;
   letter-spacing: 1px;
@@ -1085,7 +1085,7 @@ ul.list-unstyled.connect-details {
 
 .tab button.active {
   position: relative;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 .tab button.active::after {
@@ -1758,6 +1758,9 @@ section.sub-tab-section {
   .footer ul.links-footer li {
     padding: 0 0 20px 0;
   }
+  .copy-right img {
+    max-width: 46%;
+  }
   #aboutUs {
     margin: 0 !important;
   }
@@ -1903,6 +1906,9 @@ section.ticket-form {
   p.social {
     margin: 15px 0 0 0;
   }
+  .copy-right img {
+    max-width: 25%;
+  }
   .service-col h3 {
     padding: 21px 0 4px 0;
   }
@@ -1924,6 +1930,7 @@ section.ticket-form {
   }
   .tab button {
     padding: 22px 10px 22px 4px;
+    font-size: 13px;
   }
   .tabcontent {
     padding: 0 0 0 20px;
