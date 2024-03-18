@@ -1618,6 +1618,10 @@ span.bread-inner {
 .hotels-others .list-img{
   padding-bottom: 30px;
 }
+
+.client-col p br{
+  display: none;
+}
 section.sub-tab-section {
   padding: 20px 0 0 0;
 }
@@ -2053,14 +2057,10 @@ section.ticket-form {
 
 }
 
-
 /*  */
-@media only screen and (min-width: 992px) and (max-width: 1439px){
-  .client-col p{
-    width: 161px;
-    font-size: 16px;
-  }
-  .client-col .list-width-client {
-    width: 187px;
-  }
+
+@media only screen and (min-width: 1600.9px){
+   .client-col p br{
+      display: none;
+   }
 }
