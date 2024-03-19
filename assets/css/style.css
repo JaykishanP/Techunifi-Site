@@ -190,7 +190,7 @@ section {
   top: 0;
   right: 0;
   left: 0;
-  z-index: 2;
+  z-index: 10;
   background-color: #ededed;
   padding: 25px 0;
 }
@@ -1299,6 +1299,12 @@ section#hero.submit-banner {
   margin: 0 0 60px 0;
 }
 
+.sub-tabcontent .submit-head-para{
+  text-align: center;
+  max-width: 596px;
+  margin: 0 auto 60px;
+}
+
 .submit-head-para .prod-heading h3{
   position: relative;
 }
@@ -1313,6 +1319,10 @@ section#hero.submit-banner {
   bottom: -20px;
   left: 1%;
   z-index: -1;
+}
+
+.sub-tabcontent .submit-head-para .prod-heading h3::before {
+  left: 41%;
 }
 
 section.ticket-form {
@@ -1513,7 +1523,7 @@ section.product-tab-section {
 .prod-fixed {
   position: fixed;
   width: 100%;
-  z-index: 9;
+  z-index: 10;
   top: 104px;
   left: 0;
   right: 0;
@@ -1522,7 +1532,7 @@ section.product-tab-section {
 }
 
 .bread-crumb-row {
-  padding: 110px 0 0 0;
+  padding: 57px 0 0 0;
   position: relative;
 }
 
@@ -1678,8 +1688,107 @@ span.bread-inner {
   padding-bottom: 50px;
 }
 
+/* products slider */
+.container-inner {
+  overflow: hidden;
+  position: relative;
+  z-index: 9;
+}
 
-/* Responsive */
+.container-inner .slider {
+   margin: 0 auto 0 0;
+   width: calc(300em/16);
+   height: calc(314em/16);
+   overflow: visible;
+}
+
+.container-inner .slider__list {
+   width: fit-content;
+   cursor: grab;
+}
+
+.container-inner .slider__listItem {    
+  background: #fff;
+  padding: 20px;
+  border-radius: 20px;background: #fff;
+}
+
+.container-inner .scroll {
+   position: relative;
+   left: 0;
+   margin-top: calc(40em/16);
+   width: 100%;
+   overflow: hidden;
+}
+
+.container-inner .scroll__growbar {
+   content: "";
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   display: block;
+   height: 100%;
+   background: #937152;
+}
+.prod-arrows {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.prod-arrows .swiper-button-next, .prod-arrows .swiper-button-prev {
+  position: unset;
+  margin-top: unset;
+  width: 20px;
+  padding: 23px;
+  height: auto;
+  color: var(--black);
+}
+.prod-heading-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+/* .container-inner .swiper-pagination {
+  position: unset;
+} */
+
+.container-inner .prod-slide-card p{
+  margin-bottom: 0;
+}
+.slider__listItem:hover {
+  box-shadow: 0 0 2px 0 var(--black);
+}
+.prod-slide-card .card-thumbnail {
+  font-size: 16px;
+  letter-spacing: 1.5px;
+  font-weight: 500;
+}
+.prod-slide-card .card-prod-heading {
+  font-size: 24px;
+  font-weight: 600;
+}
+.right-content .voltage-brands .submit-head-para {
+  margin: 40px 0 0 0;
+}
+.right-content .voltage-brands .submit-head-para .prod-heading h3{
+  margin: 0 0 35px 0;
+}
+.prod-heading-name p {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 1.4px;
+  font-weight: 700;
+}
+.swiper-button-next:after, .swiper-button-prev:after {
+  font-size: 25px;
+  font-weight: 800;
+}
+.cloud-img{
+  padding-top: 35px;
+}
+
+
+/* ============ Responsive ==============*/
 /* Mobile */
 
 @media only screen and (max-width: 767.9px){
@@ -1960,6 +2069,9 @@ section.ticket-form {
 }
 .cont-row-head h4 {
   font-size: 24px;
+}
+.sub-tabcontent .submit-head-para .prod-heading h3::before {
+  left: 34%;
 }
 
 }
