@@ -1820,6 +1820,13 @@ section.sub-tab-section {
   #contact-submit button {
     margin: 0;
   }
+  .sub-tab2-section .ticket-form form select,
+  .ticket-form select.ticket-business-select,
+  .ticket-form select.contact-form-home,
+  .ticket-form form select{
+   min-height: unset;
+   color: var(--black);
+  }
   .contact-submit {
     padding: 0 15px;
   }
@@ -2044,6 +2051,13 @@ section.ticket-form {
   }
   .footer .what-we-do {
     padding-left: unset;
+  }
+  .sub-tab2-section .ticket-form form select,
+  .ticket-form select.ticket-business-select,
+  .ticket-form select.contact-form-home,
+  .ticket-form form select{
+   min-height: unset;
+   color: var(--black);
   }
 
 }
