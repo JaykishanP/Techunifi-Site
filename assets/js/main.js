@@ -516,10 +516,10 @@ document.addEventListener('DOMContentLoaded', function() {
 new Swiper('.home-clients-slider', {
   speed: 400,
   loop: true,
-  // autoplay: {
-  //   delay: 5000,
-  //   disableOnInteraction: false
-  // },
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false
+  },
   slidesPerView: 'auto',
   pagination: {
     el: '.swiper-pagination',
@@ -555,18 +555,26 @@ new Swiper('.home-clients-slider', {
 
 
 /* ======== Products Slider ========== */
-const sliderProd = document.querySelector("#js-slider");
 
-new Swiper(sliderProd, {
-    spaceBetween: 20,
-    slidesPerView: 1,
-    grabCursor: true,
-    pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-    },
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-    },
+// Get all elements with the class '.js-slider'
+const sliders = document.querySelectorAll(".js-slider");
+
+// Iterate over each slider element
+sliders.forEach(function(slider) {
+    new Swiper(slider, {
+        spaceBetween: 20,
+        slidesPerView: 1,
+        grabCursor: true,
+        pagination: {
+            el: slider.querySelector(".swiper-pagination"),
+            clickable: true,
+        },
+        navigation: {
+            nextEl: slider.parentNode.querySelector(".swiper-button-next"), // Corrected selector to find next button
+            prevEl: slider.parentNode.querySelector(".swiper-button-prev"), // Corrected selector to find previous button
+        },
+    });
 });
+
+
+

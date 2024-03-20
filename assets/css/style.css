@@ -354,7 +354,7 @@ section {
 
   #nav-menu {
     padding: 15px 0;
-    z-index: 4;
+    z-index: 10;
   }
   .menu-expanded.menu.show{
     display: none;
@@ -2213,7 +2213,8 @@ section.ticket-form {
   .mobile-fixed-tab-arrow{
     position: fixed;
     background: linear-gradient(#ededed, transparent);
-    z-index: 2;
+    z-index: 10;
+    top: 88px;
   }
 
   .prod-fixed {
