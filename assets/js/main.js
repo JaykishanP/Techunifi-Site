@@ -226,9 +226,7 @@ $('option').mousedown(function(e) {
 });
 
 
-/**
-   * Menu
-   */
+/* ====== Menu ====== */
 // Menu
 
 const dropdownBtn = document.querySelectorAll(".dropdown-btn");
@@ -322,7 +320,6 @@ function toggleUnderline(event) {
 }
 
 
-
 // Services
 
 // $(".menu-bar > li").click (function () {
@@ -334,7 +331,7 @@ function toggleUnderline(event) {
 // });
 
 
-/* About tabs */
+/* ====== About tabs ====== */
 // Tabs
 
 function openTab(evt, tabName) {
@@ -372,15 +369,7 @@ $('.tablinks, .prod-tablinks').click(function(event) {
 });
 
 
-/**
-   * Products -left Nav
-*/
-// Products -left Nav
-
-
-
-
-
+/* ====== Product ======*/
 //Product - Tabs
 
 function openProd(evt, cityName) {
@@ -410,7 +399,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-//Prod tab Mobile slide
+/* ======== Prod tab Mobile slide ============  */
 // Previous and Next Button functionality
   document.addEventListener("DOMContentLoaded", function() {
       // Add event listener for the previous button
@@ -480,9 +469,7 @@ window.onload = function() {
 };
 
 
-/**
-   * Submit Tab
-*/
+/* ======== Submit Tab ======== */
 
 function subTicket(evt, cityName) {
   var i, tabcontent, tablinks;
@@ -510,9 +497,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-/**
-   * Home img Slider
-   */
+
+/* ======== Home img Slider ========= */
 new Swiper('.home-clients-slider', {
   speed: 400,
   loop: true,
@@ -578,3 +564,46 @@ sliders.forEach(function(slider) {
 
 
 
+/* ======== new Inquiry ======== */
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Function to activate the "New Inquiry" tab and display its content
+  function activateNewInquiryTab() {
+      var newInquiryTabContent = document.getElementById("sub-tab1");
+      var newInquiryTabLink = document.getElementById("sub-defaultOpen");
+
+      // Display "New Inquiry" tab content
+      if (newInquiryTabContent) {
+          newInquiryTabContent.style.display = "block";
+      }
+
+      // Remove "active" class from all tab links
+      var tabLinks = document.getElementsByClassName("sub-tablinks");
+      for (var i = 0; i < tabLinks.length; i++) {
+          tabLinks[i].classList.remove("active");
+      }
+
+      // Add "active" class to "New Inquiry" tab link
+      if (newInquiryTabLink) {
+          newInquiryTabLink.classList.add("active");
+      }
+
+      // Activate the "New Inquiry" button
+      var newInquiryButton = document.getElementById("newInquiryButton");
+      if (newInquiryButton) {
+          newInquiryButton.classList.add("active");
+      }
+
+      // Deactivate the "Submit a Ticket" button
+      var submitTicketButton = document.getElementById("sub-defaultOpen");
+      if (submitTicketButton) {
+          submitTicketButton.classList.remove("active");
+      }
+  }
+
+  // Check if the URL contains "?activeTab=newInquiry"
+  if (window.location.href.indexOf("?activeTab=newInquiry") > -1) {
+      // Activate the "New Inquiry" tab and button
+      activateNewInquiryTab();
+  }
+});

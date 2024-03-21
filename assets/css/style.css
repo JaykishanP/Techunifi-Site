@@ -597,10 +597,15 @@ section {
 
 .service-col img {
   opacity: 0.4;
+  max-width: 22px;
 }
 
 .service-section-desc .service-col:hover img {
   opacity: 1;
+}
+
+.how-section-desc .service-col img {
+  opacity: unset;
 }
 
 .service-more {
@@ -1480,19 +1485,28 @@ section.thank-section {
 }
 
 /* ======== Product Page ========= */
-.left-right{
-  position: relative;
-}
 
-.sidebar{
-  position: absolute;
-  top: 10px;
-  border-right: 1px solid var(--black);
-}
-
-.sidebar.sticky {
+.sidebar {
+  padding: 0;
   position: fixed;
-  top: 200px;
+  top: 96px;
+  color: #231f20;
+}
+.sidebar.abslt {
+  position: absolute;
+  top: unset;
+  bottom: 0;
+}
+.sidebar.abslt-top {
+  position: absolute;
+  top: 500px;
+}
+.sidebar ul{
+  padding: 0;
+}
+
+.sidebar {
+  border-right: 1px solid var(--black);
 }
 
 .sidebar li {
@@ -1527,7 +1541,7 @@ section.product-tab-section {
   top: 104px;
   left: 0;
   right: 0;
-  background: linear-gradient(#ededed, transparent);
+  background: linear-gradient(#ededed, #ededed, #ededed, transparent);
   margin-top: -4px;
 }
 
@@ -1573,6 +1587,10 @@ section.product-tab-section {
 .product-tab button.active span {
   font-weight: 700;
   letter-spacing: 1px;
+}
+
+.product-tab .prod-tablinks img {
+  max-width: 22px;
 }
 
 .product-tabcontent {
@@ -1739,7 +1757,7 @@ span.bread-inner {
   position: unset;
   margin-top: unset;
   width: 20px;
-  padding: 23px;
+  padding: 15px;
   height: auto;
   color: var(--black);
 }
@@ -1780,11 +1798,15 @@ span.bread-inner {
   font-weight: 700;
 }
 .swiper-button-next:after, .swiper-button-prev:after {
-  font-size: 25px;
+  font-size: 15px;
   font-weight: 800;
 }
 .cloud-img{
   padding-top: 35px;
+}
+.prod-slide-card img {
+  display: block;
+  margin: 0 auto;
 }
 
 
@@ -2212,7 +2234,7 @@ section.ticket-form {
 
   .mobile-fixed-tab-arrow{
     position: fixed;
-    background: linear-gradient(#ededed, transparent);
+    background: linear-gradient(#ededed, #ededed, #ededed, transparent);
     z-index: 10;
     top: 88px;
   }
