@@ -244,21 +244,36 @@
           <div class="row left-right">
 
             <div class="col-md-2">
-               <aside class="sidebar">
+
+               <!-- <aside class="sidebar" id="fixedSidebar">
                   <ul>
-                      <li><a href="#brands2">Brands</a></li>
-                      <li><a href="#cordless-phone">Cordless</a></li>
+                      <li><a href="#tele-brand">Brands</a></li>
+                      <li><a href="#tele-cordless-phone">Cordless</a></li>
+                      <li><a href="#tele-corded-phone">Corded</a></li>
+                      <li><a href="#tele-clocks">Clocks</a></li>
                   </ul>
-              </aside>
+              </aside> -->
+
+              <div class="tab">
+                <a href="#tele-brand">Brands</a><br>
+                <a href="#tele-cordless-phone">Cordless</a><br>
+                <a href="#tele-corded-phone">Corded</a><br>
+                <a href="#tele-clocks">Clocks</a><br>
+              </div>
+
             </div>
  
        <div class="col-md-10">
            <main>
+
+            <!-- tele-brands -->
                <div class="right-content">
 
                 <img src="assets/img/prod_main_img.png" alt="banner">
 
-                <div class="voltage-brands" id="brands2">
+                <div id="tele-brand" class="id-div"></div>
+                <div class="voltage-brands">
+
                 <div class="submit-head-para">
                   <div class="prod-heading aos-init">
                     <h3>Brands</h3>
@@ -320,16 +335,18 @@
                   </div>
 
                   <div class="swiper-pagination"></div>
-              </div>
+                </div>
 
                 </div>
 
 
                </div>
        
+             <!-- tele-cordless -->
                <div class="right-content">
 
-                <div class="voltage-brands clouds" id="cordless-phone">
+                <div id="tele-cordless-phone" class="id-div"></div>
+                <div class="voltage-brands tele-cordless-phone">
                 <!--  -->
                 <div class="submit-head-para">
                   <div class="prod-heading aos-init">
@@ -340,7 +357,7 @@
                 <div class="container-inner">
 
                   <div class="prod-heading-name">
-                    <p>Product Partners</p>
+                    <p>Telecomm</p>
                     <div class="prod-arrows">
                       <div class="swiper-button-next"></div>
                       <div class="swiper-button-prev"></div>
@@ -350,45 +367,24 @@
                   <div class="slider swiper js-slider">
                       <div class="swiper-wrapper">
                         <!-- 1 -->
-                          <div class="slider__listItem swiper-slide">
+                          <div class="slider__listItem swiper-slide other-prod-slider">
                             <div class="prod-slide-card">
-                              <p class="card-thumbnail">Phones & Clocks</p>
-                              <p class="card-prod-heading">Bittle</p>
-                              <img src="assets/img/prod-images/telecom/bittel-logo-01 1.png" alt="techunifi" class="card-brand-img">
+                              <p class="card-thumbnail">Cordless Phones</p>
+                              <p class="card-prod-heading">Lorem Ipsum</p>
+                              <p class="card-thumbnail-text">HT60 Hotel Telephone</p>
+                              <img src="assets/img/prod-images/telecom/HT20D 1.png" alt="techunifi" class="card-brand-img">
                             </div>
                           </div>
                         <!-- 2 -->
-                          <div class="slider__listItem swiper-slide">
+                          <div class="slider__listItem swiper-slide other-prod-slider">
                             <div class="prod-slide-card">
-                              <p class="card-thumbnail">Phones & Clocks</p>
-                              <p class="card-prod-heading">Yealink</p>
-                              <img src="assets/img/prod-images/telecom/Yealink.png" alt="techunifi" class="card-brand-img">
+                              <p class="card-thumbnail">Cordless Phones</p>
+                              <p class="card-prod-heading">Lorem Ipsum</p>
+                              <p class="card-thumbnail-text">HT60 Hotel Telephone</p>
+                              <img src="assets/img/prod-images/telecom/DECTHS_W 2.png" alt="techunifi" class="card-brand-img">
                             </div>
                           </div>
-                        <!-- 3 -->
-                          <div class="slider__listItem swiper-slide">
-                            <div class="prod-slide-card">
-                              <p class="card-thumbnail">Phones & Clocks</p>
-                              <p class="card-prod-heading">Mitel</p>
-                              <img src="assets/img/prod-images/telecom/Mitel.png" alt="techunifi" class="card-brand-img">
-                            </div>
-                          </div>
-                        <!-- 4 -->
-                          <div class="slider__listItem swiper-slide">
-                            <div class="prod-slide-card">
-                              <p class="card-thumbnail">Phones & Clocks</p>
-                              <p class="card-prod-heading">Synectics</p>
-                              <img src="assets/img/prod-images/telecom/Syn.png" alt="techunifi" class="card-brand-img">
-                            </div>
-                          </div>
-                        <!-- 5 -->
-                         <div class="slider__listItem swiper-slide">
-                          <div class="prod-slide-card">
-                            <p class="card-thumbnail">Phones & Clocks</p>
-                            <p class="card-prod-heading">Polycomm</p>
-                            <img src="assets/img/prod-images/telecom/Frame 22790.png" alt="techunifi" class="card-brand-img">
-                          </div>
-                        </div>
+                        
                       </div>
                   </div>
 
@@ -400,7 +396,153 @@
                 </div>
 
                </div>
-               <!-- Add more sections as needed -->
+
+            <!-- tele-corded -->
+            <div class="right-content">
+
+              <div id="tele-corded-phone" class="id-div"></div>
+              <div class="voltage-brands tele-corded-phone">
+              <!--  -->
+              <div class="submit-head-para">
+                <div class="prod-heading aos-init">
+                  <h3>Corded Phones</h3>
+                </div>
+              </div>
+              <!--  -->
+              <div class="container-inner">
+
+                <div class="prod-heading-name">
+                  <p>Telecomm</p>
+                  <div class="prod-arrows">
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+                </div>
+
+                <div class="slider swiper js-slider">
+                    <div class="swiper-wrapper">
+                      <!-- 1 -->
+                        <div class="slider__listItem swiper-slide other-prod-slider">
+                          <div class="prod-slide-card">
+                            <p class="card-thumbnail">Corded Phones</p>
+                            <p class="card-prod-heading">Lorem Ipsum</p>
+                            <p class="card-thumbnail-text">HT60 Hotel Telephone</p>
+                            <img src="assets/img/prod-images/telecom/neo-5btncurve-web.png" alt="techunifi" class="card-brand-img">
+                          </div>
+                        </div>
+                      <!-- 2 -->
+                        <div class="slider__listItem swiper-slide other-prod-slider">
+                          <div class="prod-slide-card">
+                            <p class="card-thumbnail">Corded Phones</p>
+                            <p class="card-prod-heading">Lorem Ipsum</p>
+                            <p class="card-thumbnail-text">HT60 Hotel Telephone</p>
+                            <img src="assets/img/prod-images/telecom/HT60 1.png" alt="techunifi" class="card-brand-img">
+                          </div>
+                        </div>
+                      <!-- 3 -->
+                        <div class="slider__listItem swiper-slide other-prod-slider">
+                          <div class="prod-slide-card">
+                            <p class="card-thumbnail">Corded Phones</p>
+                            <p class="card-prod-heading">Lorem Ipsum</p>
+                            <p class="card-thumbnail-text">HT60 Hotel Telephone</p>
+                            <img src="assets/img/prod-images/telecom/1077480B_2.png" alt="techunifi" class="card-brand-img">
+                          </div>
+                        </div>
+                      
+                    </div>
+                </div>
+
+                <div class="swiper-pagination"></div>
+            </div>
+
+              <!--  -->
+              
+              </div>
+
+             </div>
+
+              <!-- clocks -->
+              <div class="right-content">
+
+                <div id="tele-clocks" class="id-div"></div>
+                <div class="voltage-brands tele-clocks">
+                <!--  -->
+                <div class="submit-head-para">
+                  <div class="prod-heading aos-init">
+                    <h3>Clocks</h3>
+                  </div>
+                </div>
+                <!--  -->
+                <div class="container-inner">
+  
+                  <div class="prod-heading-name">
+                    <p>Telecomm</p>
+                    <div class="prod-arrows">
+                      <div class="swiper-button-next"></div>
+                      <div class="swiper-button-prev"></div>
+                  </div>
+                  </div>
+  
+                  <div class="slider swiper js-slider">
+                      <div class="swiper-wrapper">
+                        <!-- 1 -->
+                          <div class="slider__listItem swiper-slide other-prod-slider">
+                            <div class="prod-slide-card">
+                              <p class="card-thumbnail">MODA Clocks</p>
+                              <p class="card-prod-heading">Lorem Ipsum</p>
+                              <p class="card-thumbnail-text">MODA Clocks</p>
+                              <img src="assets/img/prod-images/telecom/BMT_CL1_TW3.png" alt="techunifi" class="card-brand-img">
+                            </div>
+                          </div>
+                        <!-- 2 -->
+                          <div class="slider__listItem swiper-slide other-prod-slider">
+                            <div class="prod-slide-card">
+                              <p class="card-thumbnail">MODA Clocks</p>
+                              <p class="card-prod-heading">Lorem Ipsum</p>
+                              <p class="card-thumbnail-text">HT60 Hotel Telephone</p>
+                              <img src="assets/img/prod-images/telecom/HC1pro-clock.png" alt="techunifi" class="card-brand-img">
+                            </div>
+                          </div>
+                        <!-- 3 -->
+                          <div class="slider__listItem swiper-slide other-prod-slider">
+                            <div class="prod-slide-card">
+                              <p class="card-thumbnail">MODA Clocks</p>
+                              <p class="card-prod-heading">Lorem Ipsum</p>
+                              <p class="card-thumbnail-text">HT60 Hotel Telephone</p>
+                              <img src="assets/img/prod-images/telecom/D8qi-device-bwstandard-1024x845.png" alt="techunifi" class="card-brand-img">
+                            </div>
+                          </div>
+                        <!-- 4 -->
+                          <div class="slider__listItem swiper-slide other-prod-slider">
+                            <div class="prod-slide-card">
+                              <p class="card-thumbnail">MODA Clocks</p>
+                              <p class="card-prod-heading">Lorem Ipsum</p>
+                              <p class="card-thumbnail-text">HT60 Hotel Telephone</p>
+                              <img src="assets/img/prod-images/telecom/BM3_CL1_TW3_HS_WEB.png" alt="techunifi" class="card-brand-img">
+                            </div>
+                          </div>
+                        <!-- 5 -->
+                         <div class="slider__listItem swiper-slide other-prod-slider">
+                          <div class="prod-slide-card">
+                            <p class="card-thumbnail">MODA Clocks</p>
+                            <p class="card-prod-heading">Lorem Ipsum</p>
+                            <p class="card-thumbnail-text">HT60 Hotel Telephone</p>
+                            <img src="assets/img/prod-images/telecom/BM3-HS1-WEB.png" alt="techunifi" class="card-brand-img">
+                          </div>
+                        </div>
+                        
+                      </div>
+                  </div>
+  
+                  <div class="swiper-pagination"></div>
+              </div>
+  
+                <!--  -->
+                
+                </div>
+  
+               </div>
+
            </main>
        </div>
  
@@ -430,7 +572,9 @@
                   Techunifi collaborates closely with companies that prioritize staying current with franchise guidelines, ensuring meticulous adherence to brand aesthetics and standards while effectively linking owners to essential resources. Leveraging our expertise in structured cabling, we specialize in enhancing spatial layouts and crafting immersive environments that resonate with your clientele. Reach out today to delve deeper into our operational approach and discover the diverse ways in which we can provide tailored support to your business endeavors.
                 </p>
                 <a href="submit.html?activeTab=newInquiry" class="sub-Inquiry">Submit an Inquiry</a>
-                <img src="assets/img/prod_main_img.png" alt="banner" style="padding-top: 40px;">
+                <video controls="" loop="" autoplay="" muted="" style="padding-top: 40px;">
+                  <source src="assets/img/video/lightning.mp4" type="video/mp4">
+                </video>
               </div>
               <!--  -->
             </div>
@@ -468,13 +612,12 @@
           <div class="row left-right">
 
             <div class="col-md-2">
-               <aside class="sidebar">
-                  <ul>
-                      <li><a href="#brands2">Brands</a></li>
-                      <li><a href="#cordless-phone">Cordless</a></li>
-                      <!-- Add more menu items as needed -->
-                  </ul>
-              </aside>
+              <div class="tab">
+                <a href="#tele-brand">Brands</a><br>
+                <a href="#tele-cordless-phone">Cordless</a><br>
+                <a href="#tele-corded-phone">Corded</a><br>
+                <a href="#tele-clocks">Clocks</a><br>
+              </div>
             </div>
  
        <div class="col-md-10">
@@ -624,13 +767,12 @@
           <div class="row left-right">
 
             <div class="col-md-2">
-               <aside class="sidebar">
-                  <ul>
-                      <li><a href="#brands2">Brands</a></li>
-                      <li><a href="#cordless-phone">Cordless</a></li>
-                      <!-- Add more menu items as needed -->
-                  </ul>
-              </aside>
+              <div class="tab">
+                <a href="#tele-brand">Brands</a><br>
+                <a href="#tele-cordless-phone">Cordless</a><br>
+                <a href="#tele-corded-phone">Corded</a><br>
+                <a href="#tele-clocks">Clocks</a><br>
+              </div>
             </div>
  
        <div class="col-md-10">
@@ -776,13 +918,10 @@
             <div class="row left-right">
 
               <div class="col-md-2">
-                 <aside class="sidebar">
-                    <ul>
-                        <li><a href="#brands">Brands</a></li>
-                        <li><a href="#cloud">Cloud</a></li>
-                        <!-- Add more menu items as needed -->
-                    </ul>
-                </aside>
+                <div class="tab">
+                  <a href="#low-brand">Brands</a><br>
+                  <a href="#low-cloud">Clouds</a>
+                </div>
               </div>
    
          <div class="col-md-10">
@@ -791,7 +930,7 @@
 
                   <img src="assets/img/prod_main_img.png" alt="banner">
 
-                  <div class="voltage-brands" id="brands">
+                  <div class="voltage-brands" id="low-brand">
                   <!--  -->
                   <div class="submit-head-para">
                     <div class="prod-heading aos-init">
@@ -858,7 +997,7 @@
          
                  <div class="right-content">
 
-                  <div class="voltage-brands clouds" id="cloud">
+                  <div class="voltage-brands clouds" id="low-cloud">
                   <!--  -->
                   <div class="submit-head-para">
                     <div class="prod-heading aos-init">
@@ -918,12 +1057,10 @@
             <div class="row left-right">
 
               <div class="col-md-2">
-                 <aside class="sidebar">
-                    <ul>
-                        <li><a href="#brands2">Brands</a></li>
-                        <li><a href="#cordless-phone">Cordless</a></li>
-                    </ul>
-                </aside>
+                <div class="tab">
+                  <a href="#low-brand">Brands</a><br>
+                  <a href="#low-cloud">Clouds</a>
+                </div>
               </div>
    
          <div class="col-md-10">
@@ -1039,12 +1176,10 @@
             <div class="row left-right">
 
               <div class="col-md-2">
-                 <aside class="sidebar">
-                    <ul>
-                        <li><a href="#brands2">Brands</a></li>
-                        <li><a href="#cordless-phone">Cordless</a></li>
-                    </ul>
-                </aside>
+                <div class="tab">
+                  <a href="#low-brand">Brands</a><br>
+                  <a href="#low-cloud">Clouds</a>
+                </div>
               </div>
    
          <div class="col-md-10">
@@ -1254,92 +1389,42 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
   <script>
-  
-//   $(document).ready(function() {
-//   var sidebar = $('.sidebar-wrapper');
-//   var leftRightDiv = $('.left-right');
-//   var footerOffsetTop = $('.copy-right').offset().top;
-//   var sidebarHeight = sidebar.outerHeight();
-
-//   $(window).scroll(function() {
-//     var scrollTop = $(window).scrollTop();
-//     var leftRightDivOffsetTop = leftRightDiv.offset().top;
-//     var leftRightDivBottom = leftRightDivOffsetTop + leftRightDiv.outerHeight();
-
-//     if (scrollTop >= leftRightDivOffsetTop && scrollTop <= leftRightDivBottom - sidebarHeight) {
-//       sidebar.addClass('sticky').css({
-//         'position': 'fixed',
-//         'top': '300px', // Adjust as needed
-//         'left': leftRightDiv.offset().left + leftRightDiv.outerWidth() + 30 // Adjust as needed
-//       });
-//     } else if (scrollTop > leftRightDivBottom - sidebarHeight) {
-//       sidebar.removeClass('sticky').css({
-//         'position': 'absolute',
-//         'top': leftRightDiv.outerHeight() - sidebarHeight + 'px',
-//         'left': '0'
-//       });
-//     } else {
-//       sidebar.removeClass('sticky').css({
-//         'position': 'relative',
-//         'top': 'auto',
-//         'left': '0'
-//       });
-//     }
-
-//     // Hide sidebar when reaching the footer
-//     if (scrollTop + $(window).height() >= footerOffsetTop) {
-//       sidebar.css('visibility', 'hidden');
-//     } else {
-//       sidebar.css('visibility', 'visible');
-//     }
-//   }).scroll(); // Trigger scroll event on page load
-// });
-
 
 $(document).ready(function() {
-  // 
-    function checkLeftNav() {
-        var y = $(window).scrollTop();
-        var babiesRiskBody = $('.footer, .product-tabcontent .head-para-row');
-        if (babiesRiskBody.length) {
-            var top = babiesRiskBody.offset().top + babiesRiskBody.outerHeight() - $(window).innerHeight();
-            var h = babiesRiskBody.height();
-            var wh = 0.1 * $(window).height();
-            top = top - h + wh - 150;
-            if (y >= top) {
-                $('.sidebar').addClass('abslt')
-            } else {
-                $('.sidebar').removeClass('abslt')
-            }
-        }
-    }
-    checkLeftNav();
+      $(document).scroll(function() {
+        var scroll_top = $(this).scrollTop();
+        var leftRightHeight = $('.left-right').outerHeight();
+        var windowHeight = $(window).height();
+        var footerHeight = $('.email-sub-row').outerHeight();
+        var headerHeight = $('header').outerHeight();
+        var heroHeight = $('#hero').outerHeight();
+        var breadCrumbHeight = $('.bread-crumb-row').outerHeight();
+        var headParaHeight = $('.head-para-row').outerHeight();
+        var tab = $('.tab');
 
-    // 
-    function checkRightNav() {
-        var y = $(window).scrollTop();
-        var babiesRiskBody = $('.product-tabcontent .head-para-row');
-        if (babiesRiskBody.length) {
-            var top = babiesRiskBody.offset().top + babiesRiskBody.outerHeight() - $(window).innerHeight();
-            var h = babiesRiskBody.height();
-            var wh = 0.1 * $(window).height();
-            top = top - h + wh - 150;
-            if (y >= top) {
-                $('.sidebar').addClass('abslt-top')
-            } else {
-                $('.sidebar').removeClass('abslt-top')
-            }
+        if (scroll_top > heroHeight + breadCrumbHeight + headParaHeight) {
+          if (scroll_top + windowHeight >= $('footer').offset().top - footerHeight) {
+            tab.css({
+              'position': 'absolute',
+              'bottom': footerHeight + 'px',
+              'top': 'auto'
+            });
+          } else {
+            tab.css({
+              'position': 'fixed',
+              'top': headerHeight + heroHeight + breadCrumbHeight + headParaHeight + 'px',
+              'bottom': 'auto'
+            });
+          }
+        } else {
+          tab.css({
+            'position': 'static'
+          });
         }
-    }
-    checkRightNav();
-
-    // 
-    $(window).on('scroll', function() {
-        checkLeftNav()
-        checkRightNav()
-    })
-})
+      });
+    });
 
   </script>
 
