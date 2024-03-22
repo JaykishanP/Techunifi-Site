@@ -607,3 +607,38 @@ document.addEventListener('DOMContentLoaded', function() {
       activateNewInquiryTab();
   }
 });
+
+
+
+/* ======== Footer Subscribe ========= */
+
+document.getElementById("subscribeForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+  var email = document.getElementById("email").value;
+  if (email) {
+    subscribe(email);
+  } else {
+    alert("Please enter an email address");
+  }
+});
+
+function subscribe(email) {
+  var url = "https://script.google.com/macros/s/AKfycbx7yG9vTEtJBtjNB1G0iPHE9tfKZxcaVqxPgZ55l53b6r8wOnHMk_Auc2bJJRiicpUB/exec"; // Replace with the URL of your Google Apps Script
+  var formData = new FormData();
+  formData.append("email", email);
+
+  fetch(url, {
+    method: "POST",
+    body: formData
+  })
+  .then(response => response.text())
+  .then(data => {
+    alert(data);
+    document.getElementById("subscribeForm").reset();
+  })
+  .catch(error => {
+    console.error("Error:", error);
+    alert("An error occurred. Please try again later.");
+  });
+}
+
