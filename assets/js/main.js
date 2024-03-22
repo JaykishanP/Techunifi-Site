@@ -613,32 +613,37 @@ document.addEventListener('DOMContentLoaded', function() {
 /* ======== Footer Subscribe ========= */
 
 document.getElementById("subscribeForm").addEventListener("submit", function(event) {
-  event.preventDefault();
-  var email = document.getElementById("email").value;
+  event.preventDefault(); // Prevents the default form submission behavior
+
+  var email = document.getElementById("email").value; // Retrieves the email value from the input field with the id "email"
+
   if (email) {
-    subscribe(email);
+    subscribe(email); // If email is provided, call the subscribe function with the email as an argument
   } else {
-    alert("Please enter an email address");
+    alert("Please enter an email address"); // If email is not provided, show an alert
   }
 });
 
 function subscribe(email) {
-  var url = "https://script.google.com/macros/s/AKfycbx7yG9vTEtJBtjNB1G0iPHE9tfKZxcaVqxPgZ55l53b6r8wOnHMk_Auc2bJJRiicpUB/exec"; // Replace with the URL of your Google Apps Script
-  var formData = new FormData();
-  formData.append("email", email);
+  var url = "https://script.google.com/macros/s/AKfycbx7yG9vTEtJBtjNB1G0iPHE9tfKZxcaVqxPgZ55l53b6r8wOnHMk_Auc2bJJRiicpUB/exec"; // URL of the Google Apps Script endpoint
+
+  var formData = new FormData(); // Create a new FormData object
+  formData.append("email", email); // Append the email to the FormData object
 
   fetch(url, {
-    method: "POST",
-    body: formData
+    method: "POST", // HTTP POST request
+    body: formData, // Send the FormData object as the body of the request
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded" // Set Content-Type header
+    }
   })
-  .then(response => response.text())
+  .then(response => response.text()) // Parse the response as text
   .then(data => {
-    alert(data);
-    document.getElementById("subscribeForm").reset();
+    alert(data); // Show the response message in an alert
+    document.getElementById("subscribeForm").reset(); // Reset the form
   })
   .catch(error => {
-    console.error("Error:", error);
-    alert("An error occurred. Please try again later.");
+    console.error("Error:", error); // Log any errors to the console
+    alert("An error occurred. Please try again later."); // Show an alert for any errors
   });
 }
-
