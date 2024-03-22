@@ -611,24 +611,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 /* ======== Footer Subscribe ========= */
+document.querySelector(".email-subscribe").addEventListener("submit", function(event) {
+  event.preventDefault(); // Prevent the default form submission behavior
 
-document.getElementById("subscribeForm").addEventListener("submit", function(event) {
-  event.preventDefault(); // Prevents the default form submission behavior
+  var UserEmail = document.getElementById("form-email").value.trim(); // Trimmed email value
 
-  var email = document.getElementById("email").value; // Retrieves the email value from the input field with the id "email"
+  console.log("Email:", UserEmail); // Log the email value for debugging
 
-  if (email) {
-    subscribe(email); // If email is provided, call the subscribe function with the email as an argument
-  } else {
+  if (UserEmail) {
+    subscribe(UserEmail); // Call the subscribe function if email is not empty
+  } 
+  else {
     alert("Please enter an email address"); // If email is not provided, show an alert
   }
+
 });
 
-function subscribe(email) {
+function subscribe(UserEmail) {
   var url = "https://script.google.com/macros/s/AKfycbx7yG9vTEtJBtjNB1G0iPHE9tfKZxcaVqxPgZ55l53b6r8wOnHMk_Auc2bJJRiicpUB/exec"; // URL of the Google Apps Script endpoint
 
   var formData = new FormData(); // Create a new FormData object
-  formData.append("email", email); // Append the email to the FormData object
+  formData.append("email", UserEmail); // Append the email to the FormData object
 
   fetch(url, {
     method: "POST", // HTTP POST request
@@ -640,7 +643,7 @@ function subscribe(email) {
   .then(response => response.text()) // Parse the response as text
   .then(data => {
     alert(data); // Show the response message in an alert
-    document.getElementById("subscribeForm").reset(); // Reset the form
+    document.querySelector(".email-subscribe").reset(); // Reset the form
   })
   .catch(error => {
     console.error("Error:", error); // Log any errors to the console
