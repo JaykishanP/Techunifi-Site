@@ -669,7 +669,7 @@ document.querySelector(".email-subscribe").addEventListener("submit", function(e
   console.log("Email:", userEmail); // Log the email value for debugging
 
   if (userEmail) {
-    var url = "https://script.google.com/macros/s/AKfycbx7yG9vTEtJBtjNB1G0iPHE9tfKZxcaVqxPgZ55l53b6r8wOnHMk_Auc2bJJRiicpUB/exec"; // URL of the Google Apps Script endpoint
+    var url = "https://script.google.com/macros/s/AKfycbxzU0gAEI2KclMR2zjAynv7jpPVwi9jDA_9ZXZKSFdelBwL9w3lHFh4j6yVqVZO66Mt/exec"; // URL of the Google Apps Script endpoint
     subscribe(userEmail, url); // Call the subscribe function with email and url
   } else {
     alert("Please enter an email address"); // If email is not provided, show an alert
