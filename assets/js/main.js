@@ -611,42 +611,45 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 /* ======== Footer Subscribe ========= */
+
 document.querySelector(".email-subscribe").addEventListener("submit", function(event) {
   event.preventDefault(); // Prevent the default form submission behavior
 
-  var UserEmail = document.getElementById("form-email").value.trim(); // Trimmed email value
+  var userEmail = document.getElementById("form-email").value.trim(); // Trimmed email value
 
-  console.log("Email:", UserEmail); // Log the email value for debugging
+  console.log("Email:", userEmail); // Log the email value for debugging
 
-  if (UserEmail) {
-    subscribe(UserEmail); // Call the subscribe function if email is not empty
-  } 
-  else {
+  if (userEmail) {
+    var url = "https://script.google.com/macros/s/AKfycbx7yG9vTEtJBtjNB1G0iPHE9tfKZxcaVqxPgZ55l53b6r8wOnHMk_Auc2bJJRiicpUB/exec"; // URL of the Google Apps Script endpoint
+    subscribe(userEmail, url); // Call the subscribe function with email and url
+  } else {
     alert("Please enter an email address"); // If email is not provided, show an alert
   }
-
 });
 
-function subscribe(UserEmail) {
-  var url = "https://script.google.com/macros/s/AKfycbx7yG9vTEtJBtjNB1G0iPHE9tfKZxcaVqxPgZ55l53b6r8wOnHMk_Auc2bJJRiicpUB/exec"; // URL of the Google Apps Script endpoint
-
+function subscribe(userEmail, url) {
   var formData = new FormData(); // Create a new FormData object
-  formData.append("email", UserEmail); // Append the email to the FormData object
+  formData.append("email", userEmail); // Append the email to the FormData object
 
   fetch(url, {
-    method: "POST", // HTTP POST request
-    body: formData, // Send the FormData object as the body of the request
+    method: "POST",
+    body: formData,
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded" // Set Content-Type header
+      "Content-Type": "application/x-www-form-urlencoded"
     }
   })
-  .then(response => response.text()) // Parse the response as text
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.text();
+  })
   .then(data => {
-    alert(data); // Show the response message in an alert
-    document.querySelector(".email-subscribe").reset(); // Reset the form
+    alert(data);
+    document.querySelector(".email-subscribe").reset();
   })
   .catch(error => {
-    console.error("Error:", error); // Log any errors to the console
-    alert("An error occurred. Please try again later."); // Show an alert for any errors
+    console.error('There was a problem with the fetch operation:', error);
+    alert("An error occurred. Please try again later.");
   });
 }

@@ -1781,7 +1781,7 @@ span.bread-inner {
   font-weight: 600;
 }
 .right-content .voltage-brands .submit-head-para {
-  margin: 40px 0 0 0;
+  margin: 0 0 30px 0;
 }
 .right-content .voltage-brands .submit-head-para .prod-heading h3{
   margin: 0 0 35px 0;
@@ -1802,6 +1802,33 @@ span.bread-inner {
 .prod-slide-card img {
   display: block;
   margin: 0 auto;
+}
+#light video {
+  margin: 0 auto;
+  display: block;
+  width: 100%;
+}
+.id-div {
+  display: block;
+}
+.id-div::before {
+  content: '';
+  display: block;
+  height: 183px;
+  margin-top: -118px;
+  visibility: hidden;
+}
+.left-right .tab a{
+  font-size: 16px;
+  padding: 20px 25px 0 0;
+  display: block;
+}
+.left-right .tab a:hover {
+  color: var(--black);
+}
+.product-tabcontent .head-para-row .submit-head-para {
+  position: relative;
+  z-index: 8;
 }
 
 
