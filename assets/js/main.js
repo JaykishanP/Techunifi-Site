@@ -405,13 +405,13 @@ document.addEventListener('DOMContentLoaded', function() {
       // Add event listener for the previous button
       document.querySelector(".prod-prev-button").addEventListener("click", function() {
         const tabsContainer = document.querySelector(".tabs-container");
-        tabsContainer.scrollLeft -= 200; // Scroll left by 200 pixels
+        tabsContainer.scrollLeft -= 400; // Scroll left by 200 pixels
       });
     
       // Add event listener for the next button
       document.querySelector(".prod-next-button").addEventListener("click", function() {
         const tabsContainer = document.querySelector(".tabs-container");
-        tabsContainer.scrollLeft += 200; // Scroll right by 200 pixels
+        tabsContainer.scrollLeft += 400; // Scroll right by 200 pixels
       });
     });
 

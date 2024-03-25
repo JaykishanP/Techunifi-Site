@@ -1826,14 +1826,14 @@ span.bread-inner {
 .left-right .tab a:hover {
   color: var(--black);
 }
-.product-tabcontent .head-para-row .submit-head-para {
-  position: relative;
-  z-index: 8;
-}
-
 .tab a.active{
   font-weight: bold;
   border-right: 5px solid var(--black);
+}
+.product-tabcontent .head-para-row {
+  z-index: 8;
+  position: relative;
+  background-color: #ededed;
 }
 
 
@@ -2220,6 +2220,23 @@ section.ticket-form {
    min-height: unset;
    color: var(--black);
   }
+  
+  .product-tab button {
+    min-width: 80px;
+  }
+  .product-tab .prod-tablinks img {
+    max-width: 18px;
+  }
+  .product-tab button.active p {
+    font-size: 12px;
+    font-weight: 700;
+  } 
+  .product-tab button#productOpen span {
+    font-size: 12px !important;
+  }
+  .prod-fixed {
+    top: 79px;
+  }
 
 }
 
@@ -2251,9 +2268,22 @@ section.ticket-form {
 
 }
 
+/* Homeslider */
+@media only screen and (max-width: 991.9px){
+  .home-clients-slider .swiper-slide.swiper-slide-active {
+    width: 800px !important;
+    position: relative;
+    left: -93px;
+  }
+  .home-clients-slider .swiper-button-next, .home-clients-slider .swiper-button-prev {
+    color: var(--orange);
+    display: block;
+  } 
+
+}
 
 /* Prod tab mobile slide */
-@media only screen and (max-width: 991.9px){
+@media only screen and (max-width: 767px){
 
   .productPage #nav-menu {
     padding: 26px 0 26px 0;
@@ -2307,15 +2337,6 @@ section.ticket-form {
     float: left;
   }
 
-  .home-clients-slider .swiper-slide.swiper-slide-active {
-    width: 800px !important;
-    position: relative;
-    left: -93px;
-  }
-  .home-clients-slider .swiper-button-next, .home-clients-slider .swiper-button-prev {
-    color: var(--orange);
-    display: block;
-  } 
 
 }
 
@@ -2325,4 +2346,15 @@ section.ticket-form {
    .client-col p br{
       display: none;
    }
+}
+
+
+/* ===== prod tab 576px - 1199px ===== */
+@media only screen and (min-width: 576px) and (max-width: 1199px){
+  /* .product-tab-section .prod-mobile-ipad.container, 
+  .product-tab-section .prod-mobile-ipad.container-lg, 
+  .product-tab-section .prod-mobile-ipad.container-md, 
+  .product-tab-section .prod-mobile-ipad.container-sm{
+      max-width: unset;
+  }     */
 }
