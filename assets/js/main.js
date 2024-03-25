@@ -565,7 +565,6 @@ sliders.forEach(function(slider) {
 
 
 /* ======== new Inquiry ======== */
-
 document.addEventListener('DOMContentLoaded', function() {
   // Function to activate the "New Inquiry" tab and display its content
   function activateNewInquiryTab() {
@@ -594,10 +593,18 @@ document.addEventListener('DOMContentLoaded', function() {
           newInquiryButton.classList.add("active");
       }
 
-      // Deactivate the "Submit a Ticket" button
+      // Remove "active" class from the "Submit a Ticket" button
       var submitTicketButton = document.getElementById("sub-defaultOpen");
       if (submitTicketButton) {
           submitTicketButton.classList.remove("active");
+      }
+
+      // Hide other tab contents
+      var otherTabs = document.getElementsByClassName("sub-tabcontent");
+      for (var i = 0; i < otherTabs.length; i++) {
+          if (otherTabs[i].id !== "sub-tab1") {
+              otherTabs[i].style.display = "none";
+          }
       }
   }
 
