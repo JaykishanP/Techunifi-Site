@@ -609,6 +609,48 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+/* ====== Leftnav highlight on scroll ======= */
+document.addEventListener("DOMContentLoaded", function() {
+  const tabLinks = document.querySelectorAll(".tab a");
+  
+  window.addEventListener("scroll", function() {
+    const sections = document.querySelectorAll(".right-content .id-div");
+    const scrollPosition = window.scrollY || window.pageYOffset;
+    
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      
+      if (rect.top <= 0 && rect.bottom > 0) {
+        const id = section.getAttribute("id");
+        tabLinks.forEach(link => {
+          if (link.getAttribute("href") === `#${id}`) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+      }
+    });
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  const tabLinks = document.querySelectorAll(".tab a");
+  
+  tabLinks.forEach(link => {
+    link.addEventListener("click", function(event) {
+      
+      // Remove the "active" class from all links
+      tabLinks.forEach(link => {
+        link.classList.remove("active");
+      });
+      
+      // Add the "active" class to the clicked link
+      this.classList.add("active");
+    });
+  });
+});
+
 
 /* ======== Footer Subscribe ========= */
 

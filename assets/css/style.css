@@ -1820,7 +1820,7 @@ span.bread-inner {
 }
 .left-right .tab a{
   font-size: 16px;
-  padding: 20px 25px 0 0;
+  padding: 10px 25px 10px 0;
   display: block;
 }
 .left-right .tab a:hover {
@@ -1829,6 +1829,11 @@ span.bread-inner {
 .product-tabcontent .head-para-row .submit-head-para {
   position: relative;
   z-index: 8;
+}
+
+.tab a.active{
+  font-weight: bold;
+  border-right: 5px solid var(--black);
 }
 
 
