@@ -1619,7 +1619,9 @@
 
   <script>
 
-$(document).ready(function() {
+    if (window.matchMedia('(min-width: 768px)').matches) {
+
+      $(document).ready(function() {
       $(document).scroll(function() {
         var scroll_top = $(this).scrollTop();
         var leftRightHeight = $('.left-right').outerHeight();
@@ -1655,7 +1657,12 @@ $(document).ready(function() {
       });
     });
 
-  </script>
+
+    }
+
+ 
+ 
+ </script>
 
 </body>
 </html>
