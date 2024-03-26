@@ -2362,6 +2362,9 @@ section.ticket-form {
     border-bottom: 5px solid var(--black);
     border-right: 0;
   }
+  .coming-soon .tabs-para{
+    max-width: 100%;
+  }
 
 
 }

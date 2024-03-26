@@ -733,7 +733,6 @@ $(document).ready(function() {
 });
 
 
-
 /* ======== Footer Subscribe ========= */
 
 document.querySelector(".email-subscribe").addEventListener("submit", function(event) {
