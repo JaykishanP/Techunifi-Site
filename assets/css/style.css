@@ -2122,6 +2122,10 @@ section.ticket-form {
 .sub-tabcontent .submit-head-para .prod-heading h3::before {
   left: 34%;
 }
+.overview-tab-content .submit-head-para .prod-heading h3::before {
+  bottom: -15px;
+  left: 39%;
+}
 
 }
 
@@ -2237,6 +2241,22 @@ section.ticket-form {
   .prod-fixed {
     top: 79px;
   }
+  .productPage .container-inner {
+    z-index: 8;
+  }  
+  
+.left-right .tab a {
+  padding: 10px 14px 10px 0;
+  max-width: 100px;
+}
+.left-right .tab a.active{
+  font-weight: 600;
+  border-right: 3px solid var(--black);
+}
+.overview-tab-content .submit-head-para .prod-heading h3::before {
+  bottom: -15px;
+  left: 43%;
+}
 
 }
 
@@ -2264,6 +2284,18 @@ section.ticket-form {
   position: relative;
   left: -62px;
   margin-right: 0 !important;
+}
+.left-right .tab a {
+  padding: 10px 14px 10px 0;
+  max-width: 100px;
+}
+.left-right .tab a.active{
+  font-weight: 600;
+  border-right: 3px solid var(--black);
+}
+.overview-tab-content .submit-head-para .prod-heading h3::before {
+  bottom: -15px;
+  left: 44%;
 }
 
 }
@@ -2305,9 +2337,13 @@ section.ticket-form {
   .mobile-fixed-tab-arrow{
     position: fixed;
     background:#ededed;
-    z-index: 10;
+    z-index: 9;
     top: 88px;
   }
+
+  .productPage .container-inner {
+    z-index: 8;
+  }  
 
   .prod-fixed {
     position: unset;
@@ -2379,11 +2415,6 @@ section.ticket-form {
 
 
 /* ===== prod tab 576px - 1199px ===== */
-@media only screen and (min-width: 576px) and (max-width: 1199px){
-  /* .product-tab-section .prod-mobile-ipad.container, 
-  .product-tab-section .prod-mobile-ipad.container-lg, 
-  .product-tab-section .prod-mobile-ipad.container-md, 
-  .product-tab-section .prod-mobile-ipad.container-sm{
-      max-width: unset;
-  }     */
+@media only screen and (min-width: 576px) and (max-width: 767px){
+  
 }

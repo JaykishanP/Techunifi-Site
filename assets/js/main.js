@@ -400,20 +400,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 /* ======== Prod tab Mobile slide ============  */
-// Previous and Next Button functionality
-  document.addEventListener("DOMContentLoaded", function() {
-      // Add event listener for the previous button
-      document.querySelector(".prod-prev-button").addEventListener("click", function() {
-        const tabsContainer = document.querySelector(".tabs-container");
-        tabsContainer.scrollLeft -= 2; // Scroll left by 200 pixels
-      });
-    
-      // Add event listener for the next button
-      document.querySelector(".prod-next-button").addEventListener("click", function() {
-        const tabsContainer = document.querySelector(".tabs-container");
-        tabsContainer.scrollLeft += 200; // Scroll right by 200 pixels
-      });
+document.addEventListener("DOMContentLoaded", function() {
+  const prevButton = document.querySelector(".prod-prev-button");
+  const nextButton = document.querySelector(".prod-next-button");
+  const tabsContainer = document.querySelector(".tabs-container");
+
+  if (prevButton && nextButton && tabsContainer) {
+    prevButton.addEventListener("click", function() {
+      tabsContainer.scrollBy({ left: -100, behavior: 'smooth' }); // Scroll left by 100 pixels smoothly
     });
+
+    nextButton.addEventListener("click", function() {
+      tabsContainer.scrollBy({ left: 100, behavior: 'smooth' }); // Scroll right by 100 pixels smoothly
+    });
+  } 
+  // else {
+  //   console.error("One or more elements not found.");
+  // }
+});
 
 
 /* ======== ============ */
@@ -618,7 +622,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* ====== Leftnav highlight on scroll ======= */
 document.addEventListener("DOMContentLoaded", function() {
-  const tabLinks = document.querySelectorAll(".tab a");
+  const tabLinks = document.querySelectorAll(".left-right .tab a");
   
   window.addEventListener("scroll", function() {
     const sections = document.querySelectorAll(".right-content .id-div");
@@ -642,7 +646,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-  const tabLinks = document.querySelectorAll(".tab a");
+  const tabLinks = document.querySelectorAll(".left-right .tab a");
   
   tabLinks.forEach(link => {
     link.addEventListener("click", function(event) {
@@ -669,10 +673,12 @@ $(document).ready(function() {
     var heroHeight = $('#hero').outerHeight();
     var breadCrumbHeight = $('.bread-crumb-row').outerHeight();
     var headParaHeight = $('.head-para-row').outerHeight();
-    var tab = $('.tab');
+    var tab = $('.left-right .tab');
     var header = $('header');
     var mobileFixedTabArrow = $('.mobile-fixed-tab-arrow');
     var tabContainers = $('.right-content');
+    var footerOffsetTop = $('footer').offset().top;
+    var emailSubRowHeight = $('.email-sub-row').outerHeight();
 
     if (window.matchMedia('(max-width: 767px)').matches) {
       tabContainers.each(function(index) {
@@ -683,10 +689,12 @@ $(document).ready(function() {
 
         if (scroll_top > tabContainerOffsetTop - (headerHeight + heroHeight + breadCrumbHeight + headParaHeight)) {
           if (scroll_top > tabContainerOffsetTop) {
-            if (scroll_top + windowHeight >= $('footer').offset().top - $('.email-sub-row').outerHeight()) {
+            if (scroll_top + windowHeight >= footerOffsetTop - emailSubRowHeight) {
+              var tabBottom = footerOffsetTop - scroll_top - emailSubRowHeight;
               tab.css({
-                'position': 'absolute',
-                'bottom': $('.email-sub-row').outerHeight() + 'px',
+                'position': 'fixed',
+                // 'bottom': tabBottom + 'px',
+                'bottom': 'auto',
                 'top': 'auto'
               });
             } else {
@@ -694,7 +702,6 @@ $(document).ready(function() {
                 'position': 'fixed',
                 'top': headerHeight + heroHeight + breadCrumbHeight + headParaHeight + 'px',
                 'bottom': 'auto'
-                // 'border-right': '1px solid var(--black)'
               });
             }
 
