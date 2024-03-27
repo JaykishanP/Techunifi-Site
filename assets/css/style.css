@@ -1375,7 +1375,7 @@ section.ticket-form {
 }
 
 .sub-tab2-section .ticket-form form select {
-  min-height: 90px;
+  min-height: 147px;
   overflow-y: auto;
 }
 
@@ -1386,7 +1386,7 @@ section.ticket-form {
 
 .ticket-form select.contact-form-home {
   overflow-y: auto;
-  min-height: 130px;
+  min-height: 167px;
 }
 
 .ticket-form .home-contact-submit input[type="submit"] {
