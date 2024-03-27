@@ -445,7 +445,7 @@
           <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DHo000002fpJX" method="POST">
 
             <input type=hidden name="oid" value="00DHo000002fpJX">
-            <input type=hidden name="retURL" value="https://www.techunifi.com/">
+            <input type=hidden name="retURL" value="https://www.techunifi.com/thanku-submit.html">
             
             <!--  ----------------------------------------------------------------------  -->
             <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
@@ -482,11 +482,24 @@
               </div>
 
               <div class="row">
-                <div class="col-md-12">
-                  <label for="email">Email</label>
-                  <input  id="email" maxlength="80" name="email" size="20" type="text"required />
+                <div class="col-md-6">
+                  <label for="phone">Phone</label>
+                  <input  id="phone" maxlength="40" name="phone" size="20" type="text" required/>
+                </div>
+                <div class="col-md-6">
+                  <label for="mobile">Mobile</label>
+                  <input  id="mobile" maxlength="40" name="mobile" size="20" type="text" required/>
                 </div>
               </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="email">Email</label>
+                  <input  id="email" maxlength="80" name="email" size="20" type="text" required/>
+                </div>
+              </div>
+
+           
 
             </div>
             
@@ -500,61 +513,68 @@
 
               <div class="row">
                 <div class="col-md-12">
+
                   <label>Business</label>
-                  <select class="ticket-business-select" id="00NHo00000XG1NV" name="00NHo00000XG1NV" title="Type" multiple required>
-                    <option class="first-select" value="">--None--</option>
+                  <select class="ticket-business-select" id="00NHo00000XG1NV" name="00NHo00000XG1NV" title="Type" required>
+                    <option value="">--None--</option>
                     <option value="Hotel">Hotel</option>
                     <option value="Apartments">Apartments</option>
                     <option value="Senior Housing">Senior Housing</option>
                     <option value="Other">Other</option>
                   </select>
+
                 </div>
               </div>
 
-              <div class="row">
-                <div class="col-md-4">
-                   <label>Number of Rooms</label>
-                   <input  id="00NHo00000XG1Nf" name="00NHo00000XG1Nf" size="20" type="text"/>
-                </div>
-                <div class="col-md-4">
-                   <label>Number of Apartments</label>
-                   <input  id="00NHo00000XG1Nk" name="00NHo00000XG1Nk" size="20" type="text"/>
-                </div>
-                <div class="col-md-4">
-                  <label>Number of Housing</label>
-                  <input  id="00NHo00000XG1Np" name="00NHo00000XG1Np" size="20" type="text"/>
-                </div>
-              </div>
-
+         
               <div class="row">
                 <div class="col-md-12">
                   <label>Service Needed</label>
-                  <select class="contact-form-home" id="00NHo00000XG1Na" name="00NHo00000XG1Na" title="Service Needed" multiple="multiple" required>
-                    <option class="first-select" value="">--None--</option>
-                    <option value="EV Charging">Telecom</option>
-                    <option value="Phone">Network</option>
-                    <option value="TV">IT Management</option>
-                    <option value="Wifi">Low Voltage</option>
-                    <option value="Cabling">Audio & Video</option>
-                    <option value="Surveillance System">Lighting</option>
-                    </select>
+
+              <select class="contact-form-home" id="00NHo00000XG1Na" multiple="multiple" name="00NHo00000XG1Na" title="Service Needed" required>
+                <option value="EV Charging">EV Charging</option>
+                <option value="Phone">Phone</option>
+                <option value="TV">TV</option>
+                <option value="Wifi">Wifi</option>
+                <option value="Cabling">Cabling</option>
+                <option value="Surveillance System">Surveillance System</option>
+                <option value="Audio Visual System">Audio Visual System</option>
+                <option value="IT Services">IT Services</option>
+              </select>
+
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-md-12">
-                  <label for="description">Description</label>
-                  <textarea rows="7" name="description" required></textarea>
+                  <label for="street">Street</label>
+                  <textarea rows="2" name="street" required></textarea>
                 </div>
               </div>
-              
+
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="city">City</label>
+                  <input  id="city" maxlength="40" name="city" size="20" type="text" required/>
+                </div>
+                <div class="col-md-4">
+                  <label for="state">State/Province</label>
+                  <input  id="state" maxlength="20" name="state" size="20" type="text" required/>
+                </div>
+                <div class="col-md-4">
+                  <label for="zip">Zip</label>
+                  <input  id="zip" maxlength="20" name="zip" size="20" type="text" required/>
+                </div>
+              </div>
+
               <div class="row">
                 <div class="col-md-12 home-contact-submit">
-                  <input type="submit" name="submit">
+                  <input type="submit" name="submit" value="Submit An Inquiry">
                 </div>
               </div>
 
             </div>
+
                   
             </form>
             
