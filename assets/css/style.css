@@ -184,6 +184,10 @@ section {
   margin-right: 1.5rem;
 }
 
+.nav-start .logo img {
+  max-width: 50%;
+}
+
 #nav-menu {
   position: fixed;
   position: fixed;
@@ -1020,11 +1024,11 @@ p.social {
 }
 
 .copy-right img {
-  max-width: 17%;
+  max-width: 22%;
 }
 
 .copy-right p {
-  margin: 10px 0 5px 0;
+  margin: 0 0 5px 0;
 }
 .copy-right {
   text-align: center;
