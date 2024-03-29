@@ -463,9 +463,22 @@ section {
 }
 
 .hero-sub {
-  padding: 200px 0 0 0;
+  /* padding: 200px 0 0 0; */
   text-align: center;
   margin: 0 auto;
+}
+
+.event-section{
+  position: relative;
+  padding: 100px 0 100px 0;
+}
+
+.event-close {
+  position: absolute;
+  right: 45px;
+  top: 114px;
+  font-size: 30px;
+  cursor: pointer;
 }
 
 .hero-logo {
@@ -1888,7 +1901,15 @@ section.sub-tab-section {
     display: block;
   }
   .hero-sub {
-    padding: 123px 0 0 0;
+    /* padding: 123px 0 0 0; */
+  }
+  .event-section{
+    padding: 50px 0 50px 0;
+  }
+  .event-close {
+    right: 21px;
+    top: 51px;
+    font-size: 15px;
   }
   .hero-logo {
     max-width: 86%;
@@ -2261,11 +2282,27 @@ section.ticket-form {
   left: 43%;
 }
 
+.event-close {
+  right: 22px;
+  top: 112px;
+  font-size: 20px;
+}
+
 }
 
 
 /* Ipad Pro */
 @media only screen and (min-width: 1024px) and (max-width: 1199px){
+  
+  .logo {
+    margin-right: 0rem;
+  }
+
+  .event-close {
+    right: 22px;
+    top: 112px;
+    font-size: 20px;
+  }
 
 .email-subscribe input {
   width: 52%;

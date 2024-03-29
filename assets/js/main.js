@@ -844,3 +844,45 @@ $(document).ready(function() {
 
 
 });
+
+
+/* ==== Event Close ==== */
+
+document.addEventListener('DOMContentLoaded', function() {
+  const closeButtons = document.querySelectorAll('.event-close');
+
+  closeButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+          // On click, find the closest '.event' parent and hide it
+          this.closest('.event-section').style.display = 'none';
+
+          // Then, find the '.hero-sub' element and change its padding
+          const heroSub = document.querySelector('.hero-sub');
+          if (heroSub) {
+              // Check screen width
+              if (window.innerWidth <= 767) {
+                  // Apply mobile padding
+                  heroSub.style.padding = '50px 0 0 0';
+              } else {
+                  // Apply desktop padding
+                  heroSub.style.padding = '200px 0 0 0';
+              }
+          }
+      });
+  });
+
+  // Handle resizing of the window
+  window.addEventListener('resize', function() {
+      const heroSub = document.querySelector('.hero-sub');
+      if (heroSub) {
+          // Check screen width on resize
+          if (window.innerWidth <= 767) {
+              // Apply mobile padding
+              heroSub.style.padding = '50px 0 0 0';
+          } else {
+              // Apply desktop padding
+              heroSub.style.padding = '200px 0 0 0';
+          }
+      }
+  });
+});
