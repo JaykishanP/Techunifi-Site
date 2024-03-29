@@ -38,7 +38,7 @@
    * Scrolls to an element with header offset
    */
   const scrollto = (el) => {
-    let header = select('#header');
+    let header = select('header');
     let offset = header.offsetHeight;
 
     if (!header.classList.contains('header-scrolled')) {
@@ -742,44 +742,105 @@ $(document).ready(function() {
 
 /* ======== Footer Subscribe ========= */
 
-document.querySelector(".email-subscribe").addEventListener("submit", function(event) {
-  event.preventDefault(); // Prevent the default form submission behavior
 
-  var userEmail = document.getElementById("form-email").value.trim(); // Trimmed email value
 
-  console.log("Email:", userEmail); // Log the email value for debugging
+/* ==== Form Validation ====  */
 
-  if (userEmail) {
-    var url = "https://script.google.com/macros/s/AKfycbxzU0gAEI2KclMR2zjAynv7jpPVwi9jDA_9ZXZKSFdelBwL9w3lHFh4j6yVqVZO66Mt/exec"; // URL of the Google Apps Script endpoint
-    subscribe(userEmail, url); // Call the subscribe function with email and url
-  } else {
-    alert("Please enter an email address"); // If email is not provided, show an alert
+$(document).ready(function() {
+
+  /* === validation === */
+  function validateInquiryForm() {
+    var formValid = true;
+  
+    // Check each input field in the form
+    $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').each(function() {
+        // Skip validation for fields with class "not-required"
+        if ($(this).hasClass('not-required')) {
+            return true; // Skip this field and continue with the next one
+        }
+  
+        // If the field is empty or not selected
+        if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
+            formValid = false;
+            $(this).css('border-color', 'red');
+            // Scroll to the field
+            $('html, body').animate({
+                scrollTop: $(this).offset().top - 160 // Adjust the offset to ensure the field is visible
+            }, 500);
+            return false; // Exit the loop after scrolling to the first invalid field
+        } else {
+            // Set border color to green if the field is filled
+            $(this).css('border-color', 'green');
+        }
+    });
+  
+    // Return false if any field is empty or not selected
+    if (!formValid) {
+        return false;
+    }
   }
-});
-
-function subscribe(userEmail, url) {
-  var formData = new FormData(); // Create a new FormData object
-  formData.append("email", userEmail); // Append the email to the FormData object
-
-  fetch(url, {
-    method: "POST",
-    body: formData,
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
+  // Function to validate the submit a ticket form
+  function validateTicketForm() {
+    var formValid = true;
+  
+    // Check each input field in the form
+    $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').each(function() {
+        // Skip validation for fields with class "not-required"
+        if ($(this).hasClass('not-required')) {
+            return true; // Skip this field and continue with the next one
+        }
+  
+        // If the field is empty or not selected
+        if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
+            formValid = false;
+            $(this).css('border-color', 'red');
+            // Scroll to the field
+            $('html, body').animate({
+                scrollTop: $(this).offset().top - 160 // Adjust the offset to ensure the field is visible
+            }, 500);
+            return false; // Exit the loop after scrolling to the first invalid field
+        } else {
+            // Set border color to green if the field is filled
+            $(this).css('border-color', 'green');
+        }
+    });
+  
+    // Return false if any field is empty or not selected
+    if (!formValid) {
+        return false;
     }
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.text();
-  })
-  .then(data => {
-    alert(data);
-    document.querySelector(".email-subscribe").reset();
-  })
-  .catch(error => {
-    console.error('There was a problem with the fetch operation:', error);
-    alert("An error occurred. Please try again later.");
+  }
+  
+  // Add event listener for form submission
+  $('#myInquiryForm').submit(function() {
+    return validateInquiryForm();
   });
-}
+  
+  $('#submitTicketForm').submit(function() {
+    return validateTicketForm();
+  });
+  
+  // Add event listeners for input, change, and blur events to change border color dynamically
+  $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').on('input change blur', function() {
+    if (!$(this).hasClass('not-required')) {
+        if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
+            $(this).css('border-color', 'green');
+        } else {
+            $(this).css('border-color', 'red');
+        }
+    }
+  });
+  
+  $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').on('input change blur', function() {
+    if (!$(this).hasClass('not-required')) {
+        if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
+            $(this).css('border-color', 'green');
+        } else {
+            $(this).css('border-color', 'red');
+        }
+    }
+  });
+
+
+
+});

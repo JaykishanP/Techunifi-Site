@@ -819,14 +819,15 @@ section#home-clients {
   margin-bottom: 20px;
 }
 
-.form-group input{
+/* .form-group input{
   padding: 10px;
   border: none;
   border-bottom: 1px solid var(--black);
   border-radius: 0;
   background: no-repeat;
-}
-.form-group input[type="submit"] {
+} */
+
+input[type="submit"] {
   cursor: pointer;
 }
 
@@ -834,20 +835,20 @@ section#home-clients {
   border: 1px solid var(--black);
 }
 
-.form-group textarea {
+/* .form-group textarea {
   resize: vertical;
   min-height: 100px;
   border: 1px solid var(--black);
   background: transparent;
   border-radius: 0;
-}
+} */
 
-.form-control:focus {
+/* .form-control:focus {
   background-color: transparent;
   border-color: var(--black);
   outline: 0;
   box-shadow: none;
-}
+} */
 
 .php-email-form {
   margin: 30px 0 0 0;
@@ -1303,7 +1304,7 @@ section#hero.submit-banner {
   max-width: 82%;
   margin: 0 auto;
 }
-
+ 
 .submit-head-para {
   margin: 0 0 60px 0;
 }
@@ -1360,8 +1361,8 @@ section.ticket-form {
   margin: 0 auto;
 }
 
-.ticket-form form button, 
-.ticket-form form input, 
+.ticket-form form input,
+.ticket-form form button,  
 .ticket-form form optgroup, 
 .ticket-form form select, 
 .ticket-form form textarea{
@@ -1431,13 +1432,6 @@ section.ticket-form {
   content: "";
   height: 0;
   width: 0;
-  /* display: flex;
-  background-color: var(--black);
-  position: absolute;
-  left: 50px;
-  bottom: 0;
-  transform-origin: bottom right;
-  transition: transform 0.25s ease-out; */
 }
 
 .ticket-form .first-select{
@@ -1464,6 +1458,7 @@ section.ticket-form {
   margin: 0 auto;
   padding: 10px 30px;
   border: var(--border);
+  border-color: var(--black) !important;
   border-radius: var(--border-radius);
   background-color: var(--black);
   color: var(--gray);
@@ -1486,7 +1481,7 @@ section.thank-section {
 
 .thank-section a:hover {
   color: var(--black);
-}
+} 
 
 /* ======== Product Page ========= */
 
