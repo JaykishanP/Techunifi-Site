@@ -184,7 +184,7 @@
                             </div>
                             <!--  -->
           
-                            <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DHo000002fpJX" method="POST">
+                            <form id='myInquiryForm' action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DHo000002fpJX" method="POST">
 
                               <input type=hidden name="oid" value="00DHo000002fpJX">
                               <input type=hidden name="retURL" value="https://www.techunifi.com/thanku-submit.html">
@@ -208,36 +208,36 @@
                                 <div class="row">
                                   <div class="col-md-12">
                                     <label for="company">Company</label>
-                                    <input  id="company" maxlength="40" name="company" size="20" type="text" required/>
+                                    <input  id="company" maxlength="40" name="company" size="20" type="text"/>
                                   </div>
                                 </div>
                   
                                 <div class="row">
                                   <div class="col-md-6">
                                     <label for="first_name">First Name</label>
-                                    <input  id="first_name" maxlength="40" name="first_name" size="20" type="text" required/>
+                                    <input  id="first_name" maxlength="40" name="first_name" size="20" type="text"/>
                                   </div>
                                   <div class="col-md-6">
                                     <label for="last_name">Last Name</label>
-                                    <input  id="last_name" maxlength="80" name="last_name" size="20" type="text" required/>
+                                    <input  id="last_name" maxlength="80" name="last_name" size="20" type="text"/>
                                   </div>
                                 </div>
 
                                 <div class="row">
                                   <div class="col-md-6">
                                     <label for="phone">Company Phone</label>
-                                    <input  id="phone" maxlength="40" name="phone" size="20" type="text" required/>
+                                    <input  id="phone" maxlength="40" name="phone" size="20" type="text"/>
                                   </div>
                                   <div class="col-md-6">
                                     <label for="mobile">Mobile</label>
-                                    <input  id="mobile" maxlength="40" name="mobile" size="20" type="text" required/>
+                                    <input  id="mobile" maxlength="40" name="mobile" size="20" type="text"/>
                                   </div>
                                 </div>
                   
                                 <div class="row">
                                   <div class="col-md-12">
                                     <label for="email">Email</label>
-                                    <input  id="email" maxlength="80" name="email" size="20" type="text" required/>
+                                    <input  id="email" maxlength="80" name="email" size="20" type="text"/>
                                   </div>
                                 </div>
 
@@ -257,7 +257,7 @@
                                   <div class="col-md-12">
 
                                     <label>Business</label>
-                                    <select class="ticket-business-select" id="00NHo00000XG1NV" name="00NHo00000XG1NV" title="Type" required>
+                                    <select class="ticket-business-select" id="00NHo00000XG1NV" name="00NHo00000XG1NV" title="Type">
                                       <option value="">--None--</option>
                                       <option value="Hotel">Hotel</option>
                                       <option value="Apartments">Apartments</option>
@@ -273,7 +273,7 @@
                                   <div class="col-md-12">
                                     <label>Service Needed</label>
 
-                                <select class="contact-form-home" id="00NHo00000XG1Na" multiple="multiple" name="00NHo00000XG1Na" title="Service Needed" required>
+                                <select class="contact-form-home" id="00NHo00000XG1Na" multiple="multiple" name="00NHo00000XG1Na" title="Service Needed">
                                   <option value="EV Charging">EV Charging</option>
                                   <option value="Phone">Phone</option>
                                   <option value="TV">TV</option>
@@ -290,22 +290,22 @@
                                 <div class="row">
                                   <div class="col-md-12">
                                     <label for="street">Street</label>
-                                    <textarea rows="2" name="street" required></textarea>
+                                    <textarea rows="2" name="street"></textarea>
                                   </div>
                                 </div>
 
                                 <div class="row">
                                   <div class="col-md-4">
                                     <label for="city">City</label>
-                                    <input  id="city" maxlength="40" name="city" size="20" type="text" required/>
+                                    <input  id="city" maxlength="40" name="city" size="20" type="text"/>
                                   </div>
                                   <div class="col-md-4">
                                     <label for="state">State/Province</label>
-                                    <input  id="state" maxlength="20" name="state" size="20" type="text" required/>
+                                    <input  id="state" maxlength="20" name="state" size="20" type="text"/>
                                   </div>
                                   <div class="col-md-4">
                                     <label for="zip">Zip</label>
-                                    <input  id="zip" maxlength="20" name="zip" size="20" type="text" required/>
+                                    <input  id="zip" maxlength="20" name="zip" size="20" type="text"/>
                                   </div>
                                 </div>
                   
@@ -325,8 +325,6 @@
                                     
                               </form>
                               
-
-                      
                             </div>
                       
                       </div>
@@ -364,7 +362,7 @@
                   <!--  -->
 
 
-                      <form action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DHo000002fpJX" method="POST">
+                      <form id="submitTicketForm" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DHo000002fpJX" method="POST">
 
 
                         <input type=hidden name="orgid" value="00DHo000002fpJX">
@@ -390,14 +388,14 @@
                           <div class="row">
                             <div class="col-md-12">
                               <label for="company">Company</label>
-                              <input  id="company" maxlength="80" name="company" size="20" type="text" required/>   
+                              <input  id="company" maxlength="80" name="company" size="20" type="text"/>   
                             </div>
                           </div>
                           
                           <div class="row">
                             <div class="col-md-12">
                               <label for="name">Contact Name</label>
-                              <input  id="name" maxlength="80" name="name" size="20" type="text" required/>   
+                              <input  id="name" maxlength="80" name="name" size="20" type="text"/>   
                             </div>
                           </div>
 
@@ -405,12 +403,12 @@
 
                             <div class="col-md-6">
                               <label for="email">Email</label>
-                              <input  id="email" maxlength="80" name="email" size="20" type="text" required/>
+                              <input  id="email" maxlength="80" name="email" size="20" type="text"/>
                             </div>
 
                             <div class="col-md-6">
                               <label for="phone">Phone</label>
-                              <input  id="phone" maxlength="40" name="phone" size="20" type="text" required/>
+                              <input  id="phone" maxlength="40" name="phone" size="20" type="text"/>
                             </div>
 
                           </div>
@@ -429,11 +427,11 @@
                             <div class="col-md-12">
 
                               <label for="subject">Subject</label> 
-                              <input  id="subject" maxlength="80" name="subject" size="20" type="text" required/>
+                              <input  id="subject" maxlength="80" name="subject" size="20" type="text"/>
     
                               <label>Products Requiring Service (Select 1 or more options)</label> 
                               
-                              <select  id="00NHo00000Wqm1u" name="00NHo00000Wqm1u" title="Products Requiring Service" required multiple="multiple">
+                              <select  id="00NHo00000Wqm1u" name="00NHo00000Wqm1u" title="Products Requiring Service" multiple="multiple">
                                 <option class='first-select' value="">--None--</option>
                                 <option value="Phone">Phone</option>
                                 <option value="Wifi">Wifi</option>
@@ -445,11 +443,11 @@
                                 </select>
                               
                               <label>Model Number of Device</label>
-                              <input id="00NHo00000Wqm1z" maxlength="75" name="00NHo00000Wqm1z" size="20" type="text" />
+                              <input class="not-required" id="00NHo00000Wqm1z" maxlength="75" name="00NHo00000Wqm1z" size="20" type="text"/>
                               
                                
                               <label for="description">Description</label>
-                              <textarea name="description"  rows="7" tabindex="6" required></textarea>
+                              <textarea name="description"  rows="7" tabindex="6"></textarea>
                             </div>
                           </div>
 
@@ -596,7 +594,7 @@
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <!-- <script src="assets/vendor/php-email-form/validate.js"></script> -->
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
