@@ -906,14 +906,15 @@ document.addEventListener('DOMContentLoaded', function() {
 /* ===== URL Redirection ===== */
 $(document).ready(function() {
   // Redirect from old URL to new URL
-  if (window.location.href === "https://www.techunifi.com/contactus") {
+  if (window.location.href.indexOf("contactus") > -1) {
       window.location.href = "https://www.techunifi.com/index.html#contact";
   }
 
   // Handling 404 errors
-  if (window.location.href.indexOf("404") > -1) {
+  if (document.title === "404 Not Found") {
       alert("Oops! This page doesn't exist. Please check the URL or go to the homepage.");
       window.location.href = "https://www.techunifi.com/";
   }
 });
+
 
