@@ -740,8 +740,23 @@ $(document).ready(function() {
 });
 
 
-/* ======== Footer Subscribe ========= */
+/* ======== menu contact ========= */
+$(document).ready(function() {
+  function scrollToElementByIdWithJQuery(id) {
+    var checkExist = setInterval(function() {
+      if ($("#" + id).length) {
+        clearInterval(checkExist);
+        $('html, body').animate({
+          scrollTop: $("#" + id).offset().top
+        }, 100); // smooth scroll to the element
+      }
+    }, 100); // check every 100ms
+  }
 
+  if (window.location.hash === '#contact') {
+    scrollToElementByIdWithJQuery('contact');
+  }
+});
 
 
 /* ==== Form Validation ====  */
