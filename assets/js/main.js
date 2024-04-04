@@ -924,13 +924,26 @@ $(document).ready(function() {
   // Get the current URL path
   var currentUrl = window.location.pathname;
 
-  // Check if the current URL path matches any of the old URLs in the mappings
-  for (var oldUrl in urlMappings) {
-      if (currentUrl === oldUrl) {
-          // If there's a match, append the corresponding fragment to the current URL
-          window.location.href = window.location.origin + "/index.html" + urlMappings[oldUrl];
-          return; // Exit the loop once redirection is done
-      }
+  // Switch-case to determine redirection
+  switch (currentUrl) {
+      case "/contactus":
+          window.location.href = window.location.origin + "/index.html#contact";
+          break;
+      case "/cabling-system":
+      case "/energy_savings_as_a_service":
+      case "/lighting-system":
+      case "/EV-charging":
+      case "/it-services":
+      case "/visual-systems":
+      case "/telecom-services":
+      case "/audio-systems":
+      case "/telephone-system":
+      case "/surveillance-systems":
+          window.location.href = window.location.origin + "/index.html#landing-services";
+          break;
+      default:
+          // No redirection needed
+          break;
   }
 });
 
