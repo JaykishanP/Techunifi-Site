@@ -904,7 +904,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 /* ===== URL Redirection ===== */
-
 $(document).ready(function() {
   console.log("Document ready!");
   // Define the mappings of old URLs to new URLs
@@ -929,9 +928,15 @@ $(document).ready(function() {
       if (currentUrl.includes(oldUrl)) {
           var newUrlFragment = urlMappings[oldUrl];
           console.log("Redirecting to: " + newUrlFragment);
-          window.location.href = currentUrl + newUrlFragment;
+          window.location.hash = newUrlFragment;
           return; // Stop further execution once a match is found
       }
   }
   console.log("No redirection needed.");
 });
+
+
+
+
+
+
