@@ -908,17 +908,17 @@ $(document).ready(function() {
   console.log("Document ready!");
   // Define the mappings of old URLs to new URLs
   var urlMappings = {
-      "/contactus": "#contact",
-      "/cabling-system": "#landing-services",
-      "/energy_savings_as_a_service": "#landing-services",
-      "/lighting-system": "#landing-services",
-      "/EV-charging": "#landing-services",
-      "/it-services": "#landing-services",
-      "/visual-systems": "#landing-services",
-      "/telecom-services": "#landing-services",
-      "/audio-systems": "#landing-services",
-      "/telephone-system": "#landing-services",
-      "/surveillance-systems": "#landing-services"
+      "/contactus": "index.html#contact",
+      "/cabling-system": "index.html#landing-services",
+      "/energy_savings_as_a_service": "index.html#landing-services",
+      "/lighting-system": "index.html#landing-services",
+      "/EV-charging": "index.html#landing-services",
+      "/it-services": "index.html#landing-services",
+      "/visual-systems": "index.html#landing-services",
+      "/telecom-services": "index.html#landing-services",
+      "/audio-systems": "index.html#landing-services",
+      "/telephone-system": "index.html#landing-services",
+      "/surveillance-systems": "index.html#landing-services"
   };
 
   // Redirect based on current URL
@@ -934,7 +934,6 @@ $(document).ready(function() {
   }
   console.log("No redirection needed.");
 });
-
 
 
 
