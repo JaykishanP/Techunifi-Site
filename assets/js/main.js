@@ -906,7 +906,7 @@ document.addEventListener('DOMContentLoaded', function() {
 /* ===== URL Redirection ===== */
 
 $(document).ready(function() {
-  // Define the mappings of old URLs to new URL fragments
+  // Define the mappings of old URLs to new URLs
   var urlMappings = {
       "/contactus": "#contact",
       "/cabling-system": "#landing-services",
@@ -921,20 +921,20 @@ $(document).ready(function() {
       "/surveillance-systems": "#landing-services"
   };
 
-  // Get the current URL path
-  var currentUrl = window.location.pathname;
+  // Get the current URL
+  var currentUrl = window.location.href;
 
-  // Check if the current URL path matches any of the old URLs in the mappings
+  // Replace old URLs with corresponding fragments
   for (var oldUrl in urlMappings) {
-      if (currentUrl.includes(oldUrl)) {
-          // If there's a match, construct the new URL with the corresponding fragment
-          var newFragment = urlMappings[oldUrl];
-          // Append the fragment to the current URL
-          window.location.href = window.location.origin + "/index.html" + newFragment;
+      var regex = new RegExp(oldUrl.replace("/", "\\/") + "(?![^\/])"); // Create regex to match the exact path
+      if (regex.test(currentUrl)) {
+          var newUrl = currentUrl.replace(regex, urlMappings[oldUrl]);
+          window.location.href = newUrl;
           break; // Exit the loop once redirection is done
       }
   }
 });
+
 
 
 
