@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redirecting...</title>
+<script>
+    // Define the mappings of old URLs to new URL fragments
+    var urlMappings = {
+        "/contactus": "#contact",
+        "/cabling-system": "#landing-services",
+        "/energy_savings_as_a_service": "#landing-services",
+        "/lighting-system": "#landing-services",
+        "/EV-charging": "#landing-services",
+        "/it-services": "#landing-services",
+        "/visual-systems": "#landing-services",
+        "/telecom-services": "#landing-services",
+        "/audio-systems": "#landing-services",
+        "/telephone-system": "#landing-services",
+        "/surveillance-systems": "#landing-services"
+    };
+
+    // Get the current URL path
+    var currentUrl = window.location.pathname;
+
+    // Check if the current URL path matches any of the old URLs in the mappings
+    for (var oldUrl in urlMappings) {
+        if (currentUrl === oldUrl) {
+            // If there's a match, construct the new URL with the corresponding fragment
+            var newUrl = window.location.origin + "/index.html" + urlMappings[oldUrl];
+            // Redirect to the new URL
+            window.location.replace(newUrl);
+            break; // Exit the loop once redirection is done
+        }
+    }
+</script>
+</head>
+<body>
+Redirecting...
+</body>
+</html>
