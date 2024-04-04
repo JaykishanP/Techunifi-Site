@@ -922,18 +922,19 @@ $(document).ready(function() {
   };
 
   // Redirect based on current URL
-  var currentUrl = window.location.pathname;
+  var currentUrl = window.location.href;
   console.log("Current URL: " + currentUrl);
   for (var oldUrl in urlMappings) {
       if (currentUrl.includes(oldUrl)) {
-          var newUrlFragment = urlMappings[oldUrl];
-          console.log("Redirecting to: " + newUrlFragment);
-          window.location.hash = newUrlFragment;
+          var newUrl = window.location.origin + "/index.html" + urlMappings[oldUrl];
+          console.log("Redirecting to: " + newUrl);
+          window.location.href = newUrl;
           return; // Stop further execution once a match is found
       }
   }
   console.log("No redirection needed.");
 });
+
 
 
 
