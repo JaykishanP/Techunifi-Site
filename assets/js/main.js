@@ -921,19 +921,24 @@ $(document).ready(function() {
       "/surveillance-systems": "#landing-services"
   };
 
-  // Get the current URL
-  var currentUrl = window.location.href;
+  // Get the current URL path
+  var currentUrl = window.location.pathname;
 
-  // Replace old URLs with corresponding fragments
-  for (var oldUrl in urlMappings) {
-      var regex = new RegExp(oldUrl.replace("/", "\\/") + "(?![^\/])"); // Create regex to match the exact path
-      if (regex.test(currentUrl)) {
-          var newUrl = currentUrl.replace(regex, urlMappings[oldUrl]);
-          window.location.href = newUrl;
-          break; // Exit the loop once redirection is done
+  // Function to check if the current URL matches any of the old URLs
+  function redirectToNewUrl() {
+      for (var oldUrl in urlMappings) {
+          if (currentUrl === oldUrl) {
+              var newFragment = urlMappings[oldUrl];
+              window.location.href = window.location.origin + "/index.html" + newFragment;
+              return; // Exit the function once redirection is done
+          }
       }
   }
+
+  // Check if the current URL matches any of the old URLs and redirect if necessary
+  redirectToNewUrl();
 });
+
 
 
 
