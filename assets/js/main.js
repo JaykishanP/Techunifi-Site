@@ -921,31 +921,27 @@ $(document).ready(function() {
       "/surveillance-systems": "#landing-services"
   };
 
-  // Get the current URL path
-  var currentUrl = window.location.pathname;
-
-  // Switch-case to determine redirection
-  switch (currentUrl) {
-      case "/contactus":
-          window.location.href = window.location.origin + "/index.html#contact";
-          break;
-      case "/cabling-system":
-      case "/energy_savings_as_a_service":
-      case "/lighting-system":
-      case "/EV-charging":
-      case "/it-services":
-      case "/visual-systems":
-      case "/telecom-services":
-      case "/audio-systems":
-      case "/telephone-system":
-      case "/surveillance-systems":
-          window.location.href = window.location.origin + "/index.html#landing-services";
-          break;
-      default:
-          // No redirection needed
-          break;
+  // Function to handle redirection
+  function redirectToNewUrl() {
+      // Get the current URL path
+      var currentUrl = window.location.pathname;
+      
+      // Check if the current URL path matches any of the old URLs in the mappings
+      for (var oldUrl in urlMappings) {
+          if (currentUrl === oldUrl) {
+              // If there's a match, construct the new URL with the corresponding fragment
+              var newUrl = window.location.origin + "/index.html" + urlMappings[oldUrl];
+              // Redirect to the new URL
+              window.location.replace(newUrl);
+              return; // Exit the loop once redirection is done
+          }
+      }
   }
+
+  // Call the function to handle redirection
+  redirectToNewUrl();
 });
+
 
 
 
