@@ -905,16 +905,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* ===== URL Redirection ===== */
 $(document).ready(function() {
-  // Redirect from old URL to new URL
-  if (window.location.href.indexOf("contactus") > -1) {
-      window.location.href = "https://www.techunifi.com/index.html#contact";
-  }
+  // Define the mappings of old URLs to new URLs
+  var urlMappings = {
+      "/contactus": "#contact",
+      "/cabling-system": "#landing-services",
+      "/energy_savings_as_a_service": "#landing-services",
+      "/lighting-system": "#landing-services",
+      "/EV-charging": "#landing-services",
+      "/it-services": "#landing-services",
+      "/visual-systems": "#landing-services",
+      "/telecom-services": "#landing-services",
+      "/audio-systems": "#landing-services",
+      "/telephone-system": "#landing-services",
+      "/surveillance-systems": "#landing-services"
+  };
 
-  // Handling 404 errors
-  if (document.title === "404 Not Found") {
-      alert("Oops! This page doesn't exist. Please check the URL or go to the homepage.");
-      window.location.href = "https://www.techunifi.com/";
+  // Redirect based on current URL
+  var currentUrl = window.location.pathname;
+  if (urlMappings.hasOwnProperty(currentUrl)) {
+      var newUrl = urlMappings[currentUrl];
+      window.location.href = window.location.origin + window.location.pathname + newUrl;
   }
 });
+
 
 
