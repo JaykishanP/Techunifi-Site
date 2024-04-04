@@ -923,15 +923,14 @@ $(document).ready(function() {
 
   // Get the current URL path
   var currentUrl = window.location.pathname;
-  
+
   // Check if the current URL path matches any of the old URLs in the mappings
   for (var oldUrl in urlMappings) {
       if (currentUrl.includes(oldUrl)) {
           // If there's a match, construct the new URL with the corresponding fragment
           var newFragment = urlMappings[oldUrl];
-          var newUrl = window.location.origin + window.location.pathname + newFragment;
-          // Redirect to the new URL
-          window.location.href = newUrl;
+          // Append the fragment to the current URL
+          window.location.href = window.location.origin + "/index.html" + newFragment;
           break; // Exit the loop once redirection is done
       }
   }
