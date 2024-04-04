@@ -905,6 +905,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* ===== URL Redirection ===== */
 $(document).ready(function() {
+  console.log("Document ready!");
   // Define the mappings of old URLs to new URLs
   var urlMappings = {
       "/contactus": "#contact",
@@ -921,12 +922,19 @@ $(document).ready(function() {
   };
 
   // Redirect based on current URL
-  var currentUrl = window.location.pathname;
-  if (urlMappings.hasOwnProperty(currentUrl)) {
-      var newUrl = urlMappings[currentUrl];
-      window.location.href = window.location.origin + window.location.pathname + newUrl;
+  var currentUrl = window.location.href;
+  console.log("Current URL: " + currentUrl);
+  for (var oldUrl in urlMappings) {
+      if (currentUrl.includes(oldUrl)) {
+          var newUrl = urlMappings[oldUrl];
+          console.log("Redirecting to: " + newUrl);
+          window.location.href = window.location.origin + oldUrl + newUrl;
+          break; // Stop further iteration once a match is found
+      }
   }
+  console.log("No redirection needed.");
 });
+
 
 
 
