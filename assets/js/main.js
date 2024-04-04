@@ -904,9 +904,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 /* ===== URL Redirection ===== */
+
 $(document).ready(function() {
-  console.log("Document ready!");
-  // Define the mappings of old URLs to new URLs
+  // Define the mappings of old URLs to new URL fragments
   var urlMappings = {
       "/contactus": "#contact",
       "/cabling-system": "#landing-services",
@@ -921,18 +921,20 @@ $(document).ready(function() {
       "/surveillance-systems": "#landing-services"
   };
 
-  // Redirect based on current URL
-  var currentUrl = window.location.href;
-  console.log("Current URL: " + currentUrl);
+  // Get the current URL path
+  var currentUrl = window.location.pathname;
+  
+  // Check if the current URL path matches any of the old URLs in the mappings
   for (var oldUrl in urlMappings) {
       if (currentUrl.includes(oldUrl)) {
-          var newUrl = window.location.origin + "/index.html" + urlMappings[oldUrl];
-          console.log("Redirecting to: " + newUrl);
+          // If there's a match, construct the new URL with the corresponding fragment
+          var newFragment = urlMappings[oldUrl];
+          var newUrl = window.location.origin + window.location.pathname + newFragment;
+          // Redirect to the new URL
           window.location.href = newUrl;
-          return; // Stop further execution once a match is found
+          break; // Exit the loop once redirection is done
       }
   }
-  console.log("No redirection needed.");
 });
 
 
