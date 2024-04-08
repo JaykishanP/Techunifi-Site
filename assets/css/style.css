@@ -463,7 +463,7 @@ section {
 }
 
 .hero-sub {
-  /* padding: 200px 0 0 0; */
+  padding: 200px 0 0 0;
   text-align: center;
   margin: 0 auto;
 }
@@ -1901,7 +1901,7 @@ section.sub-tab-section {
     display: block;
   }
   .hero-sub {
-    /* padding: 123px 0 0 0; */
+    padding: 123px 0 0 0;
   }
   .event-section{
     padding: 50px 0 50px 0;
