@@ -201,7 +201,7 @@ section {
 
 #nav-menu.header-scrolled {
   /* background: linear-gradient(#ededed, #ededed, #ededed, transparent); */
-  background: linear-gradient(#ededed, transparent, #ededed, #ededed, transparent);
+  background: linear-gradient(#ededed, transparent, #ededed, transparent);
   backdrop-filter: blur(4px);
 }
 
@@ -1527,7 +1527,7 @@ section.thank-section {
 
 .productPage #nav-menu.header-scrolled {
   /* background: #ededed; */
-  background: linear-gradient(#ededed, transparent, #ededed, #ededed, transparent);
+  background: linear-gradient(#ededed, transparent, #ededed, transparent);
   backdrop-filter: blur(4px);
 }
 
@@ -1544,7 +1544,7 @@ section.product-tab-section {
   left: 0;
   right: 0;
   /* background: linear-gradient(#ededed, #ededed, #ededed, transparent); */
-  background: linear-gradient(transparent, transparent, #ededed, #ededed, transparent);
+  background: linear-gradient(transparent, transparent, #ededed, transparent);
   backdrop-filter: blur(4px);
   margin-top: -4px;
 }
@@ -2112,7 +2112,7 @@ section.sub-tab-section {
 
 #nav-menu.header-scrolled {
   /* background: linear-gradient(to bottom, rgba(237, 237, 237, 1),  rgba(237, 237, 237, 1)); */
-  background: linear-gradient(#ededed, transparent, #ededed, #ededed, transparent);
+  background: linear-gradient(#ededed, transparent, #ededed, transparent);
   backdrop-filter: blur(4px);
 }
 .bk-slider {
