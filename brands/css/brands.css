@@ -1,0 +1,50 @@
+/* === Modal Password === */
+
+.Brand-Password .modal {
+  display: none; 
+  position: fixed; 
+  z-index: 11;
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.4); 
+}
+.Brand-Password .modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 60px 20px;
+  border: 1px solid #888;
+  width: 100%;
+  max-width: 589px;
+  text-align: center;
+}
+.Brand-Password .error-message {
+  color: red; 
+  display: none; 
+}
+
+.Brand-Password  .pass-heading{
+  letter-spacing: 3px;
+}
+
+.Brand-Password input#protected-password {
+  border: var(--border);
+  max-width: 358px;
+  width: 100%;
+  padding: 5px 10px;
+}
+.Brand-Password input[type="button"] {
+  border: var(--border);
+  border-radius: var(--border-radius);
+  color: var(--gray);
+  background-color: var(--black);
+  padding: 8px 22px;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+.Brand-Password input[type="button"]:hover{
+  color: var(--black);
+  background-color: var(--gray);
+}
