@@ -764,37 +764,32 @@ $(document).ready(function() {
 $(document).ready(function() {
 
   /* === validation === */
-  function validateInquiryForm() {
-    var formValid = true;
+  // function validateInquiryForm() {
+  //   var formValid = true;
   
-    // Check each input field in the form
-    $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').each(function() {
-        // Skip validation for fields with class "not-required"
-        if ($(this).hasClass('not-required')) {
-            return true; // Skip this field and continue with the next one
-        }
+  //   $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').each(function() {
+  //       if ($(this).hasClass('not-required')) {
+  //           return true; 
+  //       }
   
-        // If the field is empty or not selected
-        if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
-            formValid = false;
-            $(this).css('border-color', 'red');
-            // Scroll to the field
-            $('html, body').animate({
-                scrollTop: $(this).offset().top - 160 // Adjust the offset to ensure the field is visible
-            }, 500);
-            return false; // Exit the loop after scrolling to the first invalid field
-        } else {
-            // Set border color to green if the field is filled
-            $(this).css('border-color', 'green');
-        }
-    });
+  //       if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
+  //           formValid = false;
+  //           $(this).css('border-color', 'red');
+  //           $('html, body').animate({
+  //               scrollTop: $(this).offset().top - 160 // Adjust the offset to ensure the field is visible
+  //           }, 500);
+  //           return false; 
+  //       } else {
+  //           $(this).css('border-color', 'green');
+  //       }
+  //   });
   
-    // Return false if any field is empty or not selected
-    if (!formValid) {
-        return false;
-    }
-  }
+  //   if (!formValid) {
+  //       return false;
+  //   }
+  // }
   // Function to validate the submit a ticket form
+  
   function validateTicketForm() {
     var formValid = true;
   
@@ -811,7 +806,7 @@ $(document).ready(function() {
             $(this).css('border-color', 'red');
             // Scroll to the field
             $('html, body').animate({
-                scrollTop: $(this).offset().top - 160 // Adjust the offset to ensure the field is visible
+                scrollTop: $(this).offset().top - 200 // Adjust the offset to ensure the field is visible
             }, 500);
             return false; // Exit the loop after scrolling to the first invalid field
         } else {
@@ -827,24 +822,26 @@ $(document).ready(function() {
   }
   
   // Add event listener for form submission
-  $('#myInquiryForm').submit(function() {
-    return validateInquiryForm();
-  });
+
+  // $('#myInquiryForm').submit(function() {
+  //   return validateInquiryForm();
+  // });
   
   $('#submitTicketForm').submit(function() {
     return validateTicketForm();
   });
   
   // Add event listeners for input, change, and blur events to change border color dynamically
-  $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').on('input change blur', function() {
-    if (!$(this).hasClass('not-required')) {
-        if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
-            $(this).css('border-color', 'green');
-        } else {
-            $(this).css('border-color', 'red');
-        }
-    }
-  });
+
+  // $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').on('input change blur', function() {
+  //   if (!$(this).hasClass('not-required')) {
+  //       if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
+  //           $(this).css('border-color', 'green');
+  //       } else {
+  //           $(this).css('border-color', 'red');
+  //       }
+  //   }
+  // });
   
   $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').on('input change blur', function() {
     if (!$(this).hasClass('not-required')) {
@@ -902,8 +899,6 @@ $(document).ready(function() {
 //   });
 // });
 
-
-/* ===== URL Redirection ===== */
 
 
 
