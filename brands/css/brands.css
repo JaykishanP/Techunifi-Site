@@ -1,4 +1,7 @@
 /* === Modal Password === */
+.Brand-Password {
+  padding: 0;
+}
 
 .Brand-Password .modal {
   display: none; 
@@ -9,24 +12,26 @@
   width: 100%; 
   height: 100%; 
   overflow: auto; 
-  background-color: rgba(0,0,0,0.4); 
+  background-color: rgba(237, 237, 237,0.8); 
 }
 .Brand-Password .modal-content {
   background-color: #fefefe;
   margin: 15% auto;
   padding: 60px 20px;
-  border: 1px solid #888;
+  border: 0;
   width: 100%;
   max-width: 589px;
   text-align: center;
+  border-radius: 25px;
 }
 .Brand-Password .error-message {
-  color: red; 
+  color: red;
+  letter-spacing: 1.2px;
   display: none; 
 }
 
 .Brand-Password  .pass-heading{
-  letter-spacing: 3px;
+  letter-spacing: 1.8px;
 }
 
 .Brand-Password input#protected-password {
@@ -46,5 +51,18 @@
 }
 .Brand-Password input[type="button"]:hover{
   color: var(--black);
-  background-color: var(--gray);
+  background-color: #fff;
+}
+
+
+/* ==== Responsive ==== */
+
+@media only screen and (max-width: 767.9px){
+
+.Brand-Password .modal-content {
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 }
