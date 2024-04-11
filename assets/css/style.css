@@ -595,10 +595,13 @@ section {
   cursor: pointer;
 }
 
-.service-section-desc .service-col:hover h3 {
+.service-section-desc .service-col h3 {
   text-decoration: underline;
   text-underline-offset: 4px;
-  text-decoration-skip: auto;
+}
+
+.service-section-desc .service-col:hover p {
+  font-weight: 500;
 }
 
 .service-col h3 {
