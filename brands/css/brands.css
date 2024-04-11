@@ -4,15 +4,16 @@
 }
 
 .Brand-Password .modal {
-  display: none; 
-  position: fixed; 
+  display: none;
+  position: fixed;
   z-index: 11;
   left: 0;
   top: 0;
-  width: 100%; 
-  height: 100%; 
-  overflow: auto; 
-  background-color: rgba(237, 237, 237,0.8); 
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: linear-gradient(#ededed, transparent, transparent);
+  backdrop-filter: blur(2px);
 }
 .Brand-Password .modal-content {
   background-color: #fefefe;
@@ -53,16 +54,198 @@
   color: var(--black);
   background-color: #fff;
 }
+.Brand-Password .eye-password {
+  position: relative;
+}
+
+.Brand-Password .toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 19%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* Header */
+.brand-website-link .brand-ul {
+  margin: 0;
+}
+.web-btn {
+  background-color: var(--black);
+  border-radius: var(--border-radius);
+  border: var(--border);
+  color: var(--gray);
+  padding: 6px 20px;
+  letter-spacing: 1.5px;
+}
+.web-btn:hover {
+  background-color: var(--gray);
+  color: var(--black);
+}
+
+/* Brand Body */
+.brand-parent-section {
+  max-width: 1194px;
+  margin: 0 auto;
+}
+.heading-brand h1 {
+  font-weight: 800;
+  letter-spacing: 2px;
+  font-size: 54px;
+}
+.brand-text {
+  letter-spacing: 1.8px;
+  font-weight: 600;
+}
+.brand-img-row img {
+  max-width: 415px;
+  display: block;
+  padding: 80px 0 30px;
+}
+.brand-img-row a {
+  background-color: var(--black);
+  color: var(--gray);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  letter-spacing: 1.5px;
+  font-weight: 500;
+}
+.left-para-logo {
+  padding: 50px 26px 0 0;
+  font-weight: 500;
+}
+.logo-para-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 26px;
+  padding: 0 0 20px 0;
+  border-bottom: 2px solid var(--black);
+}
+.logo-para-button img {
+  max-width: 228px;
+}
+.logo-para-button p {
+  max-width: 423px;
+  letter-spacing: 1.5px;
+  margin: 0;
+  font-weight: 500;
+}
+.logo-para-button a {
+  border: var(--border);
+  border-radius: var(--border-radius);
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+.logo-para-button a:hover{
+  background-color: var(--black);
+  color: var(--gray);
+}
+.padding-above {
+  padding: 40px 0 20px 0;
+}
+.shorten-tu img, .lighten-tu img {
+  max-width: 88px;
+  display: block;
+  margin: 0 auto;
+}
+.right-color-content{
+  background-color: #fff;
+  padding: 30px 80px;
+}
+.color-para-img {
+  padding: 20px 0;
+}
+.color-img {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.color-img p {
+  margin: 0;
+  font-size: 20px;
+  line-height: 24px;
+}
+.color-img p span {
+  font-size: 14px;
+  font-weight: 600;
+  display: block;
+}
+.color-text p{
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+}
+.right-color-content.lets-chat {
+  padding: 60px 80px;
+  border-radius: 50px;
+}
+.lets-chat h2 {
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: 1.8px;
+}
+.lets-chat p{
+  letter-spacing: 1px;
+  font-size: 24px;
+}
+.email-phone-chat {
+  padding: 20px 0 0 0;
+}
+.email-phone-chat a {
+  display: block;
+  padding: 0;
+  font-size: 24px;
+  font-weight: 500;
+}
+.email-phone-chat a:hover{
+  color: var(--black);
+}
+.email-phone-chat a span {
+  padding: 0 23px 0 0;
+}
+.talk-section .left-para-logo {
+  padding: 50px 65px 0 0;
+}
+
 
 
 /* ==== Responsive ==== */
 
-@media only screen and (max-width: 767.9px){
+@media only screen and (max-width: 767px){
 
 .Brand-Password .modal-content {
   max-width: 90%;
   margin-left: auto;
   margin-right: auto;
 }
+.Brand-Password .toggle-password {
+  right: 5%;
+}
 
+}
+
+
+/* 476 - 767 */
+@media only screen and (min-width: 476px) and (max-width: 555px){
+  .Brand-Password .toggle-password {
+    right: 13%;
+  }
+}
+
+/* 556 - 767 */
+@media only screen and (min-width: 556px) and (max-width: 767px){
+  .Brand-Password .toggle-password {
+    right: 22%;
+  }
+}
+
+/* Header */
+@media only screen and (min-width: 993px){
+  .brand-website-link{
+    display: block !important;
+  }
+  .mobile-brand-btn{
+    display: none !important;
+  }
 }

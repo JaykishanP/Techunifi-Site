@@ -44,7 +44,7 @@
         </a>
 
         <div class="nav-end">
-          <a class="nav-link raise-btn" href="techunifi.com" onclick="toggleUnderline(event)">Website</a>
+          <a class="nav-link mobile-brand-btn web-btn d-block" href="techunifi.com">Website</a>
           <button id="hamburger" aria-label="hamburger" aria-haspopup="true" aria-expanded="false">
             <i class="bx bx-menu" aria-hidden="true"></i>
           </button>
@@ -52,100 +52,40 @@
 
         <nav class="menu">
           <ul class="menu-bar">
-            <li><a class="nav-link services" href="index.html#landing-services" onclick="toggleUnderline(event)">Services</a></li>
-            <li><a class="nav-link howit-Works" href="index.html#how-it-works" onclick="toggleUnderline(event)">How it Works</a></li>
-            <li><a class="nav-link menu-products" href="products.html" onclick="toggleUnderline(event)">Products</a></li>
-            <li><a class="nav-link menu-about" href="about.html" onclick="toggleUnderline(event)">About Us</a></li>
-            <li><a class="nav-link menu-contact" href="index.html#contact" onclick="toggleUnderline(event)">Contact Us</a></li>
-            <li><a class="nav-link raise-btn" href="submit.html" onclick="toggleUnderline(event)">Submit A Ticket</a></li>
-            <!-- <li>
-              <button class="nav-link dropdown-btn menu-products" data-dropdown="dropdown1" aria-haspopup="true" aria-expanded="false" aria-label="browse" onclick="toggleUnderline(event)">
-                Dropdown discover
-                <i class="bx bx-chevron-down" aria-hidden="true"></i> 
-              </button>
-             <div id="dropdown1" class="dropdown">
-                <ul role="menu">
-                  <li role="menuitem">
-                    <a class="dropdown-link" href="#best-of-the-day">
-                      <img src="https://raw.githubusercontent.com/Evavic44/responsive-navbar-with-dropdown/main/assets/icons/botd.svg" class="icon" />
-                      <div>
-                        <span class="dropdown-link-title">Best of the day</span>
-                        <p>Shorts featured today by curators</p>
-                      </div>
-                    </a>
-                  </li>
-                  <li role="menuitem">
-                    <a class="dropdown-link" href="#featured-streams">
-                      <img src="https://raw.githubusercontent.com/Evavic44/responsive-navbar-with-dropdown/main/assets/icons/fs.svg" class="icon" />
-                      <div>
-                        <span class="dropdown-link-title">Featured Streams</span>
-                        <p>Leading creatives livestreams</p>
-                      </div>
-                    </a>
-                  </li>
-                  <li role="menuitem">
-                    <a class="dropdown-link" href="#subscriptions">
-                      <img src="https://raw.githubusercontent.com/Evavic44/responsive-navbar-with-dropdown/main/assets/icons/sp.svg" class="icon" />
-                      <div>
-                        <span class="dropdown-link-title">Subscriptions</span>
-                        <p>Gain exclusive access</p>
-                      </div>
-                    </a>
-                  </li>
-                  <li role="menuitem">
-                    <a class="dropdown-link" href="#creative-feed">
-                      <img src="https://raw.githubusercontent.com/Evavic44/responsive-navbar-with-dropdown/main/assets/icons/cf.svg" class="icon" />
-                      <div>
-                        <span class="dropdown-link-title">Creative Feed</span>
-                        <p>See trending creations</p>
-                      </div>
-                    </a>
-                  </li>
-                </ul>
-  
-                <ul role="menu">
-                  <li class="dropdown-title">
-                    <span class="dropdown-link-title">Browse by apps</span>
-                  </li>
-                  <li role="menuitem">
-                    <a class="dropdown-link" href="#adobe-xd">
-                      <img src="https://raw.githubusercontent.com/Evavic44/responsive-navbar-with-dropdown/main/assets/icons/xd.svg" />
-                      Adobe XD
-                    </a>
-                  </li>
-                  <li role="menuitem">
-                    <a class="dropdown-link" href="#after-effect">
-                      <img src="https://raw.githubusercontent.com/Evavic44/responsive-navbar-with-dropdown/main/assets/icons/ae.svg" />
-                      After Effect
-                    </a>
-                  </li>
-                  <li role="menuitem">
-                    <a class="dropdown-link" href="#sketch">
-                      <img src="https://raw.githubusercontent.com/Evavic44/responsive-navbar-with-dropdown/main/assets/icons/sketch.svg" />
-                      Sketch
-                    </a>
-                  </li>
-                  <li role="menuitem">
-                    <a class="dropdown-link" href="#indesign">
-                      <img src="https://raw.githubusercontent.com/Evavic44/responsive-navbar-with-dropdown/main/assets/icons/indesign.svg" />
-                      Indesign
-                    </a>
-                  </li>
-                  <li role="menuitem">
-                    <a class="dropdown-link" href="#figma">
-                      <img src="https://raw.githubusercontent.com/Evavic44/responsive-navbar-with-dropdown/main/assets/icons/figma.svg" />
-                      Figma
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li> -->
+            <li><a class="nav-link our-brand" href="brands.html">Our Brand</a></li>
+            <li><a class="nav-link our-logo" href="">Logo</a></li>
+            <li><a class="nav-link our-color" href="">Color</a></li>
+            <li><a class="nav-link our-flyers" href="">Flyers</a></li>
+            <li><a class="nav-link our-contact" href="">Contact</a></li>
           </ul>
         </nav>
+
+        <div class="brand-website-link d-none">
+            <ul class="brand-ul">
+              <li><a class="nav-link web-btn" href="techunifi.com">Website</a></li>
+            </ul>
+        </div>
+
       </div>
   
     </div>
   </header>
+
+  <!-- === Nav tab Section === -->
+   <!-- <div class="container">
+    <div class="row">
+        <div class="brand-fixed">
+            <div class="brand-tab container">
+              <button class="brand-tablinks active" onclick="openBrand(event, 'tab-overview')" id="brandOpen"><p>Overview</p></button>
+              <button class="brand-tablinks" onclick="openBrand(event, 'ourLogo')"><p>Low Voltage</p></button>
+              <button class="brand-tablinks" onclick="openBrand(event, 'telecom')"><p>Telecom</p></button>
+              <button class="brand-tablinks" onclick="openBrand(event, 'security')"><p>Security</p></button>
+              <button class="brand-tablinks" onclick="openBrand(event, 'wifi')"><p>Network</p></button>
+            </div>
+          </div>
+    </div>
+   </div> -->
+
   <!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
@@ -155,36 +95,319 @@
 
   <main id="main">
 
+    <!-- ======= Password Modal ======= -->
 
-<!-- The Modal -->
-<section class="Brand-Password">
-    <div id="passwordModal" class="modal">
-        <div class="modal-content">
-          <form id="PasswordloginForm">
+      <section class="Brand-Password">
+          <div id="passwordModal" class="modal">
+           <div class="modal-content">
+             <form id="PasswordloginForm">
               <h4 class="pass-heading">This is a Guest Area.<br>Enter Passcode</h4><br>
-              <input type="password" id="protected-password" name="password" oninput="hideErrorMessage()"><br>
-              <span class="error-message" id="brand-error-message">Invalid password. Please try again.</span><br><br>
+              <div class="eye-password">
+                <input type="password" id="protected-password" name="password" oninput="hideErrorMessage()">
+                <span class="toggle-password" onclick="togglePasswordVisibility()"><i class="bx bx-hide"></i></span>
+              </div>
+              <span class="error-message" id="brand-error-message">Invalid password. Please try again.</span><br>
               <input type="button" value="Enter" onclick="validateLogin()">
-          </form>
-        </div>
-      </div>
-</section>
+            </form>
+           </div>
+          </div>
+      </section>
 
 
-    <!-- ======= Brands Section ======= -->
+   <!-- ======= Tab Section ======= -->
     
-    <section class="tab-section">
+    <!-- <section class="tab-section">
       <div class="container">
         <div class="row">
+        <div class="col-md-12">
 
-          
+          <div id="tab-overview" class="brand-tabcontent">
+            <div class="row head-para-row overview-tab-content">
+                <div class="col-md-12">
+                   <div class="submit-head-para" data-aos="zoom-in" data-aos-delay="50">
+                    <div class="prod-heading aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
+                      <h3>Overview</h3>
+                    </div>
+                    <p class="tabs-para aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
+                      Techunifi's journey commenced in 2020, stemming from the visionary efforts of its founder, Rajesh Patel. Drawing upon over 25 years of rich experience within the tech industry, Rajesh meticulously crafted Techunifi with a vision to establish it as the quintessential one-stop destination for all IT solutions. With a steadfast commitment to excellence and innovation, Techunifi has seamlessly integrated itself into the fabric of the industry, serving as a trusted partner to over 75 businesses nationwide within just five years of its inception. As we set our sights on the horizon, our steadfast dedication remains unwavering; we aspire to not only sustain but elevate our trajectory, continually crafting unparalleled experiences, fostering enduring relationships, and driving forward the evolution of industry practices. Here at Techunifi, we take pride in our ability to infuse vitality into every facet of your establishment. Reach out to us today, and let us embark on this transformative journey together. We are here, dedicated to empowering your success.
+                    </p>
+                    <a href="submit.html?activeTab=newInquiry" class="sub-Inquiry">Submit an Inquiry</a>
+                  </div>
+                </div>
+            </div>
+          </div>
+
+        
+        <div id="ourLogo" class="brand-tabcontent">
+            <div class="row head-para-row overview-tab-content">
+                <div class="col-md-12">
+                   <div class="submit-head-para" data-aos="zoom-in" data-aos-delay="50">
+                    <div class="prod-heading aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
+                      <h3>Logo</h3>
+                    </div>
+                    <p class="tabs-para aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
+                      Techunifi's journey commenced in 2020, stemming from the visionary efforts of its founder, Rajesh Patel. Drawing upon over 25 years of rich experience within the tech industry, Rajesh meticulously crafted Techunifi with a vision to establish it as the quintessential one-stop destination for all IT solutions. With a steadfast commitment to excellence and innovation, Techunifi has seamlessly integrated itself into the fabric of the industry, serving as a trusted partner to over 75 businesses nationwide within just five years of its inception. As we set our sights on the horizon, our steadfast dedication remains unwavering; we aspire to not only sustain but elevate our trajectory, continually crafting unparalleled experiences, fostering enduring relationships, and driving forward the evolution of industry practices. Here at Techunifi, we take pride in our ability to infuse vitality into every facet of your establishment. Reach out to us today, and let us embark on this transformative journey together. We are here, dedicated to empowering your success.
+                    </p>
+                    <a href="submit.html?activeTab=newInquiry" class="sub-Inquiry">Submit an Inquiry</a>
+                  </div>
+                </div>
+            </div>
+          </div>
+               
+        </div>
         </div>
       </div>
-    </section>
+    </section> -->
     
-  </main><!-- End #main -->
+   <!-- ======= Brand Body Section ======= -->
+
+     <section class="brand-parent-section">
+
+        <div class="container">
+         <div class="row brand-main">
+            <div class="col-md-3">
+                <div class="heading-brand">
+                    <h1>Our<br>Brand</h1>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="right-brand-content">
+                    <p class="brand-text">Introducing Techunifi: a brand built on the pillars of reliability, sustainability, and support. Our identity is a reflection of these values, guiding everything we do. With a focus on forging enduring connections, we offer solutions that not only meet but exceed expectations. Committed to sustainability, we strive to minimize our environmental impact while maximizing the effectiveness of our innovations. Our sleek and modern aesthetic mirrors our dedication to simplicity and sophistication, ensuring that our brand remains both contemporary and refined. From cutting-edge technology to unparalleled customer support, Techunifi is here to navigate the digital landscape alongside you, where connectivity is reliable and assistance is always at hand.</p>
+                    <div class="brand-img-row">
+                        <img src="img/brand-hero-img.png" alt="techunifi">
+                        <a href="pdf/Our Logo" download>Get the logo</a>
+                    </div>
+                </div>
+            </div>
+         </div>
+        </div>
+
+     </section>
+    
+   <!-- ==== Logo section ==== -->
+     <section class="brand-parent-section logo-section">
+
+    <div class="container">
+     <div class="row logo-main">
+        <div class="col-md-3">
+            <div class="heading-brand">
+                <h1>Our<br>Logo</h1>
+                <p class="left-para-logo">Behold the Techunifi logo: a harmonious blend of vibrant orange and calming blue. Versatile yet steadfast, its integrity remains paramount—never stretched or altered. Let it symbolize our unwavering commitment to excellence in connectivity, sustainability, and support.</p>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="right-logo-content">
+               
+                <!-- Main logo -->
+                <div class="logo-para-button">
+                    <img src="img/main-logo.png" alt="techunifi">
+                    <p>This is the main logo with the slogan should be presented with both elements.</p>
+                    <a href="pdf/Our Logo/Main logo/" download>Main Logo</a>
+                </div>
+
+                 <!-- Contact logo -->
+                 <div class="logo-para-button padding-above">
+                    <img src="img/contact-logo.png" alt="techunifi">
+                    <p>This is the main logo with the slogan should be presented with both elements.</p>
+                    <a href="pdf/Our Logo/Contact logo/" download>With Contact</a>
+                </div>
+
+                 <!-- Light logo -->
+                 <div class="logo-para-button padding-above">
+                    <img src="img/light-logo.png" alt="techunifi">
+                    <p>This is the main logo with the slogan should be presented with both elements.</p>
+                    <a href="pdf/Our Logo/techunifilogo" download>Light Logo</a>
+                </div>
+
+                 <!-- Shorten TU -->
+                 <div class="logo-para-button padding-above shorten-tu">
+                    <img src="img/shorten-tu.png" alt="techunifi">
+                    <p>This is the main logo with the slogan should be presented with both elements.</p>
+                    <a href="pdf/Our Logo/Shorten logo" download>Shorten TU</a>
+                </div>
+
+                 <!-- Lightened logo -->
+                 <div class="logo-para-button padding-above lighten-tu">
+                    <img src="img/lighten-tu.png" alt="techunifi">
+                    <p>This is the main logo with the slogan should be presented with both elements.</p>
+                    <a href="pdf/Our Logo/Shorten logo/techunifi_logo TU lightened.png" download>Lightened TU</a>
+                </div>
+
+            </div>
+        </div>
+     </div>
+    </div>
+
+     </section>
+
+   <!-- ==== Color section ==== -->
+     <section class="brand-parent-section color-section">
+
+        <div class="container">
+         <div class="row logo-main">
+            <div class="col-md-3">
+                <div class="heading-brand">
+                    <h1>Our<br>Color</h1>
+                    <p class="left-para-logo">Techunifi is about Reliabitity sustain ability and support. our brand Identity is about supporting the needs of </p>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="right-color-content">
+                   
+                    <!-- Gray -->
+                    <div class="color-para-img">
+                      <div class="row">
+
+                        <div class="col-md-4">
+                          <div class="color-img">
+                            <img src="img/colors/software-gray.png" alt="techunifi">
+                            <p>Software Gray<span>#EdEdEd</span></p>
+                        </div>
+                        </div>
+
+                        <div class="col-md-8 color-text">
+                          <p>Used for background- Avoid using White or black for backgrounds</p>
+                        </div>
+
+                      </div>
+                    </div>
+    
+                     <!-- black -->
+                     <div class="color-para-img">
+                      <div class="row">
+
+                        <div class="col-md-4">
+                          <div class="color-img">
+                            <img src="img/colors/black.png" alt="techunifi">
+                            <p>Pure Black<span>#000000</span></p>
+                        </div>
+                        </div>
+
+                        <div class="col-md-8 color-text">
+                          <p>This is for font type and signage</p>
+                        </div>
+
+                      </div>
+                    </div>
+
+                     <!-- blue -->
+                     <div class="color-para-img">
+                      <div class="row">
+
+                        <div class="col-md-4">
+                          <div class="color-img">
+                            <img src="img/colors/blue.png" alt="techunifi">
+                            <p>Reliable Blue<span>#313D53</span></p>
+                        </div>
+                        </div>
+
+                        <div class="col-md-8 color-text">
+                          <p>This is the main blue for the logo this color can be used as a background color</p>
+                        </div>
+
+                      </div>
+                    </div>
+
+                      <!-- Orange -->
+                      <div class="color-para-img">
+                        <div class="row">
   
-   <!-- ======= Footer ======= -->
+                          <div class="col-md-4">
+                            <div class="color-img">
+                              <img src="img/colors/orange.png" alt="techunifi">
+                              <p>Unifi Orange<span>#EB6D47</span></p>
+                          </div>
+                          </div>
+  
+                          <div class="col-md-8 color-text">
+                            <p>This is accent color avoid over using orange but more as an identifier</p>
+                          </div>
+  
+                        </div>
+                      </div>
+
+                       <!-- Software Gray -->
+                       <div class="color-para-img">
+                        <div class="row">
+  
+                          <div class="col-md-4">
+                            <div class="color-img">
+                              <img src="img/colors/connect-gray.png" alt="techunifi">
+                              <p>Connect Gray<span>#E4E4E4</span></p>
+                          </div>
+                          </div>
+  
+                          <div class="col-md-8 color-text">
+                            <p>This gray is darker than software Grey make it stand out in comparison</p>
+                          </div>
+  
+                        </div>
+                      </div>
+
+                       <!-- Gradient -->
+                       <div class="color-para-img">
+                        <div class="row">
+  
+                          <div class="col-md-12">
+                            <div class="color-img">
+                              <img src="img/colors/linear-gradient.png" alt="techunifi">
+                              <p>Gradient Header<br>Vertical Linear Gradient<span>#EdEdEd to 0% opacity</span></p>
+                          </div>
+                          </div>
+  
+                          <!-- <div class="col-md-8 color-text">
+                            <p>This gray is darker than software Grey make it stand out in comparison</p>
+                          </div> -->
+  
+                        </div>
+                      </div>
+    
+    
+                </div>
+            </div>
+         </div>
+        </div>
+    
+     </section>
+
+  
+   <!-- ==== Contact/Chat section ==== -->
+     <section class="brand-parent-section talk-section">
+
+        <div class="container">
+         <div class="row logo-main">
+            <div class="col-md-4">
+                <div class="heading-brand">
+                    <h1>Let’s<br>Talk!</h1>
+                    <p class="left-para-logo">Our Brand means connectitivity and relaiblity. we want to to help our clients to get to the best information possible. help us help you represent the ethos of Techunifi to our national clients and partners.</p>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="right-color-content lets-chat">
+                   
+                  <h2>Get in Touch </h2>
+                  <p>Meet our Brand Management Team</p>
+
+                  <div class="email-phone-chat">
+                    <a href="tel:(336) 601-6502"><span class="bi bi-telephone"></span>(336) 601-6502</a>
+                    <a href="mailto:Jaykishan.patel@techunifi.com"><span class="bi bi-envelope"></span>Jaykishan.patel@techunifi.com</a>  
+                  </div>
+
+                </div>
+            </div>
+         </div>
+        </div>
+    
+     </section>
+
+
+
+  </main>
+  
+  <!-- End #main -->
+  
+<!-- ======= Footer ======= -->
+<footer></footer>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
 
