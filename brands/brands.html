@@ -36,56 +36,48 @@
 <body class="brandsPage">
 
   <!-- ======= Header ======= -->
-  <header id="nav-menu" class="header-nav" aria-label="navigation bar">
+  <header id="nav-menu" class="header-nav">
     <div class="container">
+
       <div class="nav-start">
         <a class="logo" href="brands.html">
           <img src="img/logo-brands.png"  alt="Logo" />
         </a>
 
-        <div class="nav-end">
-          <a class="nav-link mobile-brand-btn web-btn d-block" href="techunifi.com">Website</a>
-          <button id="hamburger" aria-label="hamburger" aria-haspopup="true" aria-expanded="false">
-            <i class="bx bx-menu" aria-hidden="true"></i>
-          </button>
+        <!-- === Nav tab Section === -->
+
+        <div class="brand-fixed d-none d-md-block">
+          <div class="brand-tab container">
+            <button class="brand-tablinks active" onclick="openBrand(event, 'brand-first')" id="brandOpen"><p>Our Brand</p></button>
+            <button class="brand-tablinks" onclick="openBrand(event, 'ourLogo')"><p>Logo</p></button>
+            <button class="brand-tablinks" onclick="openBrand(event, 'ourColor')"><p>Color</p></button>
+            <button class="brand-tablinks" onclick="openBrand(event, 'ourFlyers')"><p>Flyers</p></button>
+            <button class="brand-tablinks" onclick="openBrand(event, 'ourContact')"><p>Contact</p></button>
+          </div>
         </div>
+ 
 
-        <nav class="menu">
-          <ul class="menu-bar">
-            <li><a class="nav-link our-brand" href="brands.html">Our Brand</a></li>
-            <li><a class="nav-link our-logo" href="">Logo</a></li>
-            <li><a class="nav-link our-color" href="">Color</a></li>
-            <li><a class="nav-link our-flyers" href="">Flyers</a></li>
-            <li><a class="nav-link our-contact" href="">Contact</a></li>
-          </ul>
-        </nav>
-
-        <div class="brand-website-link d-none">
+        <div class="brand-website-link">
             <ul class="brand-ul">
-              <li><a class="nav-link web-btn" href="techunifi.com">Website</a></li>
+              <li><a class="nav-link web-btn" href="../index.html">Website</a></li>
             </ul>
         </div>
 
       </div>
   
+       <!-- === Mobile Nav tab Section === -->
+       <div class="brand-fixed mobileFixedBrand d-block d-md-none">
+        <div class="brand-tab container">
+          <button class="brand-tablinks active" onclick="openBrand(event, 'brand-first')" id="brandOpen"><p>Our Brand</p></button>
+          <button class="brand-tablinks" onclick="openBrand(event, 'ourLogo')"><p>Logo</p></button>
+          <button class="brand-tablinks" onclick="openBrand(event, 'ourColor')"><p>Color</p></button>
+          <button class="brand-tablinks" onclick="openBrand(event, 'ourFlyers')"><p>Flyers</p></button>
+          <button class="brand-tablinks" onclick="openBrand(event, 'ourContact')"><p>Contact</p></button>
+        </div>
+      </div>
+
     </div>
   </header>
-
-  <!-- === Nav tab Section === -->
-   <!-- <div class="container">
-    <div class="row">
-        <div class="brand-fixed">
-            <div class="brand-tab container">
-              <button class="brand-tablinks active" onclick="openBrand(event, 'tab-overview')" id="brandOpen"><p>Overview</p></button>
-              <button class="brand-tablinks" onclick="openBrand(event, 'ourLogo')"><p>Low Voltage</p></button>
-              <button class="brand-tablinks" onclick="openBrand(event, 'telecom')"><p>Telecom</p></button>
-              <button class="brand-tablinks" onclick="openBrand(event, 'security')"><p>Security</p></button>
-              <button class="brand-tablinks" onclick="openBrand(event, 'wifi')"><p>Network</p></button>
-            </div>
-          </div>
-    </div>
-   </div> -->
-
   <!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
@@ -116,283 +108,260 @@
 
    <!-- ======= Tab Section ======= -->
     
-    <!-- <section class="tab-section">
+    <section class="brands-tab-section">
       <div class="container">
         <div class="row">
         <div class="col-md-12">
 
-          <div id="tab-overview" class="brand-tabcontent">
-            <div class="row head-para-row overview-tab-content">
-                <div class="col-md-12">
-                   <div class="submit-head-para" data-aos="zoom-in" data-aos-delay="50">
-                    <div class="prod-heading aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
-                      <h3>Overview</h3>
-                    </div>
-                    <p class="tabs-para aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
-                      Techunifi's journey commenced in 2020, stemming from the visionary efforts of its founder, Rajesh Patel. Drawing upon over 25 years of rich experience within the tech industry, Rajesh meticulously crafted Techunifi with a vision to establish it as the quintessential one-stop destination for all IT solutions. With a steadfast commitment to excellence and innovation, Techunifi has seamlessly integrated itself into the fabric of the industry, serving as a trusted partner to over 75 businesses nationwide within just five years of its inception. As we set our sights on the horizon, our steadfast dedication remains unwavering; we aspire to not only sustain but elevate our trajectory, continually crafting unparalleled experiences, fostering enduring relationships, and driving forward the evolution of industry practices. Here at Techunifi, we take pride in our ability to infuse vitality into every facet of your establishment. Reach out to us today, and let us embark on this transformative journey together. We are here, dedicated to empowering your success.
-                    </p>
-                    <a href="submit.html?activeTab=newInquiry" class="sub-Inquiry">Submit an Inquiry</a>
-                  </div>
-                </div>
-            </div>
-          </div>
+          <!-- Tab1 -->
+          <div id="brand-first" class="brand-tabcontent">
 
-        
-        <div id="ourLogo" class="brand-tabcontent">
-            <div class="row head-para-row overview-tab-content">
-                <div class="col-md-12">
-                   <div class="submit-head-para" data-aos="zoom-in" data-aos-delay="50">
-                    <div class="prod-heading aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
-                      <h3>Logo</h3>
-                    </div>
-                    <p class="tabs-para aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
-                      Techunifi's journey commenced in 2020, stemming from the visionary efforts of its founder, Rajesh Patel. Drawing upon over 25 years of rich experience within the tech industry, Rajesh meticulously crafted Techunifi with a vision to establish it as the quintessential one-stop destination for all IT solutions. With a steadfast commitment to excellence and innovation, Techunifi has seamlessly integrated itself into the fabric of the industry, serving as a trusted partner to over 75 businesses nationwide within just five years of its inception. As we set our sights on the horizon, our steadfast dedication remains unwavering; we aspire to not only sustain but elevate our trajectory, continually crafting unparalleled experiences, fostering enduring relationships, and driving forward the evolution of industry practices. Here at Techunifi, we take pride in our ability to infuse vitality into every facet of your establishment. Reach out to us today, and let us embark on this transformative journey together. We are here, dedicated to empowering your success.
-                    </p>
-                    <a href="submit.html?activeTab=newInquiry" class="sub-Inquiry">Submit an Inquiry</a>
-                  </div>
-                </div>
-            </div>
-          </div>
-               
-        </div>
-        </div>
-      </div>
-    </section> -->
-    
-   <!-- ======= Brand Body Section ======= -->
+                  <!-- ======= Brand Body Section ======= -->
 
      <section class="brand-parent-section">
 
-        <div class="container">
-         <div class="row brand-main">
-            <div class="col-md-3">
-                <div class="heading-brand">
-                    <h1>Our<br>Brand</h1>
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div class="right-brand-content">
-                    <p class="brand-text">Introducing Techunifi: a brand built on the pillars of reliability, sustainability, and support. Our identity is a reflection of these values, guiding everything we do. With a focus on forging enduring connections, we offer solutions that not only meet but exceed expectations. Committed to sustainability, we strive to minimize our environmental impact while maximizing the effectiveness of our innovations. Our sleek and modern aesthetic mirrors our dedication to simplicity and sophistication, ensuring that our brand remains both contemporary and refined. From cutting-edge technology to unparalleled customer support, Techunifi is here to navigate the digital landscape alongside you, where connectivity is reliable and assistance is always at hand.</p>
-                    <div class="brand-img-row">
-                        <img src="img/brand-hero-img.png" alt="techunifi">
-                        <a href="pdf/Our Logo" download>Get the logo</a>
-                    </div>
-                </div>
-            </div>
-         </div>
-        </div>
+      <div class="container">
+       <div class="row brand-main">
+          <div class="col-xl-3">
+              <div class="heading-brand">
+                  <h1>Our <br>Brand</h1>
+              </div>
+          </div>
+          <div class="col-xl-9">
+              <div class="right-brand-content">
+                  <p class="brand-text">Introducing Techunifi: a brand built on the pillars of reliability, sustainability, and support. Our identity is a reflection of these values, guiding everything we do. With a focus on forging enduring connections, we offer solutions that not only meet but exceed expectations. Committed to sustainability, we strive to minimize our environmental impact while maximizing the effectiveness of our innovations. Our sleek and modern aesthetic mirrors our dedication to simplicity and sophistication, ensuring that our brand remains both contemporary and refined. From cutting-edge technology to unparalleled customer support, Techunifi is here to navigate the digital landscape alongside you, where connectivity is reliable and assistance is always at hand.</p>
+                  <div class="brand-img-row">
+                      <img src="img/brand-hero-img.png" alt="techunifi">
+                      <button class="brand-tablinks" onclick="openBrand(event, 'ourLogo')"><p>Get the Logo</p></button>
+                  </div>
+              </div>
+          </div>
+       </div>
+      </div>
 
-     </section>
-    
-   <!-- ==== Logo section ==== -->
+   </section>
+
+          </div>
+
+        <!-- Tab2 -->
+        <div id="ourLogo" class="brand-tabcontent">
+
+              <!-- ==== Logo section ==== -->
      <section class="brand-parent-section logo-section">
 
-    <div class="container">
-     <div class="row logo-main">
-        <div class="col-md-3">
-            <div class="heading-brand">
-                <h1>Our<br>Logo</h1>
-                <p class="left-para-logo">Behold the Techunifi logo: a harmonious blend of vibrant orange and calming blue. Versatile yet steadfast, its integrity remains paramount—never stretched or altered. Let it symbolize our unwavering commitment to excellence in connectivity, sustainability, and support.</p>
-            </div>
+      <div class="container">
+       <div class="row logo-main">
+          <div class="col-xl-3">
+              <div class="heading-brand">
+                  <h1>Our <br>Logo</h1>
+                  <p class="left-para-logo">Behold the Techunifi logo: a harmonious blend of vibrant orange and calming blue. Versatile yet steadfast, its integrity remains paramount—never stretched or altered. Let it symbolize our unwavering commitment to excellence in connectivity, sustainability, and support.</p>
+              </div>
+          </div>
+          <div class="col-xl-9">
+              <div class="right-logo-content">
+                 
+                  <!-- Main logo -->
+                  <div class="logo-para-button">
+                      <img src="img/main-logo.png" alt="techunifi">
+                      <p>This is the main logo with the slogan should be presented with both elements.</p>
+                      <a href="pdf/Mainlogo.png" download>Main Logo</a>
+                  </div>
+  
+                   <!-- Contact logo -->
+                   <div class="logo-para-button padding-above">
+                      <img src="img/contact-logo.png" alt="techunifi">
+                      <p>This is the main logo with the slogan should be presented with both elements.</p>
+                      <a href="pdf/Contact-logo-full.png" download>With Contact</a>
+                  </div>
+  
+                   <!-- Light logo -->
+                   <div class="logo-para-button padding-above">
+                      <img src="img/light-logo.png" alt="techunifi">
+                      <p>This is the main logo with the slogan should be presented with both elements.</p>
+                      <a href="pdf/lightlogo.png" download>Light Logo</a>
+                  </div>
+  
+                   <!-- Shorten TU -->
+                   <div class="logo-para-button padding-above shorten-tu">
+                      <img src="img/shorten-tu.png" alt="techunifi">
+                      <p>This is the main logo with the slogan should be presented with both elements.</p>
+                      <a href="pdf/Shorten-tu.png" download>Shorten TU</a>
+                  </div>
+  
+                   <!-- Lightened logo -->
+                   <div class="logo-para-button padding-above lighten-tu">
+                      <img src="img/lighten-tu.png" alt="techunifi">
+                      <p>This is the main logo with the slogan should be presented with both elements.</p>
+                      <a href="pdf/lighten-tu.png" download>Lightened TU</a>
+                  </div>
+  
+              </div>
+          </div>
+       </div>
+      </div>
+  
+       </section>
+
         </div>
-        <div class="col-md-9">
-            <div class="right-logo-content">
-               
-                <!-- Main logo -->
-                <div class="logo-para-button">
-                    <img src="img/main-logo.png" alt="techunifi">
-                    <p>This is the main logo with the slogan should be presented with both elements.</p>
-                    <a href="pdf/Our Logo/Main logo/" download>Main Logo</a>
-                </div>
 
-                 <!-- Contact logo -->
-                 <div class="logo-para-button padding-above">
-                    <img src="img/contact-logo.png" alt="techunifi">
-                    <p>This is the main logo with the slogan should be presented with both elements.</p>
-                    <a href="pdf/Our Logo/Contact logo/" download>With Contact</a>
-                </div>
+        <!-- Tab3 -->
+        <div id="ourColor" class="brand-tabcontent">
 
-                 <!-- Light logo -->
-                 <div class="logo-para-button padding-above">
-                    <img src="img/light-logo.png" alt="techunifi">
-                    <p>This is the main logo with the slogan should be presented with both elements.</p>
-                    <a href="pdf/Our Logo/techunifilogo" download>Light Logo</a>
-                </div>
-
-                 <!-- Shorten TU -->
-                 <div class="logo-para-button padding-above shorten-tu">
-                    <img src="img/shorten-tu.png" alt="techunifi">
-                    <p>This is the main logo with the slogan should be presented with both elements.</p>
-                    <a href="pdf/Our Logo/Shorten logo" download>Shorten TU</a>
-                </div>
-
-                 <!-- Lightened logo -->
-                 <div class="logo-para-button padding-above lighten-tu">
-                    <img src="img/lighten-tu.png" alt="techunifi">
-                    <p>This is the main logo with the slogan should be presented with both elements.</p>
-                    <a href="pdf/Our Logo/Shorten logo/techunifi_logo TU lightened.png" download>Lightened TU</a>
-                </div>
-
-            </div>
-        </div>
-     </div>
-    </div>
-
-     </section>
-
-   <!-- ==== Color section ==== -->
+              <!-- ==== Color section ==== -->
      <section class="brand-parent-section color-section">
 
-        <div class="container">
-         <div class="row logo-main">
-            <div class="col-md-3">
-                <div class="heading-brand">
-                    <h1>Our<br>Color</h1>
-                    <p class="left-para-logo">Techunifi is about Reliabitity sustain ability and support. our brand Identity is about supporting the needs of </p>
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div class="right-color-content">
-                   
-                    <!-- Gray -->
+      <div class="container">
+       <div class="row color-main">
+          <div class="col-xl-3">
+              <div class="heading-brand">
+                  <h1>Our <br>Color</h1>
+                  <p class="left-para-logo">Techunifi is about Reliabitity sustain ability and support. our brand Identity is about supporting the needs of </p>
+              </div>
+          </div>
+          <div class="col-xl-9">
+              <div class="right-color-content">
+                 
+                  <!-- Gray -->
+                  <div class="color-para-img">
+                    <div class="row">
+
+                      <div class="col-md-4">
+                        <div class="color-img">
+                          <img src="img/colors/software-gray.png" alt="techunifi">
+                          <p>Software Gray<span>#EdEdEd</span></p>
+                      </div>
+                      </div>
+
+                      <div class="col-md-8 color-text">
+                        <p>Used for background- Avoid using White or black for backgrounds</p>
+                      </div>
+
+                    </div>
+                  </div>
+  
+                   <!-- black -->
+                   <div class="color-para-img">
+                    <div class="row">
+
+                      <div class="col-md-4">
+                        <div class="color-img">
+                          <img src="img/colors/black.png" alt="techunifi">
+                          <p>Pure Black<span>#000000</span></p>
+                      </div>
+                      </div>
+
+                      <div class="col-md-8 color-text">
+                        <p>This is for font type and signage</p>
+                      </div>
+
+                    </div>
+                  </div>
+
+                   <!-- blue -->
+                   <div class="color-para-img">
+                    <div class="row">
+
+                      <div class="col-md-4">
+                        <div class="color-img">
+                          <img src="img/colors/blue.png" alt="techunifi">
+                          <p>Reliable Blue<span>#313D53</span></p>
+                      </div>
+                      </div>
+
+                      <div class="col-md-8 color-text">
+                        <p>This is the main blue for the logo this color can be used as a background color</p>
+                      </div>
+
+                    </div>
+                  </div>
+
+                    <!-- Orange -->
                     <div class="color-para-img">
                       <div class="row">
 
                         <div class="col-md-4">
                           <div class="color-img">
-                            <img src="img/colors/software-gray.png" alt="techunifi">
-                            <p>Software Gray<span>#EdEdEd</span></p>
+                            <img src="img/colors/orange.png" alt="techunifi">
+                            <p>Unifi Orange<span>#EB6D47</span></p>
                         </div>
                         </div>
 
                         <div class="col-md-8 color-text">
-                          <p>Used for background- Avoid using White or black for backgrounds</p>
+                          <p>This is accent color avoid over using orange but more as an identifier</p>
                         </div>
 
                       </div>
                     </div>
-    
-                     <!-- black -->
+
+                     <!-- Software Gray -->
                      <div class="color-para-img">
                       <div class="row">
 
                         <div class="col-md-4">
                           <div class="color-img">
-                            <img src="img/colors/black.png" alt="techunifi">
-                            <p>Pure Black<span>#000000</span></p>
+                            <img src="img/colors/connect-gray.png" alt="techunifi">
+                            <p>Connect Gray<span>#E4E4E4</span></p>
                         </div>
                         </div>
 
                         <div class="col-md-8 color-text">
-                          <p>This is for font type and signage</p>
+                          <p>This gray is darker than software Grey make it stand out in comparison</p>
                         </div>
 
                       </div>
                     </div>
 
-                     <!-- blue -->
+                     <!-- Gradient -->
                      <div class="color-para-img">
                       <div class="row">
 
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                           <div class="color-img">
-                            <img src="img/colors/blue.png" alt="techunifi">
-                            <p>Reliable Blue<span>#313D53</span></p>
+                            <img src="img/colors/linear-gradient.png" alt="techunifi">
+                            <p>Gradient Header<br>Vertical Linear Gradient<span>#EdEdEd to 0% opacity</span></p>
                         </div>
                         </div>
 
-                        <div class="col-md-8 color-text">
-                          <p>This is the main blue for the logo this color can be used as a background color</p>
-                        </div>
+                        <!-- <div class="col-md-8 color-text">
+                          <p>This gray is darker than software Grey make it stand out in comparison</p>
+                        </div> -->
 
                       </div>
                     </div>
+  
+  
+              </div>
+          </div>
+       </div>
+      </div>
+  
+   </section>
 
-                      <!-- Orange -->
-                      <div class="color-para-img">
-                        <div class="row">
-  
-                          <div class="col-md-4">
-                            <div class="color-img">
-                              <img src="img/colors/orange.png" alt="techunifi">
-                              <p>Unifi Orange<span>#EB6D47</span></p>
-                          </div>
-                          </div>
-  
-                          <div class="col-md-8 color-text">
-                            <p>This is accent color avoid over using orange but more as an identifier</p>
-                          </div>
-  
-                        </div>
-                      </div>
-
-                       <!-- Software Gray -->
-                       <div class="color-para-img">
-                        <div class="row">
-  
-                          <div class="col-md-4">
-                            <div class="color-img">
-                              <img src="img/colors/connect-gray.png" alt="techunifi">
-                              <p>Connect Gray<span>#E4E4E4</span></p>
-                          </div>
-                          </div>
-  
-                          <div class="col-md-8 color-text">
-                            <p>This gray is darker than software Grey make it stand out in comparison</p>
-                          </div>
-  
-                        </div>
-                      </div>
-
-                       <!-- Gradient -->
-                       <div class="color-para-img">
-                        <div class="row">
-  
-                          <div class="col-md-12">
-                            <div class="color-img">
-                              <img src="img/colors/linear-gradient.png" alt="techunifi">
-                              <p>Gradient Header<br>Vertical Linear Gradient<span>#EdEdEd to 0% opacity</span></p>
-                          </div>
-                          </div>
-  
-                          <!-- <div class="col-md-8 color-text">
-                            <p>This gray is darker than software Grey make it stand out in comparison</p>
-                          </div> -->
-  
-                        </div>
-                      </div>
-    
-    
-                </div>
-            </div>
-         </div>
         </div>
-    
-     </section>
 
-  
-   <!-- ==== Contact/Chat section ==== -->
-     <section class="brand-parent-section talk-section">
+        <!-- Tab4 -->
+        <div id="ourFlyers" class="brand-tabcontent">
+
+               <!-- ==== Flyer section ==== -->
+       <section class="brand-parent-section flyer-section">
 
         <div class="container">
-         <div class="row logo-main">
-            <div class="col-md-4">
+         <div class="row flyer-main">
+            <div class="col-xl-3">
                 <div class="heading-brand">
-                    <h1>Let’s<br>Talk!</h1>
-                    <p class="left-para-logo">Our Brand means connectitivity and relaiblity. we want to to help our clients to get to the best information possible. help us help you represent the ethos of Techunifi to our national clients and partners.</p>
+                    <h1>Our <br>Flyers</h1>
+                    <p class="left-para-logo">Explore Techunifi's world through our flyers, featuring esteemed brand partners and a myriad of services. Unaltered and authentic, each flyer embodies our commitment to reliability, sustainability, and support.</p>
+                    <a href="pdf/Techunifi flyer front final.pdf" class="flyer-download" download>Download Front</a>
+                    <a href="pdf/Techunifi flyer back final.pdf" class="flyer-download" download>Download Back</a>
                 </div>
             </div>
-            <div class="col-md-8">
-                <div class="right-color-content lets-chat">
-                   
-                  <h2>Get in Touch </h2>
-                  <p>Meet our Brand Management Team</p>
-
-                  <div class="email-phone-chat">
-                    <a href="tel:(336) 601-6502"><span class="bi bi-telephone"></span>(336) 601-6502</a>
-                    <a href="mailto:Jaykishan.patel@techunifi.com"><span class="bi bi-envelope"></span>Jaykishan.patel@techunifi.com</a>  
-                  </div>
-
+            <div class="col-xl-9">
+                <div class="right-flyers-content">
+               
+                  <img src="img/front-flyers.png" alt="techunifi" class="flyer-img">
+                  <br><br><br>
+                  <img src="img/back-flyers.png" alt="techunifi" class="flyer-img">
+  
                 </div>
             </div>
          </div>
@@ -400,7 +369,47 @@
     
      </section>
 
+        </div>
 
+        <!-- Tab5 -->
+        <div id="ourContact" class="brand-tabcontent">
+ 
+             <!-- ==== Contact/Chat section ==== -->
+     <section class="brand-parent-section talk-section">
+
+      <div class="container">
+       <div class="row contact-main">
+          <div class="col-xl-4">
+              <div class="heading-brand">
+                  <h1>Let’s <br>Talk!</h1>
+                  <p class="left-para-logo">Our Brand means connectitivity and relaiblity. we want to to help our clients to get to the best information possible. help us help you represent the ethos of Techunifi to our national clients and partners.</p>
+              </div>
+          </div>
+          <div class="col-xl-8">
+              <div class="right-color-content lets-chat">
+                 
+                <h2>Get in Touch </h2>
+                <p>Meet our Brand Management Team</p>
+
+                <div class="email-phone-chat">
+                  <a href="tel:(336) 601-6502"><span class="bi bi-telephone"></span>(336) 601-6502</a>
+                  <a href="mailto:Jaykishan.patel@techunifi.com"><span class="bi bi-envelope"></span>Jaykishan.patel@techunifi.com</a>  
+                </div>
+
+              </div>
+          </div>
+       </div>
+      </div>
+  
+   </section>
+
+        </div>
+               
+        </div>
+        </div>
+      </div>
+    </section>
+  
 
   </main>
   

@@ -67,8 +67,17 @@
 }
 
 /* Header */
+.brandsPage .logo {
+  margin-right: 0;
+  display: inline-block;
+  padding: 10px 0;
+}
+.brandsPage .nav-start .logo img {
+  max-width: 50px;
+}
 .brand-website-link .brand-ul {
   margin: 0;
+  padding: 0;
 }
 .web-btn {
   background-color: var(--black);
@@ -82,8 +91,31 @@
   background-color: var(--gray);
   color: var(--black);
 }
+.brandsPage .nav-start {
+  border-bottom: 2px solid var(--black);
+  padding: 0 0 5px 0;
+}
+.brand-tablinks {
+  background-color: transparent;
+}
+.brand-tablinks p {
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 1.2px;
+  font-weight: 500;
+}
+.brand-tablinks.active p{
+  font-weight: 800;
+}
 
 /* Brand Body */
+.brandsPage #hero {
+  padding-top: 50px;
+}
+
+section.brands-tab-section {
+  padding: 0;
+}
 .brand-parent-section {
   max-width: 1194px;
   margin: 0 auto;
@@ -102,7 +134,7 @@
   display: block;
   padding: 80px 0 30px;
 }
-.brand-img-row a {
+.brand-img-row .brand-tablinks{
   background-color: var(--black);
   color: var(--gray);
   border: var(--border);
@@ -207,7 +239,22 @@
 .talk-section .left-para-logo {
   padding: 50px 65px 0 0;
 }
-
+.flyer-download {
+  display: inline-block;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+.flyer-download:hover{
+  background-color: var(--black);
+  color: var(--gray);
+}
+.flyer-img {
+  max-width: 85%;
+  margin: 0 auto;
+  display: block;
+}
 
 
 /* ==== Responsive ==== */
@@ -221,6 +268,97 @@
 }
 .Brand-Password .toggle-password {
   right: 5%;
+}
+.brandsPage .nav-start {
+  border-bottom: unset;
+  padding: unset;
+}
+.brandsPage .mobileFixedBrand {
+  border-bottom: 2px solid var(--black);
+  padding: 10px 0 5px 0;
+}
+.brandsPage .mobileFixedBrand .brand-tab {
+  padding: 0;
+}
+.brand-tablinks {
+  padding: 10px 6px 5px;
+}
+.brandsPage #hero {
+  padding-top: 77px;
+}
+.heading-brand h1{
+  padding: 0 0 10px 0;
+  font-size: 40px;
+}
+.heading-brand h1 br{
+  display: none;
+}
+.brand-text {
+  font-weight: 500;
+}
+.brand-img-row img {
+  max-width: 92%;
+  padding: 20px 0 30px;
+}
+.brand-img-row .brand-tablinks{
+  padding: 10px 20px;
+}
+.left-para-logo {
+  padding: 0;
+}
+.talk-section .left-para-logo {
+  padding: 0;
+}
+.logo-para-button {
+  display: block;
+}
+.logo-para-button p {
+  max-width: 100%;
+  padding: 10px 0 20px;
+}
+.logo-main .left-para-logo {
+  padding: 0 0 21px 0;
+}
+.padding-above {
+  padding: 40px 0 24px 0;
+}
+.logo-para-button img {
+  max-width: 58%;
+}
+.shorten-tu img, .lighten-tu img {
+  margin: unset;
+}
+.right-color-content {
+  padding: 20px 20px;
+}
+.color-text p {
+  letter-spacing: 1px;
+  padding: 7px 0 0 0;
+}
+.flyer-img {
+  max-width: 100%;
+  margin: unset;
+}
+.flyer-download {
+  margin: 0 15px 25px 0;
+}
+.right-color-content.lets-chat {
+  padding: 25px;
+  border-radius: 25px;
+}
+.lets-chat p {
+  letter-spacing: 0.5px;
+  font-size: 16px;
+}
+.email-phone-chat {
+  padding: 0 0 0 0;
+}
+.email-phone-chat a {
+  padding: 8px 0 0 0;
+  font-size: 17px;
+}
+.email-phone-chat a span {
+  padding: 0 10px 0 0;
 }
 
 }
@@ -241,11 +379,28 @@
 }
 
 /* Header */
-@media only screen and (min-width: 993px){
-  .brand-website-link{
-    display: block !important;
+@media only screen and (min-width: 768px) and (max-width: 1199.9px){
+  .heading-brand h1{
+    padding: 0 0 10px 0;
   }
-  .mobile-brand-btn{
-    display: none !important;
+  .heading-brand h1 br{
+    display: none;
   }
+  .left-para-logo {
+    padding: 0;
+  }
+  .flyer-img {
+    margin: unset;
+  }
+  .flyer-download {
+    margin: 10px 22px 35px 0;
+  }
+  .talk-section .left-para-logo {
+    padding: 0;
+  }
+  .right-color-content.lets-chat {
+    margin: 30px 0 0 0;
+    padding: 40px 40px;
+  }
+
 }
