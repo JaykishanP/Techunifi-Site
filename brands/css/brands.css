@@ -13,7 +13,7 @@
   height: 100%;
   overflow: auto;
   background: linear-gradient(#ededed, transparent, transparent);
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(3px);
 }
 .Brand-Password .modal-content {
   background-color: #fefefe;

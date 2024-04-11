@@ -1,17 +1,18 @@
 /* ===== Password Modal ===== */
-
 var modal = document.getElementById("passwordModal");
 var errorMessage = document.getElementById("brand-error-message");
 
 document.addEventListener("DOMContentLoaded", function() {
     modal.style.display = "block";
+    document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
 });
 
 function validateLogin() {
     var password = document.getElementById("protected-password").value;
     var validPassword = "Brand_Unifi$2024";
     if (password === validPassword) {
-        modal.style.display = "none"; 
+        modal.style.display = "none";
+        document.body.style.overflow = ""; // Reset body overflow property
     } else {
         errorMessage.style.display = "block";
     }
@@ -43,6 +44,7 @@ function togglePasswordVisibility() {
       toggleButton.classList.add("bx-hide");
   }
 }
+
 
 /* === Brand Tab Section === */
 function openBrand(evt, cityName) {
