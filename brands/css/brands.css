@@ -259,7 +259,7 @@ section.brands-tab-section {
 
 /* ==== Responsive ==== */
 
-@media only screen and (max-width: 767px){
+@media only screen and (max-width: 767.9px){
 
 .Brand-Password .modal-content {
   max-width: 90%;
@@ -279,9 +279,12 @@ section.brands-tab-section {
 }
 .brandsPage .mobileFixedBrand .brand-tab {
   padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .brand-tablinks {
-  padding: 10px 6px 5px;
+  padding: 10px 8px 5px;
 }
 .brandsPage #hero {
   padding-top: 77px;
@@ -365,14 +368,14 @@ section.brands-tab-section {
 
 
 /* 476 - 767 */
-@media only screen and (min-width: 476px) and (max-width: 555px){
+@media only screen and (min-width: 476px) and (max-width: 555.9px){
   .Brand-Password .toggle-password {
     right: 13%;
   }
 }
 
 /* 556 - 767 */
-@media only screen and (min-width: 556px) and (max-width: 767px){
+@media only screen and (min-width: 556px) and (max-width: 767.9px){
   .Brand-Password .toggle-password {
     right: 22%;
   }
@@ -401,6 +404,9 @@ section.brands-tab-section {
   .right-color-content.lets-chat {
     margin: 30px 0 0 0;
     padding: 40px 40px;
+  }
+  .logo-main .left-para-logo {
+    padding: 0 0 21px 0;
   }
 
 }
