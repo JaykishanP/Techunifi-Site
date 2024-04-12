@@ -176,11 +176,6 @@ section.brands-tab-section {
 .padding-above {
   padding: 40px 0 20px 0;
 }
-.shorten-tu img, .lighten-tu img {
-  max-width: 88px;
-  display: block;
-  margin: 0 auto;
-}
 .right-color-content{
   background-color: #fff;
   padding: 30px 80px;
@@ -226,7 +221,7 @@ section.brands-tab-section {
 }
 .email-phone-chat a {
   display: block;
-  padding: 0;
+  padding: 10px 0;
   font-size: 24px;
   font-weight: 500;
 }
@@ -328,9 +323,6 @@ section.brands-tab-section {
 .logo-para-button img {
   max-width: 58%;
 }
-.shorten-tu img, .lighten-tu img {
-  margin: unset;
-}
 .right-color-content {
   padding: 20px 20px;
 }
@@ -408,5 +400,30 @@ section.brands-tab-section {
   .logo-main .left-para-logo {
     padding: 0 0 21px 0;
   }
+  .logo-para-button img {
+    max-width: 200px;
+  }
+  .logo-para-button p {
+    max-width: 264px;
+  }
 
+}
+
+/* Logo */
+@media only screen and (min-width: 992px) and (max-width: 1199.9px){
+  .logo-para-button img {
+    max-width: 200px;
+  }
+  .logo-para-button p {
+    max-width: 423px;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1499.9px){
+  .logo-para-button img {
+    max-width: 250px;
+  }
+  .logo-para-button p {
+    max-width: 328px;
+  }
 }
