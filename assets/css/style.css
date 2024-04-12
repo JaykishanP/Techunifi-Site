@@ -575,8 +575,8 @@ section {
 #landing-services::before{
   content: '';
   display: block;
-  height: 75px;
-  margin-top: -55px;
+  height: 108px;
+  margin-top: -70px;
   visibility: hidden;
 }
 
@@ -765,16 +765,13 @@ section.howItworks {
 # Contact
 --------------------------------------------------------------*/
 
-/* #contact::before {
+
+#contact::before{
   content: '';
   display: block;
-  height: 108px;
+  height: 120px;
   margin-top: -70px;
   visibility: hidden;
-} */
-
-#contact {
-  padding-top: 80px;
 }
 
 .contact .prod-img .carousel-item img {
