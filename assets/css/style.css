@@ -338,9 +338,9 @@ section {
   .nav-end .raise-btn {
     display: block;
     background-color: var(--black);
-    padding: 6px 14px;
+    padding: 6px 12px;
     border-radius: 100px;
-    font-size: 13px;
+    font-size: 12px;
     color: #fff;
     border: 1px solid var(--black);
    }
