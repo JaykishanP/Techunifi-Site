@@ -1,9 +1,7 @@
-(function() {
+ (function() {
   "use strict";
 
-  /**
-   * Easy selector helper function
-   */
+   //  Easy selector helper function
   const select = (el, all = false) => {
     el = el.trim();
     if (all) {
@@ -13,9 +11,7 @@
     }
   };
 
-  /**
-   * Easy event listener function
-   */
+   // Easy event listener function
   const on = (type, el, listener, all = false) => {
     let selectEl = select(el, all);
     if (selectEl) {
@@ -27,16 +23,13 @@
     }
   };
 
-  /**
-   * Easy on scroll event listener 
-   */
-  const onscroll = (el, listener) => {
+   //  Easy on scroll event listener 
+   const onscroll = (el, listener) => {
     el.addEventListener('scroll', listener);
   };
 
-  /**
-   * Scrolls to an element with header offset
-   */
+
+  // Scrolls to an element with header offset
   const scrollto = (el) => {
     let header = select('header');
     let offset = header.offsetHeight;
@@ -52,9 +45,7 @@
     });
   };
 
-  /**
-   * Toggle .header-scrolled class to #header when page is scrolled
-   */
+  // * Toggle .header-scrolled class to #header when page is scrolled
   let selectHeader = select('#nav-menu');
   if (selectHeader) {
     const headerScrolled = () => {
@@ -68,9 +59,7 @@
     onscroll(document, headerScrolled);
   }
 
-  /**
-   * Back to top button
-   */
+   // Back to top button
   let backtotop = select('.back-to-top');
   if (backtotop) {
     const toggleBacktotop = () => {
@@ -91,10 +80,7 @@
   });
   
 
-
-  /**
-   * Scroll with offset on page load with hash links in the URL
-   */
+  // * Scroll with offset on page load with hash links in the URL
   window.addEventListener('load', () => {
     if (window.location.hash) {
       if (select(window.location.hash)) {
@@ -104,9 +90,7 @@
   });
 
 
-  /**
-   * Animation on scroll
-   */
+  // Animation on scroll
   window.addEventListener('load', () => {
     AOS.init({
       duration: 1000,
@@ -116,13 +100,10 @@
     })
   });
 
-  /**
-   * Initiate Pure Counter 
-   */
+  // Initiate Pure Counter 
   new PureCounter();
 
-})();
-
+})(); 
 
 
 /* Slick Slider*/
@@ -866,34 +847,25 @@ $(document).ready(function() {
 
 //   closeButtons.forEach(function(button) {
 //       button.addEventListener('click', function() {
-//           // On click, find the closest '.event' parent and hide it
 //           this.closest('.event-section').style.display = 'none';
 
-//           // Then, find the '.hero-sub' element and change its padding
 //           const heroSub = document.querySelector('.hero-sub');
 //           if (heroSub) {
-//               // Check screen width
 //               if (window.innerWidth <= 767) {
-//                   // Apply mobile padding
 //                   heroSub.style.padding = '50px 0 0 0';
 //               } else {
-//                   // Apply desktop padding
 //                   heroSub.style.padding = '200px 0 0 0';
 //               }
 //           }
 //       });
 //   });
 
-//   // Handle resizing of the window
 //   window.addEventListener('resize', function() {
 //       const heroSub = document.querySelector('.hero-sub');
 //       if (heroSub) {
-//           // Check screen width on resize
 //           if (window.innerWidth <= 767) {
-//               // Apply mobile padding
 //               heroSub.style.padding = '50px 0 0 0';
 //           } else {
-//               // Apply desktop padding
 //               heroSub.style.padding = '200px 0 0 0';
 //           }
 //       }

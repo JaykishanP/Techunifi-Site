@@ -464,7 +464,7 @@ section {
 }
 
 .hero-sub {
-  padding: 200px 0 0 0;
+  /* padding: 200px 0 0 0; */
   text-align: center;
   margin: 0 auto;
 }
@@ -480,6 +480,36 @@ section {
   top: 114px;
   font-size: 30px;
   cursor: pointer;
+}
+
+.hero-img.event-section {
+  /* position: relative; */
+}
+
+.sale-text {
+  position: absolute;
+  top: 40%;
+  left: 38%;
+}
+
+.sale-text h5 {
+  font-weight: 900;
+  font-size: 28px;
+  color: #34465A;
+  letter-spacing: 1.2px;
+}
+
+.sale-text p{
+  text-align: left;
+  margin: 0;
+}
+
+.sale-text a{
+  color: #2A7AFF;
+  padding: 0;
+  text-decoration: underline;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .hero-logo {
@@ -1906,12 +1936,25 @@ section.sub-tab-section {
     padding: 123px 0 0 0;
   }
   .event-section{
-    padding: 50px 0 50px 0;
+    padding: 0px 0 50px 0;
   }
   .event-close {
     right: 21px;
     top: 51px;
     font-size: 15px;
+  }
+  .sale-text {
+    top: 38%;
+    left: 9%;
+  }
+  .sale-text h5 {
+    font-size: 12px;
+    line-height: 14px;
+    letter-spacing: 0.6px;
+    margin: 0;
+  }
+  .sale-text a{
+    font-size: 13px;
   }
   .hero-logo {
     max-width: 86%;
@@ -2290,12 +2333,19 @@ section.ticket-form {
   top: 112px;
   font-size: 20px;
 }
+.sale-text {
+  top: 51%;
+  left: 7%;
+}
+.sale-text h5 {
+  font-size: 24px;
+}
 
 }
 
 
 /* Ipad Pro */
-@media only screen and (min-width: 1024px) and (max-width: 1199px){
+@media only screen and (min-width: 1024px) and (max-width: 1199.9px){
   
   .logo {
     margin-right: 0rem;
@@ -2305,6 +2355,15 @@ section.ticket-form {
     right: 22px;
     top: 112px;
     font-size: 20px;
+  }
+
+  .sale-text {
+    top: 57%;
+    left: 7%;
+  }
+
+  .sale-text h5 {
+    font-size: 24px;
   }
 
 .email-subscribe input {
