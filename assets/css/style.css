@@ -1880,6 +1880,13 @@ span.bread-inner {
   position: relative;
   background-color: #ededed;
 }
+.card-more {
+  display: none; 
+}
+.card-more.active {
+  display: block;
+}
+
 
 /* ============ Responsive ==============*/
 /* Mobile */
