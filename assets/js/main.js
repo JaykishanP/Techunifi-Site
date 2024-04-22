@@ -849,43 +849,46 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Function to set width and activate card-more
   function activateCardMore(slide) {
+    const screenWidth = window.innerWidth;
+    if (screenWidth >= 768) {
       slide.style.width = '600px';
-      const cardMore = slide.querySelector('.card-more');
-      if (cardMore) {
-          cardMore.classList.add('active');
-      }
+    }
+    const cardMore = slide.querySelector('.card-more');
+    if (cardMore) {
+      cardMore.classList.add('active');
+    }
   }
 
-  // Initially set width to 600px for the first swiper-slide if its .card-more has .active class
-  const firstCardMore = swiperSlides[0].querySelector('.card-more');
-  if (firstCardMore && firstCardMore.classList.contains('active')) {
-      activateCardMore(swiperSlides[0]);
-  }
+  // Loop through all slides to find the first one with the 'active' class and activate it
+  swiperSlides.forEach(function(slide) {
+    const cardMore = slide.querySelector('.card-more');
+    if (cardMore && cardMore.classList.contains('active')) {
+      activateCardMore(slide);
+    }
+  });
 
   // Handle click on any card-click
   cardClicks.forEach(function(card) {
-      card.addEventListener('click', function() {
-          // Find the nearest swiper-slide parent
-          const swiperSlide = card.closest('.swiper-slide');
+    card.addEventListener('click', function() {
+      // Find the nearest swiper-slide parent
+      const swiperSlide = card.closest('.swiper-slide');
 
-          // Reset all slides and hide all card-mores
-          swiperSlides.forEach(function(slide) {
-              slide.style.width = ''; // Reset width
-              const cardMore = slide.querySelector('.card-more');
-              if (cardMore) {
-                  cardMore.classList.remove('active'); // Hide card-more
-              }
-          });
-
-          // Set width to 600px and show card-more for the clicked one
-          if (swiperSlide) {
-              activateCardMore(swiperSlide);
-          }
+      // Reset all slides and hide all card-mores
+      swiperSlides.forEach(function(slide) {
+        slide.style.width = ''; // Reset width
+        const cardMore = slide.querySelector('.card-more');
+        if (cardMore) {
+          cardMore.classList.remove('active'); // Hide card-more
+        }
       });
+
+      // Set width to 600px and show card-more for the clicked one if screen width is at least 768px
+      if (swiperSlide) {
+        activateCardMore(swiperSlide);
+      }
+    });
   });
 });
-
-
 
 
 

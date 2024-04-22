@@ -1889,12 +1889,28 @@ span.bread-inner {
 .prod-slide-card .rows{
   display: flex;
 }
+.prod-slide-card .card-prod-heading span {
+  display: block;
+  float: right;
+  font-size: 21px;
+  padding: 0;
+  margin: 0;
+}
 
 
 /* ============ Responsive ==============*/
 /* Mobile */
 
 @media only screen and (max-width: 767.9px){
+
+  .prod-slide-card .rows {
+    display: unset;
+  }
+
+  .container-inner .slider {
+    width: calc(320em/16);
+    height: unset;
+   }
 
   p.social {
     margin: unset;
