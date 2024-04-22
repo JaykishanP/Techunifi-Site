@@ -492,7 +492,7 @@ section {
   left: 38%;
 }
 
-.sale-text h5 {
+.sale-text h1 {
   font-weight: 900;
   font-size: 28px;
   color: #34465A;
@@ -1886,6 +1886,9 @@ span.bread-inner {
 .card-more.active {
   display: block;
 }
+.prod-slide-card .rows{
+  display: flex;
+}
 
 
 /* ============ Responsive ==============*/
@@ -1954,7 +1957,7 @@ section.sub-tab-section {
     top: 38%;
     left: 9%;
   }
-  .sale-text h5 {
+  .sale-text h1 {
     font-size: 12px;
     line-height: 14px;
     letter-spacing: 0.6px;
@@ -2344,7 +2347,7 @@ section.ticket-form {
   top: 51%;
   left: 7%;
 }
-.sale-text h5 {
+.sale-text h1 {
   font-size: 24px;
 }
 
@@ -2369,7 +2372,7 @@ section.ticket-form {
     left: 7%;
   }
 
-  .sale-text h5 {
+  .sale-text h1 {
     font-size: 24px;
   }
 
