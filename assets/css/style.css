@@ -488,15 +488,14 @@ section {
 
 .sale-text {
   position: absolute;
-  top: 40%;
-  left: 38%;
+  top: 43%;
+  right: 128px;
 }
 
 .sale-text h1 {
-  font-weight: 900;
   font-size: 28px;
   color: #34465A;
-  letter-spacing: 1.2px;
+  letter-spacing: 1.5px;
 }
 
 .sale-text p{
@@ -505,11 +504,13 @@ section {
 }
 
 .sale-text a{
-  color: #2A7AFF;
-  padding: 0;
-  text-decoration: underline;
-  font-size: 16px;
-  font-weight: 500;
+  border: var(--border);
+  border-radius: var(--border-radius);
+}
+
+.sale-text a:hover{
+  background-color: var(--black);
+  color: var(--gray);
 }
 
 .hero-logo {
@@ -1970,17 +1971,18 @@ section.sub-tab-section {
     font-size: 15px;
   }
   .sale-text {
-    top: 38%;
-    left: 9%;
+    top: 43%;
+    right: 11%;
   }
   .sale-text h1 {
-    font-size: 12px;
-    line-height: 14px;
+    font-size: 8px;
+    line-height: 10px;
     letter-spacing: 0.6px;
     margin: 0;
   }
   .sale-text a{
-    font-size: 13px;
+    font-size: 12px;
+    padding: 5px 15px;
   }
   .hero-logo {
     max-width: 86%;
@@ -2361,7 +2363,7 @@ section.ticket-form {
 }
 .sale-text {
   top: 51%;
-  left: 7%;
+  right: 9%;
 }
 .sale-text h1 {
   font-size: 24px;
@@ -2384,8 +2386,8 @@ section.ticket-form {
   }
 
   .sale-text {
-    top: 57%;
-    left: 7%;
+    top: 52%;
+    right: 9%;
   }
 
   .sale-text h1 {
