@@ -343,6 +343,41 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+/* ==== Home to News - About Page ==== */
+
+document.addEventListener('DOMContentLoaded', function() {
+  var urlParams = new URLSearchParams(window.location.search);
+  var tabParam = urlParams.get('tab');
+  if (tabParam === 'news') {
+    openTab(null, 'tab2'); // Assuming 'tab2' is the ID of the News tab
+    var tabLinks = document.getElementsByClassName('tablinks');
+    for (var i = 0; i < tabLinks.length; i++) {
+      if (tabLinks[i].getAttribute('data-tab') === 'tab2') {
+        tabLinks[i].classList.add('active');
+        break; // Stop looping once the News tab link is found
+      }
+    }
+  }
+});
+
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].classList.remove("active"); // Remove active class from all tab links
+  }
+  document.getElementById(tabName).style.display = "block";
+  if (evt) {
+    evt.currentTarget.classList.add("active"); // Add active class to the clicked tab link
+  }
+}
+
+
+/* === Scroll to about top === */
 //scroll to top on tab click
 $('.tablinks, .prod-tablinks').click(function(event) {
   event.preventDefault();
@@ -850,7 +885,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Function to set width and activate card-more
   function activateCardMore(slide) {
     const screenWidth = window.innerWidth;
-    if (screenWidth >= 768) {
+    if (screenWidth >= 1024) {
       slide.style.width = '600px';
     }
     const cardMore = slide.querySelector('.card-more');
@@ -859,13 +894,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Loop through all slides to find the first one with the 'active' class and activate it
-  swiperSlides.forEach(function(slide) {
-    const cardMore = slide.querySelector('.card-more');
-    if (cardMore && cardMore.classList.contains('active')) {
-      activateCardMore(slide);
-    }
-  });
+  // Set width and activate card-more for the first slide by default
+  activateCardMore(swiperSlides[0]);
 
   // Handle click on any card-click
   cardClicks.forEach(function(card) {
@@ -891,6 +921,41 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+
+/* === Chevron === */
+
+document.addEventListener('DOMContentLoaded', function() {
+  const cardClicks = document.querySelectorAll('.card-click');
+
+  // Set card-chev-right to display:block and card-chev-down to display:none by default
+  cardClicks.forEach(function(card) {
+      const cardChevRight = card.querySelector('.card-chev-right');
+      const cardChevDown = card.querySelector('.card-chev-down');
+      cardChevRight.style.display = 'block';
+      cardChevDown.style.display = 'none';
+  });
+
+  // Handle click on any card-click
+  cardClicks.forEach(function(card) {
+      card.addEventListener('click', function() {
+          // Toggle the display property of card-chev-right and card-chev-down for the clicked card
+          const cardChevRight = card.querySelector('.card-chev-right');
+          const cardChevDown = card.querySelector('.card-chev-down');
+          cardChevRight.style.display = 'none';
+          cardChevDown.style.display = 'block';
+
+          // Reset all other cards to default state
+          cardClicks.forEach(function(otherCard) {
+              if (otherCard !== card) {
+                  const otherCardChevRight = otherCard.querySelector('.card-chev-right');
+                  const otherCardChevDown = otherCard.querySelector('.card-chev-down');
+                  otherCardChevRight.style.display = 'block';
+                  otherCardChevDown.style.display = 'none';
+              }
+          });
+      });
+  });
+});
 
 
 /* ==== Event Close ==== */
@@ -924,19 +989,5 @@ document.addEventListener('DOMContentLoaded', function() {
 //       }
 //   });
 // });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
