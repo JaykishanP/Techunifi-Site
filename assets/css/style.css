@@ -1894,7 +1894,8 @@ span.bread-inner {
 }
 
 .card-brand-img {
-  max-width: 80%;
+  height: 215px;
+  object-fit: contain;
 }
 
 .slider-overlay {
