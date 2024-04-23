@@ -1881,6 +1881,50 @@ span.bread-inner {
   position: relative;
   background-color: #ededed;
 }
+/* Slider Overlay */
+.card-overlay-main {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.card-brand-img {
+  max-width: 80%;
+}
+
+.slider-overlay {
+  position: absolute;
+  bottom: 0; 
+  left: 0;
+  width: 100%;
+  height: 0; 
+  padding: 20px 20px 0;
+  margin-top: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--black);
+  overflow: hidden;
+  transition: height 0.3s ease; 
+}
+
+.slider-overlay h2,
+.slider-overlay p {
+  margin: 0;
+}
+
+.card-overlay-main:hover .slider-overlay {
+  height: 100%; 
+}
+
+.overlay-slider-text{
+  padding-top: 15px;
+}
+
+/* Product Slider Accordion */
 .card-more {
   display: none; 
 }
@@ -2254,6 +2298,19 @@ section.ticket-form {
 
 /* Ipad Mini - Air */
 @media only screen and (min-width: 768px) and (max-width: 1023px){
+
+  .prod-slide-card .rows {
+    display: unset;
+  }
+
+  .container-inner .slider {
+    height: unset;
+   }
+
+   .container-inner .slider__listItem{
+    height: auto;
+   }
+
   .what-we-do p {
     max-width: 300px;
   }
@@ -2500,10 +2557,10 @@ section.ticket-form {
   
   .prod-prev-button, .prod-next-button {
     border: none;
-    color: black;
+    color: var(--orange);
     cursor: pointer;
     padding: 7px;
-    font-size: 20px;
+    font-size: 30px;
     position: relative;
     display: inline-block;
   }
