@@ -1746,7 +1746,7 @@ span.bread-inner {
 }
 
 .container-inner .slider {
-   margin: 0 auto 0 0;
+   margin: 0 auto 10px 0;
    width: calc(300em/16);
    height: calc(314em/16);
    overflow: visible;
