@@ -1900,16 +1900,17 @@ span.bread-inner {
 
 .slider-overlay {
   position: absolute;
-  bottom: 0; 
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 0; 
+  height: 0;
   padding: 20px 20px 0;
   margin-top: 10px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background: linear-gradient(#fff, transparent, transparent, #fff, #fff);
+  backdrop-filter: blur(8px);
   color: var(--black);
   overflow: hidden;
-  transition: height 0.3s ease; 
+  transition: height 0.3s ease;
 }
 
 .slider-overlay h2,
