@@ -1910,7 +1910,7 @@ span.bread-inner {
   backdrop-filter: blur(8px);
   color: var(--black);
   overflow: hidden;
-  transition: height 0.3s ease;
+  transition: height 0.5s ease;
 }
 
 .slider-overlay h2,
