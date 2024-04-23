@@ -1811,7 +1811,7 @@ span.bread-inner {
   margin-bottom: 0;
 }
 .slider__listItem:hover {
-  box-shadow: 0 0 2px 0 var(--black);
+  box-shadow: 1px 2px 2px 0 var(--black);
 }
 .prod-slide-card .card-thumbnail {
   font-size: 16px;
