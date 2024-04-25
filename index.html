@@ -480,7 +480,11 @@
 
               <div class="row">
                 <div class="col-md-6">
-                  <label for="phone">Company Phone</label>
+                  <label for="phone" class="form-submit-tooltip">Company Phone
+                    <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="⍰ This number serves as both contact information and a case code. In case this number stops being serviced, we can still contact you via your mobile number.">
+                      <i class="bi bi-question-circle"></i>
+                    </span>
+                  </label>
                   <input  id="phone" maxlength="40" name="phone" size="20" type="text"/>
                 </div>
                 <div class="col-md-6">
@@ -500,6 +504,44 @@
 
             </div>
             
+            <div class="submit-sub-section submit-ticket-info aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
+
+              <div class="row cont-row-head">
+                <div class="col-md-12">
+                    <h4>Address</h4>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <label for="street">Street</label>
+                  <textarea rows="2" name="street"></textarea>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="city">City</label>
+                  <input  id="city" maxlength="40" name="city" size="20" type="text"/>
+                </div>
+                <div class="col-md-4">
+                  <label for="state">State/Province</label>
+                  <input  id="state" maxlength="20" name="state" size="20" type="text"/>
+                </div>
+                <div class="col-md-4">
+                  <label for="zip">Zip</label>
+                  <input  id="zip" maxlength="20" name="zip" size="20" type="text"/>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 home-contact-submit">
+                  <input type="submit" name="submit" value="Submit An Inquiry">
+                </div>
+              </div>
+
+            </div>
+
             <div class="submit-sub-section submit-ticket-info aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
 
               <div class="row cont-row-head">
@@ -542,27 +584,6 @@
                 </div>
               </div>
 
-              <div class="row">
-                <div class="col-md-12">
-                  <label for="street">Street</label>
-                  <textarea rows="2" name="street"></textarea>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-4">
-                  <label for="city">City</label>
-                  <input  id="city" maxlength="40" name="city" size="20" type="text"/>
-                </div>
-                <div class="col-md-4">
-                  <label for="state">State/Province</label>
-                  <input  id="state" maxlength="20" name="state" size="20" type="text"/>
-                </div>
-                <div class="col-md-4">
-                  <label for="zip">Zip</label>
-                  <input  id="zip" maxlength="20" name="zip" size="20" type="text"/>
-                </div>
-              </div>
 
               <div class="row">
                 <div class="col-md-12 home-contact-submit">
@@ -571,7 +592,6 @@
               </div>
 
             </div>
-
                   
             </form>
             
