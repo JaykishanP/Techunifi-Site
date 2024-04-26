@@ -1492,7 +1492,7 @@ section.ticket-form {
   margin: 0 0 3px 0;
 }
 
-.ticket-form form label.form-submit-tooltip {
+.ticket-form form .form-submit-tooltip {
   display: flex;
   justify-content: space-between;
 }
@@ -1516,11 +1516,6 @@ section.ticket-form {
   position: relative;
   border-radius: 15px;
 }
-
-/* .submitPage .tooltip .tooltip-inner::first-letter, 
-.homePage .tooltip .tooltip-inner::first-letter{
-  color: #2A7AFF;
-} */
 
 .submitPage .tooltip .tooltip-inner::before,
 .homePage .tooltip .tooltip-inner::before {
@@ -1553,6 +1548,35 @@ section.ticket-form {
 .bs-tooltip-auto[data-popper-placement^=top] .tooltip-arrow::before, .bs-tooltip-top .tooltip-arrow::before{
   border-top-color: #2A7AFF;
 }
+
+.mathTooltip{
+  display: flex;
+  gap: 10px;
+}
+
+.mathTooltip span{
+  color: #2A7AFF;
+  position: relative;
+}
+
+.mathTooltip span::after {
+  content: "";
+}
+
+.mathTooltip span:hover::after {
+  content: "This is a way for us to verify your submission. We want to secure our entries.";
+  padding: 15px;
+  color: var(--black);
+  border: 1px solid #2a7aff;
+  border-radius: 15px;
+  width: 300px;
+  position: absolute;
+  top: -34px;
+  margin: 0 0 0 10px;
+  background-color: #fff;
+  box-shadow: 0 1px 10px 0 rgb(0 0 0 / .2),0 6px 9px 0 rgb(0 0 0 / .1);
+}
+
 
 .form-parent {
   max-width: 1086px;
@@ -2017,6 +2041,12 @@ span.bread-inner {
     max-width: 86%;
   }
 
+  .mathTooltip span:hover::after {
+    padding: 10px;
+    left: -109px;
+    top: -106px;
+}
+
   .prod-slide-card .rows {
     display: unset;
   }
@@ -2025,6 +2055,7 @@ span.bread-inner {
     width: calc(320em/16);
     height: unset;
    }
+
 
   p.social {
     margin: unset;
