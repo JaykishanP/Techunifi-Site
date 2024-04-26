@@ -2227,10 +2227,10 @@ section.sub-tab-section {
    color: var(--black);
   }
   .sub-tab2-section .ticket-form form select{
-    min-height: 147px;
+    min-height: unset;
   }
   .ticket-form select.contact-form-home{
-    min-height: 170px;
+    min-height: unset;
   }
   .contact-submit {
     padding: 0 15px;
