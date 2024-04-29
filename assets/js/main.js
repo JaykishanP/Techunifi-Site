@@ -312,6 +312,13 @@ function toggleUnderline(event) {
 // });
 
 
+/* ===== domain/index.html ===== */
+$(document).ready(function() {
+  if (window.location.pathname === '/index.html') {
+      window.location.replace('/');
+  }
+});
+
 
 /* ====== About tabs ====== */
 // Tabs
