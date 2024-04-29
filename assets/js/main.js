@@ -321,11 +321,11 @@ $(document).ready(function() {
     const mobileMetaTags = $('[id^="mobile_"]');
     
     if (screenWidth >= 1024) {
-      desktopMetaTags.css('display', 'inline');
+      desktopMetaTags.css('display', 'block');
       mobileMetaTags.css('display', 'none');
     } else {
       desktopMetaTags.css('display', 'none');
-      mobileMetaTags.css('display', 'inline');
+      mobileMetaTags.css('display', 'block');
     }
   }
 
