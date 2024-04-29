@@ -312,6 +312,28 @@ function toggleUnderline(event) {
 // });
 
 
+/* ===== Meta OG ===== */
+$(document).ready(function() {
+  // Function to set meta tags based on screen size
+  function setMetaTags() {
+    const screenWidth = window.innerWidth;
+    const desktopMetaTags = $('[id^="desktop_"]');
+    const mobileMetaTags = $('[id^="mobile_"]');
+    
+    if (screenWidth >= 1024) {
+      desktopMetaTags.css('display', 'inline');
+      mobileMetaTags.css('display', 'none');
+    } else {
+      desktopMetaTags.css('display', 'none');
+      mobileMetaTags.css('display', 'inline');
+    }
+  }
+
+  // Call the function initially and on window resize
+  setMetaTags();
+  $(window).resize(setMetaTags);
+});
+
 /* ===== domain/index.html ===== */
 $(document).ready(function() {
   if (window.location.pathname === '/index.html') {

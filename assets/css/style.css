@@ -54,28 +54,6 @@ img{
   max-width: 100%;
 }
 
-/* For desktop */
-@media (min-width: 1024px) {
-  meta[property="og:image:secure_url"][content*="mobile"] {
-    display: none;
-  }
-  meta[name="twitter:image"][content*="mobile"] {
-    display: none;
-  }
-}
-
-/* For mobile */
-@media (max-width: 1023px) {
-  meta[property="og:image:secure_url"][content*="desktop"] {
-    display: none;
-  }
-  meta[name="twitter:image"][content*="desktop"] {
-    display: none;
-  }
-}
-
-
-
 @media (min-width: 1200px){
   .container {
     max-width: 1110px !important;
