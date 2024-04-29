@@ -209,3 +209,25 @@ $('.brand-tablinks').click(function(event) {
 
   $('html,body').animate({scrollTop:0}, 400); 
 });
+
+/* ===== Meta OG ===== */
+$(document).ready(function() {
+  // Function to set meta tags based on screen size
+  function setMetaTags() {
+    const screenWidth = window.innerWidth;
+    const desktopMetaTags = $('[id^="desktop_"]');
+    const mobileMetaTags = $('[id^="mobile_"]');
+    
+    if (screenWidth >= 1024) {
+      desktopMetaTags.css('display', 'block');
+      mobileMetaTags.css('display', 'none');
+    } else {
+      desktopMetaTags.css('display', 'none');
+      mobileMetaTags.css('display', 'block');
+    }
+  }
+
+  // Call the function initially and on window resize
+  setMetaTags();
+  $(window).resize(setMetaTags);
+});
