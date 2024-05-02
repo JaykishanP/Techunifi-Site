@@ -44,6 +44,8 @@
 
   <!-- Script JS  -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Captcha CDN -->
+    <script src="https://www.google.com/recaptcha/api.js"></script> 
 </head>
 <body class="submitPage">
     
@@ -505,6 +507,18 @@
                                 <span><i class="bi bi-question-circle"></i></span>
                               </div>
                                 <input id="mathSum" name="mathSum" type="number"/>
+                            </div>
+                          </div>
+
+                          <!-- Captcha -->
+
+                          <div class="row">
+                            <div class="col-md-12">
+                              <input type=hidden name='captcha_settings' value='{"keyname":"Techunifi","fallback":"true","orgId":"00DHo000002fpJX","ts":""}'> 
+                              <input type=hidden name="orgid" value="00DHo000002fpJX"> 
+                              <input type=hidden name="retURL" value="http://">
+                              <div class="g-recaptcha" data-sitekey="6Le2c80pAAAAANYomOizpC1vYiY1ekPRnxV3hJOb"></div><br> 
+                              <input type="submit" name="submit"> 
                             </div>
                           </div>
                           
