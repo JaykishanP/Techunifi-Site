@@ -469,9 +469,14 @@ section {
   margin: 0 auto;
 }
 
+.event-anchor {
+  margin: 100px 0;
+  display: block;
+}
+
 .event-section{
   position: relative;
-  padding: 100px 0 100px 0;
+  /* padding: 100px 0 100px 0; */
 }
 
 .event-close {
@@ -1532,8 +1537,10 @@ section.ticket-form {
   color: var(--black);
   box-shadow: 0 1px 10px 0 rgb(0 0 0 / .2),0 6px 9px 0 rgb(0 0 0 / .1);
   padding: 15px 5px 15px 36px;
-  max-width: 30%;
-  margin: 0 auto;
+  /* width: 100%;
+  margin: 0 auto; */
+  width: max-content; 
+max-width: 400px;
   font-size: 16px;
   letter-spacing: 0.5px;
   border: 1px solid #2A7AFF;
@@ -2063,7 +2070,7 @@ span.bread-inner {
 
   .submitPage .tooltip .tooltip-inner,
   .homePage .tooltip .tooltip-inner {
-    max-width: 86%;
+    max-width: 300px;
   }
 
   .mathTooltip span:hover::after {
@@ -2132,7 +2139,11 @@ section.sub-tab-section {
     padding: 45px 0 0 0;
   }
   .event-section{
-    padding: 0px 0 50px 0;
+    /* padding: 0px 0 50px 0; */
+  }
+  .event-anchor {
+    margin: 0 0 50px 0;
+    display: block;
   }
   .event-close {
     right: 21px;
@@ -2460,7 +2471,12 @@ section.ticket-form {
 
   .submitPage .tooltip .tooltip-inner,
   .homePage .tooltip .tooltip-inner{
-    max-width: 53%;
+    max-width: 700px;
+    margin: 0 0 0 20px;
+  }
+
+  label {
+    font-size: 15px;
   }
 
   .prod-slide-card .rows {
