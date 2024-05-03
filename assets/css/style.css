@@ -476,7 +476,7 @@ section {
 
 .event-section{
   position: relative;
-  /* padding: 100px 0 100px 0; */
+  padding: 20px 0;
 }
 
 .event-close {
@@ -497,7 +497,7 @@ section {
 
 .sale-text {
   position: absolute;
-  top: 31%;
+  top: 18%;
   right: 76px;
 }
 
@@ -2152,7 +2152,7 @@ section.sub-tab-section {
   }
   .sale-text {
     top: 8%;
-    right: 18%;
+    right: 16%;
   }
   .sale-text h1 {
     font-size: 21px;
@@ -2606,8 +2606,8 @@ section.ticket-form {
   font-size: 20px;
 }
 .sale-text {
-  top: 27%;
-  right: 33%;
+  top: 17%;
+  right: 30%;
 }
 
 
@@ -2628,8 +2628,8 @@ section.ticket-form {
   }
 
   .sale-text {
-    top: 26%;
-    right: 37%;
+    top: 19%;
+    right: 35%;
   }
 
   .event-section .hero-banner-img {
@@ -2670,6 +2670,14 @@ section.ticket-form {
   left: 44%;
 }
 
+}
+
+/* 992 - 1023 */
+@media only screen and (min-width: 992px) and (max-width: 1023.9px){
+  .sale-text {
+    top: 19%;
+    right: 45%;
+  }
 }
 
 /* Homeslider */
