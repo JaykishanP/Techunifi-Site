@@ -568,7 +568,7 @@
 
               <div class="row">
 
-                <div class="col-md-9">
+                <div class="col-md-7">
                   <label>Type of Business</label>
                   <select class="ticket-business-select" id="00NHo00000XG1NV" name="00NHo00000XG1NV" title="Type">
                     <option value="">--None--</option>
@@ -579,17 +579,25 @@
                   </select>
                 </div>
 
-                <div class="col-md-3">
-                  <label>Number of Rooms</label>
-                  <input id="00NHo00000XG1Nf" placeholder="5" name="00NHo00000XG1Nf" size="20" type="text" />
+                <div class="col-md-5">
+                  <label class="form-submit-tooltip">Number of Rooms/Apartments
+                    <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="If you have a multi unit property provide the number of Rooms/Apts./units of your business. This helps us understand the scope of work and the scale of the property.">
+                      <i class="bi bi-question-circle"></i>
+                    </span>
+                  </label>
+                  <input class="not-required" id="00NHo00000XG1Nf" placeholder="5" name="00NHo00000XG1Nf" size="20" type="text" />
                 </div>
 
               </div>
 
          
               <div class="row">
-                <div class="col-md-3">
-                  <label>Service Needed</label>
+                <div class="col-md-4">
+                  <label class="form-submit-tooltip">Service Needed
+                    <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="You may select one or more of our services">
+                      <i class="bi bi-question-circle"></i>
+                    </span>
+                  </label>
 
               <select class="contact-form-home" id="00NHo00000XG1Na" multiple="multiple" name="00NHo00000XG1Na" title="Service Needed">
                 <option value="EV Charging">EV Charging</option>
@@ -604,8 +612,13 @@
 
                 </div>
 
-                <div class="col-md-9">
-                  <label for="description">Description</label>
+                <div class="col-md-8">
+                  <label for="description" class="form-submit-tooltip">Description
+                    <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="Provide clear details on what we can help with. We will use this information to help guide our discovery call.">
+                      <i class="bi bi-question-circle"></i>
+                    </span>
+
+                  </label>
                   <textarea name="description" rows="7" placeholder="Implementation of audiovisual (AV) facilities"></textarea>
 
                 </div>
