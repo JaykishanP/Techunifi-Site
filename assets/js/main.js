@@ -997,8 +997,69 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 })
 
 
-/* ==== Mobile Overlay Slider ==== */
+/* ==== Product Accordion Approach ==== */
+/* ==== Card Width ==== */
+document.addEventListener('DOMContentLoaded', function() {
+  const swiperSlides = document.querySelectorAll('.swiper-slide');
+  const cardClicks = document.querySelectorAll('.card-click');
 
+  // Function to reset width and hide/show card-more and card-chev-right
+  function toggleCardDetails(slide, showDetails) {
+    const screenWidth = window.innerWidth;
+    const cardMore = slide.querySelector('.card-more');
+    const cardChevRight = slide.querySelector('.card-click .card-chev-right');
+    const cardCollapseContent = slide.querySelector('.card-collapse-content');
+
+    if (cardMore && cardChevRight && cardCollapseContent) {
+      if (showDetails) {
+        if (screenWidth >= 1024) {
+          slide.style.width = '600px'; // Set width to show card-more
+        }
+        cardMore.classList.add('active'); // Show card-more
+        cardChevRight.classList.add('hidden'); // Hide card-chev-right
+        cardCollapseContent.style.maxHeight = cardCollapseContent.scrollHeight + 'px'; // Expand content
+      } else {
+        slide.style.width = ''; // Reset width
+        cardMore.classList.remove('active'); // Hide card-more
+        cardChevRight.classList.remove('hidden'); // Show card-chev-right
+        cardCollapseContent.style.maxHeight = null; // Collapse content
+      }
+    }
+  }
+
+  // Set width and activate card-more for the first slide by default
+  toggleCardDetails(swiperSlides[0], true);
+
+  // Handle click on any card-click
+  cardClicks.forEach(function(card) {
+    card.addEventListener('click', function() {
+      // Find the nearest swiper-slide parent
+      const swiperSlide = card.closest('.swiper-slide');
+
+      // Reset all slides and hide all card-mores
+      swiperSlides.forEach(function(slide) {
+        toggleCardDetails(slide, false);
+      });
+
+      // Show/hide card-more and reset width for the clicked one
+      if (swiperSlide) {
+        toggleCardDetails(swiperSlide, true);
+      }
+    });
+  });
+
+  // Handle click on card-more to close it
+  swiperSlides.forEach(function(slide) {
+    const cardMore = slide.querySelector('.card-more');
+    if (cardMore) {
+      cardMore.addEventListener('click', function(event) {
+        event.stopPropagation(); // Prevent click event from bubbling up to the card-click
+        const swiperSlide = cardMore.closest('.swiper-slide');
+        toggleCardDetails(swiperSlide, false);
+      });
+    }
+  });
+});
 
 
 /* ==== Event Close ==== */
