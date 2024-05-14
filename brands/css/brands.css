@@ -186,7 +186,7 @@ section.brands-tab-section {
 .color-img {
   display: flex;
   gap: 20px;
-  align-items: center;
+  align-items: flex-start;
 }
 .color-img p {
   margin: 0;
