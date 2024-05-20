@@ -1239,6 +1239,21 @@ ul.list-unstyled.connect-details {
   padding: 20px 0 15px 0;
 }
 
+.news-content p a {
+  padding: 0;
+  font-size: 16px;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  text-underline-offset: 2px;
+  color: var(--black);
+}
+.video-baps{
+  text-align: center;
+}
+.video-baps iframe{
+  height: 290px;
+  width: 700px;
+}
 .expand summary {
   color: #2A7AFF;
 }
@@ -2141,7 +2156,10 @@ ul.sub-card-text {
 /* Mobile */
 
 @media only screen and (max-width: 767.9px){
-
+.video-baps iframe {
+    height: 290px;
+    width: auto;
+  }
   .submitPage .tooltip .tooltip-inner,
   .homePage .tooltip .tooltip-inner,
   .dashboardPage .tooltip .tooltip-inner {
@@ -2493,8 +2511,15 @@ section.ticket-form {
 }
 
 }
-
-
+@media only screen and (max-width: 400px){
+  .video-baps{
+    text-align: center;
+  }
+  .video-baps iframe{
+    height: auto;
+    max-width: 273px;
+  }
+}
 @media only screen and (min-width: 390px) and (max-width: 450px){
   .sale-text {
     top: 15%;
@@ -2511,7 +2536,10 @@ section.ticket-form {
 
 /* Higher Mobile */
 @media only screen and (min-width: 601px) and (max-width: 767px){
-
+ .video-baps iframe {
+    height: 290px;
+    width: auto;
+  }
    .hero-sub .col-container {
       display: contents;
    }
@@ -2536,7 +2564,13 @@ section.ticket-form {
 
 /* Ipad Mini - Air */
 @media only screen and (min-width: 768px) and (max-width: 1023px){
+.video-baps{
+  text-align: center;
+}
 
+.video-baps iframe{
+  width: 500px;
+}
   .submitPage .tooltip .tooltip-inner,
   .homePage .tooltip .tooltip-inner,
   .dashboardPage .tooltip .tooltip-inner{
@@ -2695,7 +2729,12 @@ section.ticket-form {
 
 /* Ipad Pro */
 @media only screen and (min-width: 1024px) and (max-width: 1199.9px){
-  
+  .video-baps{
+    text-align: center;
+  }
+  .video-baps iframe{
+    width: 500px;
+  }
   .logo {
     margin-right: 0rem;
   }
