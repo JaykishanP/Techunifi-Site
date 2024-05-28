@@ -1095,3 +1095,42 @@ document.addEventListener('DOMContentLoaded', function() {
 // });
 
 
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.card-more .card-get-link').forEach(function(link) {
+    link.addEventListener('click', function(event) {
+      event.preventDefault();
+      console.log('Card link clicked'); // Debugging statement
+
+      // Find the corresponding card's description
+      const card = event.target.closest('.rows');
+      const description = card.querySelector('.card-click .card-prod-heading').textContent.trim();
+      console.log('Description:', description); // Debugging statement
+
+      // Save the description to sessionStorage
+      sessionStorage.setItem('cardDescription', description);
+
+      // Redirect to submit.html with activeTab parameter
+      window.location.href = event.target.href;
+    });
+  });
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Check if there is a description saved in sessionStorage
+  const description = sessionStorage.getItem('cardDescription');
+  console.log('Loaded Description:', description); // Debugging statement
+  if (description) {
+    // Fill the Description textarea
+    const descriptionTextarea = document.querySelector('textarea[name="description"]');
+    if (descriptionTextarea) {
+      descriptionTextarea.value = description;
+      console.log('Textarea filled with description'); // Debugging statement
+    }
+
+    // Optionally, you can clear the saved description from sessionStorage
+    sessionStorage.removeItem('cardDescription');
+  }
+});
+
