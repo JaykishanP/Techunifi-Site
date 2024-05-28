@@ -1095,36 +1095,3 @@ document.addEventListener('DOMContentLoaded', function() {
 // });
 
 
-/* ==== ==== */
-document.querySelectorAll('.card-more .card-get-link').forEach(function(link) {
-  link.addEventListener('click', function(event) {
-    event.preventDefault();
-
-    // Find the corresponding card's description
-    const card = event.target.closest('.card');
-    const description = card.querySelector('.card-click .card-prod-heading').textContent;
-
-    // Save the description to sessionStorage
-    sessionStorage.setItem('cardDescription', description);
-
-    // Redirect to submit.html with activeTab parameter
-    window.location.href = 'submit.html?activeTab=newInquiry';
-  });
-});
-
-
-document.addEventListener('DOMContentLoaded', function() {
-  // Check if there is a description saved in sessionStorage
-  const description = sessionStorage.getItem('cardDescription');
-  if (description) {
-    // Fill the Description textarea
-    const descriptionTextarea = document.querySelector('textarea[name="description"]');
-    if (descriptionTextarea) {
-      descriptionTextarea.value = description;
-    }
-
-    // Optionally, you can clear the saved description from sessionStorage
-    sessionStorage.removeItem('cardDescription');
-  }
-});
-
