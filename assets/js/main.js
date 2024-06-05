@@ -405,6 +405,38 @@ function openTab(evt, tabName) {
   }
 }
 
+/* ==== Home to ClientList - About Page ==== */
+document.addEventListener('DOMContentLoaded', function() {
+  var urlParams = new URLSearchParams(window.location.search);
+  var tabParam = urlParams.get('tab');
+  if (tabParam === 'clientList') {
+    openTab(null, 'tab4'); // Assuming 'tab2' is the ID of the News tab
+    var tabLinks = document.getElementsByClassName('tablinks');
+    for (var i = 0; i < tabLinks.length; i++) {
+      if (tabLinks[i].getAttribute('data-tab') === 'tab4') {
+        tabLinks[i].classList.add('active');
+        break; // Stop looping once the News tab link is found
+      }
+    }
+  }
+});
+
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].classList.remove("active"); // Remove active class from all tab links
+  }
+  document.getElementById(tabName).style.display = "block";
+  if (evt) {
+    evt.currentTarget.classList.add("active"); // Add active class to the clicked tab link
+  }
+}
+
 
 /* === Scroll to about top === */
 //scroll to top on tab click
@@ -418,29 +450,65 @@ $('.tablinks, .prod-tablinks').click(function(event) {
 /* ====== Product ======*/
 //Product - Tabs
 
-function openProd(evt, cityName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("product-tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("prod-tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
-}
+document.addEventListener('DOMContentLoaded', function() {
+  // Function to handle tab clicks
+  function openProd(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("product-tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+      tabcontent[i].classList.remove("active");
+    }
+    tablinks = document.getElementsByClassName("prod-tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].classList.remove("active"); // Remove active class from all tab links
+    }
 
-// Get the element with id="defaultOpen" and click on it
-// document.getElementById("productOpen").click();
+    var cityElement = document.getElementById(cityName);
+    if (cityElement) {
+      cityElement.style.display = "block";
+      cityElement.classList.add("active");
+    }
+
+    // Add active class to the clicked tab button
+    evt.currentTarget.classList.add("active");
+  }
+
+  // Find and handle the overview tab
+  var productOpenButton = document.getElementById("productOpen");
+  var overviewTabContent = document.getElementById("tab-overview");
+
+  if (productOpenButton && overviewTabContent) {
+    productOpenButton.classList.add("active"); // Add active class to Overview tab button
+    overviewTabContent.style.display = "block"; // Ensure Overview content is visible
+    overviewTabContent.classList.add("active"); // Add active class to Overview tab content
+  }
+
+  // Adding event listeners to all tab buttons
+  var tabButtons = document.querySelectorAll(".prod-tablinks");
+  tabButtons.forEach(function(button) {
+    button.addEventListener("click", function(event) {
+      var isActive = button.classList.contains("active");
+      if (!isActive || button.id === "productOpen") {
+        openProd(event, button.getAttribute("id").replace("prod-", ""));
+      }
+    });
+  });
+});
 
 document.addEventListener('DOMContentLoaded', function() {
-  var productOpenButton = document.getElementById("productOpen");
-  if (productOpenButton) {
-    productOpenButton.click();
-  } else {
-      // console.error("Element with ID 'defaultOpen' not found.");
+  var overviewTabButton = document.getElementById("productOpen");
+  var overviewTabContent = document.getElementById("tab-overview");
+
+  if (overviewTabButton && overviewTabContent) {
+    overviewTabButton.addEventListener("click", function(event) {
+      if (!overviewTabButton.classList.contains("active")) {
+        overviewTabButton.classList.add("active");
+        overviewTabContent.style.display = "block";
+      } else {
+        overviewTabContent.style.display = "block"; // Ensure content is visible even if button is already active
+      }
+    });
   }
 });
 
@@ -999,17 +1067,18 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 
 /* ==== Product Accordion Approach ==== */
 /* ==== Card Width ==== */
+
 document.addEventListener('DOMContentLoaded', function() {
   const swiperSlides = document.querySelectorAll('.swiper-slide');
   const cardClicks = document.querySelectorAll('.card-click');
-
+ 
   // Function to reset width and hide/show card-more and card-chev-right
   function toggleCardDetails(slide, showDetails) {
     const screenWidth = window.innerWidth;
     const cardMore = slide.querySelector('.card-more');
     const cardChevRight = slide.querySelector('.card-click .card-chev-right');
     const cardCollapseContent = slide.querySelector('.card-collapse-content');
-
+ 
     if (cardMore && cardChevRight && cardCollapseContent) {
       if (showDetails) {
         if (screenWidth >= 1024) {
@@ -1026,31 +1095,31 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
   }
-
+ 
   // Set width and activate card-more for the first slide by default
   toggleCardDetails(swiperSlides[0], true);
-
+ 
   // Handle click on any card-click
   cardClicks.forEach(function(card) {
     card.addEventListener('click', function() {
       // Find the nearest swiper-slide parent
       const swiperSlide = card.closest('.swiper-slide');
-
+ 
       // Reset all slides and hide all card-mores
       swiperSlides.forEach(function(slide) {
         toggleCardDetails(slide, false);
       });
-
+ 
       // Show/hide card-more and reset width for the clicked one
       if (swiperSlide) {
         toggleCardDetails(swiperSlide, true);
       }
     });
   });
-
+ 
   // Handle click on card-more to close it
   swiperSlides.forEach(function(slide) {
-    const cardMore = slide.querySelector('.card-more');
+    const cardMore = slide.querySelector('.card-more .card-chev-right');
     if (cardMore) {
       cardMore.addEventListener('click', function(event) {
         event.stopPropagation(); // Prevent click event from bubbling up to the card-click
@@ -1060,7 +1129,151 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+ 
 
+/* ===== New How Works ===== */
+
+document.addEventListener('DOMContentLoaded', () => {
+  const sections = document.querySelectorAll('.new-how-main');
+  const options = {
+    root: null,
+    threshold: 0.6
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const activeSection = entry.target;
+        adjustAdjacentOpacity(activeSection);
+      }
+    });
+  }, options);
+
+  sections.forEach(section => observer.observe(section));
+
+  function adjustAdjacentOpacity(activeSection) {
+    sections.forEach(section => {
+      const h1Element = section.querySelector('h1');
+      const imgElement = section.querySelector('.col-md-5 img');
+      const pElement = section.querySelector('.col-md-5 p');
+      const isAdjacentSection = isAdjacent(activeSection, section);
+
+      if (section === activeSection) {
+        section.classList.add('active');
+        h1Element.style.color = '#EB6D47';
+        h1Element.style.opacity = '1';
+        imgElement.style.opacity = '1';
+        pElement.style.opacity = '1';
+      } else if (isAdjacentSection) {
+        section.classList.remove('active');
+        h1Element.style.color = '#313D53';
+        h1Element.style.opacity = '0.7';
+        imgElement.style.opacity = '0';
+        pElement.style.opacity = '0';
+      } else {
+        section.classList.remove('active');
+        h1Element.style.color = '#313D53';
+        h1Element.style.opacity = '0.32';
+        imgElement.style.opacity = '0';
+        pElement.style.opacity = '0';
+      }
+
+      [h1Element, imgElement, pElement].forEach(elem => {
+        elem.style.transition = 'opacity 0.7s ease, color 0.7s ease';
+      });
+    });
+  }
+
+  function isAdjacent(section1, section2) {
+    const index1 = Array.from(sections).indexOf(section1);
+    const index2 = Array.from(sections).indexOf(section2);
+    return Math.abs(index1 - index2) === 1;
+  }
+
+  sections.forEach(section => {
+    const h1Element = section.querySelector('h1');
+    const imgElement = section.querySelector('.col-md-5 img');
+    const pElement = section.querySelector('.col-md-5 p');
+
+    section.addEventListener('mouseover', () => {
+      if (!section.classList.contains('active')) {
+        h1Element.style.color = '#EB6D47';
+        h1Element.style.opacity = '1';
+        imgElement.style.opacity = '1';
+        pElement.style.opacity = '1';
+      }
+    });
+
+    section.addEventListener('mouseout', () => {
+      if (!section.classList.contains('active')) {
+        h1Element.style.color = '#313D53';
+        h1Element.style.opacity = '0.32';
+        imgElement.style.opacity = '0';
+        pElement.style.opacity = '0';
+      }
+    });
+  });
+});
+
+
+/* ===== Product heading to new Inquiry ===== */
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.card-more .card-get-link').forEach(function(link) {
+    link.addEventListener('click', function(event) {
+      event.preventDefault();
+
+      // Find the corresponding card's description
+      const card = event.target.closest('.rows');
+      const description = card.querySelector('.card-click .card-prod-heading').textContent.trim();
+
+      // Save the description to sessionStorage
+      sessionStorage.setItem('cardDescription', description);
+
+      // Redirect to submit.html with activeTab parameter
+      window.location.href = event.target.href;
+    });
+  });
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Check if there is a description saved in sessionStorage
+  const description = sessionStorage.getItem('cardDescription');
+  console.log('Loaded Description:', description); // Debugging statement
+  if (description) {
+    // Fill the Description textarea
+    const descriptionTextarea = document.querySelector('textarea[name="description"]');
+    if (descriptionTextarea) {
+      descriptionTextarea.value = description;
+    }
+
+    // Optionally, you can clear the saved description from sessionStorage
+    sessionStorage.removeItem('cardDescription');
+  }
+});
+
+
+/* ==== remove AOS for mobile(<1024) ==== */
+document.addEventListener('DOMContentLoaded', function() {
+  function removeAOSAttributes() {
+    const elements = document.querySelectorAll('[data-aos], [data-aos-delay]');
+    if (window.innerWidth < 1024) {
+      elements.forEach(element => {
+        element.removeAttribute('data-aos');
+        element.removeAttribute('data-aos-delay');
+      });
+    }
+  }
+
+  // Run the function on page load
+  removeAOSAttributes();
+
+  // Run the function on window resize
+  window.addEventListener('resize', function() {
+    removeAOSAttributes();
+  });
+});
 
 /* ==== Event Close ==== */
 
@@ -1094,43 +1307,4 @@ document.addEventListener('DOMContentLoaded', function() {
 //   });
 // });
 
-
-
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('.card-more .card-get-link').forEach(function(link) {
-    link.addEventListener('click', function(event) {
-      event.preventDefault();
-      console.log('Card link clicked'); // Debugging statement
-
-      // Find the corresponding card's description
-      const card = event.target.closest('.rows');
-      const description = card.querySelector('.card-click .card-prod-heading').textContent.trim();
-      console.log('Description:', description); // Debugging statement
-
-      // Save the description to sessionStorage
-      sessionStorage.setItem('cardDescription', description);
-
-      // Redirect to submit.html with activeTab parameter
-      window.location.href = event.target.href;
-    });
-  });
-});
-
-
-document.addEventListener('DOMContentLoaded', function() {
-  // Check if there is a description saved in sessionStorage
-  const description = sessionStorage.getItem('cardDescription');
-  console.log('Loaded Description:', description); // Debugging statement
-  if (description) {
-    // Fill the Description textarea
-    const descriptionTextarea = document.querySelector('textarea[name="description"]');
-    if (descriptionTextarea) {
-      descriptionTextarea.value = description;
-      console.log('Textarea filled with description'); // Debugging statement
-    }
-
-    // Optionally, you can clear the saved description from sessionStorage
-    sessionStorage.removeItem('cardDescription');
-  }
-});
 
