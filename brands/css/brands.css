@@ -45,7 +45,7 @@
   border: var(--border);
   border-radius: var(--border-radius);
   color: var(--gray);
-  background-color: var(--black);
+  background-color: var(--blue);
   padding: 8px 22px;
   letter-spacing: 2px;
   font-weight: 600;
@@ -80,7 +80,7 @@
   padding: 0;
 }
 .web-btn {
-  background-color: var(--black);
+  background-color: var(--blue);
   border-radius: var(--border-radius);
   border: var(--border);
   color: var(--gray);
@@ -135,7 +135,7 @@ section.brands-tab-section {
   padding: 80px 0 30px;
 }
 .brand-img-row .brand-tablinks{
-  background-color: var(--black);
+  background-color: var(--blue);
   color: var(--gray);
   border: var(--border);
   border-radius: var(--border-radius);
@@ -170,7 +170,7 @@ section.brands-tab-section {
   font-weight: 500;
 }
 .logo-para-button a:hover{
-  background-color: var(--black);
+  background-color: var(--blue);
   color: var(--gray);
 }
 .padding-above {
@@ -242,7 +242,7 @@ section.brands-tab-section {
   font-weight: 500;
 }
 .flyer-download:hover{
-  background-color: var(--black);
+  background-color: var(--blue);
   color: var(--gray);
 }
 .flyer-img {
