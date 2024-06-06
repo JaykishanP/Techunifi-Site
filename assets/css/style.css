@@ -2904,6 +2904,9 @@ section.sub-tab-section {
   .we-head h3 {
     padding: 0;
   }
+  .we-head h3 br{
+    display: none;
+  }
   section.howItworks{
     padding: 0;
   }
