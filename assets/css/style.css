@@ -3351,12 +3351,25 @@ section.ticket-form {
 .home-swipe-img-text {
   font-size: 12px;
 }
-
+.clients-home-img {
+  gap: 36px;
+  flex-wrap: wrap;
+}
+.home-clients-section .section-container {
+  margin: 30px 0 30px 0;
+}
 }
 
 
 /* Ipad Pro */
 @media only screen and (min-width: 1024px) and (max-width: 1199.9px){
+  .clients-home-img {
+    gap: 36px;
+    flex-wrap: wrap;
+  }
+  .home-clients-section .section-container {
+    margin: 30px 0 30px 0;
+  }
   .large-img-mega {
     display: flex;
     justify-content: center;
