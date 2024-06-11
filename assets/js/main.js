@@ -1055,7 +1055,29 @@ $(document).ready(function() {
 
 
   /* ==== Captcha Implementaion ==== */
-  function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500); 
+  // function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500); 
+
+  function timestamp() {
+    var response = document.getElementById("g-recaptcha-response");
+    if (response == null || response.value.trim() == "") {
+        var captchaSettingsInput = document.getElementsByName("captcha_settings")[0];
+        if (captchaSettingsInput) {
+            try {
+                var elems = JSON.parse(captchaSettingsInput.value);
+                elems["ts"] = new Date().getTime();
+                captchaSettingsInput.value = JSON.stringify(elems);
+            } catch (e) {
+                console.error('Failed to parse captcha_settings JSON or update timestamp:', e);
+            }
+        } else {
+            console.error('Element with name "captcha_settings" not found.');
+        }
+    }
+}
+
+// Run the timestamp function at 500ms intervals
+setInterval(timestamp, 500);
+
 
 
 /* ==== Tooltip ==== */
