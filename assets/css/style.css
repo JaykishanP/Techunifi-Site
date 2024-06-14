@@ -3704,3 +3704,46 @@ section.ticket-form {
   }
 
 }
+
+
+/* ==== 1200 - 1299 */
+
+@media only screen and (min-width: 1200px) and (max-width: 1299px){
+
+  .ev-charge-map .hoverImage {
+    max-width: 79.6px;
+    left: -2px;
+    top: -1px;
+  }
+  .telecom-map .hoverImage {
+    max-width: 30.7px;
+    left: 4px;
+    top: -3.8px;
+  }
+  .lightning-map .hoverImage {
+    max-width: 37px;
+    left: -12px;
+    top: -43px;
+  }
+  .network-map .hoverImage {
+    max-width: 158.6px;
+    left: 5px;
+    top: -8px;
+  }
+  .lowvoltage-map .hoverImage {
+    max-width: 269px;
+    left: -130px;
+    top: -235px;
+  }
+  .audivide-map .hoverImage {
+    max-width: 79px;
+    left: 30px;
+    top: -10px;
+  }
+  .security-map .hoverImage {
+    max-width: 211px;
+    left: -16px;
+    top: -43px;
+  }
+
+}
