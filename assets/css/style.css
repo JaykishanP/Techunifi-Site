@@ -2529,6 +2529,7 @@ span.hr-rule {
   display: inline-block;
 }
 /* Hover color */
+/* Hover color */
 .telecom-map .hoverImage {
   position: relative;
   max-width: 30.7px;
@@ -2600,6 +2601,8 @@ span.hr-rule {
     box-shadow: 0 0 0 6px rgba(255, 165, 0, 0.7); 
   }
 }
+
+
 
 
 
