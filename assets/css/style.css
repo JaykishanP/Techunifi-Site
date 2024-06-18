@@ -2704,7 +2704,20 @@ img.music-image {
   }
 }
 
+/* Header active */
+.menu-bar .underline,
+.aboutUsPage .menu-about,
+.productPage .menu-products{
+  color: var(--orange);
+  font-weight: 800;
+}
 
+.submitPage .menu-bar .raise-btn{
+  color: var(--orange);
+  font-weight: 800;
+  background-color: transparent;
+  border-color: var(--orange);
+}
 
 /* ============ Responsive ==============*/
 /* Mobile */
