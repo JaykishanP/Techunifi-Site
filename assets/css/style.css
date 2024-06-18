@@ -200,8 +200,7 @@ section {
 }
 
 #nav-menu.header-scrolled {
-  background: linear-gradient(#ededed, transparent, transparent, transparent);
-  backdrop-filter: blur(6px);
+  background: linear-gradient(#ededed, #ededed);
 }
 
 
@@ -1577,6 +1576,10 @@ section.ticket-form {
   border-right: 0;
 }
 
+.submitPage .sub-tab-section .tab button:hover {
+  font-weight: 800;
+}
+
 .sub-tab-section .tab button.active {
   border: 1px solid var(--black);
   border-radius: 50px;
@@ -1785,8 +1788,7 @@ section.thank-section {
 
 
 .productPage #nav-menu.header-scrolled {
-  background: linear-gradient(#ededed, transparent, transparent, transparent);
-  backdrop-filter: blur(6px);
+  background: linear-gradient(#ededed, #ededed, #ededed);
 }
 
 section.product-tab-section {
@@ -1801,9 +1803,8 @@ section.product-tab-section {
   top: 104px;
   left: 0;
   right: 0;
-  background: linear-gradient(transparent, transparent, transparent, transparent);
-  backdrop-filter: blur(6px);
   margin-top: -4px;
+  background: linear-gradient(#ededed, #ededed);
 }
 
 .bread-crumb-row {
@@ -1845,8 +1846,18 @@ section.product-tab-section {
   padding: 5px 0 0 0;
 }
 
+.product-tab button:hover p {
+  display: block;
+  margin: 0;
+  font-weight: 600;
+  padding: 7px 0 0 0;
+}
+
+.product-tab button:hover span{
+  font-weight: 800 !important;
+}
 .product-tab button.active span {
-  font-weight: 700;
+  font-weight: 700 !important;
   letter-spacing: 1px;
 }
 
@@ -1859,17 +1870,8 @@ section.product-tab-section {
   padding: 6px 12px;
 }
 
-.overview-tab-content {
-  text-align: center;
-}
-
 .overview-tab-content .submit-head-para{
   margin: 0;
-}
-
-.overview-tab-content .submit-head-para .prod-heading h3::before {
-  bottom: -15px;
-  left: 46%;
 }
 
 .overview-tab-content .tabs-para{
@@ -1890,13 +1892,29 @@ section.product-tab-section {
   color: var(--black);
 }
 
-.overview-tab-content .sub-Inquiry{
-  margin: 0 auto;
-}
 
 .overview-tab-content img {
   width: 73%;
   padding-top: 50px;
+}
+
+.overview-sketch{
+  text-align: center;
+}
+
+.overview-cont-col{
+  border-left: 3.4px solid var(--blue);
+  padding-left: 50px;
+}
+
+.overview-sketch img {
+  position: relative;
+  left: 24px;
+  max-width: 80%;
+}
+
+.overview-cont-col a.sub-Inquiry {
+  margin: 0 0 30px 0;
 }
 
 .coming-soon {
@@ -2079,10 +2097,15 @@ span.bread-inner {
 }
 .home-clients-slider .swiper-button-next:after, 
 .home-clients-slider .swiper-button-prev:after{
-  font-size: 30px;
+  font-size: 15px;
   font-weight: 800;
   position: relative;
   bottom: 30px;
+  border: 1px solid var(--orange);
+  padding: 7px;
+  /* border-radius: 100%; */
+  color: #fff;
+  background-color: var(--orange);
 }
 .cloud-img{
   padding-top: 35px;
@@ -2529,7 +2552,6 @@ span.hr-rule {
   display: inline-block;
 }
 /* Hover color */
-/* Hover color */
 .telecom-map .hoverImage {
   position: relative;
   max-width: 30.7px;
@@ -2604,8 +2626,6 @@ span.hr-rule {
 
 
 
-
-
 /* Product tab active bg color to orange */
 .prod-tablinks.active {
   border-bottom: 6px solid var(--orange);
@@ -2646,6 +2666,43 @@ span.hr-rule {
   letter-spacing: 1.5px;
   color: #2A7AFF;
 }
+img.music-image {
+  max-width: 97%;
+  margin: 0 auto;
+  display: block;
+}
+/* Form field focus */
+.ticket-form input:focus, .ticket-form textarea:focus, .ticket-form select:focus {
+  border-color: var(--black); 
+  outline: none; 
+  box-shadow: 0 0 5px rgba(235, 109, 71, 0.75); 
+  caret-color: var(--orange);
+}
+
+.ticket-form input, .ticket-form textarea {
+  padding-left: 0.2em; 
+}
+
+.ticket-form input:focus::after, .ticket-form textarea:focus::after {
+  content: '';
+  position: absolute;
+  width: 4px; 
+  height: 1.2em; 
+  background: linear-gradient(135deg, var(--orange), #ffb347); /* Gradient background for uniqueness */
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Slight border for better contrast */
+  animation: blink 1s step-end infinite; 
+  top: 0.1em; /* Adjust as necessary to align with text */
+  left: 0.5em; /* Starting position of the cursor */
+}
+
+@keyframes blink {
+  from, to {
+      background-color: transparent;
+  }
+  50% {
+      background: linear-gradient(135deg, var(--orange), #ffb347); /* Maintain gradient during blink */
+  }
+}
 
 
 
@@ -2675,13 +2732,16 @@ span.hr-rule {
     float: unset;
 }
   .news-home-section .news-rows {
-    margin: 15px 0 15px 0;
+    margin: 10px 0 0 0;
+    height: 95%;
+    padding: 20px 20px 18px 20px;
   }
   .news-home-section .home-news-heading h3 br {
     display: none;
   }
   .news-home-section .home-news-heading h3{
     font-size: 32px;
+    padding: 20px 0 0 0;
 }
 .contact .news-home-section .home-news-heading h3::before {
   z-index: 0;
@@ -3091,7 +3151,7 @@ section.sub-tab-section {
 }
 
 #nav-menu.header-scrolled {
-  background: linear-gradient(#ededed, transparent, transparent, transparent);
+  background: linear-gradient(#ededed, #ededed);
   backdrop-filter: blur(6px);
 }
 .bk-slider {
@@ -3134,13 +3194,30 @@ section.ticket-form {
 }
 .overview-tab-content .submit-head-para .prod-heading h3::before {
   bottom: -15px;
-  left: 39%;
+  left: 0;
 }
 .prod-tablinks.active {
-  border-radius: 0;
+    margin: 6px 0 0 0;
 }
 .ticket-form .home-contact-submit input[type="submit"] {
   margin: 15px 0 10px auto;
+}
+.sub-tab-section .tab button.active {
+  padding: 10px 15px;
+}
+.image-right-banner img {
+  max-width: 100%;
+}
+.left-right::before {
+  background-color: transparent;
+}
+.overview-cont-col {
+  border-left: unset;
+  padding-left: 14px;
+}
+.overview-sketch img {
+  left: unset;
+  max-width: 100%;
 }
 
 }
@@ -3368,7 +3445,7 @@ section.ticket-form {
   }
   
   .product-tab button {
-    min-width: 80px;
+    min-width: 74px;
   }
   .product-tab .prod-tablinks img {
     max-width: 18px;
@@ -3400,7 +3477,7 @@ section.ticket-form {
 }
 .overview-tab-content .submit-head-para .prod-heading h3::before {
   bottom: -15px;
-  left: 43%;
+  left: 0;
 }
 
 .event-close {
@@ -3422,6 +3499,15 @@ section.ticket-form {
 .home-clients-section .section-container {
   margin: 30px 0 30px 0;
 }
+.overview-cont-col {
+  border-left: 2.4px solid var(--blue);
+  padding-left: 20px;
+}
+.overview-sketch img {
+  left: 13.0px;
+  max-width: 80%;
+}
+
 }
 
 
@@ -3497,7 +3583,7 @@ section.ticket-form {
 }
 .overview-tab-content .submit-head-para .prod-heading h3::before {
   bottom: -15px;
-  left: 44%;
+  left: 0;
 }
 .home-swipe-img-text {
   font-size: 14px;
@@ -3505,6 +3591,9 @@ section.ticket-form {
 .home-clients-slider .swiper-button-next, .home-clients-slider .swiper-button-prev{
   display: block;
   color: var(--orange);
+}
+.overview-sketch img {
+  left: 18px;
 }
 
 }
@@ -3551,6 +3640,9 @@ section.ticket-form {
     font-size: 28px;
     line-height: 29px;
   }
+  .overview-sketch img {
+    left: 19.6px;
+  }
 }
 
 /* Homeslider */
@@ -3588,12 +3680,16 @@ section.ticket-form {
     background:#ededed;
     z-index: 9;
     top: 88px;
+    border-bottom: 2px solid var(--blue);
   }
 
   .productPage .container-inner {
     z-index: 8;
   }  
-
+  .left-right .tab a {
+    font-size: 14px;
+  }
+  
   .prod-fixed {
     position: unset;
     width: 100%;
@@ -3605,6 +3701,7 @@ section.ticket-form {
     justify-content: unset; 
     align-items: unset;
     margin: 0;
+    border-bottom: 0;
   }
 
   .tabs-container {
@@ -3635,17 +3732,21 @@ section.ticket-form {
     float: left;
   }
   .left-right .tab {
-    padding: 10px 27px;
+    padding: 10px 10px;
     z-index: 11;
-    margin: -4px 0;
-    box-shadow: 3px 2px var(--gray);
+    margin: 4px 0;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2), 0 6px 9px 0 rgba(0, 0, 0, 0.1);
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
   }
   .left-right .tab a {
-    padding: 10px 10px;
+    padding: 10px 15px;
   }
   .left-right .tab a.active {
-    border-bottom: 5px solid var(--orange);
-    border-right: 0;
+       border-right: 0;
+       border-radius: 50px;
+       font-weight: 800;
   }
   .coming-soon .tabs-para{
     max-width: 100%;
@@ -3705,6 +3806,14 @@ section.ticket-form {
 
 }
 
+/* ==== 1200 - 1360 */
+@media only screen and (min-width: 1200px) and (max-width: 1360px){
+
+.left-right .right-content {
+  padding: 0 0 0 30px;
+}
+
+}
 
 /* ==== 1200 - 1299 */
 
