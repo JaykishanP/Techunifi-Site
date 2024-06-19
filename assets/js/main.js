@@ -301,6 +301,32 @@ function toggleUnderline(event) {
 }
 
 
+
+
+/* ==== Header navitem color change ==== */
+
+
+/* ==== how it works redirection ==== */
+document.addEventListener('DOMContentLoaded', function() {
+  const howItWorksLink = document.querySelector('a[href="#how-it-works"]');
+  if (howItWorksLink) {
+      howItWorksLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const target = document.getElementById('how-it-works');
+          if (target) {
+              const offsetTop = target.offsetTop - 180; // Adjusted offset if necessary
+              window.scrollTo({
+                  top: offsetTop,
+                  behavior: 'smooth'
+              });
+          }
+      });
+  }
+});
+
+
+
 // Services
 
 // $(".menu-bar > li").click (function () {
@@ -511,6 +537,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
 
 
 /* ======== Prod tab Mobile slide ============  */
@@ -741,46 +768,159 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 /* ====== Leftnav highlight on scroll ======= */
+
+// document.addEventListener("DOMContentLoaded", function() {
+//   const tabLinks = document.querySelectorAll(".left-right .tab a");
+  
+//   window.addEventListener("scroll", function() {
+//     const sections = document.querySelectorAll(".right-content .id-div");
+//     const scrollPosition = window.scrollY || window.pageYOffset;
+    
+//     sections.forEach(section => {
+//       const rect = section.getBoundingClientRect();
+      
+//       if (rect.top <= 0 && rect.bottom > 0) {
+//         const id = section.getAttribute("id");
+//         tabLinks.forEach(link => {
+//           if (link.getAttribute("href") === `#${id}`) {
+//             link.classList.add("active");
+//           } else {
+//             link.classList.remove("active");
+//           }
+//         });
+//       }
+//     });
+//   });
+// });
+
+// document.addEventListener("DOMContentLoaded", function() {
+//   const tabLinks = document.querySelectorAll(".left-right .tab a");
+  
+//   tabLinks.forEach(link => {
+//     link.addEventListener("click", function(event) {
+      
+//       tabLinks.forEach(link => {
+//         link.classList.remove("active");
+//       });
+      
+//       this.classList.add("active");
+//     });
+//   });
+// });
+
+
 document.addEventListener("DOMContentLoaded", function() {
   const tabLinks = document.querySelectorAll(".left-right .tab a");
-  
-  window.addEventListener("scroll", function() {
+
+  // Helper function to set active tab
+  function setActiveTab(link) {
+    tabLinks.forEach(link => link.classList.remove("active"));
+    link.classList.add("active");
+  }
+
+  // Click event for tabs
+  tabLinks.forEach(link => {
+    link.addEventListener("click", function(event) {
+      event.preventDefault();
+      const targetId = this.getAttribute("href").substring(1);
+      const targetSection = document.getElementById(targetId);
+
+      if (!targetSection) return;
+
+      // Set active class immediately
+      setActiveTab(this);
+
+      // Calculate the top position considering the offset
+      const headerOffset = 100; // Adjust as necessary for fixed headers
+      const elementPosition = targetSection.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      // Smooth scroll to the target section
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+
+      // Add a temporary flag to prevent scroll event from interfering
+      document.body.classList.add('scrolling');
+      setTimeout(() => {
+        document.body.classList.remove('scrolling');
+      }, 1000);
+    });
+  });
+
+  // Scroll event to update active tab
+  function handleScroll() {
+    if (document.body.classList.contains('scrolling')) {
+      return; // Prevent scroll event from interfering during smooth scroll
+    }
+
     const sections = document.querySelectorAll(".right-content .id-div");
     const scrollPosition = window.scrollY || window.pageYOffset;
-    
+
     sections.forEach(section => {
       const rect = section.getBoundingClientRect();
-      
-      if (rect.top <= 0 && rect.bottom > 0) {
-        const id = section.getAttribute("id");
+      const id = section.getAttribute("id");
+
+      if (rect.top <= 100 && rect.bottom >= 100) { // Adjusted offset for better accuracy
         tabLinks.forEach(link => {
           if (link.getAttribute("href") === `#${id}`) {
-            link.classList.add("active");
-          } else {
-            link.classList.remove("active");
+            setActiveTab(link);
           }
         });
       }
     });
+  }
+
+  window.addEventListener("scroll", handleScroll);
+
+  // Intersection Observer for better performance and accuracy
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5 // Adjust the threshold as necessary
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    if (document.body.classList.contains('scrolling')) {
+      return; // Prevent observer event from interfering during smooth scroll
+    }
+
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute("id");
+        const tabLink = document.querySelector(`.left-right .tab a[href="#${id}"]`);
+
+        if (tabLink) {
+          setActiveTab(tabLink);
+        }
+      }
+    });
+  }, options);
+
+  document.querySelectorAll('.right-content .id-div').forEach(section => {
+    observer.observe(section);
   });
+
+  // Highlight the tab corresponding to the current hash on page load
+  if (window.location.hash) {
+    const initialTab = document.querySelector(`.left-right .tab a[href="${window.location.hash}"]`);
+    if (initialTab) {
+      setActiveTab(initialTab);
+      const targetSection = document.getElementById(window.location.hash.substring(1));
+      if (targetSection) {
+        const headerOffset = 100; // Adjust as necessary for fixed headers
+        const elementPosition = targetSection.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    }
+  }
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-  const tabLinks = document.querySelectorAll(".left-right .tab a");
-  
-  tabLinks.forEach(link => {
-    link.addEventListener("click", function(event) {
-      
-      // Remove the "active" class from all links
-      tabLinks.forEach(link => {
-        link.classList.remove("active");
-      });
-      
-      // Add the "active" class to the clicked link
-      this.classList.add("active");
-    });
-  });
-});
 
 
 /* ======== mobile prod sidebar fixed ======== */
@@ -1274,6 +1414,13 @@ document.addEventListener('DOMContentLoaded', function() {
     removeAOSAttributes();
   });
 });
+
+
+/* ==== active class sidebar ==== */
+
+
+
+
 
 /* ==== Event Close ==== */
 
