@@ -320,22 +320,15 @@ document.addEventListener('DOMContentLoaded', function() {
             if (target) {
                 const offsetTop = target.getBoundingClientRect().top + window.scrollY;
                 
-                if (document.getElementById(targetId)) {
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                } else {
-                    // If target not found, navigate to the link's href directly
-                    window.location.href = this.getAttribute('href');
-                }
-            } else {
-                // If target not found, navigate to the link's href directly
-                window.location.href = this.getAttribute('href');
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
             }
         });
     });
 });
+
 
 
 // Services
