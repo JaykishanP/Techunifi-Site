@@ -308,23 +308,34 @@ function toggleUnderline(event) {
 
 /* ==== how it works redirection ==== */
 document.addEventListener('DOMContentLoaded', function() {
-  const howItWorksLink = document.querySelector('a[href="#how-it-works"]');
-  if (howItWorksLink) {
-      howItWorksLink.addEventListener('click', function(e) {
-          e.preventDefault();
-          
-          const target = document.getElementById('how-it-works');
-          if (target) {
-              const offsetTop = target.offsetTop - 180; // Adjusted offset if necessary
-              window.scrollTo({
-                  top: offsetTop,
-                  behavior: 'smooth'
-              });
-          }
-      });
-  }
-}); 
-
+    const howItWorksLinks = document.querySelectorAll('a[href="#how-it-works"]');
+    
+    howItWorksLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href').substring(1); // Remove '#' from href
+            const target = document.getElementById(targetId);
+            
+            if (target) {
+                const offsetTop = target.getBoundingClientRect().top + window.scrollY;
+                
+                if (document.getElementById(targetId)) {
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    // If target not found, navigate to the link's href directly
+                    window.location.href = this.getAttribute('href');
+                }
+            } else {
+                // If target not found, navigate to the link's href directly
+                window.location.href = this.getAttribute('href');
+            }
+        });
+    });
+});
 
 
 // Services
