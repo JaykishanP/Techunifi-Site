@@ -307,7 +307,7 @@ function toggleUnderline(event) {
 
 
 /* ==== how it works redirection ==== */
-document.addEventListener('DOMContentLoaded', function() {
+/*document.addEventListener('DOMContentLoaded', function() {
   const howItWorksLink = document.querySelector('a[href="#how-it-works"]');
   if (howItWorksLink) {
       howItWorksLink.addEventListener('click', function(e) {
@@ -323,7 +323,7 @@ document.addEventListener('DOMContentLoaded', function() {
           }
       });
   }
-});
+}); */
 
 
 
