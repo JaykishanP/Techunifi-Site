@@ -3668,10 +3668,20 @@ div#low-Voltage {
   color: var(--orange);
 }
 .overview-sketch img {
-  left: 18px;
+  left: 17px;
+}
+.overview-cont-col {
+  border-left: 3px solid var(--blue);
+}
+.product-tab button {
+  min-width: 102px;
 }
 .low-structure-img .col-md-4 {
   padding: 0 4px;
+}
+
+ul.menu-bar {
+  padding-left: 0;
 }
 
 }
@@ -3938,13 +3948,4 @@ div#low-Voltage {
     top: -43px;
   }
 
-}
-
-/* ====== 1024 - 1199 ===== */
-
-@media only screen and (min-width: 1024px) and (max-width: 1199px){
-
-ul.menu-bar {
-  padding-left: 0;
-}
 }
