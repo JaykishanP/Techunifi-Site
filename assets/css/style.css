@@ -3939,3 +3939,12 @@ div#low-Voltage {
   }
 
 }
+
+/* ====== 1024 - 1199 ===== */
+
+@media only screen and (min-width: 1024px) and (max-width: 1199px){
+
+ul.menu-bar {
+  padding-left: 0;
+}
+}
