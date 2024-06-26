@@ -2079,6 +2079,10 @@ span.bread-inner {
   font-size: 22px;
   font-weight: 600;
 }
+.tele-brand .prod-slide-card .card-prod-heading {
+  font-size: 19px;
+  font-weight: 600;
+}
 .right-content .voltage-brands .submit-head-para {
   margin: 0 0 30px 0;
 }
