@@ -669,6 +669,7 @@ section {
   text-decoration: underline;
   text-underline-offset: 4px;
   text-decoration-color: var(--orange);
+  color: var(--orange);
 }
 
 .service-section-desc .service-col:hover p {
