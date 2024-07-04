@@ -560,6 +560,30 @@ document.addEventListener("DOMContentLoaded", function() {
   // }
 });
 
+/* ======= Prod center Mobile slide ========= */
+document.addEventListener('DOMContentLoaded', function() {
+  function centerActiveTab(tab) {
+    if (window.innerWidth <= 767) { // Check if the screen width is 767px or less
+      var tabsContainer = document.querySelector('.tabs-container');
+      var tabRect = tab.getBoundingClientRect();
+      var containerRect = tabsContainer.getBoundingClientRect();
+
+      var offset = tabRect.left - containerRect.left - (containerRect.width / 2) + (tabRect.width / 2);
+      tabsContainer.scrollBy({
+        left: offset,
+        behavior: 'smooth'
+      });
+    }
+  }
+
+  var tabButtons = document.querySelectorAll('.prod-tablinks');
+  tabButtons.forEach(function(button) {
+    button.addEventListener('click', function(event) {
+      centerActiveTab(event.currentTarget);
+    });
+  });
+});
+
 
 /* ======== ============ */
 // redirect from h to p
@@ -600,6 +624,38 @@ document.addEventListener('DOMContentLoaded', function () {
 function redirectToPage(page, section) {
   window.location.href = `${page}?section=${section}`;
 }
+
+/* ======= redirect from h to p Prod center Mobile slide ========= */
+document.addEventListener('DOMContentLoaded', function() {
+  function centerActiveTab(tab) {
+    if (window.innerWidth <= 767) { // Check if the screen width is 767px or less
+      var tabsContainer = document.querySelector('.tabs-container');
+      var tabRect = tab.getBoundingClientRect();
+      var containerRect = tabsContainer.getBoundingClientRect();
+
+      var offset = tabRect.left - containerRect.left - (containerRect.width / 2) + (tabRect.width / 2);
+      tabsContainer.scrollBy({
+        left: offset,
+        behavior: 'smooth'
+      });
+    }
+  }
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const section = urlParams.get('section');
+
+  if (section) {
+    const activeButton = document.querySelector(`.prod-tablinks[id="prod-${section}"]`);
+    if (activeButton) {
+      // Add a slight delay to ensure the DOM has rendered the tab content
+      setTimeout(function() {
+        centerActiveTab(activeButton);
+      }, 100); // Adjust the delay time if necessary
+    }
+  }
+});
+
 
 
 /* == == */
@@ -644,7 +700,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 /* ======== Home img Slider ========= */
-new Swiper('.home-clients-slider', {
+// Initialize Swiper
+var swiper = new Swiper('.home-clients-slider', {
   speed: 400,
   loop: true,
   autoplay: {
@@ -682,8 +739,49 @@ new Swiper('.home-clients-slider', {
       slidesPerView: 4,
       centeredSlides: false,
       spaceBetween: 20,
-      
     }
+  }
+});
+
+
+// Home clients scale up
+document.addEventListener('DOMContentLoaded', function () {
+  var modal = document.getElementById("image-modal");
+  
+  if (modal) {
+    var modalImg = document.getElementById("modal-image");
+    var captionText = document.getElementById("caption-image");
+
+    var images = document.querySelectorAll('.swiper-slide img');
+    images.forEach(function (img) {
+      img.onclick = function () {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        
+        // Get the caption text from the corresponding .home-swipe-img-text element
+        var parentSlide = this.closest('.swiper-slide');
+        var caption = parentSlide.querySelector('.home-swipe-img-text').innerText;
+        captionText.innerHTML = caption;
+
+        swiper.autoplay.stop(); // Stop autoplay when modal is opened
+      };
+    });
+
+    var span = document.querySelector(".close");
+
+    if (span) {
+      span.addEventListener('click', function () {
+        modal.style.display = "none";
+        swiper.autoplay.start(); // Start autoplay when modal is closed
+      });
+    }
+
+    modal.addEventListener('click', function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+        swiper.autoplay.start(); // Start autoplay when modal is closed
+      }
+    });
   }
 });
 
@@ -1416,9 +1514,143 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-/* ==== active class sidebar ==== */
+/* ==== Get a Quote Modal Popup ==== */
+
+// document.addEventListener("DOMContentLoaded", function() {
+//   var modal = document.getElementById("quoteModal");
+//   var span = document.querySelector(".quoteModal .close");
+//   var links = document.querySelectorAll(".card-more .card-get-link");
+//   var captchaRendered = false;
+//   var scrollPosition = 0;
+
+//   // Check if modal and span are found in the DOM
+
+//   // if (!modal || !span) {
+//   //   console.error('Modal or close button not found in the DOM.');
+//   //   return;
+//   // }
+
+//   links.forEach(function(link) {
+//     link.addEventListener("click", function(event) {
+//       event.preventDefault(); // Prevent the default action of the link
+//       // Save current scroll position
+//       scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+//       // Disable scroll
+//       document.body.style.position = 'fixed';
+//       document.body.style.top = `-${scrollPosition}px`;
+//       modal.style.display = "block";
+
+//       // Scroll modal content to the top
+//       modal.scrollTop = 0;
+
+//       // Check if reCAPTCHA needs to be rendered
+//       if (!captchaRendered) {
+//         renderRecaptcha();
+//         captchaRendered = true;
+//       }
+//     });
+//   });
+
+//   if (span) {
+//     span.onclick = function() {
+//       modal.style.display = "none";
+//       // Enable scroll
+//       document.body.style.position = '';
+//       document.body.style.top = '';
+//       // Restore scroll position
+//       window.scrollTo(0, scrollPosition);
+//     };
+//   }
+
+//   window.onclick = function(event) {
+//     if (event.target === modal) {
+//       modal.style.display = "none";
+//       // Enable scroll
+//       document.body.style.position = '';
+//       document.body.style.top = '';
+//       // Restore scroll position
+//       window.scrollTo(0, scrollPosition);
+//     }
+//   };
+
+//   function renderRecaptcha() {
+//     if (typeof grecaptcha !== "undefined") {
+//       grecaptcha.render(document.querySelector('.g-recaptcha'), {
+//         sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1',
+//         size: 'normal'
+//       });
+//     }
+//   }
+// });
 
 
+/* =========  Product heading to Modal Popup new Inquiry ========== */
+
+// document.addEventListener('DOMContentLoaded', () => {
+//   const modal = document.getElementById('quoteModal');
+  
+//   // Check if modal exists on the page
+//   if (!modal) {
+//     console.log('Modal element not found on this page.');
+//     return;
+//   }
+
+//   const descriptionTextarea = modal.querySelector('.productPage textarea[name="description"]');
+//   const closeModalButton = modal.querySelector('.close');
+//   const getQuoteLinks = document.querySelectorAll('.card-more .card-get-link');
+
+//   const openModal = () => {
+//     modal.style.display = 'block';
+//   };
+
+//   const closeModal = () => {
+//     modal.style.display = 'none';
+//   };
+
+//   if (closeModalButton) {
+//     closeModalButton.addEventListener('click', closeModal);
+//   }
+
+//   getQuoteLinks.forEach(link => {
+//     link.addEventListener('click', event => {
+//       event.preventDefault();
+
+//       const card = event.target.closest('.prod-slide-card');
+
+//       if (!card) {
+//         console.error('Card element not found.');
+//         return;
+//       }
+
+//       const cardHeading = card.querySelector('.card-click .card-prod-heading');
+
+//       if (!cardHeading) {
+//         console.error('Card heading element not found.');
+//         return;
+//       }
+
+//       const cardHeadingContent = cardHeading.innerText.trim();
+
+//       if (descriptionTextarea) {
+//         descriptionTextarea.value = cardHeadingContent;
+//       }
+
+//       openModal();
+//     });
+//   });
+
+//   window.addEventListener('click', event => {
+//     if (event.target === modal) {
+//       closeModal();
+//     }
+//   });
+
+//   window.addEventListener('keydown', event => {
+//     if (event.key === 'Escape') {
+//       closeModal();
+//     }
+//   });
+// });
 
 
 
