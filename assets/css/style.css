@@ -2434,7 +2434,7 @@ span.hr-rule {
 
 .new-how-works p {
   max-width: 401px;
-  padding: 18px 0 0 20px;
+  padding: 25px 0 0 20px;
 }
 
 .new-how-works img {
@@ -3974,7 +3974,7 @@ ul.menu-bar {
     z-index: 9;
     top: 88px;
     border-bottom: 2px solid var(--blue);
-    margin-top: -10px;
+    margin-top: -6px;
   }
 
   .productPage .container-inner {
