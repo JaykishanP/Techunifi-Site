@@ -1653,7 +1653,7 @@ document.addEventListener("DOMContentLoaded", function() {
   function resetModalContent() {
     modal.innerHTML = '<div class="modal-content">' +
       '<div class="modal-close-parent"><span class="close">✕</span></div>' +
-      '<section class="ticket-form">' +
+      '<section class="ticket-form visible">' + // Ensure form is visible initially
       '<h2>Submit a Ticket</h2>' +
       '<form id="myInquiryForm">' +
       '<div class="form-group">' +
@@ -1678,7 +1678,14 @@ document.addEventListener("DOMContentLoaded", function() {
       '<button type="submit">Submit</button>' +
       '</form>' +
       '</section>' +
+      '<div id="thankYouMessage" class="thank-you-message">' +
+      '<h2>Thank You!</h2>' +
+      '<p>Your inquiry has been submitted successfully. A Tech Unifi representative will reach out to you soon.</p>' +
+      '</div>' +
       '</div>';
+
+    // Initially hide thank you message
+    document.getElementById('thankYouMessage').style.display = 'none';
 
     // Rebind event listeners for the form
     bindFormEvents();
@@ -1701,7 +1708,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
       // Mocking form submission and success
       setTimeout(function() {
-        modal.innerHTML = '<div class="modal-content"><div class="modal-close-parent"><span class="close">✕</span></div><div class="thank-you-message"><h2>Thank You!</h2><p>Your inquiry has been submitted successfully. A Tech Unifi representative will reach out to you soon.</p></div></div>';
+        // Hide form, show thank you message
+        document.querySelector(".ticket-form").style.display = "none";
+        document.getElementById('thankYouMessage').style.display = 'block';
+
+        // Attach event listener to close button
         document.querySelector(".quoteModal .close").onclick = function() {
           modal.style.display = "none";
           document.body.style.position = '';
