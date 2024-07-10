@@ -3934,9 +3934,6 @@ ul.menu-bar {
     font-size: 28px;
     line-height: 29px;
   }
-  .overview-sketch img {
-    left: 19.6px;
-  }
 }
 
 /* Homeslider */
@@ -4108,15 +4105,12 @@ ul.menu-bar {
 .left-right .right-content {
   padding: 0 0 0 30px;
 }
-.overview-sketch img {
-  left: 20px;
-}
 
 }
 
 /* ==== 1200 - 1299 */
 
-@media only screen and (min-width: 1200px) and (max-width: 1299px){
+@media only screen and (min-width: 1200px) and (max-width: 1299.9px){
 
   .ev-charge-map .hoverImage {
     max-width: 79.6px;
@@ -4152,6 +4146,29 @@ ul.menu-bar {
     max-width: 211px;
     left: -16px;
     top: -43px;
+  }
+  .overview-sketch img {
+    left: 20px;
+  }
+
+}
+
+/* ==== 1300 - 1399 */
+@media only screen and (min-width: 1300px) and (max-width: 1399.9px){
+
+  .overview-sketch img {
+    left: 21.8px;
+    max-width: 81%;
+  }
+
+}
+
+/* ==== 1400 - 1499 */
+@media only screen and (min-width: 1400px) and (max-width: 1499px){
+
+  .overview-sketch img {
+    left: 21.8px;
+    max-width: 81%;
   }
 
 }
