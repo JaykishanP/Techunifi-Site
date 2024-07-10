@@ -1583,15 +1583,12 @@ document.addEventListener('DOMContentLoaded', function() {
 //   }
 // });
 
-
 document.addEventListener("DOMContentLoaded", function() {
   var modal = document.getElementById("quoteModal");
   var span = document.querySelector(".quoteModal .close");
   var links = document.querySelectorAll(".card-more .card-get-link");
+  var captchaRendered = false;
   var scrollPosition = 0;
-  var ticketForm = document.querySelector('.ticket-form');
-  var thankYouMessage = document.querySelector('.quote-thanku');
-  var recaptchaWidget = null; // Variable to store the reCAPTCHA widget instance
 
   // Check if modal and span are found in the DOM
   if (!modal || !span) {
@@ -1599,149 +1596,87 @@ document.addEventListener("DOMContentLoaded", function() {
     return;
   }
 
+  // Function to toggle between form and thank you message
+  function toggleFormAndThankYou() {
+    var formSection = document.querySelector(".ticket-form");
+    var thankYouSection = document.querySelector(".quote-thanku");
+
+    if (formSection.style.display === "block") {
+      formSection.style.display = "none";
+      thankYouSection.style.display = "block";
+    } else {
+      formSection.style.display = "block";
+      thankYouSection.style.display = "none";
+    }
+  }
+
   links.forEach(function(link) {
     link.addEventListener("click", function(event) {
       event.preventDefault(); // Prevent the default action of the link
-
-      // Reset modal content
-      resetModal();
-
       // Save current scroll position
       scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
       // Disable scroll
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollPosition}px`;
       modal.style.display = "block";
+
+      // Toggle between form and thank you message
+      toggleFormAndThankYou();
+
+      // Scroll modal content to the top
+      modal.scrollTop = 0;
+
+      // Check if reCAPTCHA needs to be rendered
+      if (!captchaRendered) {
+        renderRecaptcha();
+        captchaRendered = true;
+      }
     });
   });
 
   if (span) {
     span.onclick = function() {
-      closeModal();
+      modal.style.display = "none";
+      // Enable scroll
+      document.body.style.position = '';
+      document.body.style.top = '';
+      // Restore scroll position
+      window.scrollTo(0, scrollPosition);
+
+      // Reset form and thank you message visibility
+      var formSection = document.querySelector(".ticket-form");
+      var thankYouSection = document.querySelector(".quote-thanku");
+      formSection.style.display = "block";
+      thankYouSection.style.display = "none";
     };
   }
 
   window.onclick = function(event) {
     if (event.target === modal) {
-      closeModal();
+      modal.style.display = "none";
+      // Enable scroll
+      document.body.style.position = '';
+      document.body.style.top = '';
+      // Restore scroll position
+      window.scrollTo(0, scrollPosition);
+
+      // Reset form and thank you message visibility
+      var formSection = document.querySelector(".ticket-form");
+      var thankYouSection = document.querySelector(".quote-thanku");
+      formSection.style.display = "block";
+      thankYouSection.style.display = "none";
     }
   };
 
   function renderRecaptcha() {
     if (typeof grecaptcha !== "undefined") {
-      if (recaptchaWidget !== null) {
-        // Reset the existing reCAPTCHA instance if it's already rendered
-        grecaptcha.reset(recaptchaWidget);
-      } else {
-        // Render new reCAPTCHA instance
-        recaptchaWidget = grecaptcha.render(document.querySelector('.g-recaptcha'), {
-          sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1',
-          size: 'normal',
-          callback: function() {
-            var recaptchaError = document.getElementById('recaptchaError');
-            if (recaptchaError) {
-              recaptchaError.style.display = 'none';
-            }
-          },
-          'expired-callback': function() {
-            var recaptchaError = document.getElementById('recaptchaError');
-            if (recaptchaError) {
-              recaptchaError.style.display = 'block';
-            }
-          }
-        });
-      }
+      grecaptcha.render(document.querySelector('.g-recaptcha'), {
+        sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1',
+        size: 'normal'
+      });
     }
   }
-
-  // Function to reset modal to show form and hide thank you message
-  function resetModal() {
-    // Show the form
-    ticketForm.style.display = 'block';
-    // Hide the thank you message
-    thankYouMessage.style.display = 'none';
-
-    // Render or reset reCAPTCHA
-    renderRecaptcha();
-  }
-
-  // Function to close the modal and reset scroll
-  function closeModal() {
-    modal.style.display = "none";
-    // Enable scroll
-    document.body.style.position = '';
-    document.body.style.top = '';
-    // Restore scroll position
-    window.scrollTo(0, scrollPosition);
-  }
-
-  // Example form submission handling
-  const form = document.getElementById('myInquiryForm');
-  form.addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent default form submission
-
-    // Perform client-side validation
-    if (!validateForm()) {
-      return; // Exit if validation fails
-    }
-
-    // Assuming the submission is successful
-    // Perform your form submission logic here (e.g., AJAX request)
-
-    // Example success handling
-    // Simulate success with a timeout (replace with actual AJAX success callback)
-    setTimeout(function() {
-      // Show thank you message after successful submission
-      showThankYouMessage();
-    }, 1000); // Adjust timeout as needed or replace with actual success handling
-  });
-
-  // Example client-side validation function
-  function validateForm() {
-    var isValid = true;
-
-    // Validate each input field
-    var inputs = form.querySelectorAll('input, select, textarea');
-    inputs.forEach(function(input) {
-      // Check if field is required and empty
-      if (input.hasAttribute('required') && input.value.trim() === '') {
-        isValid = false;
-        input.style.borderColor = 'red'; // Highlight invalid fields
-      } else {
-        input.style.borderColor = ''; // Reset border color
-      }
-    });
-
-    // Additional validation logic (e.g., reCAPTCHA)
-    // Replace with your reCAPTCHA validation logic if applicable
-    // For demonstration purposes, assuming reCAPTCHA is valid if present
-    var recaptchaResponse = grecaptcha.getResponse(recaptchaWidget);
-    var recaptchaError = document.getElementById('recaptchaError');
-    if (!recaptchaResponse || recaptchaResponse.length === 0) {
-      if (recaptchaError) {
-        recaptchaError.style.display = 'block';
-      }
-      isValid = false;
-    } else {
-      if (recaptchaError) {
-        recaptchaError.style.display = 'none';
-      }
-    }
-
-    // Return validation result
-    return isValid;
-  }
-
-  // Function to show the thank you message and hide the form
-  function showThankYouMessage() {
-    // Hide the form
-    ticketForm.style.display = 'none';
-    // Show the thank you message
-    thankYouMessage.style.display = 'inline-block';
-  }
-
 });
-
 
 
 /* =========  Product heading to Modal Popup new Inquiry ========== */
