@@ -1583,6 +1583,7 @@ document.addEventListener('DOMContentLoaded', function() {
 //   }
 // });
 
+
 document.addEventListener("DOMContentLoaded", function() {
   var modal = document.getElementById("quoteModal");
   var span = document.querySelector(".quoteModal .close");
@@ -1590,7 +1591,7 @@ document.addEventListener("DOMContentLoaded", function() {
   var scrollPosition = 0;
   var ticketForm = document.querySelector('.ticket-form');
   var thankYouMessage = document.querySelector('.quote-thanku');
-  var recaptchaWidget; // Variable to store the reCAPTCHA widget instance
+  var recaptchaWidget = null; // Variable to store the reCAPTCHA widget instance
 
   // Check if modal and span are found in the DOM
   if (!modal || !span) {
@@ -1628,7 +1629,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function renderRecaptcha() {
     if (typeof grecaptcha !== "undefined") {
-      if (recaptchaWidget !== undefined) {
+      if (recaptchaWidget !== null) {
         // Reset the existing reCAPTCHA instance if it's already rendered
         grecaptcha.reset(recaptchaWidget);
       } else {
@@ -1655,15 +1656,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Function to reset modal to show form and hide thank you message
   function resetModal() {
-    const modalContent = document.querySelector('.quoteModal .modal-content');
-
     // Show the form
     ticketForm.style.display = 'block';
     // Hide the thank you message
     thankYouMessage.style.display = 'none';
-
-    // Show modal content
-    modalContent.style.display = 'block';
 
     // Render or reset reCAPTCHA
     renderRecaptcha();
@@ -1676,7 +1672,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.body.style.position = '';
     document.body.style.top = '';
     // Restore scroll position
-    // window.scrollTo(0, scrollPosition);
+    window.scrollTo(0, scrollPosition);
   }
 
   // Example form submission handling
@@ -1738,15 +1734,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Function to show the thank you message and hide the form
   function showThankYouMessage() {
-    const modalContent = document.querySelector('.quoteModal .modal-content');
-
     // Hide the form
     ticketForm.style.display = 'none';
     // Show the thank you message
     thankYouMessage.style.display = 'inline-block';
-
-    // Show modal content
-    modalContent.style.display = 'block';
   }
 
 });
