@@ -1620,6 +1620,9 @@ document.addEventListener("DOMContentLoaded", function() {
       document.body.style.top = '';
       // Restore scroll position
       window.scrollTo(0, scrollPosition);
+
+      // Reset modal content to its original state
+      resetModalContent();
     };
   }
 
@@ -1631,6 +1634,9 @@ document.addEventListener("DOMContentLoaded", function() {
       document.body.style.top = '';
       // Restore scroll position
       window.scrollTo(0, scrollPosition);
+
+      // Reset modal content to its original state
+      resetModalContent();
     }
   };
 
@@ -1643,91 +1649,130 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  // Handle form submission
-  var form = document.getElementById('myInquiryForm');
-  form.addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent default form submission
+  // Function to reset modal content to its original state
+  function resetModalContent() {
+    modal.innerHTML = '<div class="modal-content">' +
+      '<div class="modal-close-parent"><span class="close">✕</span></div>' +
+      '<section class="ticket-form">' +
+      '<h2>Submit a Ticket</h2>' +
+      '<form id="myInquiryForm">' +
+      '<div class="form-group">' +
+      '<label for="inquiryName">Name</label>' +
+      '<input type="text" id="inquiryName" name="inquiryName" required>' +
+      '</div>' +
+      '<div class="form-group">' +
+      '<label for="inquiryEmail">Email</label>' +
+      '<input type="email" id="inquiryEmail" name="inquiryEmail" required>' +
+      '</div>' +
+      '<div class="form-group">' +
+      '<label for="inquiryMessage">Message</label>' +
+      '<textarea id="inquiryMessage" name="inquiryMessage" rows="4" required></textarea>' +
+      '</div>' +
+      '<div class="form-group">' +
+      '<label id="inquirymathSumQuestion"></label>' +
+      '<input type="text" id="inquirymathSum" name="inquirymathSum" required>' +
+      '</div>' +
+      '<div class="form-group">' +
+      '<div class="g-recaptcha" data-sitekey="6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1"></div>' +
+      '</div>' +
+      '<button type="submit">Submit</button>' +
+      '</form>' +
+      '</section>' +
+      '</div>';
 
-    // Validate the form
-    if (!validateInquiryForm()) {
-      return; // Exit function if form is not valid
-    }
+    // Rebind event listeners for the form
+    bindFormEvents();
+  }
 
-    // Assuming form submission is successful
-    var formData = new FormData(form);
+  // Function to bind event listeners for the form
+  function bindFormEvents() {
+    // Handle form submission
+    var form = document.getElementById('myInquiryForm');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
 
-    // Mocking form submission and success
-    setTimeout(function() {
-      modal.innerHTML = '<div class="modal-content"><div class="modal-close-parent"><span class="close">✕</span></div><div class="thank-you-message"><h2>Thank You!</h2><p>Your inquiry has been submitted successfully. A Tech Unifi representative will reach out to you soon.</p></div></div>';
-      document.querySelector(".quoteModal .close").onclick = function() {
-        modal.style.display = "none";
-        document.body.style.position = '';
-        document.body.style.top = '';
-        window.scrollTo(0, scrollPosition);
-      };
-    }, 500); // Mocking delay
-  });
-
-  // Function to validate the inquiry form
-  function validateInquiryForm() {
-    var formValid = true;
-
-    // Validate each input field in the form
-    $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').each(function() {
-      if ($(this).hasClass('not-required')) {
-        return true; // Skip validation for fields marked as not required
+      // Validate the form
+      if (!validateInquiryForm()) {
+        return; // Exit function if form is not valid
       }
 
-      if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
-        formValid = false;
-        $(this).css('border-color', 'red');
-        $('html, body').animate({
-          scrollTop: $(this).offset().top - 160
-        }, 500);
-        return false; // Exit the loop on the first invalid field
-      } else {
-        $(this).css('border-color', 'green');
-      }
+      // Assuming form submission is successful
+      var formData = new FormData(form);
+
+      // Mocking form submission and success
+      setTimeout(function() {
+        modal.innerHTML = '<div class="modal-content"><div class="modal-close-parent"><span class="close">✕</span></div><div class="thank-you-message"><h2>Thank You!</h2><p>Your inquiry has been submitted successfully. A Tech Unifi representative will reach out to you soon.</p></div></div>';
+        document.querySelector(".quoteModal .close").onclick = function() {
+          modal.style.display = "none";
+          document.body.style.position = '';
+          document.body.style.top = '';
+          window.scrollTo(0, scrollPosition);
+          resetModalContent(); // Reset modal content after closing
+        };
+      }, 500); // Mocking delay
     });
 
-    // Validate the math sum question after other fields are validated
-    var inquirymathSumInput = $('#inquirymathSum');
-    var inquirymathSumValue = inquirymathSumInput.val();
-    var inquiryexpectedSum = inquirymathSumInput.data('inquiryexpectedSum');
-    if (!inquirymathSumValue || parseInt(inquirymathSumValue) !== inquiryexpectedSum) {
-      inquirymathSumInput.css('border-color', 'red');
-      formValid = false;
-    } else {
-      inquirymathSumInput.css('border-color', 'green');
+    // Function to validate the inquiry form
+    function validateInquiryForm() {
+      var formValid = true;
+
+      // Validate each input field in the form
+      $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').each(function() {
+        if ($(this).hasClass('not-required')) {
+          return true; // Skip validation for fields marked as not required
+        }
+
+        if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
+          formValid = false;
+          $(this).css('border-color', 'red');
+          $('html, body').animate({
+            scrollTop: $(this).offset().top - 160
+          }, 500);
+          return false; // Exit the loop on the first invalid field
+        } else {
+          $(this).css('border-color', 'green');
+        }
+      });
+
+      // Validate the math sum question after other fields are validated
+      var inquirymathSumInput = $('#inquirymathSum');
+      var inquirymathSumValue = inquirymathSumInput.val();
+      var inquiryexpectedSum = inquirymathSumInput.data('inquiryexpectedSum');
+      if (!inquirymathSumValue || parseInt(inquirymathSumValue) !== inquiryexpectedSum) {
+        inquirymathSumInput.css('border-color', 'red');
+        formValid = false;
+      } else {
+        inquirymathSumInput.css('border-color', 'green');
+      }
+
+      return formValid; // Return true if all validations pass
     }
 
-    return formValid; // Return true if all validations pass
+    // Event listener to update math sum question when the form is reset (e.g., after submission)
+    $('#myInquiryForm').on('reset', function() {
+      inquiryupdateMathSumQuestion();
+    });
+
+    // Function to update the math sum question with new numbers
+    function inquiryupdateMathSumQuestion() {
+      var inquiryrandomNumbers = inquirygenerateRandomNumbers();
+      var inquirynum1 = inquiryrandomNumbers[0];
+      var inquirynum2 = inquiryrandomNumbers[1];
+      $('#inquirymathSumQuestion').text('What is ' + inquirynum1 + ' + ' + inquirynum2 + '?');
+      $('#inquirymathSum').data('inquiryexpectedSum', inquirynum1 + inquirynum2); // Store the expected sum in a data attribute for validation
+    }
+
+    // Function to generate random numbers for the math sum question
+    function inquirygenerateRandomNumbers() {
+      var inquirynum1 = Math.floor(Math.random() * 10);
+      var inquirynum2 = Math.floor(Math.random() * 10);
+      return [inquirynum1, inquirynum2];
+    }
   }
 
-  // Event listener to update math sum question when the form is reset (e.g., after submission)
-  $('#myInquiryForm').on('reset', function() {
-    inquiryupdateMathSumQuestion();
-  });
-
-  // Function to update the math sum question with new numbers
-  function inquiryupdateMathSumQuestion() {
-    var inquiryrandomNumbers = inquirygenerateRandomNumbers();
-    var inquirynum1 = inquiryrandomNumbers[0];
-    var inquirynum2 = inquiryrandomNumbers[1];
-    $('#inquirymathSumQuestion').text('What is ' + inquirynum1 + ' + ' + inquirynum2 + '?');
-    $('#inquirymathSum').data('inquiryexpectedSum', inquirynum1 + inquirynum2); // Store the expected sum in a data attribute for validation
-  }
-
-  // Function to generate random numbers for the math sum question
-  function inquirygenerateRandomNumbers() {
-    var inquirynum1 = Math.floor(Math.random() * 10);
-    var inquirynum2 = Math.floor(Math.random() * 10);
-    return [inquirynum1, inquirynum2];
-  }
-
+  // Initially bind event listeners for the form
+  bindFormEvents();
 });
-
-
 
 
 /* =========  Product heading to Modal Popup new Inquiry ========== */
