@@ -1648,6 +1648,11 @@ document.addEventListener("DOMContentLoaded", function() {
   form.addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent default form submission
 
+    // Validate the form
+    if (!validateInquiryForm()) {
+      return; // Exit function if form is not valid
+    }
+
     // Assuming form submission is successful
     var formData = new FormData(form);
 
@@ -1662,7 +1667,66 @@ document.addEventListener("DOMContentLoaded", function() {
       };
     }, 500); // Mocking delay
   });
+
+  // Function to validate the inquiry form
+  function validateInquiryForm() {
+    var formValid = true;
+
+    // Validate each input field in the form
+    $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').each(function() {
+      if ($(this).hasClass('not-required')) {
+        return true; // Skip validation for fields marked as not required
+      }
+
+      if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
+        formValid = false;
+        $(this).css('border-color', 'red');
+        $('html, body').animate({
+          scrollTop: $(this).offset().top - 160
+        }, 500);
+        return false; // Exit the loop on the first invalid field
+      } else {
+        $(this).css('border-color', 'green');
+      }
+    });
+
+    // Validate the math sum question after other fields are validated
+    var inquirymathSumInput = $('#inquirymathSum');
+    var inquirymathSumValue = inquirymathSumInput.val();
+    var inquiryexpectedSum = inquirymathSumInput.data('inquiryexpectedSum');
+    if (!inquirymathSumValue || parseInt(inquirymathSumValue) !== inquiryexpectedSum) {
+      inquirymathSumInput.css('border-color', 'red');
+      formValid = false;
+    } else {
+      inquirymathSumInput.css('border-color', 'green');
+    }
+
+    return formValid; // Return true if all validations pass
+  }
+
+  // Event listener to update math sum question when the form is reset (e.g., after submission)
+  $('#myInquiryForm').on('reset', function() {
+    inquiryupdateMathSumQuestion();
+  });
+
+  // Function to update the math sum question with new numbers
+  function inquiryupdateMathSumQuestion() {
+    var inquiryrandomNumbers = inquirygenerateRandomNumbers();
+    var inquirynum1 = inquiryrandomNumbers[0];
+    var inquirynum2 = inquiryrandomNumbers[1];
+    $('#inquirymathSumQuestion').text('What is ' + inquirynum1 + ' + ' + inquirynum2 + '?');
+    $('#inquirymathSum').data('inquiryexpectedSum', inquirynum1 + inquirynum2); // Store the expected sum in a data attribute for validation
+  }
+
+  // Function to generate random numbers for the math sum question
+  function inquirygenerateRandomNumbers() {
+    var inquirynum1 = Math.floor(Math.random() * 10);
+    var inquirynum2 = Math.floor(Math.random() * 10);
+    return [inquirynum1, inquirynum2];
+  }
+
 });
+
 
 
 
