@@ -1587,7 +1587,6 @@ document.addEventListener("DOMContentLoaded", function() {
   var modal = document.getElementById("quoteModal");
   var span = document.querySelector(".quoteModal .close");
   var links = document.querySelectorAll(".card-more .card-get-link");
-  var captchaRendered = false;
   var scrollPosition = 0;
 
   // Check if modal and span are found in the DOM
@@ -1599,15 +1598,16 @@ document.addEventListener("DOMContentLoaded", function() {
   links.forEach(function(link) {
     link.addEventListener("click", function(event) {
       event.preventDefault(); // Prevent the default action of the link
+
+      // Reset form and thank you message visibility
+      showForm(); // Ensure form is visible
+
       // Save current scroll position
       scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
       // Disable scroll
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollPosition}px`;
       modal.style.display = "block";
-
-      // Toggle form and thank you message display
-      toggleFormAndThankYou();
     });
   });
 
@@ -1633,43 +1633,34 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   };
 
-  function renderRecaptcha() {
-    if (typeof grecaptcha !== "undefined") {
-      grecaptcha.render(document.querySelector('.g-recaptcha'), {
-        sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1',
-        size: 'normal'
-      });
-    }
+  // Function to show the form and hide the thank you message
+  function showForm() {
+    const modalContent = document.querySelector('.quoteModal .modal-content');
+    const ticketForm = document.querySelector('.ticket-form');
+    const thankYouMessage = document.querySelector('.quote-thanku');
+
+    // Show the form
+    ticketForm.style.display = 'block';
+    // Hide the thank you message
+    thankYouMessage.style.display = 'none';
+
+    // Show modal content
+    modalContent.style.display = 'block';
   }
 
-  // Function to show the "Thank You!" message and hide the form content
+  // Function to show the thank you message and hide the form
   function showThankYouMessage() {
     const modalContent = document.querySelector('.quoteModal .modal-content');
     const ticketForm = document.querySelector('.ticket-form');
     const thankYouMessage = document.querySelector('.quote-thanku');
 
-    // Toggle form and thank you message display
-    ticketForm.style.display = 'block';
-    thankYouMessage.style.display = 'none';
+    // Hide the form
+    ticketForm.style.display = 'none';
+    // Show the thank you message
+    thankYouMessage.style.display = 'block';
 
-    // Hide the form content
+    // Show modal content
     modalContent.style.display = 'block';
-  }
-
-  // Toggle between showing form and thank you message
-  function toggleFormAndThankYou() {
-    const ticketForm = document.querySelector('.ticket-form');
-    const thankYouMessage = document.querySelector('.quote-thanku');
-
-    if (ticketForm.style.display === 'none') {
-      // Show form and hide thank you message
-      ticketForm.style.display = 'block';
-      thankYouMessage.style.display = 'none';
-    } else {
-      // Show thank you message and hide form
-      ticketForm.style.display = 'none';
-      thankYouMessage.style.display = 'block';
-    }
   }
 
   // Example form submission handling
@@ -1710,7 +1701,10 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Additional validation logic (e.g., reCAPTCHA)
-    if (typeof grecaptcha !== 'undefined' && grecaptcha.getResponse().length === 0) {
+    // Replace with your reCAPTCHA validation logic if applicable
+    // For demonstration purposes, assuming reCAPTCHA is valid if present
+    var recaptchaResponse = grecaptcha.getResponse();
+    if (!recaptchaResponse || recaptchaResponse.length === 0) {
       alert('Please complete the reCAPTCHA.');
       isValid = false;
     }
@@ -1720,6 +1714,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
 });
+
 
 
 /* =========  Product heading to Modal Popup new Inquiry ========== */
