@@ -1516,6 +1516,73 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* ==== Get a Quote Modal Popup ==== */
 
+// document.addEventListener("DOMContentLoaded", function() {
+//   var modal = document.getElementById("quoteModal");
+//   var span = document.querySelector(".quoteModal .close");
+//   var links = document.querySelectorAll(".card-more .card-get-link");
+//   var captchaRendered = false;
+//   var scrollPosition = 0;
+
+//   // Check if modal and span are found in the DOM
+
+//   // if (!modal || !span) {
+//   //   console.error('Modal or close button not found in the DOM.');
+//   //   return;
+//   // }
+
+//   links.forEach(function(link) {
+//     link.addEventListener("click", function(event) {
+//       event.preventDefault(); // Prevent the default action of the link
+//       // Save current scroll position
+//       scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+//       // Disable scroll
+//       document.body.style.position = 'fixed';
+//       document.body.style.top = `-${scrollPosition}px`;
+//       modal.style.display = "block";
+
+//       // Scroll modal content to the top
+//       modal.scrollTop = 0;
+
+//       // Check if reCAPTCHA needs to be rendered
+//       if (!captchaRendered) {
+//         renderRecaptcha();
+//         captchaRendered = true;
+//       }
+//     });
+//   });
+
+//   if (span) {
+//     span.onclick = function() {
+//       modal.style.display = "none";
+//       // Enable scroll
+//       document.body.style.position = '';
+//       document.body.style.top = '';
+//       // Restore scroll position
+//       window.scrollTo(0, scrollPosition);
+//     };
+//   }
+
+//   window.onclick = function(event) {
+//     if (event.target === modal) {
+//       modal.style.display = "none";
+//       // Enable scroll
+//       document.body.style.position = '';
+//       document.body.style.top = '';
+//       // Restore scroll position
+//       window.scrollTo(0, scrollPosition);
+//     }
+//   };
+
+//   function renderRecaptcha() {
+//     if (typeof grecaptcha !== "undefined") {
+//       grecaptcha.render(document.querySelector('.g-recaptcha'), {
+//         sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1',
+//         size: 'normal'
+//       });
+//     }
+//   }
+// });
+
 document.addEventListener("DOMContentLoaded", function() {
   var modal = document.getElementById("quoteModal");
   var span = document.querySelector(".quoteModal .close");
@@ -1524,11 +1591,10 @@ document.addEventListener("DOMContentLoaded", function() {
   var scrollPosition = 0;
 
   // Check if modal and span are found in the DOM
-
-  // if (!modal || !span) {
-  //   console.error('Modal or close button not found in the DOM.');
-  //   return;
-  // }
+  if (!modal || !span) {
+    console.error('Modal or close button not found in the DOM.');
+    return;
+  }
 
   links.forEach(function(link) {
     link.addEventListener("click", function(event) {
@@ -1581,31 +1647,68 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     }
   }
-});
 
-// JavaScript for handling form submission
-document.addEventListener('DOMContentLoaded', function() {
+  // Function to show the "Thank You!" message and hide the form content
+  function showThankYouMessage() {
+    const modalContent = document.querySelector('.quoteModal .modal-content');
+    const thankYouMessage = document.querySelector('.quote-thanku');
+
+    // Hide the form content
+    modalContent.style.display = 'none';
+
+    // Display the thank you message
+    thankYouMessage.style.display = 'block';
+  }
+
+  // Example form submission handling
   const form = document.getElementById('myInquiryForm');
   form.addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent default form submission
+    event.preventDefault(); // Prevent default form submission
 
-      // Perform your form submission logic here (e.g., AJAX request)
+    // Perform client-side validation
+    if (!validateForm()) {
+      return; // Exit if validation fails
+    }
 
-      // Assuming the submission is successful, show the thank you message
+    // Assuming the submission is successful
+    // Perform your form submission logic here (e.g., AJAX request)
+
+    // Example success handling
+    // Simulate success with a timeout (replace with actual AJAX success callback)
+    setTimeout(function() {
+      // Show thank you message after successful submission
       showThankYouMessage();
+    }, 1000); // Adjust timeout as needed or replace with actual success handling
   });
 
-  function showThankYouMessage() {
-      const modalContent = document.querySelector('.quoteModal .modal-content');
-      const thankYouMessage = document.querySelector('.quote-thanku');
+  // Example client-side validation function
+  function validateForm() {
+    var isValid = true;
 
-      // Hide the form content
-      modalContent.style.display = 'none';
+    // Validate each input field
+    var inputs = form.querySelectorAll('input, select, textarea');
+    inputs.forEach(function(input) {
+      // Check if field is required and empty
+      if (input.hasAttribute('required') && input.value.trim() === '') {
+        isValid = false;
+        input.style.borderColor = 'red'; // Highlight invalid fields
+      } else {
+        input.style.borderColor = ''; // Reset border color
+      }
+    });
 
-      // Display the thank you message
-      thankYouMessage.style.display = 'block';
+    // Additional validation logic (e.g., reCAPTCHA)
+    if (typeof grecaptcha !== 'undefined' && grecaptcha.getResponse().length === 0) {
+      alert('Please complete the reCAPTCHA.');
+      isValid = false;
+    }
+
+    // Return validation result
+    return isValid;
   }
+
 });
+
 
 
 /* =========  Product heading to Modal Popup new Inquiry ========== */
