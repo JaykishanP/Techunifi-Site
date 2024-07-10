@@ -1676,7 +1676,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.body.style.position = '';
     document.body.style.top = '';
     // Restore scroll position
-    window.scrollTo(0, scrollPosition);
+    // window.scrollTo(0, scrollPosition);
   }
 
   // Example form submission handling
