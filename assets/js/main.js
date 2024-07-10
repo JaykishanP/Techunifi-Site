@@ -1583,6 +1583,7 @@ document.addEventListener('DOMContentLoaded', function() {
 //   }
 // });
 
+
 document.addEventListener("DOMContentLoaded", function() {
   var modal = document.getElementById("quoteModal");
   var span = document.querySelector(".quoteModal .close");
@@ -1633,6 +1634,21 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   };
 
+  function renderRecaptcha() {
+    if (typeof grecaptcha !== "undefined") {
+      grecaptcha.render(document.querySelector('.g-recaptcha'), {
+        sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1',
+        size: 'normal',
+        callback: function() {
+          document.getElementById('recaptchaError').style.display = 'none';
+        },
+        'expired-callback': function() {
+          document.getElementById('recaptchaError').style.display = 'block';
+        }
+      });
+    }
+  }
+
   // Function to show the form and hide the thank you message
   function showForm() {
     const modalContent = document.querySelector('.quoteModal .modal-content');
@@ -1646,6 +1662,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Show modal content
     modalContent.style.display = 'block';
+
+    // Render reCAPTCHA
+    renderRecaptcha();
   }
 
   // Function to show the thank you message and hide the form
@@ -1705,8 +1724,10 @@ document.addEventListener("DOMContentLoaded", function() {
     // For demonstration purposes, assuming reCAPTCHA is valid if present
     var recaptchaResponse = grecaptcha.getResponse();
     if (!recaptchaResponse || recaptchaResponse.length === 0) {
-      alert('Please complete the reCAPTCHA.');
+      document.getElementById('recaptchaError').style.display = 'block';
       isValid = false;
+    } else {
+      document.getElementById('recaptchaError').style.display = 'none';
     }
 
     // Return validation result
@@ -1714,6 +1735,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
 });
+
 
 
 
