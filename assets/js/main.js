@@ -1590,6 +1590,7 @@ document.addEventListener("DOMContentLoaded", function() {
   var scrollPosition = 0;
   var ticketForm = document.querySelector('.ticket-form');
   var thankYouMessage = document.querySelector('.quote-thanku');
+  var recaptchaWidget; // Variable to store the reCAPTCHA widget instance
 
   // Check if modal and span are found in the DOM
   if (!modal || !span) {
@@ -1627,22 +1628,28 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function renderRecaptcha() {
     if (typeof grecaptcha !== "undefined") {
-      grecaptcha.render(document.querySelector('.g-recaptcha'), {
-        sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1',
-        size: 'normal',
-        callback: function() {
-          var recaptchaError = document.getElementById('recaptchaError');
-          if (recaptchaError) {
-            recaptchaError.style.display = 'none';
+      if (recaptchaWidget !== undefined) {
+        // Reset the existing reCAPTCHA instance if it's already rendered
+        grecaptcha.reset(recaptchaWidget);
+      } else {
+        // Render new reCAPTCHA instance
+        recaptchaWidget = grecaptcha.render(document.querySelector('.g-recaptcha'), {
+          sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1',
+          size: 'normal',
+          callback: function() {
+            var recaptchaError = document.getElementById('recaptchaError');
+            if (recaptchaError) {
+              recaptchaError.style.display = 'none';
+            }
+          },
+          'expired-callback': function() {
+            var recaptchaError = document.getElementById('recaptchaError');
+            if (recaptchaError) {
+              recaptchaError.style.display = 'block';
+            }
           }
-        },
-        'expired-callback': function() {
-          var recaptchaError = document.getElementById('recaptchaError');
-          if (recaptchaError) {
-            recaptchaError.style.display = 'block';
-          }
-        }
-      });
+        });
+      }
     }
   }
 
@@ -1658,7 +1665,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Show modal content
     modalContent.style.display = 'block';
 
-    // Render reCAPTCHA
+    // Render or reset reCAPTCHA
     renderRecaptcha();
   }
 
@@ -1712,7 +1719,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Additional validation logic (e.g., reCAPTCHA)
     // Replace with your reCAPTCHA validation logic if applicable
     // For demonstration purposes, assuming reCAPTCHA is valid if present
-    var recaptchaResponse = grecaptcha.getResponse();
+    var recaptchaResponse = grecaptcha.getResponse(recaptchaWidget);
     var recaptchaError = document.getElementById('recaptchaError');
     if (!recaptchaResponse || recaptchaResponse.length === 0) {
       if (recaptchaError) {
@@ -1743,7 +1750,6 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
 });
-
 
 
 
