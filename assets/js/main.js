@@ -1606,14 +1606,8 @@ document.addEventListener("DOMContentLoaded", function() {
       document.body.style.top = `-${scrollPosition}px`;
       modal.style.display = "block";
 
-      // Scroll modal content to the top
-      modal.scrollTop = 0;
-
-      // Check if reCAPTCHA needs to be rendered
-      if (!captchaRendered) {
-        renderRecaptcha();
-        captchaRendered = true;
-      }
+      // Toggle form and thank you message display
+      toggleFormAndThankYou();
     });
   });
 
@@ -1650,14 +1644,32 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Function to show the "Thank You!" message and hide the form content
   function showThankYouMessage() {
-    const modalContent = document.querySelector('.quoteModal .modal-content .ticket-form');
+    const modalContent = document.querySelector('.quoteModal .modal-content');
+    const ticketForm = document.querySelector('.ticket-form');
     const thankYouMessage = document.querySelector('.quote-thanku');
 
-    // Hide the form content
-    modalContent.style.display = 'none';
+    // Toggle form and thank you message display
+    ticketForm.style.display = 'block';
+    thankYouMessage.style.display = 'none';
 
-    // Display the thank you message
-    thankYouMessage.style.display = 'block';
+    // Hide the form content
+    modalContent.style.display = 'block';
+  }
+
+  // Toggle between showing form and thank you message
+  function toggleFormAndThankYou() {
+    const ticketForm = document.querySelector('.ticket-form');
+    const thankYouMessage = document.querySelector('.quote-thanku');
+
+    if (ticketForm.style.display === 'none') {
+      // Show form and hide thank you message
+      ticketForm.style.display = 'block';
+      thankYouMessage.style.display = 'none';
+    } else {
+      // Show thank you message and hide form
+      ticketForm.style.display = 'none';
+      thankYouMessage.style.display = 'block';
+    }
   }
 
   // Example form submission handling
@@ -1708,7 +1720,6 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
 });
-
 
 
 /* =========  Product heading to Modal Popup new Inquiry ========== */
