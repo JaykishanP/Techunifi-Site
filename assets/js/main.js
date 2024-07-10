@@ -1587,28 +1587,8 @@ document.addEventListener("DOMContentLoaded", function() {
   var modal = document.getElementById("quoteModal");
   var span = document.querySelector(".quoteModal .close");
   var links = document.querySelectorAll(".card-more .card-get-link");
-  var captchaRendered = false;
   var scrollPosition = 0;
-
-  // Check if modal and span are found in the DOM
-  if (!modal || !span) {
-    console.error('Modal or close button not found in the DOM.');
-    return;
-  }
-
-  // Function to toggle between form and thank you message
-  function toggleFormAndThankYou() {
-    var formSection = document.querySelector(".ticket-form");
-    var thankYouSection = document.querySelector(".quote-thanku");
-
-    if (formSection.style.display === "block") {
-      formSection.style.display = "none";
-      thankYouSection.style.display = "block";
-    } else {
-      formSection.style.display = "block";
-      thankYouSection.style.display = "none";
-    }
-  }
+  var captchaRendered = false;
 
   links.forEach(function(link) {
     link.addEventListener("click", function(event) {
@@ -1620,8 +1600,14 @@ document.addEventListener("DOMContentLoaded", function() {
       document.body.style.top = `-${scrollPosition}px`;
       modal.style.display = "block";
 
-      // Toggle between form and thank you message
-      toggleFormAndThankYou();
+      // Show the form section and hide the thank you message
+      var formSection = document.querySelector(".ticket-form");
+      var thankYouSection = document.querySelector(".quote-thanku");
+      formSection.style.display = "block";
+      thankYouSection.style.display = "none";
+
+      // Clear form fields
+      document.getElementById("myInquiryForm").reset();
 
       // Scroll modal content to the top
       modal.scrollTop = 0;
@@ -1642,12 +1628,6 @@ document.addEventListener("DOMContentLoaded", function() {
       document.body.style.top = '';
       // Restore scroll position
       window.scrollTo(0, scrollPosition);
-
-      // Reset form and thank you message visibility
-      var formSection = document.querySelector(".ticket-form");
-      var thankYouSection = document.querySelector(".quote-thanku");
-      formSection.style.display = "block";
-      thankYouSection.style.display = "none";
     };
   }
 
@@ -1659,15 +1639,61 @@ document.addEventListener("DOMContentLoaded", function() {
       document.body.style.top = '';
       // Restore scroll position
       window.scrollTo(0, scrollPosition);
-
-      // Reset form and thank you message visibility
-      var formSection = document.querySelector(".ticket-form");
-      var thankYouSection = document.querySelector(".quote-thanku");
-      formSection.style.display = "block";
-      thankYouSection.style.display = "none";
     }
   };
 
+  // Function to handle form submission with validation
+  document.getElementById('myInquiryForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent form submission (for demo purposes)
+
+    // Validate form fields and captcha
+    if (validateForm() && validateCaptcha()) {
+      // Display thank you message and hide form
+      var formSection = document.querySelector(".ticket-form");
+      var thankYouSection = document.querySelector(".quote-thanku");
+      formSection.style.display = "none";
+      thankYouSection.style.display = "block";
+
+      // Clear form fields
+      document.getElementById("myInquiryForm").reset();
+
+      // Reset modal scroll position
+      modal.scrollTop = 0;
+    } else {
+      // Form validation failed, handle accordingly (e.g., show error messages)
+      console.log("Form validation failed. Please check your inputs.");
+    }
+  });
+
+  // Function to validate form fields
+  function validateForm() {
+    var isValid = true;
+    var form = document.getElementById("myInquiryForm");
+
+    // Example validation: Check if required fields are filled
+    var requiredFields = form.querySelectorAll('[required]');
+    requiredFields.forEach(function(field) {
+      if (!field.value.trim()) {
+        isValid = false;
+        // You can implement your error handling here (e.g., displaying error messages)
+        field.classList.add('error'); // Example: Add error class for styling
+      } else {
+        field.classList.remove('error');
+      }
+    });
+
+    return isValid;
+  }
+
+  // Function to validate captcha
+  function validateCaptcha() {
+    // Replace with your captcha validation logic
+    // Example: Check if captcha response is valid
+    var captchaResponse = grecaptcha.getResponse();
+    return captchaResponse !== ''; // Return true if captcha response is not empty
+  }
+
+  // Function to render reCAPTCHA
   function renderRecaptcha() {
     if (typeof grecaptcha !== "undefined") {
       grecaptcha.render(document.querySelector('.g-recaptcha'), {
@@ -1676,6 +1702,7 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     }
   }
+
 });
 
 
