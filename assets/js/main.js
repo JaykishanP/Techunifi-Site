@@ -1635,7 +1635,7 @@ document.addEventListener("DOMContentLoaded", function() {
   };
 
   function renderRecaptcha() {
-    if (typeof grecaptcha !== "undefined") {
+    if (typeof grecaptcha !== "undefined" && !document.querySelector('.g-recaptcha div')) {
       grecaptcha.render(document.querySelector('.g-recaptcha'), {
         sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1',
         size: 'normal'
@@ -1650,24 +1650,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Assuming form submission is successful
     var formData = new FormData(form);
-    fetch(form.action, {
-      method: form.method,
-      body: formData,
-    }).then(function(response) {
-      if (response.ok) {
-        modal.innerHTML = '<div class="modal-content"><div class="modal-close-parent"><span class="close">✕</span></div><div class="thank-you-message"><h2>Thank You!</h2><p>Your inquiry has been submitted successfully. A Tech Unifi representative will reach out to you soon.</p></div></div>';
-        document.querySelector(".quoteModal .close").onclick = function() {
-          modal.style.display = "none";
-          document.body.style.position = '';
-          document.body.style.top = '';
-          window.scrollTo(0, scrollPosition);
-        };
-      } else {
-        alert('There was a problem with your submission. Please try again.');
-      }
-    }).catch(function(error) {
-      alert('There was an error submitting the form. Please try again.');
-    });
+
+    // Mocking form submission and success
+    setTimeout(function() {
+      modal.innerHTML = '<div class="modal-content"><div class="modal-close-parent"><span class="close">✕</span></div><div class="thank-you-message"><h2>Thank You!</h2><p>Your inquiry has been submitted successfully. A Tech Unifi representative will reach out to you soon.</p></div></div>';
+      document.querySelector(".quoteModal .close").onclick = function() {
+        modal.style.display = "none";
+        document.body.style.position = '';
+        document.body.style.top = '';
+        window.scrollTo(0, scrollPosition);
+      };
+    }, 500); // Mocking delay
   });
 });
 
