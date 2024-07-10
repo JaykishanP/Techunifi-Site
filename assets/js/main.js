@@ -1640,10 +1640,16 @@ document.addEventListener("DOMContentLoaded", function() {
         sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1',
         size: 'normal',
         callback: function() {
-          document.getElementById('recaptchaError').style.display = 'none';
+          var recaptchaError = document.getElementById('recaptchaError');
+          if (recaptchaError) {
+            recaptchaError.style.display = 'none';
+          }
         },
         'expired-callback': function() {
-          document.getElementById('recaptchaError').style.display = 'block';
+          var recaptchaError = document.getElementById('recaptchaError');
+          if (recaptchaError) {
+            recaptchaError.style.display = 'block';
+          }
         }
       });
     }
@@ -1723,11 +1729,16 @@ document.addEventListener("DOMContentLoaded", function() {
     // Replace with your reCAPTCHA validation logic if applicable
     // For demonstration purposes, assuming reCAPTCHA is valid if present
     var recaptchaResponse = grecaptcha.getResponse();
+    var recaptchaError = document.getElementById('recaptchaError');
     if (!recaptchaResponse || recaptchaResponse.length === 0) {
-      document.getElementById('recaptchaError').style.display = 'block';
+      if (recaptchaError) {
+        recaptchaError.style.display = 'block';
+      }
       isValid = false;
     } else {
-      document.getElementById('recaptchaError').style.display = 'none';
+      if (recaptchaError) {
+        recaptchaError.style.display = 'none';
+      }
     }
 
     // Return validation result
