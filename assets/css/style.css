@@ -895,6 +895,7 @@ section#home-clients {
 .home-clients .swiper-slide img {
   transition: 0.3s;
   border-radius: 8px;
+  cursor: pointer;
 }
 
 .home-clients-slider .swiper-slide.swiper-slide-prev img,

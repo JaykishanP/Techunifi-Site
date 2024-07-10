@@ -1516,141 +1516,141 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* ==== Get a Quote Modal Popup ==== */
 
-// document.addEventListener("DOMContentLoaded", function() {
-//   var modal = document.getElementById("quoteModal");
-//   var span = document.querySelector(".quoteModal .close");
-//   var links = document.querySelectorAll(".card-more .card-get-link");
-//   var captchaRendered = false;
-//   var scrollPosition = 0;
+document.addEventListener("DOMContentLoaded", function() {
+  var modal = document.getElementById("quoteModal");
+  var span = document.querySelector(".quoteModal .close");
+  var links = document.querySelectorAll(".card-more .card-get-link");
+  var captchaRendered = false;
+  var scrollPosition = 0;
 
-//   // Check if modal and span are found in the DOM
+  // Check if modal and span are found in the DOM
 
-//   // if (!modal || !span) {
-//   //   console.error('Modal or close button not found in the DOM.');
-//   //   return;
-//   // }
+  // if (!modal || !span) {
+  //   console.error('Modal or close button not found in the DOM.');
+  //   return;
+  // }
 
-//   links.forEach(function(link) {
-//     link.addEventListener("click", function(event) {
-//       event.preventDefault(); // Prevent the default action of the link
-//       // Save current scroll position
-//       scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-//       // Disable scroll
-//       document.body.style.position = 'fixed';
-//       document.body.style.top = `-${scrollPosition}px`;
-//       modal.style.display = "block";
+  links.forEach(function(link) {
+    link.addEventListener("click", function(event) {
+      event.preventDefault(); // Prevent the default action of the link
+      // Save current scroll position
+      scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+      // Disable scroll
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollPosition}px`;
+      modal.style.display = "block";
 
-//       // Scroll modal content to the top
-//       modal.scrollTop = 0;
+      // Scroll modal content to the top
+      modal.scrollTop = 0;
 
-//       // Check if reCAPTCHA needs to be rendered
-//       if (!captchaRendered) {
-//         renderRecaptcha();
-//         captchaRendered = true;
-//       }
-//     });
-//   });
+      // Check if reCAPTCHA needs to be rendered
+      if (!captchaRendered) {
+        renderRecaptcha();
+        captchaRendered = true;
+      }
+    });
+  });
 
-//   if (span) {
-//     span.onclick = function() {
-//       modal.style.display = "none";
-//       // Enable scroll
-//       document.body.style.position = '';
-//       document.body.style.top = '';
-//       // Restore scroll position
-//       window.scrollTo(0, scrollPosition);
-//     };
-//   }
+  if (span) {
+    span.onclick = function() {
+      modal.style.display = "none";
+      // Enable scroll
+      document.body.style.position = '';
+      document.body.style.top = '';
+      // Restore scroll position
+      window.scrollTo(0, scrollPosition);
+    };
+  }
 
-//   window.onclick = function(event) {
-//     if (event.target === modal) {
-//       modal.style.display = "none";
-//       // Enable scroll
-//       document.body.style.position = '';
-//       document.body.style.top = '';
-//       // Restore scroll position
-//       window.scrollTo(0, scrollPosition);
-//     }
-//   };
+  window.onclick = function(event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+      // Enable scroll
+      document.body.style.position = '';
+      document.body.style.top = '';
+      // Restore scroll position
+      window.scrollTo(0, scrollPosition);
+    }
+  };
 
-//   function renderRecaptcha() {
-//     if (typeof grecaptcha !== "undefined") {
-//       grecaptcha.render(document.querySelector('.g-recaptcha'), {
-//         sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1',
-//         size: 'normal'
-//       });
-//     }
-//   }
-// });
+  function renderRecaptcha() {
+    if (typeof grecaptcha !== "undefined") {
+      grecaptcha.render(document.querySelector('.g-recaptcha'), {
+        sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1',
+        size: 'normal'
+      });
+    }
+  }
+});
 
 
 /* =========  Product heading to Modal Popup new Inquiry ========== */
 
-// document.addEventListener('DOMContentLoaded', () => {
-//   const modal = document.getElementById('quoteModal');
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('quoteModal');
   
-//   // Check if modal exists on the page
-//   if (!modal) {
-//     console.log('Modal element not found on this page.');
-//     return;
-//   }
+  // Check if modal exists on the page
+  if (!modal) {
+    console.log('Modal element not found on this page.');
+    return;
+  }
 
-//   const descriptionTextarea = modal.querySelector('.productPage textarea[name="description"]');
-//   const closeModalButton = modal.querySelector('.close');
-//   const getQuoteLinks = document.querySelectorAll('.card-more .card-get-link');
+  const descriptionTextarea = modal.querySelector('.productPage textarea[name="description"]');
+  const closeModalButton = modal.querySelector('.close');
+  const getQuoteLinks = document.querySelectorAll('.card-more .card-get-link');
 
-//   const openModal = () => {
-//     modal.style.display = 'block';
-//   };
+  const openModal = () => {
+    modal.style.display = 'block';
+  };
 
-//   const closeModal = () => {
-//     modal.style.display = 'none';
-//   };
+  const closeModal = () => {
+    modal.style.display = 'none';
+  };
 
-//   if (closeModalButton) {
-//     closeModalButton.addEventListener('click', closeModal);
-//   }
+  if (closeModalButton) {
+    closeModalButton.addEventListener('click', closeModal);
+  }
 
-//   getQuoteLinks.forEach(link => {
-//     link.addEventListener('click', event => {
-//       event.preventDefault();
+  getQuoteLinks.forEach(link => {
+    link.addEventListener('click', event => {
+      event.preventDefault();
 
-//       const card = event.target.closest('.prod-slide-card');
+      const card = event.target.closest('.prod-slide-card');
 
-//       if (!card) {
-//         console.error('Card element not found.');
-//         return;
-//       }
+      if (!card) {
+        console.error('Card element not found.');
+        return;
+      }
 
-//       const cardHeading = card.querySelector('.card-click .card-prod-heading');
+      const cardHeading = card.querySelector('.card-click .card-prod-heading');
 
-//       if (!cardHeading) {
-//         console.error('Card heading element not found.');
-//         return;
-//       }
+      if (!cardHeading) {
+        console.error('Card heading element not found.');
+        return;
+      }
 
-//       const cardHeadingContent = cardHeading.innerText.trim();
+      const cardHeadingContent = cardHeading.innerText.trim();
 
-//       if (descriptionTextarea) {
-//         descriptionTextarea.value = cardHeadingContent;
-//       }
+      if (descriptionTextarea) {
+        descriptionTextarea.value = cardHeadingContent;
+      }
 
-//       openModal();
-//     });
-//   });
+      openModal();
+    });
+  });
 
-//   window.addEventListener('click', event => {
-//     if (event.target === modal) {
-//       closeModal();
-//     }
-//   });
+  window.addEventListener('click', event => {
+    if (event.target === modal) {
+      closeModal();
+    }
+  });
 
-//   window.addEventListener('keydown', event => {
-//     if (event.key === 'Escape') {
-//       closeModal();
-//     }
-//   });
-// });
+  window.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeModal();
+    }
+  });
+});
 
 
 
