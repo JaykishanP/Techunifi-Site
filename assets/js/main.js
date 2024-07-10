@@ -1583,6 +1583,30 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 
+// JavaScript for handling form submission
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('myInquiryForm');
+  form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent default form submission
+
+      // Perform your form submission logic here (e.g., AJAX request)
+
+      // Assuming the submission is successful, show the thank you message
+      showThankYouMessage();
+  });
+
+  function showThankYouMessage() {
+      const modalContent = document.querySelector('.quoteModal .modal-content');
+      const thankYouMessage = document.querySelector('.quote-thanku');
+
+      // Hide the form content
+      modalContent.style.display = 'none';
+
+      // Display the thank you message
+      thankYouMessage.style.display = 'block';
+  }
+});
+
 
 /* =========  Product heading to Modal Popup new Inquiry ========== */
 
