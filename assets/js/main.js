@@ -1589,6 +1589,8 @@ document.addEventListener("DOMContentLoaded", function() {
   var span = document.querySelector(".quoteModal .close");
   var links = document.querySelectorAll(".card-more .card-get-link");
   var scrollPosition = 0;
+  var ticketForm = document.querySelector('.ticket-form');
+  var thankYouMessage = document.querySelector('.quote-thanku');
 
   // Check if modal and span are found in the DOM
   if (!modal || !span) {
@@ -1658,8 +1660,6 @@ document.addEventListener("DOMContentLoaded", function() {
   // Function to show the form and hide the thank you message
   function showForm() {
     const modalContent = document.querySelector('.quoteModal .modal-content');
-    const ticketForm = document.querySelector('.ticket-form');
-    const thankYouMessage = document.querySelector('.quote-thanku');
 
     // Show the form
     ticketForm.style.display = 'block';
@@ -1676,13 +1676,11 @@ document.addEventListener("DOMContentLoaded", function() {
   // Function to show the thank you message and hide the form
   function showThankYouMessage() {
     const modalContent = document.querySelector('.quoteModal .modal-content');
-    const ticketForm = document.querySelector('.ticket-form');
-    const thankYouMessage = document.querySelector('.quote-thanku');
 
     // Hide the form
     ticketForm.style.display = 'none';
     // Show the thank you message
-    thankYouMessage.style.display = 'block';
+    thankYouMessage.style.display = 'inline-block';
 
     // Show modal content
     modalContent.style.display = 'block';
