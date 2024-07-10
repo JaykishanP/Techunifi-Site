@@ -1516,73 +1516,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* ==== Get a Quote Modal Popup ==== */
 
-// document.addEventListener("DOMContentLoaded", function() {
-//   var modal = document.getElementById("quoteModal");
-//   var span = document.querySelector(".quoteModal .close");
-//   var links = document.querySelectorAll(".card-more .card-get-link");
-//   var captchaRendered = false;
-//   var scrollPosition = 0;
-
-//   // Check if modal and span are found in the DOM
-
-//   // if (!modal || !span) {
-//   //   console.error('Modal or close button not found in the DOM.');
-//   //   return;
-//   // }
-
-//   links.forEach(function(link) {
-//     link.addEventListener("click", function(event) {
-//       event.preventDefault(); // Prevent the default action of the link
-//       // Save current scroll position
-//       scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-//       // Disable scroll
-//       document.body.style.position = 'fixed';
-//       document.body.style.top = `-${scrollPosition}px`;
-//       modal.style.display = "block";
-
-//       // Scroll modal content to the top
-//       modal.scrollTop = 0;
-
-//       // Check if reCAPTCHA needs to be rendered
-//       if (!captchaRendered) {
-//         renderRecaptcha();
-//         captchaRendered = true;
-//       }
-//     });
-//   });
-
-//   if (span) {
-//     span.onclick = function() {
-//       modal.style.display = "none";
-//       // Enable scroll
-//       document.body.style.position = '';
-//       document.body.style.top = '';
-//       // Restore scroll position
-//       window.scrollTo(0, scrollPosition);
-//     };
-//   }
-
-//   window.onclick = function(event) {
-//     if (event.target === modal) {
-//       modal.style.display = "none";
-//       // Enable scroll
-//       document.body.style.position = '';
-//       document.body.style.top = '';
-//       // Restore scroll position
-//       window.scrollTo(0, scrollPosition);
-//     }
-//   };
-
-//   function renderRecaptcha() {
-//     if (typeof grecaptcha !== "undefined") {
-//       grecaptcha.render(document.querySelector('.g-recaptcha'), {
-//         sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1',
-//         size: 'normal'
-//       });
-//     }
-//   }
-// });
-
 document.addEventListener("DOMContentLoaded", function() {
   var modal = document.getElementById("quoteModal");
   var span = document.querySelector(".quoteModal .close");
@@ -1591,6 +1524,12 @@ document.addEventListener("DOMContentLoaded", function() {
   var scrollPosition = 0;
 
   // Check if modal and span are found in the DOM
+
+  // if (!modal || !span) {
+  //   console.error('Modal or close button not found in the DOM.');
+  //   return;
+  // }
+
   links.forEach(function(link) {
     link.addEventListener("click", function(event) {
       event.preventDefault(); // Prevent the default action of the link
@@ -1620,9 +1559,6 @@ document.addEventListener("DOMContentLoaded", function() {
       document.body.style.top = '';
       // Restore scroll position
       window.scrollTo(0, scrollPosition);
-
-      // Reset modal content to its original state
-      resetModalContent();
     };
   }
 
@@ -1634,155 +1570,17 @@ document.addEventListener("DOMContentLoaded", function() {
       document.body.style.top = '';
       // Restore scroll position
       window.scrollTo(0, scrollPosition);
-
-      // Reset modal content to its original state
-      resetModalContent();
     }
   };
 
   function renderRecaptcha() {
-    if (typeof grecaptcha !== "undefined" && !document.querySelector('.g-recaptcha div')) {
+    if (typeof grecaptcha !== "undefined") {
       grecaptcha.render(document.querySelector('.g-recaptcha'), {
         sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1',
         size: 'normal'
       });
     }
   }
-
-  // Function to reset modal content to its original state
-  function resetModalContent() {
-    modal.innerHTML = '<div class="modal-content">' +
-      '<div class="modal-close-parent"><span class="close">✕</span></div>' +
-      '<section class="ticket-form visible">' + // Ensure form is visible initially
-      '<h2>Submit a Ticket</h2>' +
-      '<form id="myInquiryForm">' +
-      '<div class="form-group">' +
-      '<label for="inquiryName">Name</label>' +
-      '<input type="text" id="inquiryName" name="inquiryName" required>' +
-      '</div>' +
-      '<div class="form-group">' +
-      '<label for="inquiryEmail">Email</label>' +
-      '<input type="email" id="inquiryEmail" name="inquiryEmail" required>' +
-      '</div>' +
-      '<div class="form-group">' +
-      '<label for="inquiryMessage">Message</label>' +
-      '<textarea id="inquiryMessage" name="inquiryMessage" rows="4" required></textarea>' +
-      '</div>' +
-      '<div class="form-group">' +
-      '<label id="inquirymathSumQuestion"></label>' +
-      '<input type="text" id="inquirymathSum" name="inquirymathSum" required>' +
-      '</div>' +
-      '<div class="form-group">' +
-      '<div class="g-recaptcha" data-sitekey="6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1"></div>' +
-      '</div>' +
-      '<button type="submit">Submit</button>' +
-      '</form>' +
-      '</section>' +
-      '<div id="thankYouMessage" class="thank-you-message">' +
-      '<h2>Thank You!</h2>' +
-      '<p>Your inquiry has been submitted successfully. A Tech Unifi representative will reach out to you soon.</p>' +
-      '</div>' +
-      '</div>';
-
-    // Initially hide thank you message
-    document.getElementById('thankYouMessage').style.display = 'none';
-
-    // Rebind event listeners for the form
-    bindFormEvents();
-  }
-
-  // Function to bind event listeners for the form
-  function bindFormEvents() {
-    // Handle form submission
-    var form = document.getElementById('myInquiryForm');
-    form.addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent default form submission
-
-      // Validate the form
-      if (!validateInquiryForm()) {
-        return; // Exit function if form is not valid
-      }
-
-      // Assuming form submission is successful
-      var formData = new FormData(form);
-
-      // Mocking form submission and success
-      setTimeout(function() {
-        // Hide form, show thank you message
-        document.querySelector(".ticket-form").style.display = "none";
-        document.getElementById('thankYouMessage').style.display = 'block';
-
-        // Attach event listener to close button
-        document.querySelector(".quoteModal .close").onclick = function() {
-          modal.style.display = "none";
-          document.body.style.position = '';
-          document.body.style.top = '';
-          window.scrollTo(0, scrollPosition);
-          resetModalContent(); // Reset modal content after closing
-        };
-      }, 500); // Mocking delay
-    });
-
-    // Function to validate the inquiry form
-    function validateInquiryForm() {
-      var formValid = true;
-
-      // Validate each input field in the form
-      $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').each(function() {
-        if ($(this).hasClass('not-required')) {
-          return true; // Skip validation for fields marked as not required
-        }
-
-        if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
-          formValid = false;
-          $(this).css('border-color', 'red');
-          $('html, body').animate({
-            scrollTop: $(this).offset().top - 160
-          }, 500);
-          return false; // Exit the loop on the first invalid field
-        } else {
-          $(this).css('border-color', 'green');
-        }
-      });
-
-      // Validate the math sum question after other fields are validated
-      var inquirymathSumInput = $('#inquirymathSum');
-      var inquirymathSumValue = inquirymathSumInput.val();
-      var inquiryexpectedSum = inquirymathSumInput.data('inquiryexpectedSum');
-      if (!inquirymathSumValue || parseInt(inquirymathSumValue) !== inquiryexpectedSum) {
-        inquirymathSumInput.css('border-color', 'red');
-        formValid = false;
-      } else {
-        inquirymathSumInput.css('border-color', 'green');
-      }
-
-      return formValid; // Return true if all validations pass
-    }
-
-    // Event listener to update math sum question when the form is reset (e.g., after submission)
-    $('#myInquiryForm').on('reset', function() {
-      inquiryupdateMathSumQuestion();
-    });
-
-    // Function to update the math sum question with new numbers
-    function inquiryupdateMathSumQuestion() {
-      var inquiryrandomNumbers = inquirygenerateRandomNumbers();
-      var inquirynum1 = inquiryrandomNumbers[0];
-      var inquirynum2 = inquiryrandomNumbers[1];
-      $('#inquirymathSumQuestion').text('What is ' + inquirynum1 + ' + ' + inquirynum2 + '?');
-      $('#inquirymathSum').data('inquiryexpectedSum', inquirynum1 + inquirynum2); // Store the expected sum in a data attribute for validation
-    }
-
-    // Function to generate random numbers for the math sum question
-    function inquirygenerateRandomNumbers() {
-      var inquirynum1 = Math.floor(Math.random() * 10);
-      var inquirynum2 = Math.floor(Math.random() * 10);
-      return [inquirynum1, inquirynum2];
-    }
-  }
-
-  // Initially bind event listeners for the form
-  bindFormEvents();
 });
 
 
