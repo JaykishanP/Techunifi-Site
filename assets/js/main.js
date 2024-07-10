@@ -1650,7 +1650,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Function to show the "Thank You!" message and hide the form content
   function showThankYouMessage() {
-    const modalContent = document.querySelector('.quoteModal .modal-content');
+    const modalContent = document.querySelector('.quoteModal .modal-content .ticket-form');
     const thankYouMessage = document.querySelector('.quote-thanku');
 
     // Hide the form content
