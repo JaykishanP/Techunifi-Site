@@ -1583,7 +1583,6 @@ document.addEventListener('DOMContentLoaded', function() {
 //   }
 // });
 
-
 document.addEventListener("DOMContentLoaded", function() {
   var modal = document.getElementById("quoteModal");
   var span = document.querySelector(".quoteModal .close");
@@ -1602,8 +1601,8 @@ document.addEventListener("DOMContentLoaded", function() {
     link.addEventListener("click", function(event) {
       event.preventDefault(); // Prevent the default action of the link
 
-      // Reset form and thank you message visibility
-      showForm(); // Ensure form is visible
+      // Reset modal content
+      resetModal();
 
       // Save current scroll position
       scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
@@ -1616,23 +1615,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
   if (span) {
     span.onclick = function() {
-      modal.style.display = "none";
-      // Enable scroll
-      document.body.style.position = '';
-      document.body.style.top = '';
-      // Restore scroll position
-      window.scrollTo(0, scrollPosition);
+      closeModal();
     };
   }
 
   window.onclick = function(event) {
     if (event.target === modal) {
-      modal.style.display = "none";
-      // Enable scroll
-      document.body.style.position = '';
-      document.body.style.top = '';
-      // Restore scroll position
-      window.scrollTo(0, scrollPosition);
+      closeModal();
     }
   };
 
@@ -1657,8 +1646,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  // Function to show the form and hide the thank you message
-  function showForm() {
+  // Function to reset modal to show form and hide thank you message
+  function resetModal() {
     const modalContent = document.querySelector('.quoteModal .modal-content');
 
     // Show the form
@@ -1673,17 +1662,14 @@ document.addEventListener("DOMContentLoaded", function() {
     renderRecaptcha();
   }
 
-  // Function to show the thank you message and hide the form
-  function showThankYouMessage() {
-    const modalContent = document.querySelector('.quoteModal .modal-content');
-
-    // Hide the form
-    ticketForm.style.display = 'none';
-    // Show the thank you message
-    thankYouMessage.style.display = 'inline-block';
-
-    // Show modal content
-    modalContent.style.display = 'block';
+  // Function to close the modal and reset scroll
+  function closeModal() {
+    modal.style.display = "none";
+    // Enable scroll
+    document.body.style.position = '';
+    document.body.style.top = '';
+    // Restore scroll position
+    window.scrollTo(0, scrollPosition);
   }
 
   // Example form submission handling
@@ -1741,6 +1727,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Return validation result
     return isValid;
+  }
+
+  // Function to show the thank you message and hide the form
+  function showThankYouMessage() {
+    const modalContent = document.querySelector('.quoteModal .modal-content');
+
+    // Hide the form
+    ticketForm.style.display = 'none';
+    // Show the thank you message
+    thankYouMessage.style.display = 'inline-block';
+
+    // Show modal content
+    modalContent.style.display = 'block';
   }
 
 });
