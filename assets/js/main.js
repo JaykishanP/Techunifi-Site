@@ -1542,7 +1542,7 @@ document.addEventListener("DOMContentLoaded", function() {
       thankYouSection.style.display = "none";
 
       // Clear form fields
-      document.getElementById("myInquiryForm").reset();
+      document.querySelector(".quoteModal #myInquiryForm").reset();
 
       // Scroll modal content to the top
       modal.scrollTop = 0;
@@ -1580,7 +1580,7 @@ document.addEventListener("DOMContentLoaded", function() {
   };
 
   // Function to handle form submission with validation
-  document.getElementById('myInquiryForm').addEventListener('submit', function(event) {
+  document.querySelector(".quoteModal #myInquiryForm").addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent form submission (for demo purposes)
 
     // Validate form fields and captcha
@@ -1592,7 +1592,7 @@ document.addEventListener("DOMContentLoaded", function() {
       thankYouSection.style.display = "block";
 
       // Clear form fields
-      document.getElementById("myInquiryForm").reset();
+      document.querySelector(".quoteModal #myInquiryForm").reset();
 
       // Reset modal scroll position
       modal.scrollTop = 0;
@@ -1605,7 +1605,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Function to validate form fields
   function validateForm() {
     var isValid = true;
-    var form = document.getElementById("myInquiryForm");
+    var form = document.querySelector(".quoteModal #myInquiryForm");
 
     // Example validation: Check if required fields are filled
     var requiredFields = form.querySelectorAll('[required]');
