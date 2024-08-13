@@ -1772,16 +1772,23 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ==== Captcha Implementaion - Submit a ticket==== */
   function timestamp() {
     var response = document.getElementById("g-recaptcha-response");
+    var captchaSettingsElem = document.getElementsByName("captcha_settings")[0];
+    
     if (response === null) {
         console.warn("g-recaptcha-response element not found");
     } else if (response.value.trim() === "") {
-        var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);
-        elems["ts"] = JSON.stringify(new Date().getTime());
-        document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems);
+        if (captchaSettingsElem) {
+            var elems = JSON.parse(captchaSettingsElem.value);
+            elems["ts"] = JSON.stringify(new Date().getTime());
+            captchaSettingsElem.value = JSON.stringify(elems);
+        } else {
+            console.warn("captcha_settings element not found");
+        }
     }
 }
 
 setInterval(timestamp, 500);
+
 
 
 
