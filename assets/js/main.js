@@ -1,1 +1,1828 @@
-!function(){"use strict";let e=(e,t=!1)=>(e=e.trim(),t)?[...document.querySelectorAll(e)]:document.querySelector(e),t=(e,t)=>{e.addEventListener("scroll",t)},o=t=>{let o=e("header"),n=o.offsetHeight;o.classList.contains("header-scrolled")||(n-=16);let i=e(t).offsetTop;window.scrollTo({top:i-n,behavior:"smooth"})},n=e("#nav-menu");if(n){let i=()=>{window.scrollY>100?n.classList.add("header-scrolled"):n.classList.remove("header-scrolled")};window.addEventListener("load",i),t(document,i)}let r=e(".back-to-top");if(r){let l=()=>{window.scrollY>100?r.classList.add("active"):r.classList.remove("active")};window.addEventListener("load",l),t(document,l)}$(".back-to-top").click(function(e){e.preventDefault(),$("html,body").animate({scrollTop:0},400)}),window.addEventListener("load",()=>{window.location.hash&&e(window.location.hash)&&o(window.location.hash)}),window.addEventListener("load",()=>{AOS.init({duration:1e3,easing:"ease-in-out",once:!0,mirror:!1})}),new PureCounter}();var swiper=new Swiper(".bk-slider .swiper",{slidesPerView:3,speed:500,centeredSlides:!0,autoplay:{delay:3e3,disableOnInteraction:!1,pauseOnMouseEnter:!0},loop:!0,spaceBetween:20,pagination:{el:".swiper-pagination",clickable:!0,renderBullet:function(e,t){return'<span class="'+t+'">'+(e+1)+"</span>"}},navigation:{nextEl:".swiper-button-next",prevEl:".swiper-button-prev"},breakpoints:{320:{slidesPerView:1},480:{slidesPerView:1},640:{slidesPerView:1},1023:{slidesPerView:1},1024:{slidesPerView:3}}});function showPage(e){for(var t=document.querySelectorAll(".news-section"),o=0;o<t.length;o++)o<3*e&&o>=(e-1)*3?t[o].style.display="block":t[o].style.display="none";document.getElementById("tab2").scrollIntoView({behavior:"smooth"})}function setupPagination(){var e,t=Math.ceil(document.querySelectorAll(".news-section").length/2),o=document.getElementById("news-pagination");o.innerHTML="";for(var n=1;n<=t;n++){var i=document.createElement("button");i.textContent=n,i.addEventListener("click",function(){showPage(parseInt(this.textContent))}),o.appendChild(i)}showPage(1)}document.addEventListener("DOMContentLoaded",function(){document.getElementById("news-pagination")&&setupPagination()}),$("option").mousedown(function(e){return e.preventDefault(),$(this).prop("selected",!$(this).prop("selected")),!1});const dropdownBtn=document.querySelectorAll(".dropdown-btn"),dropdown=document.querySelectorAll(".dropdown"),hamburgerBtn=document.getElementById("hamburger"),navMenu=document.querySelector(".menu"),links=document.querySelectorAll(".dropdown a");function setAriaExpandedFalse(){dropdownBtn.forEach(e=>e.setAttribute("aria-expanded","false"))}function closeDropdownMenu(){dropdown.forEach(e=>{e.classList.remove("active"),e.addEventListener("click",e=>e.stopPropagation())})}function toggleHamburger(){navMenu.classList.toggle("show")}function toggleUnderline(e){document.querySelectorAll(".menu-bar li .nav-link").forEach(function(e){e.classList.remove("underline")}),e.target.classList.add("underline")}function openTab(e,t){var o,n,i;for(o=0,n=document.getElementsByClassName("tabcontent");o<n.length;o++)n[o].style.display="none";for(o=0,i=document.getElementsByClassName("tablinks");o<i.length;o++)i[o].className=i[o].className.replace(" active","");document.getElementById(t).style.display="block",e.currentTarget.className+=" active"}function openTab(e,t){var o,n,i;for(o=0,n=document.getElementsByClassName("tabcontent");o<n.length;o++)n[o].style.display="none";for(o=0,i=document.getElementsByClassName("tablinks");o<i.length;o++)i[o].classList.remove("active");document.getElementById(t).style.display="block",e&&e.currentTarget.classList.add("active")}function openTab(e,t){var o,n,i;for(o=0,n=document.getElementsByClassName("tabcontent");o<n.length;o++)n[o].style.display="none";for(o=0,i=document.getElementsByClassName("tablinks");o<i.length;o++)i[o].classList.remove("active");document.getElementById(t).style.display="block",e&&e.currentTarget.classList.add("active")}function redirectToPage(e,t){window.location.href=`${e}?section=${t}`}function openProd(e,t){let o=document.querySelectorAll(".prod-tablinks");o.forEach(e=>e.classList.remove("active"));let n=document.querySelectorAll(".product-tabcontent");n.forEach(e=>e.style.display="none");let i=document.querySelector(`.prod-tablinks[id="prod-${t}"]`);i&&i.classList.add("active"),document.getElementById(t).style.display="block"}function redirectToPage(e,t){window.location.href=`${e}?section=${t}`}function subTicket(e,t){var o,n,i;for(o=0,n=document.getElementsByClassName("sub-tabcontent");o<n.length;o++)n[o].style.display="none";for(o=0,i=document.getElementsByClassName("sub-tablinks");o<i.length;o++)i[o].className=i[o].className.replace(" active","");document.getElementById(t).style.display="block",e.currentTarget.className+=" active"}dropdownBtn.forEach(e=>{e.addEventListener("click",function(t){let o=t.currentTarget.dataset.dropdown,n=document.getElementById(o);n.classList.toggle("active"),dropdown.forEach(t=>{t.id!==e.dataset.dropdown&&t.classList.remove("active")}),t.stopPropagation(),e.setAttribute("aria-expanded","false"===e.getAttribute("aria-expanded")?"true":"false")})}),links.forEach(e=>e.addEventListener("click",()=>{closeDropdownMenu(),setAriaExpandedFalse(),toggleHamburger()})),document.documentElement.addEventListener("click",()=>{closeDropdownMenu(),setAriaExpandedFalse()}),document.addEventListener("keydown",e=>{"Escape"===e.key&&(closeDropdownMenu(),setAriaExpandedFalse())}),hamburgerBtn.addEventListener("click",toggleHamburger),$(document).ready(function(){$(".menu-bar > li").click(function(){$(".menu").addClass("menu-expanded")}),$(".nav-end").click(function(){$(".menu").removeClass("menu-expanded")})}),document.addEventListener("DOMContentLoaded",function(){let e=document.querySelector('a[href="#how-it-works"]');e&&e.addEventListener("click",function(e){e.preventDefault();let t=document.getElementById("how-it-works");if(t){let o=t.offsetTop-180;window.scrollTo({top:o,behavior:"smooth"})}})}),$(document).ready(function(){function e(){let e=window.innerWidth,t=$('[id^="desktop_"]'),o=$('[id^="mobile_"]');e>=1024?(t.css("display","block"),o.css("display","none")):(t.css("display","none"),o.css("display","block"))}e(),$(window).resize(e)}),$(document).ready(function(){"/index.html"===window.location.pathname&&window.location.replace("/")}),document.addEventListener("DOMContentLoaded",function(){var e=document.getElementById("defaultOpen");e&&e.click()}),document.addEventListener("DOMContentLoaded",function(){if("news"===new URLSearchParams(window.location.search).get("tab")){openTab(null,"tab2");for(var e=document.getElementsByClassName("tablinks"),t=0;t<e.length;t++)if("tab2"===e[t].getAttribute("data-tab")){e[t].classList.add("active");break}}}),document.addEventListener("DOMContentLoaded",function(){if("clientList"===new URLSearchParams(window.location.search).get("tab")){openTab(null,"tab4");for(var e=document.getElementsByClassName("tablinks"),t=0;t<e.length;t++)if("tab4"===e[t].getAttribute("data-tab")){e[t].classList.add("active");break}}}),$(".tablinks, .prod-tablinks").click(function(e){e.preventDefault(),$("html,body").animate({scrollTop:0},400)}),document.addEventListener("DOMContentLoaded",function(){var e=document.getElementById("productOpen"),t=document.getElementById("tab-overview");e&&t&&(e.classList.add("active"),t.style.display="block",t.classList.add("active")),document.querySelectorAll(".prod-tablinks").forEach(function(e){e.addEventListener("click",function(t){e.classList.contains("active")&&"productOpen"!==e.id||function e(t,o){for(n=0,i=document.getElementsByClassName("product-tabcontent");n<i.length;n++)i[n].style.display="none",i[n].classList.remove("active");for(n=0,r=document.getElementsByClassName("prod-tablinks");n<r.length;n++)r[n].classList.remove("active");var n,i,r,l=document.getElementById(o);l&&(l.style.display="block",l.classList.add("active")),t.currentTarget.classList.add("active")}(t,e.getAttribute("id").replace("prod-",""))})})}),document.addEventListener("DOMContentLoaded",function(){var e=document.getElementById("productOpen"),t=document.getElementById("tab-overview");e&&t&&e.addEventListener("click",function(o){e.classList.contains("active")||e.classList.add("active"),t.style.display="block"})}),document.addEventListener("DOMContentLoaded",function(){let e=document.querySelector(".prod-prev-button"),t=document.querySelector(".prod-next-button"),o=document.querySelector(".tabs-container");e&&t&&o&&(e.addEventListener("click",function(){o.scrollBy({left:-100,behavior:"smooth"})}),t.addEventListener("click",function(){o.scrollBy({left:100,behavior:"smooth"})}))}),document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".prod-tablinks").forEach(function(e){e.addEventListener("click",function(e){!function e(t){if(window.innerWidth<=767){var o=document.querySelector(".tabs-container"),n=t.getBoundingClientRect(),i=o.getBoundingClientRect(),r=n.left-i.left-i.width/2+n.width/2;o.scrollBy({left:r,behavior:"smooth"})}}(e.currentTarget)})})}),document.addEventListener("DOMContentLoaded",function(){let e=window.location.search,t=new URLSearchParams(e),o=t.get("section");o&&openProd(null,o)}),document.addEventListener("DOMContentLoaded",function(){let e=window.location.search,t=new URLSearchParams(e),o=t.get("section");if(o){let n=document.querySelector(`.prod-tablinks[id="prod-${o}"]`);n&&setTimeout(function(){!function e(t){if(window.innerWidth<=767){var o=document.querySelector(".tabs-container"),n=t.getBoundingClientRect(),i=o.getBoundingClientRect(),r=n.left-i.left-i.width/2+n.width/2;o.scrollBy({left:r,behavior:"smooth"})}}(n)},100)}}),window.onload=function(){if(1===performance.navigation.type){var e=window.location.href.split("?")[0];window.history.replaceState({},document.title,e)}},document.addEventListener("DOMContentLoaded",function(){var e=document.getElementById("sub-defaultOpen");e&&e.click()});var swiper=new Swiper(".home-clients-slider",{speed:400,loop:!0,autoplay:{delay:5e3,disableOnInteraction:!1},slidesPerView:"auto",pagination:{el:".swiper-pagination",type:"bullets",clickable:!0},navigation:{nextEl:".swiper-button-next",prevEl:".swiper-button-prev"},breakpoints:{320:{slidesPerView:1,spaceBetween:40},480:{slidesPerView:1,spaceBetween:20},640:{slidesPerView:2,spaceBetween:20},992:{slidesPerView:3,spaceBetween:20},1200:{slidesPerView:4,centeredSlides:!1,spaceBetween:20}}});document.addEventListener("DOMContentLoaded",function(){var e=document.getElementById("image-modal");if(e){var t=document.getElementById("modal-image"),o=document.getElementById("caption-image");document.querySelectorAll(".swiper-slide img").forEach(function(n){n.onclick=function(){e.style.display="block",t.src=this.src;var n=this.closest(".swiper-slide").querySelector(".home-swipe-img-text").innerText;o.innerHTML=n,swiper.autoplay.stop()}});var n=document.querySelector(".close");n&&n.addEventListener("click",function(){e.style.display="none",swiper.autoplay.start()}),e.addEventListener("click",function(t){t.target==e&&(e.style.display="none",swiper.autoplay.start())})}});const sliders=document.querySelectorAll(".js-slider");sliders.forEach(function(e){new Swiper(e,{spaceBetween:20,slidesPerView:1,grabCursor:!0,pagination:{el:e.querySelector(".swiper-pagination"),clickable:!0},navigation:{nextEl:e.parentNode.querySelector(".swiper-button-next"),prevEl:e.parentNode.querySelector(".swiper-button-prev")},mousewheel:!0})}),document.addEventListener("DOMContentLoaded",function(){window.location.href.indexOf("?activeTab=newInquiry")>-1&&function e(){var t=document.getElementById("sub-tab1"),o=document.getElementById("sub-defaultOpen");t&&(t.style.display="block");for(var n=document.getElementsByClassName("sub-tablinks"),i=0;i<n.length;i++)n[i].classList.remove("active");o&&o.classList.add("active");var r=document.getElementById("newInquiryButton");r&&r.classList.add("active");var l=document.getElementById("sub-defaultOpen");l&&l.classList.remove("active");for(var s=document.getElementsByClassName("sub-tabcontent"),i=0;i<s.length;i++)"sub-tab1"!==s[i].id&&(s[i].style.display="none")}()}),document.addEventListener("DOMContentLoaded",function(){let e=document.querySelectorAll(".left-right .tab a");function t(t){e.forEach(e=>e.classList.remove("active")),t.classList.add("active")}e.forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();let o=this.getAttribute("href").substring(1),n=document.getElementById(o);if(!n)return;t(this);let i=n.getBoundingClientRect().top,r=i+window.scrollY-100;window.scrollTo({top:r,behavior:"smooth"}),document.body.classList.add("scrolling"),setTimeout(()=>{document.body.classList.remove("scrolling")},1e3)})}),window.addEventListener("scroll",function o(){if(document.body.classList.contains("scrolling"))return;let n=document.querySelectorAll(".right-content .id-div");window.scrollY||window.pageYOffset,n.forEach(o=>{let n=o.getBoundingClientRect(),i=o.getAttribute("id");n.top<=100&&n.bottom>=100&&e.forEach(e=>{e.getAttribute("href")===`#${i}`&&t(e)})})});let o=new IntersectionObserver(e=>{!document.body.classList.contains("scrolling")&&e.forEach(e=>{if(e.isIntersecting){let o=e.target.getAttribute("id"),n=document.querySelector(`.left-right .tab a[href="#${o}"]`);n&&t(n)}})},{root:null,rootMargin:"0px",threshold:.5});if(document.querySelectorAll(".right-content .id-div").forEach(e=>{o.observe(e)}),window.location.hash){let n=document.querySelector(`.left-right .tab a[href="${window.location.hash}"]`);if(n){t(n);let i=document.getElementById(window.location.hash.substring(1));if(i){let r=i.getBoundingClientRect().top,l=r+window.scrollY-100;window.scrollTo({top:l,behavior:"smooth"})}}}}),$(document).ready(function(){$(document).scroll(function(){var e=$(this).scrollTop(),t=$(window).height(),o=$("header").outerHeight(),n=$("#hero").outerHeight(),i=$(".bread-crumb-row").outerHeight(),r=$(".head-para-row").outerHeight(),l=$(".left-right .tab"),s=$("header"),a=$(".mobile-fixed-tab-arrow"),c=$(".right-content"),d=$("footer").offset().top,u=$(".email-sub-row").outerHeight();window.matchMedia("(max-width: 767px)").matches?c.each(function(c){var y=$(this),p=y.offset().top;y.outerHeight(),e>p-(o+n+i+r)?e>p?(e+t>=d-u?l.css({position:"fixed",bottom:"auto",top:"auto"}):l.css({position:"fixed",top:o+n+i+r+"px",bottom:"auto"}),s.css("display","none"),a.css("top","0"),l.css("top","80px")):(l.css({position:"static","border-right":"none"}),s.css("display","block"),a.css("top","auto"),l.css("top",o+n+i+r+"px")):(s.css("display","block"),a.css("top","auto"),l.css({position:"static","border-right":"none",top:"auto"}))}):(s.css("display","block"),a.css("top","auto"),l.css({position:"static","border-right":"none",top:"auto"}))})}),$(document).ready(function(){if("#contact"===window.location.hash){var e,t="contact";e=setInterval(function(){$("#"+t).length&&(clearInterval(e),$("html, body").animate({scrollTop:$("#"+t).offset().top},100))},100)}}),$(document).ready(function(){function e(){var e=[Math.floor(10*Math.random()),Math.floor(10*Math.random())],t=e[0],o=e[1];$("#mathSumQuestion").text("What is "+t+" + "+o+"?"),$("#mathSum").data("expectedSum",t+o)}function t(){var e=[Math.floor(10*Math.random()),Math.floor(10*Math.random())],t=e[0],o=e[1];$("#inquirymathSumQuestion").text("What is "+t+" + "+o+"?"),$("#inquirymathSum").data("inquiryexpectedSum",t+o)}e(),$("#submitTicketForm").submit(function(){return function e(){var t=!0;$("#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea").each(function(){return!!$(this).hasClass("not-required")||(!$(this).val()||$(this).is("select[multiple]")&&0===$(this).find("option:selected").length?(t=!1,$(this).css("border-color","red"),$("html, body").animate({scrollTop:$(this).offset().top-200},500),!1):void $(this).css("border-color","green"))});var o=$("#mathSum"),n=o.val(),i=o.data("expectedSum");if(n&&parseInt(n)===i?o.css("border-color","green"):(o.css("border-color","red"),t=!1),!t)return!1}()}),$("#submitTicketForm").on("reset",function(){e()}),$("#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea").on("input change blur",function(){$(this).hasClass("not-required")||($(this).val()||$(this).is("select[multiple]")&&0!==$(this).find("option:selected").length?$(this).css("border-color","green"):$(this).css("border-color","red"))}),t(),$("#myInquiryForm").submit(function(){var e,t,o,n;return e=!0,$("#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea").each(function(){return!!$(this).hasClass("not-required")||(!$(this).val()||$(this).is("select[multiple]")&&0===$(this).find("option:selected").length?(e=!1,$(this).css("border-color","red"),$("html, body").animate({scrollTop:$(this).offset().top-160},500),!1):void $(this).css("border-color","green"))}),o=(t=$("#inquirymathSum")).val(),n=t.data("inquiryexpectedSum"),o&&parseInt(o)===n?t.css("border-color","green"):(t.css("border-color","red"),e=!1),!!e}),$("#submitTicketForm").on("reset",function(){t()}),$("#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea").on("input change blur",function(){$(this).hasClass("not-required")||($(this).val()||$(this).is("select[multiple]")&&0!==$(this).find("option:selected").length?$(this).css("border-color","green"):$(this).css("border-color","red"))})});var tooltipTriggerList=[].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]')),tooltipList=tooltipTriggerList.map(function(e){return new bootstrap.Tooltip(e)});function timestamp(){var e=document.getElementById("g-recaptcha-response");if(null===e)console.warn("g-recaptcha-response element not found");else if(""===e.value.trim()){var t=JSON.parse(document.getElementsByName("captcha_settings")[0].value);t.ts=JSON.stringify(new Date().getTime()),document.getElementsByName("captcha_settings")[0].value=JSON.stringify(t)}}document.addEventListener("DOMContentLoaded",function(){let e=document.querySelectorAll(".swiper-slide"),t=document.querySelectorAll(".card-click");if(e.length>0&&t.length>0){function o(e,t){let o=window.innerWidth,n=e.querySelector(".card-more"),i=e.querySelector(".card-click .card-chev-right"),r=e.querySelector(".card-collapse-content");n&&i&&r&&(t?(o>=1024&&(e.style.width="600px"),n.classList.add("active"),i.classList.add("hidden"),r.style.maxHeight=r.scrollHeight+"px"):(e.style.width="",n.classList.remove("active"),i.classList.remove("hidden"),r.style.maxHeight=null))}o(e[0],!0),t.forEach(function(t){t.addEventListener("click",function(){let n=t.closest(".swiper-slide");e.forEach(function(e){o(e,!1)}),n&&o(n,!0)})}),e.forEach(function(e){let t=e.querySelector(".card-more .card-chev-right");t&&t.addEventListener("click",function(e){e.stopPropagation();let n=t.closest(".swiper-slide");o(n,!1)})})}}),document.addEventListener("DOMContentLoaded",()=>{let e=document.querySelectorAll(".new-how-main"),t={root:null,threshold:.6},o=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){let t=e.target;n(t)}})},t);function n(t){e.forEach(e=>{let o=e.querySelector("h2"),n=e.querySelector(".col-md-5 img"),r=e.querySelector(".col-md-5 p"),l=i(t,e);e===t?(e.classList.add("active"),o.style.color="#EB6D47",o.style.opacity="1",n.style.opacity="1",r.style.opacity="1"):l?(e.classList.remove("active"),o.style.color="#313D53",o.style.opacity="0.7",n.style.opacity="0",r.style.opacity="0"):(e.classList.remove("active"),o.style.color="#313D53",o.style.opacity="0.32",n.style.opacity="0",r.style.opacity="0"),[o,n,r].forEach(e=>{e.style.transition="opacity 0.7s ease, color 0.7s ease"})})}function i(t,o){let n=Array.from(e).indexOf(t),i=Array.from(e).indexOf(o);return 1===Math.abs(n-i)}e.forEach(e=>o.observe(e)),e.forEach(e=>{let t=e.querySelector("h2"),o=e.querySelector(".col-md-5 img"),n=e.querySelector(".col-md-5 p");e.addEventListener("mouseover",()=>{e.classList.contains("active")||(t.style.color="#EB6D47",t.style.opacity="1",o.style.opacity="1",n.style.opacity="1")}),e.addEventListener("mouseout",()=>{e.classList.contains("active")||(t.style.color="#313D53",t.style.opacity="0.32",o.style.opacity="0",n.style.opacity="0")})})}),document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".card-more .card-get-link").forEach(function(e){e.addEventListener("click",function(e){e.preventDefault();let t=e.target.closest(".rows"),o=t.querySelector(".card-click .card-prod-heading").textContent.trim();sessionStorage.setItem("cardDescription",o),window.location.href=e.target.href})})}),document.addEventListener("DOMContentLoaded",function(){let e=sessionStorage.getItem("cardDescription");if(console.log("Loaded Description:",e),e){let t=document.querySelector('textarea[name="description"]');t&&(t.value=e),sessionStorage.removeItem("cardDescription")}}),document.addEventListener("DOMContentLoaded",function(){function e(){let e=document.querySelectorAll("[data-aos], [data-aos-delay]");window.innerWidth<1024&&e.forEach(e=>{e.removeAttribute("data-aos"),e.removeAttribute("data-aos-delay")})}e(),window.addEventListener("resize",function(){e()})}),document.addEventListener("DOMContentLoaded",function(){var e=document.getElementById("quoteModal");if(e){var t=document.querySelector(".quoteModal .close"),o=document.querySelectorAll(".card-more .card-get-link"),n=0,i=!1;o.forEach(function(t){t.addEventListener("click",function(t){t.preventDefault(),n=window.pageYOffset||document.documentElement.scrollTop,document.body.style.position="fixed",document.body.style.top=`-${n}px`,document.body.style.left=0,document.body.style.right=0,e.style.display="block";var o=document.querySelector(".quoteModal .ticket-form"),r=document.querySelector(".quoteModal .quote-thanku");o.style.display="block",r.style.display="none",document.querySelector(".quoteModal #myInquiryForm").reset(),e.scrollTop=0,i||("undefined"!=typeof grecaptcha&&grecaptcha.render(document.querySelector(".g-recaptcha"),{sitekey:"6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1",size:"normal"}),i=!0)})}),t&&(t.onclick=function(){e.style.display="none",document.body.style.position="",document.body.style.top="",document.body.style.left="",document.body.style.right="",window.scrollTo(0,n)}),window.onclick=function(t){t.target===e&&(e.style.display="none",document.body.style.position="",document.body.style.top="",window.scrollTo(0,n))};var r=document.querySelector(".quoteModal #myInquiryForm");r&&r.addEventListener("submit",function(t){var o,n;if(t.preventDefault(),o=!0,n=document.querySelector(".quoteModal #myInquiryForm"),n&&(n.querySelectorAll("[required]").forEach(function(e){e.value.trim()?e.classList.remove("error"):(o=!1,e.classList.add("error"))}),o)&&""!==grecaptcha.getResponse()){var i=document.querySelector(".quoteModal .ticket-form"),r=document.querySelector(".quoteModal .quote-thanku");i.style.display="none",r.style.display="block",document.querySelector(".quoteModal #myInquiryForm").reset(),e.scrollTop=0}else console.log("Form validation failed. Please check your inputs.")})}}),document.addEventListener("DOMContentLoaded",()=>{let e=document.getElementById("quoteModal");if(!e){console.log("Modal element not found on this page.");return}let t=e.querySelector('.productPage textarea[name="description"]'),o=e.querySelector(".close"),n=document.querySelectorAll(".card-more .card-get-link"),i=()=>{e.style.display="block"},r=()=>{e.style.display="none"};o&&o.addEventListener("click",r),n.forEach(e=>{e.addEventListener("click",e=>{e.preventDefault();let o=e.target.closest(".prod-slide-card");if(!o){console.error("Card element not found.");return}let n=o.querySelector(".card-click .card-prod-heading");if(!n){console.error("Card heading element not found.");return}let r=n.innerText.trim();t&&(t.value=r),i()})}),window.addEventListener("click",t=>{t.target===e&&r()}),window.addEventListener("keydown",e=>{"Escape"===e.key&&r()})}),document.addEventListener("DOMContentLoaded",function(){var e=document.getElementById("image-modal"),t=document.querySelector("body");if(e){var o=document.getElementById("modal-image"),n=document.querySelectorAll(".low-structure-img img"),i=window.matchMedia("(max-width: 767px)");n.forEach(function(n){n.onclick=function(){e.style.display="block",o.src=this.src,i.matches?(t.style.overflow="hidden",window.scrollTo(0,0),setTimeout(function(){t.style.overflow="hidden"},0)):t.style.overflow="hidden"}});var r=document.querySelector(".close");r&&r.addEventListener("click",function(){e.style.display="none",t.style.overflow="auto"}),e.addEventListener("click",function(o){o.target==e&&(e.style.display="none",t.style.overflow="auto")})}}),setInterval(timestamp,500);
+ (function() {
+  "use strict";
+
+   //  Easy selector helper function
+  const select = (el, all = false) => {
+    el = el.trim();
+    if (all) {
+      return [...document.querySelectorAll(el)];
+    } else {
+      return document.querySelector(el);
+    }
+  };
+
+   // Easy event listener function
+  const on = (type, el, listener, all = false) => {
+    let selectEl = select(el, all);
+    if (selectEl) {
+      if (all) {
+        selectEl.forEach(e => e.addEventListener(type, listener));
+      } else {
+        selectEl.addEventListener(type, listener);
+      }
+    }
+  };
+
+   //  Easy on scroll event listener 
+   const onscroll = (el, listener) => {
+    el.addEventListener('scroll', listener);
+  };
+
+
+  // Scrolls to an element with header offset
+  const scrollto = (el) => {
+    let header = select('header');
+    let offset = header.offsetHeight;
+
+    if (!header.classList.contains('header-scrolled')) {
+      offset -= 16;
+    }
+
+    let elementPos = select(el).offsetTop;
+    window.scrollTo({
+      top: elementPos - offset,
+      behavior: 'smooth'
+    });
+  };
+
+  // * Toggle .header-scrolled class to #header when page is scrolled
+  let selectHeader = select('#nav-menu');
+  if (selectHeader) {
+    const headerScrolled = () => {
+      if (window.scrollY > 100) {
+        selectHeader.classList.add('header-scrolled');
+      } else {
+        selectHeader.classList.remove('header-scrolled');
+      }
+    };
+    window.addEventListener('load', headerScrolled);
+    onscroll(document, headerScrolled);
+  }
+
+   // Back to top button
+  let backtotop = select('.back-to-top');
+  if (backtotop) {
+    const toggleBacktotop = () => {
+      if (window.scrollY > 100) {
+        backtotop.classList.add('active');
+      } else {
+        backtotop.classList.remove('active');
+      }
+    };
+    window.addEventListener('load', toggleBacktotop);
+    onscroll(document, toggleBacktotop);
+  }
+
+  $('.back-to-top').click(function(event) {
+    event.preventDefault();
+  
+    $('html,body').animate({scrollTop:0}, 400); 
+  });
+  
+
+  // * Scroll with offset on page load with hash links in the URL
+  window.addEventListener('load', () => {
+    if (window.location.hash) {
+      if (select(window.location.hash)) {
+        scrollto(window.location.hash);
+      }
+    }
+  });
+
+
+  // Animation on scroll
+  window.addEventListener('load', () => {
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: true,
+      mirror: false
+    })
+  });
+
+  // Initiate Pure Counter 
+  new PureCounter();
+
+})(); 
+
+
+/* Slick Slider*/
+var swiper = new Swiper('.bk-slider .swiper', {
+  slidesPerView: 3,
+  speed: 500,
+  centeredSlides: true,
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+    pauseOnMouseEnter: true
+  },
+  loop: true,
+  spaceBetween: 20,
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true,
+    renderBullet: function (index, className) {
+      return '<span class="' + className + '">' + (index + 1) + '</span>';
+    },
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  breakpoints: {
+    320: {
+      slidesPerView: 1,
+    },
+    480: {
+      slidesPerView: 1,
+    },
+    640: {
+      slidesPerView: 1,
+    },
+    1023: {
+      slidesPerView: 1,
+    }
+    ,
+    1024: {
+      slidesPerView: 3,
+    }
+  }
+});
+
+// About pagination
+
+function showPage(pageNumber) {
+  var newsSections = document.querySelectorAll('.news-section');
+  var itemsPerPage = 3; // Change this value to adjust the number of items per page
+
+  for (var i = 0; i < newsSections.length; i++) {
+      if (i < pageNumber * itemsPerPage && i >= (pageNumber - 1) * itemsPerPage) {
+          newsSections[i].style.display = 'block';
+      } else {
+          newsSections[i].style.display = 'none';
+      }
+  }
+
+  // Scroll to the top of the news section
+  document.getElementById('tab2').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Function to generate pagination controls
+function setupPagination() {
+  var newsSections = document.querySelectorAll('.news-section');
+  var itemsPerPage = 2; // Change this value to adjust the number of items per page
+  var numPages = Math.ceil(newsSections.length / itemsPerPage);
+
+  var pagination = document.getElementById('news-pagination');
+  pagination.innerHTML = '';
+
+  for (var i = 1; i <= numPages; i++) {
+      var button = document.createElement('button');
+      button.textContent = i;
+      button.addEventListener('click', function() {
+          showPage(parseInt(this.textContent));
+      });
+      pagination.appendChild(button);
+  }
+
+  // Show the first page by default
+  showPage(1);
+}
+
+// Call the setupPagination function when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    if(document.getElementById('news-pagination')) {
+        setupPagination();
+    }
+});
+
+
+
+/* ==== Submit ticket ===== */
+
+$('option').mousedown(function(e) {
+  e.preventDefault();
+  $(this).prop('selected', !$(this).prop('selected'));
+  return false;
+});
+
+
+/* ====== Menu ====== */
+// Menu
+
+const dropdownBtn = document.querySelectorAll(".dropdown-btn");
+const dropdown = document.querySelectorAll(".dropdown");
+const hamburgerBtn = document.getElementById("hamburger");
+const navMenu = document.querySelector(".menu");
+const links = document.querySelectorAll(".dropdown a");
+
+function setAriaExpandedFalse() {
+  dropdownBtn.forEach((btn) => btn.setAttribute("aria-expanded", "false"));
+}
+
+function closeDropdownMenu() {
+  dropdown.forEach((drop) => {
+    drop.classList.remove("active");
+    drop.addEventListener("click", (e) => e.stopPropagation());
+  });
+}
+
+function toggleHamburger() {
+  navMenu.classList.toggle("show");
+}
+
+dropdownBtn.forEach((btn) => {
+  btn.addEventListener("click", function (e) {
+    const dropdownIndex = e.currentTarget.dataset.dropdown;
+    const dropdownElement = document.getElementById(dropdownIndex);
+
+    dropdownElement.classList.toggle("active");
+    dropdown.forEach((drop) => {
+      if (drop.id !== btn.dataset["dropdown"]) {
+        drop.classList.remove("active");
+      }
+    });
+    e.stopPropagation();
+    btn.setAttribute(
+      "aria-expanded",
+      btn.getAttribute("aria-expanded") === "false" ? "true" : "false"
+    );
+  });
+});
+
+// close dropdown menu when the dropdown links are clicked
+links.forEach((link) =>
+  link.addEventListener("click", () => {
+    closeDropdownMenu();
+    setAriaExpandedFalse();
+    toggleHamburger();
+  })
+);
+
+// close dropdown menu when you click on the document body
+document.documentElement.addEventListener("click", () => {
+  closeDropdownMenu();
+  setAriaExpandedFalse();
+});
+
+// close dropdown when the escape key is pressed
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeDropdownMenu();
+    setAriaExpandedFalse();
+  }
+});
+
+// toggle hamburger menu
+hamburgerBtn.addEventListener("click", toggleHamburger);
+
+
+// 
+$(document).ready(function() {
+
+ $(".menu-bar > li").click (function () {
+  $ (".menu").addClass('menu-expanded');
+});
+
+$(".nav-end").click (function () {
+  $ (".menu").removeClass('menu-expanded');
+});
+
+});
+
+// mobile li active underline
+
+function toggleUnderline(event) {
+  var allMenuItems = document.querySelectorAll('.menu-bar li .nav-link');
+  allMenuItems.forEach(function(item) {
+    item.classList.remove('underline');
+  });
+  event.target.classList.add('underline');
+}
+
+
+
+
+/* ==== Header navitem color change ==== */
+
+
+/* ==== how it works redirection ==== */
+document.addEventListener('DOMContentLoaded', function() {
+  const howItWorksLink = document.querySelector('a[href="#how-it-works"]');
+  if (howItWorksLink) {
+      howItWorksLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const target = document.getElementById('how-it-works');
+          if (target) {
+              const offsetTop = target.offsetTop - 180; // Adjusted offset if necessary
+              window.scrollTo({
+                  top: offsetTop,
+                  behavior: 'smooth'
+              });
+          }
+      });
+  }
+});
+
+
+
+// Services
+
+// $(".menu-bar > li").click (function () {
+//   $ (".menu").css('display', 'none');
+// });
+
+// $(".nav-end,").click (function () {
+//   $ (".menu").css('display', 'block');
+// });
+
+
+/* ===== Meta OG ===== */
+$(document).ready(function() {
+  // Function to set meta tags based on screen size
+  function setMetaTags() {
+    const screenWidth = window.innerWidth;
+    const desktopMetaTags = $('[id^="desktop_"]');
+    const mobileMetaTags = $('[id^="mobile_"]');
+    
+    if (screenWidth >= 1024) {
+      desktopMetaTags.css('display', 'block');
+      mobileMetaTags.css('display', 'none');
+    } else {
+      desktopMetaTags.css('display', 'none');
+      mobileMetaTags.css('display', 'block');
+    }
+  }
+
+  // Call the function initially and on window resize
+  setMetaTags();
+  $(window).resize(setMetaTags);
+});
+
+/* ===== domain/index.html ===== */
+$(document).ready(function() {
+  if (window.location.pathname === '/index.html') {
+      window.location.replace('/');
+  }
+});
+
+
+/* ====== About tabs ====== */
+// Tabs
+
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+// document.getElementById("defaultOpen").click();
+
+document.addEventListener('DOMContentLoaded', function() {
+  var defaultOpenButton = document.getElementById("defaultOpen");
+  if (defaultOpenButton) {
+      defaultOpenButton.click();
+  } else {
+      // console.error("Element with ID 'defaultOpen' not found.");
+  }
+});
+
+
+/* ==== Home to News - About Page ==== */
+
+document.addEventListener('DOMContentLoaded', function() {
+  var urlParams = new URLSearchParams(window.location.search);
+  var tabParam = urlParams.get('tab');
+  if (tabParam === 'news') {
+    openTab(null, 'tab2'); // Assuming 'tab2' is the ID of the News tab
+    var tabLinks = document.getElementsByClassName('tablinks');
+    for (var i = 0; i < tabLinks.length; i++) {
+      if (tabLinks[i].getAttribute('data-tab') === 'tab2') {
+        tabLinks[i].classList.add('active');
+        break; // Stop looping once the News tab link is found
+      }
+    }
+  }
+});
+
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].classList.remove("active"); // Remove active class from all tab links
+  }
+  document.getElementById(tabName).style.display = "block";
+  if (evt) {
+    evt.currentTarget.classList.add("active"); // Add active class to the clicked tab link
+  }
+}
+
+/* ==== Home to ClientList - About Page ==== */
+document.addEventListener('DOMContentLoaded', function() {
+  var urlParams = new URLSearchParams(window.location.search);
+  var tabParam = urlParams.get('tab');
+  if (tabParam === 'clientList') {
+    openTab(null, 'tab4'); // Assuming 'tab2' is the ID of the News tab
+    var tabLinks = document.getElementsByClassName('tablinks');
+    for (var i = 0; i < tabLinks.length; i++) {
+      if (tabLinks[i].getAttribute('data-tab') === 'tab4') {
+        tabLinks[i].classList.add('active');
+        break; // Stop looping once the News tab link is found
+      }
+    }
+  }
+});
+
+function openTab(evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].classList.remove("active"); // Remove active class from all tab links
+  }
+  document.getElementById(tabName).style.display = "block";
+  if (evt) {
+    evt.currentTarget.classList.add("active"); // Add active class to the clicked tab link
+  }
+}
+
+
+/* === Scroll to about top === */
+//scroll to top on tab click
+$('.tablinks, .prod-tablinks').click(function(event) {
+  event.preventDefault();
+
+  $('html,body').animate({scrollTop:0}, 400); 
+});
+
+
+/* ====== Product ======*/
+//Product - Tabs
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Function to handle tab clicks
+  function openProd(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("product-tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+      tabcontent[i].classList.remove("active");
+    }
+    tablinks = document.getElementsByClassName("prod-tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].classList.remove("active"); // Remove active class from all tab links
+    }
+
+    var cityElement = document.getElementById(cityName);
+    if (cityElement) {
+      cityElement.style.display = "block";
+      cityElement.classList.add("active");
+    }
+
+    // Add active class to the clicked tab button
+    evt.currentTarget.classList.add("active");
+  }
+
+  // Find and handle the overview tab
+  var productOpenButton = document.getElementById("productOpen");
+  var overviewTabContent = document.getElementById("tab-overview");
+
+  if (productOpenButton && overviewTabContent) {
+    productOpenButton.classList.add("active"); // Add active class to Overview tab button
+    overviewTabContent.style.display = "block"; // Ensure Overview content is visible
+    overviewTabContent.classList.add("active"); // Add active class to Overview tab content
+  }
+
+  // Adding event listeners to all tab buttons
+  var tabButtons = document.querySelectorAll(".prod-tablinks");
+  tabButtons.forEach(function(button) {
+    button.addEventListener("click", function(event) {
+      var isActive = button.classList.contains("active");
+      if (!isActive || button.id === "productOpen") {
+        openProd(event, button.getAttribute("id").replace("prod-", ""));
+      }
+    });
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  var overviewTabButton = document.getElementById("productOpen");
+  var overviewTabContent = document.getElementById("tab-overview");
+
+  if (overviewTabButton && overviewTabContent) {
+    overviewTabButton.addEventListener("click", function(event) {
+      if (!overviewTabButton.classList.contains("active")) {
+        overviewTabButton.classList.add("active");
+        overviewTabContent.style.display = "block";
+      } else {
+        overviewTabContent.style.display = "block"; // Ensure content is visible even if button is already active
+      }
+    });
+  }
+});
+
+
+
+/* ======== Prod tab Mobile slide ============  */
+document.addEventListener("DOMContentLoaded", function() {
+  const prevButton = document.querySelector(".prod-prev-button");
+  const nextButton = document.querySelector(".prod-next-button");
+  const tabsContainer = document.querySelector(".tabs-container");
+
+  if (prevButton && nextButton && tabsContainer) {
+    prevButton.addEventListener("click", function() {
+      tabsContainer.scrollBy({ left: -100, behavior: 'smooth' }); // Scroll left by 100 pixels smoothly
+    });
+
+    nextButton.addEventListener("click", function() {
+      tabsContainer.scrollBy({ left: 100, behavior: 'smooth' }); // Scroll right by 100 pixels smoothly
+    });
+  } 
+  // else {
+  //   console.error("One or more elements not found.");
+  // }
+});
+
+/* ======= Prod center Mobile slide ========= */
+document.addEventListener('DOMContentLoaded', function() {
+  function centerActiveTab(tab) {
+    if (window.innerWidth <= 767) { // Check if the screen width is 767px or less
+      var tabsContainer = document.querySelector('.tabs-container');
+      var tabRect = tab.getBoundingClientRect();
+      var containerRect = tabsContainer.getBoundingClientRect();
+
+      var offset = tabRect.left - containerRect.left - (containerRect.width / 2) + (tabRect.width / 2);
+      tabsContainer.scrollBy({
+        left: offset,
+        behavior: 'smooth'
+      });
+    }
+  }
+
+  var tabButtons = document.querySelectorAll('.prod-tablinks');
+  tabButtons.forEach(function(button) {
+    button.addEventListener('click', function(event) {
+      centerActiveTab(event.currentTarget);
+    });
+  });
+});
+
+
+/* ======== ============ */
+// redirect from h to p
+
+function redirectToPage(page, section) {
+  window.location.href = `${page}?section=${section}`;
+}
+
+function openProd(event, tabName) {
+  // Get all elements with class "prod-tablinks" and remove the class "active"
+  const tabLinks = document.querySelectorAll('.prod-tablinks');
+  tabLinks.forEach(link => link.classList.remove('active'));
+
+  // Get all elements with class "product-tabcontent" and hide them
+  const tabContents = document.querySelectorAll('.product-tabcontent');
+  tabContents.forEach(content => content.style.display = 'none');
+
+  // Add the "active" class to the button that opened the tab
+  const activeButton = document.querySelector(`.prod-tablinks[id="prod-${tabName}"]`);
+  if (activeButton) {
+    activeButton.classList.add('active');
+  }
+
+  // Show the specific tab content
+  document.getElementById(tabName).style.display = 'block';
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const section = urlParams.get('section');
+
+  if (section) {
+    openProd(null, section);
+  }
+});
+
+function redirectToPage(page, section) {
+  window.location.href = `${page}?section=${section}`;
+}
+
+/* ======= redirect from h to p Prod center Mobile slide ========= */
+document.addEventListener('DOMContentLoaded', function() {
+  function centerActiveTab(tab) {
+    if (window.innerWidth <= 767) { // Check if the screen width is 767px or less
+      var tabsContainer = document.querySelector('.tabs-container');
+      var tabRect = tab.getBoundingClientRect();
+      var containerRect = tabsContainer.getBoundingClientRect();
+
+      var offset = tabRect.left - containerRect.left - (containerRect.width / 2) + (tabRect.width / 2);
+      tabsContainer.scrollBy({
+        left: offset,
+        behavior: 'smooth'
+      });
+    }
+  }
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const section = urlParams.get('section');
+
+  if (section) {
+    const activeButton = document.querySelector(`.prod-tablinks[id="prod-${section}"]`);
+    if (activeButton) {
+      // Add a slight delay to ensure the DOM has rendered the tab content
+      setTimeout(function() {
+        centerActiveTab(activeButton);
+      }, 100); // Adjust the delay time if necessary
+    }
+  }
+});
+
+
+
+/* == == */
+window.onload = function() {
+  if (performance.navigation.type === 1) {
+      // Page is being reloaded
+      // Remove the query parameter from the URL
+      var currentUrl = window.location.href;
+      var cleanUrl = currentUrl.split('?')[0];
+      window.history.replaceState({}, document.title, cleanUrl);
+  }
+};
+
+
+/* ======== Submit Tab ======== */
+
+function subTicket(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("sub-tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("sub-tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+// document.getElementById("productOpen").click();
+
+document.addEventListener('DOMContentLoaded', function() {
+  var productOpenButton = document.getElementById("sub-defaultOpen");
+  if (productOpenButton) {
+    productOpenButton.click();
+  } else {
+      // console.error("Element with ID 'defaultOpen' not found.");
+  }
+});
+
+
+/* ======== Home img Slider ========= */
+// Initialize Swiper
+var swiper = new Swiper('.home-clients-slider', {
+  speed: 400,
+  loop: true,
+  autoplay: {
+    delay: 5000,
+    disableOnInteraction: false
+  },
+  slidesPerView: 'auto',
+  pagination: {
+    el: '.swiper-pagination',
+    type: 'bullets',
+    clickable: true
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev'
+  },
+  breakpoints: {
+    320: {
+      slidesPerView: 1,
+      spaceBetween: 40
+    },
+    480: {
+      slidesPerView: 1,
+      spaceBetween: 20
+    },
+    640: {
+      slidesPerView: 2,
+      spaceBetween: 20
+    },
+    992: {
+      slidesPerView: 3,
+      spaceBetween: 20,
+    },
+    1200: {
+      slidesPerView: 4,
+      centeredSlides: false,
+      spaceBetween: 20,
+    }
+  }
+});
+
+
+// Home clients scale up
+document.addEventListener('DOMContentLoaded', function () {
+  var modal = document.getElementById("image-modal");
+  
+  if (modal) {
+    var modalImg = document.getElementById("modal-image");
+    var captionText = document.getElementById("caption-image");
+
+    var images = document.querySelectorAll('.swiper-slide img');
+    images.forEach(function (img) {
+      img.onclick = function () {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        
+        // Get the caption text from the corresponding .home-swipe-img-text element
+        var parentSlide = this.closest('.swiper-slide');
+        var caption = parentSlide.querySelector('.home-swipe-img-text').innerText;
+        captionText.innerHTML = caption;
+
+        swiper.autoplay.stop(); // Stop autoplay when modal is opened
+      };
+    });
+
+    var span = document.querySelector(".close");
+
+    if (span) {
+      span.addEventListener('click', function () {
+        modal.style.display = "none";
+        swiper.autoplay.start(); // Start autoplay when modal is closed
+      });
+    }
+
+    modal.addEventListener('click', function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+        swiper.autoplay.start(); // Start autoplay when modal is closed
+      }
+    });
+  }
+});
+
+
+/* ======== Products Slider ========== */
+
+// Get all elements with the class '.js-slider'
+const sliders = document.querySelectorAll(".js-slider");
+
+// Iterate over each slider element
+sliders.forEach(function(slider) {
+    const swiper = new Swiper(slider, {
+        spaceBetween: 20,
+        slidesPerView: 1,
+        grabCursor: true,
+        pagination: {
+            el: slider.querySelector(".swiper-pagination"),
+            clickable: true,
+        },
+        navigation: {
+            nextEl: slider.parentNode.querySelector(".swiper-button-next"), // Corrected selector to find next button
+            prevEl: slider.parentNode.querySelector(".swiper-button-prev"), // Corrected selector to find previous button
+        },
+        mousewheel: true,
+    });
+
+
+});
+
+
+
+/* ======== new Inquiry ======== */
+document.addEventListener('DOMContentLoaded', function() {
+  // Function to activate the "New Inquiry" tab and display its content
+  function activateNewInquiryTab() {
+      var newInquiryTabContent = document.getElementById("sub-tab1");
+      var newInquiryTabLink = document.getElementById("sub-defaultOpen");
+
+      // Display "New Inquiry" tab content
+      if (newInquiryTabContent) {
+          newInquiryTabContent.style.display = "block";
+      }
+
+      // Remove "active" class from all tab links
+      var tabLinks = document.getElementsByClassName("sub-tablinks");
+      for (var i = 0; i < tabLinks.length; i++) {
+          tabLinks[i].classList.remove("active");
+      }
+
+      // Add "active" class to "New Inquiry" tab link
+      if (newInquiryTabLink) {
+          newInquiryTabLink.classList.add("active");
+      }
+
+      // Activate the "New Inquiry" button
+      var newInquiryButton = document.getElementById("newInquiryButton");
+      if (newInquiryButton) {
+          newInquiryButton.classList.add("active");
+      }
+
+      // Remove "active" class from the "Submit a Ticket" button
+      var submitTicketButton = document.getElementById("sub-defaultOpen");
+      if (submitTicketButton) {
+          submitTicketButton.classList.remove("active");
+      }
+
+      // Hide other tab contents
+      var otherTabs = document.getElementsByClassName("sub-tabcontent");
+      for (var i = 0; i < otherTabs.length; i++) {
+          if (otherTabs[i].id !== "sub-tab1") {
+              otherTabs[i].style.display = "none";
+          }
+      }
+  }
+
+  // Check if the URL contains "?activeTab=newInquiry"
+  if (window.location.href.indexOf("?activeTab=newInquiry") > -1) {
+      // Activate the "New Inquiry" tab and button
+      activateNewInquiryTab();
+  }
+});
+
+
+/* ====== Leftnav highlight on scroll ======= */
+
+// document.addEventListener("DOMContentLoaded", function() {
+//   const tabLinks = document.querySelectorAll(".left-right .tab a");
+  
+//   window.addEventListener("scroll", function() {
+//     const sections = document.querySelectorAll(".right-content .id-div");
+//     const scrollPosition = window.scrollY || window.pageYOffset;
+    
+//     sections.forEach(section => {
+//       const rect = section.getBoundingClientRect();
+      
+//       if (rect.top <= 0 && rect.bottom > 0) {
+//         const id = section.getAttribute("id");
+//         tabLinks.forEach(link => {
+//           if (link.getAttribute("href") === `#${id}`) {
+//             link.classList.add("active");
+//           } else {
+//             link.classList.remove("active");
+//           }
+//         });
+//       }
+//     });
+//   });
+// });
+
+// document.addEventListener("DOMContentLoaded", function() {
+//   const tabLinks = document.querySelectorAll(".left-right .tab a");
+  
+//   tabLinks.forEach(link => {
+//     link.addEventListener("click", function(event) {
+      
+//       tabLinks.forEach(link => {
+//         link.classList.remove("active");
+//       });
+      
+//       this.classList.add("active");
+//     });
+//   });
+// });
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  const tabLinks = document.querySelectorAll(".left-right .tab a");
+
+  // Helper function to set active tab
+  function setActiveTab(link) {
+    tabLinks.forEach(link => link.classList.remove("active"));
+    link.classList.add("active");
+  }
+
+  // Click event for tabs
+  tabLinks.forEach(link => {
+    link.addEventListener("click", function(event) {
+      event.preventDefault();
+      const targetId = this.getAttribute("href").substring(1);
+      const targetSection = document.getElementById(targetId);
+
+      if (!targetSection) return;
+
+      // Set active class immediately
+      setActiveTab(this);
+
+      // Calculate the top position considering the offset
+      const headerOffset = 100; // Adjust as necessary for fixed headers
+      const elementPosition = targetSection.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      // Smooth scroll to the target section
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+
+      // Add a temporary flag to prevent scroll event from interfering
+      document.body.classList.add('scrolling');
+      setTimeout(() => {
+        document.body.classList.remove('scrolling');
+      }, 1000);
+    });
+  });
+
+  // Scroll event to update active tab
+  function handleScroll() {
+    if (document.body.classList.contains('scrolling')) {
+      return; // Prevent scroll event from interfering during smooth scroll
+    }
+
+    const sections = document.querySelectorAll(".right-content .id-div");
+    const scrollPosition = window.scrollY || window.pageYOffset;
+
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      const id = section.getAttribute("id");
+
+      if (rect.top <= 100 && rect.bottom >= 100) { // Adjusted offset for better accuracy
+        tabLinks.forEach(link => {
+          if (link.getAttribute("href") === `#${id}`) {
+            setActiveTab(link);
+          }
+        });
+      }
+    });
+  }
+
+  window.addEventListener("scroll", handleScroll);
+
+  // Intersection Observer for better performance and accuracy
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5 // Adjust the threshold as necessary
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    if (document.body.classList.contains('scrolling')) {
+      return; // Prevent observer event from interfering during smooth scroll
+    }
+
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute("id");
+        const tabLink = document.querySelector(`.left-right .tab a[href="#${id}"]`);
+
+        if (tabLink) {
+          setActiveTab(tabLink);
+        }
+      }
+    });
+  }, options);
+
+  document.querySelectorAll('.right-content .id-div').forEach(section => {
+    observer.observe(section);
+  });
+
+  // Highlight the tab corresponding to the current hash on page load
+  if (window.location.hash) {
+    const initialTab = document.querySelector(`.left-right .tab a[href="${window.location.hash}"]`);
+    if (initialTab) {
+      setActiveTab(initialTab);
+      const targetSection = document.getElementById(window.location.hash.substring(1));
+      if (targetSection) {
+        const headerOffset = 100; // Adjust as necessary for fixed headers
+        const elementPosition = targetSection.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    }
+  }
+});
+
+
+
+/* ======== mobile prod sidebar fixed ======== */
+
+$(document).ready(function() {
+  $(document).scroll(function() {
+    var scroll_top = $(this).scrollTop();
+    var windowHeight = $(window).height();
+    var headerHeight = $('header').outerHeight();
+    var heroHeight = $('#hero').outerHeight();
+    var breadCrumbHeight = $('.bread-crumb-row').outerHeight();
+    var headParaHeight = $('.head-para-row').outerHeight();
+    var tab = $('.left-right .tab');
+    var header = $('header');
+    var mobileFixedTabArrow = $('.mobile-fixed-tab-arrow');
+    var tabContainers = $('.right-content');
+    var footerOffsetTop = $('footer').offset().top;
+    var emailSubRowHeight = $('.email-sub-row').outerHeight();
+
+    if (window.matchMedia('(max-width: 767px)').matches) {
+      tabContainers.each(function(index) {
+        var tabContainer = $(this);
+        var tabContainerOffsetTop = tabContainer.offset().top;
+        var tabContainerHeight = tabContainer.outerHeight();
+        var tabContainerBottom = tabContainerOffsetTop + tabContainerHeight;
+
+        if (scroll_top > tabContainerOffsetTop - (headerHeight + heroHeight + breadCrumbHeight + headParaHeight)) {
+          if (scroll_top > tabContainerOffsetTop) {
+            if (scroll_top + windowHeight >= footerOffsetTop - emailSubRowHeight) {
+              var tabBottom = footerOffsetTop - scroll_top - emailSubRowHeight;
+              tab.css({
+                'position': 'fixed',
+                // 'bottom': tabBottom + 'px',
+                'bottom': 'auto',
+                'top': 'auto'
+              });
+            } else {
+              tab.css({
+                'position': 'fixed',
+                'top': headerHeight + heroHeight + breadCrumbHeight + headParaHeight + 'px',
+                'bottom': 'auto'
+              });
+            }
+
+            header.css('display', 'none');
+            mobileFixedTabArrow.css('top', '0');
+            tab.css('top', '80px');
+          } else {
+            tab.css({
+              'position': 'static',
+              'border-right': 'none'
+            });
+            header.css('display', 'block');
+            mobileFixedTabArrow.css('top', 'auto');
+            tab.css('top', headerHeight + heroHeight + breadCrumbHeight + headParaHeight + 'px');
+          }
+        } else {
+          header.css('display', 'block');
+          mobileFixedTabArrow.css('top', 'auto');
+          tab.css({
+            'position': 'static',
+            'border-right': 'none',
+            'top': 'auto'
+          });
+        }
+      });
+    } else {
+      header.css('display', 'block');
+      mobileFixedTabArrow.css('top', 'auto');
+      tab.css({
+        'position': 'static',
+        'border-right': 'none',
+        'top': 'auto'
+      });
+    }
+  });
+});
+
+
+/* ======== menu contact ========= */
+$(document).ready(function() {
+  function scrollToElementByIdWithJQuery(id) {
+    var checkExist = setInterval(function() {
+      if ($("#" + id).length) {
+        clearInterval(checkExist);
+        $('html, body').animate({
+          scrollTop: $("#" + id).offset().top
+        }, 100); // smooth scroll to the element
+      }
+    }, 100); // check every 100ms
+  }
+
+  if (window.location.hash === '#contact') {
+    scrollToElementByIdWithJQuery('contact');
+  }
+});
+
+
+/* ==== Form Validation ====  */
+
+$(document).ready(function() {
+
+  /* ======= Submit a Ticket ======= */
+  /*Math Function for Submit Ticket */
+  function generateRandomNumbers() {
+    var num1 = Math.floor(Math.random() * 10);
+    var num2 = Math.floor(Math.random() * 10);
+    return [num1, num2];
+  }
+ 
+  // Function to update the math sum question with new numbers
+  function updateMathSumQuestion() {
+    var randomNumbers = generateRandomNumbers();
+    var num1 = randomNumbers[0];
+    var num2 = randomNumbers[1];
+    $('#mathSumQuestion').text('What is ' + num1 + ' + ' + num2 + '?');
+    $('#mathSum').data('expectedSum', num1 + num2); // Store the expected sum in a data attribute for validation
+  }
+ 
+  // Call the function to update the math sum question when the document is ready
+  updateMathSumQuestion();
+ 
+  function validateTicketForm() {
+    var formValid = true;
+
+    // Check each input field in the form
+    $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').each(function() {
+        // Skip validation for fields with class "not-required"
+        if ($(this).hasClass('not-required')) {
+            return true; // Skip this field and continue with the next one
+        }
+
+        // If the field is empty or not selected
+        if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
+            formValid = false;
+            $(this).css('border-color', 'red');
+            // Scroll to the field
+            $('html, body').animate({
+                scrollTop: $(this).offset().top - 200 // Adjust the offset to ensure the field is visible
+            }, 500);
+            return false; // Exit the loop after scrolling to the first invalid field
+        } else {
+            // Set border color to green if the field is filled
+            $(this).css('border-color', 'green');
+        }
+    });
+
+    // Validate math sum question after other fields are validated
+    var mathSumInput = $('#mathSum');
+    var mathSumValue = mathSumInput.val();
+    var expectedSum = mathSumInput.data('expectedSum'); // Retrieve the expected sum from the data attribute
+    if (!mathSumValue || parseInt(mathSumValue) !== expectedSum) {
+        mathSumInput.css('border-color', 'red');
+        formValid = false;
+        
+    } else {
+        mathSumInput.css('border-color', 'green');
+    }
+
+    // Return false if any field is empty or not selected
+    if (!formValid) {
+        return false;
+    }
+}
+
+ 
+    $('#submitTicketForm').submit(function() {
+      return validateTicketForm();
+    });
+ 
+    // Event listener to update math sum question when the form is reset (e.g., after submission)
+    $('#submitTicketForm').on('reset', function() {
+      updateMathSumQuestion();
+    });
+ 
+    $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').on('input change blur', function() {
+      if (!$(this).hasClass('not-required')) {
+          if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
+              $(this).css('border-color', 'green');
+          } else {
+              $(this).css('border-color', 'red');
+          }
+      }
+    });
+  
+
+    /* === New Inquiry Form === */
+
+    /*Math Function for Submit Ticket */
+  function inquirygenerateRandomNumbers() {
+    var inquirynum1 = Math.floor(Math.random() * 10);
+    var inquirynum2 = Math.floor(Math.random() * 10);
+    return [inquirynum1, inquirynum2];
+  }
+ 
+  // Function to update the math sum question with new numbers
+  function inquiryupdateMathSumQuestion() {
+    var inquiryrandomNumbers = inquirygenerateRandomNumbers();
+    var inquirynum1 = inquiryrandomNumbers[0];
+    var inquirynum2 = inquiryrandomNumbers[1];
+    $('#inquirymathSumQuestion').text('What is ' + inquirynum1 + ' + ' + inquirynum2 + '?');
+    $('#inquirymathSum').data('inquiryexpectedSum', inquirynum1 + inquirynum2); // Store the expected sum in a data attribute for validation
+  }
+
+    // Call the function to update the math sum question when the document is ready
+    inquiryupdateMathSumQuestion();
+
+    function validateInquiryForm() {
+      var formValid = true;
+  
+      $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').each(function() {
+          if ($(this).hasClass('not-required')) {
+              return true;
+          }
+  
+          if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
+              formValid = false;
+              $(this).css('border-color', 'red');
+              $('html, body').animate({
+                  scrollTop: $(this).offset().top - 160 // Adjust the offset to ensure the field is visible
+              }, 500);
+              return false;
+          } else {
+              $(this).css('border-color', 'green');
+          }
+      });
+  
+      // Validate math sum question after other fields are validated
+      var inquirymathSumInput = $('#inquirymathSum'); // Corrected selector
+      var inquirymathSumValue = inquirymathSumInput.val();
+      var inquiryexpectedSum = inquirymathSumInput.data('inquiryexpectedSum'); // Retrieve the expected sum from the data attribute
+      if (!inquirymathSumValue || parseInt(inquirymathSumValue) !== inquiryexpectedSum) {
+          inquirymathSumInput.css('border-color', 'red');
+          formValid = false;
+      } else {
+          inquirymathSumInput.css('border-color', 'green');
+      }
+  
+      if (!formValid) {
+          return false;
+      }
+      
+      return true; // Return true if all validations pass
+  }
+    
+    // Add event listener for form submission
+  
+    $('#myInquiryForm').submit(function() {
+      return validateInquiryForm();
+    });
+    
+     // Event listener to update math sum question when the form is reset (e.g., after submission)
+     $('#submitTicketForm').on('reset', function() {
+      inquiryupdateMathSumQuestion();
+    });
+    
+    
+    // Add event listeners for input, change, and blur events to change border color dynamically
+  
+    $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').on('input change blur', function() {
+      if (!$(this).hasClass('not-required')) {
+          if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
+              $(this).css('border-color', 'green');
+          } else {
+              $(this).css('border-color', 'red');
+          }
+      }
+    });
+    
+  
+  });
+
+
+/* ==== Tooltip ==== */
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+
+
+/* ==== Product Accordion Approach ==== */
+/* ==== Card Width ==== */
+
+document.addEventListener('DOMContentLoaded', function() {
+  const swiperSlides = document.querySelectorAll('.swiper-slide');
+  const cardClicks = document.querySelectorAll('.card-click');
+
+  if (swiperSlides.length > 0 && cardClicks.length > 0) {
+    // Function to reset width and hide/show card-more and card-chev-right
+    function toggleCardDetails(slide, showDetails) {
+      const screenWidth = window.innerWidth;
+      const cardMore = slide.querySelector('.card-more');
+      const cardChevRight = slide.querySelector('.card-click .card-chev-right');
+      const cardCollapseContent = slide.querySelector('.card-collapse-content');
+
+      if (cardMore && cardChevRight && cardCollapseContent) {
+        if (showDetails) {
+          if (screenWidth >= 1024) {
+            slide.style.width = '600px'; // Set width to show card-more
+          }
+          cardMore.classList.add('active'); // Show card-more
+          cardChevRight.classList.add('hidden'); // Hide card-chev-right
+          cardCollapseContent.style.maxHeight = cardCollapseContent.scrollHeight + 'px'; // Expand content
+        } else {
+          slide.style.width = ''; // Reset width
+          cardMore.classList.remove('active'); // Hide card-more
+          cardChevRight.classList.remove('hidden'); // Show card-chev-right
+          cardCollapseContent.style.maxHeight = null; // Collapse content
+        }
+      }
+    }
+
+    // Set width and activate card-more for the first slide by default
+    toggleCardDetails(swiperSlides[0], true);
+
+    // Handle click on any card-click
+    cardClicks.forEach(function(card) {
+      card.addEventListener('click', function() {
+        // Find the nearest swiper-slide parent
+        const swiperSlide = card.closest('.swiper-slide');
+
+        // Reset all slides and hide all card-mores
+        swiperSlides.forEach(function(slide) {
+          toggleCardDetails(slide, false);
+        });
+
+        // Show/hide card-more and reset width for the clicked one
+        if (swiperSlide) {
+          toggleCardDetails(swiperSlide, true);
+        }
+      });
+    });
+
+    // Handle click on card-more to close it
+    swiperSlides.forEach(function(slide) {
+      const cardMore = slide.querySelector('.card-more .card-chev-right');
+      if (cardMore) {
+        cardMore.addEventListener('click', function(event) {
+          event.stopPropagation(); // Prevent click event from bubbling up to the card-click
+          const swiperSlide = cardMore.closest('.swiper-slide');
+          toggleCardDetails(swiperSlide, false);
+        });
+      }
+    });
+  }
+});
+
+ 
+
+/* ===== New How Works ===== */
+
+document.addEventListener('DOMContentLoaded', () => {
+  const sections = document.querySelectorAll('.new-how-main');
+  const options = {
+    root: null,
+    threshold: 0.6
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const activeSection = entry.target;
+        adjustAdjacentOpacity(activeSection);
+      }
+    });
+  }, options);
+
+  sections.forEach(section => observer.observe(section));
+
+  function adjustAdjacentOpacity(activeSection) {
+    sections.forEach(section => {
+      const h1Element = section.querySelector('h2');
+      const imgElement = section.querySelector('.col-md-5 img');
+      const pElement = section.querySelector('.col-md-5 p');
+      const isAdjacentSection = isAdjacent(activeSection, section);
+
+      if (section === activeSection) {
+        section.classList.add('active');
+        h1Element.style.color = '#EB6D47';
+        h1Element.style.opacity = '1';
+        imgElement.style.opacity = '1';
+        pElement.style.opacity = '1';
+      } else if (isAdjacentSection) {
+        section.classList.remove('active');
+        h1Element.style.color = '#313D53';
+        h1Element.style.opacity = '0.7';
+        imgElement.style.opacity = '0';
+        pElement.style.opacity = '0';
+      } else {
+        section.classList.remove('active');
+        h1Element.style.color = '#313D53';
+        h1Element.style.opacity = '0.32';
+        imgElement.style.opacity = '0';
+        pElement.style.opacity = '0';
+      }
+
+      [h1Element, imgElement, pElement].forEach(elem => {
+        elem.style.transition = 'opacity 0.7s ease, color 0.7s ease';
+      });
+    });
+  }
+
+  function isAdjacent(section1, section2) {
+    const index1 = Array.from(sections).indexOf(section1);
+    const index2 = Array.from(sections).indexOf(section2);
+    return Math.abs(index1 - index2) === 1;
+  }
+
+  sections.forEach(section => {
+    const h1Element = section.querySelector('h2');
+    const imgElement = section.querySelector('.col-md-5 img');
+    const pElement = section.querySelector('.col-md-5 p');
+
+    section.addEventListener('mouseover', () => {
+      if (!section.classList.contains('active')) {
+        h1Element.style.color = '#EB6D47';
+        h1Element.style.opacity = '1';
+        imgElement.style.opacity = '1';
+        pElement.style.opacity = '1';
+      }
+    });
+
+    section.addEventListener('mouseout', () => {
+      if (!section.classList.contains('active')) {
+        h1Element.style.color = '#313D53';
+        h1Element.style.opacity = '0.32';
+        imgElement.style.opacity = '0';
+        pElement.style.opacity = '0';
+      }
+    });
+  });
+});
+
+
+/* ===== Product heading to new Inquiry ===== */
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.card-more .card-get-link').forEach(function(link) {
+    link.addEventListener('click', function(event) {
+      event.preventDefault();
+
+      // Find the corresponding card's description
+      const card = event.target.closest('.rows');
+      const description = card.querySelector('.card-click .card-prod-heading').textContent.trim();
+
+      // Save the description to sessionStorage
+      sessionStorage.setItem('cardDescription', description);
+
+      // Redirect to submit.html with activeTab parameter
+      window.location.href = event.target.href;
+    });
+  });
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Check if there is a description saved in sessionStorage
+  const description = sessionStorage.getItem('cardDescription');
+  console.log('Loaded Description:', description); // Debugging statement
+  if (description) {
+    // Fill the Description textarea
+    const descriptionTextarea = document.querySelector('textarea[name="description"]');
+    if (descriptionTextarea) {
+      descriptionTextarea.value = description;
+    }
+
+    // Optionally, you can clear the saved description from sessionStorage
+    sessionStorage.removeItem('cardDescription');
+  }
+});
+
+
+/* ==== remove AOS for mobile(<1024) ==== */
+document.addEventListener('DOMContentLoaded', function() {
+  function removeAOSAttributes() {
+    const elements = document.querySelectorAll('[data-aos], [data-aos-delay]');
+    if (window.innerWidth < 1024) {
+      elements.forEach(element => {
+        element.removeAttribute('data-aos');
+        element.removeAttribute('data-aos-delay');
+      });
+    }
+  }
+
+  // Run the function on page load
+  removeAOSAttributes();
+
+  // Run the function on window resize
+  window.addEventListener('resize', function() {
+    removeAOSAttributes();
+  });
+});
+
+
+/* ==== Get a Quote Modal Popup ==== */
+
+document.addEventListener("DOMContentLoaded", function() {
+  var modal = document.getElementById("quoteModal");
+
+  // Check if the modal exists before proceeding
+  if (!modal) {
+    return; // Exit the script if modal is not found
+  }
+
+  var span = document.querySelector(".quoteModal .close");
+  var links = document.querySelectorAll(".card-more .card-get-link");
+  var scrollPosition = 0;
+  var captchaRendered = false;
+
+  links.forEach(function(link) {
+    link.addEventListener("click", function(event) {
+      event.preventDefault(); // Prevent the default action of the link
+      // Save current scroll position
+      scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+      // Disable scroll
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollPosition}px`;
+      document.body.style.left = 0;
+      document.body.style.right = 0;
+      modal.style.display = "block";
+
+      // Show the form section and hide the thank you message
+      var formSection = document.querySelector(".quoteModal .ticket-form");
+      var thankYouSection = document.querySelector(".quoteModal .quote-thanku");
+      formSection.style.display = "block";
+      thankYouSection.style.display = "none";
+
+      // Clear form fields
+      document.querySelector(".quoteModal #myInquiryForm").reset();
+
+      // Scroll modal content to the top
+      modal.scrollTop = 0;
+
+      // Check if reCAPTCHA needs to be rendered
+      if (!captchaRendered) {
+        renderRecaptcha();
+        captchaRendered = true;
+      }
+    });
+  });
+
+  if (span) {
+    span.onclick = function() {
+      modal.style.display = "none";
+      // Enable scroll
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      // Restore scroll position
+      window.scrollTo(0, scrollPosition);
+    };
+  }
+
+  window.onclick = function(event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+      // Enable scroll
+      document.body.style.position = '';
+      document.body.style.top = '';
+      // Restore scroll position
+      window.scrollTo(0, scrollPosition);
+    }
+  };
+
+  // Function to handle form submission with validation
+  var form = document.querySelector(".quoteModal #myInquiryForm");
+  if (form) {
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission (for demo purposes)
+
+      // Validate form fields and captcha
+      if (validateForm() && validateCaptcha()) {
+        // Display thank you message and hide form
+        var formSection = document.querySelector(".quoteModal .ticket-form");
+        var thankYouSection = document.querySelector(".quoteModal .quote-thanku");
+        formSection.style.display = "none";
+        thankYouSection.style.display = "block";
+
+        // Clear form fields
+        document.querySelector(".quoteModal #myInquiryForm").reset();
+
+        // Reset modal scroll position
+        modal.scrollTop = 0;
+      } else {
+        // Form validation failed, handle accordingly (e.g., show error messages)
+        console.log("Form validation failed. Please check your inputs.");
+      }
+    });
+  }
+
+  // Function to validate form fields
+  function validateForm() {
+    var isValid = true;
+    var form = document.querySelector(".quoteModal #myInquiryForm");
+
+    if (!form) return false;
+
+    // Example validation: Check if required fields are filled
+    var requiredFields = form.querySelectorAll('[required]');
+    requiredFields.forEach(function(field) {
+      if (!field.value.trim()) {
+        isValid = false;
+        // You can implement your error handling here (e.g., displaying error messages)
+        field.classList.add('error'); // Example: Add error class for styling
+      } else {
+        field.classList.remove('error');
+      }
+    });
+
+    return isValid;
+  }
+
+  // Function to validate captcha
+  function validateCaptcha() {
+    // Replace with your captcha validation logic
+    // Example: Check if captcha response is valid
+    var captchaResponse = grecaptcha.getResponse();
+    return captchaResponse !== ''; // Return true if captcha response is not empty
+  }
+
+  // Function to render reCAPTCHA
+  function renderRecaptcha() {
+    if (typeof grecaptcha !== "undefined") {
+      grecaptcha.render(document.querySelector('.g-recaptcha'), {
+        sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1',
+        size: 'normal'
+      });
+    }
+  }
+
+});
+
+
+/* =========  Product heading to Modal Popup new Inquiry ========== */
+
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('quoteModal');
+  
+  // Check if modal exists on the page
+  if (!modal) {
+    console.log('Modal element not found on this page.');
+    return;
+  }
+
+  const descriptionTextarea = modal.querySelector('.productPage textarea[name="description"]');
+  const closeModalButton = modal.querySelector('.close');
+  const getQuoteLinks = document.querySelectorAll('.card-more .card-get-link');
+
+  const openModal = () => {
+    modal.style.display = 'block';
+  };
+
+  const closeModal = () => {
+    modal.style.display = 'none';
+  };
+
+  if (closeModalButton) {
+    closeModalButton.addEventListener('click', closeModal);
+  }
+
+  getQuoteLinks.forEach(link => {
+    link.addEventListener('click', event => {
+      event.preventDefault();
+
+      const card = event.target.closest('.prod-slide-card');
+
+      if (!card) {
+        console.error('Card element not found.');
+        return;
+      }
+
+      const cardHeading = card.querySelector('.card-click .card-prod-heading');
+
+      if (!cardHeading) {
+        console.error('Card heading element not found.');
+        return;
+      }
+
+      const cardHeadingContent = cardHeading.innerText.trim();
+
+      if (descriptionTextarea) {
+        descriptionTextarea.value = cardHeadingContent;
+      }
+
+      openModal();
+    });
+  });
+
+  window.addEventListener('click', event => {
+    if (event.target === modal) {
+      closeModal();
+    }
+  });
+
+  window.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeModal();
+    }
+  });
+});
+
+/* ========= Lowvoltage Structure cabling popup  ==========  */
+
+document.addEventListener('DOMContentLoaded', function () {
+  var modal = document.getElementById("image-modal");
+  var body = document.querySelector("body");
+  
+  if (modal) {
+    var modalImg = document.getElementById("modal-image");
+    var images = document.querySelectorAll('.low-structure-img img');
+    var mediaQuery = window.matchMedia("(max-width: 767px)");
+    
+    images.forEach(function (img) {
+      img.onclick = function () {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        
+        if (mediaQuery.matches) {
+          body.style.overflow = "hidden"; // Disable scrolling on body
+          window.scrollTo(0, 0); // Scroll to top when modal opens only on small screens
+          setTimeout(function () {
+            body.style.overflow = "hidden"; // Ensure scrolling is still disabled
+          }, 0);
+        } else {
+          body.style.overflow = "hidden"; // Disable scrolling on body
+        }
+      };
+    });
+
+    var span = document.querySelector(".close");
+
+    if (span) {
+      span.addEventListener('click', function () {
+        modal.style.display = "none";
+        body.style.overflow = "auto"; // Re-enable scrolling on body
+      });
+    }
+
+    modal.addEventListener('click', function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+        body.style.overflow = "auto"; // Re-enable scrolling on body
+      }
+    });
+  }
+});
+
+
+
+  /* ==== Captcha Implementaion - Submit a ticket==== */
+  function timestamp() {
+    var response = document.getElementById("g-recaptcha-response");
+    if (!response) {
+        console.warn("g-recaptcha-response element not found");
+        return;
+    }
+    
+    if (response.value.trim() === "") {
+        var captchaSettingsElem = document.getElementsByName("captcha_settings")[0];
+        if (captchaSettingsElem) {
+            var elems = JSON.parse(captchaSettingsElem.value);
+            elems["ts"] = new Date().getTime(); // no need to stringify here
+            captchaSettingsElem.value = JSON.stringify(elems);
+        }
+    }
+}
+
+// Optionally, adjust or replace setInterval based on your needs
+setInterval(timestamp, 500);
+
+
+
+
+/* ==== Event Close ==== */
+
+// document.addEventListener('DOMContentLoaded', function() {
+//   const closeButtons = document.querySelectorAll('.event-close');
+
+//   closeButtons.forEach(function(button) {
+//       button.addEventListener('click', function() {
+//           this.closest('.event-section').style.display = 'none';
+
+//           const heroSub = document.querySelector('.hero-sub');
+//           if (heroSub) {
+//               if (window.innerWidth <= 767) {
+//                   heroSub.style.padding = '50px 0 0 0';
+//               } else {
+//                   heroSub.style.padding = '200px 0 0 0';
+//               }
+//           }
+//       });
+//   });
+
+//   window.addEventListener('resize', function() {
+//       const heroSub = document.querySelector('.hero-sub');
+//       if (heroSub) {
+//           if (window.innerWidth <= 767) {
+//               heroSub.style.padding = '50px 0 0 0';
+//           } else {
+//               heroSub.style.padding = '200px 0 0 0';
+//           }
+//       }
+//   });
+// });
+
+
