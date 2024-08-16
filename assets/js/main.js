@@ -1485,10 +1485,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 /* ==== Get a Quote Modal Popup ==== */
- 
+
 document.addEventListener("DOMContentLoaded", function() {
   var modal = document.getElementById("quoteModal");
-  
+
   // Check if the modal exists before proceeding
   if (!modal) {
     return; // Exit the script if modal is not found
@@ -1526,22 +1526,38 @@ document.addEventListener("DOMContentLoaded", function() {
       modal.scrollTop = 0;
 
       // Render reCAPTCHA if not already rendered
-      // if (!captchaRendered) {
-      //   renderRecaptcha();
-      //   captchaRendered = true; // Set to true after rendering to prevent re-rendering
-      // }
+      if (!captchaRendered) {
+        renderRecaptcha();
+        captchaRendered = true; // Set to true after rendering to prevent re-rendering
+      }
     });
   });
 
   if (span) {
     span.onclick = function() {
-      closeModal();
+      modal.style.display = "none";
+      // Enable scroll
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      // Restore scroll position
+      window.scrollTo(0, scrollPosition);
+      // Clean up reCAPTCHA (if needed)
+      cleanUpRecaptcha();
     };
   }
 
   window.onclick = function(event) {
     if (event.target === modal) {
-      closeModal();
+      modal.style.display = "none";
+      // Enable scroll
+      document.body.style.position = '';
+      document.body.style.top = '';
+      // Restore scroll position
+      window.scrollTo(0, scrollPosition);
+      // Clean up reCAPTCHA (if needed)
+      cleanUpRecaptcha();
     }
   };
 
@@ -1552,7 +1568,7 @@ document.addEventListener("DOMContentLoaded", function() {
       event.preventDefault(); // Prevent form submission (for demo purposes)
 
       // Validate form fields and captcha
-      if (validateForm()) {
+      if (validateForm() && validateCaptcha()) {
         // Display thank you message and hide form
         var formSection = document.querySelector(".quoteModal .ticket-form");
         var thankYouSection = document.querySelector(".quoteModal .quote-thanku");
@@ -1594,45 +1610,34 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   // Function to validate captcha
-  // function validateCaptcha() {
-  //   var captchaResponse = grecaptcha.getResponse();
-  //   return captchaResponse !== ''; // Return true if captcha response is not empty
-  // }
+  function validateCaptcha() {
+    var captchaResponse = grecaptcha.getResponse();
+    if (captchaResponse.length === 0) {
+      console.log("Please complete the reCAPTCHA.");
+      return false;
+    }
+    return true;
+  }
 
   // Function to render reCAPTCHA
-  // function renderRecaptcha() {
-  //   var captchaElement = document.querySelector('.g-recaptcha');
-
-  //   if (typeof grecaptcha !== "undefined" && captchaElement) {
-  //     // Check if reCAPTCHA is already rendered in the element
-  //     if (captchaElement.getAttribute('data-sitekey') === null) {
-  //       grecaptcha.render(captchaElement, {
-  //         sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1', // Replace with your reCAPTCHA site key
-  //         size: 'normal'
-  //       });
-  //     }
-  //   }
-  // }
-
-  // Function to close modal and clean up
-  function closeModal() {
-    modal.style.display = "none";
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.left = '';
-    document.body.style.right = '';
-    window.scrollTo(0, scrollPosition);
-    cleanUpRecaptcha();
+  function renderRecaptcha() {
+    var captchaElement = document.querySelector('.g-recaptcha');
+    if (typeof grecaptcha !== "undefined" && captchaElement && captchaElement.childElementCount === 0) {
+      grecaptcha.render(captchaElement, {
+        sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1' // Replace with your site key
+      });
+    }
   }
 
   // Function to clean up reCAPTCHA
   function cleanUpRecaptcha() {
     var captchaElement = document.querySelector('.g-recaptcha');
     if (captchaElement && grecaptcha) {
-      grecaptcha.reset();
+      grecaptcha.reset(); // Reset captcha to ensure it can be re-used
     }
   }
 });
+
 
 
 /* =========  Product heading to Modal Popup new Inquiry ========== */
