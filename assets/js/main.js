@@ -1527,7 +1527,7 @@ document.addEventListener("DOMContentLoaded", function() {
       // Render reCAPTCHA if not already rendered
       if (!captchaRendered) {
         renderRecaptcha();
-        captchaRendered = true; // Prevent further rendering
+        captchaRendered = true;
       }
     });
   });
@@ -1630,6 +1630,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 });
+
 
 
 /* =========  Product heading to Modal Popup new Inquiry ========== */
