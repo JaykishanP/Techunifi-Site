@@ -1485,39 +1485,50 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 /* ==== Get a Quote Modal Popup ==== */
+ 
 document.addEventListener("DOMContentLoaded", function() {
   var modal = document.getElementById("quoteModal");
-  var captchaElement = document.querySelector('.g-recaptcha');
-  var scrollPosition = 0;
-  var captchaRendered = false;
-
-  if (!modal) return;
+  
+  // Check if the modal exists before proceeding
+  if (!modal) {
+    return; // Exit the script if modal is not found
+  }
 
   var span = document.querySelector(".quoteModal .close");
   var links = document.querySelectorAll(".card-more .card-get-link");
+  var scrollPosition = 0;
+  var captchaRendered = false;
 
   links.forEach(function(link) {
     link.addEventListener("click", function(event) {
-      event.preventDefault();
+      event.preventDefault(); // Prevent the default action of the link
 
+      // Save current scroll position
       scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+
+      // Disable scroll
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollPosition}px`;
       document.body.style.left = 0;
       document.body.style.right = 0;
       modal.style.display = "block";
 
+      // Show the form section and hide the thank you message
       var formSection = document.querySelector(".quoteModal .ticket-form");
       var thankYouSection = document.querySelector(".quoteModal .quote-thanku");
       formSection.style.display = "block";
       thankYouSection.style.display = "none";
 
+      // Clear form fields
       document.querySelector(".quoteModal #myInquiryForm").reset();
+
+      // Scroll modal content to the top
       modal.scrollTop = 0;
 
+      // Render reCAPTCHA if not already rendered
       if (!captchaRendered) {
         renderRecaptcha();
-        captchaRendered = true;
+        captchaRendered = true; // Set to true after rendering to prevent re-rendering
       }
     });
   });
@@ -1534,36 +1545,46 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   };
 
+  // Function to handle form submission with validation
   var form = document.querySelector(".quoteModal #myInquiryForm");
   if (form) {
     form.addEventListener('submit', function(event) {
-      event.preventDefault();
+      event.preventDefault(); // Prevent form submission (for demo purposes)
 
+      // Validate form fields and captcha
       if (validateForm() && validateCaptcha()) {
+        // Display thank you message and hide form
         var formSection = document.querySelector(".quoteModal .ticket-form");
         var thankYouSection = document.querySelector(".quoteModal .quote-thanku");
         formSection.style.display = "none";
         thankYouSection.style.display = "block";
 
+        // Clear form fields
         document.querySelector(".quoteModal #myInquiryForm").reset();
+
+        // Reset modal scroll position
         modal.scrollTop = 0;
       } else {
-        console.log("Form validation failed or captcha not completed.");
+        // Form validation failed, handle accordingly (e.g., show error messages)
+        console.log("Form validation failed. Please check your inputs.");
       }
     });
   }
 
+  // Function to validate form fields
   function validateForm() {
     var isValid = true;
     var form = document.querySelector(".quoteModal #myInquiryForm");
 
     if (!form) return false;
 
+    // Example validation: Check if required fields are filled
     var requiredFields = form.querySelectorAll('[required]');
     requiredFields.forEach(function(field) {
       if (!field.value.trim()) {
         isValid = false;
-        field.classList.add('error');
+        // You can implement your error handling here (e.g., displaying error messages)
+        field.classList.add('error'); // Example: Add error class for styling
       } else {
         field.classList.remove('error');
       }
@@ -1572,18 +1593,19 @@ document.addEventListener("DOMContentLoaded", function() {
     return isValid;
   }
 
+  // Function to validate captcha
   function validateCaptcha() {
     var captchaResponse = grecaptcha.getResponse();
-    if (captchaResponse === '') {
-      console.log("Please complete the reCAPTCHA.");
-      return false;
-    }
-    return true;
+    return captchaResponse !== ''; // Return true if captcha response is not empty
   }
 
+  // Function to render reCAPTCHA
   function renderRecaptcha() {
+    var captchaElement = document.querySelector('.g-recaptcha');
+
     if (typeof grecaptcha !== "undefined" && captchaElement) {
-      if (captchaElement.innerHTML.trim() === '') { // Ensure reCAPTCHA is not already rendered
+      // Check if reCAPTCHA is already rendered in the element
+      if (captchaElement.getAttribute('data-sitekey') === null) {
         grecaptcha.render(captchaElement, {
           sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1', // Replace with your reCAPTCHA site key
           size: 'normal'
@@ -1592,12 +1614,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  function cleanUpRecaptcha() {
-    if (captchaElement && grecaptcha) {
-      grecaptcha.reset();
-    }
-  }
-
+  // Function to close modal and clean up
   function closeModal() {
     modal.style.display = "none";
     document.body.style.position = '';
@@ -1606,7 +1623,14 @@ document.addEventListener("DOMContentLoaded", function() {
     document.body.style.right = '';
     window.scrollTo(0, scrollPosition);
     cleanUpRecaptcha();
-    captchaRendered = false;
+  }
+
+  // Function to clean up reCAPTCHA
+  function cleanUpRecaptcha() {
+    var captchaElement = document.querySelector('.g-recaptcha');
+    if (captchaElement && grecaptcha) {
+      grecaptcha.reset();
+    }
   }
 });
 
