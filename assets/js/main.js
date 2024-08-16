@@ -1636,6 +1636,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
+
 /* =========  Product heading to Modal Popup new Inquiry ========== */
 
 document.addEventListener('DOMContentLoaded', () => {
