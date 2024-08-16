@@ -1626,12 +1626,12 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   // Function to clean up reCAPTCHA
-  function cleanUpRecaptcha() {
-    var captchaElement = document.querySelector('.g-recaptcha');
-    if (captchaElement && grecaptcha) {
-      grecaptcha.reset();
-    }
-  }
+  // function cleanUpRecaptcha() {
+  //   var captchaElement = document.querySelector('.g-recaptcha');
+  //   if (captchaElement && grecaptcha) {
+  //     grecaptcha.reset();
+  //   }
+  // }
 });
 
 
