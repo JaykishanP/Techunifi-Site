@@ -1489,9 +1489,8 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener("DOMContentLoaded", function() {
   var modal = document.getElementById("quoteModal");
 
-  // Check if the modal exists before proceeding
   if (!modal) {
-    return; // Exit if modal is not found
+    return;
   }
 
   var span = document.querySelector(".quoteModal .close");
@@ -1501,19 +1500,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
   links.forEach(function(link) {
     link.addEventListener("click", function(event) {
-      event.preventDefault(); // Prevent default link action
+      event.preventDefault();
 
-      // Save current scroll position
+      // Save and disable scroll
       scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-
-      // Disable scroll
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollPosition}px`;
       document.body.style.left = 0;
       document.body.style.right = 0;
       modal.style.display = "block";
 
-      // Show form section and hide thank you message
+      // Show form and hide thank you section
       var formSection = document.querySelector(".quoteModal .ticket-form");
       var thankYouSection = document.querySelector(".quoteModal .quote-thanku");
       formSection.style.display = "block";
@@ -1522,10 +1519,7 @@ document.addEventListener("DOMContentLoaded", function() {
       // Clear form fields
       document.querySelector(".quoteModal #myInquiryForm").reset();
 
-      // Scroll modal content to the top
-      modal.scrollTop = 0;
-
-      // Render reCAPTCHA only if not already rendered
+      // Render reCAPTCHA if not already rendered
       if (!captchaRendered) {
         renderRecaptcha();
         captchaRendered = true;
@@ -1545,11 +1539,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   };
 
-  // Function to handle form submission with validation
   var form = document.querySelector(".quoteModal #myInquiryForm");
   if (form) {
     form.addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent form submission (for demo purposes)
+      event.preventDefault();
 
       if (validateForm() && validateCaptcha()) {
         var formSection = document.querySelector(".quoteModal .ticket-form");
@@ -1565,7 +1558,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-  // Function to validate form fields
   function validateForm() {
     var isValid = true;
     var form = document.querySelector(".quoteModal #myInquiryForm");
@@ -1585,7 +1577,6 @@ document.addEventListener("DOMContentLoaded", function() {
     return isValid;
   }
 
-  // Function to validate reCAPTCHA
   function validateCaptcha() {
     var captchaResponse = grecaptcha.getResponse();
     if (captchaResponse.length === 0) {
@@ -1595,24 +1586,20 @@ document.addEventListener("DOMContentLoaded", function() {
     return true;
   }
 
-  // Function to render reCAPTCHA
   function renderRecaptcha() {
     var captchaElement = document.querySelector('.g-recaptcha');
     if (captchaElement && typeof grecaptcha !== "undefined") {
-      // Render reCAPTCHA only if it hasn't been rendered before
+      // Ensure reCAPTCHA is rendered only once
       if (!captchaElement.hasAttribute('data-widget-id')) {
         grecaptcha.render(captchaElement, {
-          sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1' // Replace with your site key
+          sitekey: 'YOUR_SITE_KEY'
         });
-      } else {
-        console.log("reCAPTCHA element is already rendered.");
       }
     } else {
       console.log("reCAPTCHA element not found.");
     }
   }
 
-  // Function to close modal and clean up
   function closeModal() {
     modal.style.display = "none";
     document.body.style.position = '';
@@ -1623,11 +1610,10 @@ document.addEventListener("DOMContentLoaded", function() {
     cleanUpRecaptcha();
   }
 
-  // Function to clean up reCAPTCHA
   function cleanUpRecaptcha() {
     var captchaElement = document.querySelector('.g-recaptcha');
     if (captchaElement && grecaptcha) {
-      grecaptcha.reset(); // Reset reCAPTCHA if necessary
+      grecaptcha.reset();
     }
   }
 });
