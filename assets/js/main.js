@@ -1630,12 +1630,12 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   // Function to clean up reCAPTCHA
-  function cleanUpRecaptcha() {
-    var captchaElement = document.querySelector('.g-recaptcha');
-    if (captchaElement && grecaptcha) {
-      grecaptcha.reset(); // Reset captcha to ensure it can be re-used
-    }
-  }
+  // function cleanUpRecaptcha() {
+  //   var captchaElement = document.querySelector('.g-recaptcha');
+  //   if (captchaElement && grecaptcha) {
+  //     grecaptcha.reset(); // Reset captcha to ensure it can be re-used
+  //   }
+  // }
 });
 
 
