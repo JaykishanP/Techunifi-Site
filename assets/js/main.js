@@ -1489,18 +1489,17 @@ document.addEventListener("DOMContentLoaded", function() {
   var modal = document.getElementById("quoteModal");
   var captchaElement = document.querySelector('.g-recaptcha');
   var scrollPosition = 0;
-  var captchaRendered = false; // Track if reCAPTCHA has been rendered
+  var captchaRendered = false;
 
-  if (!modal) return; // Exit if modal is not found
+  if (!modal) return;
 
   var span = document.querySelector(".quoteModal .close");
   var links = document.querySelectorAll(".card-more .card-get-link");
 
   links.forEach(function(link) {
     link.addEventListener("click", function(event) {
-      event.preventDefault(); // Prevent the default action of the link
+      event.preventDefault();
 
-      // Save current scroll position and disable scroll
       scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollPosition}px`;
@@ -1508,19 +1507,14 @@ document.addEventListener("DOMContentLoaded", function() {
       document.body.style.right = 0;
       modal.style.display = "block";
 
-      // Show form section and hide thank you message
       var formSection = document.querySelector(".quoteModal .ticket-form");
       var thankYouSection = document.querySelector(".quoteModal .quote-thanku");
       formSection.style.display = "block";
       thankYouSection.style.display = "none";
 
-      // Clear form fields
       document.querySelector(".quoteModal #myInquiryForm").reset();
-
-      // Scroll modal content to the top
       modal.scrollTop = 0;
 
-      // Render reCAPTCHA if not already rendered
       if (!captchaRendered) {
         renderRecaptcha();
         captchaRendered = true;
@@ -1540,33 +1534,25 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   };
 
-  // Function to handle form submission with validation
   var form = document.querySelector(".quoteModal #myInquiryForm");
   if (form) {
     form.addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent form submission (for demo purposes)
+      event.preventDefault();
 
-      // Validate form fields and captcha
       if (validateForm() && validateCaptcha()) {
-        // Display thank you message and hide form
         var formSection = document.querySelector(".quoteModal .ticket-form");
         var thankYouSection = document.querySelector(".quoteModal .quote-thanku");
         formSection.style.display = "none";
         thankYouSection.style.display = "block";
 
-        // Clear form fields
         document.querySelector(".quoteModal #myInquiryForm").reset();
-
-        // Reset modal scroll position
         modal.scrollTop = 0;
       } else {
-        // Handle validation failure
-        console.log("Form validation failed. Please check your inputs.");
+        console.log("Form validation failed or captcha not completed.");
       }
     });
   }
 
-  // Function to validate form fields
   function validateForm() {
     var isValid = true;
     var form = document.querySelector(".quoteModal #myInquiryForm");
@@ -1577,7 +1563,7 @@ document.addEventListener("DOMContentLoaded", function() {
     requiredFields.forEach(function(field) {
       if (!field.value.trim()) {
         isValid = false;
-        field.classList.add('error'); // Add error class for styling
+        field.classList.add('error');
       } else {
         field.classList.remove('error');
       }
@@ -1586,34 +1572,32 @@ document.addEventListener("DOMContentLoaded", function() {
     return isValid;
   }
 
-  // Function to validate captcha
   function validateCaptcha() {
     var captchaResponse = grecaptcha.getResponse();
     if (captchaResponse === '') {
       console.log("Please complete the reCAPTCHA.");
-      return false; // Return false if captcha response is empty
+      return false;
     }
     return true;
   }
 
-  // Function to render reCAPTCHA
   function renderRecaptcha() {
-    if (typeof grecaptcha !== "undefined" && captchaElement && !captchaElement.querySelector('.g-recaptcha-response')) {
-      grecaptcha.render(captchaElement, {
-        sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1', // Replace with your reCAPTCHA site key
-        size: 'normal'
-      });
+    if (typeof grecaptcha !== "undefined" && captchaElement) {
+      if (captchaElement.innerHTML.trim() === '') { // Ensure reCAPTCHA is not already rendered
+        grecaptcha.render(captchaElement, {
+          sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1', // Replace with your reCAPTCHA site key
+          size: 'normal'
+        });
+      }
     }
   }
 
-  // Function to clean up reCAPTCHA
   function cleanUpRecaptcha() {
     if (captchaElement && grecaptcha) {
-      grecaptcha.reset(); // Reset captcha to ensure it can be re-used
+      grecaptcha.reset();
     }
   }
 
-  // Function to close modal and cleanup
   function closeModal() {
     modal.style.display = "none";
     document.body.style.position = '';
@@ -1622,7 +1606,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.body.style.right = '';
     window.scrollTo(0, scrollPosition);
     cleanUpRecaptcha();
-    captchaRendered = false; // Reset captcha rendered flag after closing the modal
+    captchaRendered = false;
   }
 });
 
