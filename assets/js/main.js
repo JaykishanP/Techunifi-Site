@@ -1488,7 +1488,6 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener("DOMContentLoaded", function() {
   var modal = document.getElementById("quoteModal");
 
-  // Check if the modal exists before proceeding
   if (!modal) {
     return; // Exit the script if modal is not found
   }
@@ -1524,7 +1523,7 @@ document.addEventListener("DOMContentLoaded", function() {
       // Scroll modal content to the top
       modal.scrollTop = 0;
 
-      // Check if reCAPTCHA needs to be rendered
+      // Render reCAPTCHA if not already rendered
       if (!captchaRendered) {
         renderRecaptcha();
         captchaRendered = true; // Set to true after rendering to prevent re-rendering
@@ -1612,8 +1611,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Function to validate captcha
   function validateCaptcha() {
-    // Replace with your captcha validation logic
-    // Example: Check if captcha response is valid
     var captchaResponse = grecaptcha.getResponse();
     return captchaResponse !== ''; // Return true if captcha response is not empty
   }
@@ -1631,14 +1628,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Function to clean up reCAPTCHA
   function cleanUpRecaptcha() {
-    // Example: Reset reCAPTCHA if needed
     var captchaElement = document.querySelector('.g-recaptcha');
     if (captchaElement && grecaptcha) {
-      grecaptcha.reset();
+      grecaptcha.reset(); // Reset captcha to ensure it can be re-used
     }
   }
 });
-
 
 
 /* =========  Product heading to Modal Popup new Inquiry ========== */
