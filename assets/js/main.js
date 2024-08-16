@@ -1487,31 +1487,28 @@ document.addEventListener('DOMContentLoaded', function() {
 /* ==== Get a Quote Modal Popup ==== */
 document.addEventListener("DOMContentLoaded", function() {
   var modal = document.getElementById("quoteModal");
+  var captchaElement = document.querySelector('.g-recaptcha');
+  var captchaRendered = false; // Track if reCAPTCHA is rendered
+  var scrollPosition = 0;
 
-  if (!modal) {
-    return; // Exit the script if modal is not found
-  }
+  if (!modal) return; // Exit if modal is not found
 
   var span = document.querySelector(".quoteModal .close");
   var links = document.querySelectorAll(".card-more .card-get-link");
-  var scrollPosition = 0;
-  var captchaRendered = false; // Variable to track if reCAPTCHA is rendered
 
   links.forEach(function(link) {
     link.addEventListener("click", function(event) {
       event.preventDefault(); // Prevent the default action of the link
 
-      // Save current scroll position
+      // Save current scroll position and disable scroll
       scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-
-      // Disable scroll
       document.body.style.position = 'fixed';
       document.body.style.top = `-${scrollPosition}px`;
       document.body.style.left = 0;
       document.body.style.right = 0;
       modal.style.display = "block";
 
-      // Show the form section and hide the thank you message
+      // Show form section and hide thank you message
       var formSection = document.querySelector(".quoteModal .ticket-form");
       var thankYouSection = document.querySelector(".quoteModal .quote-thanku");
       formSection.style.display = "block";
@@ -1526,38 +1523,20 @@ document.addEventListener("DOMContentLoaded", function() {
       // Render reCAPTCHA if not already rendered
       if (!captchaRendered) {
         renderRecaptcha();
-        captchaRendered = true; // Set to true after rendering to prevent re-rendering
+        captchaRendered = true; // Prevent re-rendering
       }
     });
   });
 
   if (span) {
     span.onclick = function() {
-      modal.style.display = "none";
-      // Enable scroll
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
-      // Restore scroll position
-      window.scrollTo(0, scrollPosition);
-
-      // Clean up reCAPTCHA (if needed)
-      cleanUpRecaptcha();
+      closeModal();
     };
   }
 
   window.onclick = function(event) {
     if (event.target === modal) {
-      modal.style.display = "none";
-      // Enable scroll
-      document.body.style.position = '';
-      document.body.style.top = '';
-      // Restore scroll position
-      window.scrollTo(0, scrollPosition);
-
-      // Clean up reCAPTCHA (if needed)
-      cleanUpRecaptcha();
+      closeModal();
     }
   };
 
@@ -1581,7 +1560,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Reset modal scroll position
         modal.scrollTop = 0;
       } else {
-        // Form validation failed, handle accordingly (e.g., show error messages)
+        // Handle validation failure
         console.log("Form validation failed. Please check your inputs.");
       }
     });
@@ -1594,13 +1573,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (!form) return false;
 
-    // Example validation: Check if required fields are filled
     var requiredFields = form.querySelectorAll('[required]');
     requiredFields.forEach(function(field) {
       if (!field.value.trim()) {
         isValid = false;
-        // You can implement your error handling here (e.g., displaying error messages)
-        field.classList.add('error'); // Example: Add error class for styling
+        field.classList.add('error'); // Add error class for styling
       } else {
         field.classList.remove('error');
       }
@@ -1612,15 +1589,18 @@ document.addEventListener("DOMContentLoaded", function() {
   // Function to validate captcha
   function validateCaptcha() {
     var captchaResponse = grecaptcha.getResponse();
-    return captchaResponse !== ''; // Return true if captcha response is not empty
+    if (captchaResponse === '') {
+      console.log("Please complete the reCAPTCHA.");
+      return false; // Return false if captcha response is empty
+    }
+    return true;
   }
 
   // Function to render reCAPTCHA
   function renderRecaptcha() {
-    var captchaElement = document.querySelector('.g-recaptcha');
-    if (typeof grecaptcha !== "undefined" && captchaElement && !captchaElement.querySelector('.g-recaptcha-response')) {
+    if (typeof grecaptcha !== "undefined" && captchaElement) {
       grecaptcha.render(captchaElement, {
-        sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1',
+        sitekey: 'YOUR_SITE_KEY', // Replace with your reCAPTCHA site key
         size: 'normal'
       });
     }
@@ -1628,12 +1608,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Function to clean up reCAPTCHA
   function cleanUpRecaptcha() {
-    var captchaElement = document.querySelector('.g-recaptcha');
     if (captchaElement && grecaptcha) {
       grecaptcha.reset(); // Reset captcha to ensure it can be re-used
     }
   }
+
+  // Function to close modal and cleanup
+  function closeModal() {
+    modal.style.display = "none";
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    window.scrollTo(0, scrollPosition);
+    cleanUpRecaptcha();
+  }
 });
+
 
 
 
