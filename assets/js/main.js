@@ -1496,7 +1496,7 @@ document.addEventListener("DOMContentLoaded", function() {
   var span = document.querySelector(".quoteModal .close");
   var links = document.querySelectorAll(".card-more .card-get-link");
   var scrollPosition = 0;
-  var captchaRendered = false; // Track if reCAPTCHA is rendered
+  var captchaRendered = false;
 
   links.forEach(function(link) {
     link.addEventListener("click", function(event) {
@@ -1597,12 +1597,17 @@ document.addEventListener("DOMContentLoaded", function() {
   // Function to render reCAPTCHA
   function renderRecaptcha() {
     var captchaElement = document.querySelector('.g-recaptcha');
-    if (captchaElement && typeof grecaptcha !== "undefined" && !captchaElement.querySelector('.g-recaptcha-response')) {
-      grecaptcha.render(captchaElement, {
-        sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1' // Replace with your site key
-      });
+    if (captchaElement && typeof grecaptcha !== "undefined") {
+      var existingWidgetId = captchaElement.getAttribute('data-widget-id');
+      if (!existingWidgetId) {
+        grecaptcha.render(captchaElement, {
+          sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1' // Replace with your site key
+        });
+      } else {
+        console.log("reCAPTCHA element is already rendered.");
+      }
     } else {
-      console.log("reCAPTCHA element is already rendered or not found.");
+      console.log("reCAPTCHA element not found.");
     }
   }
 
@@ -1625,7 +1630,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 });
-
 
 
 /* =========  Product heading to Modal Popup new Inquiry ========== */
