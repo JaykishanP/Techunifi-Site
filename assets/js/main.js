@@ -1496,7 +1496,7 @@ document.addEventListener("DOMContentLoaded", function() {
   var span = document.querySelector(".quoteModal .close");
   var links = document.querySelectorAll(".card-more .card-get-link");
   var scrollPosition = 0;
-  var captchaRendered = false;
+  // var captchaRendered = false;
 
   links.forEach(function(link) {
     link.addEventListener("click", function(event) {
@@ -1525,10 +1525,10 @@ document.addEventListener("DOMContentLoaded", function() {
       modal.scrollTop = 0;
 
       // Render reCAPTCHA if not already rendered
-      if (!captchaRendered) {
-        renderRecaptcha();
-        captchaRendered = true;
-      }
+      // if (!captchaRendered) {
+      //   renderRecaptcha();
+      //   captchaRendered = true;
+      // }
     });
   });
 
@@ -1550,7 +1550,7 @@ document.addEventListener("DOMContentLoaded", function() {
     form.addEventListener('submit', function(event) {
       event.preventDefault(); // Prevent form submission (for demo purposes)
 
-      if (validateForm() && validateCaptcha()) {
+      if (validateForm()) {
         var formSection = document.querySelector(".quoteModal .ticket-form");
         var thankYouSection = document.querySelector(".quoteModal .quote-thanku");
         formSection.style.display = "none";
@@ -1585,31 +1585,31 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   // Function to validate reCAPTCHA
-  function validateCaptcha() {
-    var captchaResponse = grecaptcha.getResponse();
-    if (captchaResponse.length === 0) {
-      console.log("Please complete the reCAPTCHA.");
-      return false;
-    }
-    return true;
-  }
+  // function validateCaptcha() {
+  //   var captchaResponse = grecaptcha.getResponse();
+  //   if (captchaResponse.length === 0) {
+  //     console.log("Please complete the reCAPTCHA.");
+  //     return false;
+  //   }
+  //   return true;
+  // }
 
   // Function to render reCAPTCHA
-  function renderRecaptcha() {
-    var captchaElement = document.querySelector('.g-recaptcha');
-    if (captchaElement && typeof grecaptcha !== "undefined") {
-      var existingWidgetId = captchaElement.getAttribute('data-widget-id');
-      if (!existingWidgetId) {
-        grecaptcha.render(captchaElement, {
-          sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1' // Replace with your site key
-        });
-      } else {
-        console.log("reCAPTCHA element is already rendered.");
-      }
-    } else {
-      console.log("reCAPTCHA element not found.");
-    }
-  }
+  // function renderRecaptcha() {
+  //   var captchaElement = document.querySelector('.g-recaptcha');
+  //   if (captchaElement && typeof grecaptcha !== "undefined") {
+  //     var existingWidgetId = captchaElement.getAttribute('data-widget-id');
+  //     if (!existingWidgetId) {
+  //       grecaptcha.render(captchaElement, {
+  //         sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1' // Replace with your site key
+  //       });
+  //     } else {
+  //       console.log("reCAPTCHA element is already rendered.");
+  //     }
+  //   } else {
+  //     console.log("reCAPTCHA element not found.");
+  //   }
+  // }
 
   // Function to close modal and clean up
   function closeModal() {
@@ -1623,12 +1623,12 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   // Function to clean up reCAPTCHA
-  function cleanUpRecaptcha() {
-    var captchaElement = document.querySelector('.g-recaptcha');
-    if (captchaElement && grecaptcha) {
-      grecaptcha.reset();
-    }
-  }
+  // function cleanUpRecaptcha() {
+  //   var captchaElement = document.querySelector('.g-recaptcha');
+  //   if (captchaElement && grecaptcha) {
+  //     grecaptcha.reset();
+  //   }
+  // }
 });
 
 
