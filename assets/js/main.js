@@ -1490,17 +1490,17 @@ document.addEventListener("DOMContentLoaded", function() {
   var modal = document.getElementById("quoteModal");
 
   if (!modal) {
-    return; // Exit the script if modal is not found
+    return; // Exit if modal is not found
   }
 
   var span = document.querySelector(".quoteModal .close");
   var links = document.querySelectorAll(".card-more .card-get-link");
   var scrollPosition = 0;
-  var captchaRendered = false;
+  var captchaRendered = false; // Track if reCAPTCHA is rendered
 
   links.forEach(function(link) {
     link.addEventListener("click", function(event) {
-      event.preventDefault(); // Prevent the default action of the link
+      event.preventDefault(); // Prevent default link action
 
       // Save current scroll position
       scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
@@ -1512,7 +1512,7 @@ document.addEventListener("DOMContentLoaded", function() {
       document.body.style.right = 0;
       modal.style.display = "block";
 
-      // Show the form section and hide the thank you message
+      // Show form section and hide thank you message
       var formSection = document.querySelector(".quoteModal .ticket-form");
       var thankYouSection = document.querySelector(".quoteModal .quote-thanku");
       formSection.style.display = "block";
@@ -1527,33 +1527,24 @@ document.addEventListener("DOMContentLoaded", function() {
       // Render reCAPTCHA if not already rendered
       if (!captchaRendered) {
         renderRecaptcha();
-        captchaRendered = true;
+        captchaRendered = true; // Prevent further rendering
       }
     });
   });
 
   if (span) {
     span.onclick = function() {
-      modal.style.display = "none";
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
-      window.scrollTo(0, scrollPosition);
-      cleanUpRecaptcha();
+      closeModal();
     };
   }
 
   window.onclick = function(event) {
     if (event.target === modal) {
-      modal.style.display = "none";
-      document.body.style.position = '';
-      document.body.style.top = '';
-      window.scrollTo(0, scrollPosition);
-      cleanUpRecaptcha();
+      closeModal();
     }
   };
 
+  // Function to handle form submission with validation
   var form = document.querySelector(".quoteModal #myInquiryForm");
   if (form) {
     form.addEventListener('submit', function(event) {
@@ -1573,6 +1564,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
+  // Function to validate form fields
   function validateForm() {
     var isValid = true;
     var form = document.querySelector(".quoteModal #myInquiryForm");
@@ -1592,6 +1584,7 @@ document.addEventListener("DOMContentLoaded", function() {
     return isValid;
   }
 
+  // Function to validate reCAPTCHA
   function validateCaptcha() {
     var captchaResponse = grecaptcha.getResponse();
     if (captchaResponse.length === 0) {
@@ -1601,9 +1594,10 @@ document.addEventListener("DOMContentLoaded", function() {
     return true;
   }
 
+  // Function to render reCAPTCHA
   function renderRecaptcha() {
     var captchaElement = document.querySelector('.g-recaptcha');
-    if (typeof grecaptcha !== "undefined" && captchaElement && captchaElement.childElementCount === 0) {
+    if (captchaElement && typeof grecaptcha !== "undefined" && !captchaElement.querySelector('.g-recaptcha-response')) {
       grecaptcha.render(captchaElement, {
         sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1' // Replace with your site key
       });
@@ -1612,6 +1606,18 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
+  // Function to close modal and clean up
+  function closeModal() {
+    modal.style.display = "none";
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    window.scrollTo(0, scrollPosition);
+    cleanUpRecaptcha();
+  }
+
+  // Function to clean up reCAPTCHA
   function cleanUpRecaptcha() {
     var captchaElement = document.querySelector('.g-recaptcha');
     if (captchaElement && grecaptcha) {
