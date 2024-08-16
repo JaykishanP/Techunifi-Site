@@ -1488,8 +1488,8 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener("DOMContentLoaded", function() {
   var modal = document.getElementById("quoteModal");
   var captchaElement = document.querySelector('.g-recaptcha');
-  var captchaRendered = false; // Track if reCAPTCHA is rendered
   var scrollPosition = 0;
+  var captchaRendered = false; // Track if reCAPTCHA has been rendered
 
   if (!modal) return; // Exit if modal is not found
 
@@ -1523,7 +1523,7 @@ document.addEventListener("DOMContentLoaded", function() {
       // Render reCAPTCHA if not already rendered
       if (!captchaRendered) {
         renderRecaptcha();
-        captchaRendered = true; // Prevent re-rendering
+        captchaRendered = true;
       }
     });
   });
@@ -1598,9 +1598,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Function to render reCAPTCHA
   function renderRecaptcha() {
-    if (typeof grecaptcha !== "undefined" && captchaElement) {
+    if (typeof grecaptcha !== "undefined" && captchaElement && !captchaElement.querySelector('.g-recaptcha-response')) {
       grecaptcha.render(captchaElement, {
-        sitekey: 'YOUR_SITE_KEY', // Replace with your reCAPTCHA site key
+        sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1', // Replace with your reCAPTCHA site key
         size: 'normal'
       });
     }
@@ -1622,10 +1622,9 @@ document.addEventListener("DOMContentLoaded", function() {
     document.body.style.right = '';
     window.scrollTo(0, scrollPosition);
     cleanUpRecaptcha();
+    captchaRendered = false; // Reset captcha rendered flag after closing the modal
   }
 });
-
-
 
 
 /* =========  Product heading to Modal Popup new Inquiry ========== */
