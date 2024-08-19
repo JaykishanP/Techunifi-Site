@@ -1539,6 +1539,12 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   };
 
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+      closeModal();
+    }
+  });
+
   var form = document.querySelector(".quoteModal #myInquiryForm");
   if (form) {
     form.addEventListener('submit', function(event) {
@@ -1566,11 +1572,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
     var requiredFields = form.querySelectorAll('[required]');
     requiredFields.forEach(function(field) {
+      var errorMessage = field.nextElementSibling;
       if (!field.value.trim()) {
         isValid = false;
         field.classList.add('error');
+        // Display an error message below the field
+        if (errorMessage && errorMessage.classList.contains('error-message')) {
+          errorMessage.textContent = "This field is required.";
+        }
       } else {
         field.classList.remove('error');
+        if (errorMessage && errorMessage.classList.contains('error-message')) {
+          errorMessage.textContent = "";
+        }
       }
     });
 
@@ -1588,17 +1602,26 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function renderRecaptcha() {
     var captchaElement = document.querySelector('.g-recaptcha');
+    
     if (captchaElement && typeof grecaptcha !== "undefined") {
-      // Ensure reCAPTCHA is rendered only once
+      // Check if the widget has already been rendered
       if (!captchaElement.hasAttribute('data-widget-id')) {
-        grecaptcha.render(captchaElement, {
-          sitekey: 'YOUR_SITE_KEY'
-        });
+        try {
+          var widgetId = grecaptcha.render(captchaElement, {
+            sitekey: '6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1'
+          });
+          captchaElement.setAttribute('data-widget-id', widgetId);
+        } catch (e) {
+          console.error("reCAPTCHA render failed: ", e);
+        }
+      } else {
+        console.log("reCAPTCHA has already been rendered.");
       }
     } else {
-      console.log("reCAPTCHA element not found.");
+      console.log("reCAPTCHA element not found or grecaptcha not loaded.");
     }
   }
+  
 
   function closeModal() {
     modal.style.display = "none";
@@ -1617,6 +1640,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 });
+
 
 
 /* =========  Product heading to Modal Popup new Inquiry ========== */
