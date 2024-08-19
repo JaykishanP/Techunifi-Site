@@ -1497,7 +1497,7 @@ document.addEventListener("DOMContentLoaded", function() {
   var span = document.querySelector(".quoteModal .close");
   var links = document.querySelectorAll(".card-more .card-get-link");
   var scrollPosition = 0;
-  // var captchaRendered = false;
+  var captchaRendered = false;
  
   links.forEach(function(link) {
     link.addEventListener("click", function(event) {
@@ -1562,7 +1562,7 @@ document.addEventListener("DOMContentLoaded", function() {
       event.preventDefault(); // Prevent form submission (for demo purposes)
  
       // Validate form fields and captcha
-      if (validateForm()) {
+      if (validateForm() && validateCaptcha()) {
         // Display thank you message and hide form
         var formSection = document.querySelector(".quoteModal .ticket-form");
         var thankYouSection = document.querySelector(".quoteModal .quote-thanku");
