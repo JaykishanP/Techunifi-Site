@@ -1486,144 +1486,131 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* ==== Get a Quote Modal Popup ==== */
 
-document.addEventListener("DOMContentLoaded", function() {
-  var modal = document.getElementById("quoteModal");
+// document.addEventListener("DOMContentLoaded", function() {
+//   var modal = document.getElementById("quoteModal");
+//   var span = document.querySelector(".quoteModal .close");
+//   var links = document.querySelectorAll(".card-more .card-get-link");
+//   var scrollPosition = 0;
+//   var captchaRendered = false;
  
-  // Check if the modal exists before proceeding
-  if (!modal) {
-    return; // Exit the script if modal is not found
-  }
+//   links.forEach(function(link) {
+//     link.addEventListener("click", function(event) {
+//       event.preventDefault(); // Prevent the default action of the link
+//       // Save current scroll position
+//       scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+//       // Disable scroll
+//       document.body.style.position = 'fixed';
+//       document.body.style.top = `-${scrollPosition}px`;
+//       document.body.style.left = 0;
+//       document.body.style.right = 0;
+//       modal.style.display = "block";
  
-  var span = document.querySelector(".quoteModal .close");
-  var links = document.querySelectorAll(".card-more .card-get-link");
-  var scrollPosition = 0;
-  var captchaRendered = false;
+//       // Show the form section and hide the thank you message
+//       var formSection = document.querySelector(".quoteModal .ticket-form");
+//       var thankYouSection = document.querySelector(".quoteModal .quote-thanku");
+//       formSection.style.display = "block";
+//       thankYouSection.style.display = "none";
  
-  links.forEach(function(link) {
-    link.addEventListener("click", function(event) {
-      event.preventDefault(); // Prevent the default action of the link
-      // Save current scroll position
-      scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-      // Disable scroll
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${scrollPosition}px`;
-      document.body.style.left = 0;
-      document.body.style.right = 0;
-      modal.style.display = "block";
+//       // Clear form fields
+//       document.querySelector(".quoteModal #myInquiryForm").reset();
  
-      // Show the form section and hide the thank you message
-      var formSection = document.querySelector(".quoteModal .ticket-form");
-      var thankYouSection = document.querySelector(".quoteModal .quote-thanku");
-      formSection.style.display = "block";
-      thankYouSection.style.display = "none";
+//       // Scroll modal content to the top
+//       modal.scrollTop = 0;
  
-      // Clear form fields
-      document.querySelector(".quoteModal #myInquiryForm").reset();
+//       // Check if reCAPTCHA needs to be rendered
+//       if (!captchaRendered) {
+//         renderRecaptcha();
+//         captchaRendered = true;
+//       }
+//     });
+//   });
  
-      // Scroll modal content to the top
-      modal.scrollTop = 0;
+//   if (span) {
+//     span.onclick = function() {
+//       modal.style.display = "none";
+//       // Enable scroll
+//       document.body.style.position = '';
+//       document.body.style.top = '';
+//       document.body.style.left = '';
+//       document.body.style.right = '';
+//       // Restore scroll position
+//       window.scrollTo(0, scrollPosition);
+//     };
+//   }
  
-      // Check if reCAPTCHA needs to be rendered
-      if (!captchaRendered) {
-        renderRecaptcha();
-        captchaRendered = true;
-      }
-    });
-  });
+//   window.onclick = function(event) {
+//     if (event.target === modal) {
+//       modal.style.display = "none";
+//       // Enable scroll
+//       document.body.style.position = '';
+//       document.body.style.top = '';
+//       // Restore scroll position
+//       window.scrollTo(0, scrollPosition);
+//     }
+//   };
  
-  if (span) {
-    span.onclick = function() {
-      modal.style.display = "none";
-      // Enable scroll
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.left = '';
-      document.body.style.right = '';
-      // Restore scroll position
-      window.scrollTo(0, scrollPosition);
-    };
-  }
+//   // Function to handle form submission with validation
+//   document.querySelector(".quoteModal #myInquiryForm").addEventListener('submit', function(event) {
+//     event.preventDefault(); // Prevent form submission (for demo purposes)
  
-  window.onclick = function(event) {
-    if (event.target === modal) {
-      modal.style.display = "none";
-      // Enable scroll
-      document.body.style.position = '';
-      document.body.style.top = '';
-      // Restore scroll position
-      window.scrollTo(0, scrollPosition);
-    }
-  };
+//     // Validate form fields and captcha
+//     if (validateForm() && validateCaptcha()) {
+//       // Display thank you message and hide form
+//       var formSection = document.querySelector(".quoteModal .ticket-form");
+//       var thankYouSection = document.querySelector(".quoteModal .quote-thanku");
+//       formSection.style.display = "none";
+//       thankYouSection.style.display = "block";
  
-  // Function to handle form submission with validation
-  var form = document.querySelector(".quoteModal #myInquiryForm");
-  if (form) {
-    form.addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent form submission (for demo purposes)
+//       // Clear form fields
+//       document.querySelector(".quoteModal #myInquiryForm").reset();
  
-      // Validate form fields and captcha
-      if (validateForm() && validateCaptcha()) {
-        // Display thank you message and hide form
-        var formSection = document.querySelector(".quoteModal .ticket-form");
-        var thankYouSection = document.querySelector(".quoteModal .quote-thanku");
-        formSection.style.display = "none";
-        thankYouSection.style.display = "block";
+//       // Reset modal scroll position
+//       modal.scrollTop = 0;
+//     } else {
+//       // Form validation failed, handle accordingly (e.g., show error messages)
+//       console.log("Form validation failed. Please check your inputs.");
+//     }
+//   });
  
-        // Clear form fields
-        document.querySelector(".quoteModal #myInquiryForm").reset();
+//   // Function to validate form fields
+//   function validateForm() {
+//     var isValid = true;
+//     var form = document.querySelector(".quoteModal #myInquiryForm");
  
-        // Reset modal scroll position
-        modal.scrollTop = 0;
-      } else {
-        // Form validation failed, handle accordingly (e.g., show error messages)
-        console.log("Form validation failed. Please check your inputs.");
-      }
-    });
-  }
+//     // Example validation: Check if required fields are filled
+//     var requiredFields = form.querySelectorAll('[required]');
+//     requiredFields.forEach(function(field) {
+//       if (!field.value.trim()) {
+//         isValid = false;
+//         // You can implement your error handling here (e.g., displaying error messages)
+//         field.classList.add('error'); // Example: Add error class for styling
+//       } else {
+//         field.classList.remove('error');
+//       }
+//     });
  
-  // Function to validate form fields
-  function validateForm() {
-    var isValid = true;
-    var form = document.querySelector(".quoteModal #myInquiryForm");
+//     return isValid;
+//   }
  
-    if (!form) return false;
+//   // Function to validate captcha
+//   function validateCaptcha() {
+//     // Replace with your captcha validation logic
+//     // Example: Check if captcha response is valid
+//     var captchaResponse = grecaptcha.getResponse();
+//     return captchaResponse !== ''; // Return true if captcha response is not empty
+//   }
  
-    // Example validation: Check if required fields are filled
-    var requiredFields = form.querySelectorAll('[required]');
-    requiredFields.forEach(function(field) {
-      if (!field.value.trim()) {
-        isValid = false;
-        // You can implement your error handling here (e.g., displaying error messages)
-        field.classList.add('error'); // Example: Add error class for styling
-      } else {
-        field.classList.remove('error');
-      }
-    });
+//   // Function to render reCAPTCHA
+//   function renderRecaptcha() {
+//     if (typeof grecaptcha !== "undefined") {
+//       grecaptcha.render(document.querySelector('.g-recaptcha'), {
+//         sitekey: '6Ld3bioqAAAAAJKQX4ICgn_gLMtqYRC7w8T4RadK',
+//         size: 'normal'
+//       });
+//     }
+//   }
  
-    return isValid;
-  }
- 
-  // Function to validate captcha
-  function validateCaptcha() {
-    // Replace with your captcha validation logic
-    // Example: Check if captcha response is valid
-    var captchaResponse = grecaptcha.getResponse();
-    return captchaResponse !== ''; // Return true if captcha response is not empty
-  }
- 
-  // // Function to render reCAPTCHA
-  function renderRecaptcha() {
-    if (typeof grecaptcha !== "undefined") {
-      grecaptcha.render(document.querySelector('.g-recaptcha'), {
-        sitekey: '6Ld3bioqAAAAAJKQX4ICgn_gLMtqYRC7w8T4RadK',
-        size: 'normal'
-      });
-    }
-  }
- 
-});
- 
-
+// });
 
 /* =========  Product heading to Modal Popup new Inquiry ========== */
 
