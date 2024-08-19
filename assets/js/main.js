@@ -1524,10 +1524,10 @@ document.addEventListener("DOMContentLoaded", function() {
       modal.scrollTop = 0;
  
       // Check if reCAPTCHA needs to be rendered
-      // if (!captchaRendered) {
-      //   renderRecaptcha();
-      //   captchaRendered = true;
-      // }
+      if (!captchaRendered) {
+        renderRecaptcha();
+        captchaRendered = true;
+      }
     });
   });
  
@@ -1604,22 +1604,22 @@ document.addEventListener("DOMContentLoaded", function() {
   }
  
   // Function to validate captcha
-  // function validateCaptcha() {
-  //   // Replace with your captcha validation logic
-  //   // Example: Check if captcha response is valid
-  //   var captchaResponse = grecaptcha.getResponse();
-  //   return captchaResponse !== ''; // Return true if captcha response is not empty
-  // }
+  function validateCaptcha() {
+    // Replace with your captcha validation logic
+    // Example: Check if captcha response is valid
+    var captchaResponse = grecaptcha.getResponse();
+    return captchaResponse !== ''; // Return true if captcha response is not empty
+  }
  
   // // Function to render reCAPTCHA
-  // function renderRecaptcha() {
-  //   if (typeof grecaptcha !== "undefined") {
-  //     grecaptcha.render(document.querySelector('.g-recaptcha'), {
-  //       sitekey: '6Ld3bioqAAAAAJKQX4ICgn_gLMtqYRC7w8T4RadK',
-  //       size: 'normal'
-  //     });
-  //   }
-  // }
+  function renderRecaptcha() {
+    if (typeof grecaptcha !== "undefined") {
+      grecaptcha.render(document.querySelector('.g-recaptcha'), {
+        sitekey: '6Ld3bioqAAAAAJKQX4ICgn_gLMtqYRC7w8T4RadK',
+        size: 'normal'
+      });
+    }
+  }
  
 });
  
