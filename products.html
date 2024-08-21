@@ -4224,17 +4224,21 @@ Additionally, we offer an Energy Savings as a Service (ESaaS) program. This prog
                               <label for="inquirymathSum" id="inquirymathSumQuestion">Math Sum: What is 2 + 2? </label>
                               <span><i class="bi bi-question-circle"></i></span>
                             </div>
-                              <input id="inquirymathSum" name="inquirymathSum" type="number"/>
+                              <input id="inquirymathSum" name="inquirymathSum" type="number" placeholder="Enter Sum"/>
                           </div>
                           </div>
 
                           <!-- Captcha -->
                           <div class="row" style="padding-bottom: 20px;">
                             <div class="col-md-12">
-                              <input type=hidden name='captcha_settings' value='{"keyname":"techunifileadsv3","fallback":"true","orgId":"00DHo000002fpJX","ts":""}'>
-                              <input type=hidden name="oid" value="00DHo000002fpJX">
-                              <input type=hidden name="retURL" value="http://techunifi.com">
-                              <div class="g-recaptcha" data-sitekey="6Ld3bioqAAAAAJKQX4ICgn_gLMtqYRC7w8T4RadK"></div>
+                              <div id="captchaBackground">
+                                <canvas id="captcha" width="300" height="70">captcha text</canvas><br>
+                                <div class="input-refresh">
+                                  <input id="textBox" type="text" name="text" placeholder="Enter captcha">
+                                  <i id="refreshIcon" class="bi bi-arrow-clockwise" style="cursor: pointer;"></i>
+                                </div>
+                                <span id="output"></span>
+                              </div>
                             </div>
                           </div>
                 
