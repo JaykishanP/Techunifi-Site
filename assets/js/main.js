@@ -1537,29 +1537,24 @@ document.addEventListener("DOMContentLoaded", function() {
   const span = document.querySelector(".quoteModal .close");
   const links = document.querySelectorAll(".card-more .card-get-link");
   let scrollPosition = 0;
-  let captchaStr = "";
+  let captchaAnswer = 0;
 
-  // Captcha Generation
+  // Math Captcha Generation
   function generateCaptcha() {
-    const captchaCanvas = document.getElementById('captcha');
-    const ctx = captchaCanvas.getContext("2d");
-    const alphaNums = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'.split('');
-    captchaStr = Array.from({ length: 7 }, () => alphaNums[Math.floor(Math.random() * alphaNums.length)]).join('');
-
-    ctx.clearRect(0, 0, captchaCanvas.width, captchaCanvas.height);
-    ctx.font = "35px Raleway";
-    ctx.fillStyle = "#eb6d47";
-    ctx.fillText(captchaStr, captchaCanvas.width / 10, captchaCanvas.height / 1.5);
+    const captchaDisplay = document.getElementById('captcha');
+    const num1 = Math.floor(Math.random() * 10) + 1;
+    const num2 = Math.floor(Math.random() * 10) + 1;
+    captchaAnswer = num1 + num2;
+    captchaDisplay.innerHTML = `What is ${num1} + ${num2}?`;
   }
 
   // Form Validation
   function validateForm() {
     let formValid = true;
 
-    document.querySelectorAll(".quoteModal #myInquiryForm input, .quoteModal #myInquiryForm select, .quoteModal #myInquiryForm textarea").forEach(field => {
-      if (field.classList.contains('not-required')) return;
-
-      if (!field.value || (field.tagName === 'SELECT' && field.multiple && !field.selectedOptions.length)) {
+    // Validate fields
+    document.querySelectorAll(".quoteModal #myInquiryForm input, .quoteModal #myInquiryForm textarea").forEach(field => {
+      if (!field.value) {
         formValid = false;
         field.style.borderColor = 'red';
         window.scrollTo({
@@ -1572,8 +1567,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Validate captcha
-    const userCaptcha = document.querySelector(".quoteModal #textBox").value;
-    if (userCaptcha !== captchaStr) {
+    const userCaptcha = parseInt(document.querySelector(".quoteModal #textBox").value, 10);
+    if (userCaptcha !== captchaAnswer) {
       document.querySelector(".quoteModal #output").style.color = "red";
       document.querySelector(".quoteModal #output").innerHTML = "Incorrect Captcha!";
       formValid = false;
@@ -1628,18 +1623,31 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   };
 
+  // Form Submission Handler
   document.querySelector(".quoteModal #myInquiryForm").addEventListener('submit', function(event) {
-    event.preventDefault();
+    event.preventDefault();  // Prevent the default form submission
     if (validateForm()) {
-      document.querySelector(".quoteModal .ticket-form").style.display = "none";
-      document.querySelector(".quoteModal .quote-thanku").style.display = "block";
-      document.querySelector(".quoteModal #myInquiryForm").reset();
-      modal.scrollTop = 0;
+      // Form validation successful, proceed with actual submission
+      fetch(this.action, {
+        method: this.method,
+        body: new FormData(this)
+      }).then(response => {
+        if (response.ok) {
+          // Show thank you message on successful submission
+          document.querySelector(".quoteModal .ticket-form").style.display = "none";
+          document.querySelector(".quoteModal .quote-thanku").style.display = "block";
+        } else {
+          console.log("Submission failed.");
+        }
+      }).catch(error => {
+        console.error("Error occurred during form submission:", error);
+      });
     } else {
       console.log("Form validation failed. Please check your inputs.");
     }
   });
 
+  // Reset Captcha on Form Reset
   document.querySelector(".quoteModal #myInquiryForm").addEventListener('reset', function() {
     generateCaptcha();
   });
