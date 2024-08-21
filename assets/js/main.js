@@ -1485,28 +1485,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-/* ==== Captcha Implementaion - Submit a ticket==== */
-  function timestamp() {
-    var response = document.getElementById("g-recaptcha-response");
-    if (!response) {
-        console.warn("g-recaptcha-response element not found");
-        return;
-    }
-    
-    if (response.value.trim() === "") {
-        var captchaSettingsElem = document.getElementsByName("captcha_settings")[0];
-        if (captchaSettingsElem) {
-            var elems = JSON.parse(captchaSettingsElem.value);
-            elems["ts"] = new Date().getTime(); // no need to stringify here
-            captchaSettingsElem.value = JSON.stringify(elems);
-        }
-    }
-}
-
-// Optionally, adjust or replace setInterval based on your needs
-setInterval(timestamp, 500);
-
-
 
 /* ==== remove AOS for mobile(<1024) ==== */
 document.addEventListener('DOMContentLoaded', function() {
@@ -1536,25 +1514,58 @@ document.addEventListener("DOMContentLoaded", function() {
   const modal = document.getElementById("quoteModal");
   const span = document.querySelector(".quoteModal .close");
   const links = document.querySelectorAll(".card-more .card-get-link");
+  const captchaCanvas = document.getElementById('captcha');
+  const ctx = captchaCanvas.getContext("2d");
+  const userText = document.getElementById('textBox');
+  const output = document.getElementById('output');
+  const refreshIcon = document.getElementById('refreshIcon');
   let scrollPosition = 0;
-  let captchaAnswer = 0;
+  let captchaStr = "";
+  const alphaNums = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'.split('');
 
-  // Math Captcha Generation
+  // Generate Captcha
   function generateCaptcha() {
-    const captchaDisplay = document.getElementById('captcha');
-    const num1 = Math.floor(Math.random() * 10) + 1;
-    const num2 = Math.floor(Math.random() * 10) + 1;
-    captchaAnswer = num1 + num2;
-    captchaDisplay.innerHTML = `What is ${num1} + ${num2}?`;
+    let emptyArr = [];
+    for (let i = 1; i <= 7; i++) {
+      emptyArr.push(alphaNums[Math.floor(Math.random() * alphaNums.length)]);
+    }
+    captchaStr = emptyArr.join('');
+    ctx.clearRect(0, 0, captchaCanvas.width, captchaCanvas.height);
+    ctx.font = "35px Raleway";
+    ctx.fillStyle = "#eb6d47";
+    ctx.fillText(captchaStr, captchaCanvas.width / 9, captchaCanvas.height / 2);
   }
+
+  generateCaptcha();
+
+  refreshIcon.onclick = function() {
+    generateCaptcha();
+    userText.value = "";
+    output.innerHTML = "";
+  };
+
+  // Math Sum Validation
+  function generateRandomNumbers() {
+    const num1 = Math.floor(Math.random() * 10);
+    const num2 = Math.floor(Math.random() * 10);
+    return [num1, num2];
+  }
+
+  function updateMathSumQuestion() {
+    const [num1, num2] = generateRandomNumbers();
+    document.getElementById('inquirymathSumQuestion').textContent = `What is ${num1} + ${num2}?`;
+    document.getElementById('inquirymathSum').dataset.expectedSum = num1 + num2;
+  }
+
+  updateMathSumQuestion();
 
   // Form Validation
   function validateForm() {
     let formValid = true;
 
     // Validate fields
-    document.querySelectorAll(".quoteModal #myInquiryForm input, .quoteModal #myInquiryForm textarea").forEach(field => {
-      if (!field.value) {
+    document.querySelectorAll(".quoteModal #myInquiryForm input, .quoteModal #myInquiryForm select, .quoteModal #myInquiryForm textarea").forEach(field => {
+      if (field.type !== 'hidden' && !field.value && !field.classList.contains('not-required')) {
         formValid = false;
         field.style.borderColor = 'red';
         window.scrollTo({
@@ -1566,14 +1577,25 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
 
-    // Validate captcha
-    const userCaptcha = parseInt(document.querySelector(".quoteModal #textBox").value, 10);
-    if (userCaptcha !== captchaAnswer) {
-      document.querySelector(".quoteModal #output").style.color = "red";
-      document.querySelector(".quoteModal #output").innerHTML = "Incorrect Captcha!";
+    // Validate math sum question
+    const mathSumInput = document.getElementById('inquirymathSum');
+    const mathSumValue = mathSumInput.value;
+    const expectedSum = parseInt(mathSumInput.dataset.expectedSum, 10);
+
+    if (!mathSumValue || parseInt(mathSumValue) !== expectedSum) {
+      mathSumInput.style.borderColor = 'red';
       formValid = false;
     } else {
-      document.querySelector(".quoteModal #output").innerHTML = "Correct!";
+      mathSumInput.style.borderColor = 'green';
+    }
+
+    // Validate captcha
+    if (userText.value !== captchaStr) {
+      output.style.color = "red";
+      output.innerHTML = "Incorrect Captcha!";
+      formValid = false;
+    } else {
+      output.innerHTML = "Correct!";
     }
 
     return formValid;
@@ -1592,6 +1614,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector(".quoteModal .quote-thanku").style.display = "none";
     document.querySelector(".quoteModal #myInquiryForm").reset();
     generateCaptcha();
+    updateMathSumQuestion();
     modal.scrollTop = 0;
   }
 
@@ -1625,22 +1648,26 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Form Submission Handler
   document.querySelector(".quoteModal #myInquiryForm").addEventListener('submit', function(event) {
-    event.preventDefault();  // Prevent the default form submission
+    event.preventDefault(); // Prevent the default form submission
+
     if (validateForm()) {
-      // Form validation successful, proceed with actual submission
-      fetch(this.action, {
-        method: this.method,
-        body: new FormData(this)
-      }).then(response => {
-        if (response.ok) {
-          // Show thank you message on successful submission
-          document.querySelector(".quoteModal .ticket-form").style.display = "none";
-          document.querySelector(".quoteModal .quote-thanku").style.display = "block";
-        } else {
-          console.log("Submission failed.");
-        }
-      }).catch(error => {
-        console.error("Error occurred during form submission:", error);
+      console.log("Form validation succeeded. Submitting form...");
+      
+      // Collect form data
+      const formData = new FormData(this);
+
+      // Send form data using fetch API
+      fetch('/submit-form', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log("Success:", data);
+        hideModal(); // Optionally hide the modal on successful submission
+      })
+      .catch(error => {
+        console.error("Error:", error);
       });
     } else {
       console.log("Form validation failed. Please check your inputs.");
@@ -1650,8 +1677,21 @@ document.addEventListener("DOMContentLoaded", function() {
   // Reset Captcha on Form Reset
   document.querySelector(".quoteModal #myInquiryForm").addEventListener('reset', function() {
     generateCaptcha();
+    updateMathSumQuestion();
   });
 
+  // Dynamic input border color change based on input, change, and blur events
+  document.querySelectorAll("#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea").forEach(input => {
+    input.addEventListener('input', function() {
+      if (!input.classList.contains('not-required')) {
+        if (input.value || (input.tagName === 'SELECT' && input.selectedOptions.length)) {
+          input.style.borderColor = 'green';
+        } else {
+          input.style.borderColor = 'red';
+        }
+      }
+    });
+  });
 });
 
 
