@@ -868,27 +868,23 @@ function gtag(){dataLayer.push(arguments);}
                 
                    <!-- Captcha -->
                    <div class="row" style="padding-bottom: 20px;">
-                    <div class="col-md-12">
-                      <div id="captchaBackground">
-                        <canvas id="captcha" width="300" height="70">captcha text</canvas><br>
-                        <div class="input-refresh">
-                          <input id="textBox" type="text" name="text" placeholder="Enter captcha">
-                          <i id="refreshIcon" class="bi bi-arrow-clockwise" style="cursor: pointer;"></i>
-                        </div>
-                        <span id="output"></span>
-                      </div>
+                    <div class="col-md-7">
+                      <input type=hidden name='captcha_settings' value='{"keyname":"cases","fallback":"true","orgId":"00DHo000002fpJX","ts":""}'>
+                      <input type=hidden name="oid" value="00DHo000002fpJX">
+                      <input type=hidden name="retURL" value="https://www.techunifi.com/">
+                      <div class="g-recaptcha" data-sitekey="6LfOHSYqAAAAAMVSP2urlj6f2T7tN1zh1UVQh_ip"></div>
                     </div>
-                    <!-- <div class="col-md-12 home-contact-submit">
+                    <div class="col-md-5 home-contact-submit">
                         <input type="submit" name="submit" value="Submit">
-                    </div> -->
+                    </div>
                   </div>
 
 
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-md-12 home-contact-submit">
                   <input type="submit" name="submit" value="Submit An Inquiry">
                 </div>
-              </div>
+              </div> -->
 
             </div>
                   
@@ -1021,7 +1017,6 @@ function gtag(){dataLayer.push(arguments);}
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/new-inquiry.js"></script>
 
 
 </body>
