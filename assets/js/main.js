@@ -1446,9 +1446,27 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+   
+/* ==== Captcha Implementation==== */
+function timestamp() {
+  var response = document.getElementById("g-recaptcha-response");
+  if (!response) {
+      console.warn("g-recaptcha-response element not found");
+      return;
+  }
+  
+  if (response.value.trim() === "") {
+      var captchaSettingsElem = document.getElementsByName("captcha_settings")[0];
+      if (captchaSettingsElem) {
+          var elems = JSON.parse(captchaSettingsElem.value);
+          elems["ts"] = new Date().getTime(); // no need to stringify here
+          captchaSettingsElem.value = JSON.stringify(elems);
+      }
+  }
+}
 
-/* ==== Get a Quote Modal Popup ==== */
-
+// Optionally, adjust or replace setInterval based on your needs
+setInterval(timestamp, 500);
 
 
 /* =========  Product heading to Modal Popup new Inquiry ========== */
