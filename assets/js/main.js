@@ -1071,90 +1071,84 @@ $(document).ready(function() {
 
   /* ======= Submit a Ticket ======= */
   /*Math Function for Submit Ticket */
-  function generateRandomNumbers() {
-    var num1 = Math.floor(Math.random() * 10);
-    var num2 = Math.floor(Math.random() * 10);
-    return [num1, num2];
-  }
- 
-  // Function to update the math sum question with new numbers
-  function updateMathSumQuestion() {
-    var randomNumbers = generateRandomNumbers();
-    var num1 = randomNumbers[0];
-    var num2 = randomNumbers[1];
-    $('#mathSumQuestion').text('What is ' + num1 + ' + ' + num2 + '?');
-    $('#mathSum').data('expectedSum', num1 + num2); // Store the expected sum in a data attribute for validation
-  }
- 
-  // Call the function to update the math sum question when the document is ready
-  updateMathSumQuestion();
- 
-  function validateTicketForm() {
-    var formValid = true;
-
-    // Check each input field in the form
-    $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').each(function() {
-        // Skip validation for fields with class "not-required"
-        if ($(this).hasClass('not-required')) {
-            return true; // Skip this field and continue with the next one
-        }
-
-        // If the field is empty or not selected
-        if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
-            formValid = false;
-            $(this).css('border-color', 'red');
-            // Scroll to the field
-            $('html, body').animate({
-                scrollTop: $(this).offset().top - 200 // Adjust the offset to ensure the field is visible
-            }, 500);
-            return false; // Exit the loop after scrolling to the first invalid field
-        } else {
-            // Set border color to green if the field is filled
-            $(this).css('border-color', 'green');
-        }
-    });
-
-    // Validate math sum question after other fields are validated
-    var mathSumInput = $('#mathSum');
-    var mathSumValue = mathSumInput.val();
-    var expectedSum = mathSumInput.data('expectedSum'); // Retrieve the expected sum from the data attribute
-    if (!mathSumValue || parseInt(mathSumValue) !== expectedSum) {
-        mathSumInput.css('border-color', 'red');
-        formValid = false;
-        
-    } else {
-        mathSumInput.css('border-color', 'green');
-    }
-
-    // Return false if any field is empty or not selected
-    if (!formValid) {
-        return false;
-    }
+  // Function to generate random numbers
+function generateRandomNumbers() {
+  var num1 = Math.floor(Math.random() * 20); // Adjusted range for complexity
+  var num2 = Math.floor(Math.random() * 20);
+  return [num1, num2];
 }
 
- 
-    $('#submitTicketForm').submit(function() {
-      return validateTicketForm();
-    });
- 
-    // Event listener to update math sum question when the form is reset (e.g., after submission)
-    $('#submitTicketForm').on('reset', function() {
-      updateMathSumQuestion();
-    });
- 
-    $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').on('input change blur', function() {
-      if (!$(this).hasClass('not-required')) {
-          if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
-              $(this).css('border-color', 'green');
-          } else {
-              $(this).css('border-color', 'red');
-          }
+// Function to update the math sum question
+function updateMathSumQuestion() {
+  var randomNumbers = generateRandomNumbers();
+  var num1 = randomNumbers[0];
+  var num2 = randomNumbers[1];
+  $('#mathSumQuestion').text('What is ' + num1 + ' + ' + num2 + '?');
+  $('#mathSum').data('expectedSum', num1 + num2); // Store expected sum
+}
+
+// Call the function on document ready
+updateMathSumQuestion();
+
+// Validate the form
+function validateTicketForm() {
+  var formValid = true;
+
+  // Check each input field in the form
+  $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').each(function() {
+      if ($(this).hasClass('not-required')) {
+          return true; // Skip non-required fields
       }
-    });
-  
-    $('#submitTicketForm').on('reset', function() {
-      inquiryupdateMathSumQuestion();
-    });
+      if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
+          formValid = false;
+          $(this).css('border-color', 'red');
+          // Scroll to the first invalid field
+          $('html, body').animate({
+              scrollTop: $(this).offset().top - 200
+          }, 500);
+          return false; // Exit loop after finding the first invalid field
+      } else {
+          $(this).css('border-color', 'green');
+      }
+  });
+
+  // Validate the math sum question
+  var mathSumInput = $('#mathSum');
+  var mathSumValue = mathSumInput.val();
+  var expectedSum = mathSumInput.data('expectedSum');
+  if (!mathSumValue || parseInt(mathSumValue) !== expectedSum) {
+      mathSumInput.css('border-color', 'red');
+      formValid = false;
+  } else {
+      mathSumInput.css('border-color', 'green');
+  }
+
+  return formValid;
+}
+
+// Form submission
+$('#submitTicketForm').submit(function() {
+  return validateTicketForm();
+});
+
+// Reset form listener
+$('#submitTicketForm').on('reset', function() {
+  updateMathSumQuestion();
+  // Optional: Reset validation styles
+  $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').css('border-color', '');
+});
+
+// Change validation style on input change
+$('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').on('input change blur', function() {
+  if (!$(this).hasClass('not-required')) {
+      if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
+          $(this).css('border-color', 'green');
+      } else {
+          $(this).css('border-color', 'red');
+      }
+  }
+});
+
 
     /* === New Inquiry Form === */
     
