@@ -1070,9 +1070,79 @@ $(document).ready(function() {
 $(document).ready(function() {
 
   /* ======= Submit a Ticket ======= */
+
+    /* === New Inquiry Form === */
+    
+    function inquirygenerateRandomNumbers() {
+      var inquirynum1 = Math.floor(Math.random() * 10);
+      var inquirynum2 = Math.floor(Math.random() * 10);
+      return [inquirynum1, inquirynum2]
+    }
+  
+    function inquiryupdateMathSumQuestion() {
+      var inquiryrandomNumbers = inquirygenerateRandomNumbers();
+      var inquirynum1 = inquiryrandomNumbers[0];
+      var inquirynum2 = inquiryrandomNumbers[1];
+      $('#inquirymathSumQuestion').text('What is ' + inquirynum1 + ' + ' + inquirynum2 + '?');
+      $('#inquirymathSum').data('inquiryexpectedSum', inquirynum1 + inquirynum2)
+    }
+    inquiryupdateMathSumQuestion();
+  
+    function validateInquiryForm() {
+      var formValid = !0;
+      $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').each(function() {
+        if ($(this).hasClass('not-required')) {
+          return !0
+        }
+        if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
+          formValid = !1;
+          $(this).css('border-color', 'red');
+          $('html, body').animate({
+            scrollTop: $(this).offset().top - 160
+          }, 500);
+          return !1
+        } else {
+          $(this).css('border-color', 'green')
+        }
+      });
+      var inquirymathSumInput = $('#inquirymathSum');
+      var inquirymathSumValue = inquirymathSumInput.val();
+      var inquiryexpectedSum = inquirymathSumInput.data('inquiryexpectedSum');
+      if (!inquirymathSumValue || parseInt(inquirymathSumValue) !== inquiryexpectedSum) {
+        inquirymathSumInput.css('border-color', 'red');
+        formValid = !1
+      } else {
+        inquirymathSumInput.css('border-color', 'green')
+      }
+      if (!formValid) {
+        return !1
+      }
+      return !0
+    }
+    $('#myInquiryForm').submit(function() {
+      return validateInquiryForm()
+    });
+    $('#submitTicketForm').on('reset', function() {
+      inquiryupdateMathSumQuestion()
+    });
+    $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').on('input change blur', function() {
+      if (!$(this).hasClass('not-required')) {
+        if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
+          $(this).css('border-color', 'green')
+        } else {
+          $(this).css('border-color', 'red')
+        }
+      }
+    })
+
+
+
+  });
+
+
   /*Math Function for Submit Ticket */
  // Function to generate random numbers
-function generateRandomNumbers() {
+ function generateRandomNumbers() {
   var num1 = Math.floor(Math.random() * 20); // Adjusted range for complexity
   var num2 = Math.floor(Math.random() * 20);
   return [num1, num2];
@@ -1152,73 +1222,7 @@ $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea
 });
 
 
-    /* === New Inquiry Form === */
-    
-    function inquirygenerateRandomNumbers() {
-      var inquirynum1 = Math.floor(Math.random() * 10);
-      var inquirynum2 = Math.floor(Math.random() * 10);
-      return [inquirynum1, inquirynum2]
-    }
-  
-    function inquiryupdateMathSumQuestion() {
-      var inquiryrandomNumbers = inquirygenerateRandomNumbers();
-      var inquirynum1 = inquiryrandomNumbers[0];
-      var inquirynum2 = inquiryrandomNumbers[1];
-      $('#inquirymathSumQuestion').text('What is ' + inquirynum1 + ' + ' + inquirynum2 + '?');
-      $('#inquirymathSum').data('inquiryexpectedSum', inquirynum1 + inquirynum2)
-    }
-    inquiryupdateMathSumQuestion();
-  
-    function validateInquiryForm() {
-      var formValid = !0;
-      $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').each(function() {
-        if ($(this).hasClass('not-required')) {
-          return !0
-        }
-        if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
-          formValid = !1;
-          $(this).css('border-color', 'red');
-          $('html, body').animate({
-            scrollTop: $(this).offset().top - 160
-          }, 500);
-          return !1
-        } else {
-          $(this).css('border-color', 'green')
-        }
-      });
-      var inquirymathSumInput = $('#inquirymathSum');
-      var inquirymathSumValue = inquirymathSumInput.val();
-      var inquiryexpectedSum = inquirymathSumInput.data('inquiryexpectedSum');
-      if (!inquirymathSumValue || parseInt(inquirymathSumValue) !== inquiryexpectedSum) {
-        inquirymathSumInput.css('border-color', 'red');
-        formValid = !1
-      } else {
-        inquirymathSumInput.css('border-color', 'green')
-      }
-      if (!formValid) {
-        return !1
-      }
-      return !0
-    }
-    $('#myInquiryForm').submit(function() {
-      return validateInquiryForm()
-    });
-    $('#submitTicketForm').on('reset', function() {
-      inquiryupdateMathSumQuestion()
-    });
-    $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').on('input change blur', function() {
-      if (!$(this).hasClass('not-required')) {
-        if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
-          $(this).css('border-color', 'green')
-        } else {
-          $(this).css('border-color', 'red')
-        }
-      }
-    })
 
-
-
-  });
 
 
 /* ==== Tooltip ==== */
