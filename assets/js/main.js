@@ -1206,46 +1206,52 @@ document.addEventListener("DOMContentLoaded", function() {
       const mathSumValue = mathSumInput.value;
       const expectedSum = mathSumInput.getAttribute('data-expected-sum');
       if (!mathSumValue || parseInt(mathSumValue) !== parseInt(expectedSum)) {
-        mathSumInput.style.borderColor = 'red';
         isValid = false;
+        mathSumInput.style.borderColor = 'red';
+        window.scrollTo({
+          top: mathSumInput.getBoundingClientRect().top + window.pageYOffset - 200,
+          behavior: 'smooth'
+        });
       } else {
         mathSumInput.style.borderColor = 'green';
       }
     }
 
+    // Validate CAPTCHA
+    const captcha = form.querySelector('#captcha');
+    if (!captcha || !captcha.value.trim()) {
+      isValid = false;
+      captcha.style.borderColor = 'red';
+      window.scrollTo({
+        top: captcha.getBoundingClientRect().top + window.pageYOffset - 200,
+        behavior: 'smooth'
+      });
+    } else {
+      captcha.style.borderColor = 'green';
+    }
+
     return isValid;
   }
 
-  // Define validation rules for changeOrderPage
-  const changeOrderValidationRules = [
-    { selector: '#name' },
-    { selector: '#email' },
-    { selector: '#orderID' }
-  ];
-
-  // Define validation rules for submitPage
+  // Define validation rules for submitTicketForm
   const submitPageValidationRules = [
     { selector: '#username' },
     { selector: '#password' },
     { selector: '#confirmPassword', matchField: '#password' }
   ];
 
-  // Handle form submission for changeOrderPage
-  const changeOrderForm = document.getElementById('changeOrderForm');
-  if (changeOrderForm) {
-    changeOrderForm.addEventListener('submit', function(event) {
-      if (!validateForm(changeOrderForm, changeOrderValidationRules)) {
-        event.preventDefault();
-      }
-    });
-  }
-
-  // Handle form submission for submitPage
+  // Handle form submission for submitTicketForm
   const submitPageForm = document.getElementById('submitTicketForm');
   if (submitPageForm) {
     submitPageForm.addEventListener('submit', function(event) {
       if (!validateForm(submitPageForm, submitPageValidationRules, true)) {
-        event.preventDefault();
+        event.preventDefault(); // Prevent form submission if validation fails
+        console.log('Form validation failed.'); // Debugging statement
+        return false; // Ensure form submission is blocked
+      } else {
+        // Form is valid, redirect to thank you page
+        console.log('Form is valid, redirecting to thank you page.'); // Debugging statement
+        window.location.href = '/thank-you.html'; // Replace with the URL of your thank you page
       }
     });
 
@@ -1266,7 +1272,6 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 });
-
 
 
 
