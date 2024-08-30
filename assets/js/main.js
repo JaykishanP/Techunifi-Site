@@ -1140,86 +1140,176 @@ $(document).ready(function() {
   });
 
 
-  /*Math Function for Submit Ticket */
- // Function to generate random numbers
- function generateRandomNumbers() {
-  var num1 = Math.floor(Math.random() * 20); // Adjusted range for complexity
-  var num2 = Math.floor(Math.random() * 20);
-  return [num1, num2];
-}
+/* ===== Submit a Ticket ===== */
+// JavaScript for submit.html
 
-// Function to update the math sum question
-function updateMathSumQuestion() {
-  var randomNumbers = generateRandomNumbers();
-  var num1 = randomNumbers[0];
-  var num2 = randomNumbers[1];
-  $('#mathSumQuestion').text('What is ' + num1 + ' + ' + num2 + '?');
-  $('#mathSum').data('expectedSum', num1 + num2); // Store expected sum
-}
+document.addEventListener('DOMContentLoaded', function() {
+  const submitTicketForm = document.getElementById('submitTicketForm');
 
-// Call the function on document ready
-$(document).ready(function() {
-  updateMathSumQuestion();
-});
+  submitTicketForm.addEventListener('submit', function(event) {
+    let valid = true;
 
-// Validate the form
-function validateTicketForm() {
-  var formValid = true;
+    // Contact Information Validation (if not hidden)
+    const company = document.getElementById('company');
+    const name = document.getElementById('name');
+    const email = document.getElementById('email');
+    const phone = document.getElementById('phone');
 
-  // Check each input field in the form
-  $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').each(function() {
-    if ($(this).hasClass('not-required')) {
-      return true; // Skip non-required fields
+    if (!company.value) {
+      valid = false;
+      alert('Company field is required.');
     }
-    if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
-      formValid = false;
-      $(this).addClass('invalid-field');
-      // Scroll to the first invalid field
-      $('html, body').animate({
-        scrollTop: $(this).offset().top - 200
-      }, 500);
-      return false; // Exit loop after finding the first invalid field
-    } else {
-      $(this).removeClass('invalid-field').addClass('valid-field');
+
+    if (!name.value) {
+      valid = false;
+      alert('Contact Name field is required.');
+    }
+
+    if (!email.value || !validateEmail(email.value)) {
+      valid = false;
+      alert('A valid email is required.');
+    }
+
+    if (!phone.value) {
+      valid = false;
+      alert('Phone field is required.');
+    }
+
+    // Ticket Information Validation
+    const subject = document.getElementById('subject');
+    const description = document.getElementsByName('description')[0];
+    const products = document.getElementById('00NHo00000Wqm1u');
+
+    if (!subject.value) {
+      valid = false;
+      alert('Subject field is required.');
+    }
+
+    if (!description.value) {
+      valid = false;
+      alert('Description field is required.');
+    }
+
+    if (products.selectedOptions.length === 0) {
+      valid = false;
+      alert('Please select at least one product requiring service.');
+    }
+
+    // Math Validation
+    const mathSum = document.getElementById('mathSum');
+    if (parseInt(mathSum.value) !== 4) { // 2 + 2 = 4
+      valid = false;
+      alert('Math validation failed.');
+    }
+
+    if (!valid) {
+      event.preventDefault();
     }
   });
 
-  // Validate the math sum question
-  var mathSumInput = $('#mathSum');
-  var mathSumValue = mathSumInput.val();
-  var expectedSum = mathSumInput.data('expectedSum');
-  if (!mathSumValue || parseInt(mathSumValue) !== expectedSum) {
-    mathSumInput.addClass('invalid-field');
-    formValid = false;
-  } else {
-    mathSumInput.removeClass('invalid-field').addClass('valid-field');
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
   }
-
-  return formValid;
-}
-
-// Form submission
-$('#submitTicketForm').submit(function() {
-  return validateTicketForm();
 });
 
-// Reset form listener
-$('#submitTicketForm').on('reset', function() {
-  updateMathSumQuestion();
-  // Optional: Reset validation styles
-  $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').removeClass('valid-field invalid-field');
-});
 
-// Change validation style on input change
-$('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').on('input change blur', function() {
-  if (!$(this).hasClass('not-required')) {
-    if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
-      $(this).removeClass('invalid-field').addClass('valid-field');
-    } else {
-      $(this).removeClass('valid-field').addClass('invalid-field');
+/* ===== Change Order ===== */
+// JavaScript for change-order.html
+
+document.addEventListener('DOMContentLoaded', function() {
+  const changeOrderForm = document.querySelector('form[action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DHo000002fpJX"]');
+
+  changeOrderForm.addEventListener('submit', function(event) {
+    let valid = true;
+
+    // Project Information Validation
+    const projectName = document.getElementById('00NUm0000097zsn');
+    const projectNumber = document.getElementById('00NUm000009805h');
+    const date = document.getElementById('00NUm00000980Ib');
+
+    if (!projectName.value) {
+      valid = false;
+      alert('Project Name field is required.');
     }
+
+    if (!projectNumber.value) {
+      valid = false;
+      alert('Project Number field is required.');
+    }
+
+    if (!date.value) {
+      valid = false;
+      alert('Date field is required.');
+    }
+
+    // Contractor Information Validation
+    const contractorName = document.getElementById('00NUm00000980Lp');
+    const contactPerson = document.getElementById('00NUm00000980NR');
+    const contactEmail = document.getElementById('00NUm00000980P3');
+    const contactPhone = document.getElementById('00NUm00000980Qf');
+
+    if (!contractorName.value) {
+      valid = false;
+      alert('Contractor Full Name field is required.');
+    }
+
+    if (!contactPerson.value) {
+      valid = false;
+      alert('Contact Person field is required.');
+    }
+
+    if (!contactEmail.value || !validateEmail(contactEmail.value)) {
+      valid = false;
+      alert('A valid Contact Person Email is required.');
+    }
+
+    if (!contactPhone.value) {
+      valid = false;
+      alert('Contact Person Phone number field is required.');
+    }
+
+    // Change Order Details Validation
+    const changeOrderNumber = document.getElementById('00NUm00000980SH');
+    const changeOrderDate = document.getElementById('00NUm00000980X7');
+
+    if (!changeOrderNumber.value) {
+      valid = false;
+      alert('Change Order Number field is required.');
+    }
+
+    if (!changeOrderDate.value) {
+      valid = false;
+      alert('Change Order Date field is required.');
+    }
+
+    // Description of Change Validation
+    const originalScopeWork = document.getElementById('00NUm00000980Yj');
+
+    if (!originalScopeWork.value) {
+      valid = false;
+      alert('Original Scope Work field is required.');
+    }
+
+    // Math Validation
+    const mathSum = document.getElementById('mathSum');
+    if (parseInt(mathSum.value) !== 4) { // 2 + 2 = 4
+      valid = false;
+      alert('Math validation failed.');
+    }
+
+    if (!valid) {
+      event.preventDefault();
+    }
+  });
+
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
   }
 });
+
+
 
 
 
