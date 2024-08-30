@@ -1143,172 +1143,68 @@ $(document).ready(function() {
 /* ===== Submit a Ticket ===== */
 // JavaScript for submit.html
 
-document.addEventListener('DOMContentLoaded', function() {
-  const submitTicketForm = document.getElementById('submitTicketForm');
-
-  submitTicketForm.addEventListener('submit', function(event) {
-    let valid = true;
-
-    // Contact Information Validation (if not hidden)
-    const company = document.getElementById('company');
-    const name = document.getElementById('name');
-    const email = document.getElementById('email');
-    const phone = document.getElementById('phone');
-
-    if (!company.value) {
-      valid = false;
-      alert('Company field is required.');
-    }
-
-    if (!name.value) {
-      valid = false;
-      alert('Contact Name field is required.');
-    }
-
-    if (!email.value || !validateEmail(email.value)) {
-      valid = false;
-      alert('A valid email is required.');
-    }
-
-    if (!phone.value) {
-      valid = false;
-      alert('Phone field is required.');
-    }
-
-    // Ticket Information Validation
-    const subject = document.getElementById('subject');
-    const description = document.getElementsByName('description')[0];
-    const products = document.getElementById('00NHo00000Wqm1u');
-
-    if (!subject.value) {
-      valid = false;
-      alert('Subject field is required.');
-    }
-
-    if (!description.value) {
-      valid = false;
-      alert('Description field is required.');
-    }
-
-    if (products.selectedOptions.length === 0) {
-      valid = false;
-      alert('Please select at least one product requiring service.');
-    }
-
-    // Math Validation
-    const mathSum = document.getElementById('mathSum');
-    if (parseInt(mathSum.value) !== 4) { // 2 + 2 = 4
-      valid = false;
-      alert('Math validation failed.');
-    }
-
-    if (!valid) {
-      event.preventDefault();
-    }
-  });
-
-  function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  }
-});
-
 
 /* ===== Change Order ===== */
 // JavaScript for change-order.html
 
-document.addEventListener('DOMContentLoaded', function() {
-  const changeOrderForm = document.querySelector('form[action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DHo000002fpJX"]');
+document.addEventListener("DOMContentLoaded", function() {
+  const bodyClass = document.body.className;
 
-  changeOrderForm.addEventListener('submit', function(event) {
-    let valid = true;
+  // Function to validate fields and apply red border if invalid
+  function validateForm(form, validationRules) {
+    let isValid = true;
 
-    // Project Information Validation
-    const projectName = document.getElementById('00NUm0000097zsn');
-    const projectNumber = document.getElementById('00NUm000009805h');
-    const date = document.getElementById('00NUm00000980Ib');
+    // Clear previous validation errors
+    const fields = form.querySelectorAll('input, textarea, select');
+    fields.forEach(field => field.classList.remove('invalid-field'));
 
-    if (!projectName.value) {
-      valid = false;
-      alert('Project Name field is required.');
-    }
+    // Validate fields
+    validationRules.forEach(rule => {
+      const field = form.querySelector(rule.selector);
+      if (field) {
+        if (!field.value.trim() || (rule.matchField && field.value !== form.querySelector(rule.matchField).value)) {
+          isValid = false;
+          field.classList.add('invalid-field');
+        }
+      }
+    });
 
-    if (!projectNumber.value) {
-      valid = false;
-      alert('Project Number field is required.');
-    }
+    return isValid;
+  }
 
-    if (!date.value) {
-      valid = false;
-      alert('Date field is required.');
-    }
+  // Define validation rules for changeOrderPage
+  const changeOrderValidationRules = [
+    { selector: '#name' },
+    { selector: '#email' },
+    { selector: '#orderID' }
+  ];
 
-    // Contractor Information Validation
-    const contractorName = document.getElementById('00NUm00000980Lp');
-    const contactPerson = document.getElementById('00NUm00000980NR');
-    const contactEmail = document.getElementById('00NUm00000980P3');
-    const contactPhone = document.getElementById('00NUm00000980Qf');
+  // Define validation rules for submitPage
+  const submitPageValidationRules = [
+    { selector: '#username' },
+    { selector: '#password' },
+    { selector: '#confirmPassword', matchField: '#password' }
+  ];
 
-    if (!contractorName.value) {
-      valid = false;
-      alert('Contractor Full Name field is required.');
-    }
-
-    if (!contactPerson.value) {
-      valid = false;
-      alert('Contact Person field is required.');
-    }
-
-    if (!contactEmail.value || !validateEmail(contactEmail.value)) {
-      valid = false;
-      alert('A valid Contact Person Email is required.');
-    }
-
-    if (!contactPhone.value) {
-      valid = false;
-      alert('Contact Person Phone number field is required.');
-    }
-
-    // Change Order Details Validation
-    const changeOrderNumber = document.getElementById('00NUm00000980SH');
-    const changeOrderDate = document.getElementById('00NUm00000980X7');
-
-    if (!changeOrderNumber.value) {
-      valid = false;
-      alert('Change Order Number field is required.');
-    }
-
-    if (!changeOrderDate.value) {
-      valid = false;
-      alert('Change Order Date field is required.');
-    }
-
-    // Description of Change Validation
-    const originalScopeWork = document.getElementById('00NUm00000980Yj');
-
-    if (!originalScopeWork.value) {
-      valid = false;
-      alert('Original Scope Work field is required.');
-    }
-
-    // Math Validation
-    const mathSum = document.getElementById('mathSum');
-    if (parseInt(mathSum.value) !== 4) { // 2 + 2 = 4
-      valid = false;
-      alert('Math validation failed.');
-    }
-
-    if (!valid) {
-      event.preventDefault();
-    }
-  });
-
-  function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
+  // Identify the form and apply page-specific validation
+  if (bodyClass.includes('changeOrderPage')) {
+    const form = document.getElementById('orderForm');
+    form.addEventListener('submit', function(event) {
+      const isValid = validateForm(form, changeOrderValidationRules);
+      if (!isValid) {
+        event.preventDefault();
+      }
+    });
+  } else if (bodyClass.includes('submitPage')) {
+    const form = document.getElementById('orderForm');
+    form.addEventListener('submit', function(event) {
+      const isValid = validateForm(form, submitPageValidationRules);
+      if (!isValid) {
+        event.preventDefault();
+      }
+    });
   }
 });
-
 
 
 
