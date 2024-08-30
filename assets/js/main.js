@@ -1071,7 +1071,7 @@ $(document).ready(function() {
 
   /* ======= Submit a Ticket ======= */
   /*Math Function for Submit Ticket */
-  // Function to generate random numbers
+ // Function to generate random numbers
 function generateRandomNumbers() {
   var num1 = Math.floor(Math.random() * 20); // Adjusted range for complexity
   var num2 = Math.floor(Math.random() * 20);
@@ -1088,7 +1088,9 @@ function updateMathSumQuestion() {
 }
 
 // Call the function on document ready
-updateMathSumQuestion();
+$(document).ready(function() {
+  updateMathSumQuestion();
+});
 
 // Validate the form
 function validateTicketForm() {
@@ -1096,20 +1098,20 @@ function validateTicketForm() {
 
   // Check each input field in the form
   $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').each(function() {
-      if ($(this).hasClass('not-required')) {
-          return true; // Skip non-required fields
-      }
-      if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
-          formValid = false;
-          $(this).css('border-color', 'red');
-          // Scroll to the first invalid field
-          $('html, body').animate({
-              scrollTop: $(this).offset().top - 200
-          }, 500);
-          return false; // Exit loop after finding the first invalid field
-      } else {
-          $(this).css('border-color', 'green');
-      }
+    if ($(this).hasClass('not-required')) {
+      return true; // Skip non-required fields
+    }
+    if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
+      formValid = false;
+      $(this).addClass('invalid-field');
+      // Scroll to the first invalid field
+      $('html, body').animate({
+        scrollTop: $(this).offset().top - 200
+      }, 500);
+      return false; // Exit loop after finding the first invalid field
+    } else {
+      $(this).removeClass('invalid-field').addClass('valid-field');
+    }
   });
 
   // Validate the math sum question
@@ -1117,10 +1119,10 @@ function validateTicketForm() {
   var mathSumValue = mathSumInput.val();
   var expectedSum = mathSumInput.data('expectedSum');
   if (!mathSumValue || parseInt(mathSumValue) !== expectedSum) {
-      mathSumInput.css('border-color', 'red');
-      formValid = false;
+    mathSumInput.addClass('invalid-field');
+    formValid = false;
   } else {
-      mathSumInput.css('border-color', 'green');
+    mathSumInput.removeClass('invalid-field').addClass('valid-field');
   }
 
   return formValid;
@@ -1135,17 +1137,17 @@ $('#submitTicketForm').submit(function() {
 $('#submitTicketForm').on('reset', function() {
   updateMathSumQuestion();
   // Optional: Reset validation styles
-  $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').css('border-color', '');
+  $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').removeClass('valid-field invalid-field');
 });
 
 // Change validation style on input change
 $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').on('input change blur', function() {
   if (!$(this).hasClass('not-required')) {
-      if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
-          $(this).css('border-color', 'green');
-      } else {
-          $(this).css('border-color', 'red');
-      }
+    if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
+      $(this).removeClass('invalid-field').addClass('valid-field');
+    } else {
+      $(this).removeClass('valid-field').addClass('invalid-field');
+    }
   }
 });
 
