@@ -1150,13 +1150,35 @@ $(document).ready(function() {
 document.addEventListener("DOMContentLoaded", function() {
   const bodyClass = document.body.className;
 
+  // Function to generate random numbers for math sum validation
+  function generateRandomNumbers() {
+    var num1 = Math.floor(Math.random() * 10);
+    var num2 = Math.floor(Math.random() * 10);
+    return [num1, num2];
+  }
+
+  // Function to update the math sum question with new numbers
+  function updateMathSumQuestion() {
+    var randomNumbers = generateRandomNumbers();
+    var num1 = randomNumbers[0];
+    var num2 = randomNumbers[1];
+    document.getElementById('mathSumQuestion').textContent = `What is ${num1} + ${num2}?`;
+    document.getElementById('mathSum').setAttribute('data-expected-sum', num1 + num2);
+  }
+
+  // Call the function to update the math sum question when the document is ready
+  updateMathSumQuestion();
+
   // Function to validate fields and apply red border if invalid
-  function validateForm(form, validationRules) {
+  function validateForm(form, validationRules, validateMathSum = false) {
     let isValid = true;
 
     // Clear previous validation errors
     const fields = form.querySelectorAll('input, textarea, select');
-    fields.forEach(field => field.classList.remove('invalid-field'));
+    fields.forEach(field => {
+      field.classList.remove('invalid-field');
+      field.style.borderColor = ''; // Reset border color
+    });
 
     // Validate fields
     validationRules.forEach(rule => {
@@ -1165,9 +1187,31 @@ document.addEventListener("DOMContentLoaded", function() {
         if (!field.value.trim() || (rule.matchField && field.value !== form.querySelector(rule.matchField).value)) {
           isValid = false;
           field.classList.add('invalid-field');
+          field.style.borderColor = 'red';
+          // Scroll to the field
+          window.scrollTo({
+            top: field.getBoundingClientRect().top + window.pageYOffset - 200, // Adjust the offset to ensure the field is visible
+            behavior: 'smooth'
+          });
+          return false; // Exit the loop after scrolling to the first invalid field
+        } else {
+          field.style.borderColor = 'green';
         }
       }
     });
+
+    // Validate math sum question if applicable
+    if (validateMathSum) {
+      const mathSumInput = form.querySelector('#mathSum');
+      const mathSumValue = mathSumInput.value;
+      const expectedSum = mathSumInput.getAttribute('data-expected-sum');
+      if (!mathSumValue || parseInt(mathSumValue) !== parseInt(expectedSum)) {
+        mathSumInput.style.borderColor = 'red';
+        isValid = false;
+      } else {
+        mathSumInput.style.borderColor = 'green';
+      }
+    }
 
     return isValid;
   }
@@ -1186,21 +1230,38 @@ document.addEventListener("DOMContentLoaded", function() {
     { selector: '#confirmPassword', matchField: '#password' }
   ];
 
-  // Identify the form and apply page-specific validation
-  if (bodyClass.includes('changeOrderPage')) {
-    const form = document.getElementById('orderForm');
-    form.addEventListener('submit', function(event) {
-      const isValid = validateForm(form, changeOrderValidationRules);
-      if (!isValid) {
+  // Handle form submission for changeOrderPage
+  const changeOrderForm = document.getElementById('changeOrderForm');
+  if (changeOrderForm) {
+    changeOrderForm.addEventListener('submit', function(event) {
+      if (!validateForm(changeOrderForm, changeOrderValidationRules)) {
         event.preventDefault();
       }
     });
-  } else if (bodyClass.includes('submitPage')) {
-    const form = document.getElementById('orderForm');
-    form.addEventListener('submit', function(event) {
-      const isValid = validateForm(form, submitPageValidationRules);
-      if (!isValid) {
+  }
+
+  // Handle form submission for submitPage
+  const submitPageForm = document.getElementById('submitTicketForm');
+  if (submitPageForm) {
+    submitPageForm.addEventListener('submit', function(event) {
+      if (!validateForm(submitPageForm, submitPageValidationRules, true)) {
         event.preventDefault();
+      }
+    });
+
+    // Event listener to update math sum question when the form is reset
+    submitPageForm.addEventListener('reset', function() {
+      updateMathSumQuestion();
+    });
+
+    // Event listener for live validation feedback
+    submitPageForm.addEventListener('input', function(event) {
+      if (!event.target.classList.contains('not-required')) {
+        if (event.target.value.trim()) {
+          event.target.style.borderColor = 'green';
+        } else {
+          event.target.style.borderColor = 'red';
+        }
       }
     });
   }
