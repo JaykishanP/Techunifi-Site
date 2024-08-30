@@ -1223,10 +1223,6 @@ $(document).ready(function() {
   $('#submitTicketForm').on('submit', function(event) {
     if (!validateTicketForm()) {
       event.preventDefault(); // Prevent form submission if validation fails
-    } else {
-      // If validation passes, redirect to the thank you page
-      window.location.href = 'thanku-submit.html'; // Redirect after form submission
-      event.preventDefault(); // Prevent default form submission to handle redirection manually
     }
   });
 
@@ -1246,6 +1242,7 @@ $(document).ready(function() {
     }
   });
 });
+
 
 
 
