@@ -1200,8 +1200,10 @@ $(document).ready(function() {
     if (!mathSumValue || parseInt(mathSumValue) !== expectedSum) {
       mathSumInput.css('border-color', 'red');
       formValid = false;
+      console.log('Math validation failed');
     } else {
       mathSumInput.css('border-color', 'green');
+      console.log('Math validation passed');
     }
 
     // Validate CAPTCHA
@@ -1211,11 +1213,12 @@ $(document).ready(function() {
       formValid = false;
       $('.g-recaptcha').css('border-color', 'red'); // Optional: You might want to style CAPTCHA differently
       alert('Please complete the CAPTCHA'); // Optional: Alert to inform user
+      console.log('CAPTCHA validation failed');
     } else {
       $('.g-recaptcha').css('border-color', 'green'); // Optional: Style CAPTCHA if completed
+      console.log('CAPTCHA validation passed');
     }
 
-    // Return false if any field is invalid
     return formValid;
   }
 
@@ -1223,6 +1226,9 @@ $(document).ready(function() {
   $('#submitTicketForm').on('submit', function(event) {
     if (!validateTicketForm()) {
       event.preventDefault(); // Prevent form submission if validation fails
+      console.log('Form validation failed. Submission prevented.');
+    } else {
+      console.log('Form validation passed. Submitting the form.');
     }
   });
 
@@ -1242,8 +1248,6 @@ $(document).ready(function() {
     }
   });
 });
-
-
 
 
 
