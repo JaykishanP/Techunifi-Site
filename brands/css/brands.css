@@ -251,6 +251,15 @@ section.brands-tab-section {
   display: block;
 }
 
+/* Change Order */
+.changeOrderPage .brand-tab.container {
+  display: flex;
+  text-align: center;
+  align-items: center;
+}
+.changeOrderPage section.ticket-form {
+  padding: 0px 0 50px 0;
+}
 
 /* ==== Responsive ==== */
 
@@ -355,6 +364,20 @@ section.brands-tab-section {
 .email-phone-chat a span {
   padding: 0 10px 0 0;
 }
+.changeOrderPage .brand-tablinks {
+  padding: 10px 5px 5px;
+  font-size: 12px;
+}
+.changeOrderPage .cont-row-head h4 {
+  font-size: 22px;
+}
+.changeOrderPage .brand-tablinks p {
+  font-size: 12px;
+  letter-spacing: 0.9px;
+}
+.changeOrderPage .web-btn {
+  font-size: 12px;
+}
 
 }
 
@@ -406,6 +429,20 @@ section.brands-tab-section {
   .logo-para-button p {
     max-width: 264px;
   }
+  .changeOrderPage .logo {
+    margin-right: 0;
+    padding: 10px 0;
+  }
+  .changeOrderPage .brand-tablinks {
+    padding: 10px 8px;
+    font-size: 12px;
+  }
+  .changeOrderPage section.sub-tab-section {
+    padding: 30px 0;
+  }
+  .changeOrderPage section.ticket-form {
+    padding: 0px 0 50px 0;
+  }
 
 }
 
@@ -426,4 +463,17 @@ section.brands-tab-section {
   .logo-para-button p {
     max-width: 328px;
   }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1199.9px){
+  .changeOrderPage .brand-tablinks {
+    padding: 10px 28px;
+  }
+  .changeOrderPage section.sub-tab-section {
+    padding: 30px 0;
+  }
+  .changeOrderPage section.ticket-form {
+    padding: 0px 0 50px 0;
+  }
+
 }
