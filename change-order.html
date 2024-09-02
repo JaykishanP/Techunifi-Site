@@ -40,6 +40,8 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <link href="brands/css/brands.css" rel="stylesheet">
+
 
   <!-- Script JS  -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -118,7 +120,7 @@ function gtag(){dataLayer.push(arguments);}
   <section class="sub-tab-section">
     <div class="container">
 
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-md-12">
           <div class="tab">
             <a href="new-inquiry.html" class="sub-tablinks" id="newInquiryButton">New Inquiry</a>
@@ -126,7 +128,7 @@ function gtag(){dataLayer.push(arguments);}
             <a href="change-order.html" class="sub-tablinks active">Change Order</a>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="row">
         <div class="col-md-12">
@@ -303,7 +305,7 @@ function gtag(){dataLayer.push(arguments);}
         </div>
   
     </div>
-  
+  <br>
     <!-- Contractor information -->
     <div class="submit-sub-section submit-contact-info">
   
@@ -342,7 +344,7 @@ function gtag(){dataLayer.push(arguments);}
         </div>
   
     </div>
-  
+  <br>
      <!-- Change Order Details -->
      <div class="submit-sub-section submit-contact-info">
   
@@ -367,7 +369,7 @@ function gtag(){dataLayer.push(arguments);}
         </div>
   
     </div>
-  
+  <br>
     <!-- Description of Change -->
     <div class="submit-sub-section submit-contact-info">
   
@@ -383,30 +385,34 @@ function gtag(){dataLayer.push(arguments);}
               <textarea  id="00NUm00000980Yj" name="00NUm00000980Yj" rows="5" type="text" wrap="soft"></textarea>
             </div>
           </div>
+
+             <!-- Math Validation -->
+         <div class="row">
+          <div class="col-md-12">
+            <div class="mathTooltip">
+              <label for="mathSum" id="mathSumQuestion">Math Sum: What is 2 + 2?</label>
+              <span><i class="bi bi-question-circle"></i></span>
+            </div>
+              <input id="mathSum" name="mathSum" type="number" placeholder="Enter Sum"/>
+          </div>
+        </div>
+
+          <!-- Captcha -->
+
+           <div class="row" style="padding-bottom: 20px;">
+              <div class="col-md-12">
+                 <input type=hidden name='captcha_settings' value='{"keyname":"casev2","fallback":"true","orgId":"00DHo000002fpJX","ts":""}'>
+                 <input type=hidden name="orgid" value="00DHo000002fpJX">
+                 <input type=hidden name="retURL" value="https://www.techunifi.com/">
+                 <div class="g-recaptcha" data-sitekey="6Lf3ICYqAAAAAGHKnO2VfWsmWMcJ57vKk7KBusnz"></div>
+              </div>
+           </div>
+        
     
     </div>
 
-         <!-- Math Validation -->
-         <div class="row">
-            <div class="col-md-12">
-              <div class="mathTooltip">
-                <label for="mathSum" id="mathSumQuestion">Math Sum: What is 2 + 2?</label>
-                <span><i class="bi bi-question-circle"></i></span>
-              </div>
-                <input id="mathSum" name="mathSum" type="number" placeholder="Enter Sum"/>
-            </div>
-          </div>
+      
     
-                          <!-- Captcha -->
-
-                          <div class="row" style="padding-bottom: 20px;">
-                            <div class="col-md-12">
-                              <input type=hidden name='captcha_settings' value='{"keyname":"casev2","fallback":"true","orgId":"00DHo000002fpJX","ts":""}'>
-                              <input type=hidden name="orgid" value="00DHo000002fpJX">
-                              <input type=hidden name="retURL" value="https://www.techunifi.com/">
-                              <div class="g-recaptcha" data-sitekey="6Lf3ICYqAAAAAGHKnO2VfWsmWMcJ57vKk7KBusnz"></div>
-                            </div>
-                          </div>
 
                           <div class="post-form-para">
                             <p>
