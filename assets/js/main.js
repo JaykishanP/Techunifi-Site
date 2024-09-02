@@ -1175,6 +1175,7 @@ $(document).ready(function() {
     $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').each(function() {
       // Skip validation for fields with class "not-required"
       if ($(this).hasClass('not-required')) {
+        console.log($(this).attr('id') + ' is not required, skipping validation.');
         return true; // Skip this field and continue with the next one
       }
 
@@ -1182,6 +1183,7 @@ $(document).ready(function() {
       if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
         formValid = false;
         $(this).css('border-color', 'red');
+        console.log($(this).attr('id') + ' is invalid. Value: ', $(this).val());
         // Scroll to the field
         $('html, body').animate({
           scrollTop: $(this).offset().top - 200 // Adjust the offset to ensure the field is visible
@@ -1190,6 +1192,7 @@ $(document).ready(function() {
       } else {
         // Set border color to green if the field is filled
         $(this).css('border-color', 'green');
+        console.log($(this).attr('id') + ' is valid.');
       }
     });
 
@@ -1200,10 +1203,10 @@ $(document).ready(function() {
     if (!mathSumValue || parseInt(mathSumValue) !== expectedSum) {
       mathSumInput.css('border-color', 'red');
       formValid = false;
-      console.log('Math validation failed');
+      console.log('Math validation failed. Entered value: ' + mathSumValue + ', Expected value: ' + expectedSum);
     } else {
       mathSumInput.css('border-color', 'green');
-      console.log('Math validation passed');
+      console.log('Math validation passed.');
     }
 
     // Validate CAPTCHA
@@ -1213,10 +1216,10 @@ $(document).ready(function() {
       formValid = false;
       $('.g-recaptcha').css('border-color', 'red'); // Optional: You might want to style CAPTCHA differently
       alert('Please complete the CAPTCHA'); // Optional: Alert to inform user
-      console.log('CAPTCHA validation failed');
+      console.log('CAPTCHA validation failed.');
     } else {
       $('.g-recaptcha').css('border-color', 'green'); // Optional: Style CAPTCHA if completed
-      console.log('CAPTCHA validation passed');
+      console.log('CAPTCHA validation passed.');
     }
 
     return formValid;
