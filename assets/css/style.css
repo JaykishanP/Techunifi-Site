@@ -2947,11 +2947,10 @@ body.productPage.modal-open {
 
 /* Signature */
 .flex-row {
-  display: flex;
+  /* display: flex; */
 }
 .wrapper {
   border: 1px solid var(--black);
-  border-right: 0;
 }
 canvas#signature-pad {
   background: #fff;
@@ -2968,7 +2967,7 @@ button#clear {
   cursor: pointer;
 }
 button#clear span {
-  transform: rotate(90deg);
+  /* transform: rotate(90deg); */
   display: block;
 }
 
