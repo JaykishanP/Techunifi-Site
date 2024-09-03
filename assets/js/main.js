@@ -1170,7 +1170,7 @@ $(document).ready(function() {
     var num2 = Math.floor(Math.random() * 10);
     return [num1, num2];
   }
- 
+
   // Function to update the math sum question with new numbers
   function updateMathSumQuestion() {
     var randomNumbers = generateRandomNumbers();
@@ -1179,97 +1179,95 @@ $(document).ready(function() {
     $('#mathSumQuestion').text('What is ' + num1 + ' + ' + num2 + '?');
     $('#mathSum').data('expectedSum', num1 + num2); // Store the expected sum in a data attribute for validation
   }
- 
+
   // Call the function to update the math sum question when the document is ready
   updateMathSumQuestion();
- 
+
   // Function to validate the ticket form
-  // Function to validate the ticket form
-function validateTicketForm() {
-  var formValid = true;
+  function validateTicketForm() {
+    var formValid = true;
 
-  // Check each input field in the form
-  $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').each(function() {
-    if (!$(this).attr('id')) {
-      console.log('Field without ID found:', this);
-    }
+    // Check each input field in the form
+    $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').each(function() {
+      if (!$(this).attr('id')) {
+        console.log('Field without ID found:', this);
+      }
 
-    if ($(this).hasClass('not-required')) {
-      console.log($(this).attr('id') + ' is not required, skipping validation.');
-      return true; // Skip this field and continue with the next one
-    }
+      if ($(this).hasClass('not-required')) {
+        console.log($(this).attr('id') + ' is not required, skipping validation.');
+        return true; // Skip this field and continue with the next one
+      }
 
-    if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
+      if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
+        formValid = false;
+        $(this).css('border-color', 'red');
+        console.log($(this).attr('id') + ' is invalid. Value: ', $(this).val());
+        $('html, body').animate({
+          scrollTop: $(this).offset().top - 200
+        }, 500);
+        return false; // Exit the loop after scrolling to the first invalid field
+      } else {
+        $(this).css('border-color', 'green');
+        console.log($(this).attr('id') + ' is valid.');
+      }
+    });
+
+    // Validate the signature
+    if (signaturePad.isEmpty()) {
       formValid = false;
-      $(this).css('border-color', 'red');
-      console.log($(this).attr('id') + ' is invalid. Value: ', $(this).val());
+      alert('Please provide your signature.');
+      console.log('Signature validation failed.');
+      // Scroll to the signature pad
       $('html, body').animate({
-        scrollTop: $(this).offset().top - 200
+        scrollTop: $(canvas).offset().top - 200
       }, 500);
-      return false; // Exit the loop after scrolling to the first invalid field
     } else {
-      $(this).css('border-color', 'green');
-      console.log($(this).attr('id') + ' is valid.');
+      console.log('Signature validation passed.');
+    }
+
+    // Validate math sum question
+    var mathSumInput = $('#mathSum');
+    var mathSumValue = mathSumInput.val();
+    var expectedSum = mathSumInput.data('expectedSum');
+    if (!mathSumValue || parseInt(mathSumValue) !== expectedSum) {
+      mathSumInput.css('border-color', 'red');
+      formValid = false;
+      console.log('Math validation failed. Entered value: ' + mathSumValue + ', Expected value: ' + expectedSum);
+    } else {
+      mathSumInput.css('border-color', 'green');
+      console.log('Math validation passed.');
+    }
+
+    // Validate CAPTCHA
+    var captchaResponse = grecaptcha.getResponse();
+    if (!captchaResponse) {
+      formValid = false;
+      $('.g-recaptcha').css('border-color', 'red');
+      alert('Please complete the CAPTCHA');
+      console.log('CAPTCHA validation failed.');
+    } else {
+      $('.g-recaptcha').css('border-color', 'green');
+      console.log('CAPTCHA validation passed.');
+    }
+
+    return formValid;
+  }
+
+  // Attach submit event handler to the form
+  $('#submitTicketForm').on('submit', function(event) {
+    if (!validateTicketForm()) {
+      event.preventDefault(); // Prevent form submission if validation fails
+      console.log('Form validation failed. Submission prevented.');
+    } else {
+      console.log('Form validation passed. Submitting the form.');
     }
   });
 
-  // Validate the signature
-  if (signaturePad.isEmpty()) {
-    formValid = false;
-    alert('Please provide your signature.');
-    console.log('Signature validation failed.');
-    // Scroll to the signature pad
-    $('html, body').animate({
-      scrollTop: $(canvas).offset().top - 200
-    }, 500);
-  } else {
-    console.log('Signature validation passed.');
-  }
-
-  // Validate math sum question
-  var mathSumInput = $('#mathSum');
-  var mathSumValue = mathSumInput.val();
-  var expectedSum = mathSumInput.data('expectedSum');
-  if (!mathSumValue || parseInt(mathSumValue) !== expectedSum) {
-    mathSumInput.css('border-color', 'red');
-    formValid = false;
-    console.log('Math validation failed. Entered value: ' + mathSumValue + ', Expected value: ' + expectedSum);
-  } else {
-    mathSumInput.css('border-color', 'green');
-    console.log('Math validation passed.');
-  }
-
-  // Validate CAPTCHA
-  var captchaResponse = grecaptcha.getResponse();
-  if (!captchaResponse) {
-    formValid = false;
-    $('.g-recaptcha').css('border-color', 'red');
-    alert('Please complete the CAPTCHA');
-    console.log('CAPTCHA validation failed.');
-  } else {
-    $('.g-recaptcha').css('border-color', 'green');
-    console.log('CAPTCHA validation passed.');
-  }
-
-  return formValid;
-}
-
-// Attach submit event handler to the form
-$('#submitTicketForm').on('submit', function(event) {
-  if (!validateTicketForm()) {
-    event.preventDefault(); // Prevent form submission if validation fails
-    console.log('Form validation failed. Submission prevented.');
-  } else {
-    console.log('Form validation passed. Submitting the form.');
-  }
-});
-
- 
   // Event listener to update math sum question when the form is reset
   $('#submitTicketForm').on('reset', function() {
     updateMathSumQuestion();
   });
- 
+
   // Event listener to update border color on input changes
   $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').on('input change blur', function() {
     if (!$(this).hasClass('not-required')) {
@@ -1280,9 +1278,49 @@ $('#submitTicketForm').on('submit', function(event) {
       }
     }
   });
+
+  // Attach event handler to the "Download PDF" button
+  $('#downloadPdf').on('click', function() {
+    if (validateTicketForm()) {
+      // Create a new jsPDF instance
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      // Get form data
+      const formData = $('#submitTicketForm').serializeArray();
+
+      // Add form data to PDF
+      let y = 10; // Starting Y position for text
+      formData.forEach(field => {
+        const label = $(`label[for='${field.name}']`).text();
+        doc.text(`${label}: ${field.value}`, 10, y);
+        y += 10; // Increment Y position for next line
+      });
+
+      // Add signature image if not empty
+      if (!signaturePad.isEmpty()) {
+        const signatureImage = signaturePad.toDataURL();
+        doc.addImage(signatureImage, 'PNG', 10, y, 100, 30);
+        y += 40; // Increment Y position after image
+      }
+
+      // Add the math sum question and answer
+      const mathSumQuestion = $('#mathSumQuestion').text();
+      const mathSumAnswer = $('#mathSum').val();
+      doc.text(`${mathSumQuestion}: ${mathSumAnswer}`, 10, y);
+
+      // Save the PDF
+      doc.save('form-data.pdf');
+      console.log('PDF has been downloaded.');
+    } else {
+      console.log('Form validation failed. PDF download prevented.');
+    }
+  });
 });
 
 
+
+/* ===== PDF ===== */
 
 
 
