@@ -1282,40 +1282,44 @@ $(document).ready(function() {
   // // Attach event handler to the "Download PDF" button
   $('#downloadPdf').on('click', function() {
     if (validateTicketForm()) {
-      // Create a new jsPDF instance
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
+        // Create a new jsPDF instance
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
 
-      // Get form data
-      const formData = $('#submitTicketForm').serializeArray();
+        // Get form data
+        const formData = $('#submitTicketForm').serializeArray();
 
-      // Add form data to PDF
-      let y = 10; // Starting Y position for text
-      formData.forEach(field => {
-        const label = $(`label[for='${field.name}']`).text();
-        doc.text(`${label}: ${field.value}`, 10, y);
-        y += 10; // Increment Y position for next line
-      });
+        // Filter out hidden fields and the fields you don't want in the PDF
+        const filteredFormData = formData.filter(field => 
+            field.name !== 'orgid' && 
+            field.name !== 'retURL' && 
+            field.name !== 'mathSum' &&
+            field.name !== 'g-recaptcha-response'
+        );
 
-      // Add signature image if not empty
-      if (!signaturePad.isEmpty()) {
-        const signatureImage = signaturePad.toDataURL();
-        doc.addImage(signatureImage, 'PNG', 10, y, 100, 30);
-        y += 40; // Increment Y position after image
-      }
+        // Add form data to PDF
+        let y = 10; // Starting Y position for text
+        filteredFormData.forEach(field => {
+            const label = $(`label[for='${field.name}']`).text();
+            doc.text(`${label}: ${field.value}`, 10, y);
+            y += 10; // Increment Y position for next line
+        });
 
-      // Add the math sum question and answer
-      const mathSumQuestion = $('#mathSumQuestion').text();
-      const mathSumAnswer = $('#mathSum').val();
-      doc.text(`${mathSumQuestion}: ${mathSumAnswer}`, 10, y);
+        // Add signature image if not empty
+        if (!signaturePad.isEmpty()) {
+            const signatureImage = signaturePad.toDataURL();
+            doc.addImage(signatureImage, 'PNG', 10, y, 100, 30);
+            y += 40; // Increment Y position after image
+        }
 
-      // Save the PDF
-      doc.save('form-data.pdf');
-      console.log('PDF has been downloaded.');
+        // Save the PDF
+        doc.save('form-data.pdf');
+        console.log('PDF has been downloaded.');
     } else {
-      console.log('Form validation failed. PDF download prevented.');
+        console.log('Form validation failed. PDF download prevented.');
     }
-  });
+});
+
 
 });
 
