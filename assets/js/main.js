@@ -1701,8 +1701,8 @@ $(document).ready(function() {
         const doc = new jsPDF();
 
         // Add header with logo
-        const logoUrl = 'path_to_logo_image'; // Replace with your logo image path or URL
-        doc.addImage(logoUrl, 'PNG', 10, 10, 50, 20); // Adjust the position and size of the logo
+        const logoUrl = 'https://www.techunifi.com/assets/img/hero-img.svg'; // Replace with your logo image path or URL
+        doc.addImage(logoUrl, 'SVG', 10, 10, 50, 20); // Adjust the position and size of the logo
         doc.setFontSize(18);
         doc.text('Your Company Name', 70, 20); // Company name in the header
 
@@ -1733,7 +1733,7 @@ $(document).ready(function() {
         // Add signature image if not empty
         if (!signaturePad.isEmpty()) {
             const signatureImage = signaturePad.toDataURL();
-            doc.addImage(signatureImage, 'PNG', 10, y, 100, 30);
+            doc.addImage(signatureImage, 'SVG', 10, y, 100, 30);
             y += 40; // Increment Y position after the image
         }
 
