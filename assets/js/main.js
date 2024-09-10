@@ -1702,7 +1702,7 @@ $(document).ready(function() {
         // Load the Raleway font (Base64-encoded)
         doc.addFileToVFS('Raleway-Regular.ttf', 'BASE64_ENCODED_STRING_OF_TTF');
         doc.addFont('Raleway-Regular.ttf', 'Raleway', 'normal');
-        doc.setFont('Raleway'); // Set the Raleway font
+        doc.setFont('Raleway'); // Set the Raleway font before using it
 
         // Add header with logo
         const logoUrl = 'https://www.techunifi.com/assets/img/hero-img.png';
@@ -1770,9 +1770,6 @@ $(document).ready(function() {
         console.log('Form validation failed. PDF download prevented.');
     }
 });
-
-
-
 
 
 
