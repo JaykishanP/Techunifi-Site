@@ -1702,7 +1702,7 @@ $(document).ready(function() {
 
         // Add header with logo
         const logoUrl = 'https://www.techunifi.com/assets/img/hero-img.png'; // Replace with your logo image path or URL
-        const logoWidth = 50;  // Set your desired width
+        const logoWidth = 30;  // Set your desired width
         const logoHeight = 30; // Set your desired height
         const logoX = 80;      // X position (adjust as needed)
         const logoY = 10;      // Y position (adjust as needed)
