@@ -1704,7 +1704,6 @@ $(document).ready(function() {
         const logoUrl = 'https://www.techunifi.com/assets/img/hero-img.png'; // Replace with your logo image path or URL
         doc.addImage(logoUrl, 'PNG', 10, 10, 50, 20); // Adjust the position and size of the logo
         doc.setFontSize(18);
-        doc.text('Your Company Name', 70, 20); // Company name in the header
 
         // Draw a line below the header
         doc.setLineWidth(0.5);
@@ -1740,8 +1739,8 @@ $(document).ready(function() {
         // Add footer with contact details
         const pageHeight = doc.internal.pageSize.height;
         doc.setFontSize(10);
-        doc.text('Contact us: 123-456-7890 | email@example.com', 10, pageHeight - 10); // Adjust the footer content and position
-        doc.text('Address: 123 Your Street, Your City, Your Country', 10, pageHeight - 5);
+        doc.text('Contact us: +1 (336) 860-6061 | info@techunifi.com', 10, pageHeight - 10); // Adjust the footer content and position
+        doc.text('Address: 2638 Willard Dairy Road, Suite 112 High Point, NC 27265', 10, pageHeight - 5);
 
         // Save the PDF
         doc.save('form-data.pdf');
