@@ -1699,49 +1699,61 @@ $(document).ready(function() {
         // Create a new jsPDF instance
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
- 
+
         // Add header with logo
         const logoUrl = 'https://www.techunifi.com/assets/img/hero-img.png'; // Replace with your logo image path or URL
-        doc.addImage(logoUrl, 'PNG', 10, 10, 50, 30); // Adjust the position and size of the logo
+        doc.addImage(logoUrl, 'PNG', 80, 10, 50, 30); // Center the logo (adjust X position to center)
         doc.setFontSize(18);
- 
-        // Draw a line below the header
-        doc.setLineWidth(0.5);
-        doc.line(10, 35, 200, 35); // Horizontal line below the header
- 
+
         // Get form data
         const formData = $('#submitTicketForm').serializeArray();
- 
+
         // Filter out hidden fields and the fields you don't want in the PDF
-        const filteredFormData = formData.filter(field =>
-            field.name !== 'orgid' &&
-            field.name !== 'retURL' &&
+        const filteredFormData = formData.filter(field => 
+            field.name !== 'orgid' && 
+            field.name !== 'retURL' && 
             field.name !== 'mathSum' &&
             field.name !== 'captcha_settings' &&
             field.name !== 'g-recaptcha-response'
         );
- 
+
         // Add form data to PDF
-        let y = 45; // Starting Y position for form data (below the header)
+        let y = 55; // Starting Y position for form data (below the header)
         filteredFormData.forEach(field => {
             const label = $(`label[for='${field.name}']`).text();
             doc.text(`${label}: ${field.value}`, 10, y);
             y += 10; // Increment Y position for the next line
         });
- 
+
         // Add signature image if not empty
         if (!signaturePad.isEmpty()) {
             const signatureImage = signaturePad.toDataURL();
             doc.addImage(signatureImage, 'PNG', 10, y, 100, 30);
             y += 40; // Increment Y position after the image
         }
- 
-        // Add footer with contact details
+
+        // Add a horizontal line above the footer
         const pageHeight = doc.internal.pageSize.height;
+        doc.setLineWidth(0.5);
+        doc.line(10, pageHeight - 20, 200, pageHeight - 20); // Horizontal line above the footer
+
+        // Add footer with contact details, centered
+        const pageWidth = doc.internal.pageSize.width;
+        const footerLine1 = '2638 Willard Dairy Road, Suite 112 High Point, NC 27265';
+        const footerLine2 = '+1 (336) 860-6061 | techunifi.com | info@techunifi.com';
+
         doc.setFontSize(10);
-        doc.text('2638 Willard Dairy Road, Suite 112 High Point, NC 27265', 10, pageHeight - 5);
-        doc.text('+1 (336) 860-6061 | techunifi.com | info@techunifi.com', 10, pageHeight - 10); // Adjust the footer content and position
- 
+
+        // Center align text by calculating its width and positioning accordingly
+        const footerLine1Width = doc.getTextWidth(footerLine1);
+        const footerLine2Width = doc.getTextWidth(footerLine2);
+
+        const footerLine1X = (pageWidth - footerLine1Width) / 2;
+        const footerLine2X = (pageWidth - footerLine2Width) / 2;
+
+        doc.text(footerLine1, footerLine1X, pageHeight - 15); // First line of footer
+        doc.text(footerLine2, footerLine2X, pageHeight - 10); // Second line of footer
+
         // Save the PDF
         doc.save('form-data.pdf');
         console.log('PDF has been downloaded.');
