@@ -1702,7 +1702,7 @@ $(document).ready(function() {
 
         // Add header with logo
         const logoUrl = 'https://www.techunifi.com/assets/img/hero-img.png'; // Replace with your logo image path or URL
-        doc.addImage(logoUrl, 'PNG', 80, 10, 50, 30); // Center the logo (adjust X position to center)
+        doc.addImage(logoUrl, 'PNG', 100, 10, 50, 30); // Center the logo (adjust X position to center)
         doc.setFontSize(18);
 
         // Get form data
