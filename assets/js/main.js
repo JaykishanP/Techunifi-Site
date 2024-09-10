@@ -1694,98 +1694,61 @@ $(document).ready(function() {
   });
 
   // // Attach event handler to the "Download PDF" button
-  const ralewayFontBase64 = 'BASE64_STRING_OF_TTF';
-
   $('#downloadPdf').on('click', function() {
-      if (validateTicketForm()) {
-          const { jsPDF } = window.jspdf;
-          const doc = new jsPDF();
-
-          // Add the Raleway font to jsPDF
-          doc.addFileToVFS('Raleway-Regular.ttf', ralewayFontBase64);
-          doc.addFont('Raleway-Regular.ttf', 'Raleway', 'normal');
-          doc.setFont('Raleway'); // Set Raleway as the font
-
-          // Add header with logo
-          const logoUrl = 'https://www.techunifi.com/assets/img/hero-img.png';
-          const logoWidth = 50; // Desired width
-          const logoHeight = 30; // Desired height (adjust based on aspect ratio)
-          const aspectRatio = 539 / 370; // Original aspect ratio of the logo
-
-          const adjustedLogoHeight = logoWidth / aspectRatio;
-          const pageWidth = doc.internal.pageSize.width;
-          const logoX = (pageWidth - logoWidth) / 2; // Center the logo horizontally
-
-          doc.addImage(logoUrl, 'PNG', logoX, 10, logoWidth, adjustedLogoHeight);
-          doc.setFontSize(18);
-
-          // Add a horizontal line below the header
-          doc.setLineWidth(0.5);
-          doc.line(10, 45, pageWidth - 10, 45); // Horizontal line below the header
-
-          // Get form data
-          const formData = $('#submitTicketForm').serializeArray();
-
-          // Filter out hidden fields and unwanted fields
-          const filteredFormData = formData.filter(field => 
-              field.name !== 'orgid' && 
-              field.name !== 'retURL' && 
-              field.name !== 'mathSum' &&
-              field.name !== 'captcha_settings' &&
-              field.name !== 'g-recaptcha-response'
-          );
-
-          // Add form data to PDF
-          let y = 55; // Starting Y position for form data (below the header)
-          filteredFormData.forEach(field => {
-              const label = $(`label[for='${field.name}']`).text();
-              doc.text(`${label}: ${field.value}`, 10, y);
-              y += 10; // Increment Y position for the next line
-          });
-
-          // Add signature image if not empty
-          if (!signaturePad.isEmpty()) {
-              const signatureImage = signaturePad.toDataURL();
-              doc.addImage(signatureImage, 'PNG', 10, y, 100, 30);
-              y += 40; // Increment Y position after the image
-          }
-
-          // Add a horizontal line above the footer
-          const pageHeight = doc.internal.pageSize.height;
-          doc.setLineWidth(0.5);
-          doc.line(10, pageHeight - 20, pageWidth - 10, pageHeight - 20); // Horizontal line above the footer
-
-          // Add footer with contact details, centered
-          const footerLine1 = '2638 Willard Dairy Road, Suite 112 High Point, NC 27265';
-          const footerLine2 = '+1 (336) 860-6061 | techunifi.com | info@techunifi.com';
-
-          doc.setFontSize(10);
-          const footerLine1Width = doc.getTextWidth(footerLine1);
-          const footerLine2Width = doc.getTextWidth(footerLine2);
-
-          const footerLine1X = (pageWidth - footerLine1Width) / 2;
-          const footerLine2X = (pageWidth - footerLine2Width) / 2;
-
-          doc.text(footerLine1, footerLine1X, pageHeight - 15);
-          doc.text(footerLine2, footerLine2X, pageHeight - 10);
-
-          // Save the PDF
-          doc.save('form-data.pdf');
-          console.log('PDF has been downloaded.');
-      } else {
-          console.log('Form validation failed. PDF download prevented.');
-      }
-  });
-
-  // Sample validation function (modify as needed)
-  function validateTicketForm() {
-      // Perform form validation here
-      return true; // Return true if valid, false otherwise
-  }
-
-  // Initialize signaturePad if used
-  const signaturePad = { isEmpty: () => true, toDataURL: () => '' }; 
-
+    if (validateTicketForm()) {
+        // Create a new jsPDF instance
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+ 
+        // Add header with logo
+        const logoUrl = 'https://www.techunifi.com/assets/img/hero-img.png'; // Replace with your logo image path or URL
+        doc.addImage(logoUrl, 'PNG', 10, 10, 50, 30); // Adjust the position and size of the logo
+        doc.setFontSize(18);
+ 
+        // Draw a line below the header
+        doc.setLineWidth(0.5);
+        doc.line(10, 35, 200, 35); // Horizontal line below the header
+ 
+        // Get form data
+        const formData = $('#submitTicketForm').serializeArray();
+ 
+        // Filter out hidden fields and the fields you don't want in the PDF
+        const filteredFormData = formData.filter(field =>
+            field.name !== 'orgid' &&
+            field.name !== 'retURL' &&
+            field.name !== 'mathSum' &&
+            field.name !== 'captcha_settings' &&
+            field.name !== 'g-recaptcha-response'
+        );
+ 
+        // Add form data to PDF
+        let y = 45; // Starting Y position for form data (below the header)
+        filteredFormData.forEach(field => {
+            const label = $(`label[for='${field.name}']`).text();
+            doc.text(`${label}: ${field.value}`, 10, y);
+            y += 10; // Increment Y position for the next line
+        });
+ 
+        // Add signature image if not empty
+        if (!signaturePad.isEmpty()) {
+            const signatureImage = signaturePad.toDataURL();
+            doc.addImage(signatureImage, 'PNG', 10, y, 100, 30);
+            y += 40; // Increment Y position after the image
+        }
+ 
+        // Add footer with contact details
+        const pageHeight = doc.internal.pageSize.height;
+        doc.setFontSize(10);
+        doc.text('2638 Willard Dairy Road, Suite 112 High Point, NC 27265', 10, pageHeight - 5);
+        doc.text('+1 (336) 860-6061 | techunifi.com | info@techunifi.com', 10, pageHeight - 10); // Adjust the footer content and position
+ 
+        // Save the PDF
+        doc.save('form-data.pdf');
+        console.log('PDF has been downloaded.');
+    } else {
+        console.log('Form validation failed. PDF download prevented.');
+    }
+});
 
 
 });
