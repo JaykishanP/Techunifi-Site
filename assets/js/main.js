@@ -1702,12 +1702,12 @@ $(document).ready(function() {
 
         // Add header with logo
         const logoUrl = 'https://www.techunifi.com/assets/img/hero-img.png'; // Replace with your logo image path or URL
-        doc.addImage(logoUrl, 'PNG', 10, 10, 50, 20); // Adjust the position and size of the logo
+        doc.addImage(logoUrl, 'PNG', 80, 10, 50, 30); // Center the logo (adjust X position to center)
         doc.setFontSize(18);
 
         // Draw a line below the header
         doc.setLineWidth(0.5);
-        doc.line(10, 35, 200, 35); // Horizontal line below the header
+        doc.line(10, 45, 200, 45); // Horizontal line below the header
 
         // Get form data
         const formData = $('#submitTicketForm').serializeArray();
@@ -1722,7 +1722,7 @@ $(document).ready(function() {
         );
 
         // Add form data to PDF
-        let y = 45; // Starting Y position for form data (below the header)
+        let y = 55; // Starting Y position for form data (below the header)
         filteredFormData.forEach(field => {
             const label = $(`label[for='${field.name}']`).text();
             doc.text(`${label}: ${field.value}`, 10, y);
@@ -1736,11 +1736,24 @@ $(document).ready(function() {
             y += 40; // Increment Y position after the image
         }
 
-        // Add footer with contact details
-        const pageHeight = doc.internal.pageSize.height;
+        // Add footer with contact details, centered
+        const pageWidth = doc.internal.pageSize.width;
+        const footerLine1 = '2638 Willard Dairy Road, Suite 112 High Point, NC 27265';
+        const footerLine2 = '+1 (336) 860-6061 | techunifi.com | info@techunifi.com';
+
         doc.setFontSize(10);
-        doc.text('Contact us: +1 (336) 860-6061 | info@techunifi.com', 10, pageHeight - 10); // Adjust the footer content and position
-        doc.text('Address: 2638 Willard Dairy Road, Suite 112 High Point, NC 27265', 10, pageHeight - 5);
+
+        // Center align text by calculating its width and positioning accordingly
+        const footerLine1Width = doc.getTextWidth(footerLine1);
+        const footerLine2Width = doc.getTextWidth(footerLine2);
+        
+        const footerLine1X = (pageWidth - footerLine1Width) / 2;
+        const footerLine2X = (pageWidth - footerLine2Width) / 2;
+
+        const pageHeight = doc.internal.pageSize.height;
+
+        doc.text(footerLine1, footerLine1X, pageHeight - 15); // First line of footer
+        doc.text(footerLine2, footerLine2X, pageHeight - 10); // Second line of footer
 
         // Save the PDF
         doc.save('form-data.pdf');
@@ -1749,6 +1762,7 @@ $(document).ready(function() {
         console.log('Form validation failed. PDF download prevented.');
     }
 });
+
 
 
 
