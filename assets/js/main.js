@@ -1739,22 +1739,32 @@ $(document).ready(function() {
 
   // Function to submit the form via AJAX and redirect
   function submitForm() {
-    var formData = $('#submitTicketForm').serialize(); // Get the form data
+    var formData = $('#submitTicketForm').serialize(); // Serialize the form data
 
     $.ajax({
       url: $('#submitTicketForm').attr('action'), // The form's action URL
       type: 'POST', // The HTTP method
       data: formData,
       success: function(response) {
-        console.log('Form submitted successfully. Redirecting to thank you page.');
-        window.location.href = 'thanku-submit.html'; // Redirect to the thank-you page
+        console.log('Form submitted successfully. Server response:', response);
+
+        // Check if the response contains any error
+        if (response && response.error) {
+          alert('Error from server: ' + response.error);
+          console.log('Server error response:', response.error);
+        } else {
+          console.log('Redirecting to thank-you page.');
+          window.location.href = $('input[name="retURL"]').val(); // Redirect to thank-you page
+        }
       },
       error: function(jqXHR, textStatus, errorThrown) {
-        console.log('Error:', textStatus, errorThrown);
-        alert('There was an error submitting the form: ' + textStatus + ', ' + errorThrown); // Detailed error alert
+        console.log('AJAX Error:', textStatus, errorThrown);
+        console.log('Full response:', jqXHR.responseText);
+        alert('There was an error submitting the form: ' + textStatus + ', ' + errorThrown);
       }
     });
-  }
+}
+
 
   // Attach submit event handler to the form
   $('#submitTicketForm').on('submit', function(event) {
