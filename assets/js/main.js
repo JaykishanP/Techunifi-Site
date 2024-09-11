@@ -1591,29 +1591,24 @@ $(document).ready(function () {
     var num1 = randomNumbers[0];
     var num2 = randomNumbers[1];
     $('#mathSumQuestion').text('What is ' + num1 + ' + ' + num2 + '?');
-    $('#mathSum').data('expectedSum', num1 + num2); // Store the expected sum in a data attribute for validation
+    $('#mathSum').data('expectedSum', num1 + num2);
   }
 
-  // Call the function to update the math sum question when the document is ready
   updateMathSumQuestion();
 
   // Function to validate the form
   function validateTicketForm() {
     var formValid = true;
 
-    // Check each input field in the form
+    // Validate all inputs
     $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').each(function () {
-      if ($(this).hasClass('not-required')) {
-        return true; // Skip non-required fields
-      }
+      if ($(this).hasClass('not-required')) return true;
 
       if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
         formValid = false;
         $(this).css('border-color', 'red');
-        $('html, body').animate({
-          scrollTop: $(this).offset().top - 200
-        }, 500);
-        return false; // Exit loop if validation fails
+        $('html, body').animate({ scrollTop: $(this).offset().top - 200 }, 500);
+        return false; // Stop validation loop
       } else {
         $(this).css('border-color', 'green');
       }
@@ -1623,9 +1618,7 @@ $(document).ready(function () {
     if (signaturePad.isEmpty()) {
       formValid = false;
       alert('Please provide your signature.');
-      $('html, body').animate({
-        scrollTop: $(canvas).offset().top - 200
-      }, 500);
+      $('html, body').animate({ scrollTop: $(canvas).offset().top - 200 }, 500);
     }
 
     // Math validation
@@ -1652,13 +1645,13 @@ $(document).ready(function () {
     return formValid;
   }
 
-  // Attach submit event handler to the form
+  // Handle form submission
   $('#submitTicketForm').on('submit', function (event) {
-    event.preventDefault(); // Prevent the default form submission to handle PDF generation first
+    event.preventDefault(); // Prevent default form submission for now
 
     if (!validateTicketForm()) {
       console.log('Form validation failed.');
-      return; // Stop the function if validation fails
+      return; // Stop function if validation fails
     }
 
     // Generate the PDF
@@ -1668,31 +1661,24 @@ $(document).ready(function () {
 
       // Add form data to the PDF
       const formData = $('#submitTicketForm').serializeArray();
-
-      // Filter out hidden fields and unwanted fields
       const filteredFormData = formData.filter(field =>
-        field.name !== 'orgid' &&
-        field.name !== 'retURL' &&
-        field.name !== 'mathSum' &&
-        field.name !== 'g-recaptcha-response'
+        field.name !== 'orgid' && field.name !== 'retURL' &&
+        field.name !== 'mathSum' && field.name !== 'g-recaptcha-response'
       );
 
-      // Add form data to PDF
-      let y = 20; // Start position
+      let y = 20;
       filteredFormData.forEach(field => {
         const label = $(`label[for='${field.name}']`).text();
         doc.text(`${label}: ${field.value}`, 10, y);
         y += 10;
       });
 
-      // Add signature to PDF if present
       if (!signaturePad.isEmpty()) {
         const signatureImage = signaturePad.toDataURL();
         doc.addImage(signatureImage, 'PNG', 10, y, 100, 30);
         y += 40;
       }
 
-      // Save the PDF
       doc.save('form-data.pdf');
       console.log('PDF downloaded successfully.');
 
@@ -1702,19 +1688,14 @@ $(document).ready(function () {
       return;
     }
 
-    // After PDF is generated, submit the form and redirect
-    console.log('Submitting form data...');
-
-    // Manually submit the form by removing preventDefault()
-    this.submit();
+    // Now allow form submission and redirection to thank you page
+    this.submit(); // Manually submit the form after PDF generation
   });
 
-  // Reset form and math question on reset event
   $('#submitTicketForm').on('reset', function () {
     updateMathSumQuestion();
   });
 
-  // Handle input changes for real-time validation
   $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').on('input change blur', function () {
     if (!$(this).hasClass('not-required')) {
       if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
@@ -1725,6 +1706,7 @@ $(document).ready(function () {
     }
   });
 });
+
 
 
 /* ==== Event Close ==== */
