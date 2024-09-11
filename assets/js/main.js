@@ -1688,9 +1688,10 @@ $(document).ready(function () {
       return;
     }
 
-    // Now allow form submission and redirection to thank you page
-    this.submit(); // Manually submit the form after PDF generation
-  });
+    // Now allow form submission and redirection to the thank you page
+    $(this).get(0).submit(); // Call native form submit on the raw DOM element
+});
+
 
   $('#submitTicketForm').on('reset', function () {
     updateMathSumQuestion();
