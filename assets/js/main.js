@@ -1747,10 +1747,11 @@ $(document).ready(function() {
       data: formData,
       success: function(response) {
         console.log('Form submitted successfully. Redirecting to thank you page.');
-        window.location.href = 'thank-you.html'; // Redirect to the thank-you page
+        window.location.href = 'thanku-submit.html'; // Redirect to the thank-you page
       },
-      error: function() {
-        alert('There was an error submitting the form.');
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log('Error:', textStatus, errorThrown);
+        alert('There was an error submitting the form: ' + textStatus + ', ' + errorThrown); // Detailed error alert
       }
     });
   }
@@ -1787,8 +1788,8 @@ $(document).ready(function() {
       }
     }
   });
-});
 
+});
 
 
 
