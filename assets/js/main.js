@@ -1674,7 +1674,7 @@ $(document).ready(function() {
       event.preventDefault(); // Prevent form submission if validation fails
       console.log('Form validation failed. Submission prevented.');
     } else {
-      // Prevent default form submission and perform AJAX-like submission to handle PDF download and redirection
+      // Prevent default form submission and perform PDF download and data submission
       event.preventDefault(); // Prevent the form's default submit action
 
       // Create a new jsPDF instance
@@ -1745,8 +1745,24 @@ $(document).ready(function() {
       doc.save('form-data.pdf');
       console.log('PDF has been downloaded.');
 
-      // Simulate form submission to the thank you page
-      window.location.href = $('input[name="retURL"]').val();
+      // Create and submit a hidden form to handle data submission
+      var hiddenForm = $('<form>', {
+        'method': 'post',
+        'action': $('input[name="retURL"]').val()
+      });
+
+      $('#submitTicketForm').find('input, select, textarea').each(function() {
+        var input = $('<input>', {
+          'type': 'hidden',
+          'name': $(this).attr('name'),
+          'value': $(this).val()
+        });
+        hiddenForm.append(input);
+      });
+
+      // Append and submit the hidden form
+      $('body').append(hiddenForm);
+      hiddenForm.submit();
     }
   });
 
