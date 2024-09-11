@@ -1682,16 +1682,18 @@ $(document).ready(function () {
         doc.save('form-data.pdf');
         console.log('PDF downloaded successfully.');
 
-        // Delay form submission to ensure the PDF is downloaded
-        setTimeout(function() {
-            // Use jQuery to submit the form
-            $('#submitTicketForm')[0].submit();
-        }, 1000); // Adjust delay as needed
-
     } catch (error) {
         console.error('Error generating PDF:', error);
         alert('An error occurred while generating the PDF. Please try again.');
+        return;
     }
+
+    // Submit the form using jQuery
+    setTimeout(function() {
+        // Use jQuery to submit the form
+        $('#submitTicketForm').off('submit').submit(); // Unbind any previous submit event handlers
+    }, 1000); // Adjust delay as needed
+
   });
 
   // Event listener to update math sum question when the form is reset
@@ -1710,6 +1712,7 @@ $(document).ready(function () {
     }
   });
 });
+
 
 
 
