@@ -1647,50 +1647,51 @@ $(document).ready(function () {
 
   // Handle form submission
   $('#submitTicketForm').on('submit', function (event) {
-    event.preventDefault(); // Prevent default form submission for now
+    event.preventDefault(); // Prevent default form submission initially
 
     if (!validateTicketForm()) {
-      console.log('Form validation failed.');
-      return; // Stop function if validation fails
+        console.log('Form validation failed.');
+        return; // Stop if validation fails
     }
 
     // Generate the PDF
     try {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
 
-      // Add form data to the PDF
-      const formData = $('#submitTicketForm').serializeArray();
-      const filteredFormData = formData.filter(field =>
-        field.name !== 'orgid' && field.name !== 'retURL' &&
-        field.name !== 'mathSum' && field.name !== 'g-recaptcha-response'
-      );
+        // Add form data to the PDF
+        const formData = $('#submitTicketForm').serializeArray();
+        const filteredFormData = formData.filter(field =>
+            field.name !== 'orgid' && field.name !== 'retURL' &&
+            field.name !== 'mathSum' && field.name !== 'g-recaptcha-response'
+        );
 
-      let y = 20;
-      filteredFormData.forEach(field => {
-        const label = $(`label[for='${field.name}']`).text();
-        doc.text(`${label}: ${field.value}`, 10, y);
-        y += 10;
-      });
+        let y = 20;
+        filteredFormData.forEach(field => {
+            const label = $(`label[for='${field.name}']`).text();
+            doc.text(`${label}: ${field.value}`, 10, y);
+            y += 10;
+        });
 
-      if (!signaturePad.isEmpty()) {
-        const signatureImage = signaturePad.toDataURL();
-        doc.addImage(signatureImage, 'PNG', 10, y, 100, 30);
-        y += 40;
-      }
+        if (!signaturePad.isEmpty()) {
+            const signatureImage = signaturePad.toDataURL();
+            doc.addImage(signatureImage, 'PNG', 10, y, 100, 30);
+            y += 40;
+        }
 
-      doc.save('form-data.pdf');
-      console.log('PDF downloaded successfully.');
+        doc.save('form-data.pdf');
+        console.log('PDF downloaded successfully.');
 
     } catch (error) {
-      console.error('Error generating PDF:', error);
-      alert('An error occurred while generating the PDF. Please try again.');
-      return;
+        console.error('Error generating PDF:', error);
+        alert('An error occurred while generating the PDF. Please try again.');
+        return;
     }
 
-    // Now allow form submission and redirection to the thank you page
-    $(this).get(0).submit(); // Call native form submit on the raw DOM element
+    // Now submit the form using the vanilla JavaScript submit method
+    document.getElementById('submitTicketForm').submit(); // Direct DOM method for form submission
 });
+
 
 
   $('#submitTicketForm').on('reset', function () {
