@@ -1578,12 +1578,14 @@ if (window.location.pathname === "/change-order.html") {
 // JavaScript for change-order.html
 
 $(document).ready(function () {
+  // Function to generate random numbers for math validation
   function generateRandomNumbers() {
     var num1 = Math.floor(Math.random() * 10);
     var num2 = Math.floor(Math.random() * 10);
     return [num1, num2];
   }
 
+  // Function to update the math sum question with new numbers
   function updateMathSumQuestion() {
     var randomNumbers = generateRandomNumbers();
     var num1 = randomNumbers[0];
@@ -1594,9 +1596,11 @@ $(document).ready(function () {
 
   updateMathSumQuestion();
 
+  // Function to validate the form
   function validateTicketForm() {
     var formValid = true;
 
+    // Validate all inputs
     $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').each(function () {
       if ($(this).hasClass('not-required')) return true;
 
@@ -1604,18 +1608,20 @@ $(document).ready(function () {
         formValid = false;
         $(this).css('border-color', 'red');
         $('html, body').animate({ scrollTop: $(this).offset().top - 200 }, 500);
-        return false;
+        return false; // Stop validation loop
       } else {
         $(this).css('border-color', 'green');
       }
     });
 
+    // Signature validation
     if (signaturePad.isEmpty()) {
       formValid = false;
       alert('Please provide your signature.');
-      $('html, body').animate({ scrollTop: $(canvas).offset().top - 200 }, 500);
+      $('html, body').animate({ scrollTop: $('#signature-pad').offset().top - 200 }, 500);
     }
 
+    // Math validation
     var mathSumInput = $('#mathSum');
     var mathSumValue = mathSumInput.val();
     var expectedSum = mathSumInput.data('expectedSum');
@@ -1626,6 +1632,7 @@ $(document).ready(function () {
       mathSumInput.css('border-color', 'green');
     }
 
+    // CAPTCHA validation
     var captchaResponse = grecaptcha.getResponse();
     if (!captchaResponse) {
       formValid = false;
@@ -1638,18 +1645,21 @@ $(document).ready(function () {
     return formValid;
   }
 
+  // Handle form submission
   $('#submitTicketForm').on('submit', function (event) {
-    event.preventDefault(); // Prevent default form submission initially
+    event.preventDefault(); // Prevent default form submission
 
     if (!validateTicketForm()) {
       console.log('Form validation failed.');
       return; // Stop if validation fails
     }
 
+    // Generate the PDF
     try {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
 
+      // Add form data to the PDF
       const formData = $('#submitTicketForm').serializeArray();
       const filteredFormData = formData.filter(field =>
         field.name !== 'orgid' && field.name !== 'retURL' &&
@@ -1678,16 +1688,18 @@ $(document).ready(function () {
       return;
     }
 
-    // Submit the form using jQuery
-    setTimeout(function() {
-      $('#submitTicketForm').off('submit').submit(); // Unbind previous submit handler and submit the form
-    }, 1000); // Adjust delay as needed
+    // Submit the form using vanilla JavaScript submit method
+    setTimeout(() => {
+      document.getElementById('submitTicketForm').submit(); // Use vanilla JavaScript method
+    }, 1000); // Adjust delay if needed
   });
 
+  // Event listener to update math sum question when the form is reset
   $('#submitTicketForm').on('reset', function () {
     updateMathSumQuestion();
   });
 
+  // Event listener to update border color on input changes
   $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').on('input change blur', function () {
     if (!$(this).hasClass('not-required')) {
       if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
