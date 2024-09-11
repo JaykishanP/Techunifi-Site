@@ -1654,7 +1654,7 @@ $(document).ready(function () {
 
   // Attach submit event handler to the form
   $('#submitTicketForm').on('submit', function (event) {
-    event.preventDefault(); // Always prevent the default action first
+    event.preventDefault(); // Prevent the default form submission to handle PDF generation first
 
     if (!validateTicketForm()) {
       console.log('Form validation failed.');
@@ -1702,31 +1702,11 @@ $(document).ready(function () {
       return;
     }
 
-    // Proceed with form submission after PDF download
+    // After PDF is generated, submit the form and redirect
     console.log('Submitting form data...');
 
-    // Create and submit a hidden form for data submission
-    var hiddenForm = $('<form>', {
-      'method': 'POST',
-      'action': $('input[name="retURL"]').val()
-    });
-
-    // Add form data to the hidden form
-    $('#submitTicketForm').find('input, select, textarea').each(function () {
-      if ($(this).attr('name')) {
-        var input = $('<input>', {
-          'type': 'hidden',
-          'name': $(this).attr('name'),
-          'value': $(this).val()
-        });
-        hiddenForm.append(input);
-      }
-    });
-
-    // Append and submit the hidden form
-    $('body').append(hiddenForm);
-    hiddenForm.submit(); // Submit form data after PDF generation
-
+    // Manually submit the form by removing preventDefault()
+    this.submit();
   });
 
   // Reset form and math question on reset event
@@ -1745,7 +1725,6 @@ $(document).ready(function () {
     }
   });
 });
-
 
 
 /* ==== Event Close ==== */
