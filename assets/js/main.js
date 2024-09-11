@@ -1647,15 +1647,12 @@ $(document).ready(function () {
 
   // Handle form submission
   $('#submitTicketForm').on('submit', function (event) {
-    // Prevent form submission if validation fails
+    event.preventDefault(); // Prevent default form submission initially
+
     if (!validateTicketForm()) {
         console.log('Form validation failed.');
-        event.preventDefault(); // Prevent default form submission
         return; // Stop if validation fails
     }
-
-    // Prevent the form submission to generate the PDF and then submit the form
-    event.preventDefault(); 
 
     // Generate the PDF
     try {
@@ -1687,8 +1684,8 @@ $(document).ready(function () {
 
         // Delay form submission to ensure the PDF is downloaded
         setTimeout(function() {
-            // Submit the form using the vanilla JavaScript submit method
-            document.getElementById('submitTicketForm').submit();
+            // Use jQuery to submit the form
+            $('#submitTicketForm')[0].submit();
         }, 1000); // Adjust delay as needed
 
     } catch (error) {
