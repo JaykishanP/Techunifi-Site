@@ -1577,7 +1577,7 @@ if (window.location.pathname === "/change-order.html") {
 /* ===== Change Order ===== */
 // JavaScript for change-order.html
 
-$(document).ready(function() {
+$(document).ready(function () {
   // Function to generate random numbers for math validation
   function generateRandomNumbers() {
     var num1 = Math.floor(Math.random() * 10);
@@ -1597,191 +1597,145 @@ $(document).ready(function() {
   // Call the function to update the math sum question when the document is ready
   updateMathSumQuestion();
 
-  // Function to validate the ticket form
+  // Function to validate the form
   function validateTicketForm() {
     var formValid = true;
 
     // Check each input field in the form
-    $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').each(function() {
-      if (!$(this).attr('id')) {
-        console.log('Field without ID found:', this);
-      }
-
+    $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').each(function () {
       if ($(this).hasClass('not-required')) {
-        console.log($(this).attr('id') + ' is not required, skipping validation.');
-        return true; // Skip this field and continue with the next one
+        return true; // Skip non-required fields
       }
 
       if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
         formValid = false;
         $(this).css('border-color', 'red');
-        console.log($(this).attr('id') + ' is invalid. Value: ', $(this).val());
         $('html, body').animate({
           scrollTop: $(this).offset().top - 200
         }, 500);
-        return false; // Exit the loop after scrolling to the first invalid field
+        return false; // Exit loop if validation fails
       } else {
         $(this).css('border-color', 'green');
-        console.log($(this).attr('id') + ' is valid.');
       }
     });
 
-    // Validate the signature
+    // Signature validation
     if (signaturePad.isEmpty()) {
       formValid = false;
       alert('Please provide your signature.');
-      console.log('Signature validation failed.');
-      // Scroll to the signature pad
       $('html, body').animate({
         scrollTop: $(canvas).offset().top - 200
       }, 500);
-    } else {
-      console.log('Signature validation passed.');
     }
 
-    // Validate math sum question
+    // Math validation
     var mathSumInput = $('#mathSum');
     var mathSumValue = mathSumInput.val();
     var expectedSum = mathSumInput.data('expectedSum');
     if (!mathSumValue || parseInt(mathSumValue) !== expectedSum) {
       mathSumInput.css('border-color', 'red');
       formValid = false;
-      console.log('Math validation failed. Entered value: ' + mathSumValue + ', Expected value: ' + expectedSum);
     } else {
       mathSumInput.css('border-color', 'green');
-      console.log('Math validation passed.');
     }
 
-    // Validate CAPTCHA
+    // CAPTCHA validation
     var captchaResponse = grecaptcha.getResponse();
     if (!captchaResponse) {
       formValid = false;
       $('.g-recaptcha').css('border-color', 'red');
       alert('Please complete the CAPTCHA');
-      console.log('CAPTCHA validation failed.');
     } else {
       $('.g-recaptcha').css('border-color', 'green');
-      console.log('CAPTCHA validation passed.');
     }
 
     return formValid;
   }
 
   // Attach submit event handler to the form
-  $('#submitTicketForm').on('submit', function(event) {
+  $('#submitTicketForm').on('submit', function (event) {
+    event.preventDefault(); // Always prevent the default action first
+
     if (!validateTicketForm()) {
-      event.preventDefault(); // Prevent form submission if validation fails
-      console.log('Form validation failed. Submission prevented.');
-    } else {
-      // Prevent default form submission and perform PDF download and data submission
-      event.preventDefault(); // Prevent the form's default submit action
+      console.log('Form validation failed.');
+      return; // Stop the function if validation fails
+    }
 
-      // Create a new jsPDF instance
-      try {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
+    // Generate the PDF
+    try {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
 
-        // Add header with logo
-        const logoUrl = 'https://www.techunifi.com/assets/img/hero-img.png'; // Replace with your logo image path or URL
-        const logoWidth = 80;  // Set your desired width
-        const logoHeight = 30; // Set your desired height
-        const logoX = 60;      // X position (adjust as needed)
-        const logoY = 10;      // Y position (adjust as needed)
+      // Add form data to the PDF
+      const formData = $('#submitTicketForm').serializeArray();
 
-        doc.addImage(logoUrl, 'PNG', logoX, logoY, logoWidth, logoHeight); // Add image with adjusted width and height
-        doc.setFontSize(18);
+      // Filter out hidden fields and unwanted fields
+      const filteredFormData = formData.filter(field =>
+        field.name !== 'orgid' &&
+        field.name !== 'retURL' &&
+        field.name !== 'mathSum' &&
+        field.name !== 'g-recaptcha-response'
+      );
 
-        // Get form data
-        const formData = $('#submitTicketForm').serializeArray();
+      // Add form data to PDF
+      let y = 20; // Start position
+      filteredFormData.forEach(field => {
+        const label = $(`label[for='${field.name}']`).text();
+        doc.text(`${label}: ${field.value}`, 10, y);
+        y += 10;
+      });
 
-        // Filter out hidden fields and the fields you don't want in the PDF
-        const filteredFormData = formData.filter(field => 
-          field.name !== 'orgid' && 
-          field.name !== 'retURL' && 
-          field.name !== 'mathSum' &&
-          field.name !== 'captcha_settings' &&
-          field.name !== 'g-recaptcha-response'
-        );
-
-        // Add form data to PDF
-        let y = 55; // Starting Y position for form data (below the header)
-        filteredFormData.forEach(field => {
-          const label = $(`label[for='${field.name}']`).text();
-          doc.text(`${label}: ${field.value}`, 10, y);
-          y += 10; // Increment Y position for the next line
-        });
-
-        // Add signature image if not empty
-        if (!signaturePad.isEmpty()) {
-          const signatureImage = signaturePad.toDataURL();
-          doc.addImage(signatureImage, 'PNG', 10, y, 100, 30);
-          y += 40; // Increment Y position after the image
-        }
-
-        // Add a horizontal line above the footer
-        const pageHeight = doc.internal.pageSize.height;
-        doc.setLineWidth(0.5);
-        doc.line(10, pageHeight - 20, 200, pageHeight - 20); // Horizontal line above the footer
-
-        // Add footer with contact details, centered
-        const pageWidth = doc.internal.pageSize.width;
-        const footerLine1 = '2638 Willard Dairy Road, Suite 112 High Point, NC 27265';
-        const footerLine2 = '+1 (336) 860-6061 | techunifi.com | info@techunifi.com';
-        doc.setFontSize(10);
-
-        // Center align text by calculating its width and positioning accordingly
-        const footerLine1Width = doc.getTextWidth(footerLine1);
-        const footerLine2Width = doc.getTextWidth(footerLine2);
-
-        const footerLine1X = (pageWidth - footerLine1Width) / 2;
-        const footerLine2X = (pageWidth - footerLine2Width) / 2;
-
-        doc.text(footerLine1, footerLine1X, pageHeight - 15); // First line of footer
-        doc.text(footerLine2, footerLine2X, pageHeight - 10); // Second line of footer
-
-        // Save the PDF
-        doc.save('form-data.pdf');
-        console.log('PDF has been downloaded.');
-
-      } catch (error) {
-        console.error('Error generating PDF:', error);
-        alert('An error occurred while generating the PDF. Please try again.');
-        return;
+      // Add signature to PDF if present
+      if (!signaturePad.isEmpty()) {
+        const signatureImage = signaturePad.toDataURL();
+        doc.addImage(signatureImage, 'PNG', 10, y, 100, 30);
+        y += 40;
       }
 
-      // Create a hidden form for submitting the data
-      var hiddenForm = $('<form>', {
-        'method': 'POST',
-        'action': $('input[name="retURL"]').val()
-      });
+      // Save the PDF
+      doc.save('form-data.pdf');
+      console.log('PDF downloaded successfully.');
 
-      // Add form data to the hidden form
-      $('#submitTicketForm').find('input, select, textarea').each(function() {
-        if ($(this).attr('name')) {
-          var input = $('<input>', {
-            'type': 'hidden',
-            'name': $(this).attr('name'),
-            'value': $(this).val()
-          });
-          hiddenForm.append(input);
-        }
-      });
-
-      // Append and submit the hidden form after the PDF generation
-      $('body').append(hiddenForm);
-      hiddenForm.submit(); // This will submit the form data after the PDF download
-
-      console.log('Form data submitted.');
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('An error occurred while generating the PDF. Please try again.');
+      return;
     }
+
+    // Proceed with form submission after PDF download
+    console.log('Submitting form data...');
+
+    // Create and submit a hidden form for data submission
+    var hiddenForm = $('<form>', {
+      'method': 'POST',
+      'action': $('input[name="retURL"]').val()
+    });
+
+    // Add form data to the hidden form
+    $('#submitTicketForm').find('input, select, textarea').each(function () {
+      if ($(this).attr('name')) {
+        var input = $('<input>', {
+          'type': 'hidden',
+          'name': $(this).attr('name'),
+          'value': $(this).val()
+        });
+        hiddenForm.append(input);
+      }
+    });
+
+    // Append and submit the hidden form
+    $('body').append(hiddenForm);
+    hiddenForm.submit(); // Submit form data after PDF generation
+
   });
 
-  // Event listener to update math sum question when the form is reset
-  $('#submitTicketForm').on('reset', function() {
+  // Reset form and math question on reset event
+  $('#submitTicketForm').on('reset', function () {
     updateMathSumQuestion();
   });
 
-  // Event listener to update border color on input changes
-  $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').on('input change blur', function() {
+  // Handle input changes for real-time validation
+  $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').on('input change blur', function () {
     if (!$(this).hasClass('not-required')) {
       if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
         $(this).css('border-color', 'green');
