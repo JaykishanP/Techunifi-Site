@@ -1647,12 +1647,15 @@ $(document).ready(function () {
 
   // Handle form submission
   $('#submitTicketForm').on('submit', function (event) {
-    event.preventDefault(); // Prevent default form submission initially
-
+    // Prevent form submission if validation fails
     if (!validateTicketForm()) {
         console.log('Form validation failed.');
+        event.preventDefault(); // Prevent default form submission
         return; // Stop if validation fails
     }
+
+    // Prevent the form submission to generate the PDF and then submit the form
+    event.preventDefault(); 
 
     // Generate the PDF
     try {
@@ -1682,22 +1685,24 @@ $(document).ready(function () {
         doc.save('form-data.pdf');
         console.log('PDF downloaded successfully.');
 
+        // Delay form submission to ensure the PDF is downloaded
+        setTimeout(function() {
+            // Submit the form using the vanilla JavaScript submit method
+            document.getElementById('submitTicketForm').submit();
+        }, 1000); // Adjust delay as needed
+
     } catch (error) {
         console.error('Error generating PDF:', error);
         alert('An error occurred while generating the PDF. Please try again.');
-        return;
     }
+  });
 
-    // Now submit the form using the vanilla JavaScript submit method
-    document.getElementById('submitTicketForm').submit(); // Direct DOM method for form submission
-});
-
-
-
+  // Event listener to update math sum question when the form is reset
   $('#submitTicketForm').on('reset', function () {
     updateMathSumQuestion();
   });
 
+  // Event listener to update border color on input changes
   $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').on('input change blur', function () {
     if (!$(this).hasClass('not-required')) {
       if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
