@@ -1661,6 +1661,7 @@ $(document).ready(function () {
 
       // Add header with logo
       doc.setFontSize(18);
+      doc.text('Company Name', 105, 15, null, null, 'center'); // Reduced space above header
 
       // Load the image from the URL
       const imgUrl = 'https://www.techunifi.com/assets/img/hero-img.png';
@@ -1669,7 +1670,7 @@ $(document).ready(function () {
 
       img.onload = function () {
         // Add the logo image at the center of the header
-        doc.addImage(img, 'PNG', 60, 25, 90, 30); // Adjust x, y, width, height as necessary
+        doc.addImage(img, 'PNG', 60, 20, 90, 30); // Adjust x, y, width, height as necessary
 
         // Add form data to the PDF
         const formData = $('#submitTicketForm').serializeArray();
@@ -1678,31 +1679,32 @@ $(document).ready(function () {
           field.name !== 'mathSum' && field.name !== 'g-recaptcha-response'
         );
 
-        let y = 70; // Adjust to start after the logo
+        let y = 60; // Adjust to start after the logo
         filteredFormData.forEach(field => {
           const label = $(`label[for='${field.name}']`).text();
           doc.text(`${label}: ${field.value}`, 10, y);
-          y += 10;
+          y += 8; // Adjust spacing between lines
         });
 
         // Add signature if available
         if (!signaturePad.isEmpty()) {
           const signatureImage = signaturePad.toDataURL();
           doc.addImage(signatureImage, 'PNG', 10, y, 100, 30);
-          y += 40;
+          y += 35; // Adjust space after signature
         }
 
         // Add footer with contact information
         doc.setFontSize(12);
-        doc.text('2638 Willard Dairy Road, Suite 112 High Point, NC 27265', 105, 290, null, null, 'center');
-        doc.text('+1 (336) 860-6061 | techunifi.com | Info@techunifi.com', 105, 300, null, null, 'center');
+        doc.text('Contact Information', 105, 250, null, null, 'center'); // Adjusted position
+        doc.text('123 Address St., City, Country', 105, 260, null, null, 'center');
+        doc.text('Phone: +123456789', 105, 270, null, null, 'center');
 
         // Draw a horizontal line above the footer
         doc.setLineWidth(0.5);
-        doc.line(10, 275, 200, 275); // x1, y1, x2, y2
+        doc.line(10, 245, 200, 245); // x1, y1, x2, y2
 
         // Save the PDF
-        doc.save('techunifi-change-order-data.pdf');
+        doc.save('form-data.pdf');
         console.log('PDF downloaded successfully.');
       };
 
