@@ -1673,16 +1673,23 @@ $(document).ready(function () {
 
         // Add form data to the PDF
         const formData = $('#submitTicketForm').serializeArray();
-        const filteredFormData = formData.filter(field =>
-          field.name !== 'orgId' && field.name !== 'retURL' &&
-          field.name !== 'mathSum' && field.name !== 'g-recaptcha-response'
+        const filteredFormData = formData.filter(field => 
+          field.name !== 'orgId' && 
+          field.name !== 'retURL' && 
+          field.name !== 'mathSum' && 
+          field.name !== 'g-recaptcha-response'
         );
 
         let y = 50; // Adjust to start after the logo
         filteredFormData.forEach(field => {
           const label = $(`label[for='${field.name}']`).text();
-          doc.text(`${label}: ${field.value}`, 10, y);
-          y += 6; // Adjust spacing between lines
+          const value = field.value;
+
+          // Exclude specific values
+          if (!value.includes('00DHo000002fpJX') && !value.includes('{"keyname":"casev2","fallback":"true","orgId":"00DHo000002fpJX","ts"')) {
+            doc.text(`${label}: ${value}`, 10, y);
+            y += 16; // Adjust spacing between lines
+          }
         });
 
         // Add signature if available
@@ -1739,7 +1746,6 @@ $(document).ready(function () {
     }
   });
 });
-
 
 
 /* ==== Event Close ==== */
