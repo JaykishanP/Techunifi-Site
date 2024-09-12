@@ -1661,7 +1661,6 @@ $(document).ready(function () {
 
       // Add header with logo
       doc.setFontSize(18);
-      doc.text('Company Name', 105, 15, null, null, 'center'); // Reduced space above header
 
       // Load the image from the URL
       const imgUrl = 'https://www.techunifi.com/assets/img/hero-img.png';
@@ -1670,20 +1669,20 @@ $(document).ready(function () {
 
       img.onload = function () {
         // Add the logo image at the center of the header
-        doc.addImage(img, 'PNG', 60, 20, 90, 30); // Adjust x, y, width, height as necessary
+        doc.addImage(img, 'PNG', 60, 10, 90, 30); // Adjust x, y, width, height as necessary
 
         // Add form data to the PDF
         const formData = $('#submitTicketForm').serializeArray();
         const filteredFormData = formData.filter(field =>
-          field.name !== 'orgid' && field.name !== 'retURL' &&
+          field.name !== 'orgId' && field.name !== 'retURL' &&
           field.name !== 'mathSum' && field.name !== 'g-recaptcha-response'
         );
 
-        let y = 60; // Adjust to start after the logo
+        let y = 50; // Adjust to start after the logo
         filteredFormData.forEach(field => {
           const label = $(`label[for='${field.name}']`).text();
           doc.text(`${label}: ${field.value}`, 10, y);
-          y += 8; // Adjust spacing between lines
+          y += 6; // Adjust spacing between lines
         });
 
         // Add signature if available
@@ -1695,16 +1694,15 @@ $(document).ready(function () {
 
         // Add footer with contact information
         doc.setFontSize(12);
-        doc.text('Contact Information', 105, 250, null, null, 'center'); // Adjusted position
-        doc.text('123 Address St., City, Country', 105, 260, null, null, 'center');
-        doc.text('Phone: +123456789', 105, 270, null, null, 'center');
+        doc.text('2638 Willard Dairy Road, Suite 112 High Point, NC 27265', 105, 260, null, null, 'center');
+        doc.text('+1 (336) 860-6061 | techunifi.com | Info@techunifi.com', 105, 270, null, null, 'center');
 
         // Draw a horizontal line above the footer
         doc.setLineWidth(0.5);
-        doc.line(10, 245, 200, 245); // x1, y1, x2, y2
+        doc.line(10, 250, 200, 250); // x1, y1, x2, y2
 
         // Save the PDF
-        doc.save('form-data.pdf');
+        doc.save('techunifi-changeOrder-data.pdf');
         console.log('PDF downloaded successfully.');
       };
 
@@ -1741,6 +1739,7 @@ $(document).ready(function () {
     }
   });
 });
+
 
 
 /* ==== Event Close ==== */
