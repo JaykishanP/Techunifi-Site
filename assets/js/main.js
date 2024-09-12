@@ -1659,28 +1659,53 @@ $(document).ready(function () {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
 
-      // Add form data to the PDF
-      const formData = $('#submitTicketForm').serializeArray();
-      const filteredFormData = formData.filter(field =>
-        field.name !== 'orgid' && field.name !== 'retURL' &&
-        field.name !== 'mathSum' && field.name !== 'g-recaptcha-response'
-      );
+      // Add header with logo
+      doc.setFontSize(18);
+      doc.text('Company Name', 105, 20, null, null, 'center');
 
-      let y = 20;
-      filteredFormData.forEach(field => {
-        const label = $(`label[for='${field.name}']`).text();
-        doc.text(`${label}: ${field.value}`, 10, y);
-        y += 10;
-      });
+      // Load the image from the URL
+      const imgUrl = 'https://www.techunifi.com/assets/img/hero-img.png';
+      const img = new Image();
+      img.src = imgUrl;
 
-      if (!signaturePad.isEmpty()) {
-        const signatureImage = signaturePad.toDataURL();
-        doc.addImage(signatureImage, 'PNG', 10, y, 100, 30);
-        y += 40;
-      }
+      img.onload = function () {
+        // Add the logo image at the center of the header
+        doc.addImage(img, 'PNG', 60, 25, 90, 30); // Adjust x, y, width, height as necessary
 
-      doc.save('form-data.pdf');
-      console.log('PDF downloaded successfully.');
+        // Add form data to the PDF
+        const formData = $('#submitTicketForm').serializeArray();
+        const filteredFormData = formData.filter(field =>
+          field.name !== 'orgid' && field.name !== 'retURL' &&
+          field.name !== 'mathSum' && field.name !== 'g-recaptcha-response'
+        );
+
+        let y = 70; // Adjust to start after the logo
+        filteredFormData.forEach(field => {
+          const label = $(`label[for='${field.name}']`).text();
+          doc.text(`${label}: ${field.value}`, 10, y);
+          y += 10;
+        });
+
+        // Add signature if available
+        if (!signaturePad.isEmpty()) {
+          const signatureImage = signaturePad.toDataURL();
+          doc.addImage(signatureImage, 'PNG', 10, y, 100, 30);
+          y += 40;
+        }
+
+        // Add footer with contact information
+        doc.setFontSize(12);
+        doc.text('2638 Willard Dairy Road, Suite 112 High Point, NC 27265', 105, 290, null, null, 'center');
+        doc.text('+1 (336) 860-6061 | techunifi.com | Info@techunifi.com', 105, 300, null, null, 'center');
+
+        // Draw a horizontal line above the footer
+        doc.setLineWidth(0.5);
+        doc.line(10, 275, 200, 275); // x1, y1, x2, y2
+
+        // Save the PDF
+        doc.save('techunifi-change-order-data.pdf');
+        console.log('PDF downloaded successfully.');
+      };
 
     } catch (error) {
       console.error('Error generating PDF:', error);
@@ -1697,7 +1722,6 @@ $(document).ready(function () {
         console.error('Form not found or not a valid form element.');
       }
     }, 1000);
-    
   });
 
   // Event listener to update math sum question when the form is reset
@@ -1716,7 +1740,6 @@ $(document).ready(function () {
     }
   });
 });
-
 
 
 /* ==== Event Close ==== */
