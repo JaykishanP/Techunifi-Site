@@ -1661,7 +1661,6 @@ $(document).ready(function () {
 
       // Add header with logo
       doc.setFontSize(18);
-      doc.text('Company Name', 105, 20, null, null, 'center');
 
       // Load the image from the URL
       const imgUrl = 'https://www.techunifi.com/assets/img/hero-img.png';
