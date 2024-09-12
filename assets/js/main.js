@@ -1690,8 +1690,14 @@ $(document).ready(function () {
 
     // Submit the form using the native JavaScript submit method to avoid conflicts
     setTimeout(() => {
-      document.getElementById('submitTicketForm').submit.call(document.getElementById('submitTicketForm')); 
-    }, 1000); // Adjust delay if needed
+      var form = document.getElementById('submitTicketForm');
+      if (form && form.tagName === 'FORM') {
+        HTMLFormElement.prototype.submit.call(form); // Native form submission
+      } else {
+        console.error('Form not found or not a valid form element.');
+      }
+    }, 1000);
+    
   });
 
   // Event listener to update math sum question when the form is reset
