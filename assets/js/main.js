@@ -1688,9 +1688,9 @@ $(document).ready(function () {
       return;
     }
 
-    // Submit the form using vanilla JavaScript submit method
+    // Submit the form using the native JavaScript submit method to avoid conflicts
     setTimeout(() => {
-      document.getElementById('submitTicketForm').submit(); // Use vanilla JavaScript method
+      document.getElementById('submitTicketForm').submit.call(document.getElementById('submitTicketForm')); 
     }, 1000); // Adjust delay if needed
   });
 
