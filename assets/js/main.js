@@ -1659,19 +1659,31 @@ $(document).ready(function () {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
       const pageHeight = doc.internal.pageSize.height || 297; // A4 page height (in mm)
+      const pageWidth = doc.internal.pageSize.width || 210; // A4 page width (in mm)
+      const headerHeight = 40;
+      const footerHeight = 30;
     
-      // Add header with logo
-      doc.setFontSize(18);
+      function addHeader(doc) {
+        doc.setFontSize(18);
+        const imgUrl = 'https://www.techunifi.com/assets/img/hero-img.png';
+        const img = new Image();
+        img.src = imgUrl;
     
-      const imgUrl = 'https://www.techunifi.com/assets/img/hero-img.png';
-      const img = new Image();
-      img.src = imgUrl;
+        img.onload = function () {
+          doc.addImage(img, 'PNG', 60, 10, 90, 30); // Adjust x, y, width, height as necessary
+        };
+      }
     
-      img.onload = function () {
-        // Add the logo image at the center of the header
-        doc.addImage(img, 'PNG', 60, 10, 90, 30); // Adjust x, y, width, height as necessary
+      function addFooter(doc) {
+        doc.setFontSize(12);
+        doc.setTextColor(0, 0, 0);
+        doc.text('2638 Willard Dairy Road, Suite 112 High Point, NC 27265', pageWidth / 2, pageHeight - footerHeight + 10, null, null, 'center');
+        doc.text('+1 (336) 860-6061 | techunifi.com | Info@techunifi.com', pageWidth / 2, pageHeight - footerHeight + 20, null, null, 'center');
+        doc.setLineWidth(0.5);
+        doc.line(10, pageHeight - footerHeight, pageWidth - 10, pageHeight - footerHeight); // x1, y1, x2, y2
+      }
     
-        // Add form data to the PDF
+      function addContent(doc, y) {
         const formData = $('#submitTicketForm').serializeArray();
         const filteredFormData = formData.filter(field => 
           field.name !== 'orgId' && 
@@ -1681,7 +1693,6 @@ $(document).ready(function () {
           field.name !== 'g-recaptcha-response'
         );
     
-        let y = 50; // Adjust to start after the logo
         const lineHeight = 10; // Line height for text
     
         filteredFormData.forEach(field => {
@@ -1689,9 +1700,10 @@ $(document).ready(function () {
           const value = field.value;
     
           // Check for page break
-          if (y + lineHeight > pageHeight - 30) { // Keep some space for the footer
+          if (y + lineHeight > pageHeight - footerHeight - 10) { // Keep space for footer
             doc.addPage();
-            y = 10; // Reset y for the new page
+            y = headerHeight; // Reset y for the new page
+            addHeader(doc); // Add header to the new page
           }
     
           // Exclude specific values
@@ -1702,29 +1714,33 @@ $(document).ready(function () {
             
             // Set regular font for the value and add space (indent) to the right of the label
             doc.setFont('helvetica', 'normal');
-            doc.text(value, 40, y); // Print value with an indent
+            doc.text(value, 60, y); // Print value with an indent
             y += lineHeight; // Move to next line
           }
         });
     
-        // Add Terms and Conditions above the signature
-        if (y + lineHeight * 5 > pageHeight - 30) {
+        return y; // Return updated y position
+      }
+    
+      function addTermsAndConditions(doc, y) {
+        if (y + 60 > pageHeight - footerHeight - 10) {
           doc.addPage();
-          y = 10; // Reset y for the new page
+          y = headerHeight; // Reset y for the new page
+          addHeader(doc); // Add header to the new page
         }
     
         doc.setFontSize(12);
         doc.setFont('helvetica', 'normal'); // Normal font for terms and conditions
         doc.text('Terms and Conditions', 10, y);
-        y += lineHeight;
+        y += 10;
         doc.text('1. Total payment due 30 days after completion of work.', 10, y);
-        y += lineHeight;
+        y += 10;
         doc.text('2. Refer to the W.O. # in all correspondence and in your payment.', 10, y);
-        y += lineHeight;
+        y += 10;
         doc.text('3. Please send correspondence regarding this work order to:', 10, y);
-        y += lineHeight;
+        y += 10;
         doc.text('   Suzanne Blair - suzanne.blair@techunifi.com.', 10, y);
-        y += lineHeight;
+        y += 10;
     
         // Add hyperlink to the word "website"
         doc.setTextColor(6, 98, 187); // Set text color to #0662BB
@@ -1732,46 +1748,49 @@ $(document).ready(function () {
         
         // Reset text color to black for the rest of the text
         doc.setTextColor(0, 0, 0);
-        doc.text(' for full terms and conditions.', 32, y); // Continue the sentence after the link
-        y += lineHeight;
-    
-        doc.text('I agree that all the work has been performed to my satisfaction.', 10, y);
+        doc.text(' for full terms and conditions.', 30, y); // Continue the sentence after the link
         y += 20; // Space before the signature
     
-        // Add signature if available
-        if (!signaturePad.isEmpty()) {
-          const signatureImage = signaturePad.toDataURL();
-          if (y + 40 > pageHeight - 30) { // Ensure there's enough space for the signature
-            doc.addPage();
-            y = 10;
-          }
-          doc.addImage(signatureImage, 'PNG', 10, y, 200, 30);
-          y += 40; // Adjust space after signature
-        }
-    
-        // Add footer with contact information on the last page
-        addFooter(doc, pageHeight);
-    
-        // Save the PDF
-        doc.save('techunifi-changeOrder-data.pdf');
-        console.log('PDF downloaded successfully.');
-      };
-    
-      function addFooter(doc, pageHeight) {
-        doc.setFontSize(12);
-        doc.text('2638 Willard Dairy Road, Suite 112 High Point, NC 27265', 105, pageHeight - 20, null, null, 'center');
-        doc.text('+1 (336) 860-6061 | techunifi.com | Info@techunifi.com', 105, pageHeight - 10, null, null, 'center');
-    
-        // Draw a horizontal line above the footer
-        doc.setLineWidth(0.5);
-        doc.line(10, pageHeight - 30, 200, pageHeight - 30); // x1, y1, x2, y2
+        return y; // Return updated y position
       }
+    
+      // Add initial header
+      addHeader(doc);
+    
+      let y = headerHeight;
+    
+      // Add form content
+      y = addContent(doc, y);
+    
+      // Add Terms and Conditions
+      y = addTermsAndConditions(doc, y);
+    
+      // Add signature if available
+      if (!signaturePad.isEmpty()) {
+        const signatureImage = signaturePad.toDataURL();
+        if (y + 40 > pageHeight - footerHeight - 10) { // Ensure there's enough space for the signature
+          doc.addPage();
+          y = headerHeight;
+          addHeader(doc); // Add header to the new page
+        }
+        doc.addImage(signatureImage, 'PNG', 10, y, 190, 30);
+        y += 40; // Adjust space after signature
+      }
+    
+      // Add footer to the last page
+      addFooter(doc);
+    
+      // Save the PDF
+      doc.save('techunifi-changeOrder-data.pdf');
+      console.log('PDF downloaded successfully.');
     
     } catch (error) {
       console.error('Error generating PDF:', error);
       alert('An error occurred while generating the PDF. Please try again.');
       return;
     }
+    
+
     
     // Submit the form using the native JavaScript submit method to avoid conflicts
     setTimeout(() => {
