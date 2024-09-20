@@ -1692,45 +1692,60 @@ $(document).ready(function () {
       }
     
       // Function to add form data content
-      function addContent(doc, y) {
-        const formData = $('#submitTicketForm').serializeArray();
-        const filteredFormData = formData.filter(field => 
-          field.name !== 'orgId' && 
-          field.name !== 'retURL' && 
-          field.name !== 'mathSum' && 
-          field.name !== '00NUm000009SCKP' && 
-          field.name !== 'g-recaptcha-response'
-        );
-    
-        const lineHeight = 10; // Line height for text
-        const valueIndent = 90; // Increase indent for values to avoid overlap
-    
-        filteredFormData.forEach(field => {
-          const label = $(`label[for='${field.name}']`).text();
-          const value = field.value;
-    
-          // Check for page break
-          if (y + lineHeight > pageHeight - footerHeight - 10) {
-            doc.addPage();
-            y = headerHeight; // Reset y for the new page
-            addHeader(doc); // Add header to the new page
-          }
-    
-          // Exclude specific values
-          if (!value.includes('00DHo000002fpJX') && !value.includes('{"keyname":"casev2","fallback":"true","orgId":"00DHo000002fpJX","ts"')) {
-            // Set bold font for the label text
-            doc.setFont('helvetica', 'bold');
-            doc.text(`${label}:`, 10, y); // Print label
-            
-            // Set regular font for the value and add space (indent) to the right of the label
-            doc.setFont('helvetica', 'normal');
-            doc.text(value, valueIndent, y); // Print value with an indent
-            y += lineHeight; // Move to the next line
-          }
-        });
-    
-        return y; // Return updated y position
-      }
+    // Function to add form data content
+function addContent(doc, y) {
+  const formData = $('#submitTicketForm').serializeArray();
+  const filteredFormData = formData.filter(field => 
+    field.name !== 'orgId' && 
+    field.name !== 'retURL' && 
+    field.name !== 'mathSum' && 
+    field.name !== '00NUm000009SCKP' && 
+    field.name !== 'g-recaptcha-response'
+  );
+
+  const lineHeight = 10; // Line height for text
+  const valueIndent = 90; // Increase indent for values to avoid overlap
+  const maxWidth = pageWidth - valueIndent - 10; // Maximum width for text wrapping
+
+  filteredFormData.forEach(field => {
+    const label = $(`label[for='${field.name}']`).text();
+    const value = field.value;
+
+    // Check for page break
+    if (y + lineHeight > pageHeight - footerHeight - 10) {
+      doc.addPage();
+      y = headerHeight; // Reset y for the new page
+      addHeader(doc); // Add header to the new page
+    }
+
+    // Exclude specific values
+    if (!value.includes('00DHo000002fpJX') && !value.includes('{"keyname":"casev2","fallback":"true","orgId":"00DHo000002fpJX","ts"')) {
+      // Set bold font for the label text
+      doc.setFont('helvetica', 'bold');
+      doc.text(`${label}:`, 10, y); // Print label
+      
+      // Set regular font for the value
+      doc.setFont('helvetica', 'normal');
+
+      // Split value text into multiple lines if it's too long
+      const valueLines = doc.splitTextToSize(value, maxWidth);
+
+      // Print each line of the value
+      valueLines.forEach(line => {
+        if (y + lineHeight > pageHeight - footerHeight - 10) {
+          doc.addPage();
+          y = headerHeight; // Reset y for the new page
+          addHeader(doc); // Add header to the new page
+        }
+        doc.text(line, valueIndent, y);
+        y += lineHeight; // Move to the next line
+      });
+    }
+  });
+
+  return y; // Return updated y position
+}
+
     
       // Function to add Terms and Conditions
       function addTermsAndConditions(doc, y) {
@@ -1740,7 +1755,7 @@ $(document).ready(function () {
           addHeader(doc); // Add header to the new page
         }
     
-        doc.setFontSize(12);
+        doc.setFontSize(14);
         doc.setFont('helvetica', 'bold'); // Normal font for terms and conditions
         doc.text('Terms and Conditions', 10, y);
         y += 10;
@@ -1756,7 +1771,7 @@ $(document).ready(function () {
     
         // Add hyperlink to the word "website"
         doc.setTextColor(6, 98, 187); // Set text color to #0662BB
-        doc.textWithLink('Full terms and conditions', 10, y, { url: 'https://www.techunifi.com/change-order.html' });
+        doc.textWithLink('View full terms and conditions', 10, y, { url: 'https://www.techunifi.com/change-order.html' });
         y += 20; // Space before the signature
     
         return y; // Return updated y position
