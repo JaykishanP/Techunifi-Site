@@ -1663,17 +1663,25 @@ $(document).ready(function () {
       const headerHeight = 40;
       const footerHeight = 30;
     
+      // Function to add the header with logo
       function addHeader(doc) {
-        doc.setFontSize(18);
-        const imgUrl = 'https://www.techunifi.com/assets/img/hero-img.png';
-        const img = new Image();
-        img.src = imgUrl;
+        return new Promise((resolve, reject) => {
+          const imgUrl = 'https://www.techunifi.com/assets/img/hero-img.png';
+          const img = new Image();
+          img.src = imgUrl;
     
-        img.onload = function () {
-          doc.addImage(img, 'PNG', 60, 10, 90, 30); // Adjust x, y, width, height as necessary
-        };
+          img.onload = function () {
+            doc.addImage(img, 'PNG', 60, 10, 90, 30); // Adjust x, y, width, height as necessary
+            resolve();
+          };
+    
+          img.onerror = function () {
+            reject('Image failed to load');
+          };
+        });
       }
     
+      // Function to add the footer with contact details
       function addFooter(doc) {
         doc.setFontSize(12);
         doc.setTextColor(0, 0, 0);
@@ -1683,6 +1691,7 @@ $(document).ready(function () {
         doc.line(10, pageHeight - footerHeight, pageWidth - 10, pageHeight - footerHeight); // x1, y1, x2, y2
       }
     
+      // Function to add form data content
       function addContent(doc, y) {
         const formData = $('#submitTicketForm').serializeArray();
         const filteredFormData = formData.filter(field => 
@@ -1694,13 +1703,14 @@ $(document).ready(function () {
         );
     
         const lineHeight = 10; // Line height for text
+        const valueIndent = 70; // Increase indent for values to avoid overlap
     
         filteredFormData.forEach(field => {
           const label = $(`label[for='${field.name}']`).text();
           const value = field.value;
     
           // Check for page break
-          if (y + lineHeight > pageHeight - footerHeight - 10) { // Keep space for footer
+          if (y + lineHeight > pageHeight - footerHeight - 10) {
             doc.addPage();
             y = headerHeight; // Reset y for the new page
             addHeader(doc); // Add header to the new page
@@ -1714,14 +1724,15 @@ $(document).ready(function () {
             
             // Set regular font for the value and add space (indent) to the right of the label
             doc.setFont('helvetica', 'normal');
-            doc.text(value, 60, y); // Print value with an indent
-            y += lineHeight; // Move to next line
+            doc.text(value, valueIndent, y); // Print value with an indent
+            y += lineHeight; // Move to the next line
           }
         });
     
         return y; // Return updated y position
       }
     
+      // Function to add Terms and Conditions
       function addTermsAndConditions(doc, y) {
         if (y + 60 > pageHeight - footerHeight - 10) {
           doc.addPage();
@@ -1744,51 +1755,53 @@ $(document).ready(function () {
     
         // Add hyperlink to the word "website"
         doc.setTextColor(6, 98, 187); // Set text color to #0662BB
-        doc.textWithLink('website', 10, y, { url: 'https://www.techunifi.com/change-order.html' });
-        
-        // Reset text color to black for the rest of the text
-        doc.setTextColor(0, 0, 0);
-        doc.text(' for full terms and conditions.', 30, y); // Continue the sentence after the link
+        doc.textWithLink('Full terms and conditions', 10, y, { url: 'https://www.techunifi.com/change-order.html' });
         y += 20; // Space before the signature
     
         return y; // Return updated y position
       }
     
-      // Add initial header
-      addHeader(doc);
+      // Start generating the PDF
+      async function generatePDF() {
+        let y = headerHeight;
     
-      let y = headerHeight;
+        // Add header and wait for image to load
+        await addHeader(doc);
     
-      // Add form content
-      y = addContent(doc, y);
+        // Add form content
+        y = addContent(doc, y);
     
-      // Add Terms and Conditions
-      y = addTermsAndConditions(doc, y);
+        // Add Terms and Conditions
+        y = addTermsAndConditions(doc, y);
     
-      // Add signature if available
-      if (!signaturePad.isEmpty()) {
-        const signatureImage = signaturePad.toDataURL();
-        if (y + 40 > pageHeight - footerHeight - 10) { // Ensure there's enough space for the signature
-          doc.addPage();
-          y = headerHeight;
-          addHeader(doc); // Add header to the new page
+        // Add signature if available
+        if (!signaturePad.isEmpty()) {
+          const signatureImage = signaturePad.toDataURL();
+          if (y + 40 > pageHeight - footerHeight - 10) { // Ensure there's enough space for the signature
+            doc.addPage();
+            y = headerHeight;
+            await addHeader(doc); // Add header to the new page
+          }
+          doc.addImage(signatureImage, 'PNG', 10, y, 190, 30);
+          y += 40; // Adjust space after signature
         }
-        doc.addImage(signatureImage, 'PNG', 10, y, 190, 30);
-        y += 40; // Adjust space after signature
+    
+        // Add footer to the last page
+        addFooter(doc);
+    
+        // Save the PDF
+        doc.save('techunifi-changeOrder-data.pdf');
+        console.log('PDF downloaded successfully.');
       }
     
-      // Add footer to the last page
-      addFooter(doc);
-    
-      // Save the PDF
-      doc.save('techunifi-changeOrder-data.pdf');
-      console.log('PDF downloaded successfully.');
+      // Generate the PDF
+      generatePDF();
     
     } catch (error) {
       console.error('Error generating PDF:', error);
       alert('An error occurred while generating the PDF. Please try again.');
-      return;
     }
+    
     
     
     
