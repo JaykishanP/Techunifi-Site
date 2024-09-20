@@ -1703,7 +1703,7 @@ $(document).ready(function () {
         );
     
         const lineHeight = 10; // Line height for text
-        const valueIndent = 70; // Increase indent for values to avoid overlap
+        const valueIndent = 90; // Increase indent for values to avoid overlap
     
         filteredFormData.forEach(field => {
           const label = $(`label[for='${field.name}']`).text();
@@ -1741,9 +1741,10 @@ $(document).ready(function () {
         }
     
         doc.setFontSize(12);
-        doc.setFont('helvetica', 'normal'); // Normal font for terms and conditions
+        doc.setFont('helvetica', 'bold'); // Normal font for terms and conditions
         doc.text('Terms and Conditions', 10, y);
         y += 10;
+        doc.setFont('helvetica', 'normal'); // Normal font for terms and conditions
         doc.text('1. Total payment due 30 days after completion of work.', 10, y);
         y += 10;
         doc.text('2. Refer to the W.O. # in all correspondence and in your payment.', 10, y);
@@ -1768,6 +1769,8 @@ $(document).ready(function () {
         // Add header and wait for image to load
         await addHeader(doc);
     
+        y+=30; 
+
         // Add form content
         y = addContent(doc, y);
     
