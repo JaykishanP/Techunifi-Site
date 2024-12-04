@@ -75,7 +75,7 @@ app.post('/submit-timesheet', async (req, res) => {
         const fileName = 'timesheet.xlsx';
         const workbook = xlsx.utils.book_new();
         const worksheetData = [
-            ['userName', 'Property Name', 'Description', 'Time In', 'Time Out', 'Date'],
+            ['User Name', 'Property Name', 'Description', 'Time In', 'Time Out', 'Date'],
             [userName, propertyName, description, timeIn, timeOut, date],
         ];
         const worksheet = xlsx.utils.aoa_to_sheet(worksheetData);
