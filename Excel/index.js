@@ -54,14 +54,14 @@ const appendToSheet = async (spreadsheetId, data) => {
 // API Endpoint to handle form submission
 app.post('/submit-timesheet', async (req, res) => {
   try {
-    const { userName, propertyName, description, timeIn, timeOut, date, travelHours, laborHours } = req.body;
+    const { userName, propertyName, description, date, travelHours, laborHours, timeIn, timeOut } = req.body;
 
     // Input validation
-    if (!userName || !propertyName || !description || !timeIn || !timeOut || !date || !travelHours || !laborHours) {
+    if (!userName || !propertyName || !description || !date || !travelHours || !laborHours || !timeIn || !timeOut) {
       return res.status(400).json({ error: 'All fields are required' });
     }
 
-    const data = [userName, propertyName, description, timeIn, timeOut, date, travelHours, laborHours];
+    const data = [userName, propertyName, description, date, travelHours, laborHours, timeIn, timeOut];
 
     // Append data to Google Sheet
     await appendToSheet(SPREADSHEET_ID, data);
