@@ -55,21 +55,14 @@ function gtag(){dataLayer.push(arguments);}
 <body class="productPage">
     
    <!-- ======= Header ======= -->
+
+   
    <header id="nav-menu" class="header-nav" aria-label="navigation bar">
     <div class="container">
       <div class="nav-start">
         <a class="logo" href="https://www.techunifi.com/">
-          <img src="assets/img/logo.png" title="techunifi" alt="Logo" />
+          <img src="assets/img/logo (1).png" title="techunifi" alt="Logo" />
         </a>
-
-        <div class="nav-end">
-          <a class="nav-link raise-btn" href="submit.html" onclick="toggleUnderline(event)">Submit A Ticket</a>
-          <a class="nav-link profile-icon" href="https://connect.ebizcharge.net/(S(nltki3tr3mxc3a0ya4rsesky))/EbizLogin.aspx?ReturnUrl=%2fTechunifi" target="_blank" onclick="toggleUnderline(event)"> <img src="assets/img/account_circle.png"> </a>
-          <button id="hamburger" aria-label="hamburger" aria-haspopup="true" aria-expanded="false">
-            <i class="bx bx-menu" aria-hidden="true"></i>
-          </button>
-        </div>
-
         <nav class="menu">
           <ul class="menu-bar">
             <li><a class="nav-link services" href="https://www.techunifi.com/#landing-services" onclick="toggleUnderline(event)">Services</a></li>
@@ -77,17 +70,56 @@ function gtag(){dataLayer.push(arguments);}
             <li><a class="nav-link menu-products" href="products.html" onclick="toggleUnderline(event)">Products</a></li>
             <li><a class="nav-link menu-about" href="about.html" onclick="toggleUnderline(event)">About Us</a></li>
             <li><a class="nav-link menu-contact" href="https://www.techunifi.com/#contact" onclick="toggleUnderline(event)">Contact Us</a></li>
-            <li><a class="nav-link raise-btn" href="submit.html" onclick="toggleUnderline(event)">Submit A Ticket</a></li>
-            <li><a class="nav-link" href="https://connect.ebizcharge.net/(S(nltki3tr3mxc3a0ya4rsesky))/EbizLogin.aspx?ReturnUrl=%2fTechunifi" target="_blank" onclick="toggleUnderline(event)"> <img src="assets/img/account_circle.svg"> </a></li>
-
-           
           </ul>
         </nav>
       </div>
   
+     
+      <div class="nav-end">
+        <a class="nav-link raise-btn" href="submit.html" onclick="toggleUnderline(event)" style="margin: 0 10px;">
+          <img src="assets/img/submit_icon.svg" alt="techunifi" title="Submit">
+          <span>Submit A Ticket</span>
+        </a>
+        <!-- <a class="nav-link search-site mobile-search" href="javascript:void(0)" onclick="toggleModal()">
+          <img src="assets/img/search-icon.svg" alt="techunifi" title="Search">
+          <span>Search</span>
+        </a> -->
+        <a class="nav-link profile-icon" href="https://connect.ebizcharge.net/(S(nltki3tr3mxc3a0ya4rsesky))/EbizLogin.aspx?ReturnUrl=%2fTechunifi" target="_blank" onclick="toggleUnderline(event)">
+          <img src="assets/img/account_circle.svg" alt="techunifi" title="Login">
+          <span>Login  <i style="padding: 0 5px;">&gt</i></span>
+        </a>
+        <button id="hamburger" aria-label="hamburger" aria-haspopup="true" aria-expanded="false">
+          <i class="bx bx-menu" aria-hidden="true"></i>
+        </button>
+      </div>
+
     </div>
   </header>
+  
+
   <!-- End Header -->
+
+  
+  <!-- ====== Search Modal ======= -->
+  <div class="search-main">
+    <div id="searchModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="toggleModal()">✕</span>
+        <h3>Search the Page</h3>
+        <div class="search-input-container">
+          <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Type your search..." 
+            oninput="performSearch(event)" 
+          />
+          <button onclick="clearSearch()">Clear</button>
+        </div>
+        <ul id="searchResults"></ul>
+      </div>
+    </div>
+  </div>
+<!-- ======= Search Modal ======= -->
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="submit-banner" data-aos="zoom-in" data-aos-delay="50">
@@ -210,13 +242,252 @@ function gtag(){dataLayer.push(arguments);}
             
 
           </div>
+
+            <!-- tele-brands -->
+            <div class="right-content">
+
+
+              <!-- <div id="tele-brand" class="id-div"></div> -->
+              <div class="voltage-brands tele-brand">
+<!-- 
+              <div class="submit-head-para">
+                <div class="prod-heading aos-init">
+                  <h3>Brands</h3>
+                </div>
+              </div> -->
+              <div class="container-inner" style="background-color: #ededed;">
+
+                <!-- <div class="prod-heading-name">
+                  <p>Product Partners</p>
+                  <div class="prod-arrows">
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+                </div> -->
+
+                <div class="slider swiper js-slider">
+                    <div class="swiper-wrapper">
+                      <!-- 1 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">Telecom</p>
+                              <p class="card-prod-heading">Bittel</p>
+                              <img src="assets/img/prod-images/telecom/bittel-logo-01 1.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                              
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">Telecom</p>
+                              <p class="card-prod-heading">Bittel</p>
+                              <p class="overlay-slider-text">
+                                Innovator in smart home automation and IoT solutions.
+                              </p>
+                            </div>
+                            
+                          </div>
+                        </div>
+                      <!-- 2 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">Telecom</p>
+                              <p class="card-prod-heading">Yealink</p>
+                              <img src="assets/img/prod-images/telecom/Yealink.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                             
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">Telecom</p>
+                              <p class="card-prod-heading">Yealink</p>
+                              <p class="overlay-slider-text">
+                                Premier provider of unified communication and collaboration solutions.
+                              </p>
+                            </div>
+
+                          </div>
+                        </div>
+                      <!-- 3 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">Telecom</p>
+                              <p class="card-prod-heading">Mitel</p>
+                              <img src="assets/img/prod-images/telecom/Mitel.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                              
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">Telecom</p>
+                              <p class="card-prod-heading">Mitel</p>
+                              <p class="overlay-slider-text">
+                                Global leader in business communications, providing cloud and on-premises solutions.                                </p>
+                            </div>
+                          
+                          </div>
+                        </div>
+                      <!-- 4 -->
+                      <!-- 5 -->
+                       <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">Telecom</p>
+                            <p class="card-prod-heading">Polycomm</p>
+                            <img src="assets/img/prod-images/telecom/Frame 22790.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                           
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Telecom</p>
+                            <p class="card-prod-heading">Polycomm</p>
+                            <p class="overlay-slider-text">
+                              Creator of advanced communication and collaboration solutions.
+                            </p>
+                          </div>
+
+                        </div>
+                      </div>
+                      <!-- 6 -->
+                      <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">Telecom</p>
+                            <p class="card-prod-heading">ComXchange</p>
+                            <img src="assets/img/prod-images/telecom/comxchange.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                            
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Telecom</p>
+                            <p class="card-prod-heading">ComXchange</p>
+                            <p class="overlay-slider-text">
+                              Provider of comprehensive communication and collaboration platforms for businesses.
+                            </p>
+                          </div>
+                        
+                        </div>
+                      </div>
+                        <!-- 7 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">Telecom</p>
+                              <p class="card-prod-heading">Grand Stream</p>
+                              <img src="assets/img/prod-images/telecom/grandstream.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                             
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">Telecom</p>
+                              <p class="card-prod-heading">Grand Stream</p>
+                              <p class="overlay-slider-text">
+                                Supplier of innovative IP voice and video telephony solutions.
+                              </p>
+                            </div>
+
+                          </div>
+                        </div>
+                          <!-- 8 -->
+                       <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">Telecom</p>
+                            <p class="card-prod-heading">Wind Stream</p>
+                            <img src="assets/img/prod-images/telecom/windstream.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                           
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Telecom</p>
+                            <p class="card-prod-heading">Wind Stream</p>
+                            <p class="overlay-slider-text">
+                              Leading provider of advanced network communications and technology solutions.
+                            </p>
+                          </div>
+                        
+                        </div>
+                      </div>
+                        <!-- 9 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">Telecom</p>
+                              <p class="card-prod-heading">Phone Suite</p>
+                              <img src="assets/img/prod-images/telecom/phone-suite.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                            
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">Telecom</p>
+                              <p class="card-prod-heading">Phone Suite</p>
+                              <p class="overlay-slider-text">
+                                Developer of cutting-edge hotel communication and guest management solutions.
+                              </p>
+                            </div>
+
+                          </div>
+                        </div>
+                          <!-- 10 -->
+                       <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">Telecom</p>
+                            <p class="card-prod-heading">TigerTMS</p>
+                            <img src="assets/img/prod-images/telecom/tigertms.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                           
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Telecom</p>
+                            <p class="card-prod-heading">TigerTMS</p>
+                            <p class="overlay-slider-text">
+                              Provider of integrated communication and guest management solutions for hospitality.
+                            </p>
+                          </div>
+
+                        </div>
+                      </div>
+                       <!-- 11 -->
+                       <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">Telecom</p>
+                            <p class="card-prod-heading">VSR Cloud Communications</p>
+                            <img src="assets/img/prod-images/telecom/vsr.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                          
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Telecom</p>
+                            <p class="card-prod-heading">VSR Cloud Communications</p>
+                            <p class="overlay-slider-text">
+                              Provider of innovative cloud-based communication and collaboration solutions.
+                            </p>
+                          </div>
+
+                        </div>
+                     
+                      </div>
+
+                    </div>
+                        <!-- Scroll Bar -->
+                        <div class="swiper-scrollbar"></div>
+                </div>
+
+                <div class="swiper-pagination"></div>
+              </div>
+
+              </div>
+
+
+             </div>
            
           <div class="row left-right">
 
             <div class="col-md-2">
 
               <div class="tab">
-                <br><a href="#tele-brand">Brands</a> 
+                <br>
                 <a href="#tele-cordless-phone">Cordless</a> 
                 <a href="#tele-corded-phone">Corded</a> 
                 <a href="#tele-clocks">Clocks</a><br>
@@ -227,232 +498,6 @@ function gtag(){dataLayer.push(arguments);}
        <div class="col-md-10">
            <main>
 
-            <!-- tele-brands -->
-               <div class="right-content">
-
-
-                <div id="tele-brand" class="id-div"></div>
-                <div class="voltage-brands tele-brand">
-
-                <div class="submit-head-para">
-                  <div class="prod-heading aos-init">
-                    <h3>Brands</h3>
-                  </div>
-                </div>
-                <div class="container-inner">
-
-                  <div class="prod-heading-name">
-                    <p>Product Partners</p>
-                    <div class="prod-arrows">
-                      <div class="swiper-button-next"></div>
-                      <div class="swiper-button-prev"></div>
-                  </div>
-                  </div>
-
-                  <div class="slider swiper js-slider">
-                      <div class="swiper-wrapper">
-                        <!-- 1 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/telecom/bittel-logo-01 1.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Telecom</p>
-                                <p class="card-prod-heading">Bittel</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Telecom</p>
-                                <p class="card-prod-heading">Bittel</p>
-                                <p class="overlay-slider-text">
-                                  Innovator in smart home automation and IoT solutions.
-                                </p>
-                              </div>
-                              
-                            </div>
-                          </div>
-                        <!-- 2 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/telecom/Yealink.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Telecom</p>
-                                <p class="card-prod-heading">Yealink</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Telecom</p>
-                                <p class="card-prod-heading">Yealink</p>
-                                <p class="overlay-slider-text">
-                                  Premier provider of unified communication and collaboration solutions.
-                                </p>
-                              </div>
-
-                            </div>
-                          </div>
-                        <!-- 3 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/telecom/Mitel.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Telecom</p>
-                                <p class="card-prod-heading">Mitel</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Telecom</p>
-                                <p class="card-prod-heading">Mitel</p>
-                                <p class="overlay-slider-text">
-                                  Global leader in business communications, providing cloud and on-premises solutions.                                </p>
-                              </div>
-                            
-                            </div>
-                          </div>
-                        <!-- 4 -->
-                        <!-- 5 -->
-                         <div class="slider__listItem swiper-slide card-overlay-main">
-                          <div class="prod-slide-card">
-
-                            <div class="card-content">
-                              <img src="assets/img/prod-images/telecom/Frame 22790.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                              <p class="card-thumbnail">Telecom</p>
-                              <p class="card-prod-heading">Polycomm</p>
-                            </div>
-                            <div class="slider-overlay">
-                              <p class="card-thumbnail">Telecom</p>
-                              <p class="card-prod-heading">Polycomm</p>
-                              <p class="overlay-slider-text">
-                                Creator of advanced communication and collaboration solutions.
-                              </p>
-                            </div>
-
-                          </div>
-                        </div>
-                        <!-- 6 -->
-                        <div class="slider__listItem swiper-slide card-overlay-main">
-                          <div class="prod-slide-card">
-
-                            <div class="card-content">
-                              <img src="assets/img/prod-images/telecom/comxchange.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                              <p class="card-thumbnail">Telecom</p>
-                              <p class="card-prod-heading">ComXchange</p>
-                            </div>
-                            <div class="slider-overlay">
-                              <p class="card-thumbnail">Telecom</p>
-                              <p class="card-prod-heading">ComXchange</p>
-                              <p class="overlay-slider-text">
-                                Provider of comprehensive communication and collaboration platforms for businesses.
-                              </p>
-                            </div>
-                          
-                          </div>
-                        </div>
-                          <!-- 7 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/telecom/grandstream.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Telecom</p>
-                                <p class="card-prod-heading">Grand Stream</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Telecom</p>
-                                <p class="card-prod-heading">Grand Stream</p>
-                                <p class="overlay-slider-text">
-                                  Supplier of innovative IP voice and video telephony solutions.
-                                </p>
-                              </div>
-
-                            </div>
-                          </div>
-                            <!-- 8 -->
-                         <div class="slider__listItem swiper-slide card-overlay-main">
-                          <div class="prod-slide-card">
-
-                            <div class="card-content">
-                              <img src="assets/img/prod-images/telecom/windstream.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                              <p class="card-thumbnail">Telecom</p>
-                              <p class="card-prod-heading">Wind Stream</p>
-                            </div>
-                            <div class="slider-overlay">
-                              <p class="card-thumbnail">Telecom</p>
-                              <p class="card-prod-heading">Wind Stream</p>
-                              <p class="overlay-slider-text">
-                                Leading provider of advanced network communications and technology solutions.
-                              </p>
-                            </div>
-                          
-                          </div>
-                        </div>
-                          <!-- 9 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/telecom/phone-suite.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Telecom</p>
-                                <p class="card-prod-heading">Phone Suite</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Telecom</p>
-                                <p class="card-prod-heading">Phone Suite</p>
-                                <p class="overlay-slider-text">
-                                  Developer of cutting-edge hotel communication and guest management solutions.
-                                </p>
-                              </div>
-
-                            </div>
-                          </div>
-                            <!-- 10 -->
-                         <div class="slider__listItem swiper-slide card-overlay-main">
-                          <div class="prod-slide-card">
-
-                            <div class="card-content">
-                              <img src="assets/img/prod-images/telecom/tigertms.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                              <p class="card-thumbnail">Telecom</p>
-                              <p class="card-prod-heading">TigerTMS</p>
-                            </div>
-                            <div class="slider-overlay">
-                              <p class="card-thumbnail">Telecom</p>
-                              <p class="card-prod-heading">TigerTMS</p>
-                              <p class="overlay-slider-text">
-                                Provider of integrated communication and guest management solutions for hospitality.
-                              </p>
-                            </div>
-
-                          </div>
-                        </div>
-                         <!-- 11 -->
-                         <div class="slider__listItem swiper-slide card-overlay-main">
-                          <div class="prod-slide-card">
-
-                            <div class="card-content">
-                              <img src="assets/img/prod-images/telecom/vsr.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                              <p class="card-thumbnail">Telecom</p>
-                              <p class="card-prod-heading">VSR Cloud Communications</p>
-                            </div>
-                            <div class="slider-overlay">
-                              <p class="card-thumbnail">Telecom</p>
-                              <p class="card-prod-heading">VSR Cloud Communications</p>
-                              <p class="overlay-slider-text">
-                                Provider of innovative cloud-based communication and collaboration solutions.
-                              </p>
-                            </div>
-
-                          </div>
-                        </div>
-
-                      </div>
-                  </div>
-
-                  <div class="swiper-pagination"></div>
-                </div>
-
-                </div>
-
-
-               </div>
-       
              <!-- tele-cordless -->
                <div class="right-content">
 
@@ -1307,11 +1352,150 @@ Additionally, we offer an Energy Savings as a Service (ESaaS) program. This prog
 
             </div>
 
+            <!-- 1 -->
+             <div class="right-content">
+
+              <!-- <div id="energy-brand" class="id-div"></div> -->
+              <div class="voltage-brands energy-brand">
+              <!--  -->
+              <!-- <div class="submit-head-para">
+                <div class="prod-heading aos-init">
+                  <h3>Brands</h3>
+                </div>
+              </div> -->
+              <!--  -->
+              <div class="container-inner" style="background-color: #ededed;">
+                <!-- Add Arrows -->
+                <!-- <div class="prod-heading-name">
+                  <p>Product Partners</p>
+                  <div class="prod-arrows">
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+                </div> -->
+
+                <div class="slider swiper js-slider">
+                    <div class="swiper-wrapper">
+                      <!-- 5 -->
+                      <div class="slider__listItem swiper-slide card-overlay-main">
+                       <div class="prod-slide-card">
+
+                        <div class="card-content">
+                          <p class="card-thumbnail">Energy Management</p>
+                          <p class="card-prod-heading">EV Pass Port</p>
+                          <img src="assets/img/prod-images/energy/ev-passport.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                         
+                        </div>
+                        <div class="slider-overlay">
+                          <p class="card-thumbnail">Energy Management</p>
+                          <p class="card-prod-heading">EV Pass Port</p>
+                          <p class="overlay-slider-text">
+                            Provider of electric vehicle charging solutions and infrastructure.
+                          </p>
+                        </div>
+
+                      </div>
+                      </div>      
+                      <!-- 1 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">Energy Management</p>
+                              <p class="card-prod-heading">HoneyWell</p>
+                              <img src="assets/img/prod-images/energy/Honeywell.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                            
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">Energy Management</p>
+                              <p class="card-prod-heading">HoneyWell</p>
+                              <p class="overlay-slider-text">
+                                Multinational conglomerate known for its diverse range of technology and engineering products.
+                              </p>
+                            </div>
+                          
+                          </div>
+                        </div>
+                      <!-- 2 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">Energy Management</p>
+                              <p class="card-prod-heading">Verdant</p>
+                              <img src="assets/img/prod-images/energy/Verdant.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                              
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">Energy Management</p>
+                              <p class="card-prod-heading">Verdant</p>
+                              <p class="overlay-slider-text">
+                                Developer of energy management solutions for hotels and commercial buildings.
+                              </p>
+                            </div>
+                          
+                          </div>
+                        </div>
+                      <!-- 3 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">Energy Management</p>
+                              <p class="card-prod-heading">Lutron</p>
+                              <img src="assets/img/prod-images/energy/Luron.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                           
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">Energy Management</p>
+                              <p class="card-prod-heading">Lutron</p>
+                              <p class="overlay-slider-text">
+                                Innovator in lighting control and automated shading systems.
+                              </p>
+                            </div>
+
+                          </div>
+                        </div>
+                     <!-- 4 -->
+                     <div class="slider__listItem swiper-slide card-overlay-main">
+                      <div class="prod-slide-card">
+
+                        <div class="card-content">
+                          <p class="card-thumbnail">Energy Management</p>
+                          <p class="card-prod-heading">Blink Charging</p>
+                          <img src="assets/img/prod-images/energy/blink.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                       
+                        </div>
+                        <div class="slider-overlay">
+                          <p class="card-thumbnail">Energy Management</p>
+                          <p class="card-prod-heading">Blink Charging</p>
+                          <p class="overlay-slider-text">
+                            Provider of electric vehicle (EV) charging solutions, specializing in innovative, user-friendly charging stations for residential, commercial, and public locations
+                          </p>
+                        </div>
+
+                      </div>
+                    </div>
+                     
+                    </div>
+                    <div class="swiper-scrollbar"></div>
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+
+              <!--  -->
+              
+              </div>
+
+
+             </div>
+
           <div class="row left-right">
 
             <div class="col-md-2">
               <div class="tab">
-                <br><a href="#energy-brand">Brands</a>
+                <br>
                 <a href="#energy-thermo">Smart Thermostats</a>
                 <a href="#energy-ev">EV Chargers</a>
                 <a href="#esaas-energy">eSaaS</a><br>
@@ -1320,139 +1504,7 @@ Additionally, we offer an Energy Savings as a Service (ESaaS) program. This prog
  
        <div class="col-md-10">
            <main>
-            <!-- 1 -->
-               <div class="right-content">
-
-                <div id="energy-brand" class="id-div"></div>
-                <div class="voltage-brands energy-brand">
-                <!--  -->
-                <div class="submit-head-para">
-                  <div class="prod-heading aos-init">
-                    <h3>Brands</h3>
-                  </div>
-                </div>
-                <!--  -->
-                <div class="container-inner">
-                  <!-- Add Arrows -->
-                  <div class="prod-heading-name">
-                    <p>Product Partners</p>
-                    <div class="prod-arrows">
-                      <div class="swiper-button-next"></div>
-                      <div class="swiper-button-prev"></div>
-                  </div>
-                  </div>
-
-                  <div class="slider swiper js-slider">
-                      <div class="swiper-wrapper">
-                        <!-- 5 -->
-                        <div class="slider__listItem swiper-slide card-overlay-main">
-                         <div class="prod-slide-card">
-
-                          <div class="card-content">
-                            <img src="assets/img/prod-images/energy/ev-passport.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                            <p class="card-thumbnail">Energy Management</p>
-                            <p class="card-prod-heading">EV Pass Port</p>
-                          </div>
-                          <div class="slider-overlay">
-                            <p class="card-thumbnail">Energy Management</p>
-                            <p class="card-prod-heading">EV Pass Port</p>
-                            <p class="overlay-slider-text">
-                              Provider of electric vehicle charging solutions and infrastructure.
-                            </p>
-                          </div>
-
-                        </div>
-                        </div>      
-                        <!-- 1 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/energy/Honeywell.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Energy Management</p>
-                                <p class="card-prod-heading">HoneyWell</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Energy Management</p>
-                                <p class="card-prod-heading">HoneyWell</p>
-                                <p class="overlay-slider-text">
-                                  Multinational conglomerate known for its diverse range of technology and engineering products.
-                                </p>
-                              </div>
-                            
-                            </div>
-                          </div>
-                        <!-- 2 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/energy/Verdant.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Energy Management</p>
-                                <p class="card-prod-heading">Verdant</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Energy Management</p>
-                                <p class="card-prod-heading">Verdant</p>
-                                <p class="overlay-slider-text">
-                                  Developer of energy management solutions for hotels and commercial buildings.
-                                </p>
-                              </div>
-                            
-                            </div>
-                          </div>
-                        <!-- 3 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/energy/Luron.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Energy Management</p>
-                                <p class="card-prod-heading">Lutron</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Energy Management</p>
-                                <p class="card-prod-heading">Lutron</p>
-                                <p class="overlay-slider-text">
-                                  Innovator in lighting control and automated shading systems.
-                                </p>
-                              </div>
-
-                            </div>
-                          </div>
-                       <!-- 4 -->
-                       <div class="slider__listItem swiper-slide card-overlay-main">
-                        <div class="prod-slide-card">
-
-                          <div class="card-content">
-                            <img src="assets/img/prod-images/energy/blink.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                            <p class="card-thumbnail">Energy Management</p>
-                            <p class="card-prod-heading">Blink Charging</p>
-                          </div>
-                          <div class="slider-overlay">
-                            <p class="card-thumbnail">Energy Management</p>
-                            <p class="card-prod-heading">Blink Charging</p>
-                            <p class="overlay-slider-text">
-                              Provider of electric vehicle (EV) charging solutions, specializing in innovative, user-friendly charging stations for residential, commercial, and public locations
-                            </p>
-                          </div>
-
-                        </div>
-                      </div>
-                       
-                      </div>
-                  </div>
-                  <!-- Add Pagination -->
-                  <div class="swiper-pagination"></div>
-              </div>
-
-                <!--  -->
-                
-                </div>
-
-
-               </div>
-
+           
             <!-- 2 -->
             <div class="right-content">
 
@@ -1825,307 +1877,306 @@ Additionally, we offer an Energy Savings as a Service (ESaaS) program. This prog
 
             </div>
 
-            
-            <div class="row left-right">
+            <div class="right-content">
 
-              <div class="col-md-2">
-                <div class="tab">
-                  <br><a href="#network-brand">Brands</a> <br>
+
+              <!-- <div id="network-brand" class="id-div"></div> -->
+              <div class="voltage-brands network-brand">
+              <!--  -->
+              <!-- <div class="submit-head-para">
+                <div class="prod-heading aos-init">
+                  <h3>Brands</h3>
                 </div>
-              </div>
-   
-         <div class="col-md-10">
-             <main>
-                 <div class="right-content">
+              </div> -->
+              <!--  -->
+              <div class="container-inner" style="background-color: #ededed;">
 
+                <!-- <div class="prod-heading-name">
+                  <p>Product Partners</p>
+                  <div class="prod-arrows">
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+                </div> -->
 
-                  <div id="network-brand" class="id-div"></div>
-                  <div class="voltage-brands network-brand">
-                  <!--  -->
-                  <div class="submit-head-para">
-                    <div class="prod-heading aos-init">
-                      <h3>Brands</h3>
-                    </div>
-                  </div>
-                  <!--  -->
-                  <div class="container-inner">
-  
-                    <div class="prod-heading-name">
-                      <p>Product Partners</p>
-                      <div class="prod-arrows">
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                    </div>
-                    </div>
-  
-                    <div class="slider swiper js-slider">
-                        <div class="swiper-wrapper">
-                           <!-- 1 -->
-                           <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
+                <div class="slider swiper js-slider">
+                    <div class="swiper-wrapper">
+                       <!-- 1 -->
+                       <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
 
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/Network/brands/wattbox.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Network</p>
-                                <p class="card-prod-heading">Wattbox</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Network</p>
-                                <p class="card-prod-heading">Wattbox</p>
-                                <p class="overlay-slider-text">
-                                  Manufacturer of reliable power management and surge protection solutions for AV and networking systems.
-                                </p>
-                              </div>
-
-                            </div>
-                          </div>
-                        <!-- 2 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/Network/brands/ovrc.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Network</p>
-                                <p class="card-prod-heading">OvrC</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Network</p>
-                                <p class="card-prod-heading">OvrC</p>
-                                <p class="overlay-slider-text">
-                                  Cloud-based remote management platform for professional integrators, enhancing control over smart devices and networks.
-                                </p>
-                              </div>
-                           
-                            </div>
-                          </div>
-                        <!-- 3 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/Network/brands/tejas-network.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Network</p>
-                                <p class="card-prod-heading">Tejas Networks</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Network</p>
-                                <p class="card-prod-heading">Tejas Networks</p>
-                                <p class="overlay-slider-text">
-                                  Provider of high-performance optical and data networking products for telecommunications and internet service providers.
-                                </p>
-                              </div>
+                          <div class="card-content">
+                            <p class="card-thumbnail">Network</p>
+                            <p class="card-prod-heading">Wattbox</p>
+                            <img src="assets/img/prod-images/Network/brands/wattbox.png" title="techunifi" alt="techunifi" class="card-brand-img">
                             
-                            </div>
                           </div>
-                          <!-- 4 -->
-                            <div class="slider__listItem swiper-slide card-overlay-main">
-                              <div class="prod-slide-card">
-
-                                <div class="card-content">
-                                  <img src="assets/img/prod-images/it-management/Lenovo.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                  <p class="card-thumbnail">Network</p>
-                                  <p class="card-prod-heading">Lenovo</p>
-                                </div>
-                                <div class="slider-overlay">
-                                  <p class="card-thumbnail">Network</p>
-                                  <p class="card-prod-heading">Lenovo</p>
-                                  <p class="overlay-slider-text">
-                                    Leading global provider of personal computers, smartphones, and enterprise solutions.
-                                  </p>
-                                </div>
-                              
-                              </div>
-                            </div>
-                          <!-- 5 -->
-                            <div class="slider__listItem swiper-slide card-overlay-main">
-                              <div class="prod-slide-card">
-
-                                <div class="card-content">
-                                  <img src="assets/img/prod-images/it-management/Aruba.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                  <p class="card-thumbnail">Network</p>
-                                  <p class="card-prod-heading">Aruba</p>
-                                </div>
-                                <div class="slider-overlay">
-                                  <p class="card-thumbnail">Network</p>
-                                  <p class="card-prod-heading">Aruba</p>
-                                  <p class="overlay-slider-text">
-                                    Provider of networking solutions for enterprises and service providers.
-                                  </p>
-                                </div>
-
-                              </div>
-                            </div>
-                          <!-- 6 -->
-                            <div class="slider__listItem swiper-slide card-overlay-main">
-                              <div class="prod-slide-card">
-
-                                <div class="card-content">
-                                  <img src="assets/img/prod-images/it-management/Dell.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                  <p class="card-thumbnail">Network</p>
-                                  <p class="card-prod-heading">Dell</p>
-                                </div>
-                                <div class="slider-overlay">
-                                  <p class="card-thumbnail">Network</p>
-                                  <p class="card-prod-heading">Dell</p>
-                                  <p class="overlay-slider-text">
-                                    Global leader in computer technology, offering a wide range of products and services.
-                                  </p>
-                                </div>
-                             
-                              </div>
-                            </div>
-                          <!-- 7 -->
-                            <div class="slider__listItem swiper-slide card-overlay-main">
-                              <div class="prod-slide-card">
-
-                                <div class="card-content">
-                                  <img src="assets/img/prod-images/it-management/Mircosoft.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                  <p class="card-thumbnail">Network</p>
-                                  <p class="card-prod-heading">Microsoft</p>
-                                </div>
-                                <div class="slider-overlay">
-                                  <p class="card-thumbnail">Network</p>
-                                  <p class="card-prod-heading">Microsoft</p>
-                                  <p class="overlay-slider-text">
-                                    Technology giant known for its software, hardware, and cloud computing services.
-                                  </p>
-                                </div>
-                              
-                              </div>
-                            </div>
-                           <!-- 8 -->
-                           <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/it-management/ionos.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Network</p>
-                                <p class="card-prod-heading">IONOS</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Network</p>
-                                <p class="card-prod-heading">IONOS</p>
-                                <p class="overlay-slider-text">
-                                  Provider of web hosting, cloud infrastructure, and online services for businesses.
-                                </p>
-                              </div>
-                            
-                            </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Network</p>
+                            <p class="card-prod-heading">Wattbox</p>
+                            <p class="overlay-slider-text">
+                              Manufacturer of reliable power management and surge protection solutions for AV and networking systems.
+                            </p>
                           </div>
-                          <!-- 9 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/it-management/barracuda.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Network</p>
-                                <p class="card-prod-heading">Barracuda</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Network</p>
-                                <p class="card-prod-heading">Barracuda</p>
-                                <p class="overlay-slider-text">
-                                  Provider of cloud-enabled security and data protection solutions.
-                                </p>
-                              </div>
-                            
-                            </div>
-                          </div>
-                          <!-- 10 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/Network/brands/tp-link.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Network</p>
-                                <p class="card-prod-heading">TP-Link</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Network</p>
-                                <p class="card-prod-heading">TP-Link</p>
-                                <p class="overlay-slider-text">
-                                  Global provider of reliable networking devices and accessories for home and business.
-                                </p>
-                              </div>
-
-                            </div>
-                          </div>
-                        <!-- 11 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/Network/brands/amada.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Network</p>
-                                <p class="card-prod-heading">Omada</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Network</p>
-                                <p class="card-prod-heading">Omada</p>
-                                <p class="overlay-slider-text">
-                                  TP-Link's business-oriented cloud-based network management solution.
-                                </p>
-                              </div>
-                           
-                            </div>
-                          </div>
-                        <!-- 12 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/Network/brands/logitech.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Network</p>
-                                <p class="card-prod-heading">Logitech</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Network</p>
-                                <p class="card-prod-heading">Logitech</p>
-                                <p class="overlay-slider-text">
-                                  Leading manufacturer of computer peripherals, software, and devices that connect people to digital experiences.
-                                </p>
-                              </div>
-                            
-                            </div>
-                          </div>
-                           <!-- 13 -->
-                           <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/security/fortinet.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Surveillance Systems</p>
-                                <p class="card-prod-heading">Fortinet</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Surveillance Systems</p>
-                                <p class="card-prod-heading">Fortinet</p>
-                                <p class="overlay-slider-text">
-                                  Global leader in broad, integrated, and automated cybersecurity solutions.
-                                </p>
-                              </div>
-
-                            </div>
-                          </div>
-                        
 
                         </div>
+                      </div>
+                    <!-- 2 -->
+                      <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">Network</p>
+                            <p class="card-prod-heading">OvrC</p>
+                            <img src="assets/img/prod-images/Network/brands/ovrc.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                          
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Network</p>
+                            <p class="card-prod-heading">OvrC</p>
+                            <p class="overlay-slider-text">
+                              Cloud-based remote management platform for professional integrators, enhancing control over smart devices and networks.
+                            </p>
+                          </div>
+                       
+                        </div>
+                      </div>
+                    <!-- 3 -->
+                      <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">Network</p>
+                            <p class="card-prod-heading">Tejas Networks</p>
+                            <img src="assets/img/prod-images/Network/brands/tejas-network.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                           
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Network</p>
+                            <p class="card-prod-heading">Tejas Networks</p>
+                            <p class="overlay-slider-text">
+                              Provider of high-performance optical and data networking products for telecommunications and internet service providers.
+                            </p>
+                          </div>
+                        
+                        </div>
+                      </div>
+                      <!-- 4 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">Network</p>
+                              <p class="card-prod-heading">Lenovo</p>
+                              <img src="assets/img/prod-images/it-management/Lenovo.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                          
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">Network</p>
+                              <p class="card-prod-heading">Lenovo</p>
+                              <p class="overlay-slider-text">
+                                Leading global provider of personal computers, smartphones, and enterprise solutions.
+                              </p>
+                            </div>
+                          
+                          </div>
+                        </div>
+                      <!-- 5 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">Network</p>
+                              <p class="card-prod-heading">Aruba</p>
+                              <img src="assets/img/prod-images/it-management/Aruba.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                           
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">Network</p>
+                              <p class="card-prod-heading">Aruba</p>
+                              <p class="overlay-slider-text">
+                                Provider of networking solutions for enterprises and service providers.
+                              </p>
+                            </div>
+
+                          </div>
+                        </div>
+                      <!-- 6 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">Network</p>
+                              <p class="card-prod-heading">Dell</p>
+                              <img src="assets/img/prod-images/it-management/Dell.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                            
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">Network</p>
+                              <p class="card-prod-heading">Dell</p>
+                              <p class="overlay-slider-text">
+                                Global leader in computer technology, offering a wide range of products and services.
+                              </p>
+                            </div>
+                         
+                          </div>
+                        </div>
+                      <!-- 7 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">Network</p>
+                              <p class="card-prod-heading">Microsoft</p>
+                              <img src="assets/img/prod-images/it-management/Mircosoft.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                             
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">Network</p>
+                              <p class="card-prod-heading">Microsoft</p>
+                              <p class="overlay-slider-text">
+                                Technology giant known for its software, hardware, and cloud computing services.
+                              </p>
+                            </div>
+                          
+                          </div>
+                        </div>
+                       <!-- 8 -->
+                       <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">Network</p>
+                            <p class="card-prod-heading">IONOS</p>
+                            <img src="assets/img/prod-images/it-management/ionos.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                           
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Network</p>
+                            <p class="card-prod-heading">IONOS</p>
+                            <p class="overlay-slider-text">
+                              Provider of web hosting, cloud infrastructure, and online services for businesses.
+                            </p>
+                          </div>
+                        
+                        </div>
+                      </div>
+                      <!-- 9 -->
+                      <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">Network</p>
+                            <p class="card-prod-heading">Barracuda</p>
+                            <img src="assets/img/prod-images/it-management/barracuda.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                         
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Network</p>
+                            <p class="card-prod-heading">Barracuda</p>
+                            <p class="overlay-slider-text">
+                              Provider of cloud-enabled security and data protection solutions.
+                            </p>
+                          </div>
+                        
+                        </div>
+                      </div>
+                      <!-- 10 -->
+                      <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">Network</p>
+                            <p class="card-prod-heading">TP-Link</p>
+                            <img src="assets/img/prod-images/Network/brands/tp-link.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                           
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Network</p>
+                            <p class="card-prod-heading">TP-Link</p>
+                            <p class="overlay-slider-text">
+                              Global provider of reliable networking devices and accessories for home and business.
+                            </p>
+                          </div>
+
+                        </div>
+                      </div>
+                    <!-- 11 -->
+                      <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">Network</p>
+                            <p class="card-prod-heading">Omada</p>
+                            <img src="assets/img/prod-images/Network/brands/amada.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                          
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Network</p>
+                            <p class="card-prod-heading">Omada</p>
+                            <p class="overlay-slider-text">
+                              TP-Link's business-oriented cloud-based network management solution.
+                            </p>
+                          </div>
+                       
+                        </div>
+                      </div>
+                    <!-- 12 -->
+                      <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">Network</p>
+                            <p class="card-prod-heading">Logitech</p>
+                            <img src="assets/img/prod-images/Network/brands/logitech.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                         
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Network</p>
+                            <p class="card-prod-heading">Logitech</p>
+                            <p class="overlay-slider-text">
+                              Leading manufacturer of computer peripherals, software, and devices that connect people to digital experiences.
+                            </p>
+                          </div>
+                        
+                        </div>
+                      </div>
+                       <!-- 13 -->
+                       <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">Surveillance Systems</p>
+                            <p class="card-prod-heading">Fortinet</p>
+                            <img src="assets/img/prod-images/security/fortinet.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                         
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Surveillance Systems</p>
+                            <p class="card-prod-heading">Fortinet</p>
+                            <p class="overlay-slider-text">
+                              Global leader in broad, integrated, and automated cybersecurity solutions.
+                            </p>
+                          </div>
+
+                        </div>
+                      </div>
+                    
+
                     </div>
-  
-                    <div class="swiper-pagination"></div>
+                    <div class="swiper-scrollbar"></div>
                 </div>
-  
 
-                  <!--  -->
-                  
-                  </div>
+                <div class="swiper-pagination"></div>
+            </div>
 
-                 </div>
-                 <!-- Add more sections as needed -->
-             </main>
-         </div>
-   
+
+              <!--  -->
+              
+              </div>
+
              </div>
+       
 
            </div>
 
@@ -2161,12 +2212,308 @@ Additionally, we offer an Energy Savings as a Service (ESaaS) program. This prog
               </div>
 
             </div>
+            
+             <!-- 1 -->
+             <div class="right-content">
+
+
+              <!-- <div id="audi-brand" class="id-div"></div> -->
+              <div class="voltage-brands audi-brand">
+              <!--  -->
+              <!-- <div class="submit-head-para">
+                <div class="prod-heading aos-init">
+                  <h3>Brands</h3>
+                </div>
+              </div> -->
+              <!--  -->
+              <div class="container-inner" style="background-color: #ededed;">
+                <!-- Add Arrows -->
+                <!-- <div class="prod-heading-name">
+                  <p>Product Partners</p>
+                  <div class="prod-arrows">
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+                </div> -->
+
+                <div class="slider swiper js-slider">
+                    <div class="swiper-wrapper">
+                       <!-- 4 -->
+                       <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">Audio & Video</p>
+                            <p class="card-prod-heading">Crown Harman</p>
+                            <img src="assets/img/prod-images/audio-video/Crown.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                        
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Audio & Video</p>
+                            <p class="card-prod-heading">Crown Harman</p>
+                            <p class="overlay-slider-text">
+                              Manufacturer of professional audio equipment and solutions.
+                            </p>
+                          </div>
+                       
+                        </div>
+                      </div>
+                      <!-- 1 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">Audio & Video</p>
+                              <p class="card-prod-heading">JBL</p>
+                              <img src="assets/img/prod-images/audio-video/JBL.png " title="techunifi" alt="techunifi" class="card-brand-img">
+                           
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">Audio & Video</p>
+                              <p class="card-prod-heading">JBL</p>
+                              <p class="overlay-slider-text">
+                                Iconic brand known for its high-performance audio equipment and speakers.
+                              </p>
+                            </div>
+                          
+                          </div>
+                        </div>
+                      <!-- 2 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">Audio & Video</p>
+                              <p class="card-prod-heading">Kramer</p>
+                              <img src="assets/img/prod-images/audio-video/Kramer.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                         
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">Audio & Video</p>
+                              <p class="card-prod-heading">Kramer</p>
+                              <p class="overlay-slider-text">
+                                Leading manufacturer of audiovisual solutions for corporate, education, and government markets.
+                              </p>
+                            </div>
+
+                          </div>
+                        </div>
+                      <!-- 3 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">Audio & Video</p>
+                              <p class="card-prod-heading">Bose</p>
+                              <img src="assets/img/prod-images/audio-video/Bose.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                            
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">Audio & Video</p>
+                              <p class="card-prod-heading">Bose</p>
+                              <p class="overlay-slider-text">
+                                Renowned for its high-quality audio systems and speakers.
+                              </p>
+                            </div>
+                          
+                          </div>
+                        </div>
+                     
+                     <!-- 5 -->
+                     <div class="slider__listItem swiper-slide card-overlay-main">
+                      <div class="prod-slide-card">
+                        <div class="card-content">
+                          <p class="card-thumbnail">Audio & Video</p>
+                          <p class="card-prod-heading">Draper</p>
+                          <img src="assets/img/prod-images/audio-video/Draper.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                    
+                        </div>
+                        <div class="slider-overlay">
+                          <p class="card-thumbnail">Audio & Video</p>
+                          <p class="card-prod-heading">Draper</p>
+                          <p class="overlay-slider-text">
+                            Provider of innovative projection screens, window shades, and AV solutions.
+                          </p>
+                        </div>
+                     
+                      </div>
+                    </div>
+                    <!-- 6 -->
+                    <div class="slider__listItem swiper-slide card-overlay-main">
+                      <div class="prod-slide-card">
+
+                        <div class="card-content">
+                          <p class="card-thumbnail">Audio & Video</p>
+                          <p class="card-prod-heading">Harman</p>
+                          <img src="assets/img/prod-images/audio-video/Haram.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                      
+                        </div>
+                        <div class="slider-overlay">
+                          <p class="card-thumbnail">Audio & Video</p>
+                          <p class="card-prod-heading">Harman</p>
+                          <p class="overlay-slider-text">
+                            Leading global provider of connected car technology, audio, and lighting solutions.
+                          </p>
+                        </div>
+
+                      </div>
+                    </div>
+                   <!-- 7 -->
+                   <div class="slider__listItem swiper-slide card-overlay-main">
+                    <div class="prod-slide-card">
+
+                      <div class="card-content">
+                        <p class="card-thumbnail">Audio & Video</p>
+                        <p class="card-prod-heading">YAMAHA</p>
+                        <img src="assets/img/prod-images/audio-video/yamaha.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                    
+                      </div>
+                      <div class="slider-overlay">
+                        <p class="card-thumbnail">Audio & Video</p>
+                        <p class="card-prod-heading">YAMAHA</p>
+                        <p class="overlay-slider-text">
+                          Manufacturer of musical instruments, audio/visual products, and professional audio equipment.
+                        </p>
+                      </div>
+                    
+                    </div>
+                  </div>
+                   <!-- 8 -->
+                   <div class="slider__listItem swiper-slide card-overlay-main">
+                    <div class="prod-slide-card">
+
+                      <div class="card-content">
+                        <p class="card-thumbnail">Audio & Video</p>
+                        <p class="card-prod-heading">SONOS</p>
+                        <img src="assets/img/prod-images/audio-video/sonos.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                    
+                      </div>
+                      <div class="slider-overlay">
+                        <p class="card-thumbnail">Audio & Video</p>
+                        <p class="card-prod-heading">SONOS</p>
+                        <p class="overlay-slider-text">
+                          Pioneer in wireless home audio systems and smart speakers.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                   <!-- 9 -->
+                   <div class="slider__listItem swiper-slide card-overlay-main">
+                    <div class="prod-slide-card">
+                      <div class="card-content">
+                        <p class="card-thumbnail">Audio & Video</p>
+                        <p class="card-prod-heading">JVC</p>
+                        <img src="assets/img/prod-images/audio-video/jvc.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                 
+                      </div>
+                      <div class="slider-overlay">
+                        <p class="card-thumbnail">Audio & Video</p>
+                        <p class="card-prod-heading">JVC</p>
+                        <p class="overlay-slider-text">
+                          Renowned manufacturer of consumer electronics, including cameras and audio equipment.
+                        </p>
+                      </div>
+                    
+                    </div>
+                  </div>
+                   <!-- 10 -->
+                   <div class="slider__listItem swiper-slide card-overlay-main">
+                    <div class="prod-slide-card">
+
+                      <div class="card-content">
+                        <p class="card-thumbnail">Audio & Video</p>
+                        <p class="card-prod-heading">Samsung</p>
+                        <img src="assets/img/prod-images/audio-video/samsung.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                 
+                      </div>
+                      <div class="slider-overlay">
+                        <p class="card-thumbnail">Audio & Video</p>
+                        <p class="card-prod-heading">Samsung</p>
+                        <p class="overlay-slider-text">
+                          Global leader in technology and electronics, offering a wide range of products and services.
+                        </p>
+                      </div>
+                    
+                    </div>
+                  </div>
+                   <!-- 11 -->
+                   <div class="slider__listItem swiper-slide card-overlay-main">
+                    <div class="prod-slide-card">
+                      <div class="card-content">
+                        <p class="card-thumbnail">Audio & Video</p>
+                        <p class="card-prod-heading">Atlona</p>
+                        <img src="assets/img/prod-images/audio-video/atlona.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                    
+                      </div>
+                      <div class="slider-overlay">
+                        <p class="card-thumbnail">Audio & Video</p>
+                        <p class="card-prod-heading">Atlona</p>
+                        <p class="overlay-slider-text">
+                          Provider of AV distribution solutions for residential and commercial applications.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                   <!-- 12 -->
+                   <div class="slider__listItem swiper-slide card-overlay-main">
+                    <div class="prod-slide-card">
+
+                      <div class="card-content">
+                        <p class="card-thumbnail">Audio & Video</p>
+                        <p class="card-prod-heading">RTI</p>
+                        <img src="assets/img/prod-images/audio-video/rti.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                 
+                      </div>  
+                      <div class="slider-overlay">
+                        <p class="card-thumbnail">Audio & Video</p>
+                        <p class="card-prod-heading">RTI</p>
+                        <p class="overlay-slider-text">
+                          Developer of control and automation systems for residential and commercial settings.
+                        </p>
+                      </div>
+
+                    </div>
+                  </div>
+                   <!-- 13 -->
+                   <div class="slider__listItem swiper-slide card-overlay-main">
+                    <div class="prod-slide-card">
+
+                      <div class="card-content">
+                        <p class="card-thumbnail">Audio & Video</p>
+                        <p class="card-prod-heading">LG</p>
+                        <img src="assets/img/prod-images/audio-video/lg.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                      
+                      </div>
+                      <div class="slider-overlay">
+                        <p class="card-thumbnail">Audio & Video</p>
+                        <p class="card-prod-heading">LG</p>
+                        <p class="overlay-slider-text">
+                          Leading global provider of electronics, home appliances, and mobile communications.
+                        </p>
+                      </div>
+                    
+                    </div>
+                  </div>
+
+                    </div>
+                    <div class="swiper-scrollbar"></div>
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+
+              <!--  -->
+              
+              </div>
+
+
+             </div>
 
           <div class="row left-right">
 
             <div class="col-md-2">
               <div class="tab">
-                <br><a href="#audi-brand">Brands</a>
+                <br>
                 <a href="#audi-music">Distributed audio</a>
                 <a href="#screen-audi">Confrence room</a>
                 <a href="#audi-display">Digital Signage</a>
@@ -2177,287 +2524,7 @@ Additionally, we offer an Energy Savings as a Service (ESaaS) program. This prog
        <div class="col-md-10">
            <main>
 
-            <!-- 1 -->
-               <div class="right-content">
-
-
-                <div id="audi-brand" class="id-div"></div>
-                <div class="voltage-brands audi-brand">
-                <!--  -->
-                <div class="submit-head-para">
-                  <div class="prod-heading aos-init">
-                    <h3>Brands</h3>
-                  </div>
-                </div>
-                <!--  -->
-                <div class="container-inner">
-                  <!-- Add Arrows -->
-                  <div class="prod-heading-name">
-                    <p>Product Partners</p>
-                    <div class="prod-arrows">
-                      <div class="swiper-button-next"></div>
-                      <div class="swiper-button-prev"></div>
-                  </div>
-                  </div>
-
-                  <div class="slider swiper js-slider">
-                      <div class="swiper-wrapper">
-                        <!-- 1 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/audio-video/JBL.png " title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Audio & Video</p>
-                                <p class="card-prod-heading">JBL</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Audio & Video</p>
-                                <p class="card-prod-heading">JBL</p>
-                                <p class="overlay-slider-text">
-                                  Iconic brand known for its high-performance audio equipment and speakers.
-                                </p>
-                              </div>
-                            
-                            </div>
-                          </div>
-                        <!-- 2 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/audio-video/Kramer.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Audio & Video</p>
-                                <p class="card-prod-heading">Kramer</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Audio & Video</p>
-                                <p class="card-prod-heading">Kramer</p>
-                                <p class="overlay-slider-text">
-                                  Leading manufacturer of audiovisual solutions for corporate, education, and government markets.
-                                </p>
-                              </div>
-
-                            </div>
-                          </div>
-                        <!-- 3 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/audio-video/Bose.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Audio & Video</p>
-                                <p class="card-prod-heading">Bose</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Audio & Video</p>
-                                <p class="card-prod-heading">Bose</p>
-                                <p class="overlay-slider-text">
-                                  Renowned for its high-quality audio systems and speakers.
-                                </p>
-                              </div>
-                            
-                            </div>
-                          </div>
-                        <!-- 4 -->
-                         <div class="slider__listItem swiper-slide card-overlay-main">
-                          <div class="prod-slide-card">
-
-                            <div class="card-content">
-                              <img src="assets/img/prod-images/audio-video/Crown.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                              <p class="card-thumbnail">Audio & Video</p>
-                              <p class="card-prod-heading">Crown Harman</p>
-                            </div>
-                            <div class="slider-overlay">
-                              <p class="card-thumbnail">Audio & Video</p>
-                              <p class="card-prod-heading">Crown Harman</p>
-                              <p class="overlay-slider-text">
-                                Manufacturer of professional audio equipment and solutions.
-                              </p>
-                            </div>
-                         
-                          </div>
-                        </div>
-                       <!-- 5 -->
-                       <div class="slider__listItem swiper-slide card-overlay-main">
-                        <div class="prod-slide-card">
-                          <div class="card-content">
-                            <img src="assets/img/prod-images/audio-video/Draper.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                            <p class="card-thumbnail">Audio & Video</p>
-                            <p class="card-prod-heading">Draper</p>
-                          </div>
-                          <div class="slider-overlay">
-                            <p class="card-thumbnail">Audio & Video</p>
-                            <p class="card-prod-heading">Draper</p>
-                            <p class="overlay-slider-text">
-                              Provider of innovative projection screens, window shades, and AV solutions.
-                            </p>
-                          </div>
-                       
-                        </div>
-                      </div>
-                      <!-- 6 -->
-                      <div class="slider__listItem swiper-slide card-overlay-main">
-                        <div class="prod-slide-card">
-
-                          <div class="card-content">
-                            <img src="assets/img/prod-images/audio-video/Haram.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                            <p class="card-thumbnail">Audio & Video</p>
-                            <p class="card-prod-heading">Harman</p>
-                          </div>
-                          <div class="slider-overlay">
-                            <p class="card-thumbnail">Audio & Video</p>
-                            <p class="card-prod-heading">Harman</p>
-                            <p class="overlay-slider-text">
-                              Leading global provider of connected car technology, audio, and lighting solutions.
-                            </p>
-                          </div>
-
-                        </div>
-                      </div>
-                     <!-- 7 -->
-                     <div class="slider__listItem swiper-slide card-overlay-main">
-                      <div class="prod-slide-card">
-
-                        <div class="card-content">
-                          <img src="assets/img/prod-images/audio-video/yamaha.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                          <p class="card-thumbnail">Audio & Video</p>
-                          <p class="card-prod-heading">YAMAHA</p>
-                        </div>
-                        <div class="slider-overlay">
-                          <p class="card-thumbnail">Audio & Video</p>
-                          <p class="card-prod-heading">YAMAHA</p>
-                          <p class="overlay-slider-text">
-                            Manufacturer of musical instruments, audio/visual products, and professional audio equipment.
-                          </p>
-                        </div>
-                      
-                      </div>
-                    </div>
-                     <!-- 8 -->
-                     <div class="slider__listItem swiper-slide card-overlay-main">
-                      <div class="prod-slide-card">
-
-                        <div class="card-content">
-                          <img src="assets/img/prod-images/audio-video/sonos.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                          <p class="card-thumbnail">Audio & Video</p>
-                          <p class="card-prod-heading">SONOS</p>
-                        </div>
-                        <div class="slider-overlay">
-                          <p class="card-thumbnail">Audio & Video</p>
-                          <p class="card-prod-heading">SONOS</p>
-                          <p class="overlay-slider-text">
-                            Pioneer in wireless home audio systems and smart speakers.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                     <!-- 9 -->
-                     <div class="slider__listItem swiper-slide card-overlay-main">
-                      <div class="prod-slide-card">
-                        <div class="card-content">
-                          <img src="assets/img/prod-images/audio-video/jvc.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                          <p class="card-thumbnail">Audio & Video</p>
-                          <p class="card-prod-heading">JVC</p>
-                        </div>
-                        <div class="slider-overlay">
-                          <p class="card-thumbnail">Audio & Video</p>
-                          <p class="card-prod-heading">JVC</p>
-                          <p class="overlay-slider-text">
-                            Renowned manufacturer of consumer electronics, including cameras and audio equipment.
-                          </p>
-                        </div>
-                      
-                      </div>
-                    </div>
-                     <!-- 10 -->
-                     <div class="slider__listItem swiper-slide card-overlay-main">
-                      <div class="prod-slide-card">
-
-                        <div class="card-content">
-                          <img src="assets/img/prod-images/audio-video/samsung.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                          <p class="card-thumbnail">Audio & Video</p>
-                          <p class="card-prod-heading">Samsung</p>
-                        </div>
-                        <div class="slider-overlay">
-                          <p class="card-thumbnail">Audio & Video</p>
-                          <p class="card-prod-heading">Samsung</p>
-                          <p class="overlay-slider-text">
-                            Global leader in technology and electronics, offering a wide range of products and services.
-                          </p>
-                        </div>
-                      
-                      </div>
-                    </div>
-                     <!-- 11 -->
-                     <div class="slider__listItem swiper-slide card-overlay-main">
-                      <div class="prod-slide-card">
-                        <div class="card-content">
-                          <img src="assets/img/prod-images/audio-video/atlona.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                          <p class="card-thumbnail">Audio & Video</p>
-                          <p class="card-prod-heading">Atlona</p>
-                        </div>
-                        <div class="slider-overlay">
-                          <p class="card-thumbnail">Audio & Video</p>
-                          <p class="card-prod-heading">Atlona</p>
-                          <p class="overlay-slider-text">
-                            Provider of AV distribution solutions for residential and commercial applications.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                     <!-- 12 -->
-                     <div class="slider__listItem swiper-slide card-overlay-main">
-                      <div class="prod-slide-card">
-
-                        <div class="card-content">
-                          <img src="assets/img/prod-images/audio-video/rti.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                          <p class="card-thumbnail">Audio & Video</p>
-                          <p class="card-prod-heading">RTI</p>
-                        </div>  
-                        <div class="slider-overlay">
-                          <p class="card-thumbnail">Audio & Video</p>
-                          <p class="card-prod-heading">RTI</p>
-                          <p class="overlay-slider-text">
-                            Developer of control and automation systems for residential and commercial settings.
-                          </p>
-                        </div>
-
-                      </div>
-                    </div>
-                     <!-- 13 -->
-                     <div class="slider__listItem swiper-slide card-overlay-main">
-                      <div class="prod-slide-card">
-
-                        <div class="card-content">
-                          <img src="assets/img/prod-images/audio-video/lg.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                          <p class="card-thumbnail">Audio & Video</p>
-                          <p class="card-prod-heading">LG</p>
-                        </div>
-                        <div class="slider-overlay">
-                          <p class="card-thumbnail">Audio & Video</p>
-                          <p class="card-prod-heading">LG</p>
-                          <p class="overlay-slider-text">
-                            Leading global provider of electronics, home appliances, and mobile communications.
-                          </p>
-                        </div>
-                      
-                      </div>
-                    </div>
-
-                      </div>
-                  </div>
-                  <!-- Add Pagination -->
-                  <div class="swiper-pagination"></div>
-              </div>
-
-                <!--  -->
-                
-                </div>
-
-
-               </div>
-       
+          
             <!-- 2 -->
             <div class="right-content">
 
@@ -2603,17 +2670,18 @@ Additionally, we offer an Energy Savings as a Service (ESaaS) program. This prog
                 </div>
   
               </div>
-
+              <br>
             <div class="row left-right">
 
-              <div class="col-md-2">
+              <!-- <div class="col-md-2">
                 <div class="tab">
                   <br><a href="#low-brand">Brands</a>
                   <a href="#low-cabling">Structured Cabling </a><br>
                 </div>
               </div>
-   
-         <div class="col-md-10">
+    -->
+         
+    <div class="col-md-12">
              <main>
                  <div class="right-content">
 
@@ -2621,21 +2689,21 @@ Additionally, we offer an Energy Savings as a Service (ESaaS) program. This prog
                   <div id="low-brand" class="id-div"></div>
                   <div class="voltage-brands low-brand">
                   <!--  -->
-                  <div class="submit-head-para">
+                  <!-- <div class="submit-head-para">
                     <div class="prod-heading aos-init">
                       <h3>Brands</h3>
                     </div>
-                  </div>
+                  </div> -->
                   <!--  -->
                   <div class="container-inner">
                     <!-- Add Arrows -->
-                    <div class="prod-heading-name">
+                    <!-- <div class="prod-heading-name">
                       <p>Product Partners</p>
                       <div class="prod-arrows">
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
                     </div>
-                    </div>
+                    </div> -->
 
                     <div class="slider swiper js-slider">
                         <div class="swiper-wrapper">
@@ -2644,9 +2712,9 @@ Additionally, we offer an Energy Savings as a Service (ESaaS) program. This prog
                               <div class="prod-slide-card">
 
                                 <div class="card-content">
-                                  <img src="assets/img/prod-images/low-voltage/ICC 1.png" title="techunifi" alt="techunifi" class="card-brand-img">
                                   <p class="card-thumbnail">Low Voltage</p>
                                   <p class="card-prod-heading">ICC</p>
+                                  <img src="assets/img/prod-images/low-voltage/ICC 1.png" title="techunifi" alt="techunifi" class="card-brand-img">
                                 </div>
                                 <div class="slider-overlay">
                                   <p class="card-thumbnail">Low Voltage</p>
@@ -2663,9 +2731,10 @@ Additionally, we offer an Energy Savings as a Service (ESaaS) program. This prog
                               <div class="prod-slide-card">
 
                                 <div class="card-content">
-                                  <img src="assets/img/prod-images/low-voltage/He.png" title="techunifi" alt="techunifi" class="card-brand-img">
                                   <p class="card-thumbnail">Low Voltage</p>
                                   <p class="card-prod-heading">Legrand</p>
+                                  <img src="assets/img/prod-images/low-voltage/He.png" title="techunifi" alt="techunifi" class="card-brand-img">
+          
                                 </div>
                                 <div class="slider-overlay">
                                   <p class="card-thumbnail">Low Voltage</p>
@@ -2682,9 +2751,10 @@ Additionally, we offer an Energy Savings as a Service (ESaaS) program. This prog
                               <div class="prod-slide-card">
 
                                 <div class="card-content">
-                                  <img src="assets/img/prod-images/low-voltage/Leviton.png" title="techunifi" alt="techunifi" class="card-brand-img">
                                   <p class="card-thumbnail">Low Voltage</p>
                                   <p class="card-prod-heading">Leviton</p>
+                                  <img src="assets/img/prod-images/low-voltage/Leviton.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                                  
                                 </div>
                                 <div class="slider-overlay">
                                   <p class="card-thumbnail">Low Voltage</p>
@@ -2696,14 +2766,115 @@ Additionally, we offer an Energy Savings as a Service (ESaaS) program. This prog
                               
                               </div>
                             </div>
-                          <!-- 4 -->
+                        <!-- 4 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">Low Voltage</p>
+                              <p class="card-prod-heading">CPI</p>
+                              <img src="assets/img/prod-images/low-voltage/chats-worth.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                              
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">Low Voltage</p>
+                              <p class="card-prod-heading">CPI</p>
+                              <p class="overlay-slider-text">
+                                Manufacturer of IT infrastructure and cable management solutions.
+                              </p>
+                            </div>
+                          
+                          </div>
+                        </div>
+                        <!-- 5 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">Low Voltage</p>
+                              <p class="card-prod-heading">Arlington</p>
+                              <img src="assets/img/prod-images/low-voltage/arlington.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                              
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">Low Voltage</p>
+                              <p class="card-prod-heading">Arlington</p>
+                              <p class="overlay-slider-text">
+                                Provider of electrical and communication products for construction.
+                              </p>
+                            </div>
+                          
+                          </div>
+                        </div>    
+                        <!-- 6 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">Low Voltage</p>
+                              <p class="card-prod-heading">Panduit</p>
+                              <img src="assets/img/prod-images/low-voltage/panduit.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                              
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">Low Voltage</p>
+                              <p class="card-prod-heading">Panduit</p>
+                              <p class="overlay-slider-text">
+                                Innovator in network infrastructure and industrial electrical solutions.
+                              </p>
+                            </div>
+                          
+                          </div>
+                        </div>
+                        <!-- 7 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">Low Voltage</p>
+                              <p class="card-prod-heading">Corning</p>
+                              <img src="assets/img/prod-images/low-voltage/corning.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                              
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">Low Voltage</p>
+                              <p class="card-prod-heading">Corning</p>
+                              <p class="overlay-slider-text">
+                                Leading provider of optical communications and glass solutions.
+                              </p>
+                            </div>
+                          
+                          </div>
+                        </div>
+                        <!-- 8 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">Low Voltage</p>
+                              <p class="card-prod-heading">CommScope</p>
+                              <img src="assets/img/prod-images/low-voltage/commscope.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                              
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">Low Voltage</p>
+                              <p class="card-prod-heading">CommScope</p>
+                              <p class="overlay-slider-text">
+                                Global leader in network infrastructure solutions for connectivity.
+                              </p>
+                            </div>
+                          
+                          </div>
+                        </div>
+                          <!-- 10 -->
                             <div class="slider__listItem swiper-slide card-overlay-main">
                               <div class="prod-slide-card">
 
                                 <div class="card-content">
-                                  <img src="assets/img/prod-images/low-voltage/C@G.png" title="techunifi" alt="techunifi" class="card-brand-img">
                                   <p class="card-thumbnail">Low Voltage</p>
                                   <p class="card-prod-heading">C2G</p>
+                                  <img src="assets/img/prod-images/low-voltage/C@G.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                                 
                                 </div>
                                 <div class="slider-overlay">
                                   <p class="card-thumbnail">Low Voltage</p>
@@ -2734,7 +2905,7 @@ Additionally, we offer an Energy Savings as a Service (ESaaS) program. This prog
                  <div class="right-content">
 
                   <div id="low-cabling" class="id-div"></div>
-                  <div class="voltage-brands low-cabling">
+                  <div class="voltage-brands low-cabling structure">
                   <!--  -->
                   <div class="submit-head-para">
                     <div class="prod-heading aos-init">
@@ -2742,10 +2913,10 @@ Additionally, we offer an Energy Savings as a Service (ESaaS) program. This prog
                     </div>
                     <p class="tabs-para aos-init">
                       Techunifi is renowned for its structured cabling solutions, known for exceptional attention to detail and clarity. Structured cabling is the backbone of your IT infrastructure, providing a standardized method for managing and connecting all your network devices, from data centers to office floors.
-                      <br>Our meticulously organized racks ensure that cables are neatly arranged, making it easy to identify and resolve any issues quickly. This high level of organization minimizes downtime and maximizes efficiency, ensuring your network operates smoothly.
-                      <br>Trust Techunifi for structured cabling that sets the standard in organization, reliability, and performance.
                     </p>
+                    <br>
                     <a href="submit.html" class="sub-Inquiry">Submit an Inquiry</a>
+                    <br>
                     <div class="row low-structure-img">
                       <div class="col-md-4">
                         <img src="assets/img/prod-images/low-voltage/structured/1.sc.png" title="techunifi" alt="banner" class="cloud-img">
@@ -2777,7 +2948,7 @@ Additionally, we offer an Energy Savings as a Service (ESaaS) program. This prog
               <!-- Image Modal -->
            <!-- Modal Container -->
           <div id="image-modal" class="image-modal">
-            <span class="close">&times;</span>
+            <!-- <span class="close">&times;</span> -->
             <img class="modal-content" id="modal-image" title="techunifi" alt="techunifi">
             <div id="caption-image"></div>
           </div>
@@ -2815,12 +2986,226 @@ Additionally, we offer an Energy Savings as a Service (ESaaS) program. This prog
               </div>
 
             </div>
+            <!-- 1 -->
+            <div class="right-content">
+  
+              <!-- <div id="security-brand" class="id-div"></div> -->
+              <div class="voltage-brands security-brand">
+              <!-- <div class="submit-head-para">
+                <div class="prod-heading aos-init">
+                  <h3>Brands</h3>
+                </div>
+              </div> -->
+              <div class="container-inner" style="background-color: #ededed;">
+
+                <!-- <div class="prod-heading-name">
+                  <p>Product Partners</p>
+                  <div class="prod-arrows">
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+                </div> -->
+
+                <div class="slider swiper js-slider">
+                    <div class="swiper-wrapper">
+                     
+                       <!-- 1 -->
+                       <!-- <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <img src="assets/img/prod-images/security/genetec_logo 1.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                            <p class="card-thumbnail">Surveillance Systems</p>
+                            <p class="card-prod-heading">Genetech</p>
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Surveillance Systems</p>
+                            <p class="card-prod-heading">Genetech</p>
+                            <p class="overlay-slider-text">
+                              Provider of advanced security and public safety solutions.
+                            </p>
+                          </div>
+
+                        </div>
+                      </div>   -->
+                      <!-- 1 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">Surveillance Systems</p>
+                              <p class="card-prod-heading">Salient</p>
+                              <img src="assets/img/prod-images/security/salient.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                        
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">Surveillance Systems</p>
+                              <p class="card-prod-heading">Salient</p>
+                              <p class="overlay-slider-text">
+                                Developer of video management software and security solutions.
+                              </p>
+                            </div>
+
+                          </div>
+                        </div>  
+                      <!-- 2 -->
+                      <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">Surveillance Systems</p>
+                            <p class="card-prod-heading">Ring</p>
+                            <img src="assets/img/prod-images/security/ring.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                      
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Surveillance Systems</p>
+                            <p class="card-prod-heading">Ring</p>
+                            <p class="overlay-slider-text">
+                              Creator of innovative home security products, including video doorbells and security cameras.
+                            </p>
+                          </div>
+
+                        </div>
+                      </div>                     
+                       <!-- 3 -->
+                       <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">Surveillance Systems</p>
+                            <p class="card-prod-heading">Viotek</p>
+                            <img src="assets/img/prod-images/security/viotek.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                       
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Surveillance Systems</p>
+                            <p class="card-prod-heading">Viotek</p>
+                            <p class="overlay-slider-text">
+                              Provider of advanced gaming monitors and computer peripherals.
+                            </p>
+                          </div>
+
+                        </div>
+                      </div>
+                       <!-- 4 -->
+                       <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">Surveillance Systems</p>
+                            <p class="card-prod-heading">LTS</p>
+                            <img src="assets/img/prod-images/security/Lts.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                        
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Surveillance Systems</p>
+                            <p class="card-prod-heading">LTS</p>
+                            <p class="overlay-slider-text">
+                              Supplier of video surveillance equipment and security solutions for various industries.
+                            </p>
+                          </div>
+
+                        </div>
+                      </div>  
+                      <!-- 5 -->
+                      <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">Surveillance Systems</p>
+                            <p class="card-prod-heading">Digital Watchdog</p>
+                            <img src="assets/img/prod-images/security/dw.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                       
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Surveillance Systems</p>
+                            <p class="card-prod-heading">Digital Watchdog</p>
+                            <p class="overlay-slider-text">
+                              Manufacturer of high-performance video surveillance solutions.
+                            </p>
+                          </div>
+
+                        </div>
+                      </div>                                   
+                      <!-- 6 -->
+                      <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">Surveillance Systems</p>
+                            <p class="card-prod-heading">Hanwha Vision</p>
+                            <img src="assets/img/prod-images/security/Frame 22791.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                          
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Surveillance Systems</p>
+                            <p class="card-prod-heading">Hanwha Vision</p>
+                            <p class="overlay-slider-text">
+                              Manufacturer of high-quality surveillance cameras and video management systems.
+                            </p>
+                          </div>
+
+                        </div>
+                      </div>
+                      <!-- 7 -->
+                      <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+                          
+                          <div class="card-content">
+                            <p class="card-thumbnail">Surveillance Systems</p>
+                            <p class="card-prod-heading">Dahua</p>
+                            <img src="assets/img/prod-images/security/Ahlua.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                       
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Surveillance Systems</p>
+                            <p class="card-prod-heading">Dahua</p>
+                            <p class="overlay-slider-text">
+                              Trusted manufacturer of cutting-edge video surveillance equipment and solutions.
+                            </p>
+                          </div>
+                        
+                        </div>
+                      </div>
+                       <!-- 8 -->
+                       <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">Surveillance Systems</p>
+                            <p class="card-prod-heading">Hikvision</p>
+                            <img src="assets/img/prod-images/security/Hia vision.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                       
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">Surveillance Systems</p>
+                            <p class="card-prod-heading">Hikvision</p>
+                            <p class="overlay-slider-text">
+                              World's leading provider of innovative security products and solutions.
+                            </p>
+                          </div>
+                        
+                        </div>
+                      </div>
+                    
+                    </div>
+                    <div class="swiper-scrollbar"></div>
+                </div>
+
+                <div class="swiper-pagination"></div>
+            </div>
+
+              </div>
+
+
+             </div>
 
             <div class="row left-right">
 
               <div class="col-md-2">
                 <div class="tab">
-                  <br><a href="#security-brand">Brands</a>
+                  <br>
                   <a href="#security-ip">IP Cameras</a>
                   <a href="#mega-ip">Specialty Cameras</a>
                   <a href="#security-lpr">LPR Cameras</a>
@@ -2831,211 +3216,7 @@ Additionally, we offer an Energy Savings as a Service (ESaaS) program. This prog
          <div class="col-md-10">
              <main>
 
-              <!-- 1 -->
-                 <div class="right-content">
-  
-                  <div id="security-brand" class="id-div"></div>
-                  <div class="voltage-brands security-brand">
-                  <div class="submit-head-para">
-                    <div class="prod-heading aos-init">
-                      <h3>Brands</h3>
-                    </div>
-                  </div>
-                  <div class="container-inner">
-  
-                    <div class="prod-heading-name">
-                      <p>Product Partners</p>
-                      <div class="prod-arrows">
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                    </div>
-                    </div>
-  
-                    <div class="slider swiper js-slider">
-                        <div class="swiper-wrapper">
-                         
-                           <!-- 1 -->
-                           <!-- <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/security/genetec_logo 1.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Surveillance Systems</p>
-                                <p class="card-prod-heading">Genetech</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Surveillance Systems</p>
-                                <p class="card-prod-heading">Genetech</p>
-                                <p class="overlay-slider-text">
-                                  Provider of advanced security and public safety solutions.
-                                </p>
-                              </div>
-
-                            </div>
-                          </div>   -->
-                          <!-- 1 -->
-                            <div class="slider__listItem swiper-slide card-overlay-main">
-                              <div class="prod-slide-card">
-
-                                <div class="card-content">
-                                  <img src="assets/img/prod-images/security/salient.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                  <p class="card-thumbnail">Surveillance Systems</p>
-                                  <p class="card-prod-heading">Salient</p>
-                                </div>
-                                <div class="slider-overlay">
-                                  <p class="card-thumbnail">Surveillance Systems</p>
-                                  <p class="card-prod-heading">Salient</p>
-                                  <p class="overlay-slider-text">
-                                    Developer of video management software and security solutions.
-                                  </p>
-                                </div>
-
-                              </div>
-                            </div>  
-                          <!-- 2 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/security/ring.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Surveillance Systems</p>
-                                <p class="card-prod-heading">Ring</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Surveillance Systems</p>
-                                <p class="card-prod-heading">Ring</p>
-                                <p class="overlay-slider-text">
-                                  Creator of innovative home security products, including video doorbells and security cameras.
-                                </p>
-                              </div>
-
-                            </div>
-                          </div>                     
-                           <!-- 3 -->
-                           <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/security/viotek.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Surveillance Systems</p>
-                                <p class="card-prod-heading">Viotek</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Surveillance Systems</p>
-                                <p class="card-prod-heading">Viotek</p>
-                                <p class="overlay-slider-text">
-                                  Provider of advanced gaming monitors and computer peripherals.
-                                </p>
-                              </div>
-
-                            </div>
-                          </div>
-                           <!-- 4 -->
-                           <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/security/Lts.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Surveillance Systems</p>
-                                <p class="card-prod-heading">LTS</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Surveillance Systems</p>
-                                <p class="card-prod-heading">LTS</p>
-                                <p class="overlay-slider-text">
-                                  Supplier of video surveillance equipment and security solutions for various industries.
-                                </p>
-                              </div>
-
-                            </div>
-                          </div>  
-                          <!-- 5 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/security/dw.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Surveillance Systems</p>
-                                <p class="card-prod-heading">Digital Watchdog</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Surveillance Systems</p>
-                                <p class="card-prod-heading">Digital Watchdog</p>
-                                <p class="overlay-slider-text">
-                                  Manufacturer of high-performance video surveillance solutions.
-                                </p>
-                              </div>
-
-                            </div>
-                          </div>                                   
-                          <!-- 6 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/security/Frame 22791.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Surveillance Systems</p>
-                                <p class="card-prod-heading">Hanwha Vision</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Surveillance Systems</p>
-                                <p class="card-prod-heading">Hanwha Vision</p>
-                                <p class="overlay-slider-text">
-                                  Manufacturer of high-quality surveillance cameras and video management systems.
-                                </p>
-                              </div>
-
-                            </div>
-                          </div>
-                          <!-- 7 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-                              
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/security/Ahlua.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Surveillance Systems</p>
-                                <p class="card-prod-heading">Dahua</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Surveillance Systems</p>
-                                <p class="card-prod-heading">Dahua</p>
-                                <p class="overlay-slider-text">
-                                  Trusted manufacturer of cutting-edge video surveillance equipment and solutions.
-                                </p>
-                              </div>
-                            
-                            </div>
-                          </div>
-                           <!-- 8 -->
-                           <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/security/Hia vision.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">Surveillance Systems</p>
-                                <p class="card-prod-heading">Hikvision</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">Surveillance Systems</p>
-                                <p class="card-prod-heading">Hikvision</p>
-                                <p class="overlay-slider-text">
-                                  World's leading provider of innovative security products and solutions.
-                                </p>
-                              </div>
-                            
-                            </div>
-                          </div>
-                        
-                        </div>
-                    </div>
-  
-                    <div class="swiper-pagination"></div>
-                </div>
-  
-                  </div>
-  
-  
-                 </div>
+              
 
             <!-- 2 -->
             <div class="right-content">
@@ -3661,12 +3842,305 @@ Additionally, we offer an Energy Savings as a Service (ESaaS) program. This prog
                 </div>
   
               </div>
+               <!-- 1 -->
+               <div class="right-content">
+    
+                <!-- <div id="it-brand" class="id-div"></div> -->
+                <div class="voltage-brands">
+                <!-- <div class="submit-head-para">
+                  <div class="prod-heading aos-init">
+                    <h3>Brands</h3>
+                  </div>
+                </div> -->
+                <div class="container-inner" style="background-color: #ededed;">
+
+                  <!-- <div class="prod-heading-name">
+                    <p>Product Partners</p>
+                    <div class="prod-arrows">
+                      <div class="swiper-button-next"></div>
+                      <div class="swiper-button-prev"></div>
+                  </div>
+                  </div> -->
+
+                  <div class="slider swiper js-slider">
+                      <div class="swiper-wrapper">
+                        <!-- 1 -->
+                          <div class="slider__listItem swiper-slide card-overlay-main">
+                            <div class="prod-slide-card">
+
+                              <div class="card-content">
+                                <p class="card-thumbnail">IT Management</p>
+                                <p class="card-prod-heading">Aruba</p>
+                                <img src="assets/img/prod-images/it-management/Aruba.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                            
+                              </div>
+                              <div class="slider-overlay">
+                                <p class="card-thumbnail">IT Management</p>
+                                <p class="card-prod-heading">Aruba</p>
+                                <p class="overlay-slider-text">
+                                  Provider of networking solutions for enterprises and service providers.
+                                </p>
+                              </div>
+
+                            </div>
+                          </div>
+                        <!-- 2 -->
+                          <div class="slider__listItem swiper-slide card-overlay-main">
+                            <div class="prod-slide-card">
+
+                              <div class="card-content">
+                                <p class="card-thumbnail">IT Management</p>
+                                <p class="card-prod-heading">Dell</p>
+                                <img src="assets/img/prod-images/it-management/Dell.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                           
+                              </div>
+                              <div class="slider-overlay">
+                                <p class="card-thumbnail">IT Management</p>
+                                <p class="card-prod-heading">Dell</p>
+                                <p class="overlay-slider-text">
+                                  Global leader in computer technology, offering a wide range of products and services.
+                                </p>
+                              </div>
+                           
+                            </div>
+                          </div>
+                        <!-- 3 -->
+                          <div class="slider__listItem swiper-slide card-overlay-main">
+                            <div class="prod-slide-card">
+
+                              <div class="card-content">
+                                <p class="card-thumbnail">IT Management</p>
+                                <p class="card-prod-heading">Microsoft</p>
+                                <img src="assets/img/prod-images/it-management/Mircosoft.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                             
+                              </div>
+                              <div class="slider-overlay">
+                                <p class="card-thumbnail">IT Management</p>
+                                <p class="card-prod-heading">Microsoft</p>
+                                <p class="overlay-slider-text">
+                                  Technology giant known for its software, hardware, and cloud computing services.
+                                </p>
+                              </div>
+                            
+                            </div>
+                          </div>
+                        <!-- 4 -->
+                          <div class="slider__listItem swiper-slide card-overlay-main">
+                            <div class="prod-slide-card">
+
+                              <div class="card-content">
+                                <p class="card-thumbnail">IT Management</p>
+                                <p class="card-prod-heading">Lenovo</p>
+                                <img src="assets/img/prod-images/it-management/Lenovo.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                             
+                              </div>
+                              <div class="slider-overlay">
+                                <p class="card-thumbnail">IT Management</p>
+                                <p class="card-prod-heading">Lenovo</p>
+                                <p class="overlay-slider-text">
+                                  Leading global provider of personal computers, smartphones, and enterprise solutions.
+                                </p>
+                              </div>
+                            
+                            </div>
+                          </div>
+                        <!-- 5 -->
+                         <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">IT Management</p>
+                              <p class="card-prod-heading">HP</p>
+                              <img src="assets/img/prod-images/it-management/HP.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                         
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">IT Management</p>
+                              <p class="card-prod-heading">HP</p>
+                              <p class="overlay-slider-text">
+                                Renowned manufacturer of computers, printers, and related accessories.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- 6 -->
+                          <div class="slider__listItem swiper-slide card-overlay-main">
+                            <div class="prod-slide-card">
+                              <div class="card-content">
+                                <p class="card-thumbnail">IT Management</p>
+                                <p class="card-prod-heading">Ekahu</p>
+                                <img src="assets/img/prod-images/it-management/ekahau.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                            
+                              </div>
+                              <div class="slider-overlay">
+                                <p class="card-thumbnail">IT Management</p>
+                                <p class="card-prod-heading">Ekahu</p>
+                                <p class="overlay-slider-text">
+                                  Provider of cloud-based Wi-Fi solutions for businesses and service providers.
+                                </p>
+                              </div>
+
+                            </div>
+                          </div>
+                        <!-- 7 -->
+                          <div class="slider__listItem swiper-slide card-overlay-main">
+                            <div class="prod-slide-card">
+
+                              <div class="card-content">
+                                <p class="card-thumbnail">IT Management</p>
+                                <p class="card-prod-heading">Ubiquiti</p>
+                                <img src="assets/img/prod-images/it-management/ubiquiti.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                          
+                              </div>
+                              <div class="slider-overlay">
+                                <p class="card-thumbnail">IT Management</p>
+                                <p class="card-prod-heading">Ubiquiti</p>
+                                <p class="overlay-slider-text">
+                                  Manufacturer of networking technology for enterprise, ISP, and surveillance markets.
+                                </p>
+                              </div>
+
+                            </div>
+                          </div>
+                         <!-- 8 -->
+                         <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">IT Management</p>
+                              <p class="card-prod-heading">IONOS</p>
+                              <img src="assets/img/prod-images/it-management/ionos.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                          
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">IT Management</p>
+                              <p class="card-prod-heading">IONOS</p>
+                              <p class="overlay-slider-text">
+                                Provider of web hosting, cloud infrastructure, and online services for businesses.
+                              </p>
+                            </div>
+                          
+                          </div>
+                        </div>
+                         <!-- 10 -->
+                      <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">IT Management</p>
+                            <p class="card-prod-heading">TP-Link</p>
+                            <img src="assets/img/prod-images/Network/brands/tp-link.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                           
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">IT Management</p>
+                            <p class="card-prod-heading">TP-Link</p>
+                            <p class="overlay-slider-text">
+                              Global provider of reliable networking devices and accessories for home and business.
+                            </p>
+                          </div>
+
+                        </div>
+                      </div>
+                    <!-- 11 -->
+                      <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">IT Management</p>
+                            <p class="card-prod-heading">Omada</p>
+                            <img src="assets/img/prod-images/Network/brands/amada.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                          
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">IT Management</p>
+                            <p class="card-prod-heading">Omada</p>
+                            <p class="overlay-slider-text">
+                              TP-Link's business-oriented cloud-based network management solution.
+                            </p>
+                          </div>
+                       
+                        </div>
+                      </div>
+                    <!-- 12 -->
+                      <div class="slider__listItem swiper-slide card-overlay-main">
+                        <div class="prod-slide-card">
+
+                          <div class="card-content">
+                            <p class="card-thumbnail">IT Management</p>
+                            <p class="card-prod-heading">Logitech</p>
+                            <img src="assets/img/prod-images/Network/brands/logitech.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                         
+                          </div>
+                          <div class="slider-overlay">
+                            <p class="card-thumbnail">IT Management</p>
+                            <p class="card-prod-heading">Logitech</p>
+                            <p class="overlay-slider-text">
+                              Leading manufacturer of computer peripherals, software, and devices that connect people to digital experiences.
+                            </p>
+                          </div>
+                        
+                        </div>
+                      </div>
+                        <!-- 9 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">IT Management</p>
+                              <p class="card-prod-heading">Barracuda</p>
+                              <img src="assets/img/prod-images/it-management/barracuda.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                           
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">IT Management</p>
+                              <p class="card-prod-heading">Barracuda</p>
+                              <p class="overlay-slider-text">
+                                Provider of cloud-enabled security and data protection solutions.
+                              </p>
+                            </div>
+                          
+                          </div>
+                        </div>
+                        <!-- 10 -->
+                        <div class="slider__listItem swiper-slide card-overlay-main">
+                          <div class="prod-slide-card">
+
+                            <div class="card-content">
+                              <p class="card-thumbnail">IT Management</p>
+                              <p class="card-prod-heading">Lavamoon Studios</p>
+                              <img src="assets/img/prod-images/it-management/lavamoon.png" title="techunifi" alt="techunifi" class="card-brand-img">
+                           
+                            </div>
+                            <div class="slider-overlay">
+                              <p class="card-thumbnail">IT Management</p>
+                              <p class="card-prod-heading">Lavamoon Studios</p>
+                              <p class="overlay-slider-text">
+                                Creative studio specializing in innovative digital media, animation, and visual effects.
+                              </p>
+                            </div>
+                          
+                          </div>
+                        </div>
+                      
+
+                      </div>
+                      <div class="swiper-scrollbar"></div>
+                  </div>
+
+                  <div class="swiper-pagination"></div>
+              </div>
+
+                </div>
+
+
+               </div>
 
             <div class="row left-right">
 
               <div class="col-md-2">
                 <div class="tab">
-                  <br><a href="#it-brand">Brands</a>
+                  <br>
                   <a href="#it-cloud">Cloud</a>
                   <a href="#it-network-management">Management</a>
                   <a href="#it-man-partner">IT Partner</a>
@@ -3676,229 +4150,7 @@ Additionally, we offer an Energy Savings as a Service (ESaaS) program. This prog
    
          <div class="col-md-10">
              <main>
-              <!-- 1 -->
-                 <div class="right-content">
-    
-                  <div id="it-brand" class="id-div"></div>
-                  <div class="voltage-brands">
-                  <div class="submit-head-para">
-                    <div class="prod-heading aos-init">
-                      <h3>Brands</h3>
-                    </div>
-                  </div>
-                  <div class="container-inner">
-  
-                    <div class="prod-heading-name">
-                      <p>Product Partners</p>
-                      <div class="prod-arrows">
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                    </div>
-                    </div>
-  
-                    <div class="slider swiper js-slider">
-                        <div class="swiper-wrapper">
-                          <!-- 1 -->
-                            <div class="slider__listItem swiper-slide card-overlay-main">
-                              <div class="prod-slide-card">
-
-                                <div class="card-content">
-                                  <img src="assets/img/prod-images/it-management/Aruba.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                  <p class="card-thumbnail">IT Management</p>
-                                  <p class="card-prod-heading">Aruba</p>
-                                </div>
-                                <div class="slider-overlay">
-                                  <p class="card-thumbnail">IT Management</p>
-                                  <p class="card-prod-heading">Aruba</p>
-                                  <p class="overlay-slider-text">
-                                    Provider of networking solutions for enterprises and service providers.
-                                  </p>
-                                </div>
-
-                              </div>
-                            </div>
-                          <!-- 2 -->
-                            <div class="slider__listItem swiper-slide card-overlay-main">
-                              <div class="prod-slide-card">
-
-                                <div class="card-content">
-                                  <img src="assets/img/prod-images/it-management/Dell.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                  <p class="card-thumbnail">IT Management</p>
-                                  <p class="card-prod-heading">Dell</p>
-                                </div>
-                                <div class="slider-overlay">
-                                  <p class="card-thumbnail">IT Management</p>
-                                  <p class="card-prod-heading">Dell</p>
-                                  <p class="overlay-slider-text">
-                                    Global leader in computer technology, offering a wide range of products and services.
-                                  </p>
-                                </div>
-                             
-                              </div>
-                            </div>
-                          <!-- 3 -->
-                            <div class="slider__listItem swiper-slide card-overlay-main">
-                              <div class="prod-slide-card">
-
-                                <div class="card-content">
-                                  <img src="assets/img/prod-images/it-management/Mircosoft.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                  <p class="card-thumbnail">IT Management</p>
-                                  <p class="card-prod-heading">Microsoft</p>
-                                </div>
-                                <div class="slider-overlay">
-                                  <p class="card-thumbnail">IT Management</p>
-                                  <p class="card-prod-heading">Microsoft</p>
-                                  <p class="overlay-slider-text">
-                                    Technology giant known for its software, hardware, and cloud computing services.
-                                  </p>
-                                </div>
-                              
-                              </div>
-                            </div>
-                          <!-- 4 -->
-                            <div class="slider__listItem swiper-slide card-overlay-main">
-                              <div class="prod-slide-card">
-
-                                <div class="card-content">
-                                  <img src="assets/img/prod-images/it-management/Lenovo.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                  <p class="card-thumbnail">IT Management</p>
-                                  <p class="card-prod-heading">Lenovo</p>
-                                </div>
-                                <div class="slider-overlay">
-                                  <p class="card-thumbnail">IT Management</p>
-                                  <p class="card-prod-heading">Lenovo</p>
-                                  <p class="overlay-slider-text">
-                                    Leading global provider of personal computers, smartphones, and enterprise solutions.
-                                  </p>
-                                </div>
-                              
-                              </div>
-                            </div>
-                          <!-- 5 -->
-                           <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/it-management/HP.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">IT Management</p>
-                                <p class="card-prod-heading">HP</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">IT Management</p>
-                                <p class="card-prod-heading">HP</p>
-                                <p class="overlay-slider-text">
-                                  Renowned manufacturer of computers, printers, and related accessories.
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          <!-- 6 -->
-                            <div class="slider__listItem swiper-slide card-overlay-main">
-                              <div class="prod-slide-card">
-                                <div class="card-content">
-                                  <img src="assets/img/prod-images/it-management/ekahau.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                  <p class="card-thumbnail">IT Management</p>
-                                  <p class="card-prod-heading">Ekahu</p>
-                                </div>
-                                <div class="slider-overlay">
-                                  <p class="card-thumbnail">IT Management</p>
-                                  <p class="card-prod-heading">Ekahu</p>
-                                  <p class="overlay-slider-text">
-                                    Provider of cloud-based Wi-Fi solutions for businesses and service providers.
-                                  </p>
-                                </div>
-
-                              </div>
-                            </div>
-                          <!-- 7 -->
-                            <div class="slider__listItem swiper-slide card-overlay-main">
-                              <div class="prod-slide-card">
-
-                                <div class="card-content">
-                                  <img src="assets/img/prod-images/it-management/ubiquiti.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                  <p class="card-thumbnail">IT Management</p>
-                                  <p class="card-prod-heading">Ubiquiti</p>
-                                </div>
-                                <div class="slider-overlay">
-                                  <p class="card-thumbnail">IT Management</p>
-                                  <p class="card-prod-heading">Ubiquiti</p>
-                                  <p class="overlay-slider-text">
-                                    Manufacturer of networking technology for enterprise, ISP, and surveillance markets.
-                                  </p>
-                                </div>
-
-                              </div>
-                            </div>
-                           <!-- 8 -->
-                           <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/it-management/ionos.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">IT Management</p>
-                                <p class="card-prod-heading">IONOS</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">IT Management</p>
-                                <p class="card-prod-heading">IONOS</p>
-                                <p class="overlay-slider-text">
-                                  Provider of web hosting, cloud infrastructure, and online services for businesses.
-                                </p>
-                              </div>
-                            
-                            </div>
-                          </div>
-                          <!-- 9 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/it-management/barracuda.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">IT Management</p>
-                                <p class="card-prod-heading">Barracuda</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">IT Management</p>
-                                <p class="card-prod-heading">Barracuda</p>
-                                <p class="overlay-slider-text">
-                                  Provider of cloud-enabled security and data protection solutions.
-                                </p>
-                              </div>
-                            
-                            </div>
-                          </div>
-                          <!-- 10 -->
-                          <div class="slider__listItem swiper-slide card-overlay-main">
-                            <div class="prod-slide-card">
-
-                              <div class="card-content">
-                                <img src="assets/img/prod-images/it-management/lavamoon.png" title="techunifi" alt="techunifi" class="card-brand-img">
-                                <p class="card-thumbnail">IT Management</p>
-                                <p class="card-prod-heading">Lavamoon Studios</p>
-                              </div>
-                              <div class="slider-overlay">
-                                <p class="card-thumbnail">IT Management</p>
-                                <p class="card-prod-heading">Lavamoon Studios</p>
-                                <p class="overlay-slider-text">
-                                  Creative studio specializing in innovative digital media, animation, and visual effects.
-                                </p>
-                              </div>
-                            
-                            </div>
-                          </div>
-                        
-
-                        </div>
-                    </div>
-  
-                    <div class="swiper-pagination"></div>
-                </div>
-  
-                  </div>
-  
-  
-                 </div>
-         
+             
                  <!-- 2 -->
              <div class="right-content">
 
