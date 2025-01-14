@@ -84,20 +84,13 @@ function gtag(){dataLayer.push(arguments);}
 <body class="submitPage" id="submit-captcha">
     
    <!-- ======= Header ======= -->
+ 
    <header id="nav-menu" class="header-nav" aria-label="navigation bar">
     <div class="container">
       <div class="nav-start">
         <a class="logo" href="https://www.techunifi.com/">
           <img src="../assets/img/logo.png" title="techunifi" alt="Logo" />
         </a>
-
-        <div class="nav-end">
-          <a class="nav-link raise-btn" href="../submit.html" onclick="toggleUnderline(event)">Submit A Ticket</a>
-          <button id="hamburger" aria-label="hamburger" aria-haspopup="true" aria-expanded="false">
-            <i class="bx bx-menu" aria-hidden="true"></i>
-          </button>
-        </div>
-
         <nav class="menu">
           <ul class="menu-bar">
             <li><a class="nav-link services" href="https://www.techunifi.com/#landing-services" onclick="toggleUnderline(event)">Services</a></li>
@@ -105,14 +98,32 @@ function gtag(){dataLayer.push(arguments);}
             <li><a class="nav-link menu-products" href="../products.html" onclick="toggleUnderline(event)">Products</a></li>
             <li><a class="nav-link menu-about" href="../about.html" onclick="toggleUnderline(event)">About Us</a></li>
             <li><a class="nav-link menu-contact" href="https://www.techunifi.com/#contact" onclick="toggleUnderline(event)">Contact Us</a></li>
-            <li><a class="nav-link raise-btn" href="../submit.html" onclick="toggleUnderline(event)">Submit A Ticket</a></li>
-            
           </ul>
         </nav>
       </div>
   
+      
+    <div class="nav-end">
+      <a class="nav-link raise-btn" href="../submit.html" onclick="toggleUnderline(event)" style="margin: 0 10px;">
+        <img src="../assets/img/submit_icon.svg" alt="techunifi" title="Submit">
+        <span>Submit A Ticket</span>
+      </a>
+      <!-- <a class="nav-link search-site mobile-search" href="javascript:void(0)" onclick="toggleModal()">
+        <img src="assets/img/search-icon.svg" alt="techunifi" title="Search">
+        <span>Search</span>
+      </a> -->
+      <a class="nav-link profile-icon" href="https://connect.ebizcharge.net/(S(nltki3tr3mxc3a0ya4rsesky))/EbizLogin.aspx?ReturnUrl=%2fTechunifi" target="_blank" onclick="toggleUnderline(event)">
+        <img src="../assets/img/account_circle.svg" alt="techunifi" title="Login">
+        <span>Login  <i style="padding: 0 5px;">&gt</i></span>
+      </a>
+      <button id="hamburger" aria-label="hamburger" aria-haspopup="true" aria-expanded="false">
+        <i class="bx bx-menu" aria-hidden="true"></i>
+      </button>
+    </div>
+
     </div>
   </header>
+  
   <!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
