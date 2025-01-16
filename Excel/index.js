@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const { google } = require('googleapis');
 const formidable = require('formidable');
+const fs = require('fs');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -53,10 +55,15 @@ const appendToSheet = async (spreadsheetId, data) => {
 };
 
 // API Endpoint to handle form submission
+const uploadDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
+}
+
 app.post('/submit-timesheet', (req, res) => {
   const form = new formidable.IncomingForm();
-  form.uploadDir = './uploads'; // Temporary upload directory
-  form.keepExtensions = true; // Retain file extensions
+  form.uploadDir = uploadDir; // Ensure this directory exists
+  form.keepExtensions = true;
 
   form.parse(req, async (err, fields, files) => {
     if (err) {
@@ -64,16 +71,18 @@ app.post('/submit-timesheet', (req, res) => {
       return res.status(500).json({ error: 'Failed to process form' });
     }
 
-    const { userName, propertyName, description, date, travelHours, laborHours, timeIn, timeOut, receipt } = fields;
-
-    // Validate fields
-    if (!userName || !propertyName || !description || !date || !travelHours || !laborHours || !timeIn || !timeOut) {
-      return res.status(400).json({ error: 'Required fields are missing' });
-    }
-
+    // Sanitize file name
     let fileURL = null;
     if (files.fileAttach) {
-      fileURL = `https://example.com/uploads/${files.fileAttach.newFilename}`; // Replace with actual public URL logic
+      const filePath = path.join(uploadDir, sanitizeFileName(files.fileAttach.newFilename));
+      fs.renameSync(files.fileAttach.filepath, filePath);
+      fileURL = `https://example.com/uploads/${path.basename(filePath)}`; // Replace with actual public URL logic
+    }
+
+    const { userName, propertyName, description, date, travelHours, laborHours, timeIn, timeOut, receipt } = fields;
+
+    if (!userName || !propertyName || !description || !date || !travelHours || !laborHours || !timeIn || !timeOut) {
+      return res.status(400).json({ error: 'Required fields are missing' });
     }
 
     if (receipt && !fileURL) {
@@ -82,7 +91,6 @@ app.post('/submit-timesheet', (req, res) => {
 
     const data = [userName, propertyName, description, date, travelHours, laborHours, timeIn, timeOut, receipt, fileURL];
 
-    // Append to Google Sheets (your existing logic)
     try {
       await appendToSheet(SPREADSHEET_ID, data);
       res.json({ message: 'Form submitted successfully!' });
@@ -92,6 +100,10 @@ app.post('/submit-timesheet', (req, res) => {
     }
   });
 });
+
+function sanitizeFileName(filename) {
+  return filename.replace(/[^a-zA-Z0-9.\-_]/g, '_');
+}
 
 // Preflight OPTIONS handling (optional but recommended)
 app.options('/submit-timesheet', cors());
