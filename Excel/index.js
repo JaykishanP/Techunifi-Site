@@ -110,13 +110,13 @@ app.post('/submit-timesheet', async (req, res) => {
 
   try {
 
-    const { userName, propertyName, description, date, travelHours, laborHours, timeIn, timeOut, receipt, fileAttach } = req.body;
+    const { userName, propertyName, description, date, travelHours, laborHours, timeIn, timeOut} = req.body;
 
 
 
     // Input validation
 
-    if (!userName || !propertyName || !description || !date || !travelHours || !laborHours || !timeIn || !timeOut || !receipt || !fileAttach) {
+    if (!userName || !propertyName || !description || !date || !travelHours || !laborHours || !timeIn || !timeOut) {
 
       return res.status(400).json({ error: 'All fields are required' });
 

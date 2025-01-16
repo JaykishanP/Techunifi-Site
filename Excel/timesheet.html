@@ -444,11 +444,7 @@ form.addEventListener('submit', async (event) => {
 
     travelHours: form.travelHours.value,
 
-    laborHours: form.laborHours.value,
-
-    receipt: form.receipt.value,
-
-    fileAttach: form.fileAttach.value
+    laborHours: form.laborHours.value
 
   };
 
@@ -542,11 +538,7 @@ function generatePDF(data) {
 
     ['Time In', data.timeIn],
 
-    ['Time Out', data.timeOut],
-
-    ['Receipt', data.receipt],
-
-    ['File', data.fileAttach]
+    ['Time Out', data.timeOut]
 
   ];
 
