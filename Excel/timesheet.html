@@ -415,31 +415,37 @@ If you need help, message or call me at <a href="tel:336-601-6502" style="paddin
 <script>
   const form = document.getElementById('timesheet-form');
 
-form.addEventListener('submit', async (event) => {
+  form.addEventListener('submit', async (event) => {
   event.preventDefault(); // Prevent default form submission
 
   // Collect form data
-  const formData = {
-    userName: form.userName.value,
-    propertyName: form.propertyName.value,
-    description: form.description.value,
-    timeIn: form.timeIn.value,
-    timeOut: form.timeOut.value,
-    date: form.date.value,
-    travelHours: form.travelHours.value,
-    laborHours: form.laborHours.value,
-    receipt: form.receipt.value,
-    fileAttach: form.fileAttach.value
-  };
+  const receipt = form.receipt.value;
+  const fileAttach = form.fileAttach.files[0];
+
+  if (receipt && !fileAttach) {
+    alert('Please attach a file for the receipt.');
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('userName', form.userName.value);
+  formData.append('propertyName', form.propertyName.value);
+  formData.append('description', form.description.value);
+  formData.append('timeIn', form.timeIn.value);
+  formData.append('timeOut', form.timeOut.value);
+  formData.append('date', form.date.value);
+  formData.append('travelHours', form.travelHours.value);
+  formData.append('laborHours', form.laborHours.value);
+  if (receipt) {
+    formData.append('receipt', receipt);
+    formData.append('fileAttach', fileAttach);
+  }
 
   try {
     // Send data to backend API
     const response = await fetch('https://test-site-techunifi-q0im.onrender.com/submit-timesheet', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
+      body: formData,
     });
 
     if (response.ok) {
@@ -454,10 +460,8 @@ form.addEventListener('submit', async (event) => {
     console.error('Error:', error);
     alert('Failed to submit form.');
   }
-
-  // Optionally, you can still generate the PDF after submitting the form to the backend
-  generatePDF(formData);
 });
+
 
 function generatePDF(data) {
   const { jsPDF } = window.jspdf;

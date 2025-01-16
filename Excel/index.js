@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { google } = require('googleapis');
+const formidable = require('formidable');
 require('dotenv').config();
 
 const app = express();
@@ -52,25 +53,44 @@ const appendToSheet = async (spreadsheetId, data) => {
 };
 
 // API Endpoint to handle form submission
-app.post('/submit-timesheet', async (req, res) => {
-  try {
-    const { userName, propertyName, description, date, travelHours, laborHours, timeIn, timeOut, receipt, fileAttach } = req.body;
+app.post('/submit-timesheet', (req, res) => {
+  const form = new formidable.IncomingForm();
+  form.uploadDir = './uploads'; // Temporary upload directory
+  form.keepExtensions = true; // Retain file extensions
 
-    // Input validation
-    if (!userName || !propertyName || !description || !date || !travelHours || !laborHours || !timeIn || !timeOut || !receipt || !fileAttach) {
-      return res.status(400).json({ error: 'All fields are required' });
+  form.parse(req, async (err, fields, files) => {
+    if (err) {
+      console.error('Form parsing failed:', err);
+      return res.status(500).json({ error: 'Failed to process form' });
     }
 
-    const data = [userName, propertyName, description, date, travelHours, laborHours, timeIn, timeOut];
+    const { userName, propertyName, description, date, travelHours, laborHours, timeIn, timeOut, receipt } = fields;
 
-    // Append data to Google Sheet
-    await appendToSheet(SPREADSHEET_ID, data);
+    // Validate fields
+    if (!userName || !propertyName || !description || !date || !travelHours || !laborHours || !timeIn || !timeOut) {
+      return res.status(400).json({ error: 'Required fields are missing' });
+    }
 
-    res.json({ message: 'Form submitted successfully!' });
-  } catch (error) {
-    console.error('Error:', error.message);
-    res.status(500).json({ error: error.message });
-  }
+    let fileURL = null;
+    if (files.fileAttach) {
+      fileURL = `https://example.com/uploads/${files.fileAttach.newFilename}`; // Replace with actual public URL logic
+    }
+
+    if (receipt && !fileURL) {
+      return res.status(400).json({ error: 'Receipt file is required when receipt amount is provided' });
+    }
+
+    const data = [userName, propertyName, description, date, travelHours, laborHours, timeIn, timeOut, receipt, fileURL];
+
+    // Append to Google Sheets (your existing logic)
+    try {
+      await appendToSheet(SPREADSHEET_ID, data);
+      res.json({ message: 'Form submitted successfully!' });
+    } catch (error) {
+      console.error('Error:', error.message);
+      res.status(500).json({ error: error.message });
+    }
+  });
 });
 
 // Preflight OPTIONS handling (optional but recommended)
