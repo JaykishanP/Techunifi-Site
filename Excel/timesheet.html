@@ -104,17 +104,17 @@ function gtag(){dataLayer.push(arguments);}
   
       
     <div class="nav-end">
-      <a class="nav-link raise-btn" href="../submit.html" onclick="toggleUnderline(event)" style="margin: 0 10px;">
+      <a class="nav-link raise-btn" href="submit.html" onclick="toggleUnderline(event)">
         <img src="../assets/img/submit_icon.svg" alt="techunifi" title="Submit">
         <span>Submit A Ticket</span>
       </a>
-      <!-- <a class="nav-link search-site mobile-search" href="javascript:void(0)" onclick="toggleModal()">
-        <img src="assets/img/search-icon.svg" alt="techunifi" title="Search">
+      <a class="nav-link search-site mobile-search" href="javascript:void(0)" onclick="toggleModal()">
+        <img src="../assets/img/search-icon.svg" alt="techunifi" title="Search">
         <span>Search</span>
-      </a> -->
+      </a>
       <a class="nav-link profile-icon" href="https://connect.ebizcharge.net/(S(nltki3tr3mxc3a0ya4rsesky))/EbizLogin.aspx?ReturnUrl=%2fTechunifi" target="_blank" onclick="toggleUnderline(event)">
         <img src="../assets/img/account_circle.svg" alt="techunifi" title="Login">
-        <span>Login  <i style="padding: 0 5px;">&gt</i></span>
+        <span>Login<img src="../assets/img/login_arrow.svg" alt="techunifi" title="Login"></span>
       </a>
       <button id="hamburger" aria-label="hamburger" aria-haspopup="true" aria-expanded="false">
         <i class="bx bx-menu" aria-hidden="true"></i>
@@ -123,6 +123,7 @@ function gtag(){dataLayer.push(arguments);}
 
     </div>
   </header>
+  
   
   <!-- End Header -->
 
@@ -198,6 +199,17 @@ If you need help, message or call me at <a href="tel:336-601-6502" style="paddin
                                     <div class="col-md-12">
                                       <label for="description">Description</label>
                                       <textarea id="description" name="description" rows="7" placeholder="Enter Work Details" required></textarea>
+                                    </div>
+                                  </div>
+
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                      <label for="receipt">Receipt</label>
+                                      <input id="receipt" placeholder="$4.32" name="receipt" size="20" type="number"/>
+                                    </div>
+                                    <div class="col-md-6">
+                                      <label for="fileAttach">Attach Image of Receipt</label>
+                                      <input id="fileAttach" placeholder="4" name="fileAttach" size="20" type="file"/>
                                     </div>
                                   </div>
 
@@ -415,7 +427,9 @@ form.addEventListener('submit', async (event) => {
     timeOut: form.timeOut.value,
     date: form.date.value,
     travelHours: form.travelHours.value,
-    laborHours: form.laborHours.value
+    laborHours: form.laborHours.value,
+    receipt: form.receipt.value,
+    fileAttach: form.fileAttach.value
   };
 
   try {
@@ -463,6 +477,8 @@ function generatePDF(data) {
     ['Labor Hours', data.laborHours],
     ['Time In', data.timeIn],
     ['Time Out', data.timeOut],
+    ['Receipt', data.receipt],
+    ['File', data.fileAttach]
   ];
 
   // Add table using autoTable plugin
