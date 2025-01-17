@@ -42,12 +42,14 @@ const SHEET_NAME = 'Timesheet';
 // Function to append data to Google Sheet
 const appendToSheet = async (spreadsheetId, data) => {
   try {
-    await sheets.spreadsheets.values.append({
+    console.log('Appending data:', data); // Log data being appended
+    const response = await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: `${SHEET_NAME}!A:J`, // Adjusted range to include additional columns if needed
+      range: `${SHEET_NAME}!A:J`, // Adjusted range
       valueInputOption: 'USER_ENTERED',
       resource: { values: [data] },
     });
+    console.log('Append response:', response.data); // Log the response
     console.log('Data appended successfully!');
   } catch (error) {
     console.error('Error appending data to Google Sheet:', error.response?.data || error.message);
