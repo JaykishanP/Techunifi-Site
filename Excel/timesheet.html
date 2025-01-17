@@ -306,8 +306,8 @@ If you need help, message or call me at <a href="tel:336-601-6502" style="paddin
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Edit Form</button>
-        <!-- <button type="button" id="confirmSubmit" class="btn btn-primary">Confirm & Submit</button> -->
-        <input type="submit" id="confirmSubmit" value="Confirm & Submit">
+        <button type="button" id="confirmSubmit" class="btn btn-primary">Confirm & Submit</button>
+        <!-- <input type="submit" id="confirmSubmit" value="Confirm & Submit"> -->
       </div>
     </div>
   </div>
@@ -454,162 +454,187 @@ If you need help, message or call me at <a href="tel:336-601-6502" style="paddin
   <script src="../assets/js/main.js"></script>
    
   <script>
-    const form = document.getElementById('timesheet-form');
-    const reviewDetails = document.getElementById('reviewDetails');
-  
-    // Mapping field keys to their labels
-    const fieldLabels = {
-      userName: 'Your Name',
-      propertyName: 'Property Name',
-      description: 'Description',
-      timeIn: 'Time In',
-      timeOut: 'Time Out',
-      date: 'Date',
-      travelHours: 'Total Travel Hours',
-      laborHours: 'Total Labor Hours',
-      receipt: 'Receipt Amount',
-      fileAttach: 'Attached File',
-    };
-  
-    let formData = {};
-  
-    form.addEventListener('submit', (event) => {
-      event.preventDefault(); // Prevent form submission
-  
-      // Check ReCaptcha validation
-      const recaptchaResponse = grecaptcha.getResponse();
-      if (!recaptchaResponse) {
-        alert('Please complete the ReCaptcha.');
-        return;
-      }
-  
-      // Collect form data
-      formData = {
-        userName: form.userName.value.trim(),
-        propertyName: form.propertyName.value.trim(),
-        description: form.description.value.trim(),
-        timeIn: form.timeIn.value.trim(),
-        timeOut: form.timeOut.value.trim(),
-        date: form.date.value,
-        travelHours: form.travelHours.value.trim(),
-        laborHours: form.laborHours.value.trim(),
-        receipt: form.receipt.value.trim(),
-        fileAttach: form.fileAttach.files[0]?.name || '',
-      };
-  
-      // Validate form data
-      const validationError = validateForm(formData);
-      if (validationError) {
-        alert(validationError);
-        return;
-      }
-  
-      // Populate review modal with field labels and values
-      reviewDetails.innerHTML = Object.entries(formData)
-        .map(
-          ([key, value]) => `
-          <div class="list-group-item d-flex justify-content-between align-items-center">
-            <strong>${fieldLabels[key]}</strong>
-            <span>${value || 'N/A'}</span>
-            <button class="btn btn-link p-0" onclick="editField('${key}')">Edit</button>
-          </div>
-        `
-        )
-        .join('');
-  
-      // Show the Bootstrap modal
-      const reviewModal = new bootstrap.Modal(document.getElementById('reviewModal'));
-      reviewModal.show();
+
+const form = document.getElementById('timesheet-form');
+const reviewDetails = document.getElementById('reviewDetails');
+
+// Mapping field keys to their labels
+const fieldLabels = {
+  userName: 'Your Name',
+  propertyName: 'Property Name',
+  description: 'Description',
+  timeIn: 'Time In',
+  timeOut: 'Time Out',
+  date: 'Date',
+  travelHours: 'Total Travel Hours',
+  laborHours: 'Total Labor Hours',
+  receipt: 'Receipt Amount',
+  fileAttach: 'Attached File',
+};
+
+let formData = {};
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault(); // Prevent form submission
+
+  // Check ReCaptcha validation
+  const recaptchaResponse = grecaptcha.getResponse();
+  if (!recaptchaResponse) {
+    alert('Please complete the ReCaptcha.');
+    return;
+  }
+
+  // Collect form data
+  formData = {
+    userName: form.userName.value.trim(),
+    propertyName: form.propertyName.value.trim(),
+    description: form.description.value.trim(),
+    timeIn: form.timeIn.value.trim(),
+    timeOut: form.timeOut.value.trim(),
+    date: form.date.value,
+    travelHours: form.travelHours.value.trim(),
+    laborHours: form.laborHours.value.trim(),
+    receipt: form.receipt.value.trim(),
+    fileAttach: form.fileAttach.files[0]?.name || '',
+  };
+
+  // Validate form data
+  const validationError = validateForm(formData);
+  if (validationError) {
+    alert(validationError);
+    return;
+  }
+
+  // Populate review modal with field labels and values
+  reviewDetails.innerHTML = Object.entries(formData)
+    .map(
+      ([key, value]) => `
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <strong>${fieldLabels[key]}</strong>
+        <span>${value || 'N/A'}</span>
+        <button class="btn btn-link p-0" onclick="editField('${key}')">Edit</button>
+      </div>
+    `
+    )
+    .join('');
+
+  // Show the Bootstrap modal
+  const reviewModal = new bootstrap.Modal(document.getElementById('reviewModal'));
+  reviewModal.show();
+});
+
+function validateForm(data) {
+  const mandatoryFields = [
+    'userName',
+    'propertyName',
+    'description',
+    'timeIn',
+    'timeOut',
+    'date',
+    'travelHours',
+    'laborHours',
+  ];
+
+  for (const field of mandatoryFields) {
+    if (!data[field]) {
+      return `Please fill out the ${fieldLabels[field]} field.`;
+    }
+  }
+
+  if (data.receipt && !data.fileAttach) {
+    return 'If Receipt Amount is provided, you must attach a file.';
+  }
+
+  return null; // No errors
+}
+
+function editField(field) {
+  const input = document.getElementById(field);
+  if (input) input.focus();
+  const reviewModal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
+  reviewModal.hide(); // Close modal to allow form editing
+}
+
+document.getElementById('confirmSubmit').addEventListener('click', async () => {
+  const reviewModal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
+  reviewModal.hide(); // Close the review modal
+
+  console.log('Form data:', formData); // Log form data before submission
+
+  try {
+    // Send data to the server via a POST request
+    const response = await fetch('/submit-timesheet', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
     });
-  
-    function validateForm(data) {
-      const mandatoryFields = [
-        'userName',
-        'propertyName',
-        'description',
-        'timeIn',
-        'timeOut',
-        'date',
-        'travelHours',
-        'laborHours',
-      ];
-  
-      for (const field of mandatoryFields) {
-        if (!data[field]) {
-          return `Please fill out the ${fieldLabels[field]} field.`;
-        }
-      }
-  
-      if (data.receipt && !data.fileAttach) {
-        return 'If Receipt Amount is provided, you must attach a file.';
-      }
-  
-      return null; // No errors
-    }
-  
-    function editField(field) {
-      const input = document.getElementById(field);
-      if (input) input.focus();
-      const reviewModal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
-      reviewModal.hide(); // Close modal to allow form editing
-    }
-  
-    document.getElementById('confirmSubmit').addEventListener('click', () => {
-      const reviewModal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
-      reviewModal.hide(); // Close the review modal
-  
-      generatePDF(formData); // Generate PDF of form data
+
+    // Parse the response as JSON
+    const result = await response.json();
+    console.log('Server response:', result); // Log response from the server
+
+    // Check if the server response is successful
+    if (response.ok) {
       alert('Form submitted successfully! Downloading PDF...');
+      generatePDF(formData); // Generate and download PDF
       form.reset(); // Reset the form
-    });
-  
-    function generatePDF(data) {
-      const { jsPDF } = window.jspdf;
-  
-      if (!jsPDF) {
-        console.error('jsPDF library is not loaded.');
-        alert('Unable to generate PDF. Please try again later.');
-        return;
-      }
-  
-      const doc = new jsPDF();
-  
-      // Add header
-      doc.setFontSize(16);
-      doc.text('Contractor Timesheet', 10, 10);
-  
-      // Define table data
-      const tableData = [
-        ['Name', data.userName],
-        ['Property Name', data.propertyName],
-        ['Description', data.description],
-        ['Date', data.date],
-        ['Travel Hours', data.travelHours],
-        ['Labor Hours', data.laborHours],
-        ['Time In', data.timeIn],
-        ['Time Out', data.timeOut],
-        ['Receipt Amount', data.receipt],
-      ];
-  
-      // Add table using autoTable plugin
-      if (doc.autoTable) {
-        doc.autoTable({
-          startY: 20,
-          head: [['Field', 'Details']],
-          body: tableData,
-        });
-      } else {
-        console.error('autoTable plugin is not available.');
-        alert('PDF generation failed due to missing plugin.');
-        return;
-      }
-  
-      // Save PDF with a date-based filename
-      const formattedDate = data.date.replace(/-/g, '_');
-      doc.save(`timesheet_${formattedDate}.pdf`);
+    } else {
+      alert(`Error: ${result.error || 'Something went wrong.'}`);
     }
+  } catch (error) {
+    console.error('Submission error:', error);
+    alert('An error occurred while submitting the form.');
+  }
+});
+
+function generatePDF(data) {
+  const { jsPDF } = window.jspdf;
+
+  if (!jsPDF) {
+    console.error('jsPDF library is not loaded.');
+    alert('Unable to generate PDF. Please try again later.');
+    return;
+  }
+
+  const doc = new jsPDF();
+
+  // Add header
+  doc.setFontSize(16);
+  doc.text('Contractor Timesheet', 10, 10);
+
+  // Define table data
+  const tableData = [
+    ['Name', data.userName],
+    ['Property Name', data.propertyName],
+    ['Description', data.description],
+    ['Date', data.date],
+    ['Travel Hours', data.travelHours],
+    ['Labor Hours', data.laborHours],
+    ['Time In', data.timeIn],
+    ['Time Out', data.timeOut],
+    ['Receipt Amount', data.receipt],
+  ];
+
+  // Add table using autoTable plugin
+  if (doc.autoTable) {
+    doc.autoTable({
+      startY: 20,
+      head: [['Field', 'Details']],
+      body: tableData,
+    });
+  } else {
+    console.error('autoTable plugin is not available.');
+    alert('PDF generation failed due to missing plugin.');
+    return;
+  }
+
+  // Save PDF with a date-based filename
+  const formattedDate = data.date.replace(/-/g, '_');
+  doc.save(`timesheet_${formattedDate}.pdf`);
+}
+
+
   </script>
-  
 
 </body>
 </html>

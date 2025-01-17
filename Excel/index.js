@@ -42,20 +42,21 @@ const SHEET_NAME = 'Timesheet';
 // Function to append data to Google Sheet
 const appendToSheet = async (spreadsheetId, data) => {
   try {
-    console.log('Appending data:', data); // Log data being appended
+    console.log('Data to append:', data); // Log the incoming data
     const response = await sheets.spreadsheets.values.append({
       spreadsheetId,
       range: `${SHEET_NAME}!A:J`, // Adjusted range
       valueInputOption: 'USER_ENTERED',
       resource: { values: [data] },
     });
-    console.log('Append response:', response.data); // Log the response
+    console.log('Append response:', response.data); // Log response from Sheets API
     console.log('Data appended successfully!');
   } catch (error) {
     console.error('Error appending data to Google Sheet:', error.response?.data || error.message);
     throw new Error('Failed to append data to Google Sheet');
   }
 };
+
 
 // Function to upload a file to Google Drive
 const uploadFileToDrive = async (fileName, base64File, mimeType) => {
