@@ -1,84 +1,48 @@
 const express = require('express');
-
 const cors = require('cors');
-
 const { google } = require('googleapis');
-
 require('dotenv').config();
 
-
-
 const app = express();
-
 const PORT = process.env.PORT || 3000;
 
-
-
 // Middleware
-
 const allowedOrigins = ['https://www.techunifi.com']; // Add allowed frontend origins here
 
-
-
-app.use(cors({
-
-  origin: (origin, callback) => {
-
-    if (allowedOrigins.includes(origin) || !origin) {
-
-      callback(null, true);
-
-    } else {
-
-      callback(new Error('CORS policy: Origin not allowed'));
-
-    }
-
-  },
-
-  methods: ['GET', 'POST', 'OPTIONS'],
-
-  allowedHeaders: ['Content-Type'],
-
-}));
-
-
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (allowedOrigins.includes(origin) || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error('CORS policy: Origin not allowed'));
+      }
+    },
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type'],
+  })
+);
 
 app.use(express.json());
 
-
-
 // Google Sheets API setup
-
 const auth = new google.auth.GoogleAuth({
-
   credentials: JSON.parse(Buffer.from(process.env.GOOGLE_CREDENTIALS_BASE64, 'base64').toString('utf-8')),
-
   scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-
 });
-
-
 
 const sheets = google.sheets({ version: 'v4', auth });
 
-
-
-// Define constants
-
+// Constants
 const SPREADSHEET_ID = '17xp08DNwal5DTc2pd8I8x-a1TQCQZZr_Oy882MIu_TU'; // Replace with your spreadsheet ID
-
 const SHEET_NAME = 'Timesheet';
 
-
-
 // Function to append data to Google Sheet
-
 const appendToSheet = async (spreadsheetId, data) => {
   try {
     await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: `${SHEET_NAME}!A:H`, // Update range to include new columns
+      range: `${SHEET_NAME}!A:J`, // Adjusted range to include additional columns if needed
       valueInputOption: 'USER_ENTERED',
       resource: { values: [data] },
     });
@@ -89,9 +53,32 @@ const appendToSheet = async (spreadsheetId, data) => {
   }
 };
 
+// Function to upload a file to Google Drive
+const uploadFileToDrive = async (fileName, base64File, mimeType) => {
+  const drive = google.drive({ version: 'v3', auth });
+  const buffer = Buffer.from(base64File, 'base64');
+
+  const fileMetadata = { name: fileName };
+  const media = { mimeType, body: buffer };
+
+  const response = await drive.files.create({
+    resource: fileMetadata,
+    media,
+    fields: 'id',
+  });
+
+  const fileId = response.data.id;
+
+  // Make the file publicly accessible
+  await drive.permissions.create({
+    fileId,
+    requestBody: { role: 'reader', type: 'anyone' },
+  });
+
+  return `https://drive.google.com/file/d/${fileId}/view`;
+};
 
 // API Endpoint to handle form submission
-
 app.post('/submit-timesheet', async (req, res) => {
   try {
     const {
@@ -107,6 +94,7 @@ app.post('/submit-timesheet', async (req, res) => {
       fileAttach,
     } = req.body;
 
+    // Validate inputs
     if (
       !userName ||
       !propertyName ||
@@ -116,9 +104,18 @@ app.post('/submit-timesheet', async (req, res) => {
       !laborHours ||
       !timeIn ||
       !timeOut ||
-      (receipt && !fileAttach) // Validate if receipt and fileAttach match the requirements
+      (receipt && !fileAttach)
     ) {
-      return res.status(400).json({ error: 'All required fields must be filled, and file must be attached if receipt is filled.' });
+      return res
+        .status(400)
+        .json({ error: 'All required fields must be filled, and file must be attached if receipt is filled.' });
+    }
+
+    let fileLink = '';
+    if (fileAttach) {
+      const fileName = `Receipt_${Date.now()}.png`; // Example filename
+      const mimeType = 'image/png'; // Adjust MIME type as needed
+      fileLink = await uploadFileToDrive(fileName, fileAttach, mimeType);
     }
 
     const data = [
@@ -131,7 +128,7 @@ app.post('/submit-timesheet', async (req, res) => {
       timeIn,
       timeOut,
       receipt || '',
-      fileAttach || '',
+      fileLink || '',
     ];
 
     await appendToSheet(SPREADSHEET_ID, data);
@@ -144,15 +141,9 @@ app.post('/submit-timesheet', async (req, res) => {
 });
 
 // Preflight OPTIONS handling (optional but recommended)
-
 app.options('/submit-timesheet', cors());
 
-
-
 // Start server
-
 app.listen(PORT, () => {
-
   console.log(`Server running on http://localhost:${PORT}`);
-
 });
