@@ -23,7 +23,10 @@ app.use(
   })
 );
 
-app.use(express.json());
+// app.use(express.json());
+app.use(express.json({ limit: '10mb' })); // Adjust size as needed
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
+
 
 // Google Sheets API setup
 const auth = new google.auth.GoogleAuth({
