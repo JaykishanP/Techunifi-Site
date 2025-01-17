@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { google } = require('googleapis');
+const { Readable } = require('stream');
 require('dotenv').config();
 
 const app = express();
@@ -23,15 +24,13 @@ app.use(
   })
 );
 
-// app.use(express.json());
-app.use(express.json({ limit: '10mb' })); // Adjust size as needed
-app.use(express.urlencoded({ limit: '10mb', extended: true }));
-
+app.use(express.json({ limit: '20mb' })); // Adjust size as needed
+app.use(express.urlencoded({ limit: '20mb', extended: true }));
 
 // Google Sheets API setup
 const auth = new google.auth.GoogleAuth({
   credentials: JSON.parse(Buffer.from(process.env.GOOGLE_CREDENTIALS_BASE64, 'base64').toString('utf-8')),
-  scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+  scopes: ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive'],
 });
 
 const sheets = google.sheets({ version: 'v4', auth });
@@ -58,27 +57,35 @@ const appendToSheet = async (spreadsheetId, data) => {
 
 // Function to upload a file to Google Drive
 const uploadFileToDrive = async (fileName, base64File, mimeType) => {
-  const drive = google.drive({ version: 'v3', auth });
-  const buffer = Buffer.from(base64File, 'base64');
+  try {
+    const drive = google.drive({ version: 'v3', auth });
 
-  const fileMetadata = { name: fileName };
-  const media = { mimeType, body: buffer };
+    // Convert buffer to readable stream
+    const buffer = Buffer.from(base64File, 'base64');
+    const stream = Readable.from(buffer);
 
-  const response = await drive.files.create({
-    resource: fileMetadata,
-    media,
-    fields: 'id',
-  });
+    const fileMetadata = { name: fileName };
+    const media = { mimeType, body: stream };
 
-  const fileId = response.data.id;
+    const response = await drive.files.create({
+      resource: fileMetadata,
+      media,
+      fields: 'id',
+    });
 
-  // Make the file publicly accessible
-  await drive.permissions.create({
-    fileId,
-    requestBody: { role: 'reader', type: 'anyone' },
-  });
+    const fileId = response.data.id;
 
-  return `https://drive.google.com/file/d/${fileId}/view`;
+    // Make the file publicly accessible
+    await drive.permissions.create({
+      fileId,
+      requestBody: { role: 'reader', type: 'anyone' },
+    });
+
+    return `https://drive.google.com/file/d/${fileId}/view`;
+  } catch (error) {
+    console.error('Google Drive API Error:', error.response?.data || error.message);
+    throw new Error('Failed to upload file to Google Drive');
+  }
 };
 
 // API Endpoint to handle form submission
