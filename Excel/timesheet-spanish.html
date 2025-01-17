@@ -81,7 +81,7 @@ function gtag(){dataLayer.push(arguments);}
 </script>
    
 </head>
-<body class="submitPage" id="submit-captcha">
+<body class="submitPage timePage" id="submit-captcha">
     
   <!-- ======= Header ======= -->
    
@@ -94,29 +94,29 @@ function gtag(){dataLayer.push(arguments);}
         </a>
         <nav class="menu">
           <ul class="menu-bar">
-            <li><a class="nav-link services" href="https://www.techunifi.com/#landing-services" onclick="toggleUnderline(event)">Services</a></li>
-            <li><a class="nav-link howit-Works" href="https://www.techunifi.com/#how-it-works" onclick="toggleUnderline(event)">How it Works</a></li>
-            <li><a class="nav-link menu-products" href="../products.html" onclick="toggleUnderline(event)">Products</a></li>
-            <li><a class="nav-link menu-about" href="../about.html" onclick="toggleUnderline(event)">About Us</a></li>
-            <li><a class="nav-link menu-contact" href="https://www.techunifi.com/#contact" onclick="toggleUnderline(event)">Contact Us</a></li>
+            <li><a class="nav-link services" href="https://www.techunifi.com/Excel/timesheet-spanish.html" onclick="toggleUnderline(event)">Timesheet</a></li>
+            <li><a class="nav-link howit-Works" href="https://www.techunifi.com/submit.html" onclick="toggleUnderline(event)">Submit A Ticket</a></li>
+            <li><a class="nav-link menu-contact" href="https://www.techunifi.com/new-inquiry.html" onclick="toggleUnderline(event)">Contact Us</a></li>
+            <li><a class="nav-link menu-contact" href="https://www.techunifi.com/brands.html" onclick="toggleUnderline(event)">Our Brand</a></li>
           </ul>
         </nav>
       </div>
   
       
     <div class="nav-end">
-      <a class="nav-link raise-btn" href="submit.html" onclick="toggleUnderline(event)">
+      <!-- <a class="nav-link raise-btn" href="../submit.html" onclick="toggleUnderline(event)">
         <img src="../assets/img/submit_icon.svg" alt="techunifi" title="Submit">
         <span>Submit A Ticket</span>
-      </a>
-      <a class="nav-link search-site mobile-search" href="javascript:void(0)" onclick="toggleModal()">
+      </a> -->
+      <a class="nav-link raise-btn" href="index.html">Website</a>
+      <!-- <a class="nav-link search-site mobile-search" href="javascript:void(0)" onclick="toggleModal()">
         <img src="../assets/img/search-icon.svg" alt="techunifi" title="Search">
         <span>Search</span>
       </a>
       <a class="nav-link profile-icon" href="https://connect.ebizcharge.net/(S(nltki3tr3mxc3a0ya4rsesky))/EbizLogin.aspx?ReturnUrl=%2fTechunifi" target="_blank" onclick="toggleUnderline(event)">
         <img src="../assets/img/account_circle.svg" alt="techunifi" title="Login">
         <span>Login<img src="../assets/img/login_arrow.svg" alt="techunifi" title="Login"></span>
-      </a>
+      </a> -->
       <button id="hamburger" aria-label="hamburger" aria-haspopup="true" aria-expanded="false">
         <i class="bx bx-menu" aria-hidden="true"></i>
       </button>
@@ -127,6 +127,28 @@ function gtag(){dataLayer.push(arguments);}
   
 
   <!-- End Header -->
+
+  
+  <!-- ====== Search Modal ======= -->
+  <!-- <div class="search-main">
+    <div id="searchModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="toggleModal()">✕</span>
+        <h3>Search the Site</h3>
+        <div class="search-input-container">
+          <input 
+            type="text" 
+            id="searchInput" 
+            placeholder="Type your search..." 
+            oninput="performSearch(event)" 
+          />
+          <button onclick="clearSearch()">Clear</button>
+        </div>
+        <div id="searchResults" class="list-group"></div>
+      </div>
+    </div>
+  </div> -->
+<!-- ======= Search Modal ======= -->
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="submit-banner">
@@ -206,12 +228,12 @@ Si necesita ayuda, envíeme un mensaje o llámeme al  <a href="tel:336-601-6502"
 
                                   <div class="row">
                                     <div class="col-md-6">
-                                      <label for="receipt">Receipt</label>
-                                      <input id="receipt" placeholder="$4.32" name="receipt" size="20" type="number"/>
+                                      <label for="receipt">Recibo</label>
+                                      <input id="receipt" placeholder="$4.32" name="receipt" size="20" type="number" step="any"/>
                                     </div>
                                     <div class="col-md-6">
-                                      <label for="fileAttach">Attach Image of Receipt</label>
-                                      <input id="fileAttach" placeholder="4" name="fileAttach" size="20" type="file"/>
+                                      <label for="fileAttach" class="fileAttach"><img src="../assets/img/attach_file.svg">Adjuntar imagen del recibo</label>
+                                      <input id="fileAttach" placeholder="4" name="fileAttach" size="20" type="file" hidden/>
                                     </div>
                                   </div>
 
@@ -226,11 +248,11 @@ Si necesita ayuda, envíeme un mensaje o llámeme al  <a href="tel:336-601-6502"
                                   <div class="row">
                                     <div class="col-md-6">
                                       <label for="travelHours">Total de horas de viaje</label>
-                                      <input id="travelHours" placeholder="4" name="travelHours" size="20" type="number" required/>
+                                      <input id="travelHours" placeholder="4" name="travelHours" size="20" type="number" step="any" required/>
                                     </div>
                                     <div class="col-md-6">
                                       <label for="laborHours">Total de horas de trabajo</label>
-                                      <input id="laborHours" placeholder="4" name="laborHours" size="20" type="number" required/>
+                                      <input id="laborHours" placeholder="4" name="laborHours" size="20" type="number" step="any" required/>
                                     </div>
                                   </div>
 
