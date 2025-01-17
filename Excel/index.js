@@ -47,7 +47,22 @@ const appendToSheet = async (spreadsheetId, data) => {
       spreadsheetId,
       range: `${SHEET_NAME}!A:J`, // Adjusted range
       valueInputOption: 'USER_ENTERED',
-      resource: { values: [data] },
+      resource: {
+        values: [ // Wrap the data array inside another array (which it looks like you're already doing)
+          [
+            data.userName,
+            data.propertyName,
+            data.description,
+            data.date,
+            data.travelHours,
+            data.laborHours,
+            data.timeIn,
+            data.timeOut,
+            data.receipt || '',
+            data.fileLink || '',
+          ],
+        ],
+      },
     });
     console.log('Append response:', response.data); // Log response from Sheets API
     console.log('Data appended successfully!');
@@ -56,6 +71,7 @@ const appendToSheet = async (spreadsheetId, data) => {
     throw new Error('Failed to append data to Google Sheet');
   }
 };
+
 
 
 // Function to upload a file to Google Drive
