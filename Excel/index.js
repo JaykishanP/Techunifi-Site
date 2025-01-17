@@ -147,8 +147,8 @@ app.post('/submit-timesheet', async (req, res) => {
     const dataToAppend = [data]; // Wrap data array inside another array
     await appendToSheet(SPREADSHEET_ID, dataToAppend);
     // await appendToSheet(SPREADSHEET_ID, data);
-
-    res.json({ message: 'Form submitted successfully!' });
+    console.log(req.body);  // Logs the form data sent from the frontend
+    res.json({ message: 'Form received successfully' }); 
   } catch (error) {
     console.error('Error:', error.message);
     res.status(500).json({ error: error.message });
