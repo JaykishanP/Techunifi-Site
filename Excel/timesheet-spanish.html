@@ -295,7 +295,27 @@ Si necesita ayuda, envíeme un mensaje o llámeme al  <a href="tel:336-601-6502"
                                 
                               </form>
                             <!-- form -->
-                          
+                  
+                  
+               <!-- Review Modal -->
+<div class="modal" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="reviewModalLabel">Review Your Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="reviewDetails" class="list-group"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Edit Form</button>
+        <button type="button" id="confirmSubmit" class="btn btn-primary">Confirm & Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+               <!-- Review Modal -->
                 
                   </div>
             
@@ -436,42 +456,39 @@ Si necesita ayuda, envíeme un mensaje o llámeme al  <a href="tel:336-601-6502"
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
 
+    
   <script>
     const form = document.getElementById('timesheet-form');
+    const reviewDetails = document.getElementById('reviewDetails');
   
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault(); // Prevent default form submission behavior
+    // Mapping field keys to their labels
+    const fieldLabels = {
+      userName: 'Your Name',
+      propertyName: 'Property Name',
+      description: 'Description',
+      timeIn: 'Time In',
+      timeOut: 'Time Out',
+      date: 'Date',
+      travelHours: 'Total Travel Hours',
+      laborHours: 'Total Labor Hours',
+      receipt: 'Receipt Amount',
+      fileAttach: 'Attached File',
+    };
   
-      const fileInput = form.fileAttach;
-      const receipt = form.receipt.value.trim(); // Trim whitespace from receipt value
-      let fileBase64 = '';
+    let formData = {};
   
-      // Check if receipt is filled and fileAttach is mandatory
-      if (receipt && !fileInput.files[0]) {
-        alert('Please attach the receipt image.');
+    form.addEventListener('submit', (event) => {
+      event.preventDefault(); // Prevent form submission
+  
+      // Check ReCaptcha validation
+      const recaptchaResponse = grecaptcha.getResponse();
+      if (!recaptchaResponse) {
+        alert('Please complete the ReCaptcha.');
         return;
       }
   
-      // If fileAttach is provided, convert it to base64
-      if (fileInput.files[0]) {
-        try {
-          const file = fileInput.files[0];
-          const reader = new FileReader();
-          const base64Promise = new Promise((resolve, reject) => {
-            reader.onload = () => resolve(reader.result.split(',')[1]); // Extract base64 string
-            reader.onerror = () => reject(new Error('Failed to read file.'));
-          });
-          reader.readAsDataURL(file);
-          fileBase64 = await base64Promise;
-        } catch (error) {
-          console.error('Error converting file to Base64:', error);
-          alert('Failed to process the attached file. Please try again.');
-          return;
-        }
-      }
-  
       // Collect form data
-      const formData = {
+      formData = {
         userName: form.userName.value.trim(),
         propertyName: form.propertyName.value.trim(),
         description: form.description.value.trim(),
@@ -480,35 +497,74 @@ Si necesita ayuda, envíeme un mensaje o llámeme al  <a href="tel:336-601-6502"
         date: form.date.value,
         travelHours: form.travelHours.value.trim(),
         laborHours: form.laborHours.value.trim(),
-        receipt: receipt,
-        fileAttach: fileBase64, // Base64 representation of the file
+        receipt: form.receipt.value.trim(),
+        fileAttach: form.fileAttach.files[0]?.name || '',
       };
   
-      try {
-        // Send data to backend API
-        const response = await fetch('https://test-site-techunifi-q0im.onrender.com/submit-timesheet', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData),
-        });
-  
-        if (response.ok) {
-          const result = await response.json();
-          alert('Form submitted successfully!');
-          form.reset(); // Reset the form after successful submission
-        } else {
-          const error = await response.json();
-          alert('Error: ' + (error.error || 'Unknown error occurred.'));
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        alert('Failed to submit the form. Please check your internet connection or try again later.');
+      // Validate form data
+      const validationError = validateForm(formData);
+      if (validationError) {
+        alert(validationError);
+        return;
       }
   
-      // Optionally, generate a PDF after successful submission
-      generatePDF(formData);
+      // Populate review modal with field labels and values
+      reviewDetails.innerHTML = Object.entries(formData)
+        .map(
+          ([key, value]) => `
+          <div class="list-group-item d-flex justify-content-between align-items-center">
+            <strong>${fieldLabels[key]}</strong>
+            <span>${value || 'N/A'}</span>
+            <button class="btn btn-link p-0" onclick="editField('${key}')">Edit</button>
+          </div>
+        `
+        )
+        .join('');
+  
+      // Show the Bootstrap modal
+      const reviewModal = new bootstrap.Modal(document.getElementById('reviewModal'));
+      reviewModal.show();
+    });
+  
+    function validateForm(data) {
+      const mandatoryFields = [
+        'userName',
+        'propertyName',
+        'description',
+        'timeIn',
+        'timeOut',
+        'date',
+        'travelHours',
+        'laborHours',
+      ];
+  
+      for (const field of mandatoryFields) {
+        if (!data[field]) {
+          return `Please fill out the ${fieldLabels[field]} field.`;
+        }
+      }
+  
+      if (data.receipt && !data.fileAttach) {
+        return 'If Receipt Amount is provided, you must attach a file.';
+      }
+  
+      return null; // No errors
+    }
+  
+    function editField(field) {
+      const input = document.getElementById(field);
+      if (input) input.focus();
+      const reviewModal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
+      reviewModal.hide(); // Close modal to allow form editing
+    }
+  
+    document.getElementById('confirmSubmit').addEventListener('click', () => {
+      const reviewModal = bootstrap.Modal.getInstance(document.getElementById('reviewModal'));
+      reviewModal.hide(); // Close the review modal
+  
+      generatePDF(formData); // Generate PDF of form data
+      alert('Form submitted successfully! Downloading PDF...');
+      form.reset(); // Reset the form
     });
   
     function generatePDF(data) {
@@ -558,7 +614,6 @@ Si necesita ayuda, envíeme un mensaje o llámeme al  <a href="tel:336-601-6502"
     }
   </script>
   
-
 
 
 </body>
