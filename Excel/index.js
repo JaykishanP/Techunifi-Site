@@ -143,7 +143,9 @@ app.post('/submit-timesheet', async (req, res) => {
       fileLink || '',
     ];
 
-    await appendToSheet(SPREADSHEET_ID, data);
+    const dataToAppend = [data]; // Wrap data array inside another array
+    await appendToSheet(SPREADSHEET_ID, dataToAppend);
+    // await appendToSheet(SPREADSHEET_ID, data);
 
     res.json({ message: 'Form submitted successfully!' });
   } catch (error) {
