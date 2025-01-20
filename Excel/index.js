@@ -45,7 +45,7 @@ const appendToSheet = async (spreadsheetId, data) => {
     console.log('Data to append:', data); // Log the incoming data
     const response = await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: `${SHEET_NAME}!A28:J`, // Adjusted range
+      range: `${SHEET_NAME}!A:J`, // Adjusted range
       valueInputOption: 'USER_ENTERED',
       resource: {
         values: [ // Wrap the data array inside another array (which it looks like you're already doing)
@@ -160,8 +160,7 @@ app.post('/submit-timesheet', async (req, res) => {
       fileLink || '',
     ];
 
-    const dataToAppend = [data]; // Wrap data array inside another array
-    await appendToSheet(SPREADSHEET_ID, dataToAppend);
+    await appendToSheet(SPREADSHEET_ID, data);
     // await appendToSheet(SPREADSHEET_ID, data);
     console.log(req.body);  // Logs the form data sent from the frontend
     res.json({ message: 'Form received successfully' }); 
