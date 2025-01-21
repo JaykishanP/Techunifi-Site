@@ -42,7 +42,7 @@ const SHEET_NAME = 'Timesheet';
 // Function to append data to Google Sheet
 const appendToSheet = async (spreadsheetId, data) => {
   try {
-    console.log('Data to append:', data); // Log the incoming data
+    console.log('Data prepared for Sheets:', data); // Log the incoming data
     const response = await sheets.spreadsheets.values.append({
       spreadsheetId,
       range: `${SHEET_NAME}!A:J`, // Adjusted range
@@ -64,10 +64,11 @@ const appendToSheet = async (spreadsheetId, data) => {
         ],
       },
     });
-    console.log('Append response:', response.data); // Log response from Sheets API
+    console.log('Sheets API response:', response.data); // Log response from Sheets API
     console.log('Data appended successfully!');
   } catch (error) {
     console.error('Error appending data to Google Sheet:', error.response?.data || error.message);
+
     throw new Error('Failed to append data to Google Sheet');
   }
 };
@@ -162,7 +163,7 @@ app.post('/submit-timesheet', async (req, res) => {
 
     await appendToSheet(SPREADSHEET_ID, data);
     // await appendToSheet(SPREADSHEET_ID, data);
-    console.log(req.body);  // Logs the form data sent from the frontend
+    console.log('Received data:', req.body);  // Logs the form data sent from the frontend
     res.json({ message: 'Form received successfully' }); 
   } catch (error) {
     console.error('Error:', error.message);
