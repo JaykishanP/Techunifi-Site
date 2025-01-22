@@ -441,16 +441,40 @@ document.addEventListener('DOMContentLoaded', () => {
   const confirmSubmitButton = document.getElementById('confirmSubmit');
 
   // Function to populate the review modal
-  function populateReviewModal(data) {
-    reviewDetails.innerHTML = ''; // Clear previous data
+  // Function to populate the review modal with labels and edit icons
+function populateReviewModal(data) {
+  reviewDetails.innerHTML = ''; // Clear previous data
 
-    Object.entries(data).forEach(([key, value]) => {
-      const item = document.createElement('div');
-      item.classList.add('list-group-item');
-      item.innerHTML = `<strong>${key}:</strong> ${value || 'N/A'}`;
-      reviewDetails.appendChild(item);
+  Object.entries(data).forEach(([key, value]) => {
+    const item = document.createElement('div');
+    item.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
+
+    // Add label and value
+    const label = document.createElement('div');
+    label.innerHTML = `<strong>${key}:</strong> ${value || 'N/A'}`;
+    
+    // Add edit icon
+    const editIcon = document.createElement('i');
+    editIcon.classList.add('bi', 'bi-pencil-square', 'text-primary', 'ms-2');
+    editIcon.style.cursor = 'pointer';
+    editIcon.title = `Edit ${key}`;
+    editIcon.addEventListener('click', () => {
+      // Scroll to the field to edit it
+      const field = form[key];
+      if (field) {
+        reviewModal.hide();
+        field.focus();
+        alert(`Please edit the field: ${key}`);
+      }
     });
-  }
+
+    item.appendChild(label);
+    item.appendChild(editIcon);
+    reviewDetails.appendChild(item);
+  });
+}
+
+
 
   // Handle initial form submission
   form.addEventListener('submit', (event) => {
