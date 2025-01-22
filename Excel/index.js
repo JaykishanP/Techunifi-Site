@@ -23,7 +23,10 @@ app.use(
   })
 );
 
-app.use(express.json());
+// app.use(express.json());
+app.use(express.json({ limit: '20mb' })); // Adjust the limit as per your needs
+app.use(express.urlencoded({ limit: '20mb', extended: true })); // For URL-encoded bodies
+
 
 // Google Sheets API setup
 const auth = new google.auth.GoogleAuth({
