@@ -1,1 +1,161 @@
-const express=require("express"),cors=require("cors"),{google:e}=require("googleapis"),{Readable:s}=require("stream");require("dotenv").config();const app=express(),PORT=process.env.PORT||3e3,allowedOrigins=["https://www.techunifi.com"];app.use(cors({origin(e,s){allowedOrigins.includes(e)||!e?s(null,!0):s(Error("CORS policy: Origin not allowed"))},methods:["GET","POST","OPTIONS"],allowedHeaders:["Content-Type"]})),app.use(express.json({limit:"20mb"})),app.use(express.urlencoded({limit:"20mb",extended:!0}));const auth=new e.auth.GoogleAuth({credentials:JSON.parse(Buffer.from(process.env.GOOGLE_CREDENTIALS_BASE64,"base64").toString("utf-8")),scopes:["https://www.googleapis.com/auth/spreadsheets","https://www.googleapis.com/auth/drive"]}),sheets=e.sheets({version:"v4",auth}),SPREADSHEET_ID="17xp08DNwal5DTc2pd8I8x-a1TQCQZZr_Oy882MIu_TU",SHEET_NAME="Timesheet",appendToSheet=async(e,s)=>{try{console.log("Appending data:",s);let t=await sheets.spreadsheets.values.append({spreadsheetId:e,range:"Timesheet!A:J",valueInputOption:"USER_ENTERED",resource:{values:[s]}});console.log("Append response:",t.data),console.log("Data appended successfully!")}catch(o){throw console.error("Error appending data to Google Sheet:",o.response?.data||o.message),Error("Failed to append data to Google Sheet")}},uploadFileToDrive=async(t,o,a)=>{try{let r=e.drive({version:"v3",auth}),i=Buffer.from(o,"base64"),p=s.from(i),l={name:t},n={mimeType:a,body:p},d=await r.files.create({resource:l,media:n,fields:"id"}),u=d.data.id;return await r.permissions.create({fileId:u,requestBody:{role:"reader",type:"anyone"}}),`https://drive.google.com/file/d/${u}/view`}catch(c){throw console.error("Google Drive API Error:",c.response?.data||c.message),Error("Failed to upload file to Google Drive")}};app.post("/submit-timesheet",async(e,s)=>{try{let{userName:t,propertyName:o,description:a,date:r,travelHours:i,laborHours:p,timeIn:l,timeOut:n,receipt:d,fileAttach:u}=e.body;if(!t||!o||!a||!r||!i||!p||!l||!n||d&&!u)return s.status(400).json({error:"All required fields must be filled, and file must be attached if receipt is filled."});let c="";if(u){let g=`Receipt_${Date.now()}.png`;c=await uploadFileToDrive(g,u,"image/png")}let h=[t,o,a,r,i,p,l,n,d||"",c||"",];await appendToSheet("17xp08DNwal5DTc2pd8I8x-a1TQCQZZr_Oy882MIu_TU",h),s.json({message:"Form submitted successfully!"})}catch(m){console.error("Error:",m.message),s.status(500).json({error:m.message})}}),app.options("/submit-timesheet",cors()),app.listen(PORT,()=>{console.log(`Server running on http://localhost:${PORT}`)});
+const express = require('express');
+const cors = require('cors');
+const { google } = require('googleapis');
+const { Readable } = require('stream');
+require('dotenv').config();
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware
+const allowedOrigins = ['https://www.techunifi.com']; // Add allowed frontend origins here
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (allowedOrigins.includes(origin) || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error('CORS policy: Origin not allowed'));
+      }
+    },
+    methods: ['GET', 'POST', 'OPTIONS'],
+    allowedHeaders: ['Content-Type'],
+  })
+);
+
+app.use(express.json({ limit: '20mb' })); // Adjust size as needed
+app.use(express.urlencoded({ limit: '20mb', extended: true }));
+
+// Google Sheets API setup
+const auth = new google.auth.GoogleAuth({
+  credentials: JSON.parse(Buffer.from(process.env.GOOGLE_CREDENTIALS_BASE64, 'base64').toString('utf-8')),
+  scopes: ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive'],
+});
+
+const sheets = google.sheets({ version: 'v4', auth });
+
+// Constants
+const SPREADSHEET_ID = '17xp08DNwal5DTc2pd8I8x-a1TQCQZZr_Oy882MIu_TU'; // Replace with your spreadsheet ID
+const SHEET_NAME = 'Timesheet';
+
+// Function to append data to Google Sheet
+const appendToSheet = async (spreadsheetId, data) => {
+  try {
+    console.log('Appending data:', data); // Log data being appended
+    const response = await sheets.spreadsheets.values.append({
+      spreadsheetId,
+      range: `${SHEET_NAME}!A:J`, // Adjusted range
+      valueInputOption: 'USER_ENTERED',
+      resource: { values: [data] },
+    });
+    console.log('Append response:', response.data); // Log the response
+    console.log('Data appended successfully!');
+  } catch (error) {
+    console.error('Error appending data to Google Sheet:', error.response?.data || error.message);
+    throw new Error('Failed to append data to Google Sheet');
+  }
+};
+
+// Function to upload a file to Google Drive
+const uploadFileToDrive = async (fileName, base64File, mimeType) => {
+  try {
+    const drive = google.drive({ version: 'v3', auth });
+
+    // Convert buffer to readable stream
+    const buffer = Buffer.from(base64File, 'base64');
+    const stream = Readable.from(buffer);
+
+    const fileMetadata = { name: fileName };
+    const media = { mimeType, body: stream };
+
+    const response = await drive.files.create({
+      resource: fileMetadata,
+      media,
+      fields: 'id',
+    });
+
+    const fileId = response.data.id;
+
+    // Make the file publicly accessible
+    await drive.permissions.create({
+      fileId,
+      requestBody: { role: 'reader', type: 'anyone' },
+    });
+
+    return `https://drive.google.com/file/d/${fileId}/view`;
+  } catch (error) {
+    console.error('Google Drive API Error:', error.response?.data || error.message);
+    throw new Error('Failed to upload file to Google Drive');
+  }
+};
+
+// API Endpoint to handle form submission
+app.post('/submit-timesheet', async (req, res) => {
+  try {
+    const {
+      userName,
+      propertyName,
+      description,
+      date,
+      travelHours,
+      laborHours,
+      timeIn,
+      timeOut,
+      receipt,
+      fileAttach,
+    } = req.body;
+
+    // Validate inputs
+    if (
+      !userName ||
+      !propertyName ||
+      !description ||
+      !date ||
+      !travelHours ||
+      !laborHours ||
+      !timeIn ||
+      !timeOut ||
+      (receipt && !fileAttach)
+    ) {
+      return res
+        .status(400)
+        .json({ error: 'All required fields must be filled, and file must be attached if receipt is filled.' });
+    }
+
+    let fileLink = '';
+    if (fileAttach) {
+      const fileName = `Receipt_${Date.now()}.png`; // Example filename
+      const mimeType = 'image/png'; // Adjust MIME type as needed
+      fileLink = await uploadFileToDrive(fileName, fileAttach, mimeType);
+    }
+
+    const data = [
+      userName,
+      propertyName,
+      description,
+      date,
+      travelHours,
+      laborHours,
+      timeIn,
+      timeOut,
+      receipt || '',
+      fileLink || '',
+    ];
+
+    await appendToSheet(SPREADSHEET_ID, data);
+
+    res.json({ message: 'Form submitted successfully!' });
+  } catch (error) {
+    console.error('Error:', error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Preflight OPTIONS handling (optional but recommended)
+app.options('/submit-timesheet', cors());
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
