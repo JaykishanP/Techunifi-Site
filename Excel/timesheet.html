@@ -463,8 +463,7 @@ If you need help, message or call me at <a href="tel:336-601-6502" style="paddin
     laborHours: form.laborHours.value.trim(),
     receipt: receipt,
     fileAttach: fileBase64,
-    captcha: captchaResponse, // Add CAPTCHA response
-  };
+    };
 
   try {
     const response = await fetch('https://test-site-techunifi-q0im.onrender.com/submit-timesheet', {

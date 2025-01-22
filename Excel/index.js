@@ -58,12 +58,17 @@ const appendToSheet = async (spreadsheetId, data) => {
 };
 
 // Function to upload a file to Google Drive
+const { Readable } = require('stream');
+
 const uploadFileToDrive = async (fileName, base64File, mimeType) => {
   const drive = google.drive({ version: 'v3', auth });
   const buffer = Buffer.from(base64File, 'base64');
 
+  // Convert buffer into a readable stream
+  const stream = Readable.from(buffer);
+
   const fileMetadata = { name: fileName };
-  const media = { mimeType, body: buffer };
+  const media = { mimeType, body: stream };
 
   const response = await drive.files.create({
     resource: fileMetadata,
@@ -81,6 +86,7 @@ const uploadFileToDrive = async (fileName, base64File, mimeType) => {
 
   return `https://drive.google.com/file/d/${fileId}/view`;
 };
+
 
 // API Endpoint to handle form submission
 app.post('/submit-timesheet', async (req, res) => {
