@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { google } = require('googleapis');
+const { Readable } = require('stream');
 require('dotenv').config();
 
 const app = express();
@@ -23,16 +24,13 @@ app.use(
   })
 );
 
-// app.use(express.json());
-app.use(express.json({ limit: '20mb' })); // For JSON bodies
-app.use(express.urlencoded({ limit: '20mb', extended: true })); // For form data
-
-
+app.use(express.json({ limit: '20mb' })); // Adjust size as needed
+app.use(express.urlencoded({ limit: '20mb', extended: true }));
 
 // Google Sheets API setup
 const auth = new google.auth.GoogleAuth({
   credentials: JSON.parse(Buffer.from(process.env.GOOGLE_CREDENTIALS_BASE64, 'base64').toString('utf-8')),
-  scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+  scopes: ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive'],
 });
 
 const sheets = google.sheets({ version: 'v4', auth });
@@ -44,12 +42,14 @@ const SHEET_NAME = 'Timesheet';
 // Function to append data to Google Sheet
 const appendToSheet = async (spreadsheetId, data) => {
   try {
-    await sheets.spreadsheets.values.append({
+    console.log('Appending data:', data); // Log data being appended
+    const response = await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: `${SHEET_NAME}!A:J`, // Adjusted range to include additional columns if needed
+      range: `${SHEET_NAME}!A:J`, // Adjusted range
       valueInputOption: 'USER_ENTERED',
       resource: { values: [data] },
     });
+    console.log('Append response:', response.data); // Log the response
     console.log('Data appended successfully!');
   } catch (error) {
     console.error('Error appending data to Google Sheet:', error.response?.data || error.message);
@@ -58,39 +58,40 @@ const appendToSheet = async (spreadsheetId, data) => {
 };
 
 // Function to upload a file to Google Drive
-const { Readable } = require('stream');
-
 const uploadFileToDrive = async (fileName, base64File, mimeType) => {
-  const drive = google.drive({ version: 'v3', auth });
-  const buffer = Buffer.from(base64File, 'base64');
+  try {
+    const drive = google.drive({ version: 'v3', auth });
 
-  // Convert buffer into a readable stream
-  const stream = Readable.from(buffer);
+    // Convert buffer to readable stream
+    const buffer = Buffer.from(base64File, 'base64');
+    const stream = Readable.from(buffer);
 
-  const fileMetadata = { name: fileName };
-  const media = { mimeType, body: stream };
+    const fileMetadata = { name: fileName };
+    const media = { mimeType, body: stream };
 
-  const response = await drive.files.create({
-    resource: fileMetadata,
-    media,
-    fields: 'id',
-  });
+    const response = await drive.files.create({
+      resource: fileMetadata,
+      media,
+      fields: 'id',
+    });
 
-  const fileId = response.data.id;
+    const fileId = response.data.id;
 
-  // Make the file publicly accessible
-  await drive.permissions.create({
-    fileId,
-    requestBody: { role: 'reader', type: 'anyone' },
-  });
+    // Make the file publicly accessible
+    await drive.permissions.create({
+      fileId,
+      requestBody: { role: 'reader', type: 'anyone' },
+    });
 
-  return `https://drive.google.com/file/d/${fileId}/view`;
+    return `https://drive.google.com/file/d/${fileId}/view`;
+  } catch (error) {
+    console.error('Google Drive API Error:', error.response?.data || error.message);
+    throw new Error('Failed to upload file to Google Drive');
+  }
 };
-
 
 // API Endpoint to handle form submission
 app.post('/submit-timesheet', async (req, res) => {
-  console.log(req.body); // Debug incoming request body
   try {
     const {
       userName,
@@ -142,7 +143,9 @@ app.post('/submit-timesheet', async (req, res) => {
       fileLink || '',
     ];
 
-    await appendToSheet(SPREADSHEET_ID, data);
+    const dataToAppend = [data]; // Wrap data array inside another array
+    await appendToSheet(SPREADSHEET_ID, dataToAppend);
+    // await appendToSheet(SPREADSHEET_ID, data);
 
     res.json({ message: 'Form submitted successfully!' });
   } catch (error) {
