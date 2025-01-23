@@ -314,6 +314,20 @@ Si necesita ayuda, envíeme un mensaje o llámeme al  <a href="tel:336-601-6502"
                                     <input type="submit" name="submit" value="Submit & Download"/>
                                   </div>
                                 </div>
+
+                                            
+               <!-- Loader -->
+
+                  <!-- Add a loader element -->
+                   <br>
+                   <div id="loader" class="d-none text-center">
+                     <div class="spinner-border" role="status">
+                       <span class="visually-hidden">Loading...</span>
+                     </div>
+                     <p class="mt-2">Submitting...</p>
+                   </div>
+                   
+                                  <!-- Loader -->
                                 
                               </form>
                             <!-- form -->
@@ -458,9 +472,8 @@ Si necesita ayuda, envíeme un mensaje o llámeme al  <a href="tel:336-601-6502"
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
   
-    
+  
   <script>
-
     document.addEventListener('DOMContentLoaded', () => {
       const form = document.getElementById('timesheet-form');
       const reviewModal = new bootstrap.Modal(document.getElementById('reviewModal'));
@@ -468,39 +481,36 @@ Si necesita ayuda, envíeme un mensaje o llámeme al  <a href="tel:336-601-6502"
       const confirmSubmitButton = document.getElementById('confirmSubmit');
     
       // Function to populate the review modal with labels and edit icons
-    function populateReviewModal(data) {
-      reviewDetails.innerHTML = ''; // Clear previous data
+      function populateReviewModal(data) {
+        reviewDetails.innerHTML = ''; // Clear previous data
     
-      Object.entries(data).forEach(([key, value]) => {
-        const item = document.createElement('div');
-        item.classList.add('list-group-item');
+        Object.entries(data).forEach(([key, value]) => {
+          const item = document.createElement('div');
+          item.classList.add('list-group-item');
     
-        // Add label and value
-        const label = document.createElement('div');
-        label.innerHTML = `<strong>${key}:</strong> ${value || 'N/A'}`;
-        
-        // Add edit icon
-        const editIcon = document.createElement('i');
-        editIcon.classList.add('bi', 'bi-pencil-square', 'text-primary', 'ms-2');
-        editIcon.style.cursor = 'pointer';
-        editIcon.title = `Edit ${key}`;
-        editIcon.addEventListener('click', () => {
-          // Scroll to the field to edit it
-          const field = form[key];
-          if (field) {
-            reviewModal.hide();
-            field.focus();
-            // alert(`Please edit the field: ${key}`);
-          }
+          // Add label and value
+          const label = document.createElement('div');
+          label.innerHTML = `<strong>${key}:</strong> ${value || 'N/A'}`;
+    
+          // Add edit icon
+          const editIcon = document.createElement('i');
+          editIcon.classList.add('bi', 'bi-pencil-square', 'text-primary', 'ms-2');
+          editIcon.style.cursor = 'pointer';
+          editIcon.title = `Edit ${key}`;
+          editIcon.addEventListener('click', () => {
+            // Scroll to the field to edit it
+            const field = form[key];
+            if (field) {
+              reviewModal.hide();
+              field.focus();
+            }
+          });
+    
+          item.appendChild(label);
+          item.appendChild(editIcon);
+          reviewDetails.appendChild(item);
         });
-    
-        item.appendChild(label);
-        item.appendChild(editIcon);
-        reviewDetails.appendChild(item);
-      });
-    }
-    
-    
+      }
     
       // Handle initial form submission
       form.addEventListener('submit', (event) => {
@@ -649,12 +659,12 @@ Si necesita ayuda, envíeme un mensaje o llámeme al  <a href="tel:336-601-6502"
     });
     
     $('#reviewModal').modal({
-        backdrop: 'static',
-        keyboard: false
-    })
+      backdrop: 'static',
+      keyboard: false
+    });
+    </script>
     
-      </script>
-      
+  
 
 
 </body>
