@@ -108,7 +108,7 @@ function gtag(){dataLayer.push(arguments);}
         <img src="../assets/img/submit_icon.svg" alt="techunifi" title="Submit">
         <span>Submit A Ticket</span>
       </a> -->
-      <a class="nav-link raise-btn" href="index.html">Website</a>
+      <a class="nav-link raise-btn" href="https://www.techunifi.com/">Website</a>
       <!-- <a class="nav-link search-site mobile-search" href="javascript:void(0)" onclick="toggleModal()">
         <img src="../assets/img/search-icon.svg" alt="techunifi" title="Search">
         <span>Search</span>
@@ -222,7 +222,7 @@ Si necesita ayuda, envíeme un mensaje o llámeme al  <a href="tel:336-601-6502"
                                   <div class="row">
                                     <div class="col-md-12">
                                       <label for="description">Description</label>
-                                      <textarea id="description" name="description" rows="7" placeholder="Enter Work Details" required></textarea>
+                                      <textarea id="description" name="description" rows="7" placeholder="Enter Work Details" onkeydown="if (event.keyCode === 13) { event.preventDefault(); this.value += '\n'; }" required></textarea>
                                     </div>
                                   </div>
 
