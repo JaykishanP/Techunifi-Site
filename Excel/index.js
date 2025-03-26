@@ -33,6 +33,10 @@ app.use(express.urlencoded({ limit: '20mb', extended: true }));
 const emailUser = Buffer.from(process.env.EMAIL_USER_BASE64, 'base64').toString('utf-8');
 const emailPass = Buffer.from(process.env.EMAIL_PASS_BASE64, 'base64').toString('utf-8');
 
+console.log('Email User:', emailUser);
+console.log('Email Pass Length:', emailPass.length);
+
+
 // Configure Nodemailer transporter
 const transporter = nodemailer.createTransport({
   service: 'gmail',
