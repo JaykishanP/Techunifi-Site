@@ -482,32 +482,31 @@ function gtag(){dataLayer.push(arguments);}
   <!-- <script src="assets/vendor/php-email-form/validate.js"></script> -->
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <!-- <script src="assets/js/main.js"></script> -->
 
   <script>
-    if (window.location.pathname === '/submit.html') {
       $(document).ready(function () {
         function submitgenerateRandomNumbers() {
           var submitnum1 = Math.floor(Math.random() * 10);
           var submitnum2 = Math.floor(Math.random() * 10);
           return [submitnum1, submitnum2];
         }
-    
+  
         function submitupdateMathSumQuestion() {
           var submitrandomNumbers = submitgenerateRandomNumbers();
           var submitnum1 = submitrandomNumbers[0];
           var submitnum2 = submitrandomNumbers[1];
-          $('#mathSumQuestion').text('What is ' + submitnum1 + ' + ' + submitnum2 + '?');
+          $('#mathSumQuestion').text('Math Sum: What is ' + submitnum1 + ' + ' + submitnum2 + '?');
           $('#mathSum').data('submitexpectedSum', submitnum1 + submitnum2);
         }
-    
+  
         submitupdateMathSumQuestion();
-    
+  
         function validateSubmitForm() {
           var formValid = true;
           $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').each(function () {
             if ($(this).hasClass('not-required')) return true;
-    
+  
             if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
               formValid = false;
               $(this).css('border-color', 'red');
@@ -519,7 +518,7 @@ function gtag(){dataLayer.push(arguments);}
               $(this).css('border-color', 'green');
             }
           });
-    
+  
           var submitmathSumInput = $('#mathSum');
           var submitmathSumValue = submitmathSumInput.val();
           var submitexpectedSum = submitmathSumInput.data('submitexpectedSum');
@@ -529,15 +528,18 @@ function gtag(){dataLayer.push(arguments);}
           } else {
             submitmathSumInput.css('border-color', 'green');
           }
-    
+  
           return formValid;
         }
-    
+  
         $('#submitTicketForm').submit(async function (event) {
           event.preventDefault();
-    
+  
           if (!validateSubmitForm()) return;
-    
+  
+          const $submitBtn = $('input[type="submit"]');
+          $submitBtn.prop('disabled', true).val('Submitting...');
+  
           const formData = {
             submitTicket: "TICKET-" + Date.now(),
             company: $('#company').val(),
@@ -545,34 +547,29 @@ function gtag(){dataLayer.push(arguments);}
             email: $('#email').val(),
             phone: $('#phone').val(),
             subject: $('#subject').val(),
-            service:$('service').val(),
-            modelNumber:$('model-number').val(),
-            description: $('textarea[name="description"]').val(),
+            modelNumber: $('#model-number').val(),
+            description: $('#description').val(),
             mathSum: $('#mathSum').val(),
+            services: $('#service').val(), // multiple select
             createdAt: new Date().toISOString()
           };
-    
-          // Handle multiple select values (Products Requiring Service)
-          const productServices = [];
-          $('select[multiple] option:selected').each(function () {
-            productServices.push($(this).val());
-          });
-    
-          formData.services = productServices;
-    
+  
           try {
             const response = await fetch('https://8svvla11u1.execute-api.us-east-1.amazonaws.com/test/saveData', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(formData),
             });
-    
+  
             const data = await response.json();
             if (response.ok) {
               alert('Ticket submitted successfully!');
               $('#submitTicketForm')[0].reset();
-              submitupdateMathSumQuestion(); // Refresh math question
+              submitupdateMathSumQuestion();
               $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').css('border-color', '');
+              if (typeof grecaptcha !== 'undefined') {
+                grecaptcha.reset(); // reset CAPTCHA if used
+              }
             } else {
               alert('Error: ' + data.message);
             }
@@ -580,12 +577,14 @@ function gtag(){dataLayer.push(arguments);}
             console.error('Error:', error);
             alert('Network error. Try again later.');
           }
+  
+          $submitBtn.prop('disabled', false).val('Submit A Ticket');
         });
-    
+  
         $('#submitTicketForm').on('reset', function () {
           submitupdateMathSumQuestion();
         });
-    
+  
         $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').on('input change blur', function () {
           if (!$(this).hasClass('not-required')) {
             if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
@@ -596,8 +595,9 @@ function gtag(){dataLayer.push(arguments);}
           }
         });
       });
-    }
-    </script>
+    
+  </script>
+  
     
 
 </body>
