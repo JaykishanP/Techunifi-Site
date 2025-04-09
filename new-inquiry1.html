@@ -613,23 +613,24 @@ function gtag(){dataLayer.push(arguments);}
         const $submitBtn = $('input[type="submit"]', this);
         $submitBtn.prop('disabled', true).val('Submitting...');
   
-        const formData = {
-          inquiryNumber: "INQUIRY-" + Date.now(),
-          company: $('company').val(),
-          FirstName: $('#first_name').val(),
-          LastName: $('#last_name').val(),
-          email: $('#email').val(),
-          phone: $('#phone').val(),
-          address: $('#street').val(),
-          city: $('#city').val(),
-          state: $('#state').val(),
-          zip: $('#zip').val(),
-          business: $('#select-business').val(),
-          RoomsApartment: $('#rooms-apt').val(),
-          services: $('#service-need').val(), // multiple select
-          description: $('#description').val(),
-          createdAt: new Date().toISOString()
-        };
+        // Now build formData safely
+  const formData = {
+    inquiryNumber: "INQUIRY-" + Date.now(),
+    company: $('#company').val(),
+    FirstName: $('#first_name').val(),
+    LastName: $('#last_name').val(),
+    email: $('#email').val(),
+    phone: $('#phone').val(),
+    address: $('#street').val(),
+    city: $('#city').val(),
+    state: $('#state').val(),
+    zip: $('#zip').val(),
+    business: $('#select-business').val(),
+    RoomsApartment: $('#rooms-apt').val(),
+    services: $('#service-need').val() || [],
+    description: $('#description').val(),
+    createdAt: new Date().toISOString()
+  };
   
         try {
           const response = await fetch('https://5hviwc1sqa.execute-api.us-east-1.amazonaws.com/test/newInquiry', {
