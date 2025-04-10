@@ -558,125 +558,122 @@ function gtag(){dataLayer.push(arguments);}
   <!-- <script src="assets/js/main.js"></script> -->
 
   <script>
-        
-        $(document).ready(function () {
-    function inquiryGenerateRandomNumbers() {
-      var num1 = Math.floor(Math.random() * 10);
-      var num2 = Math.floor(Math.random() * 10);
-      return [num1, num2];
-    }
+    $(document).ready(function () {
+      function inquiryGenerateRandomNumbers() {
+        var num1 = Math.floor(Math.random() * 10);
+        var num2 = Math.floor(Math.random() * 10);
+        return [num1, num2];
+      }
 
-    function inquiryUpdateMathSumQuestion() {
-      var randomNumbers = inquiryGenerateRandomNumbers();
-      var num1 = randomNumbers[0];
-      var num2 = randomNumbers[1];
-      $('#inquiryMathSumQuestion').text('Math Sum: What is ' + num1 + ' + ' + num2 + '?');
-      $('#inquiryMathSum').data('expectedSum', num1 + num2);
-    }
+      function inquiryUpdateMathSumQuestion() {
+        var randomNumbers = inquiryGenerateRandomNumbers();
+        var num1 = randomNumbers[0];
+        var num2 = randomNumbers[1];
+        $('#inquiryMathSumQuestion').text('Math Sum: What is ' + num1 + ' + ' + num2 + '?');
+        $('#inquiryMathSum').data('expectedSum', num1 + num2);
+      }
 
-    inquiryUpdateMathSumQuestion();
+      inquiryUpdateMathSumQuestion();
 
-    function validateInquiryForm() {
-      var formValid = true;
-      $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').each(function () {
-        if ($(this).hasClass('not-required')) return true;
+      function validateInquiryForm() {
+        var formValid = true;
+        $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').each(function () {
+          if ($(this).hasClass('not-required')) return true;
 
-        if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
+          if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
+            formValid = false;
+            $(this).css('border-color', 'red');
+            $('html, body').animate({
+              scrollTop: $(this).offset().top - 160
+            }, 500);
+            return false;
+          } else {
+            $(this).css('border-color', 'green');
+          }
+        });
+
+        var mathSumInput = $('#inquiryMathSum');
+        var mathSumValue = mathSumInput.val();
+        var expectedSum = mathSumInput.data('expectedSum');
+        if (!mathSumValue || parseInt(mathSumValue) !== expectedSum) {
+          mathSumInput.css('border-color', 'red');
           formValid = false;
-          $(this).css('border-color', 'red');
-          $('html, body').animate({
-            scrollTop: $(this).offset().top - 160
-          }, 500);
-          return false;
         } else {
-          $(this).css('border-color', 'green');
+          mathSumInput.css('border-color', 'green');
+        }
+
+        return formValid;
+      }
+
+      $('#myInquiryForm').submit(async function (event) {
+        event.preventDefault();
+
+        if (!validateInquiryForm()) return;
+
+        const $submitBtn = $('input[type="submit"]', this);
+        $submitBtn.prop('disabled', true).val('Submitting...');
+
+        const formData = {
+          inquiryNumber: "INQUIRY-" + Date.now(),
+          company: $('#company').val(),
+          FirstName: $('#first_name').val(),
+          LastName: $('#last_name').val(),
+          email: $('#email').val(),
+          phone: $('#phone').val(),
+          address: $('#street').val(),
+          city: $('#city').val(),
+          state: $('#state').val(),
+          zip: $('#zip').val(),
+          business: $('#select-business').val(),
+          RoomsApartment: $('#rooms-apt').val(),
+          services: $('#service-need').val() || [],
+          description: $('#description').val(),
+          createdAt: new Date().toISOString()
+        };
+
+        try {
+          const response = await fetch('https://5hviwc1sqa.execute-api.us-east-1.amazonaws.com/test/newInquiry', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData),
+          });
+
+          const data = await response.json();
+          if (response.ok) {
+            alert('Inquiry submitted successfully!');
+            $('#myInquiryForm')[0].reset();
+            inquiryUpdateMathSumQuestion();
+            $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').css('border-color', '');
+            if (typeof grecaptcha !== 'undefined') {
+              grecaptcha.reset();
+            }
+          } else {
+            alert('Error: ' + data.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('Network error. Try again later.');
+        } finally {
+          $submitBtn.prop('disabled', false).val('Submit An Inquiry');
         }
       });
 
-      var mathSumInput = $('#inquiryMathSum');
-      var mathSumValue = mathSumInput.val();
-      var expectedSum = mathSumInput.data('expectedSum');
-      if (!mathSumValue || parseInt(mathSumValue) !== expectedSum) {
-        mathSumInput.css('border-color', 'red');
-        formValid = false;
-      } else {
-        mathSumInput.css('border-color', 'green');
-      }
+      $('#myInquiryForm').on('reset', function () {
+        inquiryUpdateMathSumQuestion();
+        $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').css('border-color', '');
+      });
 
-      return formValid;
-    }
-
-    $('#myInquiryForm').submit(async function (event) {
-      event.preventDefault();
-
-      if (!validateInquiryForm()) return;
-
-      const $submitBtn = $('input[type="submit"]', this);
-      $submitBtn.prop('disabled', true).val('Submitting...');
-
-      const formData = {
-        inquiryNumber: "INQUIRY-" + Date.now(),
-        company: $('#company').val(),
-        FirstName: $('#first_name').val(),
-        LastName: $('#last_name').val(),
-        email: $('#email').val(),
-        phone: $('#phone').val(),
-        address: $('#street').val(),
-        city: $('#city').val(),
-        state: $('#state').val(),
-        zip: $('#zip').val(),
-        business: $('#select-business').val(),
-        RoomsApartment: $('#rooms-apt').val(),
-        services: $('#service-need').val() || [],
-        description: $('#description').val(),
-        createdAt: new Date().toISOString()
-      };
-
-      try {
-        const response = await fetch('https://5hviwc1sqa.execute-api.us-east-1.amazonaws.com/test/newInquiry', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
-        });
-
-        const data = await response.json();
-        if (response.ok) {
-          alert('Inquiry submitted successfully!');
-          $('#myInquiryForm')[0].reset();
-          inquiryUpdateMathSumQuestion();
-          $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').css('border-color', '');
-          if (typeof grecaptcha !== 'undefined') {
-            grecaptcha.reset();
+      $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').on('input change blur', function () {
+        if (!$(this).hasClass('not-required')) {
+          if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
+            $(this).css('border-color', 'green');
+          } else {
+            $(this).css('border-color', 'red');
           }
-        } else {
-          alert('Error: ' + data.message);
         }
-      } catch (error) {
-        console.error('Error:', error);
-        alert('Network error. Try again later.');
-      } finally {
-        $submitBtn.prop('disabled', false).val('Submit An Inquiry');
-      }
+      });
     });
-
-    $('#myInquiryForm').on('reset', function () {
-      inquiryUpdateMathSumQuestion();
-      $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').css('border-color', '');
-    });
-
-    $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').on('input change blur', function () {
-      if (!$(this).hasClass('not-required')) {
-        if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
-          $(this).css('border-color', 'green');
-        } else {
-          $(this).css('border-color', 'red');
-        }
-      }
-    });
-  });
-
   </script>
-  
 
 </body>
 </html>
