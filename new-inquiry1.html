@@ -573,7 +573,7 @@ $(document).ready(function() {
     console.log("Form validation passed.");
 
     const inquiryData = {
-      inquiryNumber: generateUniqueInquiryNumber(),
+      newInquiry: generateUniqueInquiryNumber(),
       company: $('#company').val(),
       FirstName: $('#first_name').val(),
       LastName: $('#last_name').val(),
@@ -586,7 +586,7 @@ $(document).ready(function() {
       zip: $('#zip').val(),
       business: $('#select-business').val(),
       RoomsApartment: $('#rooms-apt').val(),
-      services: $('#service-need').val() ? $('#service-need').val().split(',') : [],
+      services: $('#service-need').val() || [],
       description: $('#description').val()
     };
 
