@@ -49,7 +49,7 @@
    padding-top:0;
 }
 #security.product-tabcontent .head-para-row::before {
-    background-image: url('assets/img/illustrations/illustration-5.png');
+    background-image: url('https://www.techunifi.com/assets/img/illustrations/illustration-5.png');
     position: absolute;
     background-repeat: no-repeat;
     content: '';
