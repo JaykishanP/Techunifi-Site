@@ -64,7 +64,7 @@ const appendToSheet = async (spreadsheetId, data) => {
     console.log('Appending data:', data); // Log data being appended
     const response = await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: `${SHEET_NAME}!A:J`, // Adjusted range
+      range: `${SHEET_NAME}!A:L`, // Adjusted range
       valueInputOption: 'USER_ENTERED',
       resource: { values: [data] },
     });
@@ -158,7 +158,10 @@ app.post('/submit-timesheet', async (req, res) => {
       fileLink = await uploadFileToDrive(fileName, fileAttach, mimeType);
     }
 
-    const data = [userName, propertyName, description, date, travelHours, laborHours, timeIn, timeOut, receipt || '', fileLink || ''];
+    const  moneyOwedTravel = 0 
+    const moneyOwedLabor = 0
+
+    const data = [userName, propertyName, description, date, travelHours, moneyOwedTravel, laborHours,moneyOwedLabor, timeIn, timeOut, receipt || '', fileLink || ''];
     await appendToSheet(SPREADSHEET_ID, data);
     
     // Send email notification
