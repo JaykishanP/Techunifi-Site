@@ -64,7 +64,7 @@ const appendToSheet = async (spreadsheetId, data) => {
     console.log('Appending data:', data); // Log data being appended
     const response = await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: `${SHEET_NAME}!A:L`, // Adjusted range
+      range: `'${SHEET_NAME}!A:L'`, // Adjusted range
       valueInputOption: 'USER_ENTERED',
       resource: { values: [data] },
     });
