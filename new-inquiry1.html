@@ -349,7 +349,7 @@ function gtag(){dataLayer.push(arguments);}
                                 <label for="inquirymathSum" id="inquirymathSumQuestion">Math Sum: What is 2 + 2? </label>
                                 <span><i class="bi bi-question-circle"></i></span>
                               </div>
-                                <input id="inquirymathSum" name="inquirymathSum" type="number" placeholder="Enter Sum"/>
+                                <input id="inquirymathSum" name="inquirymathSum" type="number" placeholder="Enter Sum" required/>
                             </div>
                             </div>
 
@@ -618,18 +618,39 @@ $(document).ready(function() {
   });
 
   function validateInquiryForm() {
-    let isValid = true;
-    $('#myInquiryForm input[required], #myInquiryForm select[required]').each(function() {
-      if (!$(this).val()) {
-        console.warn('Validation failed at:', $(this).attr('id'));
-        isValid = false;
-        $(this).css('border', '2px solid red'); // optional: visual indicator
-      } else {
-        $(this).css('border', ''); // reset border
-      }
-    });
-    return isValid;
+  let isValid = true;
+
+  // Check required inputs
+  $('#myInquiryForm input[required], #myInquiryForm select[required]').each(function () {
+    if (!$(this).val()) {
+      console.warn('Validation failed at:', $(this).attr('id'));
+      isValid = false;
+      $(this).css('border', '2px solid red');
+    } else {
+      $(this).css('border', '');
+    }
+  });
+
+  // ✅ Validate Math Sum
+  const mathAnswer = $('#inquirymathSum').val();
+  if (parseInt(mathAnswer) !== 4) { // change this if the question changes
+    isValid = false;
+    alert('Please answer the Math Sum correctly.');
+    $('#inquirymathSum').css('border', '2px solid red');
+  } else {
+    $('#inquirymathSum').css('border', '');
   }
+
+  // ✅ Validate reCAPTCHA
+  const recaptchaResponse = grecaptcha.getResponse();
+  if (recaptchaResponse.length === 0) {
+    isValid = false;
+    alert('Please complete the reCAPTCHA.');
+  }
+
+  return isValid;
+}
+
 
   function generateUniqueInquiryNumber() {
     return 'INQ-' + Date.now();
