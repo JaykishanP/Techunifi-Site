@@ -1,471 +1,470 @@
 [
-    {
-      "title": "Home",
-      "url": "index.html",
-      "content": "Welcome to TechUnifi. Explore our products and services."
-    },
-    {
-      "title": "About Us",
-      "url": "about.html",
-      "content": "Learn more about TechUnifi and our mission to innovate. Client, Clients, ClientList"
-    },
-    {
-      "title": "Services",
-      "url": "https://www.techunifi.com/#landing-services",
-      "content": "Low Voltage, Telecom, Security, Auido-Video, Network, Wifi, Lighting, Energy, It Solutions,WIFI"
-    },
-    {
-      "title": "News",
-      "url": "https://www.techunifi.com/about.html?tab=news",
-      "content": "News, Latest News, New Changes"
-    },
-    {
-      "title": "aahoacon25, AAHOACON25, Aahoacon25",
-      "url": "https://www.techunifi.com/aahoacon25.html",
-      "content": "aahoacon25, AAHOACON25, Aahoacon25"
-    },
-    
-    {
-      "title": "Hotel, Accomodation",
-      "url": "https://www.techunifi.com/about.html?tab=news",
-      "content": "Hilton, Sheraton, Marriott, Home Suites, Home2 Suites, Homewood, Holiday Inn, Hampton, Best Westren, Courtyard Inn, Hyatt House, Country Inn, Tru, Spark, Fairfield Inn Marriott, Courtyard by Marriot, HITEC, Springhill Suites, Walk-a-thon(Baps Charity), New Port Beach Resort, AAHOACON 24, Dual Brand Hilton, Premier Petroleum Hospitality, Brew Pointe Cafe"
-    },
-    {
-      "title": "Product",
-      "url": "products.html",
-      "content": "Product description. Brands, Innovative solutions for your business."
-    },
-    {
-      "title": "Submit A Ticket",
-      "url": "submit.html",
-      "content": "Ticket Form, Service Ticket"
-    },
-    {
-        "title": "New Inquiry",
-        "url": "new-inquiry.html",
-        "content": "Are you a new client? Let's get in touch! We want to learn about your business and understand how Techunifi can best support you. After you fill out the form, an inquiry will be opened, and a Techunifi representative will reach out to you."
-      },
-      {
-        "title": "Change Order",
-        "url": "change-order.html",
-        "content": "Product description. Innovative solutions for your business."
-      },
-      {
-        "title": "Timesheet",
-        "url": "Excel/timesheet.html",
-        "content": "Timesheet, Work Hours, Log Time"
-      },
-      {
-        "title": "Timesheet Spanish",
-        "url": "Excel/timesheet-spanish.html",
-        "content": "Timesheet, Work Hours, Log Time"
-      },
-      {
-        "title": "Terms and Conditions",
-        "url": "terms-conditions.html",
-        "content": "Terms, Conditions, Policy, CopyRight"
-      },
-      {
-        "title": "Brands",
-        "url": "brands.html",
-        "content": "Introducing Techunifi: a brand built on the pillars of reliability, sustainability, and support. Our identity is a reflection of these values, guiding everything we do. With a focus on forging enduring connections, we offer solutions that not only meet but exceed expectations. Committed to sustainability, we strive to minimize our environmental impact while maximizing the effectiveness of our innovations. Our sleek and modern aesthetic mirrors our dedication to simplicity and sophistication, ensuring that our brand remains both contemporary and refined. From cutting-edge technology to unparalleled customer support, Techunifi is here to navigate the digital landscape alongside you, where connectivity is reliable and assistance is always at hand."
-      },
-      {
-        "title": "Contact Us",
-        "url": "https://www.techunifi.com/new-inquiry.html",
-        "content": "Contact, Connect"
-      },
-      {
-        "title": "Footer - Call, Social Links, Email, Facebook, Instagram, Youtube, LinkedIn, X(Twitter), Pinterest",
-        "url": "https://www.techunifi.com#footers",
-        "content": "Address, Location, Call, Social Links, Email, Facebook, Instagram, Youtube, LinkedIn, X(Twitter), Pinterest"
-      },
-      {
-        "title": "Standard",
-        "url": "standard.html",
-        "content": "Site Standard"
-      },
-      {
-        "title": "Take-Off",
-        "url": "takeoff.html",
-        "content": "Take Off"
-      },
-      {
-        "title": "How It Works",
-        "url": "https://www.techunifi.com/#how-it-works",
-        "content": "Design, Construction, Install, Go Live, Operations"
-      },
-      {
-        "title": "Login, Profile",
-        "url": "https://connect.ebizcharge.net/(S(m0bznjppezsmujzremg1hx3y))/EbizLogin.aspx?ReturnUrl=%2fTechunifi",
-        "content": "Login, EbizCharge"
-      },
-      {
-        "title": "ICC",
-        "url": "https://www.techunifi.com/products.html?section=low-Voltage",
-        "content": "Provider of innovative connectivity solutions for networking infrastructure."
-      },
-      {
-        "title": "Legrand",
-        "url": "https://www.techunifi.com/products.html?section=low-Voltage",
-        "content": "Leading global specialist in electrical and digital building infrastructures."
-      },
-      {
-        "title": "Leviton",
-        "url": "https://www.techunifi.com/products.html?section=low-Voltage",
-        "content": "Trusted manufacturer of electrical wiring devices, lighting controls, and network solutions."
-      },
-      {
-        "title": "C2G",
-        "url": "https://www.techunifi.com/products.html?section=low-Voltage",
-        "content": "Supplier of high-quality connectivity solutions for audio/video, PC, and data networking applications."
-      },
-      {
-        "title": "Panduit",
-        "url": "https://www.techunifi.com/products.html?section=low-Voltage",
-        "content": "Innovator in network infrastructure and industrial electrical solutions."
-      },
-      {
-        "title": "Corning",
-        "url": "https://www.techunifi.com/products.html?section=low-Voltage",
-        "content": "Leading provider of optical communications and glass solutions."
-      },
-      {
-        "title": "CommScope",
-        "url": "https://www.techunifi.com/products.html?section=low-Voltage",
-        "content": "Global leader in network infrastructure solutions for connectivity."
-      },
-      {
-        "title": "Chatsworth Products",
-        "url": "https://www.techunifi.com/products.html?section=low-Voltage",
-        "content": "Manufacturer of IT infrastructure and cable management solutions."
-      },
-      {
-        "title": "Arlington",
-        "url": "https://www.techunifi.com/products.html?section=low-Voltage",
-        "content": "Provider of electrical and communication products for construction."
-      },
-      {
-        "title": "Structured Cabling",
-        "url": "https://www.techunifi.com/products.html?section=low-Voltage",
-        "content": "Structured cabling is the backbone of your IT infrastructure, providing a standardized method for managing and connecting all your network devices, from data centers to office floors."
-      },
-    {
-        "title": "Bittel",
-        "url": "https://www.techunifi.com/products.html?section=telecom",
-        "content": "Smart home automation and IoT solutions"
-      },
-      {
-        "title": "Yealink",
-        "url": "https://www.techunifi.com/products.html?section=telecom",
-        "content": "Unified communication solutions"
-      },
-      {
-        "title": "Mitel",
-        "url": "https://www.techunifi.com/products.html?section=telecom",
-        "content": "Business communications (cloud and on-premise)"
-      },
-      {
-        "title": "Polycomm",
-        "url": "https://www.techunifi.com/products.html?section=telecom",
-        "content": "Communication and collaboration solutions"
-      },
-      {
-        "title": "ComXchange",
-        "url": "https://www.techunifi.com/products.html?section=telecom",
-        "content": "Communication and collaboration platforms"
-      },
-      {
-        "title": "Grandstream",
-        "url": "https://www.techunifi.com/products.html?section=telecom",
-        "content": "IP voice and video telephony solutions"
-      },
-      {
-        "title": "Wind Stream",
-        "url": "https://www.techunifi.com/products.html?section=telecom",
-        "content": "Network communications and technology solutions"
-      },
-      {
-        "title": "Phone Suite",
-        "url": "https://www.techunifi.com/products.html?section=telecom",
-        "content": "Hotel communication and guest management"
-      },
-      {
-        "title": "TigerTMS",
-        "url": "https://www.techunifi.com/products.html?section=telecom",
-        "content": "Hospitality communication solutions"
-      },
-      {
-        "title": "VSR Cloud Communications",
-        "url": "https://www.techunifi.com/products.html?section=telecom",
-        "content": "Cloud-based communication solutions"
-      },
-      {
-        "title": "Telecom - Cordless Phones, Corded Phones, Clocks",
-        "url": "https://www.techunifi.com/products.html?section=telecom",
-        "content": "Cordless Phones, Corded Phones, Clocks, cloud telephone systems(PBX), VIOP, SIP & ISP Solutions"
-      },
-      {
-        "title": "Cordless Phones",
-        "url": "https://www.techunifi.com/products.html?section=telecom",
-        "content": "Neo Cordless - Analog, SIP, 77 DECT MINI, 77 DECT MINI SIP, 77 DECT MINI PLUS, 77 DECT MINI PLUS SIP"
-      },
-      {
-        "title": "Corded Phones",
-        "url": "https://www.techunifi.com/products.html?section=telecom",
-        "content": "77 Slim, 77 Slim SIP, 62 Neo Corded - Analog, 62 Neo Corded - SIP, Neo C2 Analog"
-      },
-      {
-        "title": "Clocks",
-        "url": "https://www.techunifi.com/products.html?section=telecom",
-        "content": "C1 mini, Qi, HC1 Pro Clock, HC2 Pro Clock, D8 Clock, HS1-PD Clock"
-      },
-      {
-        "title": "Hikvision",
-        "url": "https://www.techunifi.com/products.html?section=security",
-        "content": "Leading provider of innovative video surveillance products and solutions."
-      },
-      {
-        "title": "Dahua",
-        "url": "https://www.techunifi.com/products.html?section=security",
-        "content": "Manufacturer of high-performance security and surveillance equipment."
-      },
-      {
-        "title": "Salient",
-        "url": "https://www.techunifi.com/products.html?section=security",
-        "content": "Provider of enterprise video surveillance management systems."
-      },
-      {
-        "title": "Ring",
-        "url": "https://www.techunifi.com/products.html?section=security",
-        "content": "Developer of open-platform software, hardware, and cloud-based services for security."
-      },
-      {
-        "title": "Hanwha Vision",
-        "url": "https://www.techunifi.com/products.html?section=security",
-        "content": "Supplier of advanced video surveillance solutions."
-      },
-      {
-        "title": "LTS",
-        "url": "https://www.techunifi.com/products.html?section=security",
-        "content": "Supplier of advanced video surveillance equipments."
-      },
-      {
-        "title": "Digital Watchdog",
-        "url": "https://www.techunifi.com/products.html?section=security",
-        "content": "Manufacturer of high performance video surveillance"
-      },
-      {
-        "title": "Security",
-        "url": "https://www.techunifi.com/products.html?section=security",
-        "content": "IP Cameras, Specialty Cameras(MEGApix® IP Cameras), LPR Cameras, Firewalls"
-      },
-      {
-        "title": "IP Cameras",
-        "url": "https://www.techunifi.com/products.html?section=security",
-        "content": "Luma™ X20 4MP IP PTZ Camera With 4X Optical Zoom and Active Deterrence - Black, Digital Watchdog MegaPix® 2.1MP PTZ IP Camera, Luma Surveillance™ 820 Series 8MP Dome IP Outdoor Motorized Camera | Black, Luma Surveillance™ 820 Series 8MP Bullet IP Outdoor Camera | Black, Luma Surveillance™ 110 Series Bullet IP Outdoor Camera | White"
-      },
-      {
-        "title": "Specialty Cameras",
-        "url": "https://www.techunifi.com/products.html?section=security",
-        "content": "Digital Watchdog MegaPix® 5MP IVA+ Vandal Turret IP Camera, Digital Watchdog MegaPix® 2.1MP PTZ IP Camera, Digital Watchdog MegaPix® 8MP Ultra Wide Bullet IP Camera"
-      },
-      {
-        "title": "LPR Cameras",
-        "url": "https://www.techunifi.com/products.html?section=security",
-        "content": "4 MP ColorVu DeepinView Varifocal Dome Network Camera, 8 MP DeepinView Multi-sensor (TandemVu) Bullet Camera, 4 MP LPR IR Varifocal Bullet Network Camera, IDS-2CD7046G0/EP-IHSY 11-40MM"
-      },
-      {
-        "title": "JBL",
-        "url": "https://www.techunifi.com/products.html?section=audio-video",
-        "content": "Renowned manufacturer of high-quality audio equipment."
-      },
-      {
-        "title": "Kramer",
-        "url": "https://www.techunifi.com/products.html?section=audio-video",
-        "content": "Provider of innovative audio, video, and computer signal processing solutions."
-      },
-      {
-        "title": "Bose",
-        "url": "https://www.techunifi.com/products.html?section=audio-video",
-        "content": "Leader in premium audio solutions for professional and personal use."
-      },
-      {
-        "title": "Crown Harman",
-        "url": "https://www.techunifi.com/products.html?section=audio-video",
-        "content": "Manufacturer of professional audio amplifiers and related equipment."
-      },
-      {
-        "title": "Draper",
-        "url": "https://www.techunifi.com/products.html?section=audio-video",
-        "content": "Supplier of projection screens and audiovisual equipment."
-      },
-      {
-        "title": "Harman",
-        "url": "https://www.techunifi.com/products.html?section=audio-video",
-        "content": "Designer and engineer of connected products and solutions for automakers, consumers, and enterprises."
-      },
-      {
-        "title": "Yamaha",
-        "url": "https://www.techunifi.com/products.html?section=audio-video",
-        "content": "Manufacturer of a wide range of audio products and musical instruments."
-      },
-      {
-        "title": "Sonos",
-        "url": "https://www.techunifi.com/products.html?section=audio-video",
-        "content": "Developer of wireless home sound systems."
-      },
-      {
-        "title": "JVC",
-        "url": "https://www.techunifi.com/products.html?section=audio-video",
-        "content": "Producer of audio and video equipment, including projectors and cameras."
-      },
-      {
-        "title": "Samsung",
-        "url": "https://www.techunifi.com/products.html?section=audio-video",
-        "content": "Global leader in consumer electronics and digital media technologies."
-      },
-      {
-        "title": "Atlona",
-        "url": "https://www.techunifi.com/products.html?section=audio-video",
-        "content": "Provider of AV and IT distribution and connectivity solutions."
-      },
-      {
-        "title": "RTI",
-        "url": "https://www.techunifi.com/products.html?section=audio-video",
-        "content": "Manufacturer of control and automation systems for residential and commercial applications."
-      },
-      {
-        "title": "LG",
-        "url": "https://www.techunifi.com/products.html?section=audio-video",
-        "content": "Innovator in consumer electronics, appliances, and mobile communications."
-      },
-      {
-        "title": "Audio - Video",
-        "url": "https://www.techunifi.com/products.html?section=audio-video",
-        "content": "Distributed Audio, Conference Room Solutions, Digital Signage, Pro AV"
-      },
-      {
-        "title": "EV Passport",
-        "url": "https://www.techunifi.com/products.html?section=energy",
-        "content": "Provider of electric vehicle charging solutions."
-      },
-      {
-        "title": "Honeywell",
-        "url": "https://www.techunifi.com/products.html?section=energy",
-        "content": "Manufacturer of a wide range of consumer products, engineering services, and aerospace systems."
-      },
-      {
-        "title": "Verdant",
-        "url": "https://www.techunifi.com/products.html?section=energy",
-        "content": "Supplier of energy management solutions for the hospitality industry."
-      },
-      {
-        "title": "Lutron",
-        "url": "https://www.techunifi.com/products.html?section=energy",
-        "content": "Leader in lighting control solutions and automated shading systems."
-      },
-      {
-        "title": "Blink",
-        "url": "https://www.techunifi.com/products.html?section=energy",
-        "content": "Provider of wireless home security cameras and monitoring systems."
-      },
-      {
-        "title": "Energy",
-        "url": "https://www.techunifi.com/products.html?section=energy",
-        "content": "Smart Thermostats, EV chargers, eSaaS"
-      },
-      {
-        "title": "Smart Thermostats",
-        "url": "https://www.techunifi.com/products.html?section=energy",
-        "content": "T6 PRO PROGRAMMABLE THERMOSTAT UP TO 3 HEAT/2 COOL, T6 PRO SMART THERMOSTAT MULTI-STAGE 3 HEAT/2 COOL"
-      },
-      {
-        "title": "EV chargers",
-        "url": "https://www.techunifi.com/products.html?section=energy",
-        "content": "ROSA, LLOYD, LILY, Series 8 Level 2 EV Charging Station, Series 9 - 30kW DC Fast Charging Station"
-      },
-      {
-        "title": "Aruba",
-        "url": "https://www.techunifi.com/products.html?section=wifi",
-        "content": "Provider of secure networking solutions for enterprises."
-      },
-      {
-        "title": "Dell",
-        "url": "https://www.techunifi.com/products.html?section=wifi",
-        "content": "Global technology company offering a wide range of computing products and services."
-      },
-      {
-        "title": "Microsoft",
-        "url": "https://www.techunifi.com/products.html?section=wifi",
-        "content": "Leading developer of software, hardware, and cloud services."
-      },
-      {
-        "title": "Lenovo",
-        "url": "https://www.techunifi.com/products.html?section=wifi",
-        "content": "Multinational technology company specializing in personal computers and related devices."
-      },
-      {
-        "title": "HP",
-        "url": "https://www.techunifi.com/products.html?section=wifi",
-        "content": "Provider of a wide range of hardware and software services for consumers and businesses."
-      },
-      {
-        "title": "Ekahau",
-        "url": "https://www.techunifi.com/products.html?section=wifi",
-        "content": "Developer of Wi-Fi design and troubleshooting solutions."
-      },
-      {
-        "title": "Ubiquiti",
-        "url": "https://www.techunifi.com/products.html?section=wifi",
-        "content": "Manufacturer of wireless data communication and wired products for enterprises and homes."
-      },
-      {
-        "title": "IONOS",
-        "url": "https://www.techunifi.com/products.html?section=other-info",
-        "content": "Provider of web hosting and cloud services."
-      },
-      {
-        "title": "IT Management",
-        "url": "https://www.techunifi.com/products.html?section=other-info",
-        "content": "Cloud, Network Management, IT Partner, Firewalls"
-      },
-      {
-        "title": "Wattbox",
-        "url": "https://www.techunifi.com/products.html?section=wifi",
-        "content": "Provider of web hosting and cloud services."
-      },
-      {
-        "title": "OVrC",
-        "url": "https://www.techunifi.com/products.html?section=wifi",
-        "content": "Provider of web hosting and cloud services."
-      },
-      {
-        "title": "Tejas Networks",
-        "url": "https://www.techunifi.com/products.html?section=wifi",
-        "content": "Provider of web hosting and cloud services."
-      },
-      {
-        "title": "TP-Link",
-        "url": "https://www.techunifi.com/products.html?section=wifi",
-        "content": "Provider of web hosting and cloud services."
-      },
-      {
-        "title": "Omada",
-        "url": "https://www.techunifi.com/products.html?section=wifi",
-        "content": "Provider of web hosting and cloud services."
-      },
-      {
-        "title": "Logitech",
-        "url": "https://www.techunifi.com/products.html?section=wifi",
-        "content": "Provider of web hosting and cloud services."
-      },
-      {
-        "title": "Fortinet",
-        "url": "https://www.techunifi.com/products.html?section=wifi",
-        "content": "Provider of web hosting and cloud services."
-      }
-      
-    
-  ]
+  {
+    "title": "Home",
+    "url": "index.html",
+    "content": "Welcome to TechUnifi. Explore our products and services."
+  },
+  {
+    "title": "About Us",
+    "url": "about.html",
+    "content": "Learn more about TechUnifi and our mission to innovate. Client, Clients, ClientList"
+  },
+  {
+    "title": "Services",
+    "url": "https://www.techunifi.com/#landing-services",
+    "content": "Low Voltage, Telecom, Security, Auido-Video, Network, Wifi, Lighting, Energy, It Solutions,WIFI"
+  },
+  {
+    "title": "News",
+    "url": "https://www.techunifi.com/about.html?tab=news",
+    "content": "News, Latest News, New Changes"
+  },
+  {
+    "title": "aahoacon25, AAHOACON25, Aahoacon25",
+    "url": "https://www.techunifi.com/about.html?tab=news",
+    "content": "aahoacon25, AAHOACON25, Aahoacon25"
+  },
   
+  {
+    "title": "Hotel, Accomodation",
+    "url": "https://www.techunifi.com/about.html?tab=news",
+    "content": "Hilton, Sheraton, Marriott, Home Suites, Home2 Suites, Homewood, Holiday Inn, Hampton, Best Westren, Courtyard Inn, Hyatt House, Country Inn, Tru, Spark, Fairfield Inn Marriott, Courtyard by Marriot, HITEC, Springhill Suites, Walk-a-thon(Baps Charity), New Port Beach Resort, AAHOACON 24, Dual Brand Hilton, Premier Petroleum Hospitality, Brew Pointe Cafe"
+  },
+  {
+    "title": "Product",
+    "url": "products.html",
+    "content": "Product description. Brands, Innovative solutions for your business."
+  },
+  {
+    "title": "Submit A Ticket",
+    "url": "submit.html",
+    "content": "Ticket Form, Service Ticket"
+  },
+  {
+      "title": "New Inquiry",
+      "url": "new-inquiry.html",
+      "content": "Are you a new client? Let's get in touch! We want to learn about your business and understand how Techunifi can best support you. After you fill out the form, an inquiry will be opened, and a Techunifi representative will reach out to you."
+    },
+    {
+      "title": "Change Order",
+      "url": "change-order.html",
+      "content": "Product description. Innovative solutions for your business."
+    },
+    {
+      "title": "Timesheet",
+      "url": "Excel/timesheet.html",
+      "content": "Timesheet, Work Hours, Log Time"
+    },
+    {
+      "title": "Timesheet Spanish",
+      "url": "Excel/timesheet-spanish.html",
+      "content": "Timesheet, Work Hours, Log Time"
+    },
+    {
+      "title": "Terms and Conditions",
+      "url": "terms-conditions.html",
+      "content": "Terms, Conditions, Policy, CopyRight"
+    },
+    {
+      "title": "Brands",
+      "url": "brands.html",
+      "content": "Introducing Techunifi: a brand built on the pillars of reliability, sustainability, and support. Our identity is a reflection of these values, guiding everything we do. With a focus on forging enduring connections, we offer solutions that not only meet but exceed expectations. Committed to sustainability, we strive to minimize our environmental impact while maximizing the effectiveness of our innovations. Our sleek and modern aesthetic mirrors our dedication to simplicity and sophistication, ensuring that our brand remains both contemporary and refined. From cutting-edge technology to unparalleled customer support, Techunifi is here to navigate the digital landscape alongside you, where connectivity is reliable and assistance is always at hand."
+    },
+    {
+      "title": "Contact Us",
+      "url": "https://www.techunifi.com/new-inquiry.html",
+      "content": "Contact, Connect"
+    },
+    {
+      "title": "Footer - Call, Social Links, Email, Facebook, Instagram, Youtube, LinkedIn, X(Twitter), Pinterest",
+      "url": "https://www.techunifi.com#footers",
+      "content": "Address, Location, Call, Social Links, Email, Facebook, Instagram, Youtube, LinkedIn, X(Twitter), Pinterest"
+    },
+    {
+      "title": "Standard",
+      "url": "standard.html",
+      "content": "Site Standard"
+    },
+    {
+      "title": "Take-Off",
+      "url": "takeoff.html",
+      "content": "Take Off"
+    },
+    {
+      "title": "How It Works",
+      "url": "https://www.techunifi.com/#how-it-works",
+      "content": "Design, Construction, Install, Go Live, Operations"
+    },
+    {
+      "title": "Login, Profile",
+      "url": "https://connect.ebizcharge.net/(S(m0bznjppezsmujzremg1hx3y))/EbizLogin.aspx?ReturnUrl=%2fTechunifi",
+      "content": "Login, EbizCharge"
+    },
+    {
+      "title": "ICC",
+      "url": "https://www.techunifi.com/products.html?section=low-Voltage",
+      "content": "Provider of innovative connectivity solutions for networking infrastructure."
+    },
+    {
+      "title": "Legrand",
+      "url": "https://www.techunifi.com/products.html?section=low-Voltage",
+      "content": "Leading global specialist in electrical and digital building infrastructures."
+    },
+    {
+      "title": "Leviton",
+      "url": "https://www.techunifi.com/products.html?section=low-Voltage",
+      "content": "Trusted manufacturer of electrical wiring devices, lighting controls, and network solutions."
+    },
+    {
+      "title": "C2G",
+      "url": "https://www.techunifi.com/products.html?section=low-Voltage",
+      "content": "Supplier of high-quality connectivity solutions for audio/video, PC, and data networking applications."
+    },
+    {
+      "title": "Panduit",
+      "url": "https://www.techunifi.com/products.html?section=low-Voltage",
+      "content": "Innovator in network infrastructure and industrial electrical solutions."
+    },
+    {
+      "title": "Corning",
+      "url": "https://www.techunifi.com/products.html?section=low-Voltage",
+      "content": "Leading provider of optical communications and glass solutions."
+    },
+    {
+      "title": "CommScope",
+      "url": "https://www.techunifi.com/products.html?section=low-Voltage",
+      "content": "Global leader in network infrastructure solutions for connectivity."
+    },
+    {
+      "title": "Chatsworth Products",
+      "url": "https://www.techunifi.com/products.html?section=low-Voltage",
+      "content": "Manufacturer of IT infrastructure and cable management solutions."
+    },
+    {
+      "title": "Arlington",
+      "url": "https://www.techunifi.com/products.html?section=low-Voltage",
+      "content": "Provider of electrical and communication products for construction."
+    },
+    {
+      "title": "Structured Cabling",
+      "url": "https://www.techunifi.com/products.html?section=low-Voltage",
+      "content": "Structured cabling is the backbone of your IT infrastructure, providing a standardized method for managing and connecting all your network devices, from data centers to office floors."
+    },
+  {
+      "title": "Bittel",
+      "url": "https://www.techunifi.com/products.html?section=telecom",
+      "content": "Smart home automation and IoT solutions"
+    },
+    {
+      "title": "Yealink",
+      "url": "https://www.techunifi.com/products.html?section=telecom",
+      "content": "Unified communication solutions"
+    },
+    {
+      "title": "Mitel",
+      "url": "https://www.techunifi.com/products.html?section=telecom",
+      "content": "Business communications (cloud and on-premise)"
+    },
+    {
+      "title": "Polycomm",
+      "url": "https://www.techunifi.com/products.html?section=telecom",
+      "content": "Communication and collaboration solutions"
+    },
+    {
+      "title": "ComXchange",
+      "url": "https://www.techunifi.com/products.html?section=telecom",
+      "content": "Communication and collaboration platforms"
+    },
+    {
+      "title": "Grandstream",
+      "url": "https://www.techunifi.com/products.html?section=telecom",
+      "content": "IP voice and video telephony solutions"
+    },
+    {
+      "title": "Wind Stream",
+      "url": "https://www.techunifi.com/products.html?section=telecom",
+      "content": "Network communications and technology solutions"
+    },
+    {
+      "title": "Phone Suite",
+      "url": "https://www.techunifi.com/products.html?section=telecom",
+      "content": "Hotel communication and guest management"
+    },
+    {
+      "title": "TigerTMS",
+      "url": "https://www.techunifi.com/products.html?section=telecom",
+      "content": "Hospitality communication solutions"
+    },
+    {
+      "title": "VSR Cloud Communications",
+      "url": "https://www.techunifi.com/products.html?section=telecom",
+      "content": "Cloud-based communication solutions"
+    },
+    {
+      "title": "Telecom - Cordless Phones, Corded Phones, Clocks",
+      "url": "https://www.techunifi.com/products.html?section=telecom",
+      "content": "Cordless Phones, Corded Phones, Clocks, cloud telephone systems(PBX), VIOP, SIP & ISP Solutions"
+    },
+    {
+      "title": "Cordless Phones",
+      "url": "https://www.techunifi.com/products.html?section=telecom",
+      "content": "Neo Cordless - Analog, SIP, 77 DECT MINI, 77 DECT MINI SIP, 77 DECT MINI PLUS, 77 DECT MINI PLUS SIP"
+    },
+    {
+      "title": "Corded Phones",
+      "url": "https://www.techunifi.com/products.html?section=telecom",
+      "content": "77 Slim, 77 Slim SIP, 62 Neo Corded - Analog, 62 Neo Corded - SIP, Neo C2 Analog"
+    },
+    {
+      "title": "Clocks",
+      "url": "https://www.techunifi.com/products.html?section=telecom",
+      "content": "C1 mini, Qi, HC1 Pro Clock, HC2 Pro Clock, D8 Clock, HS1-PD Clock"
+    },
+    {
+      "title": "Hikvision",
+      "url": "https://www.techunifi.com/products.html?section=security",
+      "content": "Leading provider of innovative video surveillance products and solutions."
+    },
+    {
+      "title": "Dahua",
+      "url": "https://www.techunifi.com/products.html?section=security",
+      "content": "Manufacturer of high-performance security and surveillance equipment."
+    },
+    {
+      "title": "Salient",
+      "url": "https://www.techunifi.com/products.html?section=security",
+      "content": "Provider of enterprise video surveillance management systems."
+    },
+    {
+      "title": "Ring",
+      "url": "https://www.techunifi.com/products.html?section=security",
+      "content": "Developer of open-platform software, hardware, and cloud-based services for security."
+    },
+    {
+      "title": "Hanwha Vision",
+      "url": "https://www.techunifi.com/products.html?section=security",
+      "content": "Supplier of advanced video surveillance solutions."
+    },
+    {
+      "title": "LTS",
+      "url": "https://www.techunifi.com/products.html?section=security",
+      "content": "Supplier of advanced video surveillance equipments."
+    },
+    {
+      "title": "Digital Watchdog",
+      "url": "https://www.techunifi.com/products.html?section=security",
+      "content": "Manufacturer of high performance video surveillance"
+    },
+    {
+      "title": "Security",
+      "url": "https://www.techunifi.com/products.html?section=security",
+      "content": "IP Cameras, Specialty Cameras(MEGApix® IP Cameras), LPR Cameras, Firewalls"
+    },
+    {
+      "title": "IP Cameras",
+      "url": "https://www.techunifi.com/products.html?section=security",
+      "content": "Luma™ X20 4MP IP PTZ Camera With 4X Optical Zoom and Active Deterrence - Black, Digital Watchdog MegaPix® 2.1MP PTZ IP Camera, Luma Surveillance™ 820 Series 8MP Dome IP Outdoor Motorized Camera | Black, Luma Surveillance™ 820 Series 8MP Bullet IP Outdoor Camera | Black, Luma Surveillance™ 110 Series Bullet IP Outdoor Camera | White"
+    },
+    {
+      "title": "Specialty Cameras",
+      "url": "https://www.techunifi.com/products.html?section=security",
+      "content": "Digital Watchdog MegaPix® 5MP IVA+ Vandal Turret IP Camera, Digital Watchdog MegaPix® 2.1MP PTZ IP Camera, Digital Watchdog MegaPix® 8MP Ultra Wide Bullet IP Camera"
+    },
+    {
+      "title": "LPR Cameras",
+      "url": "https://www.techunifi.com/products.html?section=security",
+      "content": "4 MP ColorVu DeepinView Varifocal Dome Network Camera, 8 MP DeepinView Multi-sensor (TandemVu) Bullet Camera, 4 MP LPR IR Varifocal Bullet Network Camera, IDS-2CD7046G0/EP-IHSY 11-40MM"
+    },
+    {
+      "title": "JBL",
+      "url": "https://www.techunifi.com/products.html?section=audio-video",
+      "content": "Renowned manufacturer of high-quality audio equipment."
+    },
+    {
+      "title": "Kramer",
+      "url": "https://www.techunifi.com/products.html?section=audio-video",
+      "content": "Provider of innovative audio, video, and computer signal processing solutions."
+    },
+    {
+      "title": "Bose",
+      "url": "https://www.techunifi.com/products.html?section=audio-video",
+      "content": "Leader in premium audio solutions for professional and personal use."
+    },
+    {
+      "title": "Crown Harman",
+      "url": "https://www.techunifi.com/products.html?section=audio-video",
+      "content": "Manufacturer of professional audio amplifiers and related equipment."
+    },
+    {
+      "title": "Draper",
+      "url": "https://www.techunifi.com/products.html?section=audio-video",
+      "content": "Supplier of projection screens and audiovisual equipment."
+    },
+    {
+      "title": "Harman",
+      "url": "https://www.techunifi.com/products.html?section=audio-video",
+      "content": "Designer and engineer of connected products and solutions for automakers, consumers, and enterprises."
+    },
+    {
+      "title": "Yamaha",
+      "url": "https://www.techunifi.com/products.html?section=audio-video",
+      "content": "Manufacturer of a wide range of audio products and musical instruments."
+    },
+    {
+      "title": "Sonos",
+      "url": "https://www.techunifi.com/products.html?section=audio-video",
+      "content": "Developer of wireless home sound systems."
+    },
+    {
+      "title": "JVC",
+      "url": "https://www.techunifi.com/products.html?section=audio-video",
+      "content": "Producer of audio and video equipment, including projectors and cameras."
+    },
+    {
+      "title": "Samsung",
+      "url": "https://www.techunifi.com/products.html?section=audio-video",
+      "content": "Global leader in consumer electronics and digital media technologies."
+    },
+    {
+      "title": "Atlona",
+      "url": "https://www.techunifi.com/products.html?section=audio-video",
+      "content": "Provider of AV and IT distribution and connectivity solutions."
+    },
+    {
+      "title": "RTI",
+      "url": "https://www.techunifi.com/products.html?section=audio-video",
+      "content": "Manufacturer of control and automation systems for residential and commercial applications."
+    },
+    {
+      "title": "LG",
+      "url": "https://www.techunifi.com/products.html?section=audio-video",
+      "content": "Innovator in consumer electronics, appliances, and mobile communications."
+    },
+    {
+      "title": "Audio - Video",
+      "url": "https://www.techunifi.com/products.html?section=audio-video",
+      "content": "Distributed Audio, Conference Room Solutions, Digital Signage, Pro AV"
+    },
+    {
+      "title": "EV Passport",
+      "url": "https://www.techunifi.com/products.html?section=energy",
+      "content": "Provider of electric vehicle charging solutions."
+    },
+    {
+      "title": "Honeywell",
+      "url": "https://www.techunifi.com/products.html?section=energy",
+      "content": "Manufacturer of a wide range of consumer products, engineering services, and aerospace systems."
+    },
+    {
+      "title": "Verdant",
+      "url": "https://www.techunifi.com/products.html?section=energy",
+      "content": "Supplier of energy management solutions for the hospitality industry."
+    },
+    {
+      "title": "Lutron",
+      "url": "https://www.techunifi.com/products.html?section=energy",
+      "content": "Leader in lighting control solutions and automated shading systems."
+    },
+    {
+      "title": "Blink",
+      "url": "https://www.techunifi.com/products.html?section=energy",
+      "content": "Provider of wireless home security cameras and monitoring systems."
+    },
+    {
+      "title": "Energy",
+      "url": "https://www.techunifi.com/products.html?section=energy",
+      "content": "Smart Thermostats, EV chargers, eSaaS"
+    },
+    {
+      "title": "Smart Thermostats",
+      "url": "https://www.techunifi.com/products.html?section=energy",
+      "content": "T6 PRO PROGRAMMABLE THERMOSTAT UP TO 3 HEAT/2 COOL, T6 PRO SMART THERMOSTAT MULTI-STAGE 3 HEAT/2 COOL"
+    },
+    {
+      "title": "EV chargers",
+      "url": "https://www.techunifi.com/products.html?section=energy",
+      "content": "ROSA, LLOYD, LILY, Series 8 Level 2 EV Charging Station, Series 9 - 30kW DC Fast Charging Station"
+    },
+    {
+      "title": "Aruba",
+      "url": "https://www.techunifi.com/products.html?section=wifi",
+      "content": "Provider of secure networking solutions for enterprises."
+    },
+    {
+      "title": "Dell",
+      "url": "https://www.techunifi.com/products.html?section=wifi",
+      "content": "Global technology company offering a wide range of computing products and services."
+    },
+    {
+      "title": "Microsoft",
+      "url": "https://www.techunifi.com/products.html?section=wifi",
+      "content": "Leading developer of software, hardware, and cloud services."
+    },
+    {
+      "title": "Lenovo",
+      "url": "https://www.techunifi.com/products.html?section=wifi",
+      "content": "Multinational technology company specializing in personal computers and related devices."
+    },
+    {
+      "title": "HP",
+      "url": "https://www.techunifi.com/products.html?section=wifi",
+      "content": "Provider of a wide range of hardware and software services for consumers and businesses."
+    },
+    {
+      "title": "Ekahau",
+      "url": "https://www.techunifi.com/products.html?section=wifi",
+      "content": "Developer of Wi-Fi design and troubleshooting solutions."
+    },
+    {
+      "title": "Ubiquiti",
+      "url": "https://www.techunifi.com/products.html?section=wifi",
+      "content": "Manufacturer of wireless data communication and wired products for enterprises and homes."
+    },
+    {
+      "title": "IONOS",
+      "url": "https://www.techunifi.com/products.html?section=other-info",
+      "content": "Provider of web hosting and cloud services."
+    },
+    {
+      "title": "IT Management",
+      "url": "https://www.techunifi.com/products.html?section=other-info",
+      "content": "Cloud, Network Management, IT Partner, Firewalls"
+    },
+    {
+      "title": "Wattbox",
+      "url": "https://www.techunifi.com/products.html?section=wifi",
+      "content": "Provider of web hosting and cloud services."
+    },
+    {
+      "title": "OVrC",
+      "url": "https://www.techunifi.com/products.html?section=wifi",
+      "content": "Provider of web hosting and cloud services."
+    },
+    {
+      "title": "Tejas Networks",
+      "url": "https://www.techunifi.com/products.html?section=wifi",
+      "content": "Provider of web hosting and cloud services."
+    },
+    {
+      "title": "TP-Link",
+      "url": "https://www.techunifi.com/products.html?section=wifi",
+      "content": "Provider of web hosting and cloud services."
+    },
+    {
+      "title": "Omada",
+      "url": "https://www.techunifi.com/products.html?section=wifi",
+      "content": "Provider of web hosting and cloud services."
+    },
+    {
+      "title": "Logitech",
+      "url": "https://www.techunifi.com/products.html?section=wifi",
+      "content": "Provider of web hosting and cloud services."
+    },
+    {
+      "title": "Fortinet",
+      "url": "https://www.techunifi.com/products.html?section=wifi",
+      "content": "Provider of web hosting and cloud services."
+    }
+    
+  
+]
