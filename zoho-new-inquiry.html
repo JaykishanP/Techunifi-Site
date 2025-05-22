@@ -419,60 +419,112 @@ function gtag(){dataLayer.push(arguments);}
 								}
 								return true;
 							}
-							function checkMandatory6771280000000651020 (){
-								var mndFileds = new Array ( 'Company', 'Last Name' );
-								var fldLangVal = new Array ( 'Company', 'Last\x20Name' );
-								for ( i = 0; i < mndFileds.length; i++ ){
-									var fieldObj = document.forms[ 'WebToLeads6771280000000651020' ][ mndFileds[ i ]];
-									if ( fieldObj ){
-										if (((fieldObj.value ).replace( /^\s+|\s+$/g,'' )).length == 0 ){
-											if ( fieldObj.type == 'file' ){
-												alert ( 'Please select a file to upload.' );
-												fieldObj.focus ();
-												return false;
-											}
-											alert ( fldLangVal[ i ] + ' cannot be empty.' );
-											fieldObj.focus ();
-											return false;
-										}
-										else if ( fieldObj.nodeName == 'SELECT' ){
-											if ( fieldObj.options[fieldObj.selectedIndex].value == '-None-' ){
-												alert ( fldLangVal[ i ] + ' cannot be none.' );
-												fieldObj.focus ();
-												return false;
-											}
-										}
-										else if ( fieldObj.type == 'checkbox' ){
-											if ( fieldObj.checked == false ){
-												alert ( 'Please accept  ' + fldLangVal[ i ]);
-												fieldObj.focus ();
-												return false;
-											}
-										}
-										try {
-											if ( fieldObj.name == 'Last Name' ){
-												name = fieldObj.value;
-											}
-										}
-										catch ( e ){}
-									}
-								}
-								if ( !validateEmail6771280000000651020()){
-									return false;
-								}
-								var urlparams = new URLSearchParams ( window.location.search );
-								if ( urlparams.has( 'service' ) && ( urlparams.get( 'service' ) === 'smarturl' )){
-									var webform = document.getElementById ( 'webform6771280000000651020' );
-									var service = urlparams.get ( 'service' );
-									var smarturlfield = document.createElement ( 'input' );
-									smarturlfield.setAttribute ( 'type', 'hidden' );
-									smarturlfield.setAttribute ( 'value', service );
-									smarturlfield.setAttribute ( 'name', 'service' );
-									webform.appendChild ( smarturlfield );
-								}
-								// document.querySelector ( '.crmWebToEntityForm .formsubmit' ).setAttribute ( 'disabled', true );
-							}
-							function tooltipShow6771280000000651020 ( el ){
+
+							// function checkMandatory6771280000000651020 (){
+							// 	var mndFileds = new Array ( 'Company', 'Last Name' );
+							// 	var fldLangVal = new Array ( 'Company', 'Last\x20Name' );
+							// 	for ( i = 0; i < mndFileds.length; i++ ){
+							// 		var fieldObj = document.forms[ 'WebToLeads6771280000000651020' ][ mndFileds[ i ]];
+							// 		if ( fieldObj ){
+							// 			if (((fieldObj.value ).replace( /^\s+|\s+$/g,'' )).length == 0 ){
+							// 				if ( fieldObj.type == 'file' ){
+							// 					alert ( 'Please select a file to upload.' );
+							// 					fieldObj.focus ();
+							// 					return false;
+							// 				}
+							// 				alert ( fldLangVal[ i ] + ' cannot be empty.' );
+							// 				fieldObj.focus ();
+							// 				return false;
+							// 			}
+							// 			else if ( fieldObj.nodeName == 'SELECT' ){
+							// 				if ( fieldObj.options[fieldObj.selectedIndex].value == '-None-' ){
+							// 					alert ( fldLangVal[ i ] + ' cannot be none.' );
+							// 					fieldObj.focus ();
+							// 					return false;
+							// 				}
+							// 			}
+							// 			else if ( fieldObj.type == 'checkbox' ){
+							// 				if ( fieldObj.checked == false ){
+							// 					alert ( 'Please accept  ' + fldLangVal[ i ]);
+							// 					fieldObj.focus ();
+							// 					return false;
+							// 				}
+							// 			}
+							// 			try {
+							// 				if ( fieldObj.name == 'Last Name' ){
+							// 					name = fieldObj.value;
+							// 				}
+							// 			}
+							// 			catch ( e ){}
+							// 		}
+							// 	}
+							// 	if ( !validateEmail6771280000000651020()){
+							// 		return false;
+							// 	}
+							// 	var urlparams = new URLSearchParams ( window.location.search );
+							// 	if ( urlparams.has( 'service' ) && ( urlparams.get( 'service' ) === 'smarturl' )){
+							// 		var webform = document.getElementById ( 'webform6771280000000651020' );
+							// 		var service = urlparams.get ( 'service' );
+							// 		var smarturlfield = document.createElement ( 'input' );
+							// 		smarturlfield.setAttribute ( 'type', 'hidden' );
+							// 		smarturlfield.setAttribute ( 'value', service );
+							// 		smarturlfield.setAttribute ( 'name', 'service' );
+							// 		webform.appendChild ( smarturlfield );
+							// 	}
+							// 	// document.querySelector ( '.crmWebToEntityForm .formsubmit' ).setAttribute ( 'disabled', true );
+							// }
+							
+              function checkMandatory6771280000000651020() {
+    const form = document.getElementById('myInquiryForm');
+    const inputs = form.querySelectorAll('input, textarea, select');
+    let isValid = true;
+    let errorMessage = '';
+
+    for (const input of inputs) {
+      const isNotRequired = input.classList.contains('not-required');
+      const type = input.type;
+      const value = input.value.trim();
+      const isHidden = input.style.display === 'none' || input.type === 'hidden';
+
+      // Skip hidden or not-required fields
+      if (isHidden || isNotRequired) continue;
+
+      if (
+        (type === 'text' || type === 'textarea' || type === 'number' || type === 'email' || input.tagName === 'SELECT') &&
+        !value
+      ) {
+        errorMessage = `${input.name || input.id || 'This field'} cannot be empty.`;
+        input.focus();
+        isValid = false;
+        break;
+      }
+
+      // Basic email validation
+      if (type === 'text' && input.name.toLowerCase() === 'email') {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(value)) {
+          alert('Please enter a valid email address.');
+          input.focus();
+          return false;
+        }
+      }
+    }
+
+    // reCAPTCHA validation
+    const captcha = document.querySelector('.g-recaptcha-response');
+    if (!captcha || captcha.value.trim() === '') {
+      alert('Please complete the reCAPTCHA.');
+      isValid = false;
+    }
+
+    if (!isValid && errorMessage) {
+      alert(errorMessage);
+    }
+
+    return isValid;
+  }
+              
+              function tooltipShow6771280000000651020 ( el ){
 								var tooltip = el.nextElementSibling;
 								var tooltipDisplay = tooltip.style.display;
 								if ( tooltipDisplay == 'none' ){
@@ -672,7 +724,6 @@ function gtag(){dataLayer.push(arguments);}
 
   <!-- Template Main JS File -->
   <!-- <script src="assets/js/main.js"></script> -->
-
 
 </body>
 </html>
