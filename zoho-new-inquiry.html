@@ -191,7 +191,7 @@ function gtag(){dataLayer.push(arguments);}
                             </div>
                             <!--  -->
           
-                            <form id='myInquiryForm' action = 'https://crm.zoho.com/crm/WebToLeadForm' name = WebToLeads6771280000000651020 method ='POST' onSubmit = 'javascript:document.charset="UTF-8";' accept-charset = 'UTF-8'>
+                            <form id='myInquiryForm' action = 'https://crm.zoho.com/crm/WebToLeadForm' name = WebToLeads6771280000000651020 method ='POST' onSubmit = 'javascript:document.charset="UTF-8"; return checkMandatory6771280000000651020()' accept-charset = 'UTF-8'>
 
                               <!-- hidden -->
                                <input type = 'text' style = 'display:none;' name = 'xnQsjsdp' value = 'b36445c3a91dd82178848ac1f9dd4683341530006c9a920e59b15ef40e1d0447'>
@@ -573,7 +573,104 @@ function gtag(){dataLayer.push(arguments);}
   <!-- <script src="assets/vendor/php-email-form/validate.js"></script> -->
 
   <!-- Template Main JS File -->
- <!--   <script src="assets/js/main.js"></script> -->
+  <script src="assets/js/main.js"></script>
+
+  
+						<script>
+							function addAriaSelected6771280000000651020 (){
+								var optionElem = event.target;
+								var previousSelectedOption = optionElem.querySelector ( '[aria-selected=true]' );
+								if ( previousSelectedOption ){
+									previousSelectedOption.removeAttribute ( 'aria-selected' );
+								}
+								optionElem.querySelectorAll ( 'option' )[ optionElem.selectedIndex ].ariaSelected = 'true';
+							}
+							function validateEmail6771280000000651020 (){
+								var form = document.forms[ 'WebToLeads6771280000000651020' ];
+								var emailFld = form.querySelectorAll ( '[ftype=email]' );
+								var i;
+								for ( i = 0; i < emailFld.length; i++ ){
+									var emailVal = emailFld[ i ].value;
+									if ((emailVal.replace( /^\s+|\s+$/g,'' )).length != 0 ){
+										var atpos = emailVal.indexOf ( '@' );
+										var dotpos = emailVal.lastIndexOf ( '.' );
+										if ( atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= emailVal.length ){
+											alert ( 'Please enter a valid email address. ' );
+											emailFld[ i ].focus ();
+											return false;
+										}
+									}
+								}
+								return true;
+							}
+							function checkMandatory6771280000000651020 (){
+								var mndFileds = new Array ( 'Company', 'Last Name' );
+								var fldLangVal = new Array ( 'Company', 'Last\x20Name' );
+								for ( i = 0; i < mndFileds.length; i++ ){
+									var fieldObj = document.forms[ 'WebToLeads6771280000000651020' ][ mndFileds[ i ]];
+									if ( fieldObj ){
+										if (((fieldObj.value ).replace( /^\s+|\s+$/g,'' )).length == 0 ){
+											if ( fieldObj.type == 'file' ){
+												alert ( 'Please select a file to upload.' );
+												fieldObj.focus ();
+												return false;
+											}
+											alert ( fldLangVal[ i ] + ' cannot be empty.' );
+											fieldObj.focus ();
+											return false;
+										}
+										else if ( fieldObj.nodeName == 'SELECT' ){
+											if ( fieldObj.options[fieldObj.selectedIndex].value == '-None-' ){
+												alert ( fldLangVal[ i ] + ' cannot be none.' );
+												fieldObj.focus ();
+												return false;
+											}
+										}
+										else if ( fieldObj.type == 'checkbox' ){
+											if ( fieldObj.checked == false ){
+												alert ( 'Please accept  ' + fldLangVal[ i ]);
+												fieldObj.focus ();
+												return false;
+											}
+										}
+										try {
+											if ( fieldObj.name == 'Last Name' ){
+												name = fieldObj.value;
+											}
+										}
+										catch ( e ){}
+									}
+								}
+								if ( !validateEmail6771280000000651020()){
+									return false;
+								}
+								var urlparams = new URLSearchParams ( window.location.search );
+								if ( urlparams.has( 'service' ) && ( urlparams.get( 'service' ) === 'smarturl' )){
+									var webform = document.getElementById ( 'webform6771280000000651020' );
+									var service = urlparams.get ( 'service' );
+									var smarturlfield = document.createElement ( 'input' );
+									smarturlfield.setAttribute ( 'type', 'hidden' );
+									smarturlfield.setAttribute ( 'value', service );
+									smarturlfield.setAttribute ( 'name', 'service' );
+									webform.appendChild ( smarturlfield );
+								}
+								document.querySelector ( '.crmWebToEntityForm .formsubmit' ).setAttribute ( 'disabled', true );
+							}
+							function tooltipShow6771280000000651020 ( el ){
+								var tooltip = el.nextElementSibling;
+								var tooltipDisplay = tooltip.style.display;
+								if ( tooltipDisplay == 'none' ){
+									var allTooltip = document.getElementsByClassName ( 'zcwf_tooltip_over' );
+									for ( i = 0; i < allTooltip.length; i++ ){
+										allTooltip[ i ].style.display = 'none';
+									}
+									tooltip.style.display = 'block';
+								}
+								else {
+									tooltip.style.display = 'none';
+								}
+							}
+						</script>
 
 </body>
 </html>
