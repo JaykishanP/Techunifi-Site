@@ -393,83 +393,71 @@ function gtag(){dataLayer.push(arguments);}
                               </div>
             
 						<script>
-			             function checkMandatory6771280000000651020() {
-  const form = document.getElementById('myInquiryForm');
-  const requiredFields = form.querySelectorAll('input:not(.not-required), textarea:not(.not-required), select:not(.not-required)');
-  let isValid = true;
-  let firstInvalidField = null;
+function checkMandatory6771280000000651020() {
+    const form = document.getElementById('myInquiryForm');
+    const requiredFields = form.querySelectorAll('input:not(.not-required), textarea:not(.not-required), select:not(.not-required)');
+    let isValid = true;
+    let firstInvalidField = null;
 
-  requiredFields.forEach(field => {
-    if (
-      field.type !== "hidden" &&
-      field.offsetParent !== null &&
-      field.name !== "" &&
-      field.getAttribute('name') !== 'captcha_settings'
-    ) {
-      const value = field.value.trim();
-      const isSelect = field.tagName === 'SELECT';
+    requiredFields.forEach(field => {
+      if (
+        field.type !== "hidden" &&
+        field.offsetParent !== null &&
+        field.name !== "" &&
+        field.getAttribute('name') !== 'captcha_settings'
+      ) {
+        const value = field.value.trim();
+        const isSelect = field.tagName === 'SELECT';
 
-      const isEmpty = (value === '' && !isSelect) || (isSelect && field.selectedIndex === 0);
-      if (isEmpty) {
-        field.style.border = "1px solid red";
+        const isEmpty = (value === '' && !isSelect) || (isSelect && field.selectedIndex === 0);
+        if (isEmpty) {
+          field.style.border = "1px solid red";
+          if (!firstInvalidField) {
+            firstInvalidField = field;
+          }
+          isValid = false;
+        } else {
+          field.style.border = "1px solid green";
+        }
+      }
+    });
+
+    // Email format check
+    const emailField = form.querySelector('[ftype=email]');
+    if (emailField) {
+      const email = emailField.value.trim();
+      const atpos = email.indexOf('@');
+      const dotpos = email.lastIndexOf('.');
+      const emailValid = atpos > 0 && dotpos > atpos + 1 && dotpos + 2 < email.length;
+
+      if (!emailValid) {
+        emailField.style.border = "1px solid red";
         if (!firstInvalidField) {
-          firstInvalidField = field;
+          firstInvalidField = emailField;
         }
         isValid = false;
       } else {
-        field.style.border = "1px solid green";
+        emailField.style.border = "1px solid green";
       }
     }
-  });
 
-  // Email format check
-  const emailField = form.querySelector('[ftype=email]');
-  if (emailField) {
-    const email = emailField.value.trim();
-    const atpos = email.indexOf('@');
-    const dotpos = email.lastIndexOf('.');
-    const emailValid = atpos > 0 && dotpos > atpos + 1 && dotpos + 2 < email.length;
-
-    if (!emailValid) {
-      emailField.style.border = "1px solid red";
-      if (!firstInvalidField) {
-        firstInvalidField = emailField;
+    // Captcha validation
+    if (typeof grecaptcha !== "undefined") {
+      const response = grecaptcha.getResponse();
+      if (response.length === 0) {
+        alert("Please complete the reCAPTCHA.");
+        isValid = false;
       }
-      isValid = false;
-    } else {
-      emailField.style.border = "1px solid green";
     }
-  }
 
-  // Captcha validation
-  if (typeof grecaptcha !== "undefined") {
-    const response = grecaptcha.getResponse();
-    if (response.length === 0) {
-      alert("Please complete the reCAPTCHA.");
-      isValid = false;
+    // Scroll to first invalid field
+    if (firstInvalidField) {
+      firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      firstInvalidField.focus();
     }
-  }
 
-  // Scroll to first invalid field
-  if (firstInvalidField) {
-    firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    firstInvalidField.focus();
+    return isValid;
   }
-
-  // ✅ Reset form if valid
-  if (isValid) {
-    setTimeout(() => {
-      form.reset();
-      requiredFields.forEach(field => {
-        field.style.border = "";
-      });
-      if (emailField) emailField.style.border = "";
-      grecaptcha.reset?.(); // Reset reCAPTCHA if needed
-    }, 100); // slight delay to allow submit event to process
-  }
-
-  return isValid;
-}
 
             </script>
 
