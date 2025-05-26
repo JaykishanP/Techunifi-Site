@@ -330,7 +330,7 @@ function gtag(){dataLayer.push(arguments);}
                                       </span>
                                     </label>
 
-                                <select class="contact-form-home" id="Industry" multiple="multiple" aria-label="Industry" name="Industry" onChange = 'addAriaSelected6771280000000651020()' title="Service Needed">
+                                <select class="contact-form-home" id="Industry" multiple="multiple" aria-label="Industry" name="Industry[]" onChange = 'addAriaSelected6771280000000651020()' title="Service Needed">
                                   <option value="EV Charging">EV Charging</option>
                                   <option value="Phone">Phone</option>
                                   <option value="TV">TV</option>
@@ -393,7 +393,7 @@ function gtag(){dataLayer.push(arguments);}
                               </div>
             
 						
-						<script>
+						<!-- <script>
 
 							function addAriaSelected6771280000000651020 (){
 								var optionElem = event.target;
@@ -521,7 +521,135 @@ function gtag(){dataLayer.push(arguments);}
 							}
 						
             </script>
+ -->
 
+ <script>
+  function addAriaSelected6771280000000651020(event) {
+    const select = event.target;
+    const options = select.options;
+
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        options[i].setAttribute('aria-selected', 'true');
+      } else {
+        options[i].removeAttribute('aria-selected');
+      }
+    }
+  }
+
+  function validateEmail6771280000000651020() {
+    const form = document.forms['WebToLeads6771280000000651020'];
+    const emailFld = form.querySelectorAll('[ftype=email]');
+    for (let i = 0; i < emailFld.length; i++) {
+      const emailVal = emailFld[i].value.trim();
+      if (emailVal.length !== 0) {
+        const atpos = emailVal.indexOf('@');
+        const dotpos = emailVal.lastIndexOf('.');
+        if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= emailVal.length) {
+          alert('Please enter a valid email address.');
+          emailFld[i].focus();
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  function checkMandatory6771280000000651020() {
+    const form = document.getElementById('myInquiryForm');
+    const requiredFields = form.querySelectorAll('input:not(.not-required), textarea:not(.not-required), select:not(.not-required)');
+    let isValid = true;
+    let firstInvalidField = null;
+
+    requiredFields.forEach(field => {
+      if (
+        field.type !== "hidden" &&
+        field.offsetParent !== null &&
+        field.name !== "" &&
+        field.getAttribute('name') !== 'captcha_settings'
+      ) {
+        const value = field.value.trim();
+        const isSelect = field.tagName === 'SELECT';
+        const isEmpty = (value === '' && !isSelect) || (isSelect && field.selectedOptions.length === 0);
+
+        if (isEmpty) {
+          field.style.border = "2px solid red";
+          if (!firstInvalidField) {
+            firstInvalidField = field;
+          }
+          isValid = false;
+        } else {
+          field.style.border = "2px solid green";
+        }
+      }
+    });
+
+    // Email format check
+    const emailField = form.querySelector('[ftype=email]');
+    if (emailField) {
+      const email = emailField.value.trim();
+      const atpos = email.indexOf('@');
+      const dotpos = email.lastIndexOf('.');
+      const emailValid = atpos > 0 && dotpos > atpos + 1 && dotpos + 2 < email.length;
+
+      if (!emailValid) {
+        emailField.style.border = "2px solid red";
+        if (!firstInvalidField) {
+          firstInvalidField = emailField;
+        }
+        isValid = false;
+      } else {
+        emailField.style.border = "2px solid green";
+      }
+    }
+
+    // Captcha validation
+    if (typeof grecaptcha !== "undefined") {
+      const response = grecaptcha.getResponse();
+      if (response.length === 0) {
+        alert("Please complete the reCAPTCHA.");
+        isValid = false;
+      }
+    }
+
+    // Scroll to first invalid field
+    if (firstInvalidField) {
+      firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      firstInvalidField.focus();
+    }
+
+    return isValid;
+  }
+
+  // Real-time border updates
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('myInquiryForm');
+    form.querySelectorAll('input, textarea, select').forEach(el => {
+      el.addEventListener('input', () => {
+        if (el.value.trim() !== '') {
+          el.style.border = "2px solid green";
+        } else {
+          el.style.border = "";
+        }
+      });
+    });
+
+    // Attach event listener for multi-select aria updates
+    const industryField = document.getElementById('Industry');
+    if (industryField) {
+      industryField.addEventListener('change', addAriaSelected6771280000000651020);
+    }
+  });
+
+  function tooltipShow6771280000000651020(el) {
+    const tooltip = el.nextElementSibling;
+    const allTooltips = document.getElementsByClassName('zcwf_tooltip_over');
+    for (let i = 0; i < allTooltips.length; i++) {
+      allTooltips[i].style.display = 'none';
+    }
+    tooltip.style.display = tooltip.style.display === 'block' ? 'none' : 'block';
+  }
+</script>
 
                               	<!-- Do not remove this --- Analytics Tracking code starts -->
 						<script id='wf_anal' src='https://crm.zohopublic.com/crm/WebFormAnalyticsServeServlet?rid=d32296b6329472f59fd92d6382add4bec6c31cc5fa6c3e3e0db379b87946f800559feb46c62e649440876f0f303069d3gidc4a7baeb1bce82778f007ac577823ea92dabcafa0a87249fca2bc14721632bdcgidf7836078c10305791a009191ba535d97eac287e6494a1b2b08545b6bef9278e8gidcedc739e56bae3f771472f48a6e8421f859debbabcfa7e7bd10d91928f02fdd5&tw=0cd0b3495968c652a1472ac1fbab6a73616f956109539709ea85903b3d241ef0'></script>
