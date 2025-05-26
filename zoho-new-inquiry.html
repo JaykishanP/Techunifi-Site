@@ -424,12 +424,12 @@ function gtag(){dataLayer.push(arguments);}
 
             //check mandatory
 
-             function checkMandatory6771280000000651020() {
+               function checkMandatory6771280000000651020() {
     const form = document.getElementById('myInquiryForm');
     const requiredFields = form.querySelectorAll('input:not(.not-required), textarea:not(.not-required), select:not(.not-required)');
     let isValid = true;
     let firstInvalidField = null;
-
+ 
     requiredFields.forEach(field => {
       if (
         field.type !== "hidden" &&
@@ -440,17 +440,19 @@ function gtag(){dataLayer.push(arguments);}
         const value = field.value.trim();
         const isSelect = field.tagName === 'SELECT';
         const isEmpty = (value === '' && !isSelect) || (isSelect && field.selectedIndex === 0);
-
+ 
         if (isEmpty) {
           field.style.border = "1px solid red";
-          if (!firstInvalidField) firstInvalidField = field;
+          if (!firstInvalidField) {
+            firstInvalidField = field;
+          }
           isValid = false;
         } else {
           field.style.border = "1px solid green";
         }
       }
     });
-
+ 
     // Email format check
     const emailField = form.querySelector('[ftype=email]');
     if (emailField) {
@@ -458,58 +460,75 @@ function gtag(){dataLayer.push(arguments);}
       const atpos = email.indexOf('@');
       const dotpos = email.lastIndexOf('.');
       const emailValid = atpos > 0 && dotpos > atpos + 1 && dotpos + 2 < email.length;
-
+ 
       if (!emailValid) {
         emailField.style.border = "1px solid red";
-        if (!firstInvalidField) firstInvalidField = emailField;
+        if (!firstInvalidField) {
+          firstInvalidField = emailField;
+        }
         isValid = false;
       } else {
         emailField.style.border = "1px solid green";
       }
     }
-
-    // Captcha validation - only if grecaptcha exists
+ 
+    // Captcha validation
     if (typeof grecaptcha !== "undefined") {
       const response = grecaptcha.getResponse();
       if (response.length === 0) {
-        // Only one alert
-        if (!document.body.classList.contains('captcha-alerted')) {
-          alert("Please complete the reCAPTCHA.");
-          document.body.classList.add('captcha-alerted');
-        }
+        alert("Please complete the reCAPTCHA.");
         isValid = false;
       }
     }
-
-    // Scroll to first invalid
+ 
+    // Scroll to first invalid field
     if (firstInvalidField) {
       firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
       firstInvalidField.focus();
     }
-
+ 
     return isValid;
   }
-
+ 
+  // Setup event listeners on DOM ready
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('myInquiryForm');
-
-    // Real-time input border update
+ 
+    // Real-time input border updates
     form.querySelectorAll('input, textarea, select').forEach(el => {
       el.addEventListener('input', () => {
-        el.style.border = el.value.trim() !== '' ? "1px solid green" : "";
+        if (el.value.trim() !== '') {
+          el.style.border = "1px solid green";
+        } else {
+          el.style.border = "";
+        }
       });
     });
-
+ 
     // Form submit handler
     form.addEventListener('submit', function (event) {
-      document.body.classList.remove('captcha-alerted'); // reset alert flag
-
-      if (!checkMandatory6771280000000651020()) {
-        event.preventDefault(); // Prevent only if validation fails
+      // event.preventDefault(); // Stop default form submission
+ 
+      if (checkMandatory6771280000000651020()) {
+        // Simulate successful submission (replace with actual logic if needed)
+        alert('Form submitted successfully!');
+ 
+        // Reset the form
+        form.reset();
+ 
+        // Clear all borders
+        form.querySelectorAll('input, textarea, select').forEach(el => {
+          el.style.border = "";
+        });
+ 
+        // Reset reCAPTCHA if applicable
+        if (typeof grecaptcha !== "undefined") {
+          grecaptcha.reset();
+        }
       }
-      // Else, form will submit to Zoho and redirect — no reset or alert needed
     });
   });
+ 
              
   function tooltipShow6771280000000651020 ( el ){
 								var tooltip = el.nextElementSibling;
