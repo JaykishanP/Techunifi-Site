@@ -204,7 +204,8 @@ function gtag(){dataLayer.push(arguments);}
 				</input>
 				<input type = 'text' style = 'display:none;' name = 'returnURL' value = 'https&#x3a;&#x2f;&#x2f;www.techunifi.com&#x2f;thanku-submit.html'>
 				</input>
-		
+		<input type="hidden" name="Industry" id="IndustryHidden" />
+
                              
                               <div class="submit-sub-section submit-contact-info aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
                   
@@ -602,6 +603,15 @@ function gtag(){dataLayer.push(arguments);}
         emailField.style.border = "2px solid green";
       }
     }
+
+    // Capture selected multi-select values
+const industrySelect = document.getElementById('Industry');
+const industryHidden = document.getElementById('IndustryHidden');
+if (industrySelect && industryHidden) {
+  const selectedOptions = Array.from(industrySelect.selectedOptions).map(opt => opt.value);
+  industryHidden.value = selectedOptions.join(', ');
+}
+
 
     // Captcha validation
     if (typeof grecaptcha !== "undefined") {
