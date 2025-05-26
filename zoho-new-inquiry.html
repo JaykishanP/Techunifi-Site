@@ -423,12 +423,12 @@ function gtag(){dataLayer.push(arguments);}
 							}
 
             //check mandatory
-function checkMandatory6771280000000651020() {
+             function checkMandatory6771280000000651020() {
     const form = document.getElementById('myInquiryForm');
     const requiredFields = form.querySelectorAll('input:not(.not-required), textarea:not(.not-required), select:not(.not-required)');
     let isValid = true;
     let firstInvalidField = null;
-
+ 
     requiredFields.forEach(field => {
       if (
         field.type !== "hidden" &&
@@ -439,7 +439,7 @@ function checkMandatory6771280000000651020() {
         const value = field.value.trim();
         const isSelect = field.tagName === 'SELECT';
         const isEmpty = (value === '' && !isSelect) || (isSelect && field.selectedIndex === 0);
-
+ 
         if (isEmpty) {
           field.style.border = "1px solid red";
           if (!firstInvalidField) {
@@ -451,7 +451,7 @@ function checkMandatory6771280000000651020() {
         }
       }
     });
-
+ 
     // Email format check
     const emailField = form.querySelector('[ftype=email]');
     if (emailField) {
@@ -459,7 +459,7 @@ function checkMandatory6771280000000651020() {
       const atpos = email.indexOf('@');
       const dotpos = email.lastIndexOf('.');
       const emailValid = atpos > 0 && dotpos > atpos + 1 && dotpos + 2 < email.length;
-
+ 
       if (!emailValid) {
         emailField.style.border = "1px solid red";
         if (!firstInvalidField) {
@@ -470,34 +470,29 @@ function checkMandatory6771280000000651020() {
         emailField.style.border = "1px solid green";
       }
     }
-
-    // Captcha validation with alert guard
+ 
+    // Captcha validation
     if (typeof grecaptcha !== "undefined") {
       const response = grecaptcha.getResponse();
       if (response.length === 0) {
-        if (!checkMandatory6771280000000651020.captchaAlerted) {
-          alert("Please complete the reCAPTCHA.");
-          checkMandatory6771280000000651020.captchaAlerted = true;
-        }
+        alert("Please complete the reCAPTCHA.");
         isValid = false;
-      } else {
-        checkMandatory6771280000000651020.captchaAlerted = false; // reset alert flag
       }
     }
-
+ 
     // Scroll to first invalid field
     if (firstInvalidField) {
       firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
       firstInvalidField.focus();
     }
-
+ 
     return isValid;
   }
-
+ 
   // Setup event listeners on DOM ready
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('myInquiryForm');
-
+ 
     // Real-time input border updates
     form.querySelectorAll('input, textarea, select').forEach(el => {
       el.addEventListener('input', () => {
@@ -508,31 +503,32 @@ function checkMandatory6771280000000651020() {
         }
       });
     });
-
+ 
     // Form submit handler
     form.addEventListener('submit', function (event) {
-      if (!checkMandatory6771280000000651020()) {
-        event.preventDefault(); // Prevent submission if validation fails
-        return false;
-      }
-
-      // Simulate successful submission (replace with actual logic)
-      alert('Form submitted successfully!');
-
-      // Reset the form
-      form.reset();
-
-      // Clear all borders
-      form.querySelectorAll('input, textarea, select').forEach(el => {
-        el.style.border = "";
-      });
-
-      // Reset reCAPTCHA if applicable
-      if (typeof grecaptcha !== "undefined") {
-        grecaptcha.reset();
+      // event.preventDefault(); // Stop default form submission
+ 
+      if (checkMandatory6771280000000651020()) {
+        // Simulate successful submission (replace with actual logic if needed)
+        alert('Form submitted successfully!');
+ 
+        // Reset the form
+        form.reset();
+ 
+        // Clear all borders
+        form.querySelectorAll('input, textarea, select').forEach(el => {
+          el.style.border = "";
+        });
+ 
+        // Reset reCAPTCHA if applicable
+        if (typeof grecaptcha !== "undefined") {
+          grecaptcha.reset();
+        }
       }
     });
   });
+
+
              
   function tooltipShow6771280000000651020 ( el ){
 								var tooltip = el.nextElementSibling;
