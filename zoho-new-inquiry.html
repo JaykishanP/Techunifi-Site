@@ -421,61 +421,9 @@ function gtag(){dataLayer.push(arguments);}
 								return true;
 							}
 
-							// function checkMandatory6771280000000651020 (){
-							// 	var mndFileds = new Array ( 'Company', 'Last Name' );
-							// 	var fldLangVal = new Array ( 'Company', 'Last\x20Name' );
-							// 	for ( i = 0; i < mndFileds.length; i++ ){
-							// 		var fieldObj = document.forms[ 'WebToLeads6771280000000651020' ][ mndFileds[ i ]];
-							// 		if ( fieldObj ){
-							// 			if (((fieldObj.value ).replace( /^\s+|\s+$/g,'' )).length == 0 ){
-							// 				if ( fieldObj.type == 'file' ){
-							// 					alert ( 'Please select a file to upload.' );
-							// 					fieldObj.focus ();
-							// 					return false;
-							// 				}
-							// 				alert ( fldLangVal[ i ] + ' cannot be empty.' );
-							// 				fieldObj.focus ();
-							// 				return false;
-							// 			}
-							// 			else if ( fieldObj.nodeName == 'SELECT' ){
-							// 				if ( fieldObj.options[fieldObj.selectedIndex].value == '-None-' ){
-							// 					alert ( fldLangVal[ i ] + ' cannot be none.' );
-							// 					fieldObj.focus ();
-							// 					return false;
-							// 				}
-							// 			}
-							// 			else if ( fieldObj.type == 'checkbox' ){
-							// 				if ( fieldObj.checked == false ){
-							// 					alert ( 'Please accept  ' + fldLangVal[ i ]);
-							// 					fieldObj.focus ();
-							// 					return false;
-							// 				}
-							// 			}
-							// 			try {
-							// 				if ( fieldObj.name == 'Last Name' ){
-							// 					name = fieldObj.value;
-							// 				}
-							// 			}
-							// 			catch ( e ){}
-							// 		}
-							// 	}
-							// 	if ( !validateEmail6771280000000651020()){
-							// 		return false;
-							// 	}
-							// 	var urlparams = new URLSearchParams ( window.location.search );
-							// 	if ( urlparams.has( 'service' ) && ( urlparams.get( 'service' ) === 'smarturl' )){
-							// 		var webform = document.getElementById ( 'webform6771280000000651020' );
-							// 		var service = urlparams.get ( 'service' );
-							// 		var smarturlfield = document.createElement ( 'input' );
-							// 		smarturlfield.setAttribute ( 'type', 'hidden' );
-							// 		smarturlfield.setAttribute ( 'value', service );
-							// 		smarturlfield.setAttribute ( 'name', 'service' );
-							// 		webform.appendChild ( smarturlfield );
-							// 	}
-							// 	// document.querySelector ( '.crmWebToEntityForm .formsubmit' ).setAttribute ( 'disabled', true );
-							// }
-							
-            function checkMandatory6771280000000651020() {
+            //check mandatory
+
+             function checkMandatory6771280000000651020() {
     const form = document.getElementById('myInquiryForm');
     const requiredFields = form.querySelectorAll('input:not(.not-required), textarea:not(.not-required), select:not(.not-required)');
     let isValid = true;
@@ -490,16 +438,16 @@ function gtag(){dataLayer.push(arguments);}
       ) {
         const value = field.value.trim();
         const isSelect = field.tagName === 'SELECT';
-
         const isEmpty = (value === '' && !isSelect) || (isSelect && field.selectedIndex === 0);
+
         if (isEmpty) {
-          field.style.border = "2px solid red";
+          field.style.border = "1px solid red";
           if (!firstInvalidField) {
             firstInvalidField = field;
           }
           isValid = false;
         } else {
-          field.style.border = "2px solid green";
+          field.style.border = "1px solid green";
         }
       }
     });
@@ -513,13 +461,13 @@ function gtag(){dataLayer.push(arguments);}
       const emailValid = atpos > 0 && dotpos > atpos + 1 && dotpos + 2 < email.length;
 
       if (!emailValid) {
-        emailField.style.border = "2px solid red";
+        emailField.style.border = "1px solid red";
         if (!firstInvalidField) {
           firstInvalidField = emailField;
         }
         isValid = false;
       } else {
-        emailField.style.border = "2px solid green";
+        emailField.style.border = "1px solid green";
       }
     }
 
@@ -541,20 +489,44 @@ function gtag(){dataLayer.push(arguments);}
     return isValid;
   }
 
-  // Real-time border updates
+  // Setup event listeners on DOM ready
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('myInquiryForm');
+
+    // Real-time input border updates
     form.querySelectorAll('input, textarea, select').forEach(el => {
       el.addEventListener('input', () => {
         if (el.value.trim() !== '') {
-          el.style.border = "2px solid green";
+          el.style.border = "1px solid green";
         } else {
           el.style.border = "";
         }
       });
     });
+
+    // Form submit handler
+    form.addEventListener('submit', function (event) {
+      event.preventDefault(); // Stop default form submission
+
+      if (checkMandatory6771280000000651020()) {
+        // Simulate successful submission (replace with actual logic if needed)
+        alert('Form submitted successfully!');
+
+        // Reset the form
+        form.reset();
+
+        // Clear all borders
+        form.querySelectorAll('input, textarea, select').forEach(el => {
+          el.style.border = "";
+        });
+
+        // Reset reCAPTCHA if applicable
+        if (typeof grecaptcha !== "undefined") {
+          grecaptcha.reset();
+        }
+      }
+    });
   });
-              
               function tooltipShow6771280000000651020 ( el ){
 								var tooltip = el.nextElementSibling;
 								var tooltipDisplay = tooltip.style.display;
