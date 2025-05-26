@@ -269,22 +269,22 @@ function gtag(){dataLayer.push(arguments);}
                                 <div class="row">
                                   <div class="col-md-12">
                                     <label for="Street">Street</label>
-                                    <textarea rows="2" id="Street" name="Street" placeholder="2638 Willard Dairy Road, Suite 112" onkeydown="if (event.keyCode === 13) { event.preventDefault(); this.value += '\n'; }"></textarea>
+                                    <textarea rows="2" id="Street" aria-label = 'Street' name = 'Street' placeholder="2638 Willard Dairy Road, Suite 112" onkeydown="if (event.keyCode === 13) { event.preventDefault(); this.value += '\n'; }"></textarea>
                                   </div>
                                 </div>
 
                                 <div class="row">
                                   <div class="col-md-4">
                                     <label for="City">City</label>
-                                    <input  id="City" placeholder="High Point" maxlength="40" name="City" size="20" type="text"/>
+                                    <input  id="City" placeholder="High Point" maxlength="40"  aria-label="City" name="City" size="20" type="text"/>
                                   </div>
                                   <div class="col-md-4">
                                     <label for="State">State/Province</label>
-                                    <input  id="State" placeholder="North Carolina (NC)" maxlength="20" name="State" size="20" type="text"/>
+                                    <input  id="State" placeholder="North Carolina (NC)" maxlength="20" aria-label="State" name="State" size="20" type="text"/>
                                   </div>
                                   <div class="col-md-4">
                                     <label for="Zip_Code">Zip</label>
-                                    <input  id="Zip_Code" placeholder="27265" maxlength="20" name="Zip_Code" size="20" type="text"/>
+                                    <input  id="Zip_Code" placeholder="27265" maxlength="20" aria-label="Zip_Code" name="Zip_Code" size="20" type="text"/>
                                   </div>
                                 </div>
                   
@@ -302,7 +302,7 @@ function gtag(){dataLayer.push(arguments);}
 
                                   <div class="col-md-7">
                                     <label for="Lead_Source">Type of Business</label>
-                                    <select class="ticket-business-select" id="Lead_Source" name="Lead Source" title="Type">
+                                    <select class="ticket-business-select" id="Lead_Source" aria-label="Lead_Source" name="Lead Source" title="Type">
                                       <option value="">--None--</option>
                                       <option value="Hotel">Hotel</option>
                                       <option value="Apartments">Apartments</option>
@@ -317,20 +317,20 @@ function gtag(){dataLayer.push(arguments);}
                                         <i class="bi bi-question-circle"></i>
                                       </span>
                                     </label>
-                                    <input class="not-required" id="No_of_Employees" placeholder="5" name="No of Employees" size="20" type="text" />
+                                    <input class="not-required" id="No_of_Employees" aria-label="No_of_Employees" placeholder="5" name="No of Employees" size="20" type="text" />
                                   </div>
                                 </div>
                   
                            
                                 <div class="row">
                                   <div class="col-md-4">
-                                    <label class="form-submit-tooltip" for="Industry">Service Needed
+                                    <label class="form-submit-tooltip" for="Lead_Status">Service Needed
                                       <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="You may select one or more of our services">
                                         <i class="bi bi-question-circle"></i>
                                       </span>
                                     </label>
 
-                                <select class="contact-form-home" id="Industry" multiple="multiple" name="Industry" title="Service Needed">
+                                <select class="contact-form-home" id="Lead_Status" multiple="multiple" aria-label="Lead_Status" name="Lead_Status" title="Service Needed">
                                   <option value="EV Charging">EV Charging</option>
                                   <option value="Phone">Phone</option>
                                   <option value="TV">TV</option>
