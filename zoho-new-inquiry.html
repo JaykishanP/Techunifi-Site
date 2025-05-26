@@ -324,13 +324,13 @@ function gtag(){dataLayer.push(arguments);}
                            
                                 <div class="row">
                                   <div class="col-md-4">
-                                    <label class="form-submit-tooltip" for="Lead_Status">Service Needed
+                                    <label class="form-submit-tooltip" for="Industry">Service Needed
                                       <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="You may select one or more of our services">
                                         <i class="bi bi-question-circle"></i>
                                       </span>
                                     </label>
 
-                                <select class="contact-form-home" id="Lead_Status" multiple="multiple" aria-label="Lead_Status" name="Lead_Status" onChange = 'addAriaSelected6771280000000651020()' title="Service Needed">
+                                <select class="contact-form-home" id="Industry" multiple="multiple" aria-label="Industry" name="Industry" onChange = 'addAriaSelected6771280000000651020()' title="Service Needed">
                                   <option value="EV Charging">EV Charging</option>
                                   <option value="Phone">Phone</option>
                                   <option value="TV">TV</option>
@@ -357,7 +357,7 @@ function gtag(){dataLayer.push(arguments);}
                                 </div>
 
                                  <!-- Math Validation -->
-                            <div class="row">
+                            <!-- <div class="row">
                             <div class="col-md-12">
                               <div class="mathTooltip">
                                 <label for="inquirymathSum" id="inquirymathSumQuestion">Math Sum: What is 2 + 2? </label>
@@ -365,7 +365,7 @@ function gtag(){dataLayer.push(arguments);}
                               </div>
                                 <input id="inquirymathSum" name="inquirymathSum" type="number" placeholder="Enter Sum"/>
                             </div>
-                            </div>
+                            </div> -->
 
                             <!-- Captcha -->
                             <div class="row" style="padding-bottom: 20px;">
@@ -403,7 +403,8 @@ function gtag(){dataLayer.push(arguments);}
 								}
 								optionElem.querySelectorAll ( 'option' )[ optionElem.selectedIndex ].ariaSelected = 'true';
 							}
-							function validateEmail6771280000000651020 (){
+							
+              function validateEmail6771280000000651020 (){
 								var form = document.forms[ 'WebToLeads6771280000000651020' ];
 								var emailFld = form.querySelectorAll ( '[ftype=email]' );
 								var i;
