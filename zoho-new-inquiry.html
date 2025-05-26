@@ -394,6 +394,7 @@ function gtag(){dataLayer.push(arguments);}
             
 						
 						<script>
+
 							function addAriaSelected6771280000000651020 (){
 								var optionElem = event.target;
 								var previousSelectedOption = optionElem.querySelector ( '[aria-selected=true]' );
@@ -423,7 +424,7 @@ function gtag(){dataLayer.push(arguments);}
 
             //check mandatory
 
-            function checkMandatory6771280000000651020() {
+             function checkMandatory6771280000000651020() {
     const form = document.getElementById('myInquiryForm');
     const requiredFields = form.querySelectorAll('input:not(.not-required), textarea:not(.not-required), select:not(.not-required)');
     let isValid = true;
@@ -467,12 +468,14 @@ function gtag(){dataLayer.push(arguments);}
       }
     }
 
-    // Captcha validation
+    // Captcha validation - only if grecaptcha exists
     if (typeof grecaptcha !== "undefined") {
       const response = grecaptcha.getResponse();
       if (response.length === 0) {
-        if (!document.querySelector('.captcha-alert')) {
+        // Only one alert
+        if (!document.body.classList.contains('captcha-alerted')) {
           alert("Please complete the reCAPTCHA.");
+          document.body.classList.add('captcha-alerted');
         }
         isValid = false;
       }
@@ -490,7 +493,7 @@ function gtag(){dataLayer.push(arguments);}
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('myInquiryForm');
 
-    // Real-time input feedback
+    // Real-time input border update
     form.querySelectorAll('input, textarea, select').forEach(el => {
       el.addEventListener('input', () => {
         el.style.border = el.value.trim() !== '' ? "1px solid green" : "";
@@ -499,16 +502,14 @@ function gtag(){dataLayer.push(arguments);}
 
     // Form submit handler
     form.addEventListener('submit', function (event) {
-      if (!checkMandatory6771280000000651020()) {
-        event.preventDefault(); // Block form only if invalid
-        return;
-      }
+      document.body.classList.remove('captcha-alerted'); // reset alert flag
 
-      // ✅ Do NOT reset form or alert if submitting to Zoho normally
-      // If you're using AJAX to submit manually, you can then clear form and reset captcha
+      if (!checkMandatory6771280000000651020()) {
+        event.preventDefault(); // Prevent only if validation fails
+      }
+      // Else, form will submit to Zoho and redirect — no reset or alert needed
     });
   });
-
              
   function tooltipShow6771280000000651020 ( el ){
 								var tooltip = el.nextElementSibling;
@@ -524,7 +525,8 @@ function gtag(){dataLayer.push(arguments);}
 									tooltip.style.display = 'none';
 								}
 							}
-						</script>
+						
+            </script>
 
 
                               	<!-- Do not remove this --- Analytics Tracking code starts -->
