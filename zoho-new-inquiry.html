@@ -423,7 +423,7 @@ function gtag(){dataLayer.push(arguments);}
 
             //check mandatory
 
-             function checkMandatory6771280000000651020() {
+            function checkMandatory6771280000000651020() {
     const form = document.getElementById('myInquiryForm');
     const requiredFields = form.querySelectorAll('input:not(.not-required), textarea:not(.not-required), select:not(.not-required)');
     let isValid = true;
@@ -442,9 +442,7 @@ function gtag(){dataLayer.push(arguments);}
 
         if (isEmpty) {
           field.style.border = "1px solid red";
-          if (!firstInvalidField) {
-            firstInvalidField = field;
-          }
+          if (!firstInvalidField) firstInvalidField = field;
           isValid = false;
         } else {
           field.style.border = "1px solid green";
@@ -462,9 +460,7 @@ function gtag(){dataLayer.push(arguments);}
 
       if (!emailValid) {
         emailField.style.border = "1px solid red";
-        if (!firstInvalidField) {
-          firstInvalidField = emailField;
-        }
+        if (!firstInvalidField) firstInvalidField = emailField;
         isValid = false;
       } else {
         emailField.style.border = "1px solid green";
@@ -475,12 +471,14 @@ function gtag(){dataLayer.push(arguments);}
     if (typeof grecaptcha !== "undefined") {
       const response = grecaptcha.getResponse();
       if (response.length === 0) {
-        alert("Please complete the reCAPTCHA.");
+        if (!document.querySelector('.captcha-alert')) {
+          alert("Please complete the reCAPTCHA.");
+        }
         isValid = false;
       }
     }
 
-    // Scroll to first invalid field
+    // Scroll to first invalid
     if (firstInvalidField) {
       firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
       firstInvalidField.focus();
@@ -489,46 +487,30 @@ function gtag(){dataLayer.push(arguments);}
     return isValid;
   }
 
-  // Setup event listeners on DOM ready
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('myInquiryForm');
 
-    // Real-time input border updates
+    // Real-time input feedback
     form.querySelectorAll('input, textarea, select').forEach(el => {
       el.addEventListener('input', () => {
-        if (el.value.trim() !== '') {
-          el.style.border = "1px solid green";
-        } else {
-          el.style.border = "";
-        }
+        el.style.border = el.value.trim() !== '' ? "1px solid green" : "";
       });
     });
 
     // Form submit handler
     form.addEventListener('submit', function (event) {
-      // event.preventDefault(); // Stop default form submission
-
-      if (checkMandatory6771280000000651020()) {
-        // Simulate successful submission (replace with actual logic if needed)
-        alert('Form submitted successfully!');
-
-        // Reset the form
-        form.reset();
-
-        // Clear all borders
-        form.querySelectorAll('input, textarea, select').forEach(el => {
-          el.style.border = "";
-        });
-
-        // Reset reCAPTCHA if applicable
-        if (typeof grecaptcha !== "undefined") {
-          grecaptcha.reset();
-        }
+      if (!checkMandatory6771280000000651020()) {
+        event.preventDefault(); // Block form only if invalid
+        return;
       }
+
+      // ✅ Do NOT reset form or alert if submitting to Zoho normally
+      // If you're using AJAX to submit manually, you can then clear form and reset captcha
     });
   });
 
-              function tooltipShow6771280000000651020 ( el ){
+             
+  function tooltipShow6771280000000651020 ( el ){
 								var tooltip = el.nextElementSibling;
 								var tooltipDisplay = tooltip.style.display;
 								if ( tooltipDisplay == 'none' ){
