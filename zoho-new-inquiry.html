@@ -474,55 +474,85 @@ function gtag(){dataLayer.push(arguments);}
 							// 	// document.querySelector ( '.crmWebToEntityForm .formsubmit' ).setAttribute ( 'disabled', true );
 							// }
 							
-              function checkMandatory6771280000000651020() {
+function checkMandatory6771280000000651020() {
     const form = document.getElementById('myInquiryForm');
-    const inputs = form.querySelectorAll('input, textarea, select');
+    const requiredFields = form.querySelectorAll('input:not(.not-required), textarea:not(.not-required), select:not(.not-required)');
     let isValid = true;
-    let errorMessage = '';
+    let firstInvalidField = null;
 
-    for (const input of inputs) {
-      const isNotRequired = input.classList.contains('not-required');
-      const type = input.type;
-      const value = input.value.trim();
-      const isHidden = input.style.display === 'none' || input.type === 'hidden';
-
-      // Skip hidden or not-required fields
-      if (isHidden || isNotRequired) continue;
-
+    requiredFields.forEach(field => {
       if (
-        (type === 'text' || type === 'textarea' || type === 'number' || type === 'email' || input.tagName === 'SELECT') &&
-        !value
+        field.type !== "hidden" &&
+        field.offsetParent !== null &&
+        field.name !== "" &&
+        field.getAttribute('name') !== 'captcha_settings'
       ) {
-        errorMessage = `${input.name || input.id || 'This field'} cannot be empty.`;
-        input.focus();
-        isValid = false;
-        break;
-      }
+        const value = field.value.trim();
+        const isSelect = field.tagName === 'SELECT';
 
-      // Basic email validation
-      if (type === 'text' && input.name.toLowerCase() === 'email') {
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(value)) {
-          alert('Please enter a valid email address.');
-          input.focus();
-          return false;
+        const isEmpty = (value === '' && !isSelect) || (isSelect && field.selectedIndex === 0);
+        if (isEmpty) {
+          field.style.border = "1px solid red";
+          if (!firstInvalidField) {
+            firstInvalidField = field;
+          }
+          isValid = false;
+        } else {
+          field.style.border = "1px solid green";
         }
       }
+    });
+
+    // Email format check
+    const emailField = form.querySelector('[ftype=email]');
+    if (emailField) {
+      const email = emailField.value.trim();
+      const atpos = email.indexOf('@');
+      const dotpos = email.lastIndexOf('.');
+      const emailValid = atpos > 0 && dotpos > atpos + 1 && dotpos + 2 < email.length;
+
+      if (!emailValid) {
+        emailField.style.border = "1px solid red";
+        if (!firstInvalidField) {
+          firstInvalidField = emailField;
+        }
+        isValid = false;
+      } else {
+        emailField.style.border = "1px solid green";
+      }
     }
 
-    // reCAPTCHA validation
-    const captcha = document.querySelector('.g-recaptcha-response');
-    if (!captcha || captcha.value.trim() === '') {
-      alert('Please complete the reCAPTCHA.');
-      isValid = false;
+    // Captcha validation
+    if (typeof grecaptcha !== "undefined") {
+      const response = grecaptcha.getResponse();
+      if (response.length === 0) {
+        alert("Please complete the reCAPTCHA.");
+        isValid = false;
+      }
     }
 
-    if (!isValid && errorMessage) {
-      alert(errorMessage);
+    // Scroll to first invalid field
+    if (firstInvalidField) {
+      firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      firstInvalidField.focus();
     }
 
     return isValid;
   }
+
+  // Real-time border updates
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('myInquiryForm');
+    form.querySelectorAll('input, textarea, select').forEach(el => {
+      el.addEventListener('input', () => {
+        if (el.value.trim() !== '') {
+          el.style.border = "1px solid green";
+        } else {
+          el.style.border = "";
+        }
+      });
+    });
+  });
               
               function tooltipShow6771280000000651020 ( el ){
 								var tooltip = el.nextElementSibling;
