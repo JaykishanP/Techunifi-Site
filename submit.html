@@ -356,6 +356,103 @@ function gtag(){dataLayer.push(arguments);}
         document.getElementById('zsSubmitButton_1137282000000375630').removeAttribute('disabled');
         setAllDependancyFieldsMapping();
     }
+
+    
+							 function checkMandatory6771280000000724002() {
+    const form = document.getElementById('submitTicketForm');
+    const requiredFields = form.querySelectorAll('input:not(.not-required), textarea:not(.not-required), select:not(.not-required)');
+    let isValid = true;
+    let firstInvalidField = null;
+
+    requiredFields.forEach(field => {
+      if (
+        field.type !== "hidden" &&
+        field.offsetParent !== null &&
+        field.name !== "" &&
+        field.getAttribute('name') !== 'captcha_settings'
+      ) {
+        const value = field.value.trim();
+        const isSelect = field.tagName === 'SELECT';
+        const isEmpty = (value === '' && !isSelect) || (isSelect && field.selectedOptions.length === 0);
+
+        if (isEmpty) {
+          field.style.border = "2px solid red";
+          if (!firstInvalidField) {
+            firstInvalidField = field;
+          }
+          isValid = false;
+        } else {
+          field.style.border = "2px solid green";
+        }
+      }
+    });
+
+    // Email format check
+    const emailField = form.querySelector('[ftype=email]');
+    if (emailField) {
+      const email = emailField.value.trim();
+      const atpos = email.indexOf('@');
+      const dotpos = email.lastIndexOf('.');
+      const emailValid = atpos > 0 && dotpos > atpos + 1 && dotpos + 2 < email.length;
+
+      if (!emailValid) {
+        emailField.style.border = "2px solid red";
+        if (!firstInvalidField) {
+          firstInvalidField = emailField;
+        }
+        isValid = false;
+      } else {
+        emailField.style.border = "2px solid green";
+      }
+    }
+
+    // Capture selected multi-select values
+const industrySelect = document.getElementById('CASECF2');
+const industryHidden = document.getElementById('selectHidden');
+if (industrySelect && industryHidden) {
+  const selectedOptions = Array.from(industrySelect.selectedOptions).map(opt => opt.value);
+  industryHidden.value = selectedOptions.join(', ');
+}
+
+
+    // Captcha validation
+    if (typeof grecaptcha !== "undefined") {
+      const response = grecaptcha.getResponse();
+      if (response.length === 0) {
+        alert("Please complete the reCAPTCHA.");
+        isValid = false;
+      }
+    }
+
+    // Scroll to first invalid field
+    if (firstInvalidField) {
+      firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      firstInvalidField.focus();
+    }
+
+    return isValid;
+  }
+
+  // Real-time border updates
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('submitTicketForm');
+    form.querySelectorAll('input, textarea, select').forEach(el => {
+      el.addEventListener('input', () => {
+        if (el.value.trim() !== '') {
+          el.style.border = "2px solid green";
+        } else {
+          el.style.border = "";
+        }
+      });
+    });
+
+    // Attach event listener for multi-select aria updates
+    const industryField = document.getElementById('Industry');
+    if (industryField) {
+      industryField.addEventListener('change', addAriaSelected6771280000000724002);
+    }
+})
+
   </script>
                       
    
@@ -478,7 +575,7 @@ function gtag(){dataLayer.push(arguments);}
                   <!--  -->
 
 
-                      <form id="submitTicketForm" name='zsWebToCase_1137282000000375630' action='https://desk.zoho.com/support/WebToCase' method='POST' onSubmit='return zsValidateMandatoryFields()' enctype='multipart/form-data'>
+                      <form id="submitTicketForm" name='zsWebToCase_1137282000000375630' action='https://desk.zoho.com/support/WebToCase' method='POST' onSubmit='return zsValidateMandatoryFields(); checkMandatory6771280000000724002()' enctype='multipart/form-data'>
 
 
                          <input type='hidden' name='xnQsjsdp' value='edbsn4d44ad8af4192d4a5279d7b2fa12eef5' /> 
@@ -545,7 +642,7 @@ function gtag(){dataLayer.push(arguments);}
     
                               <label for="Products Requiring Service">Products Requiring Service (Select 1 or more options)</label> 
                               
-                              <select onchange="setDependent(this, false)" id='CASECF2' name="Products Requiring Service" title="Products Requiring Service" multiple="multiple">
+                              <select onchange="setDependent(this, false)" id='CASECF2' name="Products[]" title="Products Requiring Service" multiple="multiple">
                                 <option class='first-select' value="">--None--</option>
                                 <option value="Phone">Phone</option>
                                 <option value="Wifi">Wifi</option>
@@ -555,6 +652,8 @@ function gtag(){dataLayer.push(arguments);}
                                 <option value="Speakers">Speakers</option>
                                 <option value="Other">Other</option>
                                 </select>
+                                <input type="hidden" name="Products" id="selectHidden"/>
+
                               
                               <label class="form-submit-tooltip" for="Model Number of Device">Model Number of Device
                                 <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="All products will display a model number on the back. This helps us isolate your problem and provide better service.">
@@ -767,7 +866,7 @@ function gtag(){dataLayer.push(arguments);}
   <!-- <script src="assets/vendor/php-email-form/validate.js"></script> -->
 
   <!-- Template Main JS File -->
-  <!-- <script src="assets/js/main.js"></script> -->
+  <script src="assets/js/main.js"></script>
 
 </body>
 </html>
