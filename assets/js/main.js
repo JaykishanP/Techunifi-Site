@@ -23,7 +23,7 @@
     }
   };
 
-   //  Easy on scroll event listener 
+   //  Easy on scroll event listener
    const onscroll = (el, listener) => {
     el.addEventListener('scroll', listener);
   };
@@ -75,10 +75,10 @@
 
   $('.back-to-top').click(function(event) {
     event.preventDefault();
-  
-    $('html,body').animate({scrollTop:0}, 400); 
+ 
+    $('html,body').animate({scrollTop:0}, 400);
   });
-  
+ 
 
   // * Scroll with offset on page load with hash links in the URL
   window.addEventListener('load', () => {
@@ -100,10 +100,10 @@
     })
   });
 
-  // Initiate Pure Counter 
+  // Initiate Pure Counter
   new PureCounter();
 
-})(); 
+})();
 
 
 /* Slick Slider*/
@@ -153,7 +153,7 @@ var swiper = new Swiper('.bk-slider .swiper', {
 
 document.addEventListener('DOMContentLoaded', (function() {
   // Set the number of items per page globally
-  var itemsPerPage = 4; 
+  var itemsPerPage = 4;
 
   // Function to display the correct page of news items
   function showPage(pageNumber) {
@@ -293,7 +293,7 @@ document.addEventListener("keydown", (e) => {
 hamburgerBtn.addEventListener("click", toggleHamburger);
 
 
-// 
+//
 $(document).ready(function() {
 
  $(".menu-bar > li").click (function () {
@@ -326,7 +326,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (howItWorksLink) {
       howItWorksLink.addEventListener('click', function(e) {
           e.preventDefault();
-          
+         
           const target = document.getElementById('how-it-works');
           if (target) {
               const offsetTop = target.offsetTop - 180; // Adjusted offset if necessary
@@ -358,7 +358,7 @@ $(document).ready(function() {
     const screenWidth = window.innerWidth;
     const desktopMetaTags = $('[id^="desktop_"]');
     const mobileMetaTags = $('[id^="mobile_"]');
-    
+   
     if (screenWidth >= 1024) {
       desktopMetaTags.css('display', 'block');
       mobileMetaTags.css('display', 'none');
@@ -482,7 +482,7 @@ function openTab(evt, tabName) {
 $('.tablinks, .prod-tablinks').click(function(event) {
   event.preventDefault();
 
-  $('html,body').animate({scrollTop:0}, 400); 
+  $('html,body').animate({scrollTop:0}, 400);
 });
 
 
@@ -567,7 +567,7 @@ document.addEventListener("DOMContentLoaded", function() {
     nextButton.addEventListener("click", function() {
       tabsContainer.scrollBy({ left: 100, behavior: 'smooth' }); // Scroll right by 100 pixels smoothly
     });
-  } 
+  }
   // else {
   //   console.error("One or more elements not found.");
   // }
@@ -760,7 +760,7 @@ var swiper = new Swiper('.home-clients-slider', {
 // Home clients scale up
 document.addEventListener('DOMContentLoaded', function () {
   var modal = document.getElementById("image-modal");
-  
+ 
   if (modal) {
     var modalImg = document.getElementById("modal-image");
     var captionText = document.getElementById("caption-image");
@@ -770,7 +770,7 @@ document.addEventListener('DOMContentLoaded', function () {
       img.onclick = function () {
         modal.style.display = "block";
         modalImg.src = this.src;
-        
+       
         // Get the caption text from the corresponding .home-swipe-img-text element
         var parentSlide = this.closest('.swiper-slide');
         var caption = parentSlide.querySelector('.home-swipe-img-text').innerText;
@@ -835,14 +835,14 @@ sliders.forEach(function(slider) {
 
 // document.addEventListener("DOMContentLoaded", function() {
 //   const tabLinks = document.querySelectorAll(".left-right .tab a");
-  
+ 
 //   window.addEventListener("scroll", function() {
 //     const sections = document.querySelectorAll(".right-content .id-div");
 //     const scrollPosition = window.scrollY || window.pageYOffset;
-    
+   
 //     sections.forEach(section => {
 //       const rect = section.getBoundingClientRect();
-      
+     
 //       if (rect.top <= 0 && rect.bottom > 0) {
 //         const id = section.getAttribute("id");
 //         tabLinks.forEach(link => {
@@ -859,14 +859,14 @@ sliders.forEach(function(slider) {
 
 // document.addEventListener("DOMContentLoaded", function() {
 //   const tabLinks = document.querySelectorAll(".left-right .tab a");
-  
+ 
 //   tabLinks.forEach(link => {
 //     link.addEventListener("click", function(event) {
-      
+     
 //       tabLinks.forEach(link => {
 //         link.classList.remove("active");
 //       });
-      
+     
 //       this.classList.add("active");
 //     });
 //   });
@@ -1086,8 +1086,144 @@ $(document).ready(function() {
 /* ==== Form Validation ====  */
 
 /* ======= Submit a Ticket ======= */
+if (window.location.pathname === '/submit.html') {
+  $(document).ready(function() {
+
+    function submitgenerateRandomNumbers() {
+      var submitnum1 = Math.floor(Math.random() * 10);
+      var submitnum2 = Math.floor(Math.random() * 10);
+      return [submitnum1, submitnum2];
+    }
+
+    function submitupdateMathSumQuestion() {
+      var submitrandomNumbers = submitgenerateRandomNumbers();
+      var submitnum1 = submitrandomNumbers[0];
+      var submitnum2 = submitrandomNumbers[1];
+      $('#mathSumQuestion').text('What is ' + submitnum1 + ' + ' + submitnum2 + '?');
+      $('#mathSum').data('submitexpectedSum', submitnum1 + submitnum2);
+    }
+    submitupdateMathSumQuestion();
+
+    function validateSubmitForm() {
+      var formValid = true;
+      $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').each(function() {
+        if ($(this).hasClass('not-required')) {
+          return true;
+        }
+        if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
+          formValid = false;
+          $(this).css('border-color', 'red');
+          $('html, body').animate({
+            scrollTop: $(this).offset().top - 160
+          }, 500);
+          return false;
+        } else {
+          $(this).css('border-color', 'green');
+        }
+      });
+      var submitmathSumInput = $('#mathSum');
+      var submitmathSumValue = submitmathSumInput.val();
+      var submitexpectedSum = submitmathSumInput.data('submitexpectedSum');
+      if (!submitmathSumValue || parseInt(submitmathSumValue) !== submitexpectedSum) {
+        submitmathSumInput.css('border-color', 'red');
+        formValid = false;
+      } else {
+        submitmathSumInput.css('border-color', 'green');
+      }
+      if (!formValid) {
+        return false;
+      }
+      return true;
+    }
+    $('#submitTicketForm').submit(function() {
+      return validateSubmitForm();
+    });
+    $('#submitTicketForm').on('reset', function() {
+      submitupdateMathSumQuestion();
+    });
+    $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').on('input change blur', function() {
+      if (!$(this).hasClass('not-required')) {
+        if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
+          $(this).css('border-color', 'green');
+        } else {
+          $(this).css('border-color', 'red');
+        }
+      }
+    });
+  });
+}
+
 
 /* === New Inquiry Form === */
+
+$(document).ready(function() {
+
+    function inquirygenerateRandomNumbers() {
+      var inquirynum1 = Math.floor(Math.random() * 10);
+      var inquirynum2 = Math.floor(Math.random() * 10);
+      return [inquirynum1, inquirynum2]
+    }
+ 
+    function inquiryupdateMathSumQuestion() {
+      var inquiryrandomNumbers = inquirygenerateRandomNumbers();
+      var inquirynum1 = inquiryrandomNumbers[0];
+      var inquirynum2 = inquiryrandomNumbers[1];
+      $('#inquirymathSumQuestion').text('What is ' + inquirynum1 + ' + ' + inquirynum2 + '?');
+      $('#inquirymathSum').data('inquiryexpectedSum', inquirynum1 + inquirynum2)
+    }
+    inquiryupdateMathSumQuestion();
+ 
+    function validateInquiryForm() {
+      var formValid = !0;
+      $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').each(function() {
+        if ($(this).hasClass('not-required')) {
+          return !0
+        }
+        if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
+          formValid = !1;
+          $(this).css('border-color', 'red');
+          $('html, body').animate({
+            scrollTop: $(this).offset().top - 160
+          }, 500);
+          return !1
+        } else {
+          $(this).css('border-color', 'green')
+        }
+      });
+      var inquirymathSumInput = $('#inquirymathSum');
+      var inquirymathSumValue = inquirymathSumInput.val();
+      var inquiryexpectedSum = inquirymathSumInput.data('inquiryexpectedSum');
+      if (!inquirymathSumValue || parseInt(inquirymathSumValue) !== inquiryexpectedSum) {
+        inquirymathSumInput.css('border-color', 'red');
+        formValid = !1
+      } else {
+        inquirymathSumInput.css('border-color', 'green')
+      }
+      if (!formValid) {
+        return !1
+      }
+      return !0
+    }
+    $('#myInquiryForm').submit(function() {
+      return validateInquiryForm()
+    });
+    $('#submitTicketForm').on('reset', function() {
+      inquiryupdateMathSumQuestion()
+    });
+    $('#myInquiryForm input, #myInquiryForm select, #myInquiryForm textarea').on('input change blur', function() {
+      if (!$(this).hasClass('not-required')) {
+        if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
+          $(this).css('border-color', 'green')
+        } else {
+          $(this).css('border-color', 'red')
+        }
+      }
+    })
+
+
+
+  });
+
 
 /* ==== Tooltip ==== */
 var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
@@ -1318,7 +1454,7 @@ function timestamp() {
       console.warn("g-recaptcha-response element not found");
       return;
   }
-  
+ 
   if (response.value.trim() === "") {
       var captchaSettingsElem = document.getElementsByName("captcha_settings")[0];
       if (captchaSettingsElem) {
@@ -1337,7 +1473,7 @@ setInterval(timestamp, 500);
 
 // document.addEventListener('DOMContentLoaded', () => {
 //   const modal = document.getElementById('quoteModal');
-  
+ 
 //   // Check if modal exists on the page
 //   if (!modal) {
 //     console.log('Modal element not found on this page.');
@@ -1406,17 +1542,17 @@ setInterval(timestamp, 500);
 document.addEventListener('DOMContentLoaded', function () {
   var modal = document.getElementById("image-modal");
   var body = document.querySelector("body");
-  
+ 
   if (modal) {
     var modalImg = document.getElementById("modal-image");
     var images = document.querySelectorAll('.low-structure-img img');
     var mediaQuery = window.matchMedia("(max-width: 767px)");
-    
+   
     images.forEach(function (img) {
       img.onclick = function () {
         modal.style.display = "block";
         modalImg.src = this.src;
-        
+       
         if (mediaQuery.matches) {
           body.style.overflow = "hidden"; // Disable scrolling on body
           window.scrollTo(0, 0); // Scroll to top when modal opens only on small screens
@@ -1470,7 +1606,7 @@ function validateLogin() {
 }
 
 function hideErrorMessage() {
-    errorMessage.style.display = "none"; 
+    errorMessage.style.display = "none";
 }
 
 document.addEventListener("keydown", function(event) {
@@ -1534,7 +1670,7 @@ if(window.location.pathname === '/change-order.html'){
       var num2 = Math.floor(Math.random() * 10);
       return [num1, num2];
     }
-  
+ 
     // Function to update the math sum question with new numbers
     function updateMathSumQuestion() {
       var randomNumbers = generateRandomNumbers();
@@ -1543,17 +1679,17 @@ if(window.location.pathname === '/change-order.html'){
       $('#mathSumQuestion').text('What is ' + num1 + ' + ' + num2 + '?');
       $('#mathSum').data('expectedSum', num1 + num2);
     }
-  
+ 
     updateMathSumQuestion();
-  
+ 
     // Function to validate the form
     function validateTicketForm() {
       var formValid = true;
-  
+ 
       // Validate all inputs
       $('#submitTicketForm input, #submitTicketForm checkbox, #submitTicketForm select, #submitTicketForm textarea').each(function () {
         if ($(this).hasClass('not-required')) return true;
-  
+ 
         if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
           formValid = false;
           $(this).css('border-color', 'red');
@@ -1563,14 +1699,14 @@ if(window.location.pathname === '/change-order.html'){
           $(this).css('border-color', 'green');
         }
       });
-  
+ 
       // Signature validation
       if (signaturePad.isEmpty()) {
         formValid = false;
         alert('Please provide your signature.');
         $('html, body').animate({ scrollTop: $('#signature-pad').offset().top - 200 }, 500);
       }
-  
+ 
       // Math validation
       var mathSumInput = $('#mathSum');
       var mathSumValue = mathSumInput.val();
@@ -1581,7 +1717,7 @@ if(window.location.pathname === '/change-order.html'){
       } else {
         mathSumInput.css('border-color', 'green');
       }
-  
+ 
       // CAPTCHA validation
       var captchaResponse = grecaptcha.getResponse();
       if (!captchaResponse) {
@@ -1591,19 +1727,19 @@ if(window.location.pathname === '/change-order.html'){
       } else {
         $('.g-recaptcha').css('border-color', 'green');
       }
-  
+ 
       return formValid;
     }
-  
+ 
     // Handle form submission
     $('#submitTicketForm').on('submit', function (event) {
       event.preventDefault(); // Prevent default form submission
-  
+ 
       if (!validateTicketForm()) {
         console.log('Form validation failed.');
         return; // Stop if validation fails
       }
-  
+ 
       // Generate the PDF
       try {
         const { jsPDF } = window.jspdf;
@@ -1612,25 +1748,25 @@ if(window.location.pathname === '/change-order.html'){
         const pageWidth = doc.internal.pageSize.width || 210; // A4 page width (in mm)
         const headerHeight = 40;
         const footerHeight = 30;
-      
+     
         // Function to add the header with logo
         function addHeader(doc) {
           return new Promise((resolve, reject) => {
             const imgUrl = 'https://www.techunifi.com/assets/img/hero-img.png';
             const img = new Image();
             img.src = imgUrl;
-      
+     
             img.onload = function () {
               doc.addImage(img, 'PNG', 60, 10, 90, 30); // Adjust x, y, width, height as necessary
               resolve();
             };
-      
+     
             img.onerror = function () {
               reject('Image failed to load');
             };
           });
         }
-      
+     
         // Function to add the footer with contact details
         function addFooter(doc) {
           doc.setFontSize(12);
@@ -1640,46 +1776,46 @@ if(window.location.pathname === '/change-order.html'){
           doc.setLineWidth(0.5);
           doc.line(10, pageHeight - footerHeight, pageWidth - 10, pageHeight - footerHeight); // x1, y1, x2, y2
         }
-      
+     
         // Function to add form data content
       // Function to add form data content
   function addContent(doc, y) {
     const formData = $('#submitTicketForm').serializeArray();
-    const filteredFormData = formData.filter(field => 
-      field.name !== 'orgId' && 
-      field.name !== 'retURL' && 
-      field.name !== 'mathSum' && 
-      field.name !== '00NUm000009SCKP' && 
+    const filteredFormData = formData.filter(field =>
+      field.name !== 'orgId' &&
+      field.name !== 'retURL' &&
+      field.name !== 'mathSum' &&
+      field.name !== '00NUm000009SCKP' &&
       field.name !== 'g-recaptcha-response'
     );
-  
+ 
     const lineHeight = 10; // Line height for text
     const valueIndent = 90; // Increase indent for values to avoid overlap
     const maxWidth = pageWidth - valueIndent - 10; // Maximum width for text wrapping
-  
+ 
     filteredFormData.forEach(field => {
       const label = $(`label[for='${field.name}']`).text();
       const value = field.value;
-  
+ 
       // Check for page break
       if (y + lineHeight > pageHeight - footerHeight - 10) {
         doc.addPage();
         y = headerHeight; // Reset y for the new page
         addHeader(doc); // Add header to the new page
       }
-  
+ 
       // Exclude specific values
       if (!value.includes('00DHo000002fpJX') && !value.includes('{"keyname":"casev2","fallback":"true","orgId":"00DHo000002fpJX","ts"')) {
         // Set bold font for the label text
         doc.setFont('helvetica', 'bold');
         doc.text(`${label}:`, 10, y); // Print label
-        
+       
         // Set regular font for the value
         doc.setFont('helvetica', 'normal');
-  
+ 
         // Split value text into multiple lines if it's too long
         const valueLines = doc.splitTextToSize(value, maxWidth);
-  
+ 
         // Print each line of the value
         valueLines.forEach(line => {
           if (y + lineHeight > pageHeight - footerHeight - 10) {
@@ -1692,11 +1828,11 @@ if(window.location.pathname === '/change-order.html'){
         });
       }
     });
-  
+ 
     return y; // Return updated y position
   }
-  
-      
+ 
+     
         // Function to add Terms and Conditions
         function addTermsAndConditions(doc, y) {
           if (y + 60 > pageHeight - footerHeight - 10) {
@@ -1704,7 +1840,7 @@ if(window.location.pathname === '/change-order.html'){
             y = headerHeight; // Reset y for the new page
             addHeader(doc); // Add header to the new page
           }
-      
+     
           doc.setFontSize(14);
           doc.setFont('helvetica', 'bold'); // Normal font for terms and conditions
           doc.text('Terms and Conditions', 10, y);
@@ -1718,31 +1854,31 @@ if(window.location.pathname === '/change-order.html'){
           y += 10;
           doc.text('   Suzanne Blair - suzanne.blair@techunifi.com.', 10, y);
           y += 10;
-      
+     
           // Add hyperlink to the word "website"
           doc.setTextColor(6, 98, 187); // Set text color to #0662BB
           doc.textWithLink('View full terms and conditions', 10, y, { url: 'https://www.techunifi.com/terms-conditions.html' });
           y += 20; // Space before the signature
-      
+     
           return y; // Return updated y position
         }
-      
+     
         // Start generating the PDF
         async function generatePDF() {
           let y = headerHeight;
-      
+     
           // Add header and wait for image to load
           await addHeader(doc);
-      
-          y+=25; 
-  
+     
+          y+=25;
+ 
           // Add form content
           y = addContent(doc, y);
-      
+     
           y+=10
           // Add Terms and Conditions
           y = addTermsAndConditions(doc, y);
-      
+     
           // Add signature if available
           if (!signaturePad.isEmpty()) {
             const signatureImage = signaturePad.toDataURL();
@@ -1754,26 +1890,26 @@ if(window.location.pathname === '/change-order.html'){
             doc.addImage(signatureImage, 'PNG', 10, y, 190, 30);
             y += 40; // Adjust space after signature
           }
-      
+     
           // Add footer to the last page
           addFooter(doc);
-      
+     
           // Save the PDF
           doc.save('techunifi-changeOrder-data.pdf');
           console.log('PDF downloaded successfully.');
         }
-      
+     
         // Generate the PDF
         generatePDF();
-      
+     
       } catch (error) {
         console.error('Error generating PDF:', error);
         alert('An error occurred while generating the PDF. Please try again.');
       }
-      
-      
-      
-      
+     
+     
+     
+     
       // Submit the form using the native JavaScript submit method to avoid conflicts
       setTimeout(() => {
         var form = document.getElementById('submitTicketForm');
@@ -1784,12 +1920,12 @@ if(window.location.pathname === '/change-order.html'){
         }
       }, 1000);
     });
-  
+ 
     // Event listener to update math sum question when the form is reset
     $('#submitTicketForm').on('reset', function () {
       updateMathSumQuestion();
     });
-  
+ 
     // Event listener to update border color on input changes
     $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').on('input change blur', function () {
       if (!$(this).hasClass('not-required')) {
@@ -1816,7 +1952,7 @@ textareas.forEach(textarea => {
       const currentText = textarea.value;
       const lines = currentText.split('\n');
       const lastLine = lines[lines.length - 1];
-      
+     
       // Use a regular expression to extract the last line number in the format `X)`
       const match = lastLine.match(/^(\d+)\)/);
       const lastNumber = match ? parseInt(match[1]) : 0;
@@ -2105,7 +2241,7 @@ function toggleChat() {
     // Show greeting message only once per day
     if (!lastInteractionDate || lastInteractionDate !== today) {
       localStorage.setItem("lastInteractionDate", today);
-      
+     
       // Check if chat is empty and add greeting
       if (!localStorage.getItem("chatMessages")) {
         const greetingMessage =
