@@ -1156,7 +1156,7 @@ if (window.location.pathname === '/submit.html') {
 
 /* === New Inquiry Form === */
 
-$(document).ready(function() {
+/* $(document).ready(function() {
 
     function inquirygenerateRandomNumbers() {
       var inquirynum1 = Math.floor(Math.random() * 10);
@@ -1222,7 +1222,7 @@ $(document).ready(function() {
 
 
 
-  });
+  }); */
 
 
 /* ==== Tooltip ==== */
