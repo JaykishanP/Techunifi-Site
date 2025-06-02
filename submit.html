@@ -72,6 +72,465 @@
 function gtag(){dataLayer.push(arguments);}  
  gtag('js', new Date());   gtag('config', 'G-CKH6XB0EMD'); 
 </script>
+
+
+ <script src='https://d17nz991552y2g.cloudfront.net/app/js/jqueryandencoder.ef05974972bf3bca1b87.js'></script>
+  <script>
+        function trimBoth(str) {
+        return jQuery.trim(str);
+    }
+
+    function setAllDependancyFieldsMapping() {
+        var mapDependancyLabels = getMapDependenySelectValues(jQuery("[id='property(module)']").val(), "JSON_MAP_DEP_LABELS");
+        if (mapDependancyLabels) {
+            for (var i = 0; i < mapDependancyLabels.length; i++) {
+                var label = mapDependancyLabels[i];
+                var obj = document.forms['zsWebToCase_1137282000000375630'][label];
+                if (obj) {
+                    setDependent(obj, true);
+                }
+            }
+        }
+    }
+
+    function getMapDependenySelectValues(module, key) {
+        var dependencyObj = jQuery.parseJSON(jQuery("[id='dependent_field_values_" + module + "']").val());
+        if (dependencyObj == undefined) {
+            return dependencyObj;
+        }
+        return dependencyObj[key];
+    }
+
+    function setDependent(obj, isload) {
+        var name = obj.id || (obj[0] && obj[0].id) || "";
+        var module = jQuery("[id='property(module)']").val();
+        var val = "";
+        var myObject = getMapDependenySelectValues(module, "JSON_VALUES");
+        if (myObject != undefined) {
+            val = myObject[name];
+        }
+        var mySelObject = getMapDependenySelectValues(module, "JSON_SELECT_VALUES");
+        if (val != null && val != "" && val != "null" && mySelObject) {
+            var fields = val;
+            for (var i in fields) {
+                if (fields.hasOwnProperty(i)) {
+                    var isDependent = false;
+                    var label = i;
+                    var values = fields[i];
+                    if (label.indexOf(")") > -1) {
+                        label = label.replace(/\)/g, '_____');
+                    }
+                    if (label.indexOf("(") > -1) {
+                        label = label.replace(/\(/g, '____');
+                    }
+                    if (label.indexOf(".") > -1) {
+                        label = label.replace(/\./g, '___');
+                    }
+                    var depObj = document.forms['zsWebToCase_1137282000000375630'][label];
+                    if (depObj && depObj.options) {
+                        var mapValues = "";
+                        var selected_val = depObj.value;
+                        var depLen = depObj.options.length - 1;
+                        for (var n = depLen; n >= 0; n--) {
+                            if (depObj.options[n].selected) {
+                                if (mapValues == "") {
+                                    mapValues = depObj.options[n].value;
+                                } else {
+                                    mapValues = mapValues + ";;;" + depObj.options[n].value;
+                                }
+                            }
+                        }
+                        depObj.value = "";
+                        var selectValues = mySelObject[label];
+                        for (var k in values) {
+                            var rat = k;
+                            if (rat == "-None-") {
+                                rat = "";
+                            }
+                            var parentValues = mySelObject[name];
+                            if (rat == trimBoth(obj.value)) {
+                                isDependent = true;
+                                depObj.length = 0;
+                                var depvalues = values[k];
+                                var depLen = depvalues.length - 1;
+                                for (var j = 0; j <= depLen; j++) {
+                                    var optionElement = document.createElement("OPTION");
+                                    var displayValue = depvalues[j];
+                                    var actualValue = displayValue;
+                                    if (actualValue == "-None-") {
+                                        optionElement.value = "";
+                                        displayValue = "-None-";
+                                    } else {
+                                        optionElement.value = actualValue;
+                                    }
+                                    optionElement.text = displayValue;
+                                    if (mapValues != undefined) {
+                                        var mapValue = mapValues.split(";;;");
+                                        var len = mapValue.length;
+                                        for (var p = 0; p < len; p++) {
+                                            if (actualValue == mapValue[p]) {
+                                                optionElement.selected = true;
+                                            }
+                                        }
+                                    }
+                                    depObj.options.add(optionElement);
+                                }
+                            }
+                        }
+                        if (!isDependent) {
+                            depObj.length = 0;
+                            var len = selectValues.length;
+                            for (var j = 0; j < len; j++) {
+                                var actualValue = selectValues[j];
+                                var optionElement = document.createElement("OPTION");
+                                if (actualValue == "-None-") {
+                                    optionElement.value = "";
+                                } else {
+                                    optionElement.value = selectValues[j];
+                                }
+                                optionElement.text = selectValues[j];
+                                depObj.options.add(optionElement);
+                            }
+                            depObj.value = selected_val;
+                        }
+                        if (!isload) {
+                            setDependent(depObj, false);
+                        }
+                        var jdepObj = jQuery(depObj);
+                        if (jdepObj.hasClass('select2-offscreen')) {
+                            jdepObj.select2("val", jdepObj.val());
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    function setSelectAll(id) {
+        var parentElement = document.getElementById(id);
+        var hiddenInput = parentElement.querySelector('#hiddenoptions');
+        var selectAllElement = parentElement.querySelector('#selectall' + id);
+        var selectedValues = [];
+        var checkboxes = parentElement.querySelectorAll('.wb_multi_pick_input');
+        checkboxes.forEach(function(cb) {
+            cb.checked = selectAllElement.checked;
+            if (cb.checked && cb.value) {
+                selectedValues.push(cb.value);
+            }
+        });
+        hiddenInput.value = selectedValues.join(',');
+    }
+
+    function setMultiSelectOption(id, obj) {
+        var parentElement = document.getElementById(id);
+        var hiddenInput = parentElement.querySelector('#hiddenoptions');
+        var selectAllElement = parentElement.querySelector('#selectall' + id);
+        var selectedStr = hiddenInput.value;
+        var selectedValues = selectedStr ? selectedStr.split(',') : [];
+        if (obj.checked && obj.value) {
+            selectedValues.push(obj.value);
+        } else if (!obj.checked && obj.value) {
+            selectedValues.splice(selectedValues.indexOf(obj.value), 1);
+            selectAllElement.checked = false;
+        } else {
+            selectAllElement.checked = false;
+        }
+        hiddenInput.value = selectedValues.join(',');
+    }
+    var zctt = function() {
+        var tt, mw = 400,
+            top = 10,
+            left = 0,
+            doctt = document;
+        var ieb = doctt.all ? true : false;
+        return {
+            showtt: function(cont, wid) {
+                if (tt == null) {
+                    tt = doctt.createElement('div');
+                    tt.setAttribute('id', 'tooltip-zc');
+                    doctt.body.appendChild(tt);
+                    doctt.onmousemove = this.setpos;
+                    doctt.onclick = this.hidett;
+                }
+                tt.style.display = 'block';
+                tt.innerHTML = cont;
+                tt.style.width = wid ? wid + 'px' : 'auto';
+                if (!wid && ieb) {
+                    tt.style.width = tt.offsetWidth;
+                }
+                if (tt.offsetWidth > mw) {
+                    tt.style.width = mw + 'px'
+                }
+                h = parseInt(tt.offsetHeight) + top;
+                w = parseInt(tt.offsetWidth) + left;
+            },
+            hidett: function() {
+                tt.style.display = 'none';
+            },
+            setpos: function(e) {
+                var u = ieb ? event.clientY + doctt.body.scrollTop : e.pageY;
+                var l = ieb ? event.clientX + doctt.body.scrollLeft : e.pageX;
+                var cw = doctt.body.clientWidth;
+                var ch = doctt.body.clientHeight;
+                if (l < 0) {
+                    tt.style.left = left + 'px';
+                    tt.style.right = '';
+                } else if ((l + w + left) > cw) {
+                    tt.style.left = '';
+                    tt.style.right = ((cw - l) + left) + 'px';
+                } else {
+                    tt.style.right = '';
+                    tt.style.left = (l + left) + 'px';
+                }
+                if (u < 0) {
+                    tt.style.top = top + 'px';
+                    tt.style.bottom = '';
+                } else if ((u + h + left) > ch) {
+                    tt.style.top = '';
+                    tt.style.bottom = ((ch - u) + top) + 'px';
+                } else {
+                    tt.style.bottom = '';
+                    tt.style.top = (u + top) + 'px';
+                }
+            }
+        };
+    }();
+
+     function generateRandomNumbers() {
+    var num1 = Math.floor(Math.random() * 10);
+    var num2 = Math.floor(Math.random() * 10);
+    return [num1, num2];
+  }
+
+  function updateMathSumQuestion() {
+    var randomNumbers = generateRandomNumbers();
+    var num1 = randomNumbers[0];
+    var num2 = randomNumbers[1];
+    $('#mathSumQuestion').text('What is ' + num1 + ' + ' + num2 + '?');
+    $('#mathSum').data('expectedSum', num1 + num2);
+  }
+
+  updateMathSumQuestion();
+
+  function validateMathSum() {
+    var mathSumInput = $('#mathSum');
+    var mathSumValue = mathSumInput.val();
+    var expectedSum = mathSumInput.data('expectedSum');
+
+    if (!mathSumValue || parseInt(mathSumValue) !== expectedSum) {
+      mathSumInput.css('border-color', 'red');
+      return false;
+    } else {
+      mathSumInput.css('border-color', 'green');
+      return true;
+    }
+  }
+
+  // On form submission - only validate math
+  $('#submitTicketForm').submit(function () {
+    return validateMathSum();
+  });
+
+  // On form reset - regenerate math question
+  $('#submitTicketForm').on('reset', function () {
+    updateMathSumQuestion();
+  });
+
+  // Live validation on math input field
+  $('#mathSum').on('input blur', function () {
+    validateMathSum();
+  });
+  
+    var zsWebFormMandatoryFields = new Array("Contact Name", "Email", "Subject");
+    var zsFieldsDisplayLabelArray = new Array("Last Name", "Email", "Subject");
+
+    function validateMandatoryFieldsCombined() {
+  const form = document.getElementById('submitTicketForm');
+  const zsForm = document.forms['zsWebToCase_1137282000000375630'];
+  const requiredFields = form.querySelectorAll('input:not(.not-required), textarea:not(.not-required), select:not(.not-required)');
+  let isValid = true;
+  let firstInvalidField = null;
+
+  // Zoho Mandatory Fields
+  var zsWebFormMandatoryFields = ["Contact Name", "Email", "Subject"];
+  var zsFieldsDisplayLabelArray = ["Last Name", "Email", "Subject"];
+
+  for (let i = 0; i < zsWebFormMandatoryFields.length; i++) {
+    let field = zsForm[zsWebFormMandatoryFields[i]];
+    if (field) {
+      let val = field.value.trim();
+      // if (val.length === 0) {
+      //   alert(zsFieldsDisplayLabelArray[i] + ' cannot be empty');
+      //   field.focus();
+      //   field.style.border = "2px solid red";
+      //   isValid = false;
+      //   firstInvalidField = field;
+      //   return false;
+      // }
+      // if (field.name === 'Email' && !/^[\w_.+\-&']+@[\w.-]+\.[a-zA-Z]{2,22}$/.test(val)) {
+      //   alert('Enter a valid email-Id');
+      //   field.focus();
+      //   field.style.border = "2px solid red";
+      //   isValid = false;
+      //   firstInvalidField = field;
+      //   return false;
+      // }
+      if (field.nodeName === 'SELECT' && field.value === '-None-') {
+        alert(zsFieldsDisplayLabelArray[i] + ' cannot be none');
+        field.focus();
+        field.style.border = "2px solid red";
+        isValid = false;
+        firstInvalidField = field;
+        return false;
+      }
+      if (field.type === 'checkbox' && !field.checked) {
+        alert('Please accept ' + zsFieldsDisplayLabelArray[i]);
+        field.focus();
+        field.style.border = "2px solid red";
+        isValid = false;
+        firstInvalidField = field;
+        return false;
+      }
+      field.style.border = "2px solid green";
+    }
+  }
+
+  // General Required Fields
+  requiredFields.forEach(field => {
+    if (
+      field.type !== "hidden" &&
+      field.offsetParent !== null &&
+      field.name !== "" &&
+      field.getAttribute('name') !== 'captcha_settings'
+    ) {
+      const value = field.value.trim();
+      const isSelect = field.tagName === 'SELECT';
+      const isEmpty = (value === '' && !isSelect) || (isSelect && field.selectedOptions.length === 0);
+
+      if (isEmpty) {
+        field.style.border = "2px solid red";
+        if (!firstInvalidField) firstInvalidField = field;
+        isValid = false;
+      } else {
+        field.style.border = "2px solid green";
+      }
+    }
+  });
+
+  // Email field check from custom form
+  const emailField = form.querySelector('[ftype=email]');
+  if (emailField) {
+    const email = emailField.value.trim();
+    const atpos = email.indexOf('@');
+    const dotpos = email.lastIndexOf('.');
+    const emailValid = atpos > 0 && dotpos > atpos + 1 && dotpos + 2 < email.length;
+
+    if (!emailValid) {
+      emailField.style.border = "2px solid red";
+      if (!firstInvalidField) firstInvalidField = emailField;
+      isValid = false;
+    } else {
+      emailField.style.border = "2px solid green";
+    }
+  }
+
+  // Multi-select values to hidden input
+  const industrySelect = document.getElementById('CASECF2');
+  const industryHidden = document.getElementById('selectHidden');
+  if (industrySelect && industryHidden) {
+    const selectedOptions = Array.from(industrySelect.selectedOptions).map(opt => opt.value);
+    industryHidden.value = selectedOptions.join(', ');
+  }
+
+  // reCAPTCHA check
+  if (typeof grecaptcha !== "undefined") {
+    const response = grecaptcha.getResponse();
+    if (response.length === 0) {
+      alert("Please complete the reCAPTCHA.");
+      isValid = false;
+    }
+  }
+
+  // Scroll to first invalid field
+  if (firstInvalidField) {
+    firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    firstInvalidField.focus();
+  }
+
+  // Disable Zoho button on valid
+  if (isValid) {
+    document.getElementById('zsSubmitButton_1137282000000375630').setAttribute('disabled', 'disabled');
+  }
+
+  return isValid;
+}
+
+    document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('submitTicketForm');
+  const zsForm = document.forms['zsWebToCase_1137282000000375630'];
+
+  const allFields = form.querySelectorAll('input, textarea, select');
+  allFields.forEach(field => {
+    if (!field.classList.contains('not-required')) {
+      if (field.tagName === 'SELECT') {
+        field.addEventListener('change', () => {
+          validateField(field);
+        });
+      } else {
+        field.addEventListener('input', () => {
+          validateField(field);
+        });
+      }
+    }
+  });
+
+  // Add real-time validation to Zoho fields
+  const zsFields = ["Contact Name", "Email", "Subject"];
+  zsFields.forEach(fieldName => {
+    const field = zsForm[fieldName];
+    if (field) {
+      const eventType = field.tagName === 'SELECT' ? 'change' : 'input';
+      field.addEventListener(eventType, () => validateField(field));
+    }
+  });
+});
+
+function validateField(field) {
+  const value = field.value.trim();
+  const isSelect = field.tagName === 'SELECT';
+
+  if (isSelect && value === '-None-') {
+    field.style.border = '2px solid red';
+  } else if (field.type === 'checkbox') {
+    field.style.border = field.checked ? '2px solid green' : '2px solid red';
+  } else if (field.type === 'email' || field.getAttribute('ftype') === 'email') {
+    const emailValid = /^[\w_.+\-&']+@[\w.-]+\.[a-zA-Z]{2,22}$/.test(value);
+    field.style.border = emailValid ? '2px solid green' : '2px solid red';
+  } else {
+    field.style.border = value.length > 0 ? '2px solid green' : '2px solid red';
+  }
+}
+
+
+
+    document.addEventListener('readystatechange', function() {
+        if (document.readyState === 'complete' && window.zsRegenerateCaptcha) {
+            zsRegenerateCaptcha();
+        }
+        setAllDependancyFieldsMapping();
+        document.getElementById('zsSubmitButton_1137282000000375630').removeAttribute('disabled');
+    });
+
+    function zsResetWebForm(webFormId) {
+        document.forms['zsWebToCase_' + webFormId].reset();
+        document.getElementById('zsSubmitButton_1137282000000375630').removeAttribute('disabled');
+        setAllDependancyFieldsMapping();
+    }
+
+    
+
+  </script>
+                      
    
 </head>
 <body class="submitPage" id="submit-captcha">
@@ -192,20 +651,19 @@ function gtag(){dataLayer.push(arguments);}
                   <!--  -->
 
 
-                      <form id="submitTicketForm" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DHo000002fpJX" method="POST">
+                      <form id="submitTicketForm" name='zsWebToCase_1137282000000375630' action='https://desk.zoho.com/support/WebToCase' method='POST' onSubmit='return validateMandatoryFieldsCombined();' enctype='multipart/form-data'>
 
 
-                        <input type=hidden name="orgid" value="00DHo000002fpJX">
-                        <input type=hidden name="retURL" value="https://www.techunifi.com/thanku-submit.html">
+                         <input type='hidden' name='xnQsjsdp' value='edbsn4d44ad8af4192d4a5279d7b2fa12eef5' /> 
+    <input type='hidden' name='xmIwtLD' value='edbsn15bb099dc0ab8cdb2738f80a22c2852e19e0f7b12d331f77d18982027524436a' /> 
+    <input type='hidden' name='xJdfEaS' value='' /> <input type='hidden' name='actionType' value='Q2FzZXM=' /> 
+    <input type="hidden" id="property(module)" value="Cases" /> 
+    <input type="hidden" id="dependent_field_values_Cases" value="&#x7b;&quot;JSON_VALUES&quot;&#x3a;&#x7b;&#x7d;,&quot;JSON_SELECT_VALUES&quot;&#x3a;&#x7b;&#x7d;,&quot;JSON_MAP_DEP_LABELS&quot;&#x3a;&#x5b;&#x5d;&#x7d;" /> 
+    <input type='hidden' name='returnURL' value='https&#x3a;&#x2f;&#x2f;www.techunifi.com&#x2f;thanku-submit.html' />
+
+    <input type='hidden' maxlength='120' id="Contact Name" name='Contact Name' class='manfieldbdr d-none' value="NA" />
                         
                             
-                         <!--  ----------------------------------------------------------------------  -->
-                        <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
-                         <!--  these lines if you wish to test in debug mode.                          -->
-                         <!-- <input type="hidden" name="debug" value=1>                             
-                          <input type="hidden" name="debugEmail" value="corey@inovisolutions.com">                                       -->
-                          <!--  ----------------------------------------------------------------------  -->
-                        
                         <div class="submit-sub-section submit-contact-info">
                            
                           <div class="row cont-row-head">
@@ -216,35 +674,28 @@ function gtag(){dataLayer.push(arguments);}
 
                           <div class="row">
                             <div class="col-md-12">
-                              <label>Case Type</label>
-                              <input id="00NUm000009802T" maxlength="50" name="00NUm000009802T" size="20" type="text" class="casetype" value="Submit A Ticket" readonly/>
-                            </div>
-                          </div>
-
-                          <div class="row">
-                            <div class="col-md-12">
-                              <label for="company">Company</label>
-                              <input  id="company" placeholder="I.E. Days inn- Fairville, TN" maxlength="80" name="company" size="20" type="text"/>   
+                              <label for="Company">Company</label>
+                              <input  id="Company" placeholder="I.E. Days inn- Fairville, TN" maxlength="80" name="Company" size="20" type="text"/>   
                             </div>
                           </div>
                           
                           <div class="row">
                             <div class="col-md-12">
-                              <label for="name">Contact Name</label>
-                              <input  id="name" placeholder="Rajesh Patel" maxlength="80" name="name" size="20" type="text"/>   
+                              <label for="First Name">Contact Name</label>
+                              <input  id="First Name" placeholder="Rajesh Patel" maxlength="80" name="First Name" size="20" type="text"/>   
                             </div>
                           </div>
 
                           <div class="row">
 
                             <div class="col-md-6">
-                              <label for="email">Email</label>
-                              <input  id="email" placeholder="company@gmail.com" maxlength="80" name="email" size="20" type="text"/>
+                              <label for="Email">Email</label>
+                              <input  id="Email" placeholder="company@gmail.com" maxlength="80" name="Email" size="20" type="text"/>
                             </div>
 
                             <div class="col-md-6">
-                              <label for="phone">Phone</label>
-                              <input  id="phone" placeholder="+1 (336) 860 6061" maxlength="40" name="phone" size="20" type="text"/>
+                              <label for="Phone">Phone</label>
+                              <input  id="Phone" placeholder="+1 (336) 860 6061" maxlength="40" name="Phone" size="20" type="text"/>
                             </div>
 
                           </div>
@@ -262,12 +713,12 @@ function gtag(){dataLayer.push(arguments);}
                           <div class="row">
                             <div class="col-md-12">
 
-                              <label for="subject">Subject</label> 
-                              <input  id="subject" placeholder="Inquiry about EV Charging" maxlength="80" name="subject" size="20" type="text"/>
+                              <label for="Subject">Subject</label> 
+                              <input  id="Subject" placeholder="Inquiry about EV Charging" maxlength="80" name="Subject" size="20" type="text"/>
     
-                              <label>Products Requiring Service (Select 1 or more options)</label> 
+                              <label for="Products Requiring Service">Products Requiring Service (Select 1 or more options)</label> 
                               
-                              <select  id="00NHo00000Wqm1u" name="00NHo00000Wqm1u" title="Products Requiring Service" multiple="multiple">
+                              <select onchange="setDependent(this, false)" id='CASECF2' name="Products[]" title="Products Requiring Service" multiple="multiple">
                                 <option class='first-select' value="">--None--</option>
                                 <option value="Phone">Phone</option>
                                 <option value="Wifi">Wifi</option>
@@ -277,21 +728,23 @@ function gtag(){dataLayer.push(arguments);}
                                 <option value="Speakers">Speakers</option>
                                 <option value="Other">Other</option>
                                 </select>
+                                <!-- <input type="hidden" name="Products" id="selectHidden"/> -->
+
                               
-                              <label class="form-submit-tooltip">Model Number of Device
+                              <label class="form-submit-tooltip" for="Model Number of Device">Model Number of Device
                                 <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="All products will display a model number on the back. This helps us isolate your problem and provide better service.">
                                   <i class="bi bi-question-circle"></i>
                                 </span>
                               </label>
-                              <input class="not-required" placeholder="56IDR456" id="00NHo00000Wqm1z" maxlength="75" name="00NHo00000Wqm1z" size="20" type="text"/>
+                              <input class="not-required" placeholder="56IDR456" id="Model Number of Device" maxlength="75" name="Model Number of Device" size="20" type="text"/>
                               
                                
-                              <label for="description">Description</label>
-                              <textarea name="description"  rows="7" tabindex="6" placeholder="Implementation of EV Charging facilities" onkeydown="if (event.keyCode === 13) { event.preventDefault(); this.value += '\n'; }"></textarea>
+                              <label for="Description">Description</label>
+                              <textarea id="Description" name="Description"  rows="7" tabindex="6" placeholder="Implementation of EV Charging facilities" onkeydown="if (event.keyCode === 13) { event.preventDefault(); this.value += '\n'; }"></textarea>
                             </div>
                           </div>
 
-                          <!-- Math Validation -->
+                           <!-- Math Validation -->
                           <div class="row">
                             <div class="col-md-12">
                               <div class="mathTooltip">
@@ -321,134 +774,9 @@ function gtag(){dataLayer.push(arguments);}
                             Be sure to review the form before submitting. Please provide as much detail as possible so that we can tailor our service to your needs.
                           </p>
                         </div>
-
-  <!-- Change Order Form -->
-
-  <!-- <div class="change-order-div d-none">
-
-    <div class="submit-sub-section submit-contact-info">
-  
-      <div class="row">
-        <div class="col-md-12">
-          <h4>Project Information</h4>
-        </div>
-      </div>
-  
-        <div class="row">
-          <div class="col-md-12">
-            <label>Case Type</label>
-            <input id="00NUm000009802T" maxlength="50" name="00NUm000009802T" size="20" type="hidden" value="Change Order Type" class="casetype"/>
-          </div>
-        </div>
-  
-        <div class="row">
-  
-          <div class="col-md-6">
-            <label>Project Name</label>
-            <input id="00NUm0000097zsn" maxlength="50" name="00NUm0000097zsn" size="20" type="hidden"/>
-          </div>
-  
-          <div class="col-md-6">
-            <label>Project Number</label>
-            <input  id="00NUm000009805h" maxlength="50" name="00NUm000009805h" size="20" type="hidden"/>
-          </div>
-  
-        </div>
-  
-        <div class="row">
-          <div class="col-md-12">
-            <label>Date</label>
-            <span class="dateInput dateOnlyInput"><input id="00NUm00000980Ib" name="00NUm00000980Ib" size="12" type="hidden" /></span>
-          </div>
-        </div>
-  
-    </div>
-  
-    <div class="submit-sub-section submit-contact-info">
-  
-      <div class="row">
-        <div class="col-md-12">
-          <h4>Contractor Information</h4>
-        </div>
-      </div>
-  
-        <div class="row">
-          <div class="col-md-12">
-            <label>Contractor Full Name</label>
-            <input  id="00NUm00000980Lp" maxlength="50" name="00NUm00000980Lp" size="20" type="hidden"/>
-          </div>
-        </div>
-  
-        <div class="row">
-          <div class="col-md-12">
-            <label>Contact Person</label>
-            <input  id="00NUm00000980NR" maxlength="50" name="00NUm00000980NR" size="20" type="hidden" /><br>
-          </div>
-        </div>
-  
-        <div class="row">
-  
-          <div class="col-md-6">
-            <label>Contact Person Email</label>
-            <input  id="00NUm00000980P3" maxlength="80" name="00NUm00000980P3" size="20" type="hidden"/>
-          </div>
-  
-          <div class="col-md-6">
-            <label>Contact Person Phone number</label>
-            <input id="00NUm00000980Qf" maxlength="40" name="00NUm00000980Qf" onkeydown="formatPhoneOnEnter(this, event);" size="20" type="hidden" />
-          </div>
-  
-        </div>
-  
-    </div>
-  
-     <div class="submit-sub-section submit-contact-info">
-  
-      <div class="row">
-        <div class="col-md-12">
-          <h4>Change Order Details</h4>
-        </div>
-      </div>
-  
-        <div class="row">
-          <div class="col-md-12">
-            <label>Change Order Number </label>
-            <input  id="00NUm00000980SH" maxlength="50" name="00NUm00000980SH" size="20" type="hidden" />
-          </div>
-        </div>
-  
-        <div class="row">
-          <div class="col-md-12">
-            <label>Change Order Date</label>
-            <span class="dateInput dateOnlyInput"><input  id="00NUm00000980X7" name="00NUm00000980X7" size="12" type="hidden" /></span>
-          </div>
-        </div>
-  
-    </div>
-  
-    <div class="submit-sub-section submit-contact-info">
-  
-        <div class="row">
-          <div class="col-md-12">
-            <h4>Description of Change</h4>
-          </div>
-        </div>
-    
-          <div class="row">
-            <div class="col-md-12">
-              <label>Original Scope Work</label>
-              <textarea  id="00NUm00000980Yj" name="00NUm00000980Yj" rows="5" style="display: none;" wrap="soft"></textarea>
-            </div>
-          </div>
-    
-    </div>
-      
-  </div> -->
-  
-    <!-- Change Order Form -->
                  
-                        <input type="submit" name="submit" value="Submit A Ticket">   
-                        
+                        <input type="submit" id="zsSubmitButton_1137282000000375630" class='zsFontClass' name="submit" value="Submit A Ticket">   
+  
                     </form> 
 
                     
