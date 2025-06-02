@@ -358,7 +358,7 @@ function gtag(){dataLayer.push(arguments);}
                                 </div>
 
                                  <!-- Math Validation -->
-                            <!-- <div class="row">
+                            <div class="row">
                             <div class="col-md-12">
                               <div class="mathTooltip">
                                 <label for="inquirymathSum" id="inquirymathSumQuestion">Math Sum: What is 2 + 2? </label>
@@ -366,7 +366,7 @@ function gtag(){dataLayer.push(arguments);}
                               </div>
                                 <input id="inquirymathSum" name="inquirymathSum" type="number" placeholder="Enter Sum"/>
                             </div>
-                            </div> -->
+                            </div>
 
                             <!-- Captcha -->
                             <!-- <div class="row" style="padding-bottom: 20px;">
@@ -587,6 +587,48 @@ function gtag(){dataLayer.push(arguments);}
     return true;
   }
 
+// Math Validation
+
+  function inquirygenerateRandomNumbers() {
+    var inquirynum1 = Math.floor(Math.random() * 10);
+    var inquirynum2 = Math.floor(Math.random() * 10);
+    return [inquirynum1, inquirynum2];
+  }
+
+  function inquiryupdateMathSumQuestion() {
+    var inquiryrandomNumbers = inquirygenerateRandomNumbers();
+    var inquirynum1 = inquiryrandomNumbers[0];
+    var inquirynum2 = inquiryrandomNumbers[1];
+    $('#inquirymathSumQuestion').text('What is ' + inquirynum1 + ' + ' + inquirynum2 + '?');
+    $('#inquirymathSum').data('inquiryexpectedSum', inquirynum1 + inquirynum2);
+  }
+
+  inquiryupdateMathSumQuestion();
+
+  function validateInquiryForm() {
+    var formValid = true;
+
+    var inquirymathSumInput = $('#inquirymathSum');
+    var inquirymathSumValue = inquirymathSumInput.val();
+    var inquiryexpectedSum = inquirymathSumInput.data('inquiryexpectedSum');
+
+    if (!inquirymathSumValue || parseInt(inquirymathSumValue) !== inquiryexpectedSum) {
+      inquirymathSumInput.css('border-color', 'red');
+      formValid = false;
+    } else {
+      inquirymathSumInput.css('border-color', 'green');
+    }
+
+    return formValid;
+  }
+
+  // $('#myInquiryForm').submit(function() {
+  //   return validateInquiryForm();
+  // });
+
+
+
+
   function checkMandatory6771280000000651020() {
     const form = document.getElementById('myInquiryForm');
     const requiredFields = form.querySelectorAll('input:not(.not-required), textarea:not(.not-required), select:not(.not-required)');
@@ -635,6 +677,15 @@ function gtag(){dataLayer.push(arguments);}
       }
     }
 
+      // --- BEGIN Math Validation Integration ---
+  if (!validateInquiryForm()) { // Call the math validation function
+      isValid = false; // If math validation fails, the whole form is invalid
+      if (!firstInvalidField) { // If no other fields were invalid, set math field as the first invalid one
+          firstInvalidField = document.getElementById('inquirymathSum');
+      }
+  }
+  // --- END Math Validation Integration ---
+
     // Capture selected multi-select values
 const industrySelect = document.getElementById('Industry');
 const industryHidden = document.getElementById('IndustryHidden');
@@ -642,6 +693,7 @@ if (industrySelect && industryHidden) {
   const selectedOptions = Array.from(industrySelect.selectedOptions).map(opt => opt.value);
   industryHidden.value = selectedOptions.join(', ');
 }
+
 
 
     // Captcha validation
@@ -681,6 +733,8 @@ if (industrySelect && industryHidden) {
       industryField.addEventListener('change', addAriaSelected6771280000000651020);
     }
   });
+
+  
 
   function tooltipShow6771280000000651020(el) {
     const tooltip = el.nextElementSibling;
