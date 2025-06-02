@@ -75,115 +75,168 @@ function gtag(){dataLayer.push(arguments);}
 
 
  <script src='https://d17nz991552y2g.cloudfront.net/app/js/jqueryandencoder.ef05974972bf3bca1b87.js'></script>
-  <script>
-        function trimBoth(str) {
-        return jQuery.trim(str);
+ <script>
+
+     $(document).ready(function() {
+    // --- Configuration Variables ---
+    // Make sure this matches the actual form name attribute in your HTML
+    var formName = 'zsWebToCase_1137282000000375630';
+    var submitButtonId = 'zsSubmitButton_1137282000000375630';
+
+    // Array of mandatory field names (matching 'name' attribute in HTML or accessible via form.elements[name])
+    // The order here should correspond to the order in zsFieldsDisplayLabelArray if you use that for error messages
+    var zsWebFormMandatoryFields = ["Company", "First Name", "Email", "Phone", "Subject", "Products", "Description"];
+    // Display labels for mandatory fields (optional, if you were using them for user-friendly error messages)
+    var zsFieldsDisplayLabelArray = ["Company", "Contact Name", "Email", "Phone", "Subject", "Products Requiring Service", "Description"];
+
+    // --- Helper Functions ---
+
+    /**
+     * Trims whitespace from both ends of a string.
+     * @param {string} str The string to trim.
+     * @returns {string} The trimmed string.
+     */
+    function trimBoth(str) {
+        return str ? String(str).trim() : '';
     }
 
-    function setAllDependancyFieldsMapping() {
-        var mapDependancyLabels = getMapDependenySelectValues(jQuery("[id='property(module)']").val(), "JSON_MAP_DEP_LABELS");
-        if (mapDependancyLabels) {
-            for (var i = 0; i < mapDependancyLabels.length; i++) {
-                var label = mapDependancyLabels[i];
-                var obj = document.forms['zsWebToCase_1137282000000375630'][label];
-                if (obj) {
-                    setDependent(obj, true);
-                }
-            }
-        }
-    }
-
+    /**
+     * Retrieves dependency select values from a hidden JSON element.
+     * Assumes a hidden input with ID `dependent_field_values_[module]`
+     * contains JSON data.
+     * @param {string} module The module value to get dependency data for.
+     * @param {string} key The key within the JSON object (e.g., "JSON_MAP_DEP_LABELS").
+     * @returns {object|undefined} The parsed JSON object or undefined if not found.
+     */
     function getMapDependenySelectValues(module, key) {
-        var dependencyObj = jQuery.parseJSON(jQuery("[id='dependent_field_values_" + module + "']").val());
-        if (dependencyObj == undefined) {
-            return dependencyObj;
+        var dependencyElement = jQuery("[id='dependent_field_values_" + module + "']");
+        if (dependencyElement.length === 0) {
+            console.warn("Dependency element not found for module:", module);
+            return undefined;
+        }
+        var dependencyObj = jQuery.parseJSON(dependencyElement.val());
+        if (dependencyObj === undefined || dependencyObj === null) {
+            return undefined;
         }
         return dependencyObj[key];
     }
 
+    /**
+     * Sets up dependent dropdowns based on a parent selection.
+     * This function's logic is highly specific to a particular dependency
+     * data structure (likely from Zoho CRM or similar).
+     * @param {HTMLElement} obj The parent select element.
+     * @param {boolean} isload True if this is being called on initial load.
+     */
     function setDependent(obj, isload) {
-        var name = obj.id || (obj[0] && obj[0].id) || "";
+        // Ensure obj is a single DOM element for consistency or handle jQuery object
+        var currentObj = $(obj)[0] || obj; // Convert to DOM element if it's a jQuery object
+
+        var name = currentObj.id || "";
+        if (!name && currentObj.name) { // Fallback to name if ID isn't present
+             name = currentObj.name;
+        }
+
         var module = jQuery("[id='property(module)']").val();
         var val = "";
         var myObject = getMapDependenySelectValues(module, "JSON_VALUES");
-        if (myObject != undefined) {
+
+        if (myObject !== undefined) {
             val = myObject[name];
         }
+
         var mySelObject = getMapDependenySelectValues(module, "JSON_SELECT_VALUES");
-        if (val != null && val != "" && val != "null" && mySelObject) {
+
+        if (val != null && val !== "" && val !== "null" && mySelObject) {
             var fields = val;
             for (var i in fields) {
                 if (fields.hasOwnProperty(i)) {
                     var isDependent = false;
                     var label = i;
-                    var values = fields[i];
+                    // Decoding field names that might have been encoded on the backend
                     if (label.indexOf(")") > -1) {
-                        label = label.replace(/\)/g, '_____');
+                        label = label.replace(/_____\)/g, ')'); // Revert previous encoding
+                        label = label.replace(/\)/g, '_____'); // Apply new encoding
                     }
                     if (label.indexOf("(") > -1) {
-                        label = label.replace(/\(/g, '____');
+                         label = label.replace(/____\(/g, '('); // Revert previous encoding
+                         label = label.replace(/\(/g, '____'); // Apply new encoding
                     }
                     if (label.indexOf(".") > -1) {
-                        label = label.replace(/\./g, '___');
+                        label = label.replace(/___\./g, '.'); // Revert previous encoding
+                        label = label.replace(/\./g, '___'); // Apply new encoding
                     }
-                    var depObj = document.forms['zsWebToCase_1137282000000375630'][label];
-                    if (depObj && depObj.options) {
+
+                    var depObj = document.forms[formName][label];
+                    if (depObj && depObj.options) { // Check if it's a select element
                         var mapValues = "";
-                        var selected_val = depObj.value;
+                        var selected_val = depObj.value; // Store currently selected value
+
+                        // Capture selected values for multi-select (if applicable)
                         var depLen = depObj.options.length - 1;
                         for (var n = depLen; n >= 0; n--) {
                             if (depObj.options[n].selected) {
-                                if (mapValues == "") {
+                                if (mapValues === "") {
                                     mapValues = depObj.options[n].value;
                                 } else {
                                     mapValues = mapValues + ";;;" + depObj.options[n].value;
                                 }
                             }
                         }
-                        depObj.value = "";
+
+                        depObj.value = ""; // Clear current selection before populating
                         var selectValues = mySelObject[label];
-                        for (var k in values) {
-                            var rat = k;
-                            if (rat == "-None-") {
-                                rat = "";
-                            }
-                            var parentValues = mySelObject[name];
-                            if (rat == trimBoth(obj.value)) {
-                                isDependent = true;
-                                depObj.length = 0;
-                                var depvalues = values[k];
-                                var depLen = depvalues.length - 1;
-                                for (var j = 0; j <= depLen; j++) {
-                                    var optionElement = document.createElement("OPTION");
-                                    var displayValue = depvalues[j];
-                                    var actualValue = displayValue;
-                                    if (actualValue == "-None-") {
-                                        optionElement.value = "";
-                                        displayValue = "-None-";
-                                    } else {
-                                        optionElement.value = actualValue;
-                                    }
-                                    optionElement.text = displayValue;
-                                    if (mapValues != undefined) {
-                                        var mapValue = mapValues.split(";;;");
-                                        var len = mapValue.length;
-                                        for (var p = 0; p < len; p++) {
-                                            if (actualValue == mapValue[p]) {
-                                                optionElement.selected = true;
+
+                        for (var k in values) { // Iterate through values based on parent selection
+                            if (values.hasOwnProperty(k)) {
+                                var rat = k;
+                                if (rat === "-None-") {
+                                    rat = "";
+                                }
+
+                                // Check if the current parent value matches the dependent field's value
+                                if (rat === trimBoth(currentObj.value)) {
+                                    isDependent = true;
+                                    depObj.length = 0; // Clear all existing options
+                                    var depvalues = values[k]; // Get new options for this dependency
+                                    var depLenOptions = depvalues.length;
+
+                                    for (var j = 0; j < depLenOptions; j++) {
+                                        var optionElement = document.createElement("OPTION");
+                                        var displayValue = depvalues[j];
+                                        var actualValue = displayValue;
+
+                                        if (actualValue === "-None-") {
+                                            optionElement.value = "";
+                                            displayValue = "-None-";
+                                        } else {
+                                            optionElement.value = actualValue;
+                                        }
+                                        optionElement.text = displayValue;
+
+                                        // Try to re-select previously selected options for multi-select
+                                        if (mapValues !== undefined && mapValues !== "") {
+                                            var mapValueArray = mapValues.split(";;;");
+                                            for (var p = 0; p < mapValueArray.length; p++) {
+                                                if (actualValue === mapValueArray[p]) {
+                                                    optionElement.selected = true;
+                                                }
                                             }
                                         }
+                                        depObj.options.add(optionElement);
                                     }
-                                    depObj.options.add(optionElement);
                                 }
                             }
                         }
+
                         if (!isDependent) {
+                            // If no dependent options are found, reset to all available options
                             depObj.length = 0;
                             var len = selectValues.length;
                             for (var j = 0; j < len; j++) {
                                 var actualValue = selectValues[j];
                                 var optionElement = document.createElement("OPTION");
-                                if (actualValue == "-None-") {
+                                if (actualValue === "-None-") {
                                     optionElement.value = "";
                                 } else {
                                     optionElement.value = selectValues[j];
@@ -191,13 +244,17 @@ function gtag(){dataLayer.push(arguments);}
                                 optionElement.text = selectValues[j];
                                 depObj.options.add(optionElement);
                             }
-                            depObj.value = selected_val;
+                            depObj.value = selected_val; // Try to restore previous selection
                         }
+
+                        // Recursively call setDependent for child dependencies
                         if (!isload) {
                             setDependent(depObj, false);
                         }
+
+                        // Re-initialize select2 if it's being used
                         var jdepObj = jQuery(depObj);
-                        if (jdepObj.hasClass('select2-offscreen')) {
+                        if (jdepObj.hasClass('select2-offscreen') && jdepObj.data('select2')) { // Check if select2 is initialized
                             jdepObj.select2("val", jdepObj.val());
                         }
                     }
@@ -206,12 +263,37 @@ function gtag(){dataLayer.push(arguments);}
         }
     }
 
+
+    /**
+     * Initializes all dependency fields mapping on page load.
+     */
+    function setAllDependancyFieldsMapping() {
+        var moduleValue = jQuery("[id='property(module)']").val();
+        var mapDependancyLabels = getMapDependenySelectValues(moduleValue, "JSON_MAP_DEP_LABELS");
+        if (mapDependancyLabels) {
+            for (var i = 0; i < mapDependancyLabels.length; i++) {
+                var label = mapDependancyLabels[i];
+                var obj = document.forms[formName][label];
+                if (obj) {
+                    setDependent(obj, true); // true for initial load
+                }
+            }
+        }
+    }
+
+    /**
+     * Handles 'Select All' functionality for custom multi-select checkboxes.
+     * @param {string} id The ID of the parent container for the checkboxes.
+     */
     function setSelectAll(id) {
         var parentElement = document.getElementById(id);
+        if (!parentElement) return;
+
         var hiddenInput = parentElement.querySelector('#hiddenoptions');
         var selectAllElement = parentElement.querySelector('#selectall' + id);
         var selectedValues = [];
         var checkboxes = parentElement.querySelectorAll('.wb_multi_pick_input');
+
         checkboxes.forEach(function(cb) {
             cb.checked = selectAllElement.checked;
             if (cb.checked && cb.value) {
@@ -221,317 +303,262 @@ function gtag(){dataLayer.push(arguments);}
         hiddenInput.value = selectedValues.join(',');
     }
 
+    /**
+     * Handles individual option selection for custom multi-select checkboxes.
+     * @param {string} id The ID of the parent container for the checkboxes.
+     * @param {HTMLElement} obj The individual checkbox element.
+     */
     function setMultiSelectOption(id, obj) {
         var parentElement = document.getElementById(id);
+        if (!parentElement) return;
+
         var hiddenInput = parentElement.querySelector('#hiddenoptions');
         var selectAllElement = parentElement.querySelector('#selectall' + id);
         var selectedStr = hiddenInput.value;
         var selectedValues = selectedStr ? selectedStr.split(',') : [];
+
         if (obj.checked && obj.value) {
             selectedValues.push(obj.value);
         } else if (!obj.checked && obj.value) {
-            selectedValues.splice(selectedValues.indexOf(obj.value), 1);
-            selectAllElement.checked = false;
+            var index = selectedValues.indexOf(obj.value);
+            if (index > -1) {
+                selectedValues.splice(index, 1);
+            }
+            if (selectAllElement) {
+                selectAllElement.checked = false;
+            }
         } else {
-            selectAllElement.checked = false;
+            if (selectAllElement) {
+                selectAllElement.checked = false;
+            }
         }
         hiddenInput.value = selectedValues.join(',');
     }
-    var zctt = function() {
-        var tt, mw = 400,
-            top = 10,
-            left = 0,
-            doctt = document;
-        var ieb = doctt.all ? true : false;
-        return {
-            showtt: function(cont, wid) {
-                if (tt == null) {
-                    tt = doctt.createElement('div');
-                    tt.setAttribute('id', 'tooltip-zc');
-                    doctt.body.appendChild(tt);
-                    doctt.onmousemove = this.setpos;
-                    doctt.onclick = this.hidett;
-                }
-                tt.style.display = 'block';
-                tt.innerHTML = cont;
-                tt.style.width = wid ? wid + 'px' : 'auto';
-                if (!wid && ieb) {
-                    tt.style.width = tt.offsetWidth;
-                }
-                if (tt.offsetWidth > mw) {
-                    tt.style.width = mw + 'px'
-                }
-                h = parseInt(tt.offsetHeight) + top;
-                w = parseInt(tt.offsetWidth) + left;
-            },
-            hidett: function() {
-                tt.style.display = 'none';
-            },
-            setpos: function(e) {
-                var u = ieb ? event.clientY + doctt.body.scrollTop : e.pageY;
-                var l = ieb ? event.clientX + doctt.body.scrollLeft : e.pageX;
-                var cw = doctt.body.clientWidth;
-                var ch = doctt.body.clientHeight;
-                if (l < 0) {
-                    tt.style.left = left + 'px';
-                    tt.style.right = '';
-                } else if ((l + w + left) > cw) {
-                    tt.style.left = '';
-                    tt.style.right = ((cw - l) + left) + 'px';
-                } else {
-                    tt.style.right = '';
-                    tt.style.left = (l + left) + 'px';
-                }
-                if (u < 0) {
-                    tt.style.top = top + 'px';
-                    tt.style.bottom = '';
-                } else if ((u + h + left) > ch) {
-                    tt.style.top = '';
-                    tt.style.bottom = ((ch - u) + top) + 'px';
-                } else {
-                    tt.style.bottom = '';
-                    tt.style.top = (u + top) + 'px';
-                }
-            }
-        };
-    }();
 
-     function generateRandomNumbers() {
-    var num1 = Math.floor(Math.random() * 10);
-    var num2 = Math.floor(Math.random() * 10);
-    return [num1, num2];
-  }
-
-  function updateMathSumQuestion() {
-    var randomNumbers = generateRandomNumbers();
-    var num1 = randomNumbers[0];
-    var num2 = randomNumbers[1];
-    $('#mathSumQuestion').text('What is ' + num1 + ' + ' + num2 + '?');
-    $('#mathSum').data('expectedSum', num1 + num2);
-  }
-
-  updateMathSumQuestion();
-
-  function validateMathSum() {
-    var mathSumInput = $('#mathSum');
-    var mathSumValue = mathSumInput.val();
-    var expectedSum = mathSumInput.data('expectedSum');
-
-    if (!mathSumValue || parseInt(mathSumValue) !== expectedSum) {
-      mathSumInput.css('border-color', 'red');
-      return false;
-    } else {
-      mathSumInput.css('border-color', 'green');
-      return true;
+    // --- Math Sum Captcha Functions ---
+    function generateRandomNumbers() {
+        var num1 = Math.floor(Math.random() * 10);
+        var num2 = Math.floor(Math.random() * 10);
+        return [num1, num2];
     }
-  }
 
-  // On form submission - only validate math
-  $('#submitTicketForm').submit(function () {
-    return validateMathSum();
-  });
-
-  // On form reset - regenerate math question
-  $('#submitTicketForm').on('reset', function () {
-    updateMathSumQuestion();
-  });
-
-  // Live validation on math input field
-  $('#mathSum').on('input blur', function () {
-    validateMathSum();
-  });
-
-    var zsWebFormMandatoryFields = new Array("Contact Name", "Email", "Subject");
-    var zsFieldsDisplayLabelArray = new Array("Last Name", "Email", "Subject");
-
-    function validateMandatoryFieldsCombined() {
-  const form = document.getElementById('submitTicketForm');
-  const zsForm = document.forms['zsWebToCase_1137282000000375630'];
-  const requiredFields = form.querySelectorAll('input:not(.not-required), textarea:not(.not-required), select:not(.not-required)');
-  let isValid = true;
-  let firstInvalidField = null;
-
-  // Zoho Mandatory Fields
-  var zsWebFormMandatoryFields = ["Contact Name", "Email", "Subject"];
-  var zsFieldsDisplayLabelArray = ["Last Name", "Email", "Subject"];
-
-  for (let i = 0; i < zsWebFormMandatoryFields.length; i++) {
-    let field = zsForm[zsWebFormMandatoryFields[i]];
-    if (field) {
-      let val = field.value.trim();
-      // if (val.length === 0) {
-      //   alert(zsFieldsDisplayLabelArray[i] + ' cannot be empty');
-      //   field.focus();
-      //   field.style.border = "2px solid red";
-      //   isValid = false;
-      //   firstInvalidField = field;
-      //   return false;
-      // }
-      // if (field.name === 'Email' && !/^[\w_.+\-&']+@[\w.-]+\.[a-zA-Z]{2,22}$/.test(val)) {
-      //   alert('Enter a valid email-Id');
-      //   field.focus();
-      //   field.style.border = "2px solid red";
-      //   isValid = false;
-      //   firstInvalidField = field;
-      //   return false;
-      // }
-      if (field.nodeName === 'SELECT' && field.value === '-None-') {
-        alert(zsFieldsDisplayLabelArray[i] + ' cannot be none');
-        field.focus();
-        field.style.border = "2px solid red";
-        isValid = false;
-        firstInvalidField = field;
-        return false;
-      }
-      if (field.type === 'checkbox' && !field.checked) {
-        alert('Please accept ' + zsFieldsDisplayLabelArray[i]);
-        field.focus();
-        field.style.border = "2px solid red";
-        isValid = false;
-        firstInvalidField = field;
-        return false;
-      }
-      field.style.border = "2px solid green";
+    function updateMathSumQuestion() {
+        var randomNumbers = generateRandomNumbers();
+        var num1 = randomNumbers[0];
+        var num2 = randomNumbers[1];
+        $('#mathSumQuestion').text('What is ' + num1 + ' + ' + num2 + '?');
+        $('#mathSum').data('expectedSum', num1 + num2);
+        // Clear styling and value on new question
+        $('#mathSum').css('border-color', ''); // Remove border color
+        $('#mathSum').val('');
     }
-  }
 
-  // General Required Fields
-  requiredFields.forEach(field => {
-    if (
-      field.type !== "hidden" &&
-      field.offsetParent !== null &&
-      field.name !== "" &&
-      field.getAttribute('name') !== 'captcha_settings'
-    ) {
-      const value = field.value.trim();
-      const isSelect = field.tagName === 'SELECT';
-      const isEmpty = (value === '' && !isSelect) || (isSelect && field.selectedOptions.length === 0);
+    function validateMathSum() {
+        var mathSumInput = $('#mathSum');
+        var mathSumValue = mathSumInput.val();
+        var expectedSum = mathSumInput.data('expectedSum');
 
-      if (isEmpty) {
-        field.style.border = "2px solid red";
-        if (!firstInvalidField) firstInvalidField = field;
-        isValid = false;
-      } else {
-        field.style.border = "2px solid green";
-      }
-    }
-  });
-
-  // Email field check from custom form
-  const emailField = form.querySelector('[ftype=email]');
-  if (emailField) {
-    const email = emailField.value.trim();
-    const atpos = email.indexOf('@');
-    const dotpos = email.lastIndexOf('.');
-    const emailValid = atpos > 0 && dotpos > atpos + 1 && dotpos + 2 < email.length;
-
-    if (!emailValid) {
-      emailField.style.border = "2px solid red";
-      if (!firstInvalidField) firstInvalidField = emailField;
-      isValid = false;
-    } else {
-      emailField.style.border = "2px solid green";
-    }
-  }
-
-  // Multi-select values to hidden input
-  const industrySelect = document.getElementById('CASECF2');
-  const industryHidden = document.getElementById('selectHidden');
-  if (industrySelect && industryHidden) {
-    const selectedOptions = Array.from(industrySelect.selectedOptions).map(opt => opt.value);
-    industryHidden.value = selectedOptions.join(', ');
-  }
-
-  // reCAPTCHA check
-  if (typeof grecaptcha !== "undefined") {
-    const response = grecaptcha.getResponse();
-    if (response.length === 0) {
-      alert("Please complete the reCAPTCHA.");
-      isValid = false;
-    }
-  }
-
-  // Scroll to first invalid field
-  if (firstInvalidField) {
-    firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    firstInvalidField.focus();
-  }
-
-  // Disable Zoho button on valid
-  if (isValid) {
-    document.getElementById('zsSubmitButton_1137282000000375630').setAttribute('disabled', 'disabled');
-  }
-
-  return isValid;
-}
-
-    document.addEventListener('DOMContentLoaded', function () {
-  const form = document.getElementById('submitTicketForm');
-  const zsForm = document.forms['zsWebToCase_1137282000000375630'];
-
-  const allFields = form.querySelectorAll('input, textarea, select');
-  allFields.forEach(field => {
-    if (!field.classList.contains('not-required')) {
-      if (field.tagName === 'SELECT') {
-        field.addEventListener('change', () => {
-          validateField(field);
-        });
-      } else {
-        field.addEventListener('input', () => {
-          validateField(field);
-        });
-      }
-    }
-  });
-
-  // Add real-time validation to Zoho fields
-  const zsFields = ["Contact Name", "Email", "Subject"];
-  zsFields.forEach(fieldName => {
-    const field = zsForm[fieldName];
-    if (field) {
-      const eventType = field.tagName === 'SELECT' ? 'change' : 'input';
-      field.addEventListener(eventType, () => validateField(field));
-    }
-  });
-});
-
-function validateField(field) {
-  const value = field.value.trim();
-  const isSelect = field.tagName === 'SELECT';
-
-  if (isSelect && value === '-None-') {
-    field.style.border = '2px solid red';
-  } else if (field.type === 'checkbox') {
-    field.style.border = field.checked ? '2px solid green' : '2px solid red';
-  } else if (field.type === 'email' || field.getAttribute('ftype') === 'email') {
-    const emailValid = /^[\w_.+\-&']+@[\w.-]+\.[a-zA-Z]{2,22}$/.test(value);
-    field.style.border = emailValid ? '2px solid green' : '2px solid red';
-  } else {
-    field.style.border = value.length > 0 ? '2px solid green' : '2px solid red';
-  }
-}
-
-
-
-    document.addEventListener('readystatechange', function() {
-        if (document.readyState === 'complete' && window.zsRegenerateCaptcha) {
-            zsRegenerateCaptcha();
+        if (!mathSumValue || isNaN(parseInt(mathSumValue)) || parseInt(mathSumValue) !== expectedSum) {
+            mathSumInput.css('border-color', 'red');
+            return false;
+        } else {
+            mathSumInput.css('border-color', 'green');
+            return true;
         }
-        setAllDependancyFieldsMapping();
-        document.getElementById('zsSubmitButton_1137282000000375630').removeAttribute('disabled');
-    });
+    }
 
+    // --- Main Form Validation Logic (called on submit) ---
+    function zsValidateMandatoryFields() {
+        var firstErrorField = null;
+        var isValid = true;
+
+        // Reset styling for all form fields before re-validation
+        $('#' + formName + ' input, #' + formName + ' select, #' + formName + ' textarea').each(function() {
+            $(this).css('border-color', ''); // Clear existing borders
+        });
+        $('.g-recaptcha').css('border', ''); // Clear reCAPTCHA border
+
+        for (var index = 0; index < zsWebFormMandatoryFields.length; index++) {
+            var fieldName = zsWebFormMandatoryFields[index];
+            var fieldObject = document.forms[formName][fieldName];
+            var displayLabel = zsFieldsDisplayLabelArray[index]; // Use if you were showing specific error messages
+
+            // Check if the field exists and is not explicitly marked as 'not-required'
+            // We use jQuery here for consistency and for hasClass check
+            if (fieldObject && !$(fieldObject).hasClass('not-required')) {
+                var $fieldObject = $(fieldObject); // Convert to jQuery object
+
+                if (fieldObject.type === 'text' || fieldObject.tagName === 'TEXTAREA' || fieldObject.type === 'email' || fieldObject.type === 'tel') {
+                    if (trimBoth($fieldObject.val()).length === 0) {
+                        $fieldObject.css('border-color', 'red');
+                        if (!firstErrorField) firstErrorField = fieldObject;
+                        isValid = false;
+                    } else {
+                        $fieldObject.css('border-color', 'green');
+                        // Specific email validation
+                        if (fieldName === 'Email') {
+                            if (!trimBoth($fieldObject.val()).match(/^([\w_][\w\-_.+\'&]*)@(?=.{4,256}$)(([\w]+)([\-_]*[\w])*[\.])+[a-zA-Z]{2,22}$/)) {
+                                $fieldObject.css('border-color', 'red');
+                                if (!firstErrorField) firstErrorField = fieldObject;
+                                isValid = false;
+                            }
+                        }
+                    }
+                } else if (fieldObject.tagName === 'SELECT') {
+                    // For single select and multi-select
+                    if ($fieldObject.val() === null || $fieldObject.val() === '' || $fieldObject.val() === '-None-' || ($fieldObject.is('select[multiple]') && $fieldObject.find('option:selected').length === 0)) {
+                        $fieldObject.css('border-color', 'red');
+                        if (!firstErrorField) firstErrorField = fieldObject;
+                        isValid = false;
+                    } else {
+                        $fieldObject.css('border-color', 'green');
+                    }
+                }
+                // Add validation for other input types if needed (e.g., radio, checkbox)
+            }
+        }
+
+        // Math Sum Validation
+        if (!validateMathSum()) {
+            if (!firstErrorField) firstErrorField = $('#mathSum')[0];
+            isValid = false;
+        }
+
+        // reCAPTCHA Validation (assuming grecaptcha is loaded)
+        // Note: The reCAPTCHA element usually doesn't have a direct value,
+        // so styling its container is typical.
+        var recaptchaResponse = typeof grecaptcha !== 'undefined' ? grecaptcha.getResponse() : '';
+        var recaptchaElement = $('.g-recaptcha'); // Selector for the reCAPTCHA container div
+
+        if (recaptchaElement.length > 0) { // Only validate if reCAPTCHA element exists
+            if (recaptchaResponse.length === 0) {
+                recaptchaElement.css('border', '1px solid red'); // Highlight the reCAPTCHA container
+                if (!firstErrorField) firstErrorField = recaptchaElement[0];
+                isValid = false;
+            } else {
+                recaptchaElement.css('border', '1px solid green');
+            }
+        }
+
+
+        // Scroll to the first error field if any errors were found
+        if (firstErrorField) {
+            $('html, body').animate({
+                scrollTop: $(firstErrorField).offset().top - 50 // Adjust offset as needed
+            }, 500);
+        }
+
+        // Disable submit button if form is valid (to prevent double submission)
+        if (isValid) {
+            $('#' + submitButtonId).attr('disabled', 'disabled');
+        }
+        return isValid;
+    }
+
+
+    /**
+     * Resets the web form, clears validation styling, and regenerates captcha.
+     * @param {string} webFormId The ID part of the form name (e.g., '1137282000000375630').
+     */
     function zsResetWebForm(webFormId) {
         document.forms['zsWebToCase_' + webFormId].reset();
-        document.getElementById('zsSubmitButton_1137282000000375630').removeAttribute('disabled');
-        setAllDependancyFieldsMapping();
+        $('#' + submitButtonId).removeAttr('disabled');
+        setAllDependancyFieldsMapping(); // Re-initialize dependencies
+        updateMathSumQuestion(); // Regenerate math question
+        // Clear all validation styling
+        $('#' + formName + ' input, #' + formName + ' select, #' + formName + ' textarea').css('border-color', '');
+        $('.g-recaptcha').css('border', ''); // Clear recaptcha border
     }
 
-    
+    // Attach zsResetWebForm to the window object so it can be called from HTML, if needed
+    window.zsResetWebForm = zsResetWebForm;
+    // Attach zsValidateMandatoryFields to the window object so it can be called from form's onSubmit, if needed
+    window.zsValidateMandatoryFields = zsValidateMandatoryFields;
 
-  </script>
-                      
-   
+
+    // --- Document Ready Initializations and Event Handlers ---
+
+    // Initial setup for the form elements
+    // Add 'id' or 'name' attributes to your HTML elements if you're using them in `zsWebFormMandatoryFields`
+    // Or you might need to add a class like 'mandatory-field' to your required fields
+    // For this consolidated code, we will assume elements in zsWebFormMandatoryFields are considered mandatory.
+
+    // Real-time validation for all input, select, textarea elements within the form
+    $('#' + formName + ' input, #' + formName + ' select, #' + formName + ' textarea').on('input change blur', function() {
+        // Only apply live validation to fields that are NOT marked as 'not-required'
+        if (!$(this).hasClass('not-required') && $(this).attr('id') !== 'mathSum') { // Exclude mathSum as it has dedicated live validation
+            var $this = $(this);
+            var fieldValue = $this.val();
+            var isFieldValid = true;
+
+            if ($this.is('select[multiple]')) {
+                // For multi-selects, check if any option is selected
+                if ($this.find('option:selected').length === 0) {
+                    isFieldValid = false;
+                }
+            } else if ($this.prop('tagName') === 'SELECT') {
+                // For single select, check if a valid option is chosen
+                if (fieldValue === '' || fieldValue === '-None-') {
+                    isFieldValid = false;
+                }
+            } else if ($this.attr('name') === 'Email') {
+                // Email field specific validation
+                if (trimBoth(fieldValue).length === 0 || !trimBoth(fieldValue).match(/^([\w_][\w\-_.+\'&]*)@(?=.{4,256}$)(([\w]+)([\-_]*[\w])*[\.])+[a-zA-Z]{2,22}$/)) {
+                    isFieldValid = false;
+                }
+            } else {
+                // General text input/textarea validation
+                if (trimBoth(fieldValue).length === 0) {
+                    isFieldValid = false;
+                }
+            }
+
+            if (isFieldValid) {
+                $this.css('border-color', 'green');
+            } else {
+                $this.css('border-color', 'red');
+            }
+        }
+    });
+
+
+    // Initial math question generation on page load
+    updateMathSumQuestion();
+
+    // Live validation on math input field
+    $('#mathSum').on('input blur', function() {
+        validateMathSum();
+    });
+
+    // Handle form submission
+    $('#' + formName).on('submit', function(event) {
+        // Call the central validation function
+        if (!zsValidateMandatoryFields()) {
+            event.preventDefault(); // Prevent form submission if validation fails
+            // You might want a general alert here or rely on specific field highlights
+            alert('Please correct the highlighted errors before submitting.');
+        }
+    });
+
+    // Initial setup for dependency fields (if any)
+    setAllDependancyFieldsMapping();
+
+    // Re-enable submit button (in case it was disabled from a previous form load/error)
+    $('#' + submitButtonId).removeAttr('disabled');
+
+    // This section was in readystatechange, moving to doc ready for consistency
+    // If you need zsRegenerateCaptcha to run after the google recaptcha script is loaded,
+    // ensure that script is loaded asynchronously and this function is called after it's ready,
+    // or keep a separate event listener if that's how it's designed.
+    // For now, assuming it might be available immediately on DOM ready.
+    if (typeof window.zsRegenerateCaptcha === 'function') {
+        // This function is likely for Zoho's internal captcha management
+        window.zsRegenerateCaptcha();
+    }
+});
+
+ </script>
+
 </head>
 <body class="submitPage" id="submit-captcha">
     
@@ -651,7 +678,7 @@ function validateField(field) {
                   <!--  -->
 
 
-                      <form id="submitTicketForm" name='zsWebToCase_1137282000000375630' action='https://desk.zoho.com/support/WebToCase' method='POST' onSubmit='return validateMandatoryFieldsCombined();' enctype='multipart/form-data'>
+                      <form id="submitTicketForm" name='zsWebToCase_1137282000000375630' action='https://desk.zoho.com/support/WebToCase' method='POST' onSubmit='return zsValidateMandatoryFields();' enctype='multipart/form-data'>
 
 
                          <input type='hidden' name='xnQsjsdp' value='edbsn4d44ad8af4192d4a5279d7b2fa12eef5' /> 
@@ -719,7 +746,7 @@ function validateField(field) {
     
                               <label for="Products Requiring Service">Products Requiring Service (Select 1 or more options)</label> 
                               
-                              <select onchange="setDependent(this, false)" id='CASECF2' name="Products[]" title="Products Requiring Service" multiple="multiple">
+                              <select onchange="setDependent(this, false)" id='CASECF2' name="Products" title="Products Requiring Service" multiple="multiple">
                                 <option class='first-select' value="">--None--</option>
                                 <option value="Phone">Phone</option>
                                 <option value="Wifi">Wifi</option>
@@ -729,7 +756,7 @@ function validateField(field) {
                                 <option value="Speakers">Speakers</option>
                                 <option value="Other">Other</option>
                                 </select>
-                                <input type="hidden" name="Products" id="selectHidden"/>
+                                <!-- <input type="hidden" name="Products" id="selectHidden"/> -->
 
                               
                               <label class="form-submit-tooltip" for="Model Number of Device">Model Number of Device
