@@ -1086,7 +1086,7 @@ $(document).ready(function() {
 /* ==== Form Validation ====  */
 
 /* ======= Submit a Ticket ======= */
-if (window.location.pathname === '/submit.html') {
+/* if (window.location.pathname === '/submit.html') {
   $(document).ready(function() {
 
     function submitgenerateRandomNumbers() {
@@ -1151,7 +1151,7 @@ if (window.location.pathname === '/submit.html') {
       }
     });
   });
-}
+} */
 
 /* ==== Tooltip ==== */
 var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
