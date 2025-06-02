@@ -191,19 +191,22 @@ function gtag(){dataLayer.push(arguments);}
                             </div>
                             <!--  -->
           
-                            <form id='myInquiryForm' action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DHo000002fpJX" method="POST">
+                            <form id='myInquiryForm' action = 'https://crm.zoho.com/crm/WebToLeadForm' name = WebToLeads6771280000000651020 method ='POST' onSubmit = 'javascript:document.charset="UTF-8"; return checkMandatory6771280000000651020()' accept-charset = 'UTF-8'>
 
-                              <input type=hidden name="oid" value="00DHo000002fpJX">
-                              <input type=hidden name="retURL" value="https://www.techunifi.com/thanku-submit.html">
-                              
-                              <!--  ----------------------------------------------------------------------  -->
-                              <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
-                              <!--  these lines if you wish to test in debug mode.                          -->
-                              <!--  <input type="hidden" name="debug" value=1>                              -->
-                              <!--  <input type="hidden" name="debugEmail"                                  -->
-                              <!--  value="corey@inovisolutions.com">                                       -->
-                              <!--  ----------------------------------------------------------------------  -->
-                  
+                              <!-- hidden -->
+                               <input type = 'text' style = 'display:none;' name = 'xnQsjsdp' value = 'b36445c3a91dd82178848ac1f9dd4683341530006c9a920e59b15ef40e1d0447'>
+				</input>
+				<input type = 'hidden' name = 'zc_gad' id = 'zc_gad' value = ''>
+				</input>
+				<input type = 'text' style = 'display:none;' name = 'xmIwtLD' value = 'df68b606c9cdb1ec412c6d20eb8a3caf676a70aa9e410e88b1e2bf3d967affec90f133b6d0a81641cf8c4da92413c046'>
+				</input>
+				<input type = 'text' style = 'display:none;' name = 'actionType' value = 'TGVhZHM='>
+				</input>
+				<input type = 'text' style = 'display:none;' name = 'returnURL' value = 'https&#x3a;&#x2f;&#x2f;www.techunifi.com&#x2f;thanku-submit.html'>
+				</input>
+		<input type="hidden" name="Industry" id="IndustryHidden" />
+
+                             
                               <div class="submit-sub-section submit-contact-info aos-init aos-animate" data-aos="zoom-in" data-aos-delay="50">
                   
                                 <div class="row cont-row-head">
@@ -214,41 +217,42 @@ function gtag(){dataLayer.push(arguments);}
                   
                                 <div class="row">
                                   <div class="col-md-12">
-                                    <label for="company">Company</label>
-                                    <input  id="company" placeholder="I.E. Days inn- Fairville, TN" maxlength="40" name="company" size="20" type="text"/>
+                                    <label for="Company">Company</label>
+                                  	<input type = 'text' id = 'Company' placeholder="I.E. Days inn- Fairville, TN" aria-label = 'Company' name = 'Company' aria-valuemax = '200' maxlength = '200'/>
+
                                   </div>
                                 </div>
                   
                                 <div class="row">
                                   <div class="col-md-6">
-                                    <label for="first_name">First Name</label>
-                                    <input  id="first_name" placeholder="Rajesh" maxlength="40" name="first_name" size="20" type="text"/>
+                                    <label for="First_Name">First Name</label>
+                                    <input type = 'text' id = 'First_Name' placeholder="Rajesh" aria-label = 'First Name' name = 'First Name' aria-valuemax = '40' maxlength = '40'/>
                                   </div>
                                   <div class="col-md-6">
-                                    <label for="last_name">Last Name</label>
-                                    <input  id="last_name" placeholder="Patel" maxlength="80" name="last_name" size="20" type="text"/>
+                                    <label for="Last_Name">Last Name</label>
+                                    <input type = 'text' id = 'Last_Name' placeholder="Patel" aria-label = 'Last Name' name = 'Last Name' aria-valuemax = '80' maxlength = '80'/>
                                   </div>
                                 </div>
 
                                 <div class="row">
                                   <div class="col-md-6">
-                                    <label for="phone" class="form-submit-tooltip">Company Phone
+                                    <label for="Phone" class="form-submit-tooltip">Company Phone
                                       <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="This number serves as both contact information and a case code. In case this number stops being serviced, we can still contact you via your mobile number.">
                                         <i class="bi bi-question-circle"></i>
                                       </span>
                                     </label>
-                                    <input  id="phone" placeholder="+1 (336) 860 6061" maxlength="40" name="phone" size="20" type="text"/>
+                                    <input type = 'text' id = 'Phone' placeholder="+1 (336) 860 6061" aria-label = 'Phone' name = 'Phone' aria-valuemax = '30' maxlength = '30'/>
                                   </div>
                                   <div class="col-md-6">
-                                    <label for="mobile">Mobile</label>
-                                    <input  id="mobile" placeholder="+1 (336) 860 6061" maxlength="40" name="mobile" size="20" type="text"/>
+                                    <label for="Mobile">Mobile</label>
+                                    <input type = 'text' id = 'Mobile' placeholder="+1 (336) 860 6061" aria-label = 'Mobile' name = 'Mobile' aria-valuemax = '30' maxlength = '30'/>
                                   </div>
                                 </div>
                   
                                 <div class="row">
                                   <div class="col-md-12">
                                     <label for="email">Email</label>
-                                    <input  id="email" placeholder="company@gmail.com" maxlength="80" name="email" size="20" type="text"/>
+                                    <input type = 'text' placeholder="company@gmail.com" ftype = 'email' id = 'Email' aria-label = 'Email' name = 'Email' aria-valuemax = '100' crmlabel = '' maxlength = '100'/>
                                   </div>
                                 </div>
 
@@ -265,23 +269,23 @@ function gtag(){dataLayer.push(arguments);}
                   
                                 <div class="row">
                                   <div class="col-md-12">
-                                    <label for="street">Street</label>
-                                    <textarea rows="2" name="street" placeholder="2638 Willard Dairy Road, Suite 112" onkeydown="if (event.keyCode === 13) { event.preventDefault(); this.value += '\n'; }"></textarea>
+                                    <label for="Street">Street</label>
+                                    <textarea rows="2" id="Street" aria-label = 'Street' name = 'Street' placeholder="2638 Willard Dairy Road, Suite 112" onkeydown="if (event.keyCode === 13) { event.preventDefault(); this.value += '\n'; }"></textarea>
                                   </div>
                                 </div>
 
                                 <div class="row">
                                   <div class="col-md-4">
-                                    <label for="city">City</label>
-                                    <input  id="city" placeholder="High Point" maxlength="40" name="city" size="20" type="text"/>
+                                    <label for="City">City</label>
+                                    <input  id="City" placeholder="High Point" maxlength="40"  aria-label="City" name="City" size="20" type="text"/>
                                   </div>
                                   <div class="col-md-4">
-                                    <label for="state">State/Province</label>
-                                    <input  id="state" placeholder="North Carolina (NC)" maxlength="20" name="state" size="20" type="text"/>
+                                    <label for="State">State/Province</label>
+                                    <input  id="State" placeholder="North Carolina (NC)" maxlength="20" aria-label="State" name="State" size="20" type="text"/>
                                   </div>
                                   <div class="col-md-4">
-                                    <label for="zip">Zip</label>
-                                    <input  id="zip" placeholder="27265" maxlength="20" name="zip" size="20" type="text"/>
+                                    <label for="Zip_Code">Zip</label>
+                                    <input  id="Zip_Code" placeholder="27265" maxlength="20" aria-label="Zip_Code" name="Zip_Code" size="20" type="text"/>
                                   </div>
                                 </div>
                   
@@ -298,8 +302,8 @@ function gtag(){dataLayer.push(arguments);}
                                 <div class="row">
 
                                   <div class="col-md-7">
-                                    <label>Type of Business</label>
-                                    <select class="ticket-business-select" id="00NHo00000XG1NV" name="00NHo00000XG1NV" title="Type">
+                                    <label for="Lead_Source">Type of Business</label>
+                                    <select class="ticket-business-select" id="Lead_Source" aria-label="Lead_Source" name="Lead Source" onChange = 'addAriaSelected6771280000000651020()' title="Type">
                                       <option value="">--None--</option>
                                       <option value="Hotel">Hotel</option>
                                       <option value="Apartments">Apartments</option>
@@ -309,25 +313,25 @@ function gtag(){dataLayer.push(arguments);}
                                   </div>
 
                                   <div class="col-md-5">
-                                    <label class="form-submit-tooltip">Number of Rooms/Apartments
+                                    <label class="form-submit-tooltip" for="No_of_Employees">Number of Rooms/Apartments
                                       <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="If you have a multi unit property provide the number of Rooms/Apts./units of your business. This helps us understand the scope of work and the scale of the property.">
                                         <i class="bi bi-question-circle"></i>
                                       </span>
                                     </label>
-                                    <input class="not-required" id="00NHo00000XG1Nf" placeholder="5" name="00NHo00000XG1Nf" size="20" type="text" />
+                                    <input class="not-required" id="No_of_Employees" aria-label="No_of_Employees" placeholder="5" name="No of Employees" size="20" type="text" />
                                   </div>
                                 </div>
                   
                            
                                 <div class="row">
                                   <div class="col-md-4">
-                                    <label class="form-submit-tooltip">Service Needed
+                                    <label class="form-submit-tooltip" for="Industry">Service Needed
                                       <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="You may select one or more of our services">
                                         <i class="bi bi-question-circle"></i>
                                       </span>
                                     </label>
 
-                                <select class="contact-form-home" id="00NHo00000XG1Na" multiple="multiple" name="00NHo00000XG1Na" title="Service Needed">
+                                <select class="contact-form-home" id="Industry" multiple="multiple" aria-label="Industry" name="Industry[]" onChange = 'addAriaSelected6771280000000651020()' title="Service Needed">
                                   <option value="EV Charging">EV Charging</option>
                                   <option value="Phone">Phone</option>
                                   <option value="TV">TV</option>
@@ -341,20 +345,20 @@ function gtag(){dataLayer.push(arguments);}
                                   </div>
 
                                   <div class="col-md-8">
-                                    <label for="description" class="form-submit-tooltip">Description
+                                    <label for="Description" class="form-submit-tooltip">Description
                                       <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="If you have additional images, files, or drawings to help us better understand the scope of work, please feel free to reach out to Rajesh Patel at
                                       rajesh.patel@techunifi.com">
                                         <i class="bi bi-question-circle"></i>
                                       </span>
                                     </label>
-                                    <textarea name="description" rows="7" placeholder="Implementation of audiovisual (AV) facilities" onkeydown="if (event.keyCode === 13) { event.preventDefault(); this.value += '\n'; }"></textarea>
+                                    <textarea id="Description" name="Description" rows="7" placeholder="Implementation of audiovisual (AV) facilities" onkeydown="if (event.keyCode === 13) { event.preventDefault(); this.value += '\n'; }"></textarea>
 
                                   </div>
 
                                 </div>
 
                                  <!-- Math Validation -->
-                            <div class="row">
+                            <!-- <div class="row">
                             <div class="col-md-12">
                               <div class="mathTooltip">
                                 <label for="inquirymathSum" id="inquirymathSumQuestion">Math Sum: What is 2 + 2? </label>
@@ -362,17 +366,30 @@ function gtag(){dataLayer.push(arguments);}
                               </div>
                                 <input id="inquirymathSum" name="inquirymathSum" type="number" placeholder="Enter Sum"/>
                             </div>
-                            </div>
+                            </div> -->
 
                             <!-- Captcha -->
-                            <div class="row" style="padding-bottom: 20px;">
+                            <!-- <div class="row" style="padding-bottom: 20px;">
                               <div class="col-md-12">
                                 <input type=hidden name='captcha_settings' value='{"keyname":"techunifiv2attempt3","fallback":"true","orgId":"00DHo000002fpJX","ts":""}'>
                                 <input type=hidden name="oid" value="00DHo000002fpJX">
                                 <input type=hidden name="retURL" value="http://">
                                 <div class="g-recaptcha" data-sitekey="6LfnZs4pAAAAAI9TPACWBCvx4O5CGV0tB7jHNRt1"></div>
                               </div>
-                            </div>
+                            </div> -->
+
+                            <!-- zoho captcha -->
+                             	<div class = 'zcwf_row'>
+					<div class = 'zcwf_col_lab'>
+					</div>
+					<div class = 'zcwf_col_fld'>
+						<div class = 'g-recaptcha' data-sitekey = '6Lf3ICYqAAAAAGHKnO2VfWsmWMcJ57vKk7KBusnz' data-theme = 'light' data-callback = 'rccallback6771280000000651020' captcha-verified = 'false' id = 'recap6771280000000651020'>
+						</div>
+						<div id = 'recapErr6771280000000651020' style = 'font-size:12px;color:red;visibility:hidden;'>
+							Captcha validation failed. If you are not a robot then please try again.
+						</div>
+					</div>
+				</div>
                   
                   
                               </div>
@@ -385,9 +402,301 @@ function gtag(){dataLayer.push(arguments);}
 
                               <div class="row">
                                 <div class="col-md-12 home-contact-submit">
-                                  <input type="submit" name="submit" value="Submit An Inquiry">
+                                  <input type="submit"  id="formsubmit" class="formsubmit" name="submit" value="Submit An Inquiry" role = 'button' class = 'formsubmit zcwf_button' value = 'Submit' aria-label = 'Submit' title = 'Submit'>
                                 </div>
                               </div>
+            
+						
+						<!-- <script>
+
+							function addAriaSelected6771280000000651020 (){
+								var optionElem = event.target;
+								var previousSelectedOption = optionElem.querySelector ( '[aria-selected=true]' );
+								if ( previousSelectedOption ){
+									previousSelectedOption.removeAttribute ( 'aria-selected' );
+								}
+								optionElem.querySelectorAll ( 'option' )[ optionElem.selectedIndex ].ariaSelected = 'true';
+							}
+							
+              function validateEmail6771280000000651020 (){
+								var form = document.forms[ 'WebToLeads6771280000000651020' ];
+								var emailFld = form.querySelectorAll ( '[ftype=email]' );
+								var i;
+								for ( i = 0; i < emailFld.length; i++ ){
+									var emailVal = emailFld[ i ].value;
+									if ((emailVal.replace( /^\s+|\s+$/g,'' )).length != 0 ){
+										var atpos = emailVal.indexOf ( '@' );
+										var dotpos = emailVal.lastIndexOf ( '.' );
+										if ( atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= emailVal.length ){
+											alert ( 'Please enter a valid email address. ' );
+											emailFld[ i ].focus ();
+											return false;
+										}
+									}
+								}
+								return true;
+							}
+
+            //check mandatory
+             function checkMandatory6771280000000651020() {
+    const form = document.getElementById('myInquiryForm');
+    const requiredFields = form.querySelectorAll('input:not(.not-required), textarea:not(.not-required), select:not(.not-required)');
+    let isValid = true;
+    let firstInvalidField = null;
+
+    requiredFields.forEach(field => {
+      if (
+        field.type !== "hidden" &&
+        field.offsetParent !== null &&
+        field.name !== "" &&
+        field.getAttribute('name') !== 'captcha_settings'
+      ) {
+        const value = field.value.trim();
+        const isSelect = field.tagName === 'SELECT';
+
+        const isEmpty = (value === '' && !isSelect) || (isSelect && field.selectedIndex === 0);
+        if (isEmpty) {
+          field.style.border = "2px solid red";
+          if (!firstInvalidField) {
+            firstInvalidField = field;
+          }
+          isValid = false;
+        } else {
+          field.style.border = "2px solid green";
+        }
+      }
+    });
+
+    // Email format check
+    const emailField = form.querySelector('[ftype=email]');
+    if (emailField) {
+      const email = emailField.value.trim();
+      const atpos = email.indexOf('@');
+      const dotpos = email.lastIndexOf('.');
+      const emailValid = atpos > 0 && dotpos > atpos + 1 && dotpos + 2 < email.length;
+
+      if (!emailValid) {
+        emailField.style.border = "2px solid red";
+        if (!firstInvalidField) {
+          firstInvalidField = emailField;
+        }
+        isValid = false;
+      } else {
+        emailField.style.border = "2px solid green";
+      }
+    }
+
+    // Captcha validation
+    if (typeof grecaptcha !== "undefined") {
+      const response = grecaptcha.getResponse();
+      if (response.length === 0) {
+        alert("Please complete the reCAPTCHA.");
+        isValid = false;
+      }
+    }
+
+    // Scroll to first invalid field
+    if (firstInvalidField) {
+      firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      firstInvalidField.focus();
+    }
+
+    return isValid;
+  }
+
+  // Real-time border updates
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('myInquiryForm');
+    form.querySelectorAll('input, textarea, select').forEach(el => {
+      el.addEventListener('input', () => {
+        if (el.value.trim() !== '') {
+          el.style.border = "2px solid green";
+        } else {
+          el.style.border = "";
+        }
+      });
+    });
+  });
+             
+             
+  function tooltipShow6771280000000651020 ( el ){
+								var tooltip = el.nextElementSibling;
+								var tooltipDisplay = tooltip.style.display;
+								if ( tooltipDisplay == 'none' ){
+									var allTooltip = document.getElementsByClassName ( 'zcwf_tooltip_over' );
+									for ( i = 0; i < allTooltip.length; i++ ){
+										allTooltip[ i ].style.display = 'none';
+									}
+									tooltip.style.display = 'block';
+								}
+								else {
+									tooltip.style.display = 'none';
+								}
+							}
+						
+            </script>
+ -->
+
+ <script>
+  function addAriaSelected6771280000000651020(event) {
+    const select = event.target;
+    const options = select.options;
+
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].selected) {
+        options[i].setAttribute('aria-selected', 'true');
+      } else {
+        options[i].removeAttribute('aria-selected');
+      }
+    }
+  }
+
+  	/* Do not remove this code. */
+							function rccallback6771280000000651020 (){
+								if ( document.getElementById( 'recap6771280000000651020' ) != undefined ){
+									document.getElementById ( 'recap6771280000000651020' ).setAttribute ( 'captcha-verified', true );
+								}
+								if ( document.getElementById( 'recapErr6771280000000651020' ) != undefined && document.getElementById( 'recapErr6771280000000651020' ).style.visibility == 'visible' ){
+									document.getElementById ( 'recapErr6771280000000651020' ).style.visibility = 'hidden';
+								}
+							}
+							function reCaptchaAlert6771280000000651020 (){
+								var recap = document.getElementById ( 'recap6771280000000651020' );
+								if ( recap != undefined && recap.getAttribute( 'captcha-verified' ) == 'false' ){
+									document.getElementById ( 'recapErr6771280000000651020' ).style.visibility = 'visible';
+									return false;
+								}
+								return true;
+							}
+
+  function validateEmail6771280000000651020() {
+    const form = document.forms['WebToLeads6771280000000651020'];
+    const emailFld = form.querySelectorAll('[ftype=email]');
+    for (let i = 0; i < emailFld.length; i++) {
+      const emailVal = emailFld[i].value.trim();
+      if (emailVal.length !== 0) {
+        const atpos = emailVal.indexOf('@');
+        const dotpos = emailVal.lastIndexOf('.');
+        if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= emailVal.length) {
+          alert('Please enter a valid email address.');
+          emailFld[i].focus();
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  function checkMandatory6771280000000651020() {
+    const form = document.getElementById('myInquiryForm');
+    const requiredFields = form.querySelectorAll('input:not(.not-required), textarea:not(.not-required), select:not(.not-required)');
+    let isValid = true;
+    let firstInvalidField = null;
+
+    requiredFields.forEach(field => {
+      if (
+        field.type !== "hidden" &&
+        field.offsetParent !== null &&
+        field.name !== "" &&
+        field.getAttribute('name') !== 'captcha_settings'
+      ) {
+        const value = field.value.trim();
+        const isSelect = field.tagName === 'SELECT';
+        const isEmpty = (value === '' && !isSelect) || (isSelect && field.selectedOptions.length === 0);
+
+        if (isEmpty) {
+          field.style.border = "1px solid red";
+          if (!firstInvalidField) {
+            firstInvalidField = field;
+          }
+          isValid = false;
+        } else {
+          field.style.border = "1px solid green";
+        }
+      }
+    });
+
+    // Email format check
+    const emailField = form.querySelector('[ftype=email]');
+    if (emailField) {
+      const email = emailField.value.trim();
+      const atpos = email.indexOf('@');
+      const dotpos = email.lastIndexOf('.');
+      const emailValid = atpos > 0 && dotpos > atpos + 1 && dotpos + 2 < email.length;
+
+      if (!emailValid) {
+        emailField.style.border = "1px solid red";
+        if (!firstInvalidField) {
+          firstInvalidField = emailField;
+        }
+        isValid = false;
+      } else {
+        emailField.style.border = "1px solid green";
+      }
+    }
+
+    // Capture selected multi-select values
+const industrySelect = document.getElementById('Industry');
+const industryHidden = document.getElementById('IndustryHidden');
+if (industrySelect && industryHidden) {
+  const selectedOptions = Array.from(industrySelect.selectedOptions).map(opt => opt.value);
+  industryHidden.value = selectedOptions.join(', ');
+}
+
+
+    // Captcha validation
+    if (typeof grecaptcha !== "undefined") {
+      const response = grecaptcha.getResponse();
+      if (response.length === 0) {
+        alert("Please complete the reCAPTCHA.");
+        isValid = false;
+      }
+    }
+
+    // Scroll to first invalid field
+    if (firstInvalidField) {
+      firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      firstInvalidField.focus();
+    }
+
+    return isValid;
+  }
+
+  // Real-time border updates
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('myInquiryForm');
+    form.querySelectorAll('input, textarea, select').forEach(el => {
+      el.addEventListener('input', () => {
+        if (el.value.trim() !== '') {
+          el.style.border = "1px solid green";
+        } else {
+          el.style.border = "";
+        }
+      });
+    });
+
+    // Attach event listener for multi-select aria updates
+    const industryField = document.getElementById('Industry');
+    if (industryField) {
+      industryField.addEventListener('change', addAriaSelected6771280000000651020);
+    }
+  });
+
+  function tooltipShow6771280000000651020(el) {
+    const tooltip = el.nextElementSibling;
+    const allTooltips = document.getElementsByClassName('zcwf_tooltip_over');
+    for (let i = 0; i < allTooltips.length; i++) {
+      allTooltips[i].style.display = 'none';
+    }
+    tooltip.style.display = tooltip.style.display === 'block' ? 'none' : 'block';
+  }
+</script>
+
+                              	<!-- Do not remove this --- Analytics Tracking code starts -->
+						<script id='wf_anal' src='https://crm.zohopublic.com/crm/WebFormAnalyticsServeServlet?rid=d32296b6329472f59fd92d6382add4bec6c31cc5fa6c3e3e0db379b87946f800559feb46c62e649440876f0f303069d3gidc4a7baeb1bce82778f007ac577823ea92dabcafa0a87249fca2bc14721632bdcgidf7836078c10305791a009191ba535d97eac287e6494a1b2b08545b6bef9278e8gidcedc739e56bae3f771472f48a6e8421f859debbabcfa7e7bd10d91928f02fdd5&tw=0cd0b3495968c652a1472ac1fbab6a73616f956109539709ea85903b3d241ef0'></script>
+						<!-- Do not remove this --- Analytics Tracking code ends. -->
+
+                                    
                                     
                               </form>
                               
