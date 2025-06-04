@@ -44,7 +44,7 @@
   <!-- Script JS  -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- Captcha CDN -->
-    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <!-- <script src="https://www.google.com/recaptcha/api.js"></script> -->
 
       <!-- Location Starts -->
 
@@ -75,9 +75,368 @@ function gtag(){dataLayer.push(arguments);}
 
 
   <script src='https://d17nz991552y2g.cloudfront.net/app/js/jqueryandencoder.ef05974972bf3bca1b87.js'></script>
-  <script>
-    function trimBoth(str){return jQuery.trim(str);}function setAllDependancyFieldsMapping(){var mapDependancyLabels = getMapDependenySelectValues(jQuery("[id='property(module)']").val(), "JSON_MAP_DEP_LABELS");if(mapDependancyLabels){for(var i = 0; i < mapDependancyLabels.length; i++){var label = mapDependancyLabels[i];var obj = document.forms['zsWebToCase_1137282000000375630'][label];if(obj){setDependent(obj, true);}}}}function getMapDependenySelectValues(module, key){var dependencyObj = jQuery.parseJSON( jQuery("[id='dependent_field_values_" + module + "']").val() );if(dependencyObj == undefined){return dependencyObj;}return dependencyObj[key];}function setDependent(obj, isload){var name = obj.id || (obj[0] && obj[0].id) || "";var module = jQuery("[id='property(module)']").val();var val = "";var myObject = getMapDependenySelectValues(module, "JSON_VALUES");if(myObject !=undefined){val = myObject[name];}var mySelObject = getMapDependenySelectValues(module, "JSON_SELECT_VALUES");if(val != null && val != "" && val != "null" && mySelObject){var fields = val;for(var i in fields){if (fields.hasOwnProperty(i)){var isDependent = false;var label = i;var values = fields[i];if(label.indexOf(")") > -1){label = label.replace(/\)/g, '_____');}if(label.indexOf("(") > -1){label = label.replace(/\(/g, '____');}if(label.indexOf(".") > -1){label = label.replace(/\./g, '___');}var depObj = document.forms['zsWebToCase_1137282000000375630'][label];if(depObj && depObj.options){var mapValues = "";var selected_val = depObj.value;var depLen = depObj.options.length-1;for (var n = depLen; n >= 0; n--) {if (depObj.options[n].selected){if(mapValues == ""){mapValues = depObj.options[n].value;}else{mapValues = mapValues + ";;;"+depObj.options[n].value;}}}depObj.value = "";var selectValues = mySelObject[label];for(var k in values){var rat = k;if(rat == "-None-"){rat = "";}var parentValues = mySelObject[name];if(rat == trimBoth(obj.value)){isDependent = true;depObj.length = 0;var depvalues = values[k];var depLen = depvalues.length - 1;for(var j = 0; j <= depLen; j++){var optionElement = document.createElement("OPTION");var displayValue = depvalues[j];var actualValue = displayValue;if(actualValue == "-None-"){optionElement.value = "";displayValue = "-None-";}else{optionElement.value = actualValue;}optionElement.text = displayValue;if(mapValues != undefined){var mapValue = mapValues.split(";;;");var len = mapValue.length;for(var p = 0; p < len; p++){if(actualValue == mapValue[p]){optionElement.selected = true;}}}depObj.options.add(optionElement);}}}if(!isDependent){depObj.length = 0;var len = selectValues.length;for(var j = 0; j < len; j++){var actualValue = selectValues[j];var optionElement = document.createElement("OPTION");if(actualValue == "-None-"){optionElement.value = "";}else{optionElement.value = selectValues[j];}optionElement.text = selectValues[j];depObj.options.add(optionElement);}depObj.value =  selected_val;}if(!isload){setDependent(depObj,false);}var jdepObj = jQuery(depObj);if(jdepObj.hasClass('select2-offscreen')){jdepObj.select2("val", jdepObj.val());}}}}}}function setSelectAll(id){var parentElement = document.getElementById(id);var hiddenInput = parentElement.querySelector('#hiddenoptions');var selectAllElement = parentElement.querySelector('#selectall' + id);var selectedValues = [];var checkboxes = parentElement.querySelectorAll('.wb_multi_pick_input');checkboxes.forEach(function (cb) {cb.checked = selectAllElement.checked;if (cb.checked && cb.value) {selectedValues.push(cb.value);}});hiddenInput.value = selectedValues.join(',');}function setMultiSelectOption(id, obj){var parentElement = document.getElementById(id);var hiddenInput = parentElement.querySelector('#hiddenoptions');var selectAllElement = parentElement.querySelector('#selectall' + id);var selectedStr = hiddenInput.value;var selectedValues = selectedStr ? selectedStr.split(',') : [];if(obj.checked && obj.value) {selectedValues.push(obj.value);}else if(!obj.checked && obj.value) {selectedValues.splice(selectedValues.indexOf(obj.value), 1);selectAllElement.checked = false;}else {selectAllElement.checked = false;}hiddenInput.value = selectedValues.join(',');}var zctt = function(){var tt, mw = 400, top = 10, left = 0, doctt = document;var ieb = doctt.all ? true : false;return{showtt: function(cont, wid){if(tt == null){tt = doctt.createElement('div');tt.setAttribute('id', 'tooltip-zc');doctt.body.appendChild(tt);doctt.onmousemove = this.setpos;doctt.onclick = this.hidett;}tt.style.display = 'block';tt.innerHTML = cont;tt.style.width = wid ? wid + 'px' : 'auto';if(!wid && ieb){tt.style.width = tt.offsetWidth;}if(tt.offsetWidth > mw){tt.style.width = mw + 'px'}h = parseInt(tt.offsetHeight) + top;w = parseInt(tt.offsetWidth) + left;},hidett: function(){tt.style.display = 'none';},setpos: function(e){var u = ieb ? event.clientY + doctt.body.scrollTop : e.pageY;var l = ieb ? event.clientX + doctt.body.scrollLeft : e.pageX;var cw = doctt.body.clientWidth;var ch = doctt.body.clientHeight;if(l < 0){tt.style.left = left + 'px';tt.style.right = '';}else if((l+w+left) > cw){tt.style.left = '';tt.style.right = ((cw-l) + left) + 'px';}else{tt.style.right = '';tt.style.left = (l + left) + 'px';}if(u < 0){tt.style.top = top + 'px';tt.style.bottom = '';}else if((u + h + left) > ch){tt.style.top = '';tt.style.bottom = ((ch - u) + top) + 'px';}else{tt.style.bottom = '';tt.style.top = (u + top) + 'px';}}};}();var zsWebFormMandatoryFields = new Array("Contact Name","Email","Subject");var zsFieldsDisplayLabelArray = new Array("Last Name","Email","Subject");function zsValidateMandatoryFields(){var name = '';var email = '';var isError = 0;for(var index = 0; index < zsWebFormMandatoryFields.length; index++){isError = 0;var fieldObject = document.forms['zsWebToCase_1137282000000375630'][zsWebFormMandatoryFields[index]];if(fieldObject){if(((fieldObject.value).replace(/^\s+|\s+$/g, '')).length == 0){alert(zsFieldsDisplayLabelArray[index] +' cannot be empty ');fieldObject.focus();isError = 1;return false;}else{if(fieldObject.name == 'Email'){if(!fieldObject.value.match(/^([\w_][\w\-_.+\'&]*)@(?=.{4,256}$)(([\w]+)([\-_]*[\w])*[\.])+[a-zA-Z]{2,22}$/)){isError = 1;alert('Enter a valid email-Id');fieldObject.focus();return false;}}}if(fieldObject.nodeName == 'SELECT'){if(fieldObject.options[fieldObject.selectedIndex].value == '-None-'){alert(zsFieldsDisplayLabelArray[index] +' cannot be none');fieldObject.focus();isError = 1;return false;}}if(fieldObject.type == 'checkbox'){if (fieldObject.checked == false){alert('Please accept '+zsFieldsDisplayLabelArray[index]);fieldObject.focus();isError = 1;return false;}}}}if(isError == 0){if(document.forms['zsWebToCase_1137282000000375630']['zsWebFormCaptchaWord'].value.replace(/^\s+|\s+$/g, '').length == 0){alert('Please enter the captcha code.');document.forms['zsWebToCase_1137282000000375630']['zsWebFormCaptchaWord'].focus();return false;}}if(isError == 0){document.getElementById('zsSubmitButton_1137282000000375630').setAttribute('disabled', 'disabled');}}function zsShowCaptcha(){jQuery('#zsCaptchaLoading').hide();jQuery('#zsCaptcha').show();}function zsRegenerateCaptcha(){var webFormxhr = {};webFormxhr = new XMLHttpRequest();webFormxhr.open('GET','https://desk.zoho.com/support/GenerateCaptcha?action=getNewCaptcha&_='+new Date().getTime(),true);webFormxhr.onreadystatechange = function () {if(webFormxhr.readyState === 4 && webFormxhr.status === 200) {try{ var response = (webFormxhr.responseText != null) ? JSON.parse(webFormxhr.responseText) : ''; jQuery('#zsCaptchaUrl').load(zsShowCaptcha);document.getElementById('zsCaptchaUrl').src = response.captchaUrl;document.getElementsByName('xJdfEaS')[0].value = response.captchaDigest;}catch(e){}}};webFormxhr.send();}document.addEventListener('readystatechange',function(){if(document.readyState === 'complete' && window.zsRegenerateCaptcha ){zsRegenerateCaptcha();}setAllDependancyFieldsMapping();document.getElementById('zsSubmitButton_1137282000000375630').removeAttribute('disabled');zsAttachedAttachmentsCount = 0;zsAttachmentFileBrowserIdsList = [1, 2, 3, 4, 5];document.forms['zsWebToCase_1137282000000375630']['zsWebFormCaptchaWord'].value = '';});function zsResetWebForm(webFormId){document.forms['zsWebToCase_'+webFormId].reset();document.getElementById('zsSubmitButton_1137282000000375630').removeAttribute('disabled');setAllDependancyFieldsMapping();} 
-  </script>
+
+ <script>
+  
+      function trimBoth(str) {
+        return jQuery.trim(str);
+    }
+
+    function setAllDependancyFieldsMapping() {
+        var mapDependancyLabels = getMapDependenySelectValues(jQuery("[id='property(module)']").val(), "JSON_MAP_DEP_LABELS");
+        if (mapDependancyLabels) {
+            for (var i = 0; i < mapDependancyLabels.length; i++) {
+                var label = mapDependancyLabels[i];
+                var obj = document.forms['zsWebToCase_1137282000000375630'][label];
+                if (obj) {
+                    setDependent(obj, true);
+                }
+            }
+        }
+    }
+
+    function getMapDependenySelectValues(module, key) {
+        var dependencyObj = jQuery.parseJSON(jQuery("[id='dependent_field_values_" + module + "']").val());
+        if (dependencyObj == undefined) {
+            return dependencyObj;
+        }
+        return dependencyObj[key];
+    }
+
+    function setDependent(obj, isload) {
+        var name = obj.id || (obj[0] && obj[0].id) || "";
+        var module = jQuery("[id='property(module)']").val();
+        var val = "";
+        var myObject = getMapDependenySelectValues(module, "JSON_VALUES");
+        if (myObject != undefined) {
+            val = myObject[name];
+        }
+        var mySelObject = getMapDependenySelectValues(module, "JSON_SELECT_VALUES");
+        if (val != null && val != "" && val != "null" && mySelObject) {
+            var fields = val;
+            for (var i in fields) {
+                if (fields.hasOwnProperty(i)) {
+                    var isDependent = false;
+                    var label = i;
+                    var values = fields[i];
+                    if (label.indexOf(")") > -1) {
+                        label = label.replace(/\)/g, '_____');
+                    }
+                    if (label.indexOf("(") > -1) {
+                        label = label.replace(/\(/g, '____');
+                    }
+                    if (label.indexOf(".") > -1) {
+                        label = label.replace(/\./g, '___');
+                    }
+                    var depObj = document.forms['zsWebToCase_1137282000000375630'][label];
+                    if (depObj && depObj.options) {
+                        var mapValues = "";
+                        var selected_val = depObj.value;
+                        var depLen = depObj.options.length - 1;
+                        for (var n = depLen; n >= 0; n--) {
+                            if (depObj.options[n].selected) {
+                                if (mapValues == "") {
+                                    mapValues = depObj.options[n].value;
+                                } else {
+                                    mapValues = mapValues + ";;;" + depObj.options[n].value;
+                                }
+                            }
+                        }
+                        depObj.value = "";
+                        var selectValues = mySelObject[label];
+                        for (var k in values) {
+                            var rat = k;
+                            if (rat == "-None-") {
+                                rat = "";
+                            }
+                            var parentValues = mySelObject[name];
+                            if (rat == trimBoth(obj.value)) {
+                                isDependent = true;
+                                depObj.length = 0;
+                                var depvalues = values[k];
+                                var depLen = depvalues.length - 1;
+                                for (var j = 0; j <= depLen; j++) {
+                                    var optionElement = document.createElement("OPTION");
+                                    var displayValue = depvalues[j];
+                                    var actualValue = displayValue;
+                                    if (actualValue == "-None-") {
+                                        optionElement.value = "";
+                                        displayValue = "-None-";
+                                    } else {
+                                        optionElement.value = actualValue;
+                                    }
+                                    optionElement.text = displayValue;
+                                    if (mapValues != undefined) {
+                                        var mapValue = mapValues.split(";;;");
+                                        var len = mapValue.length;
+                                        for (var p = 0; p < len; p++) {
+                                            if (actualValue == mapValue[p]) {
+                                                optionElement.selected = true;
+                                            }
+                                        }
+                                    }
+                                    depObj.options.add(optionElement);
+                                }
+                            }
+                        }
+                        if (!isDependent) {
+                            depObj.length = 0;
+                            var len = selectValues.length;
+                            for (var j = 0; j < len; j++) {
+                                var actualValue = selectValues[j];
+                                var optionElement = document.createElement("OPTION");
+                                if (actualValue == "-None-") {
+                                    optionElement.value = "";
+                                } else {
+                                    optionElement.value = selectValues[j];
+                                }
+                                optionElement.text = selectValues[j];
+                                depObj.options.add(optionElement);
+                            }
+                            depObj.value = selected_val;
+                        }
+                        if (!isload) {
+                            setDependent(depObj, false);
+                        }
+                        var jdepObj = jQuery(depObj);
+                        if (jdepObj.hasClass('select2-offscreen')) {
+                            jdepObj.select2("val", jdepObj.val());
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    function setSelectAll(id) {
+        var parentElement = document.getElementById(id);
+        var hiddenInput = parentElement.querySelector('#hiddenoptions');
+        var selectAllElement = parentElement.querySelector('#selectall' + id);
+        var selectedValues = [];
+        var checkboxes = parentElement.querySelectorAll('.wb_multi_pick_input');
+        checkboxes.forEach(function(cb) {
+            cb.checked = selectAllElement.checked;
+            if (cb.checked && cb.value) {
+                selectedValues.push(cb.value);
+            }
+        });
+        hiddenInput.value = selectedValues.join(',');
+    }
+
+    function setMultiSelectOption(id, obj) {
+        var parentElement = document.getElementById(id);
+        var hiddenInput = parentElement.querySelector('#hiddenoptions');
+        var selectAllElement = parentElement.querySelector('#selectall' + id);
+        var selectedStr = hiddenInput.value;
+        var selectedValues = selectedStr ? selectedStr.split(',') : [];
+        if (obj.checked && obj.value) {
+            selectedValues.push(obj.value);
+        } else if (!obj.checked && obj.value) {
+            selectedValues.splice(selectedValues.indexOf(obj.value), 1);
+            selectAllElement.checked = false;
+        } else {
+            selectAllElement.checked = false;
+        }
+        hiddenInput.value = selectedValues.join(',');
+    }
+    var zctt = function() {
+        var tt, mw = 400,
+            top = 10,
+            left = 0,
+            doctt = document;
+        var ieb = doctt.all ? true : false;
+        return {
+            showtt: function(cont, wid) {
+                if (tt == null) {
+                    tt = doctt.createElement('div');
+                    tt.setAttribute('id', 'tooltip-zc');
+                    doctt.body.appendChild(tt);
+                    doctt.onmousemove = this.setpos;
+                    doctt.onclick = this.hidett;
+                }
+                tt.style.display = 'block';
+                tt.innerHTML = cont;
+                tt.style.width = wid ? wid + 'px' : 'auto';
+                if (!wid && ieb) {
+                    tt.style.width = tt.offsetWidth;
+                }
+                if (tt.offsetWidth > mw) {
+                    tt.style.width = mw + 'px'
+                }
+                h = parseInt(tt.offsetHeight) + top;
+                w = parseInt(tt.offsetWidth) + left;
+            },
+            hidett: function() {
+                tt.style.display = 'none';
+            },
+            setpos: function(e) {
+                var u = ieb ? event.clientY + doctt.body.scrollTop : e.pageY;
+                var l = ieb ? event.clientX + doctt.body.scrollLeft : e.pageX;
+                var cw = doctt.body.clientWidth;
+                var ch = doctt.body.clientHeight;
+                if (l < 0) {
+                    tt.style.left = left + 'px';
+                    tt.style.right = '';
+                } else if ((l + w + left) > cw) {
+                    tt.style.left = '';
+                    tt.style.right = ((cw - l) + left) + 'px';
+                } else {
+                    tt.style.right = '';
+                    tt.style.left = (l + left) + 'px';
+                }
+                if (u < 0) {
+                    tt.style.top = top + 'px';
+                    tt.style.bottom = '';
+                } else if ((u + h + left) > ch) {
+                    tt.style.top = '';
+                    tt.style.bottom = ((ch - u) + top) + 'px';
+                } else {
+                    tt.style.bottom = '';
+                    tt.style.top = (u + top) + 'px';
+                }
+            }
+        };
+    }();
+    var zsWebFormMandatoryFields = new Array("Contact Name", "Email", "Subject");
+    var zsFieldsDisplayLabelArray = new Array("Last Name", "Email", "Subject");
+
+    function zsValidateMandatoryFields() {
+    const form = document.forms['zsWebToCase_1137282000000375630'];
+    const allFields = form.querySelectorAll('input, select, textarea');
+    let isValid = true;
+    let firstErrorField = null;
+
+    allFields.forEach(field => {
+        const isRequired = !field.classList.contains('not-required') && field.type !== 'hidden' && field.name !== 'zsWebFormCaptchaWord';
+
+        // Reset previous styles
+        field.style.border = '';
+
+        if (isRequired) {
+            const value = field.value.trim();
+
+            // Validate based on type
+            if (
+                (field.nodeName === 'SELECT' && field.value === '-None-') ||
+                (field.type === 'checkbox' && !field.checked) ||
+                value === ''
+            ) {
+                field.style.border = '1px solid red';
+                if (!firstErrorField) firstErrorField = field;
+                isValid = false;
+            } else if (field.name === 'Email') {
+                const emailRegex = /^([\w_][\w\-_.+\'&]*)@(?=.{4,256}$)(([\w]+)([\-_]*[\w])*[\.])+[a-zA-Z]{2,22}$/;
+                if (!emailRegex.test(value)) {
+                    field.style.border = '1px solid red';
+                    if (!firstErrorField) firstErrorField = field;
+                    isValid = false;
+                } else {
+                    field.style.border = '1px solid green';
+                }
+            } else {
+                field.style.border = '1px solid green';
+            }
+        }
+    });
+
+    // Captcha validation
+    const captchaInput = form['zsWebFormCaptchaWord'];
+    const captchaValue = captchaInput.value.trim();
+    if (captchaValue === '') {
+        captchaInput.style.border = '1px solid red';
+        if (!firstErrorField) firstErrorField = captchaInput;
+        isValid = false;
+    } else {
+        captchaInput.style.border = '1px solid green';
+    }
+
+    // Scroll to the first error
+    if (!isValid && firstErrorField) {
+        firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return false;
+    }
+
+    // Disable button after validation
+    document.getElementById('zsSubmitButton_1137282000000375630').setAttribute('disabled', 'disabled');
+
+    // Let form proceed (if backend rejects captcha, it’ll alert separately)
+    return true;
+}
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+  const form = document.forms['zsWebToCase_1137282000000375630'];
+  const allFields = form.querySelectorAll('input, select, textarea');
+
+  allFields.forEach(field => {
+    if (!field.classList.contains('not-required') && field.type !== 'hidden' && field.name !== 'zsWebFormCaptchaWord') {
+      field.addEventListener('input', function () {
+        const value = field.value.trim();
+        let isValid = true;
+
+        if (field.nodeName === 'SELECT') {
+          isValid = (value !== '-None-');
+        } else if (field.type === 'checkbox') {
+          isValid = field.checked;
+        } else if (field.name === 'Email') {
+          isValid = /^([\w_][\w\-_.+\'&]*)@(?=.{4,256}$)(([\w]+)([\-_]*[\w])*[\.])+[a-zA-Z]{2,22}$/.test(value);
+        } else {
+          isValid = value !== '';
+        }
+
+        field.style.border = isValid ? '1px solid green' : '1px solid red';
+      });
+    }
+  });
+});
+
+function zsShowCaptcha() {
+        jQuery('#zsCaptchaLoading').hide();
+        jQuery('#zsCaptcha').show();
+    }
+
+    function zsRegenerateCaptcha() {
+        var webFormxhr = {};
+        webFormxhr = new XMLHttpRequest();
+        webFormxhr.open('GET', 'https://desk.zoho.com/support/GenerateCaptcha?action=getNewCaptcha&_=' + new Date().getTime(), true);
+        webFormxhr.onreadystatechange = function() {
+           if (webFormxhr.readyState === 4 && webFormxhr.status === 200) {
+    try {
+        const response = (webFormxhr.responseText != null) ? JSON.parse(webFormxhr.responseText) : '';
+        if (response && response.error === 'true') {
+            alert('Incorrect captcha. Please try again.');
+        } else {
+            jQuery('#zsCaptchaUrl').load(zsShowCaptcha);
+            document.getElementById('zsCaptchaUrl').src = response.captchaUrl;
+            document.getElementsByName('xJdfEaS')[0].value = response.captchaDigest;
+        }
+    } catch (e) {
+        alert('Unable to verify captcha. Please try again.');
+    }
+}
+
+        };
+        webFormxhr.send();
+    }
+    document.addEventListener('readystatechange', function() {
+        if (document.readyState === 'complete' && window.zsRegenerateCaptcha) {
+            zsRegenerateCaptcha();
+        }
+        setAllDependancyFieldsMapping();
+        document.getElementById('zsSubmitButton_1137282000000375630').removeAttribute('disabled');
+        zsAttachedAttachmentsCount = 0;
+        zsAttachmentFileBrowserIdsList = [1, 2, 3, 4, 5];
+        document.forms['zsWebToCase_1137282000000375630']['zsWebFormCaptchaWord'].value = '';
+    });
+
+    function zsResetWebForm(webFormId) {
+        document.forms['zsWebToCase_' + webFormId].reset();
+        document.getElementById('zsSubmitButton_1137282000000375630').removeAttribute('disabled');
+        setAllDependancyFieldsMapping();
+    }
+
+</script>
+
 
 </head>
 <body class="submitPage" id="submit-captcha">
@@ -321,7 +680,7 @@ function gtag(){dataLayer.push(arguments);}
                               <a href='javascript:;' style='color:#2A7AFF; cursor:pointer; margin-left:10px; vertical-align:middle;text-decoration: none; font-weight: bold;' class='zsFontClass' onclick='zsRegenerateCaptcha()'>Refresh</a>
                             </div>
                              <div>
-                              <input type='text' name='zsWebFormCaptchaWord' />
+                              <input type='text' name='zsWebFormCaptchaWord' placeholder="Enter Captcha" />
                               <input type='hidden' name='zsCaptchaSrc' value='' />
                             </div>
                           </div>
@@ -514,6 +873,90 @@ function gtag(){dataLayer.push(arguments);}
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.forms['zsWebToCase_1137282000000375630'];
+  const submitButton = document.getElementById('zsSubmitButton_1137282000000375630');
+
+  // Realtime border feedback
+  const allFields = form.querySelectorAll('input, select, textarea');
+  allFields.forEach(field => {
+    if (!field.classList.contains('not-required') && field.type !== 'hidden') {
+      field.addEventListener('input', function () {
+        const value = field.value.trim();
+        let isValid = true;
+
+        if (field.nodeName === 'SELECT') {
+          isValid = (value !== '-None-');
+        } else if (field.type === 'checkbox') {
+          isValid = field.checked;
+        } else if (field.name === 'Email') {
+          isValid = /^([\w_][\w\-_.+\'&]*)@(?=.{4,256}$)(([\w]+)([\-_]*[\w])*[\.])+[a-zA-Z]{2,22}$/.test(value);
+        } else {
+          isValid = value !== '';
+        }
+
+        field.style.border = isValid ? '1px solid green' : '1px solid red';
+      });
+    }
+  });
+
+  // Intercept form submission
+  form.addEventListener('submit', function (e) {
+    let valid = true;
+
+    const fields = form.querySelectorAll('input, select, textarea');
+
+    for (let field of fields) {
+      if (
+        !field.classList.contains('not-required') &&
+        field.type !== 'hidden' &&
+        field.name !== 'zsWebFormCaptchaWord'
+      ) {
+        let value = field.value.trim();
+        let isValid = true;
+
+        if (field.nodeName === 'SELECT') {
+          isValid = (value !== '-None-');
+        } else if (field.type === 'checkbox') {
+          isValid = field.checked;
+        } else if (field.name === 'Email') {
+          isValid = /^([\w_][\w\-_.+\'&]*)@(?=.{4,256}$)(([\w]+)([\-_]*[\w])*[\.])+[a-zA-Z]{2,22}$/.test(value);
+        } else {
+          isValid = value !== '';
+        }
+
+        if (!isValid) {
+          field.style.border = '1px solid red';
+          field.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          valid = false;
+          break;
+        } else {
+          field.style.border = '1px solid green';
+        }
+      }
+    }
+
+    // Check CAPTCHA input
+    const captchaField = form['zsWebFormCaptchaWord'];
+    const captchaValue = captchaField.value.trim();
+
+    if (captchaValue === '') {
+      alert('Please enter the captcha code.');
+      captchaField.style.border = '1px solid red';
+      captchaField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      valid = false;
+    }
+
+    if (!valid) {
+      e.preventDefault(); // stop form if invalid
+    }
+    // Otherwise let the form submit normally to Zoho
+  });
+});
+</script>
+
 
 </body>
 </html>
