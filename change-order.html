@@ -1057,134 +1057,7 @@ function gtag(){dataLayer.push(arguments);}
         }
     };
 </script> -->
-						<style>
-							#calenDiv{
-								padding: 10px;
-								display: table;
-								width: 195px;
-								font-family: helvetica,sans-serif !important;
-							}
-							.calNav {width: 20px;
-							height: 15px;
-							display
-							:inline-block;position: relative;
-							top: 4px;
-							cursor: pointer }
-							#calenDiv .calNav {width: 15px;
-							}
-							#calenDiv .yearNavLft {right: 10px;
-							}
-							#calenDiv .yearNavRgt {left: 10px;
-							}
-							#calenDiv .dLft {right: 5px;
-							}
-							#calenDiv .dRgt {left: 5px;
-							}
-							.dLft {right
-							:10px;opacity: 0.8;
-							}
-							.dRgt {left
-							:10px;opacity: 0.8;
-							}
-							.yearNavLft {right: 15px;
-							}
-							.yearNavRgt {left
-							:15px;opacity: 0.6;
-							}
-							#calenDiv table.calDay {border-spacing: 6px;
-							margin-top: 0 }
-							#calenDiv table.calDay td{
-							padding: 3px 4px;
-							font-size: 11px }
-							#calenDiv table.calDay th {padding: 0 3px;
-							font-size: 11px;
-							padding-right: 0;
-							padding-left: 1px;
-							color:  #888;
-							width: 22px;
-							cursor: default;
-							border-radius: 3px;
-							text-align: center;
-							font-weight: normal;
-							}
-							#calenDiv #weekDays {margin-top: 10px;
-							margin-bottom: 5px;
-							border-top: 1px solid  #c0c6cc;
-							border-bottom: 1px solid  #c0c6cc;
-							border-spacing: 5px;
-							margin-left: 0;
-							color:  #8b9ab9;
-							}
-							#calenDiv .sCalMon {cursor: default;
-							display: inline-block;
-							color:  #888;
-							width: 110px;
-							font-size: 12px;
-							}
-							table.calDay td:hover {background-color: #e8e8e8;
-							}
-							table.calDay{
-							color: #222;
-							margin-left: -10px;
-							border-spacing: 12px;
-							}
-							table.calDay td, table.calDay th{
-							font-size: var(--crm-extra-medium-font-size);
-							cursor: default;
-							border-radius: 3px;
-							text-align: center;
-							padding: 3px 5px;
-							font-family: helvetica,sans-serif !important;
-							}
-							table.calDay td.sel, table.calDay td.sel:hover {color: #fff;
-							background: #b3b3b3;
-							border-radius: 3px;
-							}
-							table.calDay td.noNum, table.calDay td.lt-gray {color: #c1c1c1;
-							}
-							.aligncenter {text-align: center;
-							}
-							#calBtns a,  .lyteCalBtns .lyteCalCurrentDate a {color: var(--linkColor);
-							font-size: 14px;
-							text-decoration: none;
-							}
-							#calenDiv #calBtns{
-							width: 183px;
-							margin-left: 10px;
-							border-top: 0;
-							font-size: 11px;
-							padding: 3px 0 12px !important;
-							}
-							.arrow {border: solid  #666;
-							border-width: 0 1px 1px 0;
-							display: inline-block;
-							height: 6px;
-							width: 6px;
-							}
-							#calenDiv .right {transform: rotate(-45deg);
-							-webkit-transform: rotate(-45deg);
-							}
-							#calenDiv .left {transform: rotate(135deg);
-							-webkit-transform: rotate(135deg);
-							}
-							.mLMinus2 {margin-left: -2px;
-							}
-							.mRMinus2 {margin-right: -2px;
-							}
-							.vaM {vertical-align: middle;
-							}
-							.tempCalDiv {display: none;
-							margin: 0;
-							position: absolute;
-							z-index: 1000;
-							background-color:  #fff;
-							border: 1px solid  #c0c6cc;
-							-webkit-box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-							box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-							border-top: 0;
-							top: 20px;
-							}
-						</style>
+						
 						<script>
 							function addAriaSelected6771280000000742007 (){
 								var optionElem = event.target;
@@ -1229,26 +1102,27 @@ function gtag(){dataLayer.push(arguments);}
 								}
 								return true;
 							}
-							function validateDateFormat6771280000000742007 (){
-								var form = document.forms[ 'WebToCases6771280000000742007' ];
-								var dateFlds = form.querySelectorAll ( '[ftype=date]' );
-								var i;
-								for ( i = 0; i < dateFlds.length; i++ ){
-									var dateFld = dateFlds[ i ];
-									var usrPtrn = dateFld.placeholder;
-									var dateVal = dateFld.value;
-									if ( dateVal.trim() != '' ){
-										var vald = dateFormatConvert.validate ( dateVal, usrPtrn );
-										if ( !vald ){
-											alert ( 'Please enter a valid date ' );
-											dateFld.focus ();
-											return false;
-										}
-									}
-								}
-								return true;
-							}
-							function checkMandatory6771280000000742007 (){
+							// function validateDateFormat6771280000000742007 (){
+							// 	var form = document.forms[ 'WebToCases6771280000000742007' ];
+							// 	var dateFlds = form.querySelectorAll ( '[ftype=date]' );
+							// 	var i;
+							// 	for ( i = 0; i < dateFlds.length; i++ ){
+							// 		var dateFld = dateFlds[ i ];
+							// 		var usrPtrn = dateFld.placeholder;
+							// 		var dateVal = dateFld.value;
+							// 		if ( dateVal.trim() != '' ){
+							// 			var vald = dateFormatConvert.validate ( dateVal, usrPtrn );
+							// 			if ( !vald ){
+							// 				alert ( 'Please enter a valid date ' );
+							// 				dateFld.focus ();
+							// 				return false;
+							// 			}
+							// 		}
+							// 	}
+							// 	return true;
+							// }
+						
+            	function checkMandatory6771280000000742007 (){
 								var mndFileds = new Array ( 'Subject' );
 								var fldLangVal = new Array ( 'Subject' );
 								for ( i = 0; i < mndFileds.length; i++ ){
@@ -1292,9 +1166,9 @@ function gtag(){dataLayer.push(arguments);}
 								if ( !reCaptchaAlert6771280000000742007()){
 									return false;
 								}
-								if ( !validateDateFormat6771280000000742007()){
-									return false;
-								}
+								// if ( !validateDateFormat6771280000000742007()){
+								// 	return false;
+								// }
 								var urlparams = new URLSearchParams ( window.location.search );
 								if ( urlparams.has( 'service' ) && ( urlparams.get( 'service' ) === 'smarturl' )){
 									var webform = document.getElementById ( 'webform6771280000000742007' );
