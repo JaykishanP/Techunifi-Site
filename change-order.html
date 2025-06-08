@@ -213,7 +213,7 @@ function gtag(){dataLayer.push(arguments);}
 				<input type = 'text' style = 'display:none;' name = 'returnURL' value = 'https&#x3a;&#x2f;&#x2f;www.techunifi.com&#x2f;thanku-submit.html'>
 				</input>
 
-        <input type = 'text' value="NA" class="none" id = 'Subject' aria-required = 'true' aria-label = 'Subject' name = 'Subject' aria-valuemax = '300' maxlength = '300'>
+        <input type = 'hidden' value="NA" class="none" id = 'Subject' aria-required = 'true' aria-label = 'Subject' name = 'Subject' aria-valuemax = '300' maxlength = '300'>
 						</input>
 
   <!-- Change Order Form -->
@@ -741,649 +741,715 @@ function gtag(){dataLayer.push(arguments);}
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
 
 
-<script>
-    // --- Global Helper Functions for Error Display (defined to resolve ReferenceError) ---
-    // This function is missing from your original snippet but was referenced by the error.
-    // You might need to customize its behavior based on your actual UI for error messages.
-    function hideErrorMessage(inputElement) {
-        // Example implementation: find a sibling span with an error class and hide it.
-        const errorElement = inputElement.nextElementSibling;
-        if (errorElement && errorElement.classList.contains('error-message')) {
-            errorElement.style.display = 'none';
+    <script>
+        // --- Error Message Utility Functions (Can be customized) ---
+        function showErrorMessage(inputElement, message) {
+            const $input = $(inputElement);
+            // Assuming the error message span is the next sibling
+            let $errorElement = $input.next('.error-message');
+            if ($errorElement.length === 0) {
+                 // Fallback: If no sibling, create one. This is good for robustness.
+                $errorElement = $('<span class="error-message"></span>').insertAfter($input);
+            }
+            $errorElement.text(message).css('display', 'block');
         }
-        // Also remove the red border/class from the input
-        inputElement.style.borderColor = ''; // Revert to default
-        inputElement.classList.remove('is-invalid'); // Assuming you have such a class
-    }
 
-    // --- Zoho Form Specific Functions ---
-    // These functions are provided by Zoho and are crucial for its internal validation
-    // and reCAPTCHA handling. Do not alter their core logic unless you understand Zoho's requirements.
-
-    function addAriaSelected6771280000000742007(event) { // Added 'event' parameter
-        var optionElem = event.target;
-        var previousSelectedOption = optionElem.querySelector('[aria-selected=true]');
-        if (previousSelectedOption) {
-            previousSelectedOption.removeAttribute('aria-selected');
-        }
-        // Ensure the selected option is an element before trying to set ariaSelected
-        const selectedOption = optionElem.querySelectorAll('option')[optionElem.selectedIndex];
-        if (selectedOption) {
-            selectedOption.setAttribute('aria-selected', 'true'); // Correct way to set ariaSelected
-        }
-    }
-
-    /* Do not remove this code. */
-    function rccallback6771280000000742007() {
-        if (document.getElementById('recap6771280000000742007') != undefined) {
-            document.getElementById('recap6771280000000742007').setAttribute('captcha-verified', true);
-        }
-        if (document.getElementById('recapErr6771280000000742007') != undefined && document.getElementById('recapErr6771280000000742007').style.visibility == 'visible') {
-            document.getElementById('recapErr6771280000000742007').style.visibility = 'hidden';
-        }
-    }
-
-    function reCaptchaAlert6771280000000742007() {
-        var recap = document.getElementById('recap6771280000000742007');
-        if (recap != undefined && recap.getAttribute('captcha-verified') == 'false') {
-            document.getElementById('recapErr6771280000000742007').style.visibility = 'visible';
-            return false;
-        }
-        return true;
-    }
-
-    function validateEmail6771280000000742007() {
-        var form = document.forms['WebToCases6771280000000742007'];
-        var emailFld = form.querySelectorAll('[ftype=email]');
-        var i;
-        for (i = 0; i < emailFld.length; i++) {
-            var emailVal = emailFld[i].value;
-            if ((emailVal.replace(/^\s+|\s+$/g, '')).length !== 0) { // Use strict comparison
-                var atpos = emailVal.indexOf('@');
-                var dotpos = emailVal.lastIndexOf('.');
-                if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= emailVal.length) {
-                    alert('Please enter a valid email address.');
-                    emailFld[i].focus();
-                    return false;
-                }
+        function hideErrorMessage(inputElement) {
+            const $input = $(inputElement);
+            const $errorElement = $input.next('.error-message');
+            if ($errorElement.length) {
+                $errorElement.css('display', 'none');
+                $errorElement.text(''); // Clear message
             }
         }
-        return true;
-    }
 
-    // Placeholder for dateFormatConvert as it's not provided
-    const dateFormatConvert = {
-        validate: function(dateVal, usrPtrn) {
-            if (usrPtrn === 'DD/MM/YYYY') {
-                const parts = dateVal.split('/');
-                if (parts.length === 3) {
-                    const day = parseInt(parts[0], 10);
-                    const month = parseInt(parts[1], 10);
-                    const year = parseInt(parts[2], 10);
-                    const date = new Date(year, month - 1, day);
-                    // Check if the parsed date components match the original input
-                    return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
-                }
+        // --- Zoho-related functions (provided by you) ---
+        function rccallback6771280000000742007() {
+            if (document.getElementById('recap6771280000000742007') != undefined) {
+                document.getElementById('recap6771280000000742007').setAttribute('captcha-verified', true);
             }
-            // If the pattern doesn't match or is not handled, return true (assume valid)
-            // Or implement other date formats as needed.
+            if (document.getElementById('recapErr6771280000000742007') != undefined && document.getElementById('recapErr6771280000000742007').style.visibility == 'visible') {
+                document.getElementById('recapErr6771280000000742007').style.visibility = 'hidden';
+            }
+        }
+
+        function reCaptchaAlert6771280000000742007() {
+            var recap = document.getElementById('recap6771280000000742007');
+            if (recap != undefined && recap.getAttribute('captcha-verified') == 'false') {
+                document.getElementById('recapErr6771280000000742007').style.visibility = 'visible';
+                return false;
+            }
             return true;
         }
-    };
 
-    function validateDateFormat6771280000000742007() {
-        var form = document.forms['WebToCases6771280000000742007'];
-        var dateFlds = form.querySelectorAll('[ftype=date]');
-        var i;
-        for (i = 0; i < dateFlds.length; i++) {
-            var dateFld = dateFlds[i];
-            var usrPtrn = dateFld.placeholder;
-            var dateVal = dateFld.value;
-            if (dateVal.trim() !== '') { // Use strict comparison
-                var vald = dateFormatConvert.validate(dateVal, usrPtrn);
-                if (!vald) {
-                    alert('Please enter a valid date.');
-                    dateFld.focus();
-                    return false;
+        function validateEmail6771280000000742007() {
+            var form = document.forms['WebToCases6771280000000742007'];
+            var emailFld = form.querySelectorAll('[ftype=email]');
+            var isValidEmail = true; // Flag for overall email validity
+
+            for (var i = 0; i < emailFld.length; i++) {
+                var emailInput = emailFld[i];
+                var emailVal = emailInput.value;
+                if ((emailVal.replace(/^\s+|\s+$/g, '')).length !== 0) {
+                    var atpos = emailVal.indexOf('@');
+                    var dotpos = emailVal.lastIndexOf('.');
+                    if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= emailVal.length) {
+                        // Instead of alert, use showErrorMessage
+                        showErrorMessage(emailInput, 'Please enter a valid email address.');
+                        isValidEmail = false; // Set flag to false
+                        // Don't return here, continue checking other email fields
+                    } else {
+                        hideErrorMessage(emailInput); // Hide if valid
+                    }
+                } else {
+                    hideErrorMessage(emailInput); // Hide if empty (handled by mandatory check)
                 }
             }
+            // Only return the overall validity after checking all email fields
+            return isValidEmail;
         }
-        return true;
-    }
 
-    function checkMandatory6771280000000742007() {
-        var mndFileds = new Array('Subject'); // Only 'Subject' is mandatory here
-        var fldLangVal = new Array('Subject');
-        for (i = 0; i < mndFileds.length; i++) {
-            var fieldObj = document.forms['WebToCases6771280000000742007'][mndFileds[i]];
-            if (fieldObj) {
-                if (((fieldObj.value).replace(/^\s+|\s+$/g, '')).length === 0) { // Use strict comparison
-                    if (fieldObj.type == 'file') {
-                        alert('Please select a file to upload.');
-                        fieldObj.focus();
-                        return false;
-                    }
-                    alert(fldLangVal[i] + ' cannot be empty.');
-                    fieldObj.focus();
-                    return false;
-                } else if (fieldObj.nodeName === 'SELECT') { // Use strict comparison for nodeName
-                    if (fieldObj.options[fieldObj.selectedIndex].value === '-None-') { // Use strict comparison
-                        alert(fldLangVal[i] + ' cannot be none.');
-                        fieldObj.focus();
-                        return false;
-                    }
-                } else if (fieldObj.type === 'checkbox') { // Use strict comparison
-                    if (fieldObj.checked === false) { // Use strict comparison
-                        alert('Please accept ' + fldLangVal[i]);
-                        fieldObj.focus();
-                        return false;
+        // Placeholder for dateFormatConvert as it's not provided in full,
+        // but your code uses it, so I'll keep the basic structure.
+        const dateFormatConvert = {
+            validate: function(dateVal, usrPtrn) {
+                if (usrPtrn === 'DD/MM/YYYY') {
+                    const parts = dateVal.split('/');
+                    if (parts.length === 3) {
+                        const day = parseInt(parts[0], 10);
+                        const month = parseInt(parts[1], 10);
+                        const year = parseInt(parts[2], 10);
+                        const date = new Date(year, month - 1, day);
+                        return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
                     }
                 }
-                try {
-                    if (fieldObj.name === 'Last Name') { // This part might be for Zoho's internal logic
-                        // 'name' variable is undeclared here, which could cause issues.
-                        // If 'name' is meant to be a global, declare it with 'var' at the top,
-                        // or better yet, avoid global variables.
-                        // Assuming 'name' is just a placeholder and not strictly needed here.
-                        // var name = fieldObj.value; // If you need it for something else
+                return true; // Default to true if pattern is not DD/MM/YYYY or date is empty
+            }
+        };
+
+        function validateDateFormat6771280000000742007() {
+            var form = document.forms['WebToCases6771280000000742007'];
+            var dateFlds = form.querySelectorAll('[ftype=date]');
+            var isValidDate = true; // Flag for overall date validity
+
+            for (var i = 0; i < dateFlds.length; i++) {
+                var dateFld = dateFlds[i];
+                var usrPtrn = dateFld.placeholder || 'DD/MM/YYYY'; // Fallback if placeholder is missing
+                var dateVal = dateFld.value;
+                if (dateVal.trim() !== '') {
+                    var vald = dateFormatConvert.validate(dateVal, usrPtrn);
+                    if (!vald) {
+                        // Instead of alert, use showErrorMessage
+                        showErrorMessage(dateFld, 'Please enter a valid date in ' + usrPtrn + ' format.');
+                        isValidDate = false; // Set flag to false
+                        // Don't return here, continue checking other date fields
+                    } else {
+                        hideErrorMessage(dateFld); // Hide if valid
                     }
-                } catch (e) {
-                    // console.error("Error in Zoho mandatory check:", e); // For debugging
+                } else {
+                    hideErrorMessage(dateFld); // Hide if empty (handled by mandatory check)
                 }
             }
+            // Only return the overall validity after checking all date fields
+            return isValidDate;
         }
-        // These are now handled in validateTicketForm, but kept here for Zoho's own internal logic.
-        // Be aware these will trigger native JS alerts if Zoho's internal checks fail.
-        if (!validateEmail6771280000000742007()) {
-            return false;
-        }
-        if (!validateDateFormat6771280000000742007()) {
-            return false;
-        }
-        var urlparams = new URLSearchParams(window.location.search);
-        if (urlparams.has('service') && (urlparams.get('service') === 'smarturl')) {
-            var webform = document.getElementById('webform6771280000000742007');
-            var service = urlparams.get('service');
-            var smarturlfield = document.createElement('input');
-            smarturlfield.setAttribute('type', 'hidden');
-            smarturlfield.setAttribute('value', service);
-            smarturlfield.setAttribute('name', 'service');
-            if (webform) { // Check if webform exists before appending
-                webform.appendChild(smarturlfield);
-            }
-        }
-        return true;
-    }
 
-    function tooltipShow6771280000000742007(el) {
-        var tooltip = el.nextElementSibling;
-        if (tooltip) { // Check if tooltip exists
-            var tooltipDisplay = tooltip.style.display;
-            if (tooltipDisplay === 'none') { // Use strict comparison
-                var allTooltip = document.getElementsByClassName('zcwf_tooltip_over');
-                for (i = 0; i < allTooltip.length; i++) {
-                    allTooltip[i].style.display = 'none';
-                }
-                tooltip.style.display = 'block';
-            } else {
-                tooltip.style.display = 'none';
-            }
-        }
-    }
+        function checkMandatory6771280000000742007() {
+            // Updated to be more flexible, using 'required' attribute if present,
+            // or specific name for Subject as per original
+            var mandatoryFields = document.forms['WebToCases6771280000000742007'].querySelectorAll('[required]');
+            var zohoMandatorySubject = document.forms['WebToCases6771280000000742007']['Subject'];
 
+            let allMandatoryValid = true;
 
-    // --- Main jQuery script for form handling ---
-    // Encapsulate the entire script within the DOMContentLoaded event listener
-    // or ensure it's placed just before the closing </body> tag.
-    // The if (window.location.pathname === '/change-order.html') check is useful
-    // if this script is included on multiple pages.
-    if (window.location.pathname === '/change-order.html') {
-        $(document).ready(function() {
-            console.log("jQuery document ready fired for /change-order.html");
-
-            // --- CRUCIAL: Remove the onsubmit attribute to prevent native form submission initially ---
-            // This ensures your jQuery handler takes full control.
-            $('#submitTicketForm').removeAttr('onsubmit');
-            console.log("Removed 'onsubmit' attribute from #submitTicketForm.");
-
-            // Digital Signature
-            var canvas = document.getElementById("signature-pad");
-
-            // Check if canvas exists before proceeding with signature pad logic
-            if (canvas) {
-                function resizeCanvas() {
-                    var ratio = Math.max(window.devicePixelRatio || 1, 1);
-                    canvas.width = canvas.offsetWidth * ratio;
-                    canvas.height = canvas.offsetHeight * ratio;
-                    canvas.getContext("2d").scale(ratio, ratio);
+            // Check fields with 'required' attribute first
+            mandatoryFields.forEach(fieldObj => {
+                let currentFieldValid = true;
+                if (fieldObj.type === 'checkbox') {
+                    if (!fieldObj.checked) {
+                        showErrorMessage(fieldObj, 'This checkbox must be checked.');
+                        currentFieldValid = false;
+                    } else {
+                        hideErrorMessage(fieldObj);
+                    }
+                } else if (fieldObj.nodeName === 'SELECT') {
+                    if (fieldObj.value === '' || fieldObj.value === '-None-') {
+                        showErrorMessage(fieldObj, 'Please select an option.');
+                        currentFieldValid = false;
+                    } else {
+                        hideErrorMessage(fieldObj);
+                    }
+                } else if (fieldObj.type === 'file') {
+                    if (fieldObj.files.length === 0) {
+                        showErrorMessage(fieldObj, 'Please select a file to upload.');
+                        currentFieldValid = false;
+                    } else {
+                        hideErrorMessage(fieldObj);
+                    }
+                } else { // Text, email, textarea, number etc.
+                    if (fieldObj.value.trim() === '') {
+                        showErrorMessage(fieldObj, 'This field cannot be empty.');
+                        currentFieldValid = false;
+                    } else {
+                        hideErrorMessage(fieldObj);
+                    }
                 }
 
-                window.onresize = resizeCanvas;
-                resizeCanvas();
+                if (!currentFieldValid) {
+                    allMandatoryValid = false;
+                    // Don't focus here, let the main validateTicketForm handle the first invalid field focus.
+                }
+            });
 
-                // Ensure SignaturePad library is loaded before this point
-                // For example, typically you'd include:
-                var signaturePad = new SignaturePad(canvas, {
-                    backgroundColor: 'rgb(250,250,250)'
+            // Special handling for Zoho's 'Subject' field if it's explicitly mentioned and not caught by 'required'
+            if (zohoMandatorySubject && zohoMandatorySubject.value.trim() === '') {
+                 // This particular 'Subject' field is often hidden and populated by Zoho.
+                 // If it's *not* hidden and meant for user input, you'd handle it.
+                 // For now, assuming it's managed by Zoho's internal process or populated by the script.
+                 // If you intend for the user to fill it, you might want to adjust its 'required' state or display.
+                 // For this specific Zoho function, it's often a hidden field. We'll rely on the main form's subject.
+            }
+
+            return allMandatoryValid; // Return the overall validity
+        }
+
+
+        // --- Main jQuery script for form handling ---
+        // This condition ensures the script only runs on /change-order.html
+        if (window.location.pathname === '/change-order.html') {
+            $(document).ready(function() {
+                console.log("jQuery document ready fired for /change-order.html");
+
+                // Remove the 'onsubmit' attribute to ensure jQuery's handler takes precedence
+                $('#submitTicketForm').removeAttr('onsubmit');
+                console.log("Removed 'onsubmit' attribute from #submitTicketForm.");
+
+                // --- Digital Signature Pad Initialization ---
+                var canvas = document.getElementById("signature-pad");
+                var signaturePad; // Declare signaturePad in a scope accessible by handlers
+
+                if (canvas) {
+                    function resizeCanvas() {
+                        var ratio = Math.max(window.devicePixelRatio || 1, 1);
+                        canvas.width = canvas.offsetWidth * ratio;
+                        canvas.height = canvas.offsetHeight * ratio;
+                        canvas.getContext("2d").scale(ratio, ratio);
+                        // If signaturePad exists and is not empty, redraw it after resize
+                        if (signaturePad && !signaturePad.isEmpty()) {
+                            // Saving and restoring the signature data is crucial for resize
+                            const data = signaturePad.toData();
+                            signaturePad.clear(); // Clear before setting new size
+                            signaturePad.fromData(data);
+                        }
+                    }
+
+                    // Initialize SignaturePad
+                    signaturePad = new SignaturePad(canvas, {
+                        backgroundColor: 'rgb(250,250,250)' // Light background
+                    });
+
+                    window.addEventListener('resize', resizeCanvas); // Use addEventListener for modern practice
+                    resizeCanvas(); // Initial resize
+
+                    // Clear button for signature pad
+                    document.getElementById("clear").addEventListener('click', function() {
+                        signaturePad.clear();
+                        $('#signatureError').css('display', 'block'); // Show error again if cleared
+                    });
+
+                    // Hide signature error message once drawing starts
+                    signaturePad.addEventListener("endStroke", () => {
+                        $('#signatureError').css('display', 'none');
+                    });
+
+                } else {
+                    console.warn("Signature pad canvas not found. Skipping signature pad initialization.");
+                    // Hide signature related elements if canvas is not found
+                    $('#signature-pad').hide();
+                    $('#clear').hide();
+                    $('h3:contains("Digital Signature")').hide(); // Hide the heading too
+                }
+
+
+                // --- Form Validation Logic on Submit ---
+                function validateTicketForm() {
+                    let formValid = true;
+                    let firstInvalidField = null;
+
+                    // Reset all border colors and hide all error messages initially
+                    $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').each(function() {
+                        const $this = $(this);
+                        $this.css('border-color', ''); // Reset border
+                        hideErrorMessage(this); // Hide potential error messages
+                    });
+                    $('#signatureError').css('display', 'none');
+                    $('#recapErr6771280000000742007').css('visibility', 'hidden');
+
+
+                    // 1. Validate all inputs (excluding 'not-required' and 'g-recaptcha-response')
+                    $('#submitTicketForm input:not(.not-required):not([name="g-recaptcha-response"]), ' +
+                      '#submitTicketForm select:not(.not-required):not([name="g-recaptcha-response"]), ' +
+                      '#submitTicketForm textarea:not(.not-required):not([name="g-recaptcha-response"])').each(function() {
+                        const $this = $(this);
+                        let isValid = true;
+                        let errorMessage = '';
+
+                        if ($this.is('select[multiple]')) {
+                            if ($this.find('option:selected').length === 0) {
+                                isValid = false;
+                                errorMessage = 'Please select at least one option.';
+                            }
+                        } else if ($this.is(':checkbox')) {
+                            if (!$this.is(':checked')) {
+                                isValid = false;
+                                errorMessage = 'This checkbox must be checked.';
+                            }
+                        } else {
+                            if (!$this.val() || $this.val().trim() === '') {
+                                isValid = false;
+                                errorMessage = 'This field is required.';
+                            }
+                            // Add more specific validations here if needed (e.g., email format, number ranges)
+                            // Note: Zoho's functions below handle some of this, but client-side visual feedback is good.
+                        }
+
+                        if (!isValid) {
+                            formValid = false;
+                            $this.css('border-color', 'red');
+                            showErrorMessage(this, errorMessage);
+                            if (!firstInvalidField) {
+                                firstInvalidField = $this;
+                            }
+                        } else {
+                            $this.css('border-color', 'green');
+                            hideErrorMessage(this);
+                        }
+                    });
+
+                    // 2. Run Zoho specific mandatory checks (may show native alerts)
+                    // We call checkMandatory first to handle any required fields not caught by jQuery's initial loop,
+                    // although the jQuery loop above should cover most standard required fields.
+                    // Keep Zoho's checkMandatory as it might have specific Zoho internal logic for certain field names.
+                    if (!checkMandatory6771280000000742007()) {
+                        formValid = false;
+                        console.log('Zoho mandatory check failed. (Alert might have been shown by Zoho function)');
+                        // Note: Zoho's default alert might steal focus; consider replacing with custom error messages.
+                    }
+
+                    // 3. Email validation (using Zoho's function, adapted to use custom error messages)
+                    if (!validateEmail6771280000000742007()) {
+                        formValid = false;
+                        console.log('Zoho email validation failed.');
+                        // find first invalid email and set as firstInvalidField
+                        if (!firstInvalidField) {
+                            firstInvalidField = $('[ftype=email]').filter(function() {
+                                return $(this).next('.error-message').css('display') === 'block';
+                            }).first();
+                        }
+                    }
+
+                    // 4. Date format validation (using Zoho's function, adapted)
+                    if (!validateDateFormat6771280000000742007()) {
+                        formValid = false;
+                        console.log('Zoho date format validation failed.');
+                        // find first invalid date and set as firstInvalidField
+                        if (!firstInvalidField) {
+                            firstInvalidField = $('[ftype=date]').filter(function() {
+                                return $(this).next('.error-message').css('display') === 'block';
+                            }).first();
+                        }
+                    }
+
+                    // 5. Signature validation
+                    if (canvas && signaturePad && signaturePad.isEmpty()) {
+                        formValid = false;
+                        showErrorMessage(canvas, 'Please provide your signature.');
+                        $('#signature-pad').css('border-color', 'red'); // Highlight signature pad
+                        if (!firstInvalidField) {
+                            firstInvalidField = $('#signature-pad');
+                        }
+                        console.log('Signature validation failed.');
+                    } else if (canvas && signaturePad) {
+                         $('#signature-pad').css('border-color', 'green'); // If valid, make it green
+                         hideErrorMessage(canvas);
+                    }
+
+
+                    // 6. CAPTCHA validation (using Zoho's function)
+                    if (!reCaptchaAlert6771280000000742007()) {
+                        formValid = false;
+                        console.log('reCAPTCHA validation failed. (Error message shown by Zoho function)');
+                        if (!firstInvalidField) {
+                            firstInvalidField = $('#recap6771280000000742007');
+                        }
+                    }
+
+                    // 7. Check the consent checkbox (specific Zoho ID)
+                    var consentCheckbox = $('#00NUm000009SCKP');
+                    if (consentCheckbox.length && !consentCheckbox.is(':checked')) {
+                        formValid = false;
+                        showErrorMessage(consentCheckbox, 'You must agree to the terms.');
+                        consentCheckbox.css('border-color', 'red'); // Border for the checkbox if needed
+                        if (!firstInvalidField) {
+                            firstInvalidField = consentCheckbox;
+                        }
+                        console.log('Consent checkbox not checked.');
+                    } else if (consentCheckbox.length) {
+                        consentCheckbox.css('border-color', 'green'); // If checked, make it green
+                        hideErrorMessage(consentCheckbox);
+                    }
+
+
+                    // Scroll to the first invalid field if validation failed
+                    if (!formValid && firstInvalidField) {
+                        $('html, body').animate({
+                            scrollTop: firstInvalidField.offset().top - 100 // Adjust offset as needed
+                        }, 500);
+                        firstInvalidField.focus(); // Focus the element
+                    }
+
+                    return formValid;
+                }
+
+
+                // --- Handle form submission ---
+                $('#submitTicketForm').on('submit', function(event) {
+                    event.preventDefault(); // Prevent default form submission initially
+
+                    console.log("Form submission intercepted by jQuery handler.");
+
+                    if (!validateTicketForm()) {
+                        console.log('Form validation failed. Stopping submission.');
+                        return; // Stop if validation fails
+                    }
+
+                    console.log('Form validation passed. Proceeding with PDF and submission to Zoho.');
+
+                    // Set the Zoho Subject field for the PDF, if it's a hidden field
+                    const subjectField = document.forms['WebToCases6771280000000742007']['Subject'];
+                    if (subjectField) {
+                        // Dynamically set subject based on form data, e.g., Order Number + Change Details
+                        const orderNum = $('#orderNumber').val();
+                        const changeDet = $('#changeDetails').val().substring(0, 50); // Take first 50 chars
+                        subjectField.value = `Change Order Request - ${orderNum} - ${changeDet}...`;
+                    }
+
+                    // Generate the PDF
+                    try {
+                        const { jsPDF } = window.jspdf;
+                        const doc = new jsPDF();
+                        const pageHeight = doc.internal.pageSize.height || 297;
+                        const pageWidth = doc.internal.pageSize.width || 210;
+                        const headerHeight = 40;
+                        const footerHeight = 30;
+
+                        // Function to add the header with logo
+                        function addHeader(docInstance) {
+                            return new Promise((resolve) => {
+                                const imgUrl = 'https://www.techunifi.com/assets/img/hero-img.png';
+                                const img = new Image();
+                                img.src = imgUrl;
+
+                                img.onload = function() {
+                                    docInstance.addImage(img, 'PNG', 60, 10, 90, 30);
+                                    resolve();
+                                };
+                                img.onerror = function() {
+                                    console.warn('Error loading header image, proceeding without it.');
+                                    resolve(); // Resolve even if image fails to load
+                                };
+                            });
+                        }
+
+                        // Function to add the footer with contact details
+                        function addFooter(docInstance) {
+                            docInstance.setFontSize(12);
+                            docInstance.setTextColor(0, 0, 0);
+                            docInstance.text('2638 Willard Dairy Road, Suite 112 High Point, NC 27265', pageWidth / 2, pageHeight - footerHeight + 10, { align: 'center' });
+                            docInstance.text('+1 (336) 860-6061 | techunifi.com | Info@techunifi.com', pageWidth / 2, pageHeight - footerHeight + 20, { align: 'center' });
+                            docInstance.setLineWidth(0.5);
+                            docInstance.line(10, pageHeight - footerHeight, pageWidth - 10, pageHeight - footerHeight);
+                        }
+
+                        // Function to add form data content
+                        function addContent(docInstance, yCoord) {
+                            const formData = $('#submitTicketForm').serializeArray();
+                            const filteredFormData = formData.filter(field =>
+                                !['xnQsjsdp', 'zc_gad', 'xmIwtLD', 'actionType', 'returnURL', 'g-recaptcha-response', '00NUm000009SCKP', 'Subject'].includes(field.name)
+                            );
+
+                            const lineHeight = 10;
+                            const labelIndent = 10;
+                            const valueIndent = 60;
+                            const maxWidth = pageWidth - valueIndent - 10;
+
+                            filteredFormData.forEach(field => {
+                                let label = $(`label[for='${field.name}']`).text().trim();
+                                if (!label) {
+                                    // Fallback for elements without direct label (e.g., selects without 'for' attribute)
+                                    const element = $(`[name='${field.name}']`);
+                                    if (element.is('select') || element.is('input') || element.is('textarea')) {
+                                        // Attempt to use placeholder or name as label
+                                        label = element.attr('placeholder') || element.attr('name');
+                                        if (label) {
+                                            label = label.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()); // Capitalize words
+                                        } else {
+                                            label = field.name; // Use raw name if no other option
+                                        }
+                                    }
+                                }
+                                label = label.replace(/:$/, ''); // Remove trailing colon from label text
+
+                                let value = field.value;
+
+                                // Handle multiple select options (display selected text, not just value)
+                                if ($(`[name='${field.name}']`).is('select[multiple]')) {
+                                    const selectedOptions = $(`[name='${field.name}']`).find('option:selected').map(function() {
+                                        return $(this).text();
+                                    }).get().join(', ');
+                                    value = selectedOptions || 'None selected';
+                                } else if ($(`[name='${field.name}']`).is(':checkbox')) {
+                                    // Checkboxes are filtered out above; if they weren't, handle their specific 'checked' state here.
+                                    return; // Skip checkboxes as we handle consent separately
+                                }
+
+
+                                if (!label || value === '') {
+                                    return; // Skip empty fields or fields with no recognizable label
+                                }
+
+                                // Check for page break before adding the label
+                                if (yCoord + lineHeight > pageHeight - footerHeight - 10) {
+                                    docInstance.addPage();
+                                    yCoord = headerHeight;
+                                    addHeader(docInstance);
+                                }
+
+                                docInstance.setFont('helvetica', 'bold');
+                                docInstance.text(`${label}:`, labelIndent, yCoord);
+
+                                docInstance.setFont('helvetica', 'normal');
+                                const valueLines = docInstance.splitTextToSize(value, maxWidth);
+                                valueLines.forEach(line => {
+                                    if (yCoord + lineHeight > pageHeight - footerHeight - 10) {
+                                        docInstance.addPage();
+                                        yCoord = headerHeight;
+                                        addHeader(docInstance);
+                                    }
+                                    docInstance.text(line, valueIndent, yCoord);
+                                    yCoord += lineHeight;
+                                });
+                            });
+
+                            // Add the state of the consent checkbox
+                            const consentCheckbox = $('#00NUm000009SCKP');
+                            if (consentCheckbox.length) {
+                                const consentStatus = consentCheckbox.is(':checked') ? 'Agreed' : 'Not Agreed';
+                                if (yCoord + lineHeight > pageHeight - footerHeight - 10) {
+                                    docInstance.addPage();
+                                    yCoord = headerHeight;
+                                    addHeader(docInstance);
+                                }
+                                docInstance.setFont('helvetica', 'bold');
+                                docInstance.text('Consent to Terms:', labelIndent, yCoord);
+                                docInstance.setFont('helvetica', 'normal');
+                                docInstance.text(consentStatus, valueIndent, yCoord);
+                                yCoord += lineHeight;
+                            }
+
+                            return yCoord;
+                        }
+
+                        // Function to add Terms and Conditions
+                        function addTermsAndConditions(docInstance, yCoord) {
+                            // Ensure enough space for the heading and first few lines before adding a new page
+                            if (yCoord + 60 > pageHeight - footerHeight - 10) {
+                                docInstance.addPage();
+                                yCoord = headerHeight;
+                                addHeader(docInstance);
+                            }
+
+                            docInstance.setFontSize(14);
+                            docInstance.setFont('helvetica', 'bold');
+                            docInstance.text('Terms and Conditions', 10, yCoord);
+                            yCoord += 10;
+                            docInstance.setFontSize(12);
+                            docInstance.setFont('helvetica', 'normal');
+
+                            const terms = [
+                                '1. Total payment due 30 days after completion of work.',
+                                '2. Refer to the W.O. # in all correspondence and in your payment.',
+                                '3. Please send correspondence regarding this work order to:',
+                                '    Suzanne Blair - suzanne.blair@techunifi.com.'
+                            ];
+
+                            terms.forEach(term => {
+                                if (yCoord + 10 > pageHeight - footerHeight - 10) {
+                                    docInstance.addPage();
+                                    yCoord = headerHeight;
+                                    addHeader(docInstance);
+                                }
+                                docInstance.text(term, 10, yCoord);
+                                yCoord += 10;
+                            });
+
+                            // Add hyperlink
+                            if (yCoord + 10 > pageHeight - footerHeight - 10) {
+                                docInstance.addPage();
+                                yCoord = headerHeight;
+                                addHeader(docInstance);
+                            }
+                            docInstance.setTextColor(6, 98, 187); // Set text color to #0662BB for link
+                            docInstance.textWithLink('View full terms and conditions', 10, yCoord, {
+                                url: 'https://www.techunifi.com/terms-conditions.html'
+                            });
+                            docInstance.setTextColor(0, 0, 0); // Reset text color
+                            yCoord += 20; // Space after link
+
+                            return yCoord;
+                        }
+
+                        // Start PDF generation process
+                        async function generateAndSubmitPDF() {
+                            let y = headerHeight;
+
+                            await addHeader(doc);
+                            y += 25; // Initial spacing after header
+
+                            y = addContent(doc, y); // Add form content
+                            y += 10; // Space between content and terms
+
+                            y = addTermsAndConditions(doc, y); // Add Terms and Conditions
+
+                            // Add signature if available
+                            if (canvas && signaturePad && !signaturePad.isEmpty()) {
+                                const signatureImage = signaturePad.toDataURL();
+                                if (y + 40 > pageHeight - footerHeight - 10) {
+                                    doc.addPage();
+                                    y = headerHeight;
+                                    await addHeader(doc);
+                                }
+                                doc.text('E-Signature:', 10, y);
+                                doc.addImage(signatureImage, 'PNG', 10, y + 5, 190, 30); // Adjust Y for image
+                                y += 40; // Adjust space after signature
+                            }
+
+                            // Add footer to the last page
+                            addFooter(doc);
+
+                            // Save the PDF
+                            const pdfFileName = `Techunifi_ChangeOrder_${$('#orderNumber').val() || 'NoOrder'}_${new Date().toISOString().slice(0,10)}.pdf`;
+                            doc.save(pdfFileName);
+                            console.log('PDF downloaded successfully:', pdfFileName);
+
+                            // Submit the form natively AFTER PDF generation and download has initiated.
+                            // A small delay ensures the browser has time to start the download.
+                            setTimeout(() => {
+                                var form = document.getElementById('submitTicketForm');
+                                if (form && form.tagName === 'FORM') {
+                                    console.log("Natively submitting the form to Zoho...");
+                                    form.submit(); // Native form submission to Zoho
+                                } else {
+                                    console.error('Form not found or not a valid form element for native submission.');
+                                }
+                            }, 1000); // 1-second delay
+                        }
+
+                        generateAndSubmitPDF().catch(error => {
+                            console.error('Error during PDF generation or submission:', error);
+                            alert('An error occurred during form processing. Please try again.');
+                        });
+
+                    } catch (error) {
+                        console.error('Initial error caught in PDF generation block:', error);
+                        alert('An error occurred while preparing the PDF. Please ensure all fields are correctly filled.');
+                    }
                 });
 
-                document.getElementById("clear").addEventListener('click', function() {
-                    signaturePad.clear();
-                });
-            } else {
-                console.warn("Signature pad canvas not found. Skipping signature pad initialization.");
-            }
-
-
-            // Function to validate the form
-            function validateTicketForm() {
-                let formValid = true;
-                let firstInvalidField = null;
-
-                // Validate all inputs (excluding 'not-required' and 'g-recaptcha-response')
-                $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').each(function() {
+                // --- Event listener for real-time border color feedback ---
+                $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').on('input change blur', function() {
                     const $this = $(this);
 
-                    // Skip fields with 'not-required' class or reCAPTCHA
+                    // If the field is not required or is g-recaptcha-response, do not apply red/green borders
                     if ($this.hasClass('not-required') || $this.attr('name') === 'g-recaptcha-response') {
-                        $this.css('border-color', ''); // Remove border if not required
-                        return true; // Continue to the next field in .each()
+                        $this.css('border-color', ''); // Remove border if not required, or revert to default
+                        hideErrorMessage(this); // Ensure no error message for non-required fields
+                        return;
                     }
 
                     let isValid = true;
+                    let errorMessage = '';
 
-                    // Check for multiple select specifically (CASECF5)
                     if ($this.is('select[multiple]')) {
                         if ($this.find('option:selected').length === 0) {
                             isValid = false;
+                            errorMessage = 'Please select at least one option.';
                         }
                     } else if ($this.is(':checkbox')) {
                         if (!$this.is(':checked')) {
                             isValid = false;
+                            errorMessage = 'This checkbox must be checked.';
                         }
-                    } else {
-                        // For other input types, check if value is empty after trimming
+                    } else if ($this.attr('ftype') === 'email') { // Specific email validation for real-time
+                        const emailVal = $this.val().trim();
+                        if (emailVal === '') {
+                             isValid = false;
+                             errorMessage = 'Email address is required.';
+                        } else {
+                            const atpos = emailVal.indexOf('@');
+                            const dotpos = emailVal.lastIndexOf('.');
+                            if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= emailVal.length) {
+                                isValid = false;
+                                errorMessage = 'Please enter a valid email address.';
+                            }
+                        }
+                    } else if ($this.attr('ftype') === 'date') { // Specific date validation for real-time
+                        const dateVal = $this.val().trim();
+                        if (dateVal === '') {
+                            isValid = false;
+                            errorMessage = 'Date is required.';
+                        } else {
+                            const usrPtrn = $this.attr('placeholder') || 'DD/MM/YYYY';
+                            if (!dateFormatConvert.validate(dateVal, usrPtrn)) {
+                                isValid = false;
+                                errorMessage = 'Please enter a valid date (' + usrPtrn + ').';
+                            }
+                        }
+                    }
+                    else {
+                        // For other input types (text inputs, textareas, number inputs etc.)
                         if (!$this.val() || $this.val().trim() === '') {
                             isValid = false;
+                            errorMessage = 'This field is required.';
                         }
                     }
 
-                    if (!isValid) {
-                        formValid = false;
-                        $this.css('border-color', 'red');
-                        // Show specific error message if applicable, using hideErrorMessage's counterpart
-                        // E.g., $this.next('.error-message').text('This field is required.').show();
-                        if (!firstInvalidField) {
-                            firstInvalidField = $this;
-                        }
-                    } else {
+                    if (isValid) {
                         $this.css('border-color', 'green');
-                        // Hide specific error message if applicable
-                        // E.g., $this.next('.error-message').hide();
+                        hideErrorMessage(this);
+                    } else {
+                        $this.css('border-color', 'red');
+                        showErrorMessage(this, errorMessage);
                     }
                 });
 
-                // --- Zoho specific mandatory checks ---
-                // These functions will trigger native JavaScript alerts.
-                // Consider integrating their logic directly into your custom validation
-                // or handling their alerts more gracefully if they are critical.
-                if (!checkMandatory6771280000000742007()) {
-                    formValid = false;
-                    console.log('Zoho mandatory check failed. (Alert shown by Zoho function)');
-                    // No need to set firstInvalidField here as Zoho's alert will focus.
-                }
-
-                // Email validation (using Zoho's function)
-                if (!validateEmail6771280000000742007()) {
-                    formValid = false;
-                    console.log('Zoho email validation failed. (Alert shown by Zoho function)');
-                }
-
-                // Date format validation (using Zoho's function)
-                if (!validateDateFormat6771280000000742007()) {
-                    formValid = false;
-                    console.log('Zoho date format validation failed. (Alert shown by Zoho function)');
-                }
-
-                // Signature validation
-                if (canvas && signaturePad.isEmpty()) { // Only check if signaturePad was initialized
-                    formValid = false;
-                    alert('Please provide your signature.');
-                    if (!firstInvalidField) {
-                        firstInvalidField = $('#signature-pad');
-                    }
-                    console.log('Signature validation failed.');
-                }
-
-                // CAPTCHA validation (using Zoho's function)
-                if (!reCaptchaAlert6771280000000742007()) {
-                    formValid = false;
-                    console.log('reCAPTCHA validation failed. (Error message shown by Zoho function)');
-                    // reCaptchaAlert function already shows an error message.
-                    // No need for additional alert here.
-                }
-
-                // Check the checkbox "I agree that all the work has been performed to my satisfaction"
-                var consentCheckbox = $('#00NUm000009SCKP');
-                if (consentCheckbox.length && !consentCheckbox.is(':checked')) {
-                    formValid = false;
-                    alert('Please agree that all the work has been performed to your satisfaction.');
-                    if (!firstInvalidField) {
-                        firstInvalidField = consentCheckbox;
-                    }
-                    console.log('Consent checkbox not checked.');
-                }
-
-                // Scroll to the first invalid field if any
-                if (firstInvalidField && formValid === false) { // Only scroll if validation actually failed
-                    $('html, body').animate({
-                        scrollTop: firstInvalidField.offset().top - 200
-                    }, 500);
-                }
-
-                return formValid;
-            }
-
-
-            // Handle form submission
-            $('#submitTicketForm').on('submit', function(event) {
-                event.preventDefault(); // Prevent default form submission from here
-
-                console.log("Form submission intercepted by jQuery handler.");
-
-                if (!validateTicketForm()) {
-                    console.log('Form validation failed. Stopping submission.');
-                    return; // Stop if validation fails
-                }
-
-                console.log('Form validation passed. Proceeding with PDF and submission to Zoho.');
-
-                // Generate the PDF
-                try {
-                    const {
-                        jsPDF
-                    } = window.jspdf;
-                    const doc = new jsPDF();
-                    const pageHeight = doc.internal.pageSize.height || 297; // A4 page height (in mm)
-                    const pageWidth = doc.internal.pageSize.width || 210; // A4 page width (in mm)
-                    const headerHeight = 40;
-                    const footerHeight = 30;
-
-                    // Function to add the header with logo
-                    function addHeader(docInstance) { // Renamed doc to docInstance to avoid scope conflict
-                        return new Promise((resolve, reject) => {
-                            const imgUrl = 'https://www.techunifi.com/assets/img/hero-img.png';
-                            const img = new Image();
-                            img.src = imgUrl;
-
-                            img.onload = function() {
-                                docInstance.addImage(img, 'PNG', 60, 10, 90, 30); // Adjust x, y, width, height as necessary
-                                resolve();
-                            };
-
-                            img.onerror = function() {
-                                console.error('Error loading header image:', imgUrl);
-                                // Resolve even if image fails, to not block PDF generation
-                                resolve();
-                            };
-                        });
-                    }
-
-                    // Function to add the footer with contact details
-                    function addFooter(docInstance) { // Renamed doc to docInstance
-                        docInstance.setFontSize(12);
-                        docInstance.setTextColor(0, 0, 0);
-                        docInstance.text('2638 Willard Dairy Road, Suite 112 High Point, NC 27265', pageWidth / 2, pageHeight - footerHeight + 10, null, null, 'center');
-                        docInstance.text('+1 (336) 860-6061 | techunifi.com | Info@techunifi.com', pageWidth / 2, pageHeight - footerHeight + 20, null, null, 'center');
-                        docInstance.setLineWidth(0.5);
-                        docInstance.line(10, pageHeight - footerHeight, pageWidth - 10, pageHeight - footerHeight); // x1, y1, x2, y2
-                    }
-
-                    // Function to add form data content
-                    function addContent(docInstance, yCoord) { // Renamed doc to docInstance, y to yCoord
-                        const formData = $('#submitTicketForm').serializeArray();
-                        const filteredFormData = formData.filter(field =>
-                            field.name !== 'xnQsjsdp' && // Hidden Zoho field
-                            field.name !== 'zc_gad' && // Hidden Zoho field
-                            field.name !== 'xmIwtLD' && // Hidden Zoho field
-                            field.name !== 'actionType' && // Hidden Zoho field
-                            field.name !== 'returnURL' && // Hidden Zoho field
-                            field.name !== '00NUm000009SCKP' && // Checkbox (we'll handle its state separately)
-                            field.name !== 'g-recaptcha-response' && // Google Captcha response
-                            field.name !== 'Subject' // Hidden subject field
-                        );
-
-                        const lineHeight = 10; // Line height for text
-                        const labelIndent = 10; // Indent for labels
-                        const valueIndent = 60; // Increase indent for values to avoid overlap
-                        const maxWidth = pageWidth - valueIndent - 10; // Maximum width for text wrapping
-
-                        filteredFormData.forEach(field => {
-                            let label = $(`label[for='${field.name}']`).text().trim();
-                            if (!label) {
-                                // For select elements with no direct label, get the name attribute
-                                const selectElement = $(`[name='${field.name}']`);
-                                if (selectElement.is('select') && selectElement.attr('name')) {
-                                    label = selectElement.attr('name').replace(/_/g, ' '); // Replace underscores for readability
-                                }
-                            }
-                            const value = field.value;
-
-                            // Skip if label is empty or if it's the checkbox value (handled separately)
-                            if (!label || field.name === '00NUm000009SCKP') {
-                                return;
-                            }
-
-                            // Handle multiple select options
-                            if ($(`[name='${field.name}']`).is('select[multiple]')) {
-                                const selectedOptions = $(`[name='${field.name}']`).find('option:selected').map(function() {
-                                    return $(this).text();
-                                }).get().join(', ');
-
-                                if (selectedOptions) {
-                                    // Check for page break before adding the label
-                                    if (yCoord + lineHeight > pageHeight - footerHeight - 10) {
-                                        docInstance.addPage();
-                                        yCoord = headerHeight; // Reset yCoord for the new page
-                                        addHeader(docInstance); // Add header to the new page
-                                    }
-
-                                    docInstance.setFont('helvetica', 'bold');
-                                    docInstance.text(`${label}:`, labelIndent, yCoord);
-
-                                    docInstance.setFont('helvetica', 'normal');
-                                    const valueLines = docInstance.splitTextToSize(selectedOptions, maxWidth);
-                                    valueLines.forEach(line => {
-                                        if (yCoord + lineHeight > pageHeight - footerHeight - 10) {
-                                            docInstance.addPage();
-                                            yCoord = headerHeight; // Reset yCoord for the new page
-                                            addHeader(docInstance); // Add header to the new page
-                                        }
-                                        docInstance.text(line, valueIndent, yCoord);
-                                        yCoord += lineHeight; // Move to the next line
-                                    });
-                                }
-                            } else {
-                                // Check for page break before adding the label
-                                if (yCoord + lineHeight > pageHeight - footerHeight - 10) {
-                                    docInstance.addPage();
-                                    yCoord = headerHeight; // Reset yCoord for the new page
-                                    addHeader(docInstance); // Add header to the new page
-                                }
-
-                                docInstance.setFont('helvetica', 'bold');
-                                docInstance.text(`${label}:`, labelIndent, yCoord); // Print label
-
-                                docInstance.setFont('helvetica', 'normal');
-
-                                // Split value text into multiple lines if it's too long
-                                const valueLines = docInstance.splitTextToSize(value, maxWidth);
-
-                                // Print each line of the value
-                                valueLines.forEach(line => {
-                                    if (yCoord + lineHeight > pageHeight - footerHeight - 10) {
-                                        docInstance.addPage();
-                                        yCoord = headerHeight; // Reset yCoord for the new page
-                                        addHeader(docInstance); // Add header to the new page
-                                    }
-                                    docInstance.text(line, valueIndent, yCoord);
-                                    yCoord += lineHeight; // Move to the next line
-                                });
-                            }
-                        });
-
-                        // Add the state of the consent checkbox
-                        const consentCheckbox = $('#00NUm000009SCKP');
-                        if (consentCheckbox.length) {
-                            const consentStatus = consentCheckbox.is(':checked') ? 'Agreed' : 'Not Agreed';
-                            if (yCoord + lineHeight > pageHeight - footerHeight - 10) {
-                                docInstance.addPage();
-                                yCoord = headerHeight; // Reset yCoord for the new page
-                                addHeader(docInstance); // Add header to the new page
-                            }
-                            docInstance.setFont('helvetica', 'bold');
-                            docInstance.text('Consent:', labelIndent, yCoord);
-                            docInstance.setFont('helvetica', 'normal');
-                            docInstance.text(consentStatus, valueIndent, yCoord);
-                            yCoord += lineHeight;
-                        }
-
-                        return yCoord; // Return updated yCoord position
-                    }
-
-
-                    // Function to add Terms and Conditions
-                    function addTermsAndConditions(docInstance, yCoord) { // Renamed doc to docInstance, y to yCoord
-                        if (yCoord + 60 > pageHeight - footerHeight - 10) {
-                            docInstance.addPage();
-                            yCoord = headerHeight; // Reset yCoord for the new page
-                            addHeader(docInstance); // Add header to the new page
-                        }
-
-                        docInstance.setFontSize(14);
-                        docInstance.setFont('helvetica', 'bold'); // Normal font for terms and conditions
-                        docInstance.text('Validation', 10, yCoord);
-                        yCoord += 10;
-                        docInstance.setFontSize(12);
-                        docInstance.setFont('helvetica', 'normal'); // Normal font for terms and conditions
-                        docInstance.text('1. Total payment due 30 days after completion of work.', 10, yCoord);
-                        yCoord += 10;
-                        docInstance.text('2. Refer to the W.O. # in all correspondence and in your payment.', 10, yCoord);
-                        yCoord += 10;
-                        docInstance.text('3. Please send correspondence regarding this work order to:', 10, yCoord);
-                        yCoord += 10;
-                        docInstance.text('    Suzanne Blair - suzanne.blair@techunifi.com.', 10, yCoord);
-                        yCoord += 10;
-
-                        // Add hyperlink to the word "website"
-                        docInstance.setTextColor(6, 98, 187); // Set text color to #0662BB
-                        docInstance.textWithLink('View full terms and conditions', 10, yCoord, {
-                            url: 'https://www.techunifi.com/terms-conditions.html'
-                        });
-                        yCoord += 20; // Space before the signature
-
-                        return yCoord; // Return updated yCoord position
-                    }
-
-                    // Start generating the PDF
-                    async function generatePDF() {
-                        let y = headerHeight;
-
-                        // Add header and wait for image to load
-                        await addHeader(doc); // Use the outer 'doc' instance here
-
-                        y += 25; // Initial spacing after header
-
-                        // Add form content
-                        y = addContent(doc, y); // Pass the outer 'doc' instance
-
-                        y += 10; // Space between content and terms
-                        // Add Terms and Conditions
-                        y = addTermsAndConditions(doc, y); // Pass the outer 'doc' instance
-
-                        // Add signature if available
-                        if (canvas && !signaturePad.isEmpty()) { // Check if signaturePad was initialized
-                            const signatureImage = signaturePad.toDataURL();
-                            if (y + 40 > pageHeight - footerHeight - 10) { // Ensure there's enough space for the signature
-                                doc.addPage();
-                                y = headerHeight;
-                                await addHeader(doc); // Add header to the new page
-                            }
-                            doc.text('E-Signature:', 10, y); // Label for signature
-                            doc.addImage(signatureImage, 'PNG', 10, y + 5, 190, 30); // Adjust Y for image
-                            y += 40; // Adjust space after signature
-                        }
-
-                        // Add footer to the last page (ensure it's added to the *current* doc instance)
-                        addFooter(doc);
-
-                        // Save the PDF
-                        doc.save('techunifi-changeOrder-data.pdf');
-                        console.log('PDF downloaded successfully.');
-                    }
-
-                    // Generate the PDF
-                    generatePDF().then(() => {
-                        // Submit the form natively AFTER PDF generation and download has initiated.
-                        // A small delay ensures the browser has time to start the download.
-                        setTimeout(() => {
-                            var form = document.getElementById('submitTicketForm');
-                            if (form && form.tagName === 'FORM') {
-                                console.log("Natively submitting the form to Zoho...");
-                                form.submit(); // Native form submission to Zoho
-                            } else {
-                                console.error('Form not found or not a valid form element for native submission.');
-                            }
-                        }, 1000); // 1-second delay
-                    }).catch(error => {
-                        console.error('Error during PDF generation promise:', error);
-                        alert('An error occurred while generating the PDF. Please try again.');
-                        // If PDF generation fails, we still might want to submit the form
-                        // or halt depending on desired behavior. For now, it will halt.
+                // Signature pad border color update
+                if (canvas && signaturePad) {
+                    signaturePad.addEventListener("beginStroke", () => {
+                        $('#signature-pad').css('border-color', 'green');
+                        $('#signatureError').css('display', 'none');
                     });
-
-                } catch (error) {
-                    console.error('Error generating PDF (initial catch):', error);
-                    alert('An error occurred while generating the PDF. Please try again.');
+                    // For blur event, if empty, make it red
+                    $(canvas).on('blur', function() {
+                        if (signaturePad.isEmpty()) {
+                            $('#signature-pad').css('border-color', 'red');
+                            $('#signatureError').css('display', 'block');
+                        }
+                    });
                 }
             });
-
-            // Event listener to update border color on input changes
-            $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').on('input change blur', function() {
-                const $this = $(this);
-
-                // If the field is not required or is g-recaptcha-response, do not apply red/green borders
-                if ($this.hasClass('not-required') || $this.attr('name') === 'g-recaptcha-response') {
-                    $this.css('border-color', ''); // Remove border if not required
-                    return;
-                }
-
-                if ($this.is('select[multiple]')) {
-                    if ($this.find('option:selected').length !== 0) {
-                        $this.css('border-color', 'green');
-                        // hideErrorMessage($this[0]); // Use this if you have a specific error message element
-                    } else {
-                        $this.css('border-color', 'red');
-                        // showErrorMessage($this[0], 'Please select at least one option.'); // Example
-                    }
-                } else if ($this.is(':checkbox')) {
-                    if ($this.is(':checked')) {
-                        $this.css('border-color', 'green');
-                    } else {
-                        $this.css('border-color', 'red');
-                    }
-                } else {
-                    // This also handles text inputs, textareas, number inputs etc.
-                    if ($this.val() && $this.val().trim() !== '') {
-                        $this.css('border-color', 'green');
-                    } else {
-                        $this.css('border-color', 'red');
-                    }
-                }
-            });
-        });
-    }
-</script>
+        }
+    </script>
 
 <script id='wf_anal' src='https://crm.zohopublic.com/crm/WebFormAnalyticsServeServlet?rid=6b6ae31ae2f4d68071c20592b87156438014f67fc021847b8229436aaaf7edf4ba53094dab9d377a285430233462bf94gid14630c9998666c0397966c58f966f98f6949ecc50f3255e60e1b46cfdeb45215gid4f42e44b0916558510b15f60c0df3baa1687b14dcbf31981aa040dc5b9cd9b6agid7a5d1b79510f3e61a6cc141b716aa6e5669d008dfce3ecd98dea64263f147da6&tw=2d706fdfc189a35e27c4a7b9a7df6c964fbd339347066a5e0a3c5b63f01b1024' defer></script>
 
