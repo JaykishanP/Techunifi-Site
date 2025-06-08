@@ -742,16 +742,35 @@ function gtag(){dataLayer.push(arguments);}
 
 
 <script>
-    // Zoho form specific functions (from the first script block)
+    // --- Global Helper Functions for Error Display (defined to resolve ReferenceError) ---
+    // This function is missing from your original snippet but was referenced by the error.
+    // You might need to customize its behavior based on your actual UI for error messages.
+    function hideErrorMessage(inputElement) {
+        // Example implementation: find a sibling span with an error class and hide it.
+        const errorElement = inputElement.nextElementSibling;
+        if (errorElement && errorElement.classList.contains('error-message')) {
+            errorElement.style.display = 'none';
+        }
+        // Also remove the red border/class from the input
+        inputElement.style.borderColor = ''; // Revert to default
+        inputElement.classList.remove('is-invalid'); // Assuming you have such a class
+    }
+
+    // --- Zoho Form Specific Functions ---
     // These functions are provided by Zoho and are crucial for its internal validation
-    // and reCAPTCHA handling.
-    function addAriaSelected6771280000000742007() {
+    // and reCAPTCHA handling. Do not alter their core logic unless you understand Zoho's requirements.
+
+    function addAriaSelected6771280000000742007(event) { // Added 'event' parameter
         var optionElem = event.target;
         var previousSelectedOption = optionElem.querySelector('[aria-selected=true]');
         if (previousSelectedOption) {
             previousSelectedOption.removeAttribute('aria-selected');
         }
-        optionElem.querySelectorAll('option')[optionElem.selectedIndex].ariaSelected = 'true';
+        // Ensure the selected option is an element before trying to set ariaSelected
+        const selectedOption = optionElem.querySelectorAll('option')[optionElem.selectedIndex];
+        if (selectedOption) {
+            selectedOption.setAttribute('aria-selected', 'true'); // Correct way to set ariaSelected
+        }
     }
 
     /* Do not remove this code. */
@@ -779,7 +798,7 @@ function gtag(){dataLayer.push(arguments);}
         var i;
         for (i = 0; i < emailFld.length; i++) {
             var emailVal = emailFld[i].value;
-            if ((emailVal.replace(/^\s+|\s+$/g, '')).length != 0) {
+            if ((emailVal.replace(/^\s+|\s+$/g, '')).length !== 0) { // Use strict comparison
                 var atpos = emailVal.indexOf('@');
                 var dotpos = emailVal.lastIndexOf('.');
                 if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= emailVal.length) {
@@ -802,9 +821,12 @@ function gtag(){dataLayer.push(arguments);}
                     const month = parseInt(parts[1], 10);
                     const year = parseInt(parts[2], 10);
                     const date = new Date(year, month - 1, day);
+                    // Check if the parsed date components match the original input
                     return date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
                 }
             }
+            // If the pattern doesn't match or is not handled, return true (assume valid)
+            // Or implement other date formats as needed.
             return true;
         }
     };
@@ -817,7 +839,7 @@ function gtag(){dataLayer.push(arguments);}
             var dateFld = dateFlds[i];
             var usrPtrn = dateFld.placeholder;
             var dateVal = dateFld.value;
-            if (dateVal.trim() != '') {
+            if (dateVal.trim() !== '') { // Use strict comparison
                 var vald = dateFormatConvert.validate(dateVal, usrPtrn);
                 if (!vald) {
                     alert('Please enter a valid date.');
@@ -835,7 +857,7 @@ function gtag(){dataLayer.push(arguments);}
         for (i = 0; i < mndFileds.length; i++) {
             var fieldObj = document.forms['WebToCases6771280000000742007'][mndFileds[i]];
             if (fieldObj) {
-                if (((fieldObj.value).replace(/^\s+|\s+$/g, '')).length == 0) {
+                if (((fieldObj.value).replace(/^\s+|\s+$/g, '')).length === 0) { // Use strict comparison
                     if (fieldObj.type == 'file') {
                         alert('Please select a file to upload.');
                         fieldObj.focus();
@@ -844,27 +866,34 @@ function gtag(){dataLayer.push(arguments);}
                     alert(fldLangVal[i] + ' cannot be empty.');
                     fieldObj.focus();
                     return false;
-                } else if (fieldObj.nodeName == 'SELECT') {
-                    if (fieldObj.options[fieldObj.selectedIndex].value == '-None-') {
+                } else if (fieldObj.nodeName === 'SELECT') { // Use strict comparison for nodeName
+                    if (fieldObj.options[fieldObj.selectedIndex].value === '-None-') { // Use strict comparison
                         alert(fldLangVal[i] + ' cannot be none.');
                         fieldObj.focus();
                         return false;
                     }
-                } else if (fieldObj.type == 'checkbox') {
-                    if (fieldObj.checked == false) {
+                } else if (fieldObj.type === 'checkbox') { // Use strict comparison
+                    if (fieldObj.checked === false) { // Use strict comparison
                         alert('Please accept ' + fldLangVal[i]);
                         fieldObj.focus();
                         return false;
                     }
                 }
                 try {
-                    if (fieldObj.name == 'Last Name') { // This part might be for Zoho's internal logic
-                        name = fieldObj.value;
+                    if (fieldObj.name === 'Last Name') { // This part might be for Zoho's internal logic
+                        // 'name' variable is undeclared here, which could cause issues.
+                        // If 'name' is meant to be a global, declare it with 'var' at the top,
+                        // or better yet, avoid global variables.
+                        // Assuming 'name' is just a placeholder and not strictly needed here.
+                        // var name = fieldObj.value; // If you need it for something else
                     }
-                } catch (e) {}
+                } catch (e) {
+                    // console.error("Error in Zoho mandatory check:", e); // For debugging
+                }
             }
         }
         // These are now handled in validateTicketForm, but kept here for Zoho's own internal logic.
+        // Be aware these will trigger native JS alerts if Zoho's internal checks fail.
         if (!validateEmail6771280000000742007()) {
             return false;
         }
@@ -879,27 +908,35 @@ function gtag(){dataLayer.push(arguments);}
             smarturlfield.setAttribute('type', 'hidden');
             smarturlfield.setAttribute('value', service);
             smarturlfield.setAttribute('name', 'service');
-            webform.appendChild(smarturlfield);
+            if (webform) { // Check if webform exists before appending
+                webform.appendChild(smarturlfield);
+            }
         }
         return true;
     }
 
     function tooltipShow6771280000000742007(el) {
         var tooltip = el.nextElementSibling;
-        var tooltipDisplay = tooltip.style.display;
-        if (tooltipDisplay == 'none') {
-            var allTooltip = document.getElementsByClassName('zcwf_tooltip_over');
-            for (i = 0; i < allTooltip.length; i++) {
-                allTooltip[i].style.display = 'none';
+        if (tooltip) { // Check if tooltip exists
+            var tooltipDisplay = tooltip.style.display;
+            if (tooltipDisplay === 'none') { // Use strict comparison
+                var allTooltip = document.getElementsByClassName('zcwf_tooltip_over');
+                for (i = 0; i < allTooltip.length; i++) {
+                    allTooltip[i].style.display = 'none';
+                }
+                tooltip.style.display = 'block';
+            } else {
+                tooltip.style.display = 'none';
             }
-            tooltip.style.display = 'block';
-        } else {
-            tooltip.style.display = 'none';
         }
     }
 
 
-    // Main jQuery script for form handling
+    // --- Main jQuery script for form handling ---
+    // Encapsulate the entire script within the DOMContentLoaded event listener
+    // or ensure it's placed just before the closing </body> tag.
+    // The if (window.location.pathname === '/change-order.html') check is useful
+    // if this script is included on multiple pages.
     if (window.location.pathname === '/change-order.html') {
         $(document).ready(function() {
             console.log("jQuery document ready fired for /change-order.html");
@@ -912,23 +949,31 @@ function gtag(){dataLayer.push(arguments);}
             // Digital Signature
             var canvas = document.getElementById("signature-pad");
 
-            function resizeCanvas() {
-                var ratio = Math.max(window.devicePixelRatio || 1, 1);
-                canvas.width = canvas.offsetWidth * ratio;
-                canvas.height = canvas.offsetHeight * ratio;
-                canvas.getContext("2d").scale(ratio, ratio);
+            // Check if canvas exists before proceeding with signature pad logic
+            if (canvas) {
+                function resizeCanvas() {
+                    var ratio = Math.max(window.devicePixelRatio || 1, 1);
+                    canvas.width = canvas.offsetWidth * ratio;
+                    canvas.height = canvas.offsetHeight * ratio;
+                    canvas.getContext("2d").scale(ratio, ratio);
+                }
+
+                window.onresize = resizeCanvas;
+                resizeCanvas();
+
+                // Ensure SignaturePad library is loaded before this point
+                // For example, typically you'd include:
+                var signaturePad = new SignaturePad(canvas, {
+                    backgroundColor: 'rgb(250,250,250)'
+                });
+
+                document.getElementById("clear").addEventListener('click', function() {
+                    signaturePad.clear();
+                });
+            } else {
+                console.warn("Signature pad canvas not found. Skipping signature pad initialization.");
             }
 
-            window.onresize = resizeCanvas;
-            resizeCanvas();
-
-            var signaturePad = new SignaturePad(canvas, {
-                backgroundColor: 'rgb(250,250,250)'
-            });
-
-            document.getElementById("clear").addEventListener('click', function() {
-                signaturePad.clear();
-            });
 
             // Function to validate the form
             function validateTicketForm() {
@@ -942,7 +987,7 @@ function gtag(){dataLayer.push(arguments);}
                     // Skip fields with 'not-required' class or reCAPTCHA
                     if ($this.hasClass('not-required') || $this.attr('name') === 'g-recaptcha-response') {
                         $this.css('border-color', ''); // Remove border if not required
-                        return true; // Continue to the next field
+                        return true; // Continue to the next field in .each()
                     }
 
                     let isValid = true;
@@ -966,35 +1011,42 @@ function gtag(){dataLayer.push(arguments);}
                     if (!isValid) {
                         formValid = false;
                         $this.css('border-color', 'red');
+                        // Show specific error message if applicable, using hideErrorMessage's counterpart
+                        // E.g., $this.next('.error-message').text('This field is required.').show();
                         if (!firstInvalidField) {
                             firstInvalidField = $this;
                         }
                     } else {
                         $this.css('border-color', 'green');
+                        // Hide specific error message if applicable
+                        // E.g., $this.next('.error-message').hide();
                     }
                 });
 
-                // Zoho specific mandatory check (Subject field is hidden and set to 'NA')
-                // This will trigger alerts if Zoho's internal checks fail (e.g., for 'Subject')
+                // --- Zoho specific mandatory checks ---
+                // These functions will trigger native JavaScript alerts.
+                // Consider integrating their logic directly into your custom validation
+                // or handling their alerts more gracefully if they are critical.
                 if (!checkMandatory6771280000000742007()) {
                     formValid = false;
-                    console.log('Zoho mandatory check failed.');
+                    console.log('Zoho mandatory check failed. (Alert shown by Zoho function)');
+                    // No need to set firstInvalidField here as Zoho's alert will focus.
                 }
 
                 // Email validation (using Zoho's function)
                 if (!validateEmail6771280000000742007()) {
                     formValid = false;
-                    console.log('Zoho email validation failed.');
+                    console.log('Zoho email validation failed. (Alert shown by Zoho function)');
                 }
 
                 // Date format validation (using Zoho's function)
                 if (!validateDateFormat6771280000000742007()) {
                     formValid = false;
-                    console.log('Zoho date format validation failed.');
+                    console.log('Zoho date format validation failed. (Alert shown by Zoho function)');
                 }
 
                 // Signature validation
-                if (signaturePad.isEmpty()) {
+                if (canvas && signaturePad.isEmpty()) { // Only check if signaturePad was initialized
                     formValid = false;
                     alert('Please provide your signature.');
                     if (!firstInvalidField) {
@@ -1006,7 +1058,7 @@ function gtag(){dataLayer.push(arguments);}
                 // CAPTCHA validation (using Zoho's function)
                 if (!reCaptchaAlert6771280000000742007()) {
                     formValid = false;
-                    console.log('reCAPTCHA validation failed.');
+                    console.log('reCAPTCHA validation failed. (Error message shown by Zoho function)');
                     // reCaptchaAlert function already shows an error message.
                     // No need for additional alert here.
                 }
@@ -1023,7 +1075,7 @@ function gtag(){dataLayer.push(arguments);}
                 }
 
                 // Scroll to the first invalid field if any
-                if (firstInvalidField) {
+                if (firstInvalidField && formValid === false) { // Only scroll if validation actually failed
                     $('html, body').animate({
                         scrollTop: firstInvalidField.offset().top - 200
                     }, 500);
@@ -1058,14 +1110,14 @@ function gtag(){dataLayer.push(arguments);}
                     const footerHeight = 30;
 
                     // Function to add the header with logo
-                    function addHeader(doc) {
+                    function addHeader(docInstance) { // Renamed doc to docInstance to avoid scope conflict
                         return new Promise((resolve, reject) => {
                             const imgUrl = 'https://www.techunifi.com/assets/img/hero-img.png';
                             const img = new Image();
                             img.src = imgUrl;
 
                             img.onload = function() {
-                                doc.addImage(img, 'PNG', 60, 10, 90, 30); // Adjust x, y, width, height as necessary
+                                docInstance.addImage(img, 'PNG', 60, 10, 90, 30); // Adjust x, y, width, height as necessary
                                 resolve();
                             };
 
@@ -1078,17 +1130,17 @@ function gtag(){dataLayer.push(arguments);}
                     }
 
                     // Function to add the footer with contact details
-                    function addFooter(doc) {
-                        doc.setFontSize(12);
-                        doc.setTextColor(0, 0, 0);
-                        doc.text('2638 Willard Dairy Road, Suite 112 High Point, NC 27265', pageWidth / 2, pageHeight - footerHeight + 10, null, null, 'center');
-                        doc.text('+1 (336) 860-6061 | techunifi.com | Info@techunifi.com', pageWidth / 2, pageHeight - footerHeight + 20, null, null, 'center');
-                        doc.setLineWidth(0.5);
-                        doc.line(10, pageHeight - footerHeight, pageWidth - 10, pageHeight - footerHeight); // x1, y1, x2, y2
+                    function addFooter(docInstance) { // Renamed doc to docInstance
+                        docInstance.setFontSize(12);
+                        docInstance.setTextColor(0, 0, 0);
+                        docInstance.text('2638 Willard Dairy Road, Suite 112 High Point, NC 27265', pageWidth / 2, pageHeight - footerHeight + 10, null, null, 'center');
+                        docInstance.text('+1 (336) 860-6061 | techunifi.com | Info@techunifi.com', pageWidth / 2, pageHeight - footerHeight + 20, null, null, 'center');
+                        docInstance.setLineWidth(0.5);
+                        docInstance.line(10, pageHeight - footerHeight, pageWidth - 10, pageHeight - footerHeight); // x1, y1, x2, y2
                     }
 
                     // Function to add form data content
-                    function addContent(doc, y) {
+                    function addContent(docInstance, yCoord) { // Renamed doc to docInstance, y to yCoord
                         const formData = $('#submitTicketForm').serializeArray();
                         const filteredFormData = formData.filter(field =>
                             field.name !== 'xnQsjsdp' && // Hidden Zoho field
@@ -1127,54 +1179,55 @@ function gtag(){dataLayer.push(arguments);}
                                 const selectedOptions = $(`[name='${field.name}']`).find('option:selected').map(function() {
                                     return $(this).text();
                                 }).get().join(', ');
+
                                 if (selectedOptions) {
                                     // Check for page break before adding the label
-                                    if (y + lineHeight > pageHeight - footerHeight - 10) {
-                                        doc.addPage();
-                                        y = headerHeight; // Reset y for the new page
-                                        addHeader(doc); // Add header to the new page
+                                    if (yCoord + lineHeight > pageHeight - footerHeight - 10) {
+                                        docInstance.addPage();
+                                        yCoord = headerHeight; // Reset yCoord for the new page
+                                        addHeader(docInstance); // Add header to the new page
                                     }
 
-                                    doc.setFont('helvetica', 'bold');
-                                    doc.text(`${label}:`, labelIndent, y);
+                                    docInstance.setFont('helvetica', 'bold');
+                                    docInstance.text(`${label}:`, labelIndent, yCoord);
 
-                                    doc.setFont('helvetica', 'normal');
-                                    const valueLines = doc.splitTextToSize(selectedOptions, maxWidth);
+                                    docInstance.setFont('helvetica', 'normal');
+                                    const valueLines = docInstance.splitTextToSize(selectedOptions, maxWidth);
                                     valueLines.forEach(line => {
-                                        if (y + lineHeight > pageHeight - footerHeight - 10) {
-                                            doc.addPage();
-                                            y = headerHeight; // Reset y for the new page
-                                            addHeader(doc); // Add header to the new page
+                                        if (yCoord + lineHeight > pageHeight - footerHeight - 10) {
+                                            docInstance.addPage();
+                                            yCoord = headerHeight; // Reset yCoord for the new page
+                                            addHeader(docInstance); // Add header to the new page
                                         }
-                                        doc.text(line, valueIndent, y);
-                                        y += lineHeight; // Move to the next line
+                                        docInstance.text(line, valueIndent, yCoord);
+                                        yCoord += lineHeight; // Move to the next line
                                     });
                                 }
                             } else {
                                 // Check for page break before adding the label
-                                if (y + lineHeight > pageHeight - footerHeight - 10) {
-                                    doc.addPage();
-                                    y = headerHeight; // Reset y for the new page
-                                    addHeader(doc); // Add header to the new page
+                                if (yCoord + lineHeight > pageHeight - footerHeight - 10) {
+                                    docInstance.addPage();
+                                    yCoord = headerHeight; // Reset yCoord for the new page
+                                    addHeader(docInstance); // Add header to the new page
                                 }
 
-                                doc.setFont('helvetica', 'bold');
-                                doc.text(`${label}:`, labelIndent, y); // Print label
+                                docInstance.setFont('helvetica', 'bold');
+                                docInstance.text(`${label}:`, labelIndent, yCoord); // Print label
 
-                                doc.setFont('helvetica', 'normal');
+                                docInstance.setFont('helvetica', 'normal');
 
                                 // Split value text into multiple lines if it's too long
-                                const valueLines = doc.splitTextToSize(value, maxWidth);
+                                const valueLines = docInstance.splitTextToSize(value, maxWidth);
 
                                 // Print each line of the value
                                 valueLines.forEach(line => {
-                                    if (y + lineHeight > pageHeight - footerHeight - 10) {
-                                        doc.addPage();
-                                        y = headerHeight; // Reset y for the new page
-                                        addHeader(doc); // Add header to the new page
+                                    if (yCoord + lineHeight > pageHeight - footerHeight - 10) {
+                                        docInstance.addPage();
+                                        yCoord = headerHeight; // Reset yCoord for the new page
+                                        addHeader(docInstance); // Add header to the new page
                                     }
-                                    doc.text(line, valueIndent, y);
-                                    y += lineHeight; // Move to the next line
+                                    docInstance.text(line, valueIndent, yCoord);
+                                    yCoord += lineHeight; // Move to the next line
                                 });
                             }
                         });
@@ -1183,54 +1236,53 @@ function gtag(){dataLayer.push(arguments);}
                         const consentCheckbox = $('#00NUm000009SCKP');
                         if (consentCheckbox.length) {
                             const consentStatus = consentCheckbox.is(':checked') ? 'Agreed' : 'Not Agreed';
-                            if (y + lineHeight > pageHeight - footerHeight - 10) {
-                                doc.addPage();
-                                y = headerHeight; // Reset y for the new page
-                                addHeader(doc); // Add header to the new page
+                            if (yCoord + lineHeight > pageHeight - footerHeight - 10) {
+                                docInstance.addPage();
+                                yCoord = headerHeight; // Reset yCoord for the new page
+                                addHeader(docInstance); // Add header to the new page
                             }
-                            doc.setFont('helvetica', 'bold');
-                            doc.text('Consent:', labelIndent, y);
-                            doc.setFont('helvetica', 'normal');
-                            doc.text(consentStatus, valueIndent, y);
-                            y += lineHeight;
+                            docInstance.setFont('helvetica', 'bold');
+                            docInstance.text('Consent:', labelIndent, yCoord);
+                            docInstance.setFont('helvetica', 'normal');
+                            docInstance.text(consentStatus, valueIndent, yCoord);
+                            yCoord += lineHeight;
                         }
 
-
-                        return y; // Return updated y position
+                        return yCoord; // Return updated yCoord position
                     }
 
 
                     // Function to add Terms and Conditions
-                    function addTermsAndConditions(doc, y) {
-                        if (y + 60 > pageHeight - footerHeight - 10) {
-                            doc.addPage();
-                            y = headerHeight; // Reset y for the new page
-                            addHeader(doc); // Add header to the new page
+                    function addTermsAndConditions(docInstance, yCoord) { // Renamed doc to docInstance, y to yCoord
+                        if (yCoord + 60 > pageHeight - footerHeight - 10) {
+                            docInstance.addPage();
+                            yCoord = headerHeight; // Reset yCoord for the new page
+                            addHeader(docInstance); // Add header to the new page
                         }
 
-                        doc.setFontSize(14);
-                        doc.setFont('helvetica', 'bold'); // Normal font for terms and conditions
-                        doc.text('Validation', 10, y);
-                        y += 10;
-                        doc.setFontSize(12);
-                        doc.setFont('helvetica', 'normal'); // Normal font for terms and conditions
-                        doc.text('1. Total payment due 30 days after completion of work.', 10, y);
-                        y += 10;
-                        doc.text('2. Refer to the W.O. # in all correspondence and in your payment.', 10, y);
-                        y += 10;
-                        doc.text('3. Please send correspondence regarding this work order to:', 10, y);
-                        y += 10;
-                        doc.text('     Suzanne Blair - suzanne.blair@techunifi.com.', 10, y);
-                        y += 10;
+                        docInstance.setFontSize(14);
+                        docInstance.setFont('helvetica', 'bold'); // Normal font for terms and conditions
+                        docInstance.text('Validation', 10, yCoord);
+                        yCoord += 10;
+                        docInstance.setFontSize(12);
+                        docInstance.setFont('helvetica', 'normal'); // Normal font for terms and conditions
+                        docInstance.text('1. Total payment due 30 days after completion of work.', 10, yCoord);
+                        yCoord += 10;
+                        docInstance.text('2. Refer to the W.O. # in all correspondence and in your payment.', 10, yCoord);
+                        yCoord += 10;
+                        docInstance.text('3. Please send correspondence regarding this work order to:', 10, yCoord);
+                        yCoord += 10;
+                        docInstance.text('    Suzanne Blair - suzanne.blair@techunifi.com.', 10, yCoord);
+                        yCoord += 10;
 
                         // Add hyperlink to the word "website"
-                        doc.setTextColor(6, 98, 187); // Set text color to #0662BB
-                        doc.textWithLink('View full terms and conditions', 10, y, {
+                        docInstance.setTextColor(6, 98, 187); // Set text color to #0662BB
+                        docInstance.textWithLink('View full terms and conditions', 10, yCoord, {
                             url: 'https://www.techunifi.com/terms-conditions.html'
                         });
-                        y += 20; // Space before the signature
+                        yCoord += 20; // Space before the signature
 
-                        return y; // Return updated y position
+                        return yCoord; // Return updated yCoord position
                     }
 
                     // Start generating the PDF
@@ -1238,19 +1290,19 @@ function gtag(){dataLayer.push(arguments);}
                         let y = headerHeight;
 
                         // Add header and wait for image to load
-                        await addHeader(doc);
+                        await addHeader(doc); // Use the outer 'doc' instance here
 
                         y += 25; // Initial spacing after header
 
                         // Add form content
-                        y = addContent(doc, y);
+                        y = addContent(doc, y); // Pass the outer 'doc' instance
 
                         y += 10; // Space between content and terms
                         // Add Terms and Conditions
-                        y = addTermsAndConditions(doc, y);
+                        y = addTermsAndConditions(doc, y); // Pass the outer 'doc' instance
 
                         // Add signature if available
-                        if (!signaturePad.isEmpty()) {
+                        if (canvas && !signaturePad.isEmpty()) { // Check if signaturePad was initialized
                             const signatureImage = signaturePad.toDataURL();
                             if (y + 40 > pageHeight - footerHeight - 10) { // Ensure there's enough space for the signature
                                 doc.addPage();
@@ -1262,7 +1314,7 @@ function gtag(){dataLayer.push(arguments);}
                             y += 40; // Adjust space after signature
                         }
 
-                        // Add footer to the last page
+                        // Add footer to the last page (ensure it's added to the *current* doc instance)
                         addFooter(doc);
 
                         // Save the PDF
@@ -1309,8 +1361,10 @@ function gtag(){dataLayer.push(arguments);}
                 if ($this.is('select[multiple]')) {
                     if ($this.find('option:selected').length !== 0) {
                         $this.css('border-color', 'green');
+                        // hideErrorMessage($this[0]); // Use this if you have a specific error message element
                     } else {
                         $this.css('border-color', 'red');
+                        // showErrorMessage($this[0], 'Please select at least one option.'); // Example
                     }
                 } else if ($this.is(':checkbox')) {
                     if ($this.is(':checked')) {
@@ -1333,6 +1387,7 @@ function gtag(){dataLayer.push(arguments);}
 
 <script id='wf_anal' src='https://crm.zohopublic.com/crm/WebFormAnalyticsServeServlet?rid=6b6ae31ae2f4d68071c20592b87156438014f67fc021847b8229436aaaf7edf4ba53094dab9d377a285430233462bf94gid14630c9998666c0397966c58f966f98f6949ecc50f3255e60e1b46cfdeb45215gid4f42e44b0916558510b15f60c0df3baa1687b14dcbf31981aa040dc5b9cd9b6agid7a5d1b79510f3e61a6cc141b716aa6e5669d008dfce3ecd98dea64263f147da6&tw=2d706fdfc189a35e27c4a7b9a7df6c964fbd339347066a5e0a3c5b63f01b1024' defer></script>
 
-	
+
+
 </body>
 </html>
