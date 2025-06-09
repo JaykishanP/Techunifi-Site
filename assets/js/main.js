@@ -1495,277 +1495,32 @@ function togglePasswordVisibility() {
 
 /* ===== Digital Signature ===== */
 // Run this script only on the "change-order.html" page
-if (window.location.pathname === "/change-order.html") {
-  var canvas = document.getElementById("signature-pad");
+// if (window.location.pathname === "/change-order.html") {
+//   var canvas = document.getElementById("signature-pad");
 
-  function resizeCanvas() {
-      var ratio = Math.max(window.devicePixelRatio || 1, 1);
-      canvas.width = canvas.offsetWidth * ratio;
-      canvas.height = canvas.offsetHeight * ratio;
-      canvas.getContext("2d").scale(ratio, ratio);
-  }
+//   function resizeCanvas() {
+//       var ratio = Math.max(window.devicePixelRatio || 1, 1);
+//       canvas.width = canvas.offsetWidth * ratio;
+//       canvas.height = canvas.offsetHeight * ratio;
+//       canvas.getContext("2d").scale(ratio, ratio);
+//   }
 
-  window.onresize = resizeCanvas;
-  resizeCanvas();
+//   window.onresize = resizeCanvas;
+//   resizeCanvas();
 
-  var signaturePad = new SignaturePad(canvas, {
-      backgroundColor: 'rgb(250,250,250)'
-  });
+//   var signaturePad = new SignaturePad(canvas, {
+//       backgroundColor: 'rgb(250,250,250)'
+//   });
 
-  document.getElementById("clear").addEventListener('click', function() {
-      signaturePad.clear();
-  });
-}
+//   document.getElementById("clear").addEventListener('click', function() {
+//       signaturePad.clear();
+//   });
+// }
 
 
 /* ===== Change Order ===== */
 // JavaScript for change-order.html
 
-if(window.location.pathname === '/change-order.html'){
-
-  $(document).ready(function () {
- 
-    // Function to validate the form
-    function validateTicketForm() {
-      var formValid = true;
-  
-      // Validate all inputs
-      $('#submitTicketForm input, #submitTicketForm checkbox, #submitTicketForm select, #submitTicketForm textarea').each(function () {
-        if ($(this).hasClass('not-required')) return true;
-  
-        if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
-          formValid = false;
-          $(this).css('border-color', 'red');
-          $('html, body').animate({ scrollTop: $(this).offset().top - 200 }, 500);
-          return false; // Stop validation loop
-        } else {
-          $(this).css('border-color', 'green');
-        }
-      });
-  
-      // Signature validation
-      if (signaturePad.isEmpty()) {
-        formValid = false;
-        alert('Please provide your signature.');
-        $('html, body').animate({ scrollTop: $('#signature-pad').offset().top - 200 }, 500);
-      }
-  
-
-      // CAPTCHA validation
-      var captchaResponse = grecaptcha.getResponse();
-      if (!captchaResponse) {
-        formValid = false;
-        $('.g-recaptcha').css('border-color', 'red');
-        alert('Please complete the CAPTCHA');
-      } else {
-        $('.g-recaptcha').css('border-color', 'green');
-      }
-  
-      return formValid;
-    }
-  
-    // Handle form submission
-    $('#submitTicketForm').on('submit', function (event) {
-      event.preventDefault(); // Prevent default form submission
-  
-      if (!validateTicketForm()) {
-        console.log('Form validation failed.');
-        return; // Stop if validation fails
-      }
-  
-      // Generate the PDF
-      try {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-        const pageHeight = doc.internal.pageSize.height || 297; // A4 page height (in mm)
-        const pageWidth = doc.internal.pageSize.width || 210; // A4 page width (in mm)
-        const headerHeight = 40;
-        const footerHeight = 30;
-      
-        // Function to add the header with logo
-        function addHeader(doc) {
-          return new Promise((resolve, reject) => {
-            const imgUrl = 'https://www.techunifi.com/assets/img/hero-img.png';
-            const img = new Image();
-            img.src = imgUrl;
-      
-            img.onload = function () {
-              doc.addImage(img, 'PNG', 60, 10, 90, 30); // Adjust x, y, width, height as necessary
-              resolve();
-            };
-      
-            img.onerror = function () {
-              reject('Image failed to load');
-            };
-          });
-        }
-      
-        // Function to add the footer with contact details
-        function addFooter(doc) {
-          doc.setFontSize(12);
-          doc.setTextColor(0, 0, 0);
-          doc.text('2638 Willard Dairy Road, Suite 112 High Point, NC 27265', pageWidth / 2, pageHeight - footerHeight + 10, null, null, 'center');
-          doc.text('+1 (336) 860-6061 | techunifi.com | Info@techunifi.com', pageWidth / 2, pageHeight - footerHeight + 20, null, null, 'center');
-          doc.setLineWidth(0.5);
-          doc.line(10, pageHeight - footerHeight, pageWidth - 10, pageHeight - footerHeight); // x1, y1, x2, y2
-        }
-      
-        // Function to add form data content
-      // Function to add form data content
-  function addContent(doc, y) {
-    const formData = $('#submitTicketForm').serializeArray();
-    const filteredFormData = formData.filter(field => 
-      field.name !== 'orgId' && 
-      field.name !== 'retURL' && 
-      field.name !== 'mathSum' && 
-      field.name !== '00NUm000009SCKP' && 
-      field.name !== 'g-recaptcha-response'
-    );
-  
-    const lineHeight = 10; // Line height for text
-    const valueIndent = 90; // Increase indent for values to avoid overlap
-    const maxWidth = pageWidth - valueIndent - 10; // Maximum width for text wrapping
-  
-    filteredFormData.forEach(field => {
-      const label = $(`label[for='${field.name}']`).text();
-      const value = field.value;
-  
-      // Check for page break
-      if (y + lineHeight > pageHeight - footerHeight - 10) {
-        doc.addPage();
-        y = headerHeight; // Reset y for the new page
-        addHeader(doc); // Add header to the new page
-      }
-  
-      // Exclude specific values
-      if (!value.includes('00DHo000002fpJX') && !value.includes('{"keyname":"casev2","fallback":"true","orgId":"00DHo000002fpJX","ts"')) {
-        // Set bold font for the label text
-        doc.setFont('helvetica', 'bold');
-        doc.text(`${label}:`, 10, y); // Print label
-        
-        // Set regular font for the value
-        doc.setFont('helvetica', 'normal');
-  
-        // Split value text into multiple lines if it's too long
-        const valueLines = doc.splitTextToSize(value, maxWidth);
-  
-        // Print each line of the value
-        valueLines.forEach(line => {
-          if (y + lineHeight > pageHeight - footerHeight - 10) {
-            doc.addPage();
-            y = headerHeight; // Reset y for the new page
-            addHeader(doc); // Add header to the new page
-          }
-          doc.text(line, valueIndent, y);
-          y += lineHeight; // Move to the next line
-        });
-      }
-    });
-  
-    return y; // Return updated y position
-  }
-  
-      
-        // Function to add Terms and Conditions
-        function addTermsAndConditions(doc, y) {
-          if (y + 60 > pageHeight - footerHeight - 10) {
-            doc.addPage();
-            y = headerHeight; // Reset y for the new page
-            addHeader(doc); // Add header to the new page
-          }
-      
-          doc.setFontSize(14);
-          doc.setFont('helvetica', 'bold'); // Normal font for terms and conditions
-          doc.text('Terms and Conditions', 10, y);
-          y += 10;
-          doc.setFont('helvetica', 'normal'); // Normal font for terms and conditions
-          doc.text('1. Total payment due 30 days after completion of work.', 10, y);
-          y += 10;
-          doc.text('2. Refer to the W.O. # in all correspondence and in your payment.', 10, y);
-          y += 10;
-          doc.text('3. Please send correspondence regarding this work order to:', 10, y);
-          y += 10;
-          doc.text('   Suzanne Blair - suzanne.blair@techunifi.com.', 10, y);
-          y += 10;
-      
-          // Add hyperlink to the word "website"
-          doc.setTextColor(6, 98, 187); // Set text color to #0662BB
-          doc.textWithLink('View full terms and conditions', 10, y, { url: 'https://www.techunifi.com/terms-conditions.html' });
-          y += 20; // Space before the signature
-      
-          return y; // Return updated y position
-        }
-      
-        // Start generating the PDF
-        async function generatePDF() {
-          let y = headerHeight;
-      
-          // Add header and wait for image to load
-          await addHeader(doc);
-      
-          y+=25; 
-  
-          // Add form content
-          y = addContent(doc, y);
-      
-          y+=10
-          // Add Terms and Conditions
-          y = addTermsAndConditions(doc, y);
-      
-          // Add signature if available
-          if (!signaturePad.isEmpty()) {
-            const signatureImage = signaturePad.toDataURL();
-            if (y + 40 > pageHeight - footerHeight - 10) { // Ensure there's enough space for the signature
-              doc.addPage();
-              y = headerHeight;
-              await addHeader(doc); // Add header to the new page
-            }
-            doc.addImage(signatureImage, 'PNG', 10, y, 190, 30);
-            y += 40; // Adjust space after signature
-          }
-      
-          // Add footer to the last page
-          addFooter(doc);
-      
-          // Save the PDF
-          doc.save('techunifi-changeOrder-data.pdf');
-          console.log('PDF downloaded successfully.');
-        }
-      
-        // Generate the PDF
-        generatePDF();
-      
-      } catch (error) {
-        console.error('Error generating PDF:', error);
-        alert('An error occurred while generating the PDF. Please try again.');
-      }
-      
-      
-      // Submit the form using the native JavaScript submit method to avoid conflicts
-      setTimeout(() => {
-        var form = document.getElementById('submitTicketForm');
-        if (form && form.tagName === 'FORM') {
-          HTMLFormElement.prototype.submit.call(form); // Native form submission
-        } else {
-          console.error('Form not found or not a valid form element.');
-        }
-      }, 1000);
-    });
-  
-
-    // Event listener to update border color on input changes
-    $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').on('input change blur', function () {
-      if (!$(this).hasClass('not-required')) {
-        if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
-          $(this).css('border-color', 'green');
-        } else {
-          $(this).css('border-color', 'red');
-        }
-      }
-    });
-  });
-
-}
 
 /* ======= Textarea ======= */
 
