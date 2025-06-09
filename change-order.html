@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -351,7 +352,7 @@ function gtag(){dataLayer.push(arguments);}
   
           <div class="col-md-5">
             <label for="CASECF116">Date</label>
-           <div class = 'zcwf_col_fld'>
+           <div class = 'zcwf_col_fld zoho-date'>
 						<input type = 'text' id = 'CASECF116' aria-required = 'false' aria-label = 'CASECF116' name = 'CASECF116' aria-valuemax = '20' maxlength = '20' ftype = 'date' placeholder = 'DD-MM-YYYY' aria-placeholder = 'DD-MM-YYYY' tplid = '6771280000000858023CASECF116' onfocus = 'formCalender.stEv(event);formCalender.createCalendar(this);' autocomplete = 'off'>
 						</input>
 						<div id = 'template6771280000000858023CASECF116' onclick = 'formCalender.stEv(event);' class = 'tempCalDiv'>
@@ -1841,7 +1842,7 @@ function gtag(){dataLayer.push(arguments);}
 
               margin: 0;
 
-              position: absolute;
+              position: relative;
 
               z-index: 1000;
 
@@ -1854,9 +1855,14 @@ function gtag(){dataLayer.push(arguments);}
               box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 
               border-top: 0;
+              width: 100%;
+              max-width: 215px;
 
-              top: 20px;
+             /* top: 20px; */
 
+              }
+              .zoho-date {
+                position: absolute;
               }
 
             </style>
