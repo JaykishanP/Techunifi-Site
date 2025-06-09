@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -822,7 +823,7 @@ function gtag(){dataLayer.push(arguments);}
       var s = new Date(a, t, 1), i = 6, l = this.daysBasedOnPrefernce.indexOf(this.days[s.getDay()]) + 1;
       i = 31 === this.currMonthEnd[t] && l >= 6 || 30 === this.currMonthEnd[t] && 7 === l ? 7 : 28 === this.currMonthEnd[t] && 1 === l ? 5 : 6;
       var d = this.getTitle(e, a, t), o = this.dayNamesShort, h = '<div id=\'calenDiv\'><i id=\'calArrow\' style=\'display:none;\' class=\'dIB SocialArrow\'></i><div><div>';
-      h += '<div class=\'aligncenter\'><span class=\'calNav dIB vaM yearNavLft\' onclick=\'formCalender.updateDatePicker(event,undefined, -1)\'><i class=\'arrow left mRMinus2\'></i><i class=\'arrow left\'></i></span><span class=\'calNav dLft dIB vaM\' onClick=\'formCalender.updateDatePicker(event,-1)\' id=\'pm\'><i class=\'arrow left\'></i></span><span class=\'sCalMon\'>' + d + '</span><span class=\'calNav dRgt vaM\' onClick =\'formCalender.updateDatePicker(event,1)\' id=\'nm\'><i class=\'arrow right\'></i><i class=\'arrow right mLMinus2\'></i></span><span class=\'calNav dIB vaM yearNavRgt\' onclick=\'formCalender.updateDatePicker(event,undefined, 1)\'><i class=\'arrow right\'></i><i class=\'arrow right mLMinus2\'></i></span></div>', h += '<table  class=\'calDay\'  id =\'weekDays\' style=\'color:#8b9ab9; font-size:8px; margin-left:0\'><tr> <th>' + o[0] + '</th> <th>' + o[1] + '</th><th>' + o[2] + '</th><th>' + o[3] + '</th> <th>' + o[4] + '</th> <th>' + o[5] + '</th> <th>' + o[6] + '</th></tr></table>', h += '</div>', h += '<table id=\'calHeader\' class=\'calDay\' style=\'margin-left:0; margin-top:-5px;\' width=\'100%\' cellspacing=\'0\' cellpadding=\'0\' border=\'0\' >';
+      h += '<div class=\'aligncenter\'><span class=\'calNav dIB vaM yearNavLft\' onclick=\'formCalender.updateDatePicker(event,undefined, -1)\'><i class=\'arrow left mRMinus2\'></i><i class=\'arrow left\'></i></span><span class=\'calNav dLft dIB vaM\' onClick=\'formCalender.updateDatePicker(event,-1)\' id=\'pm\'><i class=\'arrow left\'></i></span><span class=\'sCalMon\'>' + d + '</span><span class=\'calNav dRgt vaM\' onClick =\'formCalender.updateDatePicker(event,1)\' id=\'nm\'><i class=\'arrow right\'></i><i class=\'arrow right mLMinus2\'></i></span><span class=\'calNav dIB vaM yearNavRgt\' onclick=\'formCalender.updateDatePicker(event,undefined, 1)\'><i class=\'arrow right\'></i><i class=\'arrow right mLMinus2\'></i></span></div>', h += '<table  class=\'calDay\'  id =\'weekDays\' style=\'color:#8b9ab9; font-size:8px; margin-left:0\'><tr> <th>' + o[0] + '</th> <th>' + o[1] + '</th><th>' + o[2] + '</th><th>' + o[3] + '</th> <th>' + o[4] + '</th> <th>' + o[5] + '</th> <th>' + o[6] + '</th></tr></table>', h += '</div>', h += '<table id=\'calHeader\' class=\'calDay\' style=\'margin-left:0; margin-top:-5px;\' width=\'100%\' cellspacing=\'0\' cellpadding=\'0\' border=\'0\' >';
       var c = '', u = new Date, y = a || u.getFullYear(), v = e || u.getDate(), g = void 0 === t ? u.getMonth() : t,
         m = u.getMonth(), p = u.getFullYear();
       u.getDate();
@@ -1469,7 +1470,7 @@ function gtag(){dataLayer.push(arguments);}
 
             // --- Form Validation and PDF Generation on Submit ---
             $('#submitTicketForm').on('submit', async function(event) {
-                // event.preventDefault();
+                event.preventDefault();
 
                 // --- Combined Form Validation ---
                 function validateAndPrepareForm() {
