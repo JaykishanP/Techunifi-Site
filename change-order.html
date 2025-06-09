@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -211,8 +210,6 @@ function gtag(){dataLayer.push(arguments);}
 				</input>
 				<input type = 'text' style = 'display:none;' name = 'actionType' value = 'Q2FzZXM='>
 				</input>
-        <input type="hidden" id="a-unqbdv4fyn0k" name="a-unqbdv4fyn0k" value="" />
-
 				<input type = 'text' style = 'display:none;' name = 'returnURL' value = 'https&#x3a;&#x2f;&#x2f;www.techunifi.com&#x2f;thanku-submit.html'>
 				</input>
 				
@@ -235,7 +232,7 @@ function gtag(){dataLayer.push(arguments);}
         <div class="row">
           <div class="col-md-12">
             <label for="CASECF5">Category</label>
-            <select  id="CASECF5" name="CASECF5" onChange='addAriaSelected6771280000000858023()' title="Products Requiring Servie">
+            <select  id="CASECF5" name="CASECF5" onChange='addAriaSelected6771280000000858023()' title="Products Requiring Servie" multiple>
               <!-- <option value="">--None--</option> -->
               <option value="Phone">Phone</option>
               <option value="Wifi">Wifi</option>
@@ -722,662 +719,1007 @@ function gtag(){dataLayer.push(arguments);}
   <script src="assets/js/main.js"></script>
 
   
- <!-- Internal JavaScript for Form Logic -->
-    <script type='text/javascript'>
-        // Custom message box functions to replace alerts
-        function showMessage(message) {
-            console.log("Displaying message:", message);
-            document.getElementById('messageContent').innerText = message;
-            document.getElementById('customMessageBox').style.display = 'block';
+				<script type='text/javascript'>
+  var formCalender = {
+    userPattern: 'YYYY-MM-DD',
+    currDateObj: void 0, currMonth: void 0, currYear: void 0, currDate: void 0, currMonthEnd: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31], monthName: void 0, days: void 0, displayPanel: void 0, isHideToday: void 0, calDefColor: '#515CCB',
+    weekdays: {
+      1: 'Sunday',
+      2: 'Monday',
+      3: 'Tuesday',
+      4: 'Wednesday',
+      5: 'Thursday',
+      6: 'Friday',
+      7: 'Saturday'
+    },
+    months: {
+      1: 'January',
+      2: 'February',
+      3: 'March',
+      4: 'April',
+      5: 'May',
+      6: 'June',
+      7: 'July',
+      8: 'August',
+      9: 'September',
+      10: 'October',
+      11: 'November',
+      12: 'December'
+    },
+    init: function () {
+      this.monthName = [{
+        html: 'January',
+        value: 0
+      },
+      {
+        html: 'February',
+        value: 1
+      },
+      {
+        html: 'March',
+        value: 2
+      },
+      {
+        html: 'April',
+        value: 3
+      },
+      {
+        html: 'May',
+        value: 4
+      },
+      {
+        html: 'June',
+        value: 5
+      },
+      {
+        html: 'July',
+        value: 6
+      },
+      {
+        html: 'August',
+        value: 7
+      },
+      {
+        html: 'September',
+        value: 8
+      },
+      {
+        html: 'October',
+        value: 9
+      },
+      {
+        html: 'November',
+        value: 10
+      },
+      {
+        html: 'December',
+        value: 11
+      }], this.days = ['ssunday', 'smonday', 'stuesday', 'swednesday', 'sthursday', 'sfriday', 'ssaturday'], this.dayNamesShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], this.daysBasedOnPrefernce = ['ssunday', 'smonday', 'stuesday', 'swednesday', 'sthursday', 'sfriday', 'ssaturday'];
+      var e = this.daysBasedOnPrefernce[0];
+      this.daysBasedOnPrefernce.shift(1), this.daysBasedOnPrefernce.push(e);
+      var t = this.dayNamesShort[0];
+      this.dayNamesShort.shift(1), this.dayNamesShort.push(t), this.currDateObj = new Date, this.currMonth = this.currDateObj.getMonth(), this.currYear = this.currDateObj.getFullYear(), this.currYear < 1e3 && (this.currYear += 1900), this.currDate = this.currDateObj.getDate()
+    },
+    getTitle: function () {
+      return this.monthName[this.currMonth].html + ' ' + this.currYear
+    },
+    createCalendar: function (e) {
+      for (var t = document.getElementsByClassName('tempCalDiv'), a = t.length, r = 0; r < a; r++) {
+        var n = t[r].style;
+        'block' === n.display && (n.display = 'none')
+      }
+      this.calendarNode = e, this.userPattern = this.calendarNode.placeholder;
+      var s = this.calendarNode.value, i = !1;
+      if (s) {
+        var l = dateFormatConvert.validate(s, this.userPattern);
+        l && (this.currDate = l.getDate(), this.currMonth = l.getMonth(), this.currYear = l.getFullYear(), this.currYear < 1e3 && (this.currYear = Number(this.currYear) + 1900))
+      }
+      else i = !0, formCalender.init();
+      this.monthName || formCalender.init(), this.createDatePicker(this.currDate, this.currMonth, this.currYear, i, !1)
+    },
+    createDatePicker: function (e, t, a, r, n) {
+      1 === this.currMonth && (this.currMonthEnd[1] = this.currYear % 400 == 0 || this.currYear % 4 == 0 && this.currYear % 100 != 0 ? 29 : 28);
+      var s = new Date(a, t, 1), i = 6, l = this.daysBasedOnPrefernce.indexOf(this.days[s.getDay()]) + 1;
+      i = 31 === this.currMonthEnd[t] && l >= 6 || 30 === this.currMonthEnd[t] && 7 === l ? 7 : 28 === this.currMonthEnd[t] && 1 === l ? 5 : 6;
+      var d = this.getTitle(e, a, t), o = this.dayNamesShort, h = '<div id=\'calenDiv\'><i id=\'calArrow\' style=\'display:none;\' class=\'dIB SocialArrow\'></i><div><div>';
+      h += '<div class=\'aligncenter\'><span class=\'calNav dIB vaM yearNavLft\' onclick=\'formCalender.updateDatePicker(event,undefined, -1)\'><i class=\'arrow left mRMinus2\'></i><i class=\'arrow left\'></i></span><span class=\'calNav dLft dIB vaM\' onClick=\'formCalender.updateDatePicker(event,-1)\' id=\'pm\'><i class=\'arrow left\'></i></span><span class=\'sCalMon\'>' + d + '</span><span class=\'calNav dRgt vaM\' onClick =\'formCalender.updateDatePicker(event,1)\' id=\'nm\'><i class=\'arrow right\'></i><i class=\'arrow right mLMinus2\'></i></span><span class=\'calNav dIB vaM yearNavRgt\' onclick=\'formCalender.updateDatePicker(event,undefined, 1)\'><i class=\'arrow right\'></i><i class=\'arrow right mLMinus2\'></i></span></div>', h += '<table  class=\'calDay\'  id =\'weekDays\' style=\'color:#8b9ab9; font-size:8px; margin-left:0\'><tr> <th>' + o[0] + '</th> <th>' + o[1] + '</th><th>' + o[2] + '</th><th>' + o[3] + '</th> <th>' + o[4] + '</th> <th>' + o[5] + '</th> <th>' + o[6] + '</th></tr></table>', h += '</div>', h += '<table id=\'calHeader\' class=\'calDay\' style=\'margin-left:0; margin-top:-5px;\' width=\'100%\' cellspacing=\'0\' cellpadding=\'0\' border=\'0\' >';
+      var c = '', u = new Date, y = a || u.getFullYear(), v = e || u.getDate(), g = void 0 === t ? u.getMonth() : t,
+        m = u.getMonth(), p = u.getFullYear();
+      u.getDate();
+      m === t && a === p && (c = ' style=\'display:none\'');
+      for (var f, D, M, b = s.getDay(); 1 !== b;)
+        s.setDate(s.getDate() - 1), b = s.getDay();
+      for (var x = 1; x <= i; x++) {
+        h += '<tr>';
+        for (var Y = 1; Y < 8; Y++) {
+          f = s.getMonth(), D = s.getFullYear(), M = s.getDate(), D + '-' + (parseInt(f) + 1) + '-' + M;
+          var F = 'cdate lt-gray';
+          if (M === v && D === y && f === g && (F = 'cdate lt-gray'), f === g && (F = 'cdate'), (r && M === v && m === g && p === y || !n && M === v && f === g && D === y) && (F = 'sel'), n) {
+            var k = dateFormatConvert.validate(this.calendarNode.value, formCalender.userPattern);
+            k && M === k.getDate() && f === k.getMonth() && D === k.getFullYear() && (F = 'sel')
+          }
+          h += '<td class=\'' + F + '\' onClick=\'formCalender.displaySelectedDate(\"' + M + ' ' + f + ' ' + D + '\")\'>' + M + '</td>', s.setDate(s.getDate() + 1)
         }
-
-        document.getElementById('messageBoxClose').addEventListener('click', function() {
-            document.getElementById('customMessageBox').style.display = 'none';
-        });
-
-        // Date picker related functions (from original code)
-        var formCalender = {
-            userPattern: 'YYYY-MM-DD',
-            currDateObj: undefined, currMonth: undefined, currYear: undefined, currDate: undefined, currMonthEnd: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31], monthName: undefined, days: undefined, displayPanel: undefined, isHideToday: undefined, calDefColor: '#515CCB',
-            weekdays: { 1: 'Sunday', 2: 'Monday', 3: 'Tuesday', 4: 'Wednesday', 5: 'Thursday', 6: 'Friday', 7: 'Saturday' },
-            months: { 1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May', 6: 'June', 7: 'July', 8: 'August', 9: 'September', 10: 'October', 11: 'November', 12: 'December' },
-            init: function (){
-                this.monthName = [{ html: 'January', value: 0 }, { html: 'February', value: 1 }, { html: 'March', value: 2 }, { html: 'April', value: 3 }, { html: 'May', value: 4 }, { html: 'June', value: 5 }, { html: 'July', value: 6 }, { html: 'August', value: 7 }, { html: 'September', value: 8 }, { html: 'October', value: 9 }, { html: 'November', value: 10 }, { html: 'December', value: 11 }];
-                this.days = [ 'ssunday', 'smonday', 'stuesday', 'swednesday', 'sthursday', 'sfriday', 'ssaturday' ];
-                this.dayNamesShort = [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ];
-                this.daysBasedOnPrefernce = [ 'ssunday', 'smonday', 'stuesday', 'swednesday', 'sthursday', 'sfriday', 'ssaturday' ];
-                var e = this.daysBasedOnPrefernce[0];
-                this.daysBasedOnPrefernce.shift ( 1 );
-                this.daysBasedOnPrefernce.push ( e );
-                var t = this.dayNamesShort[0];
-                this.dayNamesShort.shift ( 1 );
-                this.dayNamesShort.push ( t );
-                this.currDateObj = new Date;
-                this.currMonth = this.currDateObj.getMonth ();
-                this.currYear = this.currDateObj.getFullYear ();
-                this.currYear < 1e3 && ( this.currYear += 1900 );
-                this.currDate = this.currDateObj.getDate ();
-            },
-            getTitle: function (){ return this.monthName[ this.currMonth ].html + ' ' + this.currYear },
-            createCalendar: function ( e ){
-                for ( var t = document.getElementsByClassName( 'tempCalDiv' ),a = t.length,r = 0; r < a; r++ ){
-                    var n = t[ r ].style;
-                    'block' === n.display && ( n.display = 'none' );
-                }
-                this.calendarNode = e;
-                this.userPattern = this.calendarNode.placeholder;
-                var s = this.calendarNode.value, i =!1;
-                if ( s ){
-                    var l = dateFormatConvert.validate ( s, this.userPattern );
-                    l && ( this.currDate = l.getDate (), this.currMonth = l.getMonth (), this.currYear = l.getFullYear (), this.currYear < 1e3 && ( this.currYear = Number ( this.currYear ) + 1900 ));
-                } else {
-                    i =!0;
-                    formCalender.init ();
-                }
-                this.monthName || formCalender.init ();
-                this.createDatePicker ( this.currDate, this.currMonth, this.currYear, i, !1 );
-            },
-            createDatePicker: function ( e, t, a, r, n ){
-                1 === this.currMonth && ( this.currMonthEnd[1] = this.currYear % 400 == 0 || this.currYear % 4 == 0 && this.currYear % 100 != 0 ? 29: 28 );
-                var s = new Date ( a, t, 1 ), i = 6, l = this.daysBasedOnPrefernce.indexOf ( this.days[ s.getDay ()]) + 1;
-                i = 31 === this.currMonthEnd[ t ] && l >= 6 || 30 === this.currMonthEnd[ t ] && 7 === l ? 7: 28 === this.currMonthEnd[ t ] && 1 === l ? 5: 6;
-                var d = this.getTitle ( e, a, t ), o = this.dayNamesShort, h = '<div id=\'calenDiv\'><i id=\'calArrow\' style=\'display:none;\' class=\'dIB SocialArrow\'></i><div><div>';
-                h += '<div class=\'aligncenter\'><span class=\'calNav dIB vaM yearNavLft\' onclick=\'formCalender.updateDatePicker(event,undefined, -1)\'><i class=\'arrow left mRMinus2\'></i><i class=\'arrow left\'></i></span><span class=\'calNav dLft dIB vaM\' onClick=\'formCalender.updateDatePicker(event,-1)\' id=\'pm\'><i class=\'arrow left\'></i></span><span class=\'sCalMon\'>' + d + '</span><span class=\'calNav dRgt vaM\' onClick =\'formCalender.updateDatePicker(event,1)\' id=\'nm\'><i class=\'arrow right\'></i><i class=\'arrow right mLMinus2\'></i></span><span class=\'calNav dIB vaM yearNavRgt\' onclick=\'formCalender.updateDatePicker(event,undefined, 1)\'><i class=\'arrow right\'></i><i class=\'arrow right mLMinus2\'></i></span></div>';
-                h += '<table  class=\'calDay\'  id =\'weekDays\' style=\'color:#8b9ab9; font-size:8px; margin-left:0\'><tr> <th>' + o[0] + '</th> <th>' + o[1] + '</th><th>' + o[2] + '</th><th>' + o[3] + '</th> <th>' + o[4] + '</th> <th>' + o[5] + '</th> <th>' + o[6] + '</th></tr></table>';
-                h += '</div>';
-                h += '<table id=\'calHeader\' class=\'calDay\' style=\'margin-left:0; margin-top:-5px;\' width=\'100%\' cellspacing=\'0\' cellpadding=\'0\' border=\'0\' >';
-                var c = '', u = new Date, y = a || u.getFullYear (), v = e || u.getDate (), g = undefined === t ? u.getMonth (): t,
-                m = u.getMonth (), p = u.getFullYear ();
-                u.getDate ();
-                m === t && a === p && ( c = ' style=\'display:none\'' );
-                for ( var f,D,M,b = s.getDay(); 1 !== b; ) {
-                    s.setDate ( s.getDate ()-1 );
-                    b = s.getDay ();
-                }
-                for ( var x = 1; x <= i; x++ ){
-                    h += '<tr>';
-                    for ( var Y = 1; Y < 8; Y++ ){
-                        f = s.getMonth (), D = s.getFullYear (), M = s.getDate ();
-                        D + '-' + ( parseInt ( f ) + 1 ) + '-' + M;
-                        var F = 'cdate lt-gray';
-                        if ( M === v && D === y && f === g && ( F = 'cdate lt-gray' ),f === g && ( F = 'cdate' ),(r && M === v && m === g && p === y || !n && M === v && f === g && D === y ) && ( F = 'sel' ),n ){
-                            var k = dateFormatConvert.validate ( this.calendarNode.value, formCalender.userPattern );
-                            k && M === k.getDate () && f === k.getMonth () && D === k.getFullYear () && ( F = 'sel' );
-                        }
-                        h += '<td class=\'' + F + '\' onClick=\'formCalender.displaySelectedDate(\"' + M + ' ' + f + ' ' + D + '\")\'>' + M + '</td>';
-                        s.setDate ( s.getDate () + 1 );
-                    }
-                    h += '</tr>';
-                }
-                h += '</table>';
-                h += '<div>';
-                this.isHideToday || ( h += '<div id=\'calBtns\' class=\'pT15 pB15 fL\'><a' + c + ' class=\'cP fL\' href=\'javascript:;\' id=\'todayBtn\' onclick=\'formCalender.displaySelectedDate(\"today\")\'>Today</a></div>' );
-                h += '</div>';
-                h += '</div></div>';
-                var C = document.getElementById ( 'template' + this.calendarNode.getAttribute ( 'tplid' ));
-                C.innerHTML = h;
-                C.style.display = 'block';
-            },
-            displaySelectedDate: function ( e, t ){
-                if ( !t ) t = this.calendarNode;
-                if ( 'today' === e ){
-                    var a = new Date;
-                    e = a.getDate () + ' ' + a.getMonth () + ' ' + a.getFullYear ();
-                }
-                e = e.split ( ' ' );
-                var r = dateFormatConvert.convertFormat ( new Date ( e[2], e[1], e[0]), this.userPattern );
-                t.value = r;
-                t.focus ();
-                t.placeholder = this.userPattern;
-                formCalender.closeDatePicker ();
-                t.addEventListener ( 'keyup', function ( e ){
-                    formCalender.calendarNode = this;
-                    var t = this.value, a = dateFormatConvert.validate ( t, formCalender.userPattern );
-                    if ( a ){
-                        var r = {};
-                        r.date = a.getDate ();
-                        r.month = a.getMonth ();
-                        r.year = a.getFullYear ();
-                        formCalender.updateDatePicker ( e, undefined, undefined, r );
-                    }
-                });
-                t.blur ();
-            },
-            closeDatePicker: function (){
-                document.getElementById ( 'template' + this.calendarNode.getAttribute ( 'tplid' )).style.display = 'none';
-            },
-            updateDatePicker: function ( e, t, a, r ){
-                var n = document.getElementById ( 'template' + this.calendarNode.getAttribute ( 'tplid' ));
-                r && ( this.currDate = r.date, this.currMonth = r.month, this.currYear = r.year );
-                if ( t !== undefined ) {
-                    if ( 1 === t ) {
-                        if ( 11 === this.currMonth ) {
-                            this.currMonth = 0;
-                            this.currYear++;
-                        } else {
-                            this.currMonth++;
-                        }
-                    } else {
-                        if ( 0 === this.currMonth ) {
-                            this.currMonth = 11;
-                            this.currYear--;
-                        } else {
-                            this.currMonth--;
-                        }
-                    }
-                } else if ( a !== undefined ) {
-                    this.currYear = parseInt ( this.currYear ) + a;
-                }
-                this.createDatePicker ( this.currDate, this.currMonth, this.currYear, !1, !0 );
-                n.style.display = 'block';
-            },
-            stEv: function ( e ){
-                e || ( e = window.event );
-                e && ( e.cancelBubble =!0, e.stopPropagation && e.stopPropagation () );
-            }
+        h += '</tr>'
+      }
+      h += '</table>', h += '<div>', this.isHideToday || (h += '<div id=\'calBtns\' class=\'pT15 pB15 fL\'><a' + c + ' class=\'cP fL\' href=\'javascript:;\' id=\'todayBtn\' onclick=\'formCalender.displaySelectedDate(\"today\")\'>Today</a>'), h += '</div>', h += '</div>', h += '</div></div>';
+      var C = document.getElementById('template' + this.calendarNode.getAttribute('tplid'));
+      C.innerHTML = h, C.style.display = 'block'
+    },
+    displaySelectedDate: function (e, t) {
+      if (!t)
+        t = this.calendarNode;
+      if ('today' === e) {
+        var a = new Date;
+        e = a.getDate() + ' ' + a.getMonth() + ' ' + a.getFullYear()
+      }
+      e = e.split(' ');
+      var r = dateFormatConvert.convertFormat(new Date(e[2], e[1], e[0]), this.userPattern);
+      t.value = r, t.focus(), t.placeholder = this.userPattern, formCalender.closeDatePicker(), t.addEventListener('keyup', function (e) {
+        formCalender.calendarNode = this;
+        var t = this.value, a = dateFormatConvert.validate(t, formCalender.userPattern);
+        if (a) {
+          var r = {};
+          r.date = a.getDate(), r.month = a.getMonth(), r.year = a.getFullYear(), formCalender.updateDatePicker(e, void 0, void 0, r)
+        }
+      }),
+        t.blur()
+    },
+    closeDatePicker: function () {
+      document.getElementById('template' + this.calendarNode.getAttribute('tplid')).style.display = 'none'
+    },
+    updateDatePicker: function (e, t, a, r) {
+      var n = document.getElementById('template' + this.calendarNode.getAttribute('tplid'));
+      r && (this.currDate = r.date, this.currMonth = r.month, this.currYear = r.year), void 0 !== t ? 1 === t ? 11 === this.currMonth ? (this.currMonth = 0, this.currYear++) : this.currMonth++ : 0 === this.currMonth ? (this.currMonth = 11, this.currYear--) : this.currMonth-- : void 0 !== a && (this.currYear = parseInt(this.currYear) + a), this.createDatePicker(this.currDate, this.currMonth, this.currYear, !1, !0), n.style.display = 'block'
+    },
+    stEv: function (e) {
+      e || (e = window.event), e && (e.cancelBubble = !0, e.stopPropagation && e.stopPropagation())
+    }
+  };
+  window.onclick = function () {
+    for (var e = document.getElementsByClassName('tempCalDiv'), t = e.length, a = 0; a < t; a++) {
+      var r = e[a];
+      if (document.activeElement === document.querySelector('input[tplid=\'' + r.id.replace('template', '') + '\']'))
+        return;
+      var n = e[a].style;
+      'block' === n.display && (n.display = 'none')
+    }
+  };
+  var dateFormatConvert = {
+    shortMon: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], longMon: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], dayArr: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31], wod: 1, lm: 'userdate',
+    _dateObj: void 0, lLimit: 80, formats: [{
+      val: 'YYYY',
+      type: 'year',
+      regex: /\d{4}/, len: 4
+    },
+    {
+      val: 'GGGG',
+      type: 'year',
+      regex: /\d{4}/, len: 4, isWEG: !0
+    },
+    {
+      val: 'gggg',
+      type: 'year',
+      regex: /\d{4}/, len: 4, isWEG: !0
+    },
+    {
+      val: 'YY',
+      type: 'year',
+      regex: /\d{2}/, len: 2
+    },
+    {
+      val: 'GG',
+      type: 'year',
+      regex: /\d{2}/, len: 2, isWEG: !0
+    },
+    {
+      val: 'gg',
+      type: 'year',
+      regex: /\d{2}/, len: 2, isWEG: !0
+    },
+    {
+      val: 'MMMM',
+      type: 'month',
+      regex: /[A-z]{3,}/, long: !0, str: !0, array: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    },
+    {
+      val: 'MMM',
+      str: !0, type: 'month',
+      regex: /[A-z]{3,}/, array: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    },
+    {
+      val: 'Mo',
+      suff: !0, type: 'month',
+      regex: /\d{1,2}(?=st|nd|rd|th)/, max: 12
+    },
+    {
+      val: 'MM',
+      type: 'month',
+      regex: /\d{2}/, len: 2, max: 12, alt: !0
+    },
+    {
+      val: 'M',
+      type: 'month',
+      regex: /\d{1,2}/, max: 12
+    },
+    {
+      val: 'DDDD',
+      type: 'date',
+      regex: /\d{3}/, len: 3, year: !0
+    },
+    {
+      val: 'DDDo',
+      type: 'date',
+      suff: !0, regex: /\d{1,3}(?=st|nd|rd|th)/, len: 3, year: !0, ignore: /\d{3}(?=st|nd|rd|th)/
+    },
+    {
+      val: 'DDD',
+      type: 'date',
+      regex: /\d{1,3}/, year: !0, ignore: /\d{3}/
+    },
+    {
+      val: 'Do',
+      type: 'date',
+      suff: !0, regex: /\d{1,2}(?=st|nd|rd|th)/
+    },
+    {
+      val: 'DD',
+      type: 'date',
+      regex: /\d{2}/, len: 2, alt: !0
+    },
+    {
+      val: 'D',
+      type: 'date',
+      regex: /\d{1,2}/
+    },
+    {
+      val: 'dddd',
+      type: 'longdate',
+      regex: /[A-z]{3,}/, long: !0, str: !0, array: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    },
+    {
+      val: 'ddd',
+      type: 'longdate',
+      regex: /[A-z]{3}/, str: !0, array: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    },
+    {
+      val: 'dd',
+      type: 'longdate',
+      regex: /[A-z]{2}/, str: !0, array: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+    },
+    {
+      val: 'do',
+      type: 'longdate',
+      regex: /\d{1}(?=st|nd|rd|th)/, suff: !0
+    },
+    {
+      val: 'd',
+      type: 'longdate',
+      regex: /\d{1}/
+    }], parseFormat: function (e, t) {
+      for (var a, r = this.formats, n = [], s = r.length, i = 0; i < s; i++) {
+        var l = r[i];
+        if (!e.length)
+          break;
+        if (e.indexOf(l.val) > -1) {
+          if (t && l.alt) {
+            a = !0;
+            continue
+          }
+          a && (l.val = r[i - 1].val, l = r[i - 1]), a = !1, n.push({
+            format: l,
+            index: e.indexOf(l.val)
+          }),
+            e = e.replace(l.val, Math.pow(10, l.val.length - 1)), i--
+        }
+        else;
+      }
+      return n.sort(function (e, t) {
+        return e.index - t.index
+      })
+    },
+    convertFormat: function (e, t) {
+      this._dateObj = e;
+      var a = this._dateObj, r = this.parseFormat(t, !0), n = {},
+        s = {
+          date: a.getDate(), month: a.getMonth(), year: a.getFullYear(), day: a.getDay()
         };
-
-        window.onclick = function (){
-            for ( var e = document.getElementsByClassName( 'tempCalDiv' ),t = e.length,a = 0; a < t; a++ ){
-                var r = e[ a ];
-                if ( document.activeElement === document.querySelector( 'input[tplid=\'' + r.id.replace( 'template','' ) + '\']' ) ) {
-                    return;
-                }
-                var n = e[ a ].style;
-                'block' === n.display && ( n.display = 'none' );
-            }
-        };
-
-        // Date format conversion and validation functions (from original code)
-        var dateFormatConvert = {
-            shortMon: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ],
-            longMon: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ],
-            dayArr: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
-            wod: 1, lm: 'userdate',
-            _dateObj: undefined, lLimit: 80,
-            formats: [{ val: 'YYYY', type: 'year', regex: /\d{4}/, len: 4 }, { val: 'GGGG', type: 'year', regex: /\d{4}/, len: 4, isWEG: !0 }, { val: 'gggg', type: 'year', regex: /\d{4}/, len: 4, isWEG: !0 }, { val: 'YY', type: 'year', regex: /\d{2}/, len: 2 }, { val: 'GG', type: 'year', regex: /\d{2}/, len: 2, isWEG: !0 }, { val: 'gg', type: 'year', regex: /\d{2}/, len: 2, isWEG: !0 }, { val: 'MMMM', type: 'month', regex: /[A-z]{3,}/, long: !0, str: !0, array: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ] }, { val: 'MMM', str: !0, type: 'month', regex: /[A-z]{3,}/, array: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ] }, { val: 'Mo', suff: !0, type: 'month', regex: /\d{1,2}(?=st|nd|rd|th)/, max: 12 }, { val: 'MM', type: 'month', regex: /\d{2}/, len: 2, max: 12, alt: !0 }, { val: 'M', type: 'month', regex: /\d{1,2}/, max: 12 }, { val: 'DDDD', type: 'date', regex: /\d{3}/, len: 3, year: !0 }, { val: 'DDDo', type: 'date', suff: !0, regex: /\d{1,3}(?=st|nd|rd|th)/, len: 3, year: !0, ignore: /\d{3}(?=st|nd|rd|th)/ }, { val: 'DDD', type: 'date', regex: /\d{1,3}/, year: !0, ignore: /\d{3}/ }, { val: 'Do', type: 'date', suff: !0, regex: /\d{1,2}(?=st|nd|rd|th)/ }, { val: 'DD', type: 'date', regex: /\d{2}/, len: 2, alt: !0 }, { val: 'D', type: 'date', regex: /\d{1,2}/ }, { val: 'dddd', type: 'longdate', regex: /[A-z]{3,}/, long: !0, str: !0, array: [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ] }, { val: 'ddd', type: 'longdate', regex: /[A-z]{3}/, str: !0, array: [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ] }, { val: 'dd', type: 'longdate', regex: /[A-z]{2}/, str: !0, array: [ 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa' ] }, { val: 'do', type: 'longdate', regex: /\d{1}(?=st|nd|rd|th)/, suff: !0 }, { val: 'd', type: 'longdate', regex: /\d{1}/ }],
-            parseFormat: function ( e, t ){ for ( var a,r = this.formats,n = [],s = r.length,i = 0; i < s; i++ ){ var l = r[ i ]; if ( !e.length ) break; if ( e.indexOf( l.val ) > -1 ){ if ( t && l.alt ){ a =!0; continue } a && ( l.val = r[ i-1].val, l = r[ i-1]), a =!1, n.push ({ format: l, index: e.indexOf ( l.val ) }), e = e.replace ( l.val, Math.pow ( 10, l.val.length-1 )), i-- } else; } return n.sort ( function ( e, t ){ return e.index-t.index }) },
-            convertFormat: function ( e, t ){ this._dateObj = e; var a = this._dateObj, r = this.parseFormat ( t, !0 ), n = {}, s = { date: a.getDate (), month: a.getMonth (), year: a.getFullYear (), day: a.getDay () }; t = this.fmReplace ( t.replace ( /{{|}}/g, '' ), r ); for ( var i = r.length,l = 0; l < i; l++ ){ var d = r[ l ].format; switch ( d.type ){ case 'date': t = t.replace ( d.val + this.lm, this.crctLength ( d.year ? this.totdate ( s.month, this.isLeap ( s.year ), s.date ): s.date, d.len, d.suff )); break; case 'month': t = d.str ? t.replace ( d.val + this.lm, d.array[ s.month ]): t.replace ( d.val + this.lm, this.crctLength ( s.month + 1, d.len, d.suff )); break; case 'year': t = t.replace ( d.val + this.lm, 2 === d.len ? this.crctLength ( s.year % 100, 2 ): 4 === ( s.year + '' ).length ? s.year: this.crctLength ( s.year, 4 )), n.year = n.year || [], n.year.push ( d ); break; case 'day': case 'week': n.flag =!0, n[ d.type ] = n[ d.type ] || [], n[ d.type ].push ( d ); break; case 'longdate': t = d.str ? t.replace ( d.val + this.lm, d.array[ s.day ]): t.replace ( d.val + this.lm, this.crctLength ( s.day, null, d.suff )) } } return t.replace ( /{{|}}/g, '' ) },
-            fmReplace: function ( e, t ){ for ( var a = 0,r = t.length,n = 0; n < r; n++ ) e = e.slice ( 0, t[ n ].index + a ) + t[ n ].format.val + this.lm + e.slice ( t[ n ].index + a + t[ n ].format.val.length ), a += 8; return e },
-            totdate: function ( e, t, a ){ for ( var r = 0,n = 0; n < e; n++ ) r += this.dayArr[ n ], t && 1 === n && ( r += 1 ); return r + ( a || 0 ) },
-            crctLength: function ( e, t, a ){ var r = ''; if ( a && ( r = this.nthconv( e )),t ){ e = e.toString (); for ( var n = 1; n < t; n++ ) e.length <= n && ( e = '0' + e ) } return e + r },
-            nthconv: function ( e ){ if ( e > 3 && e < 21 ) return 'th'; switch ( e % 10 ){ case 1: return 'st'; case 2: return 'nd'; case 3: return 'rd'; default: return 'th' } },
-            isLeap: function ( e ){ return 2 === ( e += '' ).length && ( e = this.getCorrectYear ( parseInt ( e ))), ( e = parseInt ( e )) % 4 == 0 && e % 100 != 0 || e % 400 == 0 },
-            getCorrectYear: function ( e ){ var t = e + ''; if ( e = parseInt( e ),2 === t.length ){ var a = ( new Date ).getFullYear (), r = parseInt ( a / 100 ), n = a % 100, s = ( n-this.lLimit + 100 ) % 100; e = n > s ? e < s ? r + 1 + '' + this.crctLength ( e, 2 ): r + '' + this.crctLength ( e, 2 ): e < s ? r + '' + this.crctLength ( e, 2 ): r-1 + '' + this.crctLength ( e, 2 ) } return e },
-            valFormat: function ( e, t ){ for ( var a = {},r = new Date((new Date ).getFullYear(),0 ),n = this.parseFormat( t, !0 ),s = e,i = t = t.replace( /{{|}}/g,'' ),l = n.length,d = 0; d < l; d++ ){ var o, h = n[ d ].format; switch ( h.type ){ case 'date': case 'year': case 'week': case 'day': h.regex.test ( e ) ? ( o = 'year' === h.type ? e.match ( h.regex )[ h.match || 0]: parseInt ( e.match ( h.regex )[ h.match || 0]), a[ h.type ] = o, e = this.replaceVal ( e, h.regex, h.suff ), s = this.replaceVal ( s, h.regex, h.suff, h.val ), h.year && ( a.date = getDay ( a.date ).day )): a.year && a.week ? ( a[ h.type ] = this.wod, t = t.replace ( h.val, '' ), i = i.replace ( h.val, '' )): a[ h.type ] = 'Invalid', /date/i.test ( h.type ) && 0 === a[ h.type ] && ( a[ h.type ] = 'Invalid' ); break; case 'month': h.regex.test ( e ) ? ( o = this.getMonth ( e.match ( h.regex )[0], h.suff, h.str, h.long ), a.month = o.val, e = this.replaceVal ( e, o.mon || h.regex, h.suff ), s = this.replaceVal ( s, o.mon || h.regex, h.suff, h.val )): a.month = 'Invalid', a.month < 0 && ( a.month = 'Invalid' ); break; case 'longdate': h.regex.test ( e ) && ( o = h.str ? this.findVal ( h.array, e.match ( h.regex )[0]): parseInt ( e.match ( h.regex )[0]), a.longdate = this.isDef ( o.index ) ? o.index: o, e = this.replaceVal ( e, o.mon || o, h.suff ), s = this.replaceVal ( s, o.mon || o, h.suff, h.val )) } t = t.replace ( h.valForm || h.val, '' ) } if ( this.isDef( a.longdate ) && a.day && a.day !== a.longdate ? r.setFullYear( 'Invalid' ):this.isDef( a.year ) && r.setFullYear( this.getCorrectYear( a.year )),this.isDef( a.month ) && r.setMonth( a.month ),this.isDef( a.date ) && r.setDate( a.date <= this.dayArr[r.getMonth()] + ( 1 === r.getMonth() && this.isLeap( r.getFullYear()) ? 1:0 ) ? a.date:'Invalid' ),this._isCorrectFormat = e.length === t.length && i === s && this.validate( r )) return r },
-            validate: function ( e, t ){ var a = e.constructor; if ( a === Date ) return this._dateObj = e, 'Invalid Date' !== e.toString (); if ( a === String && t ){ var r = this.valFormat ( e, t ); return r && this._isCorrectFormat && ( this._format = t ), r } },
-            replaceVal: function ( e, t, a, r ){ return e = e.replace ( t, r || '' ), a && ( e = e.replace ( /st|nd|rd|th/, '' )), e },
-            getMonth: function ( e, t, a, r ){ var n; if ( a ){ var s = this.findVal ( r ? this.longMon: this.shortMon, e ); n = s.mon, e = s.index, ( !n || e > 11 ) && ( e = 'Invalid' ) } else ( e = parseInt ( e )-1 ) > 11 && ( e = 'Invalid' ); return { val: e, mon: n } },
-            findVal: function ( e, t ){ var a, r, n = e.length; for ( r = 0; r < n; r++ ) if ( new RegExp( e[r]).test( t )){ a = e[ r ]; break } return { mon: a, index: r } },
-            isDef: function ( e ){ return undefined !== e }
-        };
-
-        // ReCAPTCHA and form validation functions
-        function addAriaSelected6771280000000858023(event) {
-            var optionElem = event.target;
-            const previouslySelectedOption = optionElem.querySelector('option[aria-selected="true"]');
-            if (previouslySelectedOption) {
-                previouslySelectedOption.removeAttribute('aria-selected');
-            }
-            if (optionElem.options[optionElem.selectedIndex]) {
-                optionElem.options[optionElem.selectedIndex].setAttribute('aria-selected', 'true');
-            }
+      t = this.fmReplace(t.replace(/{{|}}/g, ''), r);
+      for (var i = r.length, l = 0; l < i; l++) {
+        var d = r[l].format;
+        switch (d.type) {
+          case 'date':
+            t = t.replace(d.val + this.lm, this.crctLength(d.year ? this.totdate(s.month, this.isLeap(s.year), s.date) :
+              s.date, d.len, d.suff));
+            break;
+          case 'month':
+            t = d.str ? t.replace(d.val + this.lm, d.array[s.month]) :
+              t.replace(d.val + this.lm, this.crctLength(s.month + 1, d.len, d.suff));
+            break;
+          case 'year':
+            t = t.replace(d.val + this.lm, 2 === d.len ? this.crctLength(s.year % 100, 2) :
+              4 === (s.year + '').length ? s.year :
+                this.crctLength(s.year, 4)), n.year = n.year || [], n.year.push(d);
+            break;
+          case 'day':
+          case 'week':
+            n.flag = !0, n[d.type] = n[d.type] || [], n[d.type].push(d);
+            break;
+          case 'longdate':
+            t = d.str ? t.replace(d.val + this.lm, d.array[s.day]) :
+              t.replace(d.val + this.lm, this.crctLength(s.day, null, d.suff))
         }
-
-        /* Do not remove this code. */
-        function rccallback6771280000000858023() {
-            console.log("reCAPTCHA callback invoked.");
-            var recap = document.getElementById('recap6771280000000858023');
-            if (recap) {
-                recap.setAttribute('captcha-verified', true);
-            }
-            var recapErr = document.getElementById('recapErr6771280000000858023');
-            if (recapErr && recapErr.style.visibility === 'visible') {
-                recapErr.style.visibility = 'hidden';
-            }
+      }
+      return t.replace(/{{|}}/g, '')
+    },
+    fmReplace: function (e, t) {
+      for (var a = 0, r = t.length, n = 0; n < r; n++)
+        e = e.slice(0, t[n].index + a) + t[n].format.val + this.lm + e.slice(t[n].index + a + t[n].format.val.length), a += 8;
+      return e
+    },
+    totdate: function (e, t, a) {
+      for (var r = 0, n = 0; n < e; n++)
+        r += this.dayArr[n], t && 1 === n && (r += 1);
+      return r + (a || 0)
+    },
+    crctLength: function (e, t, a) {
+      var r = '';
+      if (a && (r = this.nthconv(e)), t) {
+        e = e.toString();
+        for (var n = 1; n < t; n++)
+          e.length <= n && (e = '0' + e)
+      }
+      return e + r
+    },
+    nthconv: function (e) {
+      if (e > 3 && e < 21)
+        return 'th';
+      switch (e % 10) {
+        case 1:
+          return 'st';
+        case 2:
+          return 'nd';
+        case 3:
+          return 'rd';
+        default:
+          return 'th'
+      }
+    },
+    isLeap: function (e) {
+      return 2 === (e += '').length && (e = this.getCorrectYear(parseInt(e))), (e = parseInt(e)) % 4 == 0 && e % 100 != 0 || e % 400 == 0
+    },
+    getCorrectYear: function (e) {
+      var t = e + '';
+      if (e = parseInt(e), 2 === t.length) {
+        var a = (new Date).getFullYear(), r = parseInt(a / 100), n = a % 100, s = (n - this.lLimit + 100) % 100;
+        e = n > s ? e < s ? r + 1 + '' + this.crctLength(e, 2) : r + '' + this.crctLength(e, 2) : e < s ? r + '' + this.crctLength(e, 2) : r - 1 + '' + this.crctLength(e, 2)
+      }
+      return e
+    },
+    valFormat: function (e, t) {
+      for (var a = {}, r = new Date((new Date).getFullYear(), 0), n = this.parseFormat(t, !0), s = e, i = t = t.replace(/{{|}}/g, ''), l = n.length, d = 0; d < l; d++) {
+        var o, h = n[d].format;
+        switch (h.type) {
+          case 'date':
+          case 'year':
+          case 'week':
+          case 'day':
+            h.regex.test(e) ? (o = 'year' === h.type ? e.match(h.regex)[h.match || 0] :
+              parseInt(e.match(h.regex)[h.match || 0]), a[h.type] = o, e = this.replaceVal(e, h.regex, h.suff), s = this.replaceVal(s, h.regex, h.suff, h.val), h.year && (a.date = getDay(a.date).day)) :
+              a.year && a.week ? (a[h.type] = this.wod, t = t.replace(h.val, ''), i = i.replace(h.val, '')) :
+                a[h.type] = 'Invalid', /date/i.test(h.type) && 0 === a[h.type] && (a[h.type] = 'Invalid');
+            break;
+          case 'month':
+            h.regex.test(e) ? (o = this.getMonth(e.match(h.regex)[0], h.suff, h.str, h.long), a.month = o.val, e = this.replaceVal(e, o.mon || h.regex, h.suff), s = this.replaceVal(s, o.mon || h.regex, h.suff, h.val)) :
+              a.month = 'Invalid', a.month < 0 && (a.month = 'Invalid');
+            break;
+          case 'longdate':
+            h.regex.test(e) && (o = h.str ? this.findVal(h.array, e.match(h.regex)[0]) :
+              parseInt(e.match(h.regex)[0]), a.longdate = this.isDef(o.index) ? o.index :
+                o, e = this.replaceVal(e, o.mon || o, h.suff), s = this.replaceVal(s, o.mon || o, h.suff, h.val))
         }
-
-        function reCaptchaAlert6771280000000858023() {
-            console.log("Checking reCAPTCHA status...");
-            var recap = document.getElementById('recap6771280000000858023');
-            if (recap && recap.getAttribute('captcha-verified') === 'false') {
-                showMessage('Captcha validation failed. Please check the "I\'m not a robot" box.');
-                return false;
-            }
-            console.log("reCAPTCHA passed.");
-            return true;
+        t = t.replace(h.valForm || h.val, '')
+      }
+      if (this.isDef(a.longdate) && a.day && a.day !== a.longdate ? r.setFullYear('Invalid') : this.isDef(a.year) && r.setFullYear(this.getCorrectYear(a.year)), this.isDef(a.month) && r.setMonth(a.month), this.isDef(a.date) && r.setDate(a.date <= this.dayArr[r.getMonth()] + (1 === r.getMonth() && this.isLeap(r.getFullYear()) ? 1 : 0) ? a.date : 'Invalid'), this._isCorrectFormat = e.length === t.length && i === s && this.validate(r))
+        return r
+    },
+    validate: function (e, t) {
+      var a = e.constructor;
+      if (a === Date)
+        return this._dateObj = e, 'Invalid Date' !== e.toString();
+      if (a === String && t) {
+        var r = this.valFormat(e, t);
+        return r && this._isCorrectFormat && (this._format = t), r
+      }
+    },
+    replaceVal: function (e, t, a, r) {
+      return e = e.replace(t, r || ''), a && (e = e.replace(/st|nd|rd|th/, '')), e
+    },
+    getMonth: function (e, t, a, r) {
+      var n;
+      if (a) {
+        var s = this.findVal(r ? this.longMon : this.shortMon, e);
+        n = s.mon, e = s.index, (!n || e > 11) && (e = 'Invalid')
+      }
+      else (e = parseInt(e) - 1) > 11 && (e = 'Invalid');
+      return {
+        val: e,
+        mon: n
+      }
+    },
+    findVal: function (e, t) {
+      var a, r, n = e.length;
+      for (r = 0; r < n; r++)
+        if (new RegExp(e[r]).test(t)) {
+          a = e[r];
+          break
         }
+      return {
+        mon: a,
+        index: r
+      }
+    },
+    isDef: function (e) {
+      return void 0 !== e
+    }
+  };
+</script>
+						<style>
+							#calenDiv{
+								padding: 10px;
+								display: table;
+								width: 195px;
+								font-family: helvetica,sans-serif !important;
+							}
+							.calNav {width: 20px;
+							height: 15px;
+							display
+							:inline-block;position: relative;
+							top: 4px;
+							cursor: pointer }
+							#calenDiv .calNav {width: 15px;
+							}
+							#calenDiv .yearNavLft {right: 10px;
+							}
+							#calenDiv .yearNavRgt {left: 10px;
+							}
+							#calenDiv .dLft {right: 5px;
+							}
+							#calenDiv .dRgt {left: 5px;
+							}
+							.dLft {right
+							:10px;opacity: 0.8;
+							}
+							.dRgt {left
+							:10px;opacity: 0.8;
+							}
+							.yearNavLft {right: 15px;
+							}
+							.yearNavRgt {left
+							:15px;opacity: 0.6;
+							}
+							#calenDiv table.calDay {border-spacing: 6px;
+							margin-top: 0 }
+							#calenDiv table.calDay td{
+							padding: 3px 4px;
+							font-size: 11px }
+							#calenDiv table.calDay th {padding: 0 3px;
+							font-size: 11px;
+							padding-right: 0;
+							padding-left: 1px;
+							color:  #888;
+							width: 22px;
+							cursor: default;
+							border-radius: 3px;
+							text-align: center;
+							font-weight: normal;
+							}
+							#calenDiv #weekDays {margin-top: 10px;
+							margin-bottom: 5px;
+							border-top: 1px solid  #c0c6cc;
+							border-bottom: 1px solid  #c0c6cc;
+							border-spacing: 5px;
+							margin-left: 0;
+							color:  #8b9ab9;
+							}
+							#calenDiv .sCalMon {cursor: default;
+							display: inline-block;
+							color:  #888;
+							width: 110px;
+							font-size: 12px;
+							}
+							table.calDay td:hover {background-color: #e8e8e8;
+							}
+							table.calDay{
+							color: #222;
+							margin-left: -10px;
+							border-spacing: 12px;
+							}
+							table.calDay td, table.calDay th{
+							font-size: var(--crm-extra-medium-font-size);
+							cursor: default;
+							border-radius: 3px;
+							text-align: center;
+							padding: 3px 5px;
+							font-family: helvetica,sans-serif !important;
+							}
+							table.calDay td.sel, table.calDay td.sel:hover {color: #fff;
+							background: #b3b3b3;
+							border-radius: 3px;
+							}
+							table.calDay td.noNum, table.calDay td.lt-gray {color: #c1c1c1;
+							}
+							.aligncenter {text-align: center;
+							}
+							#calBtns a,  .lyteCalBtns .lyteCalCurrentDate a {color: var(--linkColor);
+							font-size: 14px;
+							text-decoration: none;
+							}
+							#calenDiv #calBtns{
+							width: 183px;
+							margin-left: 10px;
+							border-top: 0;
+							font-size: 11px;
+							padding: 3px 0 12px !important;
+							}
+							.arrow {border: solid  #666;
+							border-width: 0 1px 1px 0;
+							display: inline-block;
+							height: 6px;
+							width: 6px;
+							}
+							#calenDiv .right {transform: rotate(-45deg);
+							-webkit-transform: rotate(-45deg);
+							}
+							#calenDiv .left {transform: rotate(135deg);
+							-webkit-transform: rotate(135deg);
+							}
+							.mLMinus2 {margin-left: -2px;
+							}
+							.mRMinus2 {margin-right: -2px;
+							}
+							.vaM {vertical-align: middle;
+							}
+							.tempCalDiv {display: none;
+							margin: 0;
+							position: absolute;
+							z-index: 1000;
+							background-color:  #fff;
+							border: 1px solid  #c0c6cc;
+							-webkit-box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+							box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+							border-top: 0;
+							top: 20px;
+							}
+						</style>
+<script>
+    // --- Zoho CRM specific functions (keep these if they are part of your Zoho integration) ---
+    // These functions appear to be generated by Zoho's Web-to-Case form.
+    // Ensure the IDs and form names match your actual Zoho form setup.
 
-        function validateEmail6771280000000858023() {
-            console.log("Validating email...");
-            var form = document.forms['WebToCases6771280000000858023'];
-            var emailFlds = form.querySelectorAll('[ftype=email]');
-            for (var i = 0; i < emailFlds.length; i++) {
-                var emailVal = emailFlds[i].value;
-                if ((emailVal.replace(/^\s+|\s+$/g, '')).length !== 0) {
-                    var atpos = emailVal.indexOf('@');
-                    var dotpos = emailVal.lastIndexOf('.');
-                    if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= emailVal.length) {
-                        showMessage('Please enter a valid email address.');
-                        emailFlds[i].focus();
-                        return false;
-                    }
-                }
-            }
-            console.log("Email validation passed.");
-            return true;
+    function addAriaSelected6771280000000858023() {
+        var optionElem = event.target;
+        var previousSelectedOption = optionElem.querySelector('[aria-selected=true]');
+        if (previousSelectedOption) {
+            previousSelectedOption.removeAttribute('aria-selected');
         }
+        optionElem.querySelectorAll('option')[optionElem.selectedIndex].ariaSelected = 'true';
+    }
 
-        function validateDateFormat6771280000000858023() {
-            console.log("Validating date format...");
-            var form = document.forms['WebToCases6771280000000858023'];
-            var dateFlds = form.querySelectorAll('[ftype=date]');
-            for (var i = 0; i < dateFlds.length; i++) {
-                var dateFld = dateFlds[i];
-                var usrPtrn = dateFld.placeholder;
-                var dateVal = dateFld.value;
-                if (dateVal.trim() !== '') {
-                    var vald = dateFormatConvert.validate(dateVal, usrPtrn);
-                    if (!vald) {
-                        showMessage('Please enter a valid date in ' + usrPtrn + ' format.');
-                        dateFld.focus();
-                        return false;
-                    }
-                }
-            }
-            console.log("Date format validation passed.");
-            return true;
+    /* Do not remove this code. */
+    function rccallback6771280000000858023() {
+        if (document.getElementById('recap6771280000000858023') != undefined) {
+            document.getElementById('recap6771280000000858023').setAttribute('captcha-verified', true);
         }
-
-        // Signature Pad Initialization and resizing
-        var canvas = document.getElementById("signature-pad");
-        var signaturePad = null;
-
-        function resizeCanvas() {
-            if (!canvas) {
-                console.warn("Canvas element not found for signature pad.");
-                return;
-            }
-
-            var containerWidth = canvas.parentElement.offsetWidth;
-            var ratio = Math.max(window.devicePixelRatio || 1, 1);
-            canvas.width = containerWidth * ratio;
-            canvas.height = 100 * ratio; /* fixed height for signature pad */
-            canvas.getContext("2d").scale(ratio, ratio);
-
-            if (signaturePad && !signaturePad.isEmpty()) {
-                const img = new Image();
-                img.onload = function() {
-                    signaturePad.clear();
-                    signaturePad.fromDataURL(img.src);
-                };
-                img.src = signaturePad.toDataURL();
-            }
-            console.log("Signature canvas resized.");
+        if (document.getElementById('recapErr6771280000000858023') != undefined && document.getElementById('recapErr6771280000000858023').style.visibility == 'visible') {
+            document.getElementById('recapErr6771280000000858023').style.visibility = 'hidden';
         }
+    }
 
-        // Main form submission logic
-        async function checkMandatory6771280000000858023(event) {
-            console.log("checkMandatory function invoked.");
-            event.preventDefault(); // Prevent default browser submission immediately
+    function reCaptchaAlert6771280000000858023() {
+        var recap = document.getElementById('recap6771280000000858023');
+        if (recap != undefined && recap.getAttribute('captcha-verified') == 'false') {
+            document.getElementById('recapErr6771280000000858023').style.visibility = 'visible';
+            return false;
+        }
+        return true;
+    }
 
-            const form = document.forms['WebToCases6771280000000858023'];
-            const submitButton = document.getElementById('formsubmit');
-
-            // Disable button and show loading overlay early
-            submitButton.setAttribute('disabled', 'true');
-            document.getElementById('loadingOverlay').style.display = 'flex';
-
-            // --- Client-side validation ---
-            const mndFileds = [
-                'CASECF5', 'Priority', 'CASECF12', 'Phone', 'Case Reason', 'Reported_By',
-                'Email', 'Description', 'CASECF11', 'CASECF116', '00NUm000009SCKP'
-            ];
-
-            const fldLangVal = [
-                'Category', 'Urgency', 'Property Reporting Issue', 'Contact Phone', 'New/Recurring status',
-                'Requested By', 'Email', 'Description', 'Authorized by', 'Date', 'Agreement checkbox'
-            ];
-
-            for (let i = 0; i < mndFileds.length; i++) {
-                const fieldName = mndFileds[i];
-                let fieldObj = form.elements[fieldName];
-
-                if (!fieldObj) {
-                    console.error(`ERROR: Mandatory field '${fieldName}' (labeled as '${fldLangVal[i]}') not found in form.`);
-                    showMessage(`A required field (${fldLangVal[i]}) is missing or improperly configured. Please check the console for details.`);
-                    submitButton.removeAttribute('disabled');
-                    document.getElementById('loadingOverlay').style.display = 'none';
+    function validateEmail6771280000000858023() {
+        var form = document.forms['WebToCases6771280000000858023'];
+        var emailFld = form.querySelectorAll('[ftype=email]');
+        var i;
+        for (i = 0; i < emailFld.length; i++) {
+            var emailVal = emailFld[i].value;
+            if ((emailVal.replace(/^\s+|\s+$/g, '')).length != 0) {
+                var atpos = emailVal.indexOf('@');
+                var dotpos = emailVal.lastIndexOf('.');
+                if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= emailVal.length) {
+                    alert('Please enter a valid email address. ');
+                    emailFld[i].focus();
                     return false;
                 }
+            }
+        }
+        return true;
+    }
 
-                console.log(`Validating field: ${fieldName} (${fldLangVal[i]}) - Current value: "${fieldObj.value}"`);
+    function validateDateFormat6771280000000858023() {
+        var form = document.forms['WebToCases6771280000000858023'];
+        var dateFlds = form.querySelectorAll('[ftype=date]');
+        var i;
+        for (i = 0; i < dateFlds.length; i++) {
+            var dateFld = dateFlds[i];
+            var usrPtrn = dateFld.placeholder;
+            var dateVal = dateFld.value;
+            if (dateVal.trim() != '') {
+                // Ensure dateFormatConvert is defined if you use this
+                // if (typeof dateFormatConvert !== 'undefined' && !dateFormatConvert.validate(dateVal, usrPtrn)) {
+                //     alert('Please enter a valid date ');
+                //     dateFld.focus();
+                //     return false;
+                // }
+                 // If dateFormatConvert is not defined, you'll need to handle date validation differently
+            }
+        }
+        return true;
+    }
 
-                if (fieldObj.type === 'checkbox') {
-                    if (!fieldObj.checked) {
-                        showMessage('Please accept the "' + fldLangVal[i] + '" to proceed.');
+    function checkMandatory6771280000000858023() {
+        var mndFileds = new Array('Subject');
+        var fldLangVal = new Array('Subject');
+        for (i = 0; i < mndFileds.length; i++) {
+            var fieldObj = document.forms['WebToCases6771280000000858023'][mndFileds[i]];
+            if (fieldObj) {
+                if (((fieldObj.value).replace(/^\s+|\s+$/g, '')).length == 0) {
+                    if (fieldObj.type == 'file') {
+                        alert('Please select a file to upload.');
                         fieldObj.focus();
-                        submitButton.removeAttribute('disabled');
-                        document.getElementById('loadingOverlay').style.display = 'none';
                         return false;
                     }
-                } else if (fieldObj.nodeName === 'SELECT') {
-                    if (!fieldObj.value || fieldObj.value === '-None-') {
-                        showMessage(fldLangVal[i] + ' cannot be empty or "-None-".');
-                        fieldObj.focus();
-                        submitButton.removeAttribute('disabled');
-                        document.getElementById('loadingOverlay').style.display = 'none';
-                        return false;
-                    }
-                } else if (fieldObj.value.trim().length === 0) {
-                    showMessage(fldLangVal[i] + ' cannot be empty.');
+                    alert(fldLangVal[i] + ' cannot be empty.');
                     fieldObj.focus();
-                    submitButton.removeAttribute('disabled');
-                    document.getElementById('loadingOverlay').style.display = 'none';
                     return false;
+                } else if (fieldObj.nodeName == 'SELECT') {
+                    if (fieldObj.options[fieldObj.selectedIndex].value == '-None-') {
+                        alert(fldLangVal[i] + ' cannot be none.');
+                        fieldObj.focus();
+                        return false;
+                    }
+                } else if (fieldObj.type == 'checkbox') {
+                    if (fieldObj.checked == false) {
+                        alert('Please accept  ' + fldLangVal[i]);
+                        fieldObj.focus();
+                        return false;
+                    }
                 }
+                try {
+                    if (fieldObj.name == 'Last Name') {
+                        name = fieldObj.value;
+                    }
+                } catch (e) {}
+            }
+        }
+        if (!validateEmail6771280000000858023()) {
+            return false;
+        }
+        if (!reCaptchaAlert6771280000000858023()) {
+            return false;
+        }
+        if (!validateDateFormat6771280000000858023()) {
+            return false;
+        }
+        var urlparams = new URLSearchParams(window.location.search);
+        if (urlparams.has('service') && (urlparams.get('service') === 'smarturl')) {
+            var webform = document.getElementById('webform6771280000000858023');
+            var service = urlparams.get('service');
+            var smarturlfield = document.createElement('input');
+            smarturlfield.setAttribute('type', 'hidden');
+            smarturlfield.setAttribute('value', service);
+            smarturlfield.setAttribute('name', 'service');
+            webform.appendChild(smarturlfield);
+        }
+        // This line caused the error in previous interaction if .crmWebToEntityForm .formsubmit wasn't found
+        // document.querySelector('.crmWebToEntityForm .formsubmit').setAttribute('disabled', true);
+        // It's commented out here because the form will be submitted by our main handler.
+        return true; // Return true if Zoho's checks pass
+    }
+
+    function tooltipShow6771280000000858023(el) {
+        var tooltip = el.nextElementSibling;
+        var tooltipDisplay = tooltip.style.display;
+        if (tooltipDisplay == 'none') {
+            var allTooltip = document.getElementsByClassName('zcwf_tooltip_over');
+            for (i = 0; i < allTooltip.length; i++) {
+                allTooltip[i].style.display = 'none';
+            }
+            tooltip.style.display = 'block';
+        } else {
+            tooltip.style.display = 'none';
+        }
+    }
+
+    /* ===== Digital Signature & PDF Generation (Integrated) ===== */
+    // This script combines the signature pad functionality and PDF generation
+    // with the form submission.
+    if (window.location.pathname === "/change-order.html") {
+        var canvas;
+        var signaturePad;
+
+        $(document).ready(function() {
+            canvas = document.getElementById("signature-pad");
+
+            function resizeCanvas() {
+                var ratio = Math.max(window.devicePixelRatio || 1, 1);
+                canvas.width = canvas.offsetWidth * ratio;
+                canvas.height = canvas.offsetHeight * ratio;
+                canvas.getContext("2d").scale(ratio, ratio);
             }
 
-            if (!validateEmail6771280000000858023()) {
-                submitButton.removeAttribute('disabled');
-                document.getElementById('loadingOverlay').style.display = 'none';
-                return false;
-            }
-            if (!reCaptchaAlert6771280000000858023()) {
-                submitButton.removeAttribute('disabled');
-                document.getElementById('loadingOverlay').style.display = 'none';
-                return false;
-            }
-            if (!validateDateFormat6771280000000858023()) {
-                submitButton.removeAttribute('disabled');
-                document.getElementById('loadingOverlay').style.display = 'none';
-                return false;
-            }
+            window.onresize = resizeCanvas;
+            resizeCanvas();
 
-            if (!signaturePad || signaturePad.isEmpty()) {
-                showMessage('Please provide an E-Signature in the signature pad.');
-                submitButton.removeAttribute('disabled');
-                document.getElementById('loadingOverlay').style.display = 'none';
-                return false;
-            }
-            console.log("All client-side validations passed successfully.");
+            signaturePad = new SignaturePad(canvas, {
+                backgroundColor: 'rgb(250,250,250)'
+            });
 
-            // --- PDF generation and then form submission ---
-            try {
-                console.log("Initiating PDF generation process...");
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF();
-                const pageHeight = doc.internal.pageSize.height || 297;
-                const pageWidth = doc.internal.pageSize.width || 210;
-                const headerHeight = 40;
-                const footerHeight = 30;
+            document.getElementById("clear").addEventListener('click', function() {
+                signaturePad.clear();
+            });
 
-                async function addHeader(pdfDoc) {
-                    console.log("Adding PDF header...");
-                    return new Promise((resolve) => {
-                        const imgUrl = 'https://www.techunifi.com/assets/img/hero-img.png';
-                        const img = new Image();
-                        img.src = imgUrl;
-                        img.onload = function() {
-                            pdfDoc.addImage(img, 'PNG', 60, 10, 90, 30);
-                            resolve();
-                        };
-                        img.onerror = function() {
-                            console.warn('Failed to load header image. Using text fallback.');
-                            pdfDoc.setFontSize(20);
-                            pdfDoc.setTextColor(0, 0, 0);
-                            pdfDoc.text('Techunifi LLC', pageWidth / 2, 25, null, null, 'center');
-                            resolve();
-                        };
-                    });
-                }
+            // --- Form Validation and PDF Generation on Submit ---
+            $('#submitTicketForm').on('submit', async function(event) {
+                // event.preventDefault();
 
-                function addFooter(pdfDoc) {
-                    console.log("Adding PDF footer...");
-                    pdfDoc.setFontSize(10);
-                    pdfDoc.setTextColor(0, 0, 0);
-                    pdfDoc.text('2638 Willard Dairy Road, Suite 112 High Point, NC 27265', pageWidth / 2, pageHeight - footerHeight + 10, null, null, 'center');
-                    pdfDoc.text('+1 (336) 860-6061 | techunifi.com | Info@techunifi.com', pageWidth / 2, pageHeight - footerHeight + 20, null, null, 'center');
-                    pdfDoc.setLineWidth(0.5);
-                    pdfDoc.line(10, pageHeight - footerHeight, pageWidth - 10, pageHeight - footerHeight);
-                }
+                // --- Combined Form Validation ---
+                function validateAndPrepareForm() {
+                    var formValid = true;
 
-                async function addContent(pdfDoc, currentY) {
-                    console.log("Adding form content to PDF...");
-                    const formData = $('#submitTicketForm').serializeArray(); // Using jQuery
-                    const excludedFields = [
-                        'xnQsjsdp', 'zc_gad', 'xmIwtLD', 'actionType', 'a-unqbdv4fyn0k', 'returnURL', 'Subject',
-                        '00NUm000009SCKP', 'g-recaptcha-response', // Exclude reCAPTCHA client-side token
-                    ];
+                    // 1. Validate all inputs (jQuery-based)
+                    $('#submitTicketForm input, #submitTicketForm checkbox, #submitTicketForm select, #submitTicketForm textarea').each(function() {
+                        if ($(this).hasClass('not-required')) return true;
 
-                    const fieldsToDisplay = [
-                        { name: 'CASECF5', label: 'Category' },
-                        { name: 'Priority', label: 'Urgency' },
-                        { name: 'CASECF12', label: 'Property Reporting Issue' },
-                        { name: 'Phone', label: 'Contact Phone' },
-                        { name: 'Case Reason', label: 'New/Recurring' },
-                        { name: 'Reported_By', label: 'Requested By' },
-                        { name: 'Email', label: 'Email' },
-                        { name: 'Description', label: 'Description' },
-                        { name: 'CASECF4', label: 'Ship to (If different)' },
-                        { name: 'CASECF11', label: 'Authorized by' },
-                        { name: 'CASECF116', label: 'Date' },
-                        { name: 'CASECF9', label: 'Service and Labor' },
-                        { name: 'CASECF7', label: 'Hours' },
-                        { name: 'CASECF10', label: 'Parts and Materials' },
-                        { name: 'CASECF8', label: 'QTY' }
-                    ];
-
-                    const lineHeight = 7;
-                    const valueIndent = 70;
-                    const maxWidth = pageWidth - valueIndent - 10;
-
-                    for (const fieldConfig of fieldsToDisplay) {
-                        const field = formData.find(f => f.name === fieldConfig.name);
-                        if (!field || excludedFields.includes(field.name)) continue;
-
-                        let label = fieldConfig.label;
-                        let value = field.value || 'N/A';
-
-                        if (['CASECF9', 'CASECF7', 'CASECF10', 'CASECF8'].includes(field.name)) {
-                            value = value.split('\n').map(line => line.trim()).filter(line => line !== '');
-                            if (value.length === 0) value = ['N/A'];
+                        if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
+                            formValid = false;
+                            $(this).css('border-color', 'red');
+                            $('html, body').animate({
+                                scrollTop: $(this).offset().top - 200
+                            }, 500);
+                            return false; // Stop validation loop
                         } else {
-                            value = [value];
+                            $(this).css('border-color', 'green');
                         }
+                    });
 
-                        if (currentY + lineHeight > pageHeight - footerHeight - 10) {
-                            pdfDoc.addPage();
-                            currentY = headerHeight;
-                            await addHeader(pdfDoc);
+                    // 2. Validate Signature
+                    if (signaturePad.isEmpty()) {
+                        formValid = false;
+                        alert('Please provide your signature.');
+                        $('html, body').animate({
+                            scrollTop: $('#signature-pad').offset().top - 200
+                        }, 500);
+                    }
+
+                    // 3. Validate reCAPTCHA (if using the Zoho specific reCAPTCHA function)
+                    // Ensure the reCAPTCHA HTML element has the ID 'recap6771280000000858023'
+                    // and your sitekey is correctly loaded.
+                    if (typeof grecaptcha !== 'undefined' && grecaptcha.getResponse) { // Check if grecaptcha is loaded
+                         var captchaResponse = grecaptcha.getResponse();
+                         if (!captchaResponse) {
+                             formValid = false;
+                             $('.g-recaptcha').css('border-color', 'red');
+                             alert('Please complete the CAPTCHA');
+                         } else {
+                             $('.g-recaptcha').css('border-color', 'green');
+                         }
+                    } else if (typeof reCaptchaAlert6771280000000858023 === 'function') { // Fallback to Zoho's check
+                         if (!reCaptchaAlert6771280000000858023()) {
+                             formValid = false;
+                         }
+                    } else {
+                        console.warn("reCAPTCHA validation skipped: grecaptcha or Zoho's reCaptchaAlert function not found.");
+                    }
+
+
+                    // 4. Run Zoho's specific validations if available
+                    // Ensure your form name is 'WebToCases6771280000000858023' for these to work.
+                    if (typeof checkMandatory6771280000000858023 === 'function') {
+                        if (!checkMandatory6771280000000858023()) {
+                            formValid = false;
                         }
+                    }
 
-                        pdfDoc.setFont('helvetica', 'bold');
-                        pdfDoc.text(`${label}:`, 10, currentY);
+                    return formValid;
+                }
 
-                        pdfDoc.setFont('helvetica', 'normal');
-                        for (const line of value) {
-                            const splitLines = pdfDoc.splitTextToSize(line, maxWidth);
-                            for (const splitLine of splitLines) {
+
+                if (!validateAndPrepareForm()) {
+                    console.log('Form validation failed. PDF not generated and form not submitted.');
+                    return; // Stop if validation fails
+                }
+
+                // --- PDF Generation Logic ---
+                try {
+                    const {
+                        jsPDF
+                    } = window.jspdf;
+                    const doc = new jsPDF();
+                    const pageHeight = doc.internal.pageSize.height || 297;
+                    const pageWidth = doc.internal.pageSize.width || 210;
+                    const headerHeight = 40;
+                    const footerHeight = 30;
+
+                    async function addHeader(pdfDoc) {
+                        return new Promise((resolve, reject) => {
+                            const imgUrl = 'https://www.techunifi.com/assets/img/hero-img.png';
+                            const img = new Image();
+                            img.src = imgUrl;
+                            img.onload = function() {
+                                pdfDoc.addImage(img, 'PNG', 60, 10, 90, 30);
+                                resolve();
+                            };
+                            img.onerror = function() {
+                                console.error('Failed to load header image:', imgUrl);
+                                reject('Image failed to load');
+                            };
+                        });
+                    }
+
+                    function addFooter(pdfDoc) {
+                        pdfDoc.setFontSize(12);
+                        pdfDoc.setTextColor(0, 0, 0);
+                        pdfDoc.text('2638 Willard Dairy Road, Suite 112 High Point, NC 27265', pageWidth / 2, pageHeight - footerHeight + 10, null, null, 'center');
+                        pdfDoc.text('+1 (336) 860-6061 | techunifi.com | Info@techunifi.com', pageWidth / 2, pageHeight - footerHeight + 20, null, null, 'center');
+                        pdfDoc.setLineWidth(0.5);
+                        pdfDoc.line(10, pageHeight - footerHeight, pageWidth - 10, pageHeight - footerHeight);
+                    }
+
+                    function addContent(pdfDoc, currentY) {
+                        const formData = $('#submitTicketForm').serializeArray();
+                        const filteredFormData = formData.filter(field =>
+                            field.name !== 'orgId' &&
+                            field.name !== 'retURL' &&
+                            field.name !== 'mathSum' &&
+                            field.name !== '00NUm000009SCKP' &&
+                            field.name !== 'g-recaptcha-response' &&
+                            !field.name.startsWith('xmField') &&
+                            !field.name.startsWith('zc_') &&
+                            !field.name.includes('csrf') &&
+                            field.name !== 'name' &&
+                            field.name !== 'redirectURL' &&
+                            field.name !== 'externalCreatedTime' &&
+                            field.name !== 'actid' &&
+                            field.name !== 'captchaVerified'
+                        );
+
+                        const lineHeight = 10;
+                        const valueIndent = 90;
+                        const maxWidth = pageWidth - valueIndent - 10;
+
+                        filteredFormData.forEach(field => {
+                            let label = $(`label[for='${field.name}']`).text();
+                            if (!label && field.name) {
+                                label = field.name.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+                            }
+                            const value = field.value || 'N/A';
+
+                            if (currentY + lineHeight > pageHeight - footerHeight - 10) {
+                                pdfDoc.addPage();
+                                currentY = headerHeight;
+                                addHeader(pdfDoc);
+                            }
+
+                            pdfDoc.setFont('helvetica', 'bold');
+                            pdfDoc.text(`${label}:`, 10, currentY);
+
+                            pdfDoc.setFont('helvetica', 'normal');
+                            const valueLines = pdfDoc.splitTextToSize(value, maxWidth);
+
+                            valueLines.forEach(line => {
                                 if (currentY + lineHeight > pageHeight - footerHeight - 10) {
                                     pdfDoc.addPage();
                                     currentY = headerHeight;
-                                    await addHeader(pdfDoc);
+                                    addHeader(pdfDoc);
                                 }
-                                pdfDoc.text(splitLine, valueIndent, currentY);
+                                pdfDoc.text(line, valueIndent, currentY);
                                 currentY += lineHeight;
-                            }
-                        }
-                        currentY += lineHeight / 2; // Small gap between fields
-                    }
-                    return currentY;
-                }
-
-                function addTermsAndConditions(pdfDoc, currentY) {
-                    console.log("Adding terms and conditions to PDF...");
-                    const termsModalContent = document.querySelector('.modal-body ol');
-                    const preamble = document.querySelector('.modal-body .change-terms-para');
-
-                    let termsContent = termsModalContent ? termsModalContent.innerText : '';
-                    let preambleText = preamble ? preamble.innerText : '';
-
-                    const lineHeight = 6;
-                    const maxWidth = pageWidth - 20;
-
-                    // Ensure enough space for the title and preamble before adding a new page
-                    if (currentY + 20 > pageHeight - footerHeight) {
-                        pdfDoc.addPage();
-                        currentY = headerHeight;
-                        addHeader(pdfDoc);
+                            });
+                        });
+                        return currentY;
                     }
 
-                    pdfDoc.setFontSize(12);
-                    pdfDoc.setFont('helvetica', 'bold');
-                    pdfDoc.text('Terms and Conditions', 10, currentY);
-                    currentY += 10;
-
-                    pdfDoc.setFontSize(9);
-                    pdfDoc.setFont('helvetica', 'normal');
-
-                    const preambleLines = doc.splitTextToSize(preambleText, maxWidth);
-                    preambleLines.forEach(line => {
-                        if (currentY + lineHeight > pageHeight - footerHeight) {
+                    function addTermsAndConditions(pdfDoc, currentY) {
+                        if (currentY + 60 > pageHeight - footerHeight - 10) {
                             pdfDoc.addPage();
                             currentY = headerHeight;
                             addHeader(pdfDoc);
                         }
-                        pdfDoc.text(line, 10, currentY);
-                        currentY += lineHeight;
-                    });
-                    currentY += 5;
 
-                    const termsLines = doc.splitTextToSize(termsContent, maxWidth);
-                    termsLines.forEach(line => {
-                        if (currentY + lineHeight > pageHeight - footerHeight) {
-                            pdfDoc.addPage();
-                            currentY = headerHeight;
-                            addHeader(pdfDoc);
-                        }
-                        pdfDoc.text(line, 10, currentY);
-                        currentY += lineHeight;
-                    });
-                    currentY += 5;
-
-                    const agreeCheckbox = document.getElementById('00NUm000009SCKP');
-                    if (agreeCheckbox && agreeCheckbox.checked) {
-                        const agreementTextLabel = document.querySelector('label[for="00NUm000009SCKP"]');
-                        const agreementText = agreementTextLabel ? agreementTextLabel.innerText : 'I agree that all the work has been performed to my satisfaction';
-                        if (currentY + lineHeight > pageHeight - footerHeight) {
-                            pdfDoc.addPage();
-                            currentY = headerHeight;
-                            addHeader(pdfDoc);
-                        }
+                        pdfDoc.setFontSize(14);
                         pdfDoc.setFont('helvetica', 'bold');
-                        pdfDoc.text(`Agreement: ${agreementText}`, 10, currentY);
-                        currentY += lineHeight;
+                        pdfDoc.text('Terms and Conditions', 10, currentY);
+                        currentY += 10;
+                        pdfDoc.setFont('helvetica', 'normal');
+                        pdfDoc.text('1. Total payment due 30 days after completion of work.', 10, currentY);
+                        currentY += 10;
+                        pdfDoc.text('2. Refer to the W.O. # in all correspondence and in your payment.', 10, currentY);
+                        currentY += 10;
+                        pdfDoc.text('3. Please send correspondence regarding this work order to:', 10, currentY);
+                        currentY += 10;
+                        pdfDoc.text('   Suzanne Blair - suzanne.blair@techunifi.com.', 10, currentY);
+                        currentY += 10;
+
+                        pdfDoc.setTextColor(6, 98, 187);
+                        pdfDoc.textWithLink('View full terms and conditions', 10, currentY, {
+                            url: 'https://www.techunifi.com/terms-conditions.html'
+                        });
+                        pdfDoc.setTextColor(0, 0, 0);
+                        currentY += 20;
+
+                        return currentY;
                     }
 
-                    pdfDoc.setTextColor(6, 98, 187);
-                    if (currentY + 10 > pageHeight - footerHeight) {
-                        pdfDoc.addPage();
-                        currentY = headerHeight;
-                        addHeader(pdfDoc);
-                    }
-                    pdfDoc.textWithLink('View full terms and conditions online', 10, currentY, { url: 'https://www.techunifi.com/terms-conditions.html' });
-                    pdfDoc.setTextColor(0, 0, 0);
-                    currentY += 15;
+                    async function generatePDF() {
+                        let currentY = headerHeight;
+                        await addHeader(doc);
+                        currentY += 25;
+                        currentY = addContent(doc, currentY);
+                        currentY += 10;
+                        currentY = addTermsAndConditions(doc, currentY);
 
-                    return currentY;
-                }
-
-                // Main function to generate and download the PDF
-                async function generatePDF() {
-                    console.log("Starting generatePDF function...");
-                    let currentY = headerHeight;
-                    await addHeader(doc);
-                    currentY += 10;
-
-                    currentY = await addContent(doc, currentY);
-                    currentY += 10;
-
-                    currentY = addTermsAndConditions(doc, currentY);
-
-                    if (!signaturePad.isEmpty()) {
-                        console.log("Adding signature to PDF...");
-                        const signatureImage = signaturePad.toDataURL();
-                        if (currentY + 40 > pageHeight - footerHeight - 10) {
-                            doc.addPage();
-                            currentY = headerHeight;
-                            await addHeader(doc);
+                        if (!signaturePad.isEmpty()) {
+                            const signatureImage = signaturePad.toDataURL();
+                            if (currentY + 40 > pageHeight - footerHeight - 10) {
+                                doc.addPage();
+                                currentY = headerHeight;
+                                await addHeader(doc);
+                            }
+                            doc.addImage(signatureImage, 'PNG', 10, currentY, 190, 30);
+                            currentY += 40;
                         }
-                        doc.setFont('helvetica', 'bold');
-                        doc.text('E-Signature:', 10, currentY);
-                        doc.setFont('helvetica', 'normal');
-                        doc.addImage(signatureImage, 'PNG', 10, currentY + 5, 100, 30);
-                        currentY += 40;
-                    } else {
-                        console.log("Signature pad is empty, skipping signature in PDF.");
+
+                        addFooter(doc);
+                        doc.save('techunifi-changeOrder-data.pdf');
+                        console.log('PDF downloaded successfully.');
                     }
 
-                    addFooter(doc);
-                    doc.save('techunifi-changeOrder-data.pdf');
-                    console.log('PDF downloaded successfully.');
+                    await generatePDF();
+
+                } catch (error) {
+                    console.error('Error generating PDF:', error);
+                    alert('An error occurred while generating the PDF. Please try again.');
                 }
 
-                await generatePDF(); // Execute PDF generation
+                // --- Re-submit the form after PDF generation (or failure) ---
+                // Add a small delay to allow the PDF download prompt to appear first.
+                setTimeout(() => {
+                    const form = document.getElementById('submitTicketForm');
+                    if (form && form.tagName === 'FORM') {
+                        // Use native form submission.
+                        // Ensure your Zoho form's 'name' attribute is also correct (e.g., name="WebToCases6771280000000858023")
+                        form.submit();
+                        // For Zoho, you might also need to ensure the action attribute of the form is set
+                        // to the correct Zoho Web-to-Case URL.
+                    } else {
+                        console.error('Form not found or not a valid form element for submission.');
+                    }
+                }, 1000); // 1-second delay
+            });
 
-                // Programmatically submit the form to Zoho CRM after PDF download
-                console.log("PDF generated. Proceeding to submit form to Zoho CRM...");
-                form.submit(); // This will trigger the form's action
-
-            } catch (error) {
-                console.error('CRITICAL ERROR during PDF generation or form submission:', error);
-                showMessage('An error occurred during form processing. Please try again. If the issue persists, contact support. Details: ' + error.message);
-                // Re-enable button and hide loading on error
-                submitButton.removeAttribute('disabled');
-            } finally {
-                document.getElementById('loadingOverlay').style.display = 'none'; // Always hide loading overlay
-            }
-
-            return false; // Crucial: Prevent default browser submission if all logic runs.
-        }
-
-        // Initialize SignaturePad after DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log("DOMContentLoaded: Initializing SignaturePad and setting up resize listener.");
-            // Ensure canvas is found
-            canvas = document.getElementById("signature-pad");
-            if (canvas) {
-                signaturePad = new SignaturePad(canvas, {
-                    backgroundColor: 'rgb(250,250,250)'
-                });
-                resizeCanvas(); // Initial resize
-                document.getElementById("clear").addEventListener('click', function() {
-                    signaturePad.clear();
-                    console.log("Signature pad cleared.");
-                });
-            } else {
-                console.error("ERROR: Canvas element with ID 'signature-pad' not found on DOMContentLoaded.");
-            }
+            // --- Live Input Validation Styling ---
+            $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').on('input change blur', function() {
+                if (!$(this).hasClass('not-required')) {
+                    if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
+                        $(this).css('border-color', 'green');
+                    } else {
+                        $(this).css('border-color', 'red');
+                    }
+                }
+            });
         });
+    }
+</script>
 
-        window.addEventListener('resize', resizeCanvas); // Attach resize listener
-
-        // Tooltip function (from original code, not directly used in this improved form)
-        function tooltipShow6771280000000858023(el) {
-            var tooltip = el.nextElementSibling;
-            var tooltipDisplay = tooltip.style.display;
-            if (tooltipDisplay === 'none') {
-                var allTooltip = document.getElementsByClassName('zcwf_tooltip_over');
-                for (var i = 0; i < allTooltip.length; i++) {
-                    allTooltip[i].style.display = 'none';
-                }
-                tooltip.style.display = 'block';
-            } else {
-                tooltip.style.display = 'none';
-            }
-        }
-    </script>
 	
 						<!-- Do not remove this --- Analytics Tracking code starts -->
 						<script id='wf_anal' src='https://crm.zohopublic.com/crm/WebFormAnalyticsServeServlet?rid=1c9a11584b5ce55dbeac6200d692f925ceb6a60076fceccb47738398653c0479eeadaee6ed5ece32ee3f2f6a0ea8bd07gided4413ae4b6b34e234b316be3f8a92f63a0e4bbaadfd3224fbe44c87352cb412gid4943cf7df9905d5b096529519ce80ed25060571dc0df73e2441eb824d267b573gid2b748179890689ce6610c7079b8b54e3407550d5b0db2c34b518a692ba139b2b&tw=7f84a6c803e9ff9e9a4555ec0f74a72d5020bdbac2e9192b2c294d1645135cc1'></script>
