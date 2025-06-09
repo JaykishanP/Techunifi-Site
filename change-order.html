@@ -1293,6 +1293,7 @@ function gtag(){dataLayer.push(arguments);}
 							}
 						</style>
 
+
             <script>
 
               function addAriaSelected6771280000000858023 (){
@@ -1415,30 +1416,31 @@ function gtag(){dataLayer.push(arguments);}
 
               }
 
-              // Initialize signature pad
-              var canvas = document.getElementById('signature-pad');
-              var signaturePad = new SignaturePad(canvas);
-              document.getElementById('clear').addEventListener('click', function () {
-                signaturePad.clear();
+              // Initialize signature pad after DOM is loaded
+              let signaturePad; // Declare signaturePad outside to be accessible
+              document.addEventListener('DOMContentLoaded', function() {
+                var canvas = document.getElementById('signature-pad');
+                if (canvas) {
+                    signaturePad = new SignaturePad(canvas);
+                    document.getElementById('clear').addEventListener('click', function () {
+                        signaturePad.clear();
+                    });
+                } else {
+                    console.error('Signature pad canvas not found.');
+                }
               });
-
+              
               // PDF generation functions (from your provided code)
-              const { jsPDF } = window.jspdf;
-              const doc = new jsPDF();
-              const pageHeight = doc.internal.pageSize.height || 297; // A4 page height (in mm)
-              const pageWidth = doc.internal.pageSize.width || 210; // A4 page width (in mm)
-              const headerHeight = 40;
-              const footerHeight = 30;
-            
-              // Function to add the header with logo
-              function addHeader(doc) {
+              // These functions now accept `doc`, `pageHeight`, `pageWidth`, `headerHeight`, `footerHeight` as arguments
+              // to ensure they use the local scope variables from generatePDFAndSubmitForm.
+              function addHeader(doc, headerHeight) {
                 return new Promise((resolve, reject) => {
-                  const imgUrl = 'https://www.techunifi.com/assets/img/hero-img.svg'; // Changed to .svg as it's in assets folder
+                  const imgUrl = 'https://www.techunifi.com/assets/img/hero-img.svg'; 
                   const img = new Image();
                   img.src = imgUrl;
             
                   img.onload = function () {
-                    doc.addImage(img, 'PNG', 60, 10, 90, 30); // Adjust x, y, width, height as necessary
+                    doc.addImage(img, 'PNG', 60, 10, 90, 30); 
                     resolve();
                   };
             
@@ -1448,18 +1450,16 @@ function gtag(){dataLayer.push(arguments);}
                 });
               }
             
-              // Function to add the footer with contact details
-              function addFooter(doc) {
+              function addFooter(doc, pageHeight, footerHeight, pageWidth) {
                 doc.setFontSize(12);
                 doc.setTextColor(0, 0, 0);
                 doc.text('2638 Willard Dairy Road, Suite 112 High Point, NC 27265', pageWidth / 2, pageHeight - footerHeight + 10, null, null, 'center');
                 doc.text('+1 (336) 860-6061 | techunifi.com | Info@techunifi.com', pageWidth / 2, pageHeight - footerHeight + 20, null, null, 'center');
                 doc.setLineWidth(0.5);
-                doc.line(10, pageHeight - footerHeight, pageWidth - 10, pageHeight - footerHeight); // x1, y1, x2, y2
+                doc.line(10, pageHeight - footerHeight, pageWidth - 10, pageHeight - footerHeight); 
               }
             
-              // Function to add form data content
-              function addContent(doc, y) {
+              function addContent(doc, y, pageHeight, footerHeight, pageWidth, headerHeight) {
                 const formData = $('#submitTicketForm').serializeArray();
                 const filteredFormData = formData.filter(field =>
                   field.name !== 'orgId' &&
@@ -1467,69 +1467,60 @@ function gtag(){dataLayer.push(arguments);}
                   field.name !== 'mathSum' &&
                   field.name !== '00NUm000009SCKP' &&
                   field.name !== 'g-recaptcha-response' &&
-                  field.name !== 'Subject' // Exclude hidden Subject field
+                  field.name !== 'Subject' 
                 );
             
-                const lineHeight = 10; // Line height for text
-                const valueIndent = 90; // Increase indent for values to avoid overlap
-                const maxWidth = pageWidth - valueIndent - 10; // Maximum width for text wrapping
+                const lineHeight = 10; 
+                const valueIndent = 90; 
+                const maxWidth = pageWidth - valueIndent - 10; 
             
-                filteredFormData.forEach(field => {
-                  // Get the label text. Use the 'for' attribute for <label> or name attribute for inputs without a direct label
+                for (const field of filteredFormData) {
                   let label = $(`label[for='${field.name}']`).text();
                   if (!label) {
-                      // Fallback for inputs without a direct <label for="..."> (e.g., hidden fields if they were not filtered out properly)
                       const inputElement = $(`[name='${field.name}']`);
                       if (inputElement.length > 0) {
                           label = inputElement.attr('placeholder') || inputElement.attr('title') || field.name;
                       } else {
-                          label = field.name; // Use the name as a fallback
+                          label = field.name; 
                       }
                   }
                   
                   const value = field.value;
             
-                  // Check for page break
                   if (y + lineHeight > pageHeight - footerHeight - 10) {
                     doc.addPage();
-                    y = headerHeight; // Reset y for the new page
-                    addHeader(doc); // Add header to the new page
+                    y = headerHeight; 
+                    addHeader(doc, headerHeight); 
                   }
             
-                  // Exclude specific values (Zoho CRM internal fields)
                   if (!value.includes('00DHo000002fpJX') && !value.includes('{"keyname":"casev2","fallback":"true","orgId":"00DHo000002fpJX","ts"')) {
-                    // Set bold font for the label text
                     doc.setFont('helvetica', 'bold');
-                    doc.text(`${label}:`, 10, y); // Print label
+                    doc.text(`${label}:`, 10, y); 
                     
-                    // Set regular font for the value
                     doc.setFont('helvetica', 'normal');
             
-                    // Split value text into multiple lines if it's too long
                     const valueLines = doc.splitTextToSize(value, maxWidth);
             
-                    // Print each line of the value
                     valueLines.forEach(line => {
                       if (y + lineHeight > pageHeight - footerHeight - 10) {
                         doc.addPage();
-                        y = headerHeight; // Reset y for the new page
-                        addHeader(doc); // Add header to the new page
+                        y = headerHeight; 
+                        addHeader(doc, headerHeight); 
                       }
                       doc.text(line, valueIndent, y);
-                      y += lineHeight; // Move to the next line
+                      y += lineHeight; 
                     });
                   }
-                });
+                }
             
-                return y; // Return updated y position
+                return y; 
               }
             
-              // Function to add Terms and Conditions
-              function addTermsAndConditions(doc, y) {
+              function addTermsAndConditions(doc, y, pageHeight, footerHeight, headerHeight) {
                 if (y + 60 > pageHeight - footerHeight - 10) {
                   doc.addPage();
-                  y = headerHeight; // Reset y for the new page
-                  addHeader(doc); // Add header to the new page
+                  y = headerHeight; 
+                  addHeader(doc, headerHeight); 
                 }
             
                 doc.setFontSize(14);
@@ -1546,49 +1537,54 @@ function gtag(){dataLayer.push(arguments);}
                 doc.text('   Suzanne Blair - suzanne.blair@techunifi.com.', 10, y);
                 y += 10;
             
-                // Add hyperlink
-                doc.setTextColor(6, 98, 187); // Set text color to #0662BB
+                doc.setTextColor(6, 98, 187); 
                 doc.textWithLink('View full terms and conditions', 10, y, { url: 'https://www.techunifi.com/terms-conditions.html' });
-                y += 20; // Space before the signature
+                y += 20; 
             
-                return y; // Return updated y position
+                return y; 
               }
             
               // Main PDF generation and form submission logic
               async function generatePDFAndSubmitForm() {
                 const submitButton = document.querySelector('.crmWebToEntityForm .formsubmit');
                 submitButton.setAttribute('disabled', true);
-                submitButton.value = 'Generating PDF...'; // Provide feedback
+                submitButton.value = 'Generating PDF...'; 
             
                 try {
+                  const { jsPDF } = window.jspdf; // Get jsPDF here
                   const doc = new jsPDF(); // Create a new jsPDF instance for each generation
+                  const pageHeight = doc.internal.pageSize.height || 297; 
+                  const pageWidth = doc.internal.pageSize.width || 210; 
+                  const headerHeight = 40;
+                  const footerHeight = 30;
+
                   let y = headerHeight;
             
                   // Add header and wait for image to load
-                  await addHeader(doc);
-                  y += 25; // Space after header image
+                  await addHeader(doc, headerHeight);
+                  y += 25; 
             
                   // Add form content
-                  y = addContent(doc, y);
-                  y += 10; // Space before terms and conditions
+                  y = addContent(doc, y, pageHeight, footerHeight, pageWidth, headerHeight);
+                  y += 10; 
             
                   // Add Terms and Conditions
-                  y = addTermsAndConditions(doc, y);
+                  y = addTermsAndConditions(doc, y, pageHeight, footerHeight, headerHeight);
             
                   // Add signature if available
-                  if (!signaturePad.isEmpty()) {
+                  if (signaturePad && !signaturePad.isEmpty()) { // Check if signaturePad is initialized
                     const signatureImage = signaturePad.toDataURL();
                     if (y + 40 > pageHeight - footerHeight - 10) { 
                       doc.addPage();
                       y = headerHeight;
-                      await addHeader(doc); // Add header to the new page
+                      await addHeader(doc, headerHeight); 
                     }
                     doc.addImage(signatureImage, 'PNG', 10, y, 190, 30);
-                    y += 40; // Adjust space after signature
+                    y += 40; 
                   }
             
                   // Add footer to the last page
-                  addFooter(doc);
+                  addFooter(doc, pageHeight, footerHeight, pageWidth);
             
                   // Save the PDF
                   doc.save('techunifi-changeOrder-data.pdf');
@@ -1596,22 +1592,17 @@ function gtag(){dataLayer.push(arguments);}
             
                   // Now submit the form to Zoho after PDF generation
                   const form = document.forms['WebToCases6771280000000858023'];
-                  form.submit(); // Programmatically submit the form
+                  form.submit(); 
             
                 } catch (error) {
                   console.error('Error generating PDF:', error);
-                  // Re-enable submit button if PDF generation fails
-                  submitButton.setAttribute('disabled', false);
+                  submitButton.removeAttribute('disabled'); // Re-enable submit button if PDF generation fails
                   submitButton.value = 'Submit & Download';
-                  // You might want to show a user-friendly error message here on the UI
                 }
               }
 
-
-              // Modified checkMandatory function
               function checkMandatory6771280000000858023(event) {
-                // Prevent default form submission initially
-                event.preventDefault();
+                event.preventDefault(); // Prevent default form submission initially
 
                 const form = document.forms['WebToCases6771280000000858023'];
 
@@ -1639,7 +1630,6 @@ function gtag(){dataLayer.push(arguments);}
                       }
                     }
                     else if ( fieldObj.type == 'checkbox' ){
-                        // This checkbox needs to be checked (I agree to terms)
                         if (fieldObj.id === '00NUm000009SCKP' && fieldObj.checked === false) {
                             console.error('Please accept the terms and conditions.');
                             fieldObj.focus();
@@ -1662,16 +1652,15 @@ function gtag(){dataLayer.push(arguments);}
                 }
 
                 // New logic for signature validation
-                if (typeof signaturePad !== 'undefined' && signaturePad.isEmpty()) {
+                if (!signaturePad || signaturePad.isEmpty()) { // Check if signaturePad is initialized and empty
                     console.error('Please provide an e-signature.');
-                    // You might want to add a visual indicator or message for the user here
                     return false;
                 }
 
                 // All validations passed, proceed with PDF generation and then form submission
                 generatePDFAndSubmitForm();
 
-                return false; // Prevent default submission, handled asynchronously
+                return false; 
               }
 
 
@@ -1704,7 +1693,6 @@ function gtag(){dataLayer.push(arguments);}
               }
 
             </script>
-
 
 	
 						<!-- Do not remove this --- Analytics Tracking code starts -->
