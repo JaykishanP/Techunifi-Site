@@ -233,7 +233,7 @@ function gtag(){dataLayer.push(arguments);}
         <div class="row">
           <div class="col-md-12">
             <label for="CASECF5">Category</label>
-            <select  id="CASECF5" name="CASECF5" onChange='addAriaSelected6771280000000858023()' title="Products Requiring Servie" multiple>
+            <select  id="CASECF5" name="CASECF5" onChange='addAriaSelected6771280000000858023()' title="Products Requiring Servie">
               <!-- <option value="">--None--</option> -->
               <option value="Phone">Phone</option>
               <option value="Wifi">Wifi</option>
@@ -1485,6 +1485,14 @@ if (window.location.pathname === "/change-order.html") {
                         $(this).css('border-color', 'green'); // Indicate valid fields
                     }
                 });
+
+		
+    // Call Zoho's main validation function
+    if (!checkMandatory6771280000000858023()) {
+        formValid = false;
+        // Zoho's function might already show alerts,
+        // so you might not need an extra one here.
+    }
 
                 // Signature validation: Check if the signature pad is empty
                 if (signaturePad.isEmpty()) {
