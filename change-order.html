@@ -81,6 +81,7 @@
 function gtag(){dataLayer.push(arguments);}  
  gtag('js', new Date());   gtag('config', 'G-CKH6XB0EMD'); 
 </script>
+
    
 </head>
 <body class="changeOrderPage" id="submit-captcha">
@@ -549,8 +550,136 @@ function gtag(){dataLayer.push(arguments);}
   
     <!-- Change Order Form -->
                  
-                        <input type="submit" id='formsubmit' role='button' class ='crmWebToEntityForm formsubmit zcwf_button' value="Submit & Download">   
+                        <input type="submit" id='formsubmit' role='button' class ='formsubmit zcwf_button' value="Submit & Download">   
 
+						<style>
+							#calenDiv{
+								padding: 10px;
+								display: table;
+								width: 195px;
+								font-family: helvetica,sans-serif !important;
+							}
+							.calNav {width: 20px;
+							height: 15px;
+							display
+							:inline-block;position: relative;
+							top: 4px;
+							cursor: pointer }
+							#calenDiv .calNav {width: 15px;
+							}
+							#calenDiv .yearNavLft {right: 10px;
+							}
+							#calenDiv .yearNavRgt {left: 10px;
+							}
+							#calenDiv .dLft {right: 5px;
+							}
+							#calenDiv .dRgt {left: 5px;
+							}
+							.dLft {right
+							:10px;opacity: 0.8;
+							}
+							.dRgt {left
+							:10px;opacity: 0.8;
+							}
+							.yearNavLft {right: 15px;
+							}
+							.yearNavRgt {left
+							:15px;opacity: 0.6;
+							}
+							#calenDiv table.calDay {border-spacing: 6px;
+							margin-top: 0 }
+							#calenDiv table.calDay td{
+							padding: 3px 4px;
+							font-size: 11px }
+							#calenDiv table.calDay th {padding: 0 3px;
+							font-size: 11px;
+							padding-right: 0;
+							padding-left: 1px;
+							color:  #888;
+							width: 22px;
+							cursor: default;
+							border-radius: 3px;
+							text-align: center;
+							font-weight: normal;
+							}
+							#calenDiv #weekDays {margin-top: 10px;
+							margin-bottom: 5px;
+							border-top: 1px solid  #c0c6cc;
+							border-bottom: 1px solid  #c0c6cc;
+							border-spacing: 5px;
+							margin-left: 0;
+							color:  #8b9ab9;
+							}
+							#calenDiv .sCalMon {cursor: default;
+							display: inline-block;
+							color:  #888;
+							width: 110px;
+							font-size: 12px;
+							}
+							table.calDay td:hover {background-color: #e8e8e8;
+							}
+							table.calDay{
+							color: #222;
+							margin-left: -10px;
+							border-spacing: 12px;
+							}
+							table.calDay td, table.calDay th{
+							font-size: var(--crm-extra-medium-font-size);
+							cursor: default;
+							border-radius: 3px;
+							text-align: center;
+							padding: 3px 5px;
+							font-family: helvetica,sans-serif !important;
+							}
+							table.calDay td.sel, table.calDay td.sel:hover {color: #fff;
+							background: #b3b3b3;
+							border-radius: 3px;
+							}
+							table.calDay td.noNum, table.calDay td.lt-gray {color: #c1c1c1;
+							}
+							.aligncenter {text-align: center;
+							}
+							#calBtns a,  .lyteCalBtns .lyteCalCurrentDate a {color: var(--linkColor);
+							font-size: 14px;
+							text-decoration: none;
+							}
+							#calenDiv #calBtns{
+							width: 183px;
+							margin-left: 10px;
+							border-top: 0;
+							font-size: 11px;
+							padding: 3px 0 12px !important;
+							}
+							.arrow {border: solid  #666;
+							border-width: 0 1px 1px 0;
+							display: inline-block;
+							height: 6px;
+							width: 6px;
+							}
+							#calenDiv .right {transform: rotate(-45deg);
+							-webkit-transform: rotate(-45deg);
+							}
+							#calenDiv .left {transform: rotate(135deg);
+							-webkit-transform: rotate(135deg);
+							}
+							.mLMinus2 {margin-left: -2px;
+							}
+							.mRMinus2 {margin-right: -2px;
+							}
+							.vaM {vertical-align: middle;
+							}
+							.tempCalDiv {display: none;
+							margin: 0;
+							position: absolute;
+							z-index: 1000;
+							background-color:  #fff;
+							border: 1px solid  #c0c6cc;
+							-webkit-box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+							box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+							border-top: 0;
+							top: 20px;
+							}
+						</style>
                         
                         
                     </form> 
@@ -716,988 +845,874 @@ function gtag(){dataLayer.push(arguments);}
   <!-- <script src="assets/vendor/php-email-form/validate.js"></script> -->
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <!-- <script src="assets/js/main.js"></script> -->
 
-  
-				<script type='text/javascript'>
-  var formCalender = {
-    userPattern: 'YYYY-MM-DD',
-    currDateObj: void 0, currMonth: void 0, currYear: void 0, currDate: void 0, currMonthEnd: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31], monthName: void 0, days: void 0, displayPanel: void 0, isHideToday: void 0, calDefColor: '#515CCB',
-    weekdays: {
-      1: 'Sunday',
-      2: 'Monday',
-      3: 'Tuesday',
-      4: 'Wednesday',
-      5: 'Thursday',
-      6: 'Friday',
-      7: 'Saturday'
-    },
-    months: {
-      1: 'January',
-      2: 'February',
-      3: 'March',
-      4: 'April',
-      5: 'May',
-      6: 'June',
-      7: 'July',
-      8: 'August',
-      9: 'September',
-      10: 'October',
-      11: 'November',
-      12: 'December'
-    },
-    init: function () {
-      this.monthName = [{
-        html: 'January',
-        value: 0
-      },
-      {
-        html: 'February',
-        value: 1
-      },
-      {
-        html: 'March',
-        value: 2
-      },
-      {
-        html: 'April',
-        value: 3
-      },
-      {
-        html: 'May',
-        value: 4
-      },
-      {
-        html: 'June',
-        value: 5
-      },
-      {
-        html: 'July',
-        value: 6
-      },
-      {
-        html: 'August',
-        value: 7
-      },
-      {
-        html: 'September',
-        value: 8
-      },
-      {
-        html: 'October',
-        value: 9
-      },
-      {
-        html: 'November',
-        value: 10
-      },
-      {
-        html: 'December',
-        value: 11
-      }], this.days = ['ssunday', 'smonday', 'stuesday', 'swednesday', 'sthursday', 'sfriday', 'ssaturday'], this.dayNamesShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], this.daysBasedOnPrefernce = ['ssunday', 'smonday', 'stuesday', 'swednesday', 'sthursday', 'sfriday', 'ssaturday'];
-      var e = this.daysBasedOnPrefernce[0];
-      this.daysBasedOnPrefernce.shift(1), this.daysBasedOnPrefernce.push(e);
-      var t = this.dayNamesShort[0];
-      this.dayNamesShort.shift(1), this.dayNamesShort.push(t), this.currDateObj = new Date, this.currMonth = this.currDateObj.getMonth(), this.currYear = this.currDateObj.getFullYear(), this.currYear < 1e3 && (this.currYear += 1900), this.currDate = this.currDateObj.getDate()
-    },
-    getTitle: function () {
-      return this.monthName[this.currMonth].html + ' ' + this.currYear
-    },
-    createCalendar: function (e) {
-      for (var t = document.getElementsByClassName('tempCalDiv'), a = t.length, r = 0; r < a; r++) {
-        var n = t[r].style;
-        'block' === n.display && (n.display = 'none')
-      }
-      this.calendarNode = e, this.userPattern = this.calendarNode.placeholder;
-      var s = this.calendarNode.value, i = !1;
-      if (s) {
-        var l = dateFormatConvert.validate(s, this.userPattern);
-        l && (this.currDate = l.getDate(), this.currMonth = l.getMonth(), this.currYear = l.getFullYear(), this.currYear < 1e3 && (this.currYear = Number(this.currYear) + 1900))
-      }
-      else i = !0, formCalender.init();
-      this.monthName || formCalender.init(), this.createDatePicker(this.currDate, this.currMonth, this.currYear, i, !1)
-    },
-    createDatePicker: function (e, t, a, r, n) {
-      1 === this.currMonth && (this.currMonthEnd[1] = this.currYear % 400 == 0 || this.currYear % 4 == 0 && this.currYear % 100 != 0 ? 29 : 28);
-      var s = new Date(a, t, 1), i = 6, l = this.daysBasedOnPrefernce.indexOf(this.days[s.getDay()]) + 1;
-      i = 31 === this.currMonthEnd[t] && l >= 6 || 30 === this.currMonthEnd[t] && 7 === l ? 7 : 28 === this.currMonthEnd[t] && 1 === l ? 5 : 6;
-      var d = this.getTitle(e, a, t), o = this.dayNamesShort, h = '<div id=\'calenDiv\'><i id=\'calArrow\' style=\'display:none;\' class=\'dIB SocialArrow\'></i><div><div>';
-      h += '<div class=\'aligncenter\'><span class=\'calNav dIB vaM yearNavLft\' onclick=\'formCalender.updateDatePicker(event,undefined, -1)\'><i class=\'arrow left mRMinus2\'></i><i class=\'arrow left\'></i></span><span class=\'calNav dLft dIB vaM\' onClick=\'formCalender.updateDatePicker(event,-1)\' id=\'pm\'><i class=\'arrow left\'></i></span><span class=\'sCalMon\'>' + d + '</span><span class=\'calNav dRgt vaM\' onClick =\'formCalender.updateDatePicker(event,1)\' id=\'nm\'><i class=\'arrow right\'></i><i class=\'arrow right mLMinus2\'></i></span><span class=\'calNav dIB vaM yearNavRgt\' onclick=\'formCalender.updateDatePicker(event,undefined, 1)\'><i class=\'arrow right\'></i><i class=\'arrow right mLMinus2\'></i></span></div>', h += '<table  class=\'calDay\'  id =\'weekDays\' style=\'color:#8b9ab9; font-size:8px; margin-left:0\'><tr> <th>' + o[0] + '</th> <th>' + o[1] + '</th><th>' + o[2] + '</th><th>' + o[3] + '</th> <th>' + o[4] + '</th> <th>' + o[5] + '</th> <th>' + o[6] + '</th></tr></table>', h += '</div>', h += '<table id=\'calHeader\' class=\'calDay\' style=\'margin-left:0; margin-top:-5px;\' width=\'100%\' cellspacing=\'0\' cellpadding=\'0\' border=\'0\' >';
-      var c = '', u = new Date, y = a || u.getFullYear(), v = e || u.getDate(), g = void 0 === t ? u.getMonth() : t,
-        m = u.getMonth(), p = u.getFullYear();
-      u.getDate();
-      m === t && a === p && (c = ' style=\'display:none\'');
-      for (var f, D, M, b = s.getDay(); 1 !== b;)
-        s.setDate(s.getDate() - 1), b = s.getDay();
-      for (var x = 1; x <= i; x++) {
-        h += '<tr>';
-        for (var Y = 1; Y < 8; Y++) {
-          f = s.getMonth(), D = s.getFullYear(), M = s.getDate(), D + '-' + (parseInt(f) + 1) + '-' + M;
-          var F = 'cdate lt-gray';
-          if (M === v && D === y && f === g && (F = 'cdate lt-gray'), f === g && (F = 'cdate'), (r && M === v && m === g && p === y || !n && M === v && f === g && D === y) && (F = 'sel'), n) {
-            var k = dateFormatConvert.validate(this.calendarNode.value, formCalender.userPattern);
-            k && M === k.getDate() && f === k.getMonth() && D === k.getFullYear() && (F = 'sel')
-          }
-          h += '<td class=\'' + F + '\' onClick=\'formCalender.displaySelectedDate(\"' + M + ' ' + f + ' ' + D + '\")\'>' + M + '</td>', s.setDate(s.getDate() + 1)
+						<script type='text/javascript'>
+							var formCalender = {
+								userPattern: 'YYYY-MM-DD',
+								currDateObj: void 0, currMonth: void 0, currYear: void 0, currDate: void 0, currMonthEnd: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31], monthName: void 0, days: void 0, displayPanel: void 0, isHideToday: void 0, calDefColor: '#515CCB',
+								weekdays: {
+									1: 'Sunday',
+									2: 'Monday',
+									3: 'Tuesday',
+									4: 'Wednesday',
+									5: 'Thursday',
+									6: 'Friday',
+									7: 'Saturday'
+								},
+								months: {
+									1: 'January',
+									2: 'February',
+									3: 'March',
+									4: 'April',
+									5: 'May',
+									6: 'June',
+									7: 'July',
+									8: 'August',
+									9: 'September',
+									10: 'October',
+									11: 'November',
+									12: 'December'
+								},
+								init: function (){
+									this.monthName = [{
+										html: 'January',
+										value: 0
+									},
+									{
+										html: 'February',
+										value: 1
+									},
+									{
+										html: 'March',
+										value: 2
+									},
+									{
+										html: 'April',
+										value: 3
+									},
+									{
+										html: 'May',
+										value: 4
+									},
+									{
+										html: 'June',
+										value: 5
+									},
+									{
+										html: 'July',
+										value: 6
+									},
+									{
+										html: 'August',
+										value: 7
+									},
+									{
+										html: 'September',
+										value: 8
+									},
+									{
+										html: 'October',
+										value: 9
+									},
+									{
+										html: 'November',
+										value: 10
+									},
+									{
+										html: 'December',
+										value: 11
+									}], this.days = [ 'ssunday', 'smonday', 'stuesday', 'swednesday', 'sthursday', 'sfriday', 'ssaturday' ], this.dayNamesShort = [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ], this.daysBasedOnPrefernce = [ 'ssunday', 'smonday', 'stuesday', 'swednesday', 'sthursday', 'sfriday', 'ssaturday' ];
+									var e = this.daysBasedOnPrefernce[0];
+									this.daysBasedOnPrefernce.shift ( 1 ), this.daysBasedOnPrefernce.push ( e );
+									var t = this.dayNamesShort[0];
+									this.dayNamesShort.shift ( 1 ), this.dayNamesShort.push ( t ), this.currDateObj = new Date, this.currMonth = this.currDateObj.getMonth (), this.currYear = this.currDateObj.getFullYear (), this.currYear < 1e3 && ( this.currYear += 1900 ), this.currDate = this.currDateObj.getDate ()
+								},
+								getTitle: function (){
+									return this.monthName[ this.currMonth ].html + ' ' + this.currYear
+								},
+								createCalendar: function ( e ){
+									for ( var t = document.getElementsByClassName( 'tempCalDiv' ),a = t.length,r = 0; r < a; r++ ){
+										var n = t[ r ].style;
+										'block' === n.display && ( n.display = 'none' )
+									}
+									this.calendarNode = e, this.userPattern = this.calendarNode.placeholder;
+									var s = this.calendarNode.value, i =!1;
+									if ( s ){
+										var l = dateFormatConvert.validate ( s, this.userPattern );
+										l && ( this.currDate = l.getDate (), this.currMonth = l.getMonth (), this.currYear = l.getFullYear (), this.currYear < 1e3 && ( this.currYear = Number ( this.currYear ) + 1900 ))
+									}
+									else i =!0, formCalender.init ();
+									this.monthName || formCalender.init (), this.createDatePicker ( this.currDate, this.currMonth, this.currYear, i, !1 )
+								},
+								createDatePicker: function ( e, t, a, r, n ){
+									1 === this.currMonth && ( this.currMonthEnd[1] = this.currYear % 400 == 0 || this.currYear % 4 == 0 && this.currYear % 100 != 0 ? 29: 28 );
+									var s = new Date ( a, t, 1 ), i = 6, l = this.daysBasedOnPrefernce.indexOf ( this.days[ s.getDay ()]) + 1;
+									i = 31 === this.currMonthEnd[ t ] && l >= 6 || 30 === this.currMonthEnd[ t ] && 7 === l ? 7: 28 === this.currMonthEnd[ t ] && 1 === l ? 5: 6;
+									var d = this.getTitle ( e, a, t ), o = this.dayNamesShort, h = '<div id=\'calenDiv\'><i id=\'calArrow\' style=\'display:none;\' class=\'dIB SocialArrow\'></i><div><div>';
+									h += '<div class=\'aligncenter\'><span class=\'calNav dIB vaM yearNavLft\' onclick=\'formCalender.updateDatePicker(event,undefined, -1)\'><i class=\'arrow left mRMinus2\'></i><i class=\'arrow left\'></i></span><span class=\'calNav dLft dIB vaM\' onClick=\'formCalender.updateDatePicker(event,-1)\' id=\'pm\'><i class=\'arrow left\'></i></span><span class=\'sCalMon\'>' + d + '</span><span class=\'calNav dRgt vaM\' onClick =\'formCalender.updateDatePicker(event,1)\' id=\'nm\'><i class=\'arrow right\'></i></span><span class=\'calNav dIB vaM yearNavRgt\' onclick=\'formCalender.updateDatePicker(event,undefined, 1)\'><i class=\'arrow right\'></i><i class=\'arrow right mLMinus2\'></i></span></div>', h += '<table  class=\'calDay\'  id =\'weekDays\' style=\'color:#8b9ab9; font-size:8px; margin-left:0\'><tr> <th>' + o[0] + '</th> <th>' + o[1] + '</th><th>' + o[2] + '</th><th>' + o[3] + '</th> <th>' + o[4] + '</th> <th>' + o[5] + '</th> <th>' + o[6] + '</th></tr></table>', h += '</div>', h += '<table id=\'calHeader\' class=\'calDay\' style=\'margin-left:0; margin-top:-5px;\' width=\'100%\' cellspacing=\'0\' cellpadding=\'0\' border=\'0\' >';
+									var c = '', u = new Date, y = a || u.getFullYear (), v = e || u.getDate (), g = void 0 === t ? u.getMonth (): t,
+									m = u.getMonth (), p = u.getFullYear ();
+									u.getDate ();
+									m === t && a === p && ( c = ' style=\'display:none\'' );
+									for ( var f,D,M,b = s.getDay(); 1 !== b; )
+										s.setDate ( s.getDate ()-1 ), b = s.getDay ();
+									for ( var x = 1; x <= i; x++ ){
+										h += '<tr>';
+										for ( var Y = 1; Y < 8; Y++ ){
+											f = s.getMonth (), D = s.getFullYear (), M = s.getDate (), D + '-' + ( parseInt ( f ) + 1 ) + '-' + M;
+											var F = 'cdate lt-gray';
+											if ( M === v && D === y && f === g && ( F = 'cdate lt-gray' ),f === g && ( F = 'cdate' ),(r && M === v && m === g && p === y || !n && M === v && f === g && D === y ) && ( F = 'sel' ),n ){
+												var k = dateFormatConvert.validate ( this.calendarNode.value, formCalender.userPattern );
+												k && M === k.getDate () && f === k.getMonth () && D === k.getFullYear () && ( F = 'sel' )
+											}
+											h += '<td class=\'' + F + '\' onClick=\'formCalender.displaySelectedDate(\"' + M + ' ' + f + ' ' + D + '\")\'>' + M + '</td>', s.setDate ( s.getDate () + 1 )
+										}
+										h += '</tr>'
+									}
+									h += '</table>', h += '<div>', this.isHideToday || ( h += '<div id=\'calBtns\' class=\'pT15 pB15 fL\'><a' + c + ' class=\'cP fL\' href=\'javascript:;\' id=\'todayBtn\' onclick=\'formCalender.displaySelectedDate(\"today\")\'>Today</a>' ), h += '</div>', h += '</div>', h += '</div></div>';
+									var C = document.getElementById ( 'template' + this.calendarNode.getAttribute ( 'tplid' ));
+									C.innerHTML = h, C.style.display = 'block'
+								},
+								displaySelectedDate: function ( e, t ){
+									if ( !t )
+										t = this.calendarNode;
+									if ( 'today' === e ){
+										var a = new Date;
+										e = a.getDate () + ' ' + a.getMonth () + ' ' + a.getFullYear ()
+									}
+									e = e.split ( ' ' );
+									var r = dateFormatConvert.convertFormat ( new Date ( e[2], e[1], e[0]), this.userPattern );
+									t.value = r, t.focus (), t.placeholder = this.userPattern, formCalender.closeDatePicker (), t.addEventListener ( 'keyup', function ( e ){
+										formCalender.calendarNode = this;
+										var t = this.value, a = dateFormatConvert.validate ( t, formCalender.userPattern );
+										if ( a ){
+											var r = {};
+											r.date = a.getDate (), r.month = a.getMonth (), r.year = a.getFullYear (), formCalender.updateDatePicker ( e, void 0, void 0, r )
+										}
+									}),
+									t.blur ()
+								},
+								closeDatePicker: function (){
+									document.getElementById ( 'template' + this.calendarNode.getAttribute ( 'tplid' )).style.display = 'none'
+								},
+								updateDatePicker: function ( e, t, a, r ){
+									var n = document.getElementById ( 'template' + this.calendarNode.getAttribute ( 'tplid' ));
+									r && ( this.currDate = r.date, this.currMonth = r.month, this.currYear = r.year ), void 0 !== t ? 1 === t ? 11 === this.currMonth ? ( this.currMonth = 0, this.currYear++  ): this.currMonth++ : 0 === this.currMonth ? ( this.currMonth = 11, this.currYear--  ): this.currMonth-- : void 0 !== a && ( this.currYear = parseInt ( this.currYear ) + a ), this.createDatePicker ( this.currDate, this.currMonth, this.currYear, !1, !0 ), n.style.display = 'block'
+								},
+								stEv: function ( e ){
+									e || ( e = window.event ), e && ( e.cancelBubble =!0, e.stopPropagation && e.stopPropagation ())
+								}
+							};
+							window.onclick = function (){
+								for ( var e = document.getElementsByClassName( 'tempCalDiv' ),t = e.length,a = 0; a < t; a++ ){
+									var r = e[ a ];
+									if ( document.activeElement === document.querySelector( 'input[tplid=\'' + r.id.replace( 'template','' ) + '\']' ))
+										return ;
+									var n = e[ a ].style;
+									'block' === n.display && ( n.display = 'none' )
+								}
+							};
+							var dateFormatConvert = {
+								shortMon: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ], longMon: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ], dayArr: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31], wod: 1, lm: 'userdate',
+								_dateObj: void 0, lLimit: 80, formats: [{
+									val: 'YYYY',
+									type: 'year',
+									regex: /\d{4}/, len: 4
+								},
+								{
+									val: 'GGGG',
+									type: 'year',
+									regex: /\d{4}/, len: 4, isWEG: !0
+								},
+								{
+									val: 'gggg',
+									type: 'year',
+									regex: /\d{4}/, len: 4, isWEG: !0
+								},
+								{
+									val: 'YY',
+									type: 'year',
+									regex: /\d{2}/, len: 2
+								},
+								{
+									val: 'GG',
+									type: 'year',
+									regex: /\d{2}/, len: 2, isWEG: !0
+								},
+								{
+									val: 'gg',
+									type: 'year',
+									regex: /\d{2}/, len: 2, isWEG: !0
+								},
+								{
+									val: 'MMMM',
+									type: 'month',
+									regex: /[A-z]{3,}/, long: !0, str: !0, array: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ]
+								},
+								{
+									val: 'MMM',
+									str: !0, type: 'month',
+									regex: /[A-z]{3,}/, array: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ]
+								},
+								{
+									val: 'Mo',
+									suff: !0, type: 'month',
+									regex: /\d{1,2}(?=st|nd|rd|th)/, max: 12
+								},
+								{
+									val: 'MM',
+									type: 'month',
+									regex: /\d{2}/, len: 2, max: 12, alt: !0
+								},
+								{
+									val: 'M',
+									type: 'month',
+									regex: /\d{1,2}/, max: 12
+								},
+								{
+									val: 'DDDD',
+									type: 'date',
+									regex: /\d{3}/, len: 3, year: !0
+								},
+								{
+									val: 'DDDo',
+									type: 'date',
+									suff: !0, regex: /\d{1,3}(?=st|nd|rd|th)/, len: 3, year: !0, ignore: /\d{3}(?=st|nd|rd|th)/
+								},
+								{
+									val: 'DDD',
+									type: 'date',
+									regex: /\d{1,3}/, year: !0, ignore: /\d{3}/
+								},
+								{
+									val: 'Do',
+									type: 'date',
+									suff: !0, regex: /\d{1,2}(?=st|nd|rd|th)/
+								},
+								{
+									val: 'DD',
+									type: 'date',
+									regex: /\d{2}/, len: 2, alt: !0
+								},
+								{
+									val: 'D',
+									type: 'date',
+									regex: /\d{1,2}/
+								},
+								{
+									val: 'dddd',
+									type: 'longdate',
+									regex: /[A-z]{3,}/, long: !0, str: !0, array: [ 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' ]
+								},
+								{
+									val: 'ddd',
+									type: 'longdate',
+									regex: /[A-z]{3}/, str: !0, array: [ 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat' ]
+								},
+								{
+									val: 'dd',
+									type: 'longdate',
+									regex: /[A-z]{2}/, str: !0, array: [ 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa' ]
+								},
+								{
+									val: 'do',
+									type: 'longdate',
+									regex: /\d{1}(?=st|nd|rd|th)/, suff: !0
+								},
+								{
+									val: 'd',
+									type: 'longdate',
+									regex: /\d{1}/
+								}], parseFormat: function ( e, t ){
+									for ( var a,r = this.formats,n = [],s = r.length,i = 0; i < s; i++ ){
+										var l = r[ i ];
+										if ( !e.length )
+											break;
+										if ( e.indexOf( l.val ) > -1 ){
+											if ( t && l.alt ){
+												a =!0;
+												continue }
+											a && ( l.val = r[ i-1].val, l = r[ i-1]), a =!1, n.push ({
+												format: l,
+												index: e.indexOf ( l.val )
+											}),
+											e = e.replace ( l.val, Math.pow ( 10, l.val.length-1 )), i-- }
+										else;
+									}
+									return n.sort ( function ( e, t ){
+										return e.index-t.index
+									})
+								},
+								convertFormat: function ( e, t ){
+									this._dateObj = e;
+									var a = this._dateObj, r = this.parseFormat ( t, !0 ), n = {},
+									s = {
+										date: a.getDate (), month: a.getMonth (), year: a.getFullYear (), day: a.getDay ()
+									};
+									t = this.fmReplace ( t.replace ( /{{|}}/g, '' ), r );
+									for ( var i = r.length,l = 0; l < i; l++ ){
+										var d = r[ l ].format;
+										switch ( d.type ){
+											case 'date':
+												t = t.replace ( d.val + this.lm, this.crctLength ( d.year ? this.totdate ( s.month, this.isLeap ( s.year ), s.date ):
+												s.date, d.len, d.suff ));
+												break;
+											case 'month':
+												t = d.str ? t.replace ( d.val + this.lm, d.array[ s.month ]):
+												t.replace ( d.val + this.lm, this.crctLength ( s.month + 1, d.len, d.suff ));
+												break;
+											case 'year':
+												t = t.replace ( d.val + this.lm, 2 === d.len ? this.crctLength ( s.year % 100, 2 ):
+												4 === ( s.year + '' ).length ? s.year:
+												this.crctLength ( s.year, 4 )), n.year = n.year || [], n.year.push ( d );
+												break;
+											case 'day':
+											case 'week':
+												n.flag =!0, n[ d.type ] = n[ d.type ] || [], n[ d.type ].push ( d );
+												break;
+											case 'longdate':
+												t = d.str ? t.replace ( d.val + this.lm, d.array[ s.day ]):
+												t.replace ( d.val + this.lm, this.crctLength ( s.day, null, d.suff ))
+										}
+									}
+									return t.replace ( /{{|}}/g, '' )
+								},
+								fmReplace: function ( e, t ){
+									for ( var a = 0,r = t.length,n = 0; n < r; n++ )
+										e = e.slice ( 0, t[ n ].index + a ) + t[ n ].format.val + this.lm + e.slice ( t[ n ].index + a + t[ n ].format.val.length ), a += 8;
+									return e
+								},
+								totdate: function ( e, t, a ){
+									for ( var r = 0,n = 0; n < e; n++ )
+										r += this.dayArr[ n ], t && 1 === n && ( r += 1 );
+									return r + ( a || 0 )
+								},
+								crctLength: function ( e, t, a ){
+									var r = '';
+									if ( a && ( r = this.nthconv( e )),t ){
+										e = e.toString ();
+										for ( var n = 1; n < t; n++ )
+											e.length <= n && ( e = '0' + e )
+									}
+									return e + r
+								},
+								nthconv: function ( e ){
+									if ( e > 3 && e < 21 )
+										return 'th';
+									switch ( e % 10 ){
+										case 1:
+											return 'st';
+										case 2:
+											return 'nd';
+										case 3:
+											return 'rd';
+										default:
+											return 'th'
+									}
+								},
+								isLeap: function ( e ){
+									return 2 === ( e += '' ).length && ( e = this.getCorrectYear ( parseInt ( e ))), ( e = parseInt ( e )) % 4 == 0 && e % 100 != 0 || e % 400 == 0
+								},
+								getCorrectYear: function ( e ){
+									var t = e + '';
+									if ( e = parseInt( e ),2 === t.length ){
+										var a = ( new Date ).getFullYear (), r = parseInt ( a / 100 ), n = a % 100, s = ( n-this.lLimit + 100 ) % 100;
+										e = n > s ? e < s ? r + 1 + '' + this.crctLength ( e, 2 ): r + '' + this.crctLength ( e, 2 ): e < s ? r + '' + this.crctLength ( e, 2 ): r-1 + '' + this.crctLength ( e, 2 )
+									}
+									return e
+								},
+								valFormat: function ( e, t ){
+									for ( var a = {},r = new Date((new Date ).getFullYear(),0 ),n = this.parseFormat( t, !0 ),s = e,i = t = t.replace( /{{|}}/g,'' ),l = n.length,d = 0; d < l; d++ ){
+										var o, h = n[ d ].format;
+										switch ( h.type ){
+											case 'date':
+											case 'year':
+											case 'week':
+											case 'day':
+												h.regex.test ( e ) ? ( o = 'year' === h.type ? e.match ( h.regex )[ h.match || 0]:
+												parseInt ( e.match ( h.regex )[ h.match || 0]), a[ h.type ] = o, e = this.replaceVal ( e, h.regex, h.suff ), s = this.replaceVal ( s, h.regex, h.suff, h.val ), h.year && ( a.date = getDay ( a.date ).day )):
+												a.year && a.week ? ( a[ h.type ] = this.wod, t = t.replace ( h.val, '' ), i = i.replace ( h.val, '' )):
+												a[ h.type ] = 'Invalid', /date/i.test ( h.type ) && 0 === a[ h.type ] && ( a[ h.type ] = 'Invalid' );
+												break;
+											case 'month':
+												h.regex.test ( e ) ? ( o = this.getMonth ( e.match ( h.regex )[0], h.suff, h.str, h.long ), a.month = o.val, e = this.replaceVal ( e, o.mon || h.regex, h.suff ), s = this.replaceVal ( s, o.mon || h.regex, h.suff, h.val )):
+												a.month = 'Invalid', a.month < 0 && ( a.month = 'Invalid' );
+												break;
+											case 'longdate':
+												h.regex.test ( e ) && ( o = h.str ? this.findVal ( h.array, e.match ( h.regex )[0]):
+												parseInt ( e.match ( h.regex )[0]), a.longdate = this.isDef ( o.index ) ? o.index:
+												o, e = this.replaceVal ( e, o.mon || o, h.suff ), s = this.replaceVal ( s, o.mon || o, h.suff, h.val ))
+										}
+										t = t.replace ( h.valForm || h.val, '' )
+									}
+									if ( this.isDef( a.longdate ) && a.day && a.day !== a.longdate ? r.setFullYear( 'Invalid' ):this.isDef( a.year ) && r.setFullYear( this.getCorrectYear( a.year )),this.isDef( a.month ) && r.setMonth( a.month ),this.isDef( a.date ) && r.setDate( a.date <= this.dayArr[r.getMonth()] + ( 1 === r.getMonth() && this.isLeap( r.getFullYear()) ? 1:0 ) ? a.date:'Invalid' ),this._isCorrectFormat = e.length === t.length && i === s && this.validate( r ))
+										return r
+								},
+								validate: function ( e, t ){
+									var a = e.constructor;
+									if ( a === Date )
+										return this._dateObj = e, 'Invalid Date' !== e.toString ();
+									if ( a === String && t ){
+										var r = this.valFormat ( e, t );
+										return r && this._isCorrectFormat && ( this._format = t ), r
+									}
+								},
+								replaceVal: function ( e, t, a, r ){
+									return e = e.replace ( t, r || '' ), a && ( e = e.replace ( /st|nd|rd|th/, '' )), e
+								},
+								getMonth: function ( e, t, a, r ){
+									var n;
+									if ( a ){
+										var s = this.findVal ( r ? this.longMon: this.shortMon, e );
+										n = s.mon, e = s.index, ( !n || e > 11 ) && ( e = 'Invalid' )
+									}
+									else ( e = parseInt ( e )-1 ) > 11 && ( e = 'Invalid' );
+									return {
+										val: e,
+										mon: n
+									}
+								},
+								findVal: function ( e, t ){
+									var a, r, n = e.length;
+									for ( r = 0; r < n; r++ )
+										if ( new RegExp( e[r]).test( t )){
+										a = e[ r ];
+										break }
+									return {
+										mon: a,
+										index: r
+									}
+								},
+								isDef: function ( e ){
+									return void 0 !== e
+								}
+							};
+						</script>
+						<script>
+							function addAriaSelected6771280000000858023 (){
+								var optionElem = event.target;
+								var previousSelectedOption = optionElem.querySelector ( '[aria-selected=true]' );
+								if ( previousSelectedOption ){
+									previousSelectedOption.removeAttribute ( 'aria-selected' );
+								}
+								optionElem.querySelectorAll ( 'option' )[ optionElem.selectedIndex ].ariaSelected = 'true';
+							}
+							/* Do not remove this code. */
+							function rccallback6771280000000858023 (){
+								if ( document.getElementById( 'recap6771280000000858023' ) != undefined ){
+									document.getElementById ( 'recap6771280000000858023' ).setAttribute ( 'captcha-verified', true );
+								}
+								if ( document.getElementById( 'recapErr6771280000000858023' ) != undefined && document.getElementById( 'recapErr6771280000000858023' ).style.visibility == 'visible' ){
+									document.getElementById ( 'recapErr6771280000000858023' ).style.visibility = 'hidden';
+								}
+							}
+							function reCaptchaAlert6771280000000858023 (){
+								var recap = document.getElementById ( 'recap6771280000000858023' );
+								if ( recap != undefined && recap.getAttribute( 'captcha-verified' ) == 'false' ){
+									document.getElementById ( 'recapErr6771280000000858023' ).style.visibility = 'visible';
+									return false;
+								}
+								return true;
+							}
+							function validateEmail6771280000000858023 (){
+								var form = document.forms[ 'WebToCases6771280000000858023' ];
+								var emailFld = form.querySelectorAll ( '[ftype=email]' );
+								var i;
+								for ( i = 0; i < emailFld.length; i++ ){
+									var emailVal = emailFld[ i ].value;
+									if ((emailVal.replace( /^\s+|\s+$/g,'' )).length != 0 ){
+										var atpos = emailVal.indexOf ( '@' );
+										var dotpos = emailVal.lastIndexOf ( '.' );
+										if ( atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= emailVal.length ){
+											alert ( 'Please enter a valid email address. ' );
+											emailFld[ i ].focus ();
+											return false;
+										}
+									}
+								}
+								return true;
+							}
+							function validateDateFormat6771280000000858023 (){
+								var form = document.forms[ 'WebToCases6771280000000858023' ];
+								var dateFlds = form.querySelectorAll ( '[ftype=date]' );
+								var i;
+								for ( i = 0; i < dateFlds.length; i++ ){
+									var dateFld = dateFlds[ i ];
+									var usrPtrn = dateFld.placeholder;
+									var dateVal = dateFld.value;
+									if ( dateVal.trim() != '' ){
+										var vald = dateFormatConvert.validate ( dateVal, usrPtrn );
+										if ( !vald ){
+											alert ( 'Please enter a valid date ' );
+											dateFld.focus ();
+											return false;
+										}
+									}
+								}
+								return true;
+							}
+							function checkMandatory6771280000000858023 (){
+								var mndFileds = new Array ( 'Subject' );
+								var fldLangVal = new Array ( 'Subject' );
+								for ( i = 0; i < mndFileds.length; i++ ){
+									var fieldObj = document.forms[ 'WebToCases6771280000000858023' ][ mndFileds[ i ]];
+									if ( fieldObj ){
+										if (((fieldObj.value ).replace( /^\s+|\s+$/g,'' )).length == 0 ){
+											if ( fieldObj.type == 'file' ){
+												alert ( 'Please select a file to upload.' );
+												fieldObj.focus ();
+												return false;
+											}
+											alert ( fldLangVal[ i ] + ' cannot be empty.' );
+											fieldObj.focus ();
+											return false;
+										}
+										else if ( fieldObj.nodeName == 'SELECT' ){
+											if ( fieldObj.options[fieldObj.selectedIndex].value == '-None-' ){
+												alert ( fldLangVal[ i ] + ' cannot be none.' );
+												fieldObj.focus ();
+												return false;
+											}
+										}
+										else if ( fieldObj.type == 'checkbox' ){
+											if ( fieldObj.checked == false ){
+												alert ( 'Please accept  ' + fldLangVal[ i ]);
+												fieldObj.focus ();
+												return false;
+											}
+										}
+										try {
+											if ( fieldObj.name == 'Last Name' ){
+												name = fieldObj.value;
+											}
+										}
+										catch ( e ){}
+									}
+								}
+								if ( !validateEmail6771280000000858023()){
+									return false;
+								}
+								if ( !reCaptchaAlert6771280000000858023()){
+									return false;
+								}
+								if ( !validateDateFormat6771280000000858023()){
+									return false;
+								}
+								var urlparams = new URLSearchParams ( window.location.search );
+								if ( urlparams.has( 'service' ) && ( urlparams.get( 'service' ) === 'smarturl' )){
+									var webform = document.getElementById ( 'webform6771280000000858023' );
+									var service = urlparams.get ( 'service' );
+									var smarturlfield = document.createElement ( 'input' );
+									smarturlfield.setAttribute ( 'type', 'hidden' );
+									smarturlfield.setAttribute ( 'value', service );
+									smarturlfield.setAttribute ( 'name', 'service' );
+									webform.appendChild ( smarturlfield );
+								}
+								document.querySelector ( '.crmWebToEntityForm .formsubmit' ).setAttribute ( 'disabled', true );
+							}
+							function tooltipShow6771280000000858023 ( el ){
+								var tooltip = el.nextElementSibling;
+								var tooltipDisplay = tooltip.style.display;
+								if ( tooltipDisplay == 'none' ){
+									var allTooltip = document.getElementsByClassName ( 'zcwf_tooltip_over' );
+									for ( i = 0; i < allTooltip.length; i++ ){
+										allTooltip[ i ].style.display = 'none';
+									}
+									tooltip.style.display = 'block';
+								}
+								else {
+									tooltip.style.display = 'none';
+								}
+							}
+
+							// Ensure this script runs only on the "change-order.html" page
+if (window.location.pathname === "/change-order.html") {
+    // Declare signaturePad globally within this scope so it's accessible everywhere
+    var signaturePad;
+    var canvas;
+
+    // --- Signature Pad Initialization ---
+    // This part ensures the signature pad is set up as soon as the DOM is ready.
+    // It's crucial that the 'canvas' element with id 'signature-pad' exists in your HTML.
+    $(document).ready(function() {
+        canvas = document.getElementById("signature-pad");
+
+        function resizeCanvas() {
+            var ratio = Math.max(window.devicePixelRatio || 1, 1);
+            canvas.width = canvas.offsetWidth * ratio;
+            canvas.height = canvas.offsetHeight * ratio;
+            canvas.getContext("2d").scale(ratio, ratio);
         }
-        h += '</tr>'
-      }
-      h += '</table>', h += '<div>', this.isHideToday || (h += '<div id=\'calBtns\' class=\'pT15 pB15 fL\'><a' + c + ' class=\'cP fL\' href=\'javascript:;\' id=\'todayBtn\' onclick=\'formCalender.displaySelectedDate(\"today\")\'>Today</a>'), h += '</div>', h += '</div>', h += '</div></div>';
-      var C = document.getElementById('template' + this.calendarNode.getAttribute('tplid'));
-      C.innerHTML = h, C.style.display = 'block'
-    },
-    displaySelectedDate: function (e, t) {
-      if (!t)
-        t = this.calendarNode;
-      if ('today' === e) {
-        var a = new Date;
-        e = a.getDate() + ' ' + a.getMonth() + ' ' + a.getFullYear()
-      }
-      e = e.split(' ');
-      var r = dateFormatConvert.convertFormat(new Date(e[2], e[1], e[0]), this.userPattern);
-      t.value = r, t.focus(), t.placeholder = this.userPattern, formCalender.closeDatePicker(), t.addEventListener('keyup', function (e) {
-        formCalender.calendarNode = this;
-        var t = this.value, a = dateFormatConvert.validate(t, formCalender.userPattern);
-        if (a) {
-          var r = {};
-          r.date = a.getDate(), r.month = a.getMonth(), r.year = a.getFullYear(), formCalender.updateDatePicker(e, void 0, void 0, r)
-        }
-      }),
-        t.blur()
-    },
-    closeDatePicker: function () {
-      document.getElementById('template' + this.calendarNode.getAttribute('tplid')).style.display = 'none'
-    },
-    updateDatePicker: function (e, t, a, r) {
-      var n = document.getElementById('template' + this.calendarNode.getAttribute('tplid'));
-      r && (this.currDate = r.date, this.currMonth = r.month, this.currYear = r.year), void 0 !== t ? 1 === t ? 11 === this.currMonth ? (this.currMonth = 0, this.currYear++) : this.currMonth++ : 0 === this.currMonth ? (this.currMonth = 11, this.currYear--) : this.currMonth-- : void 0 !== a && (this.currYear = parseInt(this.currYear) + a), this.createDatePicker(this.currDate, this.currMonth, this.currYear, !1, !0), n.style.display = 'block'
-    },
-    stEv: function (e) {
-      e || (e = window.event), e && (e.cancelBubble = !0, e.stopPropagation && e.stopPropagation())
-    }
-  };
-  window.onclick = function () {
-    for (var e = document.getElementsByClassName('tempCalDiv'), t = e.length, a = 0; a < t; a++) {
-      var r = e[a];
-      if (document.activeElement === document.querySelector('input[tplid=\'' + r.id.replace('template', '') + '\']'))
-        return;
-      var n = e[a].style;
-      'block' === n.display && (n.display = 'none')
-    }
-  };
-  var dateFormatConvert = {
-    shortMon: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], longMon: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], dayArr: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31], wod: 1, lm: 'userdate',
-    _dateObj: void 0, lLimit: 80, formats: [{
-      val: 'YYYY',
-      type: 'year',
-      regex: /\d{4}/, len: 4
-    },
-    {
-      val: 'GGGG',
-      type: 'year',
-      regex: /\d{4}/, len: 4, isWEG: !0
-    },
-    {
-      val: 'gggg',
-      type: 'year',
-      regex: /\d{4}/, len: 4, isWEG: !0
-    },
-    {
-      val: 'YY',
-      type: 'year',
-      regex: /\d{2}/, len: 2
-    },
-    {
-      val: 'GG',
-      type: 'year',
-      regex: /\d{2}/, len: 2, isWEG: !0
-    },
-    {
-      val: 'gg',
-      type: 'year',
-      regex: /\d{2}/, len: 2, isWEG: !0
-    },
-    {
-      val: 'MMMM',
-      type: 'month',
-      regex: /[A-z]{3,}/, long: !0, str: !0, array: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    },
-    {
-      val: 'MMM',
-      str: !0, type: 'month',
-      regex: /[A-z]{3,}/, array: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    },
-    {
-      val: 'Mo',
-      suff: !0, type: 'month',
-      regex: /\d{1,2}(?=st|nd|rd|th)/, max: 12
-    },
-    {
-      val: 'MM',
-      type: 'month',
-      regex: /\d{2}/, len: 2, max: 12, alt: !0
-    },
-    {
-      val: 'M',
-      type: 'month',
-      regex: /\d{1,2}/, max: 12
-    },
-    {
-      val: 'DDDD',
-      type: 'date',
-      regex: /\d{3}/, len: 3, year: !0
-    },
-    {
-      val: 'DDDo',
-      type: 'date',
-      suff: !0, regex: /\d{1,3}(?=st|nd|rd|th)/, len: 3, year: !0, ignore: /\d{3}(?=st|nd|rd|th)/
-    },
-    {
-      val: 'DDD',
-      type: 'date',
-      regex: /\d{1,3}/, year: !0, ignore: /\d{3}/
-    },
-    {
-      val: 'Do',
-      type: 'date',
-      suff: !0, regex: /\d{1,2}(?=st|nd|rd|th)/
-    },
-    {
-      val: 'DD',
-      type: 'date',
-      regex: /\d{2}/, len: 2, alt: !0
-    },
-    {
-      val: 'D',
-      type: 'date',
-      regex: /\d{1,2}/
-    },
-    {
-      val: 'dddd',
-      type: 'longdate',
-      regex: /[A-z]{3,}/, long: !0, str: !0, array: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-    },
-    {
-      val: 'ddd',
-      type: 'longdate',
-      regex: /[A-z]{3}/, str: !0, array: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-    },
-    {
-      val: 'dd',
-      type: 'longdate',
-      regex: /[A-z]{2}/, str: !0, array: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
-    },
-    {
-      val: 'do',
-      type: 'longdate',
-      regex: /\d{1}(?=st|nd|rd|th)/, suff: !0
-    },
-    {
-      val: 'd',
-      type: 'longdate',
-      regex: /\d{1}/
-    }], parseFormat: function (e, t) {
-      for (var a, r = this.formats, n = [], s = r.length, i = 0; i < s; i++) {
-        var l = r[i];
-        if (!e.length)
-          break;
-        if (e.indexOf(l.val) > -1) {
-          if (t && l.alt) {
-            a = !0;
-            continue
-          }
-          a && (l.val = r[i - 1].val, l = r[i - 1]), a = !1, n.push({
-            format: l,
-            index: e.indexOf(l.val)
-          }),
-            e = e.replace(l.val, Math.pow(10, l.val.length - 1)), i--
-        }
-        else;
-      }
-      return n.sort(function (e, t) {
-        return e.index - t.index
-      })
-    },
-    convertFormat: function (e, t) {
-      this._dateObj = e;
-      var a = this._dateObj, r = this.parseFormat(t, !0), n = {},
-        s = {
-          date: a.getDate(), month: a.getMonth(), year: a.getFullYear(), day: a.getDay()
-        };
-      t = this.fmReplace(t.replace(/{{|}}/g, ''), r);
-      for (var i = r.length, l = 0; l < i; l++) {
-        var d = r[l].format;
-        switch (d.type) {
-          case 'date':
-            t = t.replace(d.val + this.lm, this.crctLength(d.year ? this.totdate(s.month, this.isLeap(s.year), s.date) :
-              s.date, d.len, d.suff));
-            break;
-          case 'month':
-            t = d.str ? t.replace(d.val + this.lm, d.array[s.month]) :
-              t.replace(d.val + this.lm, this.crctLength(s.month + 1, d.len, d.suff));
-            break;
-          case 'year':
-            t = t.replace(d.val + this.lm, 2 === d.len ? this.crctLength(s.year % 100, 2) :
-              4 === (s.year + '').length ? s.year :
-                this.crctLength(s.year, 4)), n.year = n.year || [], n.year.push(d);
-            break;
-          case 'day':
-          case 'week':
-            n.flag = !0, n[d.type] = n[d.type] || [], n[d.type].push(d);
-            break;
-          case 'longdate':
-            t = d.str ? t.replace(d.val + this.lm, d.array[s.day]) :
-              t.replace(d.val + this.lm, this.crctLength(s.day, null, d.suff))
-        }
-      }
-      return t.replace(/{{|}}/g, '')
-    },
-    fmReplace: function (e, t) {
-      for (var a = 0, r = t.length, n = 0; n < r; n++)
-        e = e.slice(0, t[n].index + a) + t[n].format.val + this.lm + e.slice(t[n].index + a + t[n].format.val.length), a += 8;
-      return e
-    },
-    totdate: function (e, t, a) {
-      for (var r = 0, n = 0; n < e; n++)
-        r += this.dayArr[n], t && 1 === n && (r += 1);
-      return r + (a || 0)
-    },
-    crctLength: function (e, t, a) {
-      var r = '';
-      if (a && (r = this.nthconv(e)), t) {
-        e = e.toString();
-        for (var n = 1; n < t; n++)
-          e.length <= n && (e = '0' + e)
-      }
-      return e + r
-    },
-    nthconv: function (e) {
-      if (e > 3 && e < 21)
-        return 'th';
-      switch (e % 10) {
-        case 1:
-          return 'st';
-        case 2:
-          return 'nd';
-        case 3:
-          return 'rd';
-        default:
-          return 'th'
-      }
-    },
-    isLeap: function (e) {
-      return 2 === (e += '').length && (e = this.getCorrectYear(parseInt(e))), (e = parseInt(e)) % 4 == 0 && e % 100 != 0 || e % 400 == 0
-    },
-    getCorrectYear: function (e) {
-      var t = e + '';
-      if (e = parseInt(e), 2 === t.length) {
-        var a = (new Date).getFullYear(), r = parseInt(a / 100), n = a % 100, s = (n - this.lLimit + 100) % 100;
-        e = n > s ? e < s ? r + 1 + '' + this.crctLength(e, 2) : r + '' + this.crctLength(e, 2) : e < s ? r + '' + this.crctLength(e, 2) : r - 1 + '' + this.crctLength(e, 2)
-      }
-      return e
-    },
-    valFormat: function (e, t) {
-      for (var a = {}, r = new Date((new Date).getFullYear(), 0), n = this.parseFormat(t, !0), s = e, i = t = t.replace(/{{|}}/g, ''), l = n.length, d = 0; d < l; d++) {
-        var o, h = n[d].format;
-        switch (h.type) {
-          case 'date':
-          case 'year':
-          case 'week':
-          case 'day':
-            h.regex.test(e) ? (o = 'year' === h.type ? e.match(h.regex)[h.match || 0] :
-              parseInt(e.match(h.regex)[h.match || 0]), a[h.type] = o, e = this.replaceVal(e, h.regex, h.suff), s = this.replaceVal(s, h.regex, h.suff, h.val), h.year && (a.date = getDay(a.date).day)) :
-              a.year && a.week ? (a[h.type] = this.wod, t = t.replace(h.val, ''), i = i.replace(h.val, '')) :
-                a[h.type] = 'Invalid', /date/i.test(h.type) && 0 === a[h.type] && (a[h.type] = 'Invalid');
-            break;
-          case 'month':
-            h.regex.test(e) ? (o = this.getMonth(e.match(h.regex)[0], h.suff, h.str, h.long), a.month = o.val, e = this.replaceVal(e, o.mon || h.regex, h.suff), s = this.replaceVal(s, o.mon || h.regex, h.suff, h.val)) :
-              a.month = 'Invalid', a.month < 0 && (a.month = 'Invalid');
-            break;
-          case 'longdate':
-            h.regex.test(e) && (o = h.str ? this.findVal(h.array, e.match(h.regex)[0]) :
-              parseInt(e.match(h.regex)[0]), a.longdate = this.isDef(o.index) ? o.index :
-                o, e = this.replaceVal(e, o.mon || o, h.suff), s = this.replaceVal(s, o.mon || o, h.suff, h.val))
-        }
-        t = t.replace(h.valForm || h.val, '')
-      }
-      if (this.isDef(a.longdate) && a.day && a.day !== a.longdate ? r.setFullYear('Invalid') : this.isDef(a.year) && r.setFullYear(this.getCorrectYear(a.year)), this.isDef(a.month) && r.setMonth(a.month), this.isDef(a.date) && r.setDate(a.date <= this.dayArr[r.getMonth()] + (1 === r.getMonth() && this.isLeap(r.getFullYear()) ? 1 : 0) ? a.date : 'Invalid'), this._isCorrectFormat = e.length === t.length && i === s && this.validate(r))
-        return r
-    },
-    validate: function (e, t) {
-      var a = e.constructor;
-      if (a === Date)
-        return this._dateObj = e, 'Invalid Date' !== e.toString();
-      if (a === String && t) {
-        var r = this.valFormat(e, t);
-        return r && this._isCorrectFormat && (this._format = t), r
-      }
-    },
-    replaceVal: function (e, t, a, r) {
-      return e = e.replace(t, r || ''), a && (e = e.replace(/st|nd|rd|th/, '')), e
-    },
-    getMonth: function (e, t, a, r) {
-      var n;
-      if (a) {
-        var s = this.findVal(r ? this.longMon : this.shortMon, e);
-        n = s.mon, e = s.index, (!n || e > 11) && (e = 'Invalid')
-      }
-      else (e = parseInt(e) - 1) > 11 && (e = 'Invalid');
-      return {
-        val: e,
-        mon: n
-      }
-    },
-    findVal: function (e, t) {
-      var a, r, n = e.length;
-      for (r = 0; r < n; r++)
-        if (new RegExp(e[r]).test(t)) {
-          a = e[r];
-          break
-        }
-      return {
-        mon: a,
-        index: r
-      }
-    },
-    isDef: function (e) {
-      return void 0 !== e
-    }
-  };
-</script>
-						<style>
-							#calenDiv{
-								padding: 10px;
-								display: table;
-								width: 195px;
-								font-family: helvetica,sans-serif !important;
-							}
-							.calNav {width: 20px;
-							height: 15px;
-							display
-							:inline-block;position: relative;
-							top: 4px;
-							cursor: pointer }
-							#calenDiv .calNav {width: 15px;
-							}
-							#calenDiv .yearNavLft {right: 10px;
-							}
-							#calenDiv .yearNavRgt {left: 10px;
-							}
-							#calenDiv .dLft {right: 5px;
-							}
-							#calenDiv .dRgt {left: 5px;
-							}
-							.dLft {right
-							:10px;opacity: 0.8;
-							}
-							.dRgt {left
-							:10px;opacity: 0.8;
-							}
-							.yearNavLft {right: 15px;
-							}
-							.yearNavRgt {left
-							:15px;opacity: 0.6;
-							}
-							#calenDiv table.calDay {border-spacing: 6px;
-							margin-top: 0 }
-							#calenDiv table.calDay td{
-							padding: 3px 4px;
-							font-size: 11px }
-							#calenDiv table.calDay th {padding: 0 3px;
-							font-size: 11px;
-							padding-right: 0;
-							padding-left: 1px;
-							color:  #888;
-							width: 22px;
-							cursor: default;
-							border-radius: 3px;
-							text-align: center;
-							font-weight: normal;
-							}
-							#calenDiv #weekDays {margin-top: 10px;
-							margin-bottom: 5px;
-							border-top: 1px solid  #c0c6cc;
-							border-bottom: 1px solid  #c0c6cc;
-							border-spacing: 5px;
-							margin-left: 0;
-							color:  #8b9ab9;
-							}
-							#calenDiv .sCalMon {cursor: default;
-							display: inline-block;
-							color:  #888;
-							width: 110px;
-							font-size: 12px;
-							}
-							table.calDay td:hover {background-color: #e8e8e8;
-							}
-							table.calDay{
-							color: #222;
-							margin-left: -10px;
-							border-spacing: 12px;
-							}
-							table.calDay td, table.calDay th{
-							font-size: var(--crm-extra-medium-font-size);
-							cursor: default;
-							border-radius: 3px;
-							text-align: center;
-							padding: 3px 5px;
-							font-family: helvetica,sans-serif !important;
-							}
-							table.calDay td.sel, table.calDay td.sel:hover {color: #fff;
-							background: #b3b3b3;
-							border-radius: 3px;
-							}
-							table.calDay td.noNum, table.calDay td.lt-gray {color: #c1c1c1;
-							}
-							.aligncenter {text-align: center;
-							}
-							#calBtns a,  .lyteCalBtns .lyteCalCurrentDate a {color: var(--linkColor);
-							font-size: 14px;
-							text-decoration: none;
-							}
-							#calenDiv #calBtns{
-							width: 183px;
-							margin-left: 10px;
-							border-top: 0;
-							font-size: 11px;
-							padding: 3px 0 12px !important;
-							}
-							.arrow {border: solid  #666;
-							border-width: 0 1px 1px 0;
-							display: inline-block;
-							height: 6px;
-							width: 6px;
-							}
-							#calenDiv .right {transform: rotate(-45deg);
-							-webkit-transform: rotate(-45deg);
-							}
-							#calenDiv .left {transform: rotate(135deg);
-							-webkit-transform: rotate(135deg);
-							}
-							.mLMinus2 {margin-left: -2px;
-							}
-							.mRMinus2 {margin-right: -2px;
-							}
-							.vaM {vertical-align: middle;
-							}
-							.tempCalDiv {display: none;
-							margin: 0;
-							position: absolute;
-							z-index: 1000;
-							background-color:  #fff;
-							border: 1px solid  #c0c6cc;
-							-webkit-box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-							box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-							border-top: 0;
-							top: 20px;
-							}
-						</style>
 
+        // Adjust canvas size on window resize and initially
+        window.onresize = resizeCanvas;
+        resizeCanvas();
 
-            <script>
+        // Initialize SignaturePad
+        signaturePad = new SignaturePad(canvas, {
+            backgroundColor: 'rgb(250,250,250)' // Light background for signature area
+        });
 
-              function addAriaSelected6771280000000858023 (){
+        // Event listener for the "Clear" button
+        document.getElementById("clear").addEventListener('click', function() {
+            signaturePad.clear();
+        });
 
-                var optionElem = event.target;
+        // --- Form Validation and PDF Generation on Submit ---
+        $('#submitTicketForm').on('submit', async function(event) {
+            event.preventDefault(); // Prevent default form submission to handle it manually
 
-                var previousSelectedOption = optionElem.querySelector ( '[aria-selected=true]' );
+            // Form Validation Function (combining your existing validation)
+            function validateTicketForm() {
+                var formValid = true;
 
-                if ( previousSelectedOption ){
-
-                  previousSelectedOption.removeAttribute ( 'aria-selected' );
-
-                }
-
-                optionElem.querySelectorAll ( 'option' )[ optionElem.selectedIndex ].ariaSelected = 'true';
-
-              }
-
-              /* Do not remove this code. */
-
-              function rccallback6771280000000858023 (){
-
-                if ( document.getElementById( 'recap6771280000000858023' ) != undefined ){
-
-                  document.getElementById ( 'recap6771280000000858023' ).setAttribute ( 'captcha-verified', true );
-
-                }
-
-                if ( document.getElementById( 'recapErr6771280000000858023' ) != undefined && document.getElementById( 'recapErr6771280000000858023' ).style.visibility == 'visible' ){
-
-                  document.getElementById ( 'recapErr6771280000000858023' ).style.visibility = 'hidden';
-
-                }
-
-              }
-
-              function reCaptchaAlert6771280000000858023 (){
-
-                var recap = document.getElementById ( 'recap6771280000000858023' );
-
-                if ( recap != undefined && recap.getAttribute( 'captcha-verified' ) == 'false' ){
-
-                  document.getElementById ( 'recapErr6771280000000858023' ).style.visibility = 'visible';
-
-                  return false;
-
-                }
-
-                return true;
-
-              }
-
-              function validateEmail6771280000000858023 (){
-
-                var form = document.forms[ 'WebToCases6771280000000858023' ];
-
-                var emailFld = form.querySelectorAll ( '[ftype=email]' );
-
-                var i;
-
-                for ( i = 0; i < emailFld.length; i++ ){
-
-                  var emailVal = emailFld[ i ].value;
-
-                  if ((emailVal.replace( /^\s+|\s+$/g,'' )).length != 0 ){
-
-                    var atpos = emailVal.indexOf ( '@' );
-
-                    var dotpos = emailVal.lastIndexOf ( '.' );
-
-                    if ( atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= emailVal.length ){
-
-                      console.error ( 'Please enter a valid email address. ' ); // Changed from alert
-                      emailFld[ i ].focus ();
-                      return false;
-
+                // Validate all required input fields
+                $('#submitTicketForm input, #submitTicketForm checkbox, #submitTicketForm select, #submitTicketForm textarea').each(function() {
+                    // Skip fields marked as 'not-required'
+                    if ($(this).hasClass('not-required')) {
+                        return true;
                     }
 
-                  }
-
-                }
-
-                return true;
-
-              }
-
-              function validateDateFormat6771280000000858023 (){
-
-                var form = document.forms[ 'WebToCases6771280000000858023' ];
-
-                var dateFlds = form.querySelectorAll ( '[ftype=date]' );
-
-                var i;
-
-                for ( i = 0; i < dateFlds.length; i++ ){
-
-                  var dateFld = dateFlds[ i ];
-
-                  var usrPtrn = dateFld.placeholder;
-
-                  var dateVal = dateFld.value;
-
-                  if ( dateVal.trim() != '' ){
-
-                    var vald = dateFormatConvert.validate ( dateVal, usrPtrn );
-
-                    if ( !vald ){
-
-                      console.error ( 'Please enter a valid date ' ); // Changed from alert
-                      dateFld.focus ();
-                      return false;
-
+                    // Check if value is empty or, for multiple selects, if no option is selected
+                    if (!$(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length === 0)) {
+                        formValid = false;
+                        $(this).css('border-color', 'red'); // Highlight invalid fields
+                        // Scroll to the first invalid field for better UX
+                        $('html, body').animate({ scrollTop: $(this).offset().top - 200 }, 500);
+                        return false; // Stop the loop on the first invalid field
+                    } else {
+                        $(this).css('border-color', 'green'); // Indicate valid fields
                     }
-
-                  }
-
-                }
-
-                return true;
-
-              }
-
-              // Initialize signature pad after DOM is loaded
-              let signaturePad; // Declare signaturePad outside to be accessible
-              document.addEventListener('DOMContentLoaded', function() {
-                var canvas = document.getElementById('signature-pad');
-                if (canvas) {
-                    signaturePad = new SignaturePad(canvas);
-                    document.getElementById('clear').addEventListener('click', function () {
-                        signaturePad.clear();
-                    });
-                } else {
-                    console.error('Signature pad canvas not found.');
-                }
-              });
-              
-              // PDF generation functions (from your provided code)
-              // These functions now accept `doc`, `pageHeight`, `pageWidth`, `headerHeight`, `footerHeight` as arguments
-              // to ensure they use the local scope variables from generatePDFAndSubmitForm.
-              function addHeader(doc, headerHeight) {
-                return new Promise((resolve, reject) => {
-                  const imgUrl = 'https://www.techunifi.com/assets/img/hero-img.svg'; 
-                  const img = new Image();
-                  img.src = imgUrl;
-            
-                  img.onload = function () {
-                    doc.addImage(img, 'PNG', 60, 10, 90, 30); 
-                    resolve();
-                  };
-            
-                  img.onerror = function () {
-                    reject('Image failed to load');
-                  };
                 });
-              }
-            
-              function addFooter(doc, pageHeight, footerHeight, pageWidth) {
-                doc.setFontSize(12);
-                doc.setTextColor(0, 0, 0);
-                doc.text('2638 Willard Dairy Road, Suite 112 High Point, NC 27265', pageWidth / 2, pageHeight - footerHeight + 10, null, null, 'center');
-                doc.text('+1 (336) 860-6061 | techunifi.com | Info@techunifi.com', pageWidth / 2, pageHeight - footerHeight + 20, null, null, 'center');
-                doc.setLineWidth(0.5);
-                doc.line(10, pageHeight - footerHeight, pageWidth - 10, pageHeight - footerHeight); 
-              }
-            
-              function addContent(doc, y, pageHeight, footerHeight, pageWidth, headerHeight) {
-                const formData = $('#submitTicketForm').serializeArray();
-                const filteredFormData = formData.filter(field =>
-                  field.name !== 'orgId' &&
-                  field.name !== 'retURL' &&
-                  field.name !== 'mathSum' &&
-                  field.name !== '00NUm000009SCKP' &&
-                  field.name !== 'g-recaptcha-response' &&
-                  field.name !== 'Subject' 
-                );
-            
-                const lineHeight = 10; 
-                const valueIndent = 90; 
-                const maxWidth = pageWidth - valueIndent - 10; 
-            
-                for (const field of filteredFormData) {
-                  let label = $(`label[for='${field.name}']`).text();
-                  if (!label) {
-                      const inputElement = $(`[name='${field.name}']`);
-                      if (inputElement.length > 0) {
-                          label = inputElement.attr('placeholder') || inputElement.attr('title') || field.name;
-                      } else {
-                          label = field.name; 
-                      }
-                  }
-                  
-                  const value = field.value;
-            
-                  if (y + lineHeight > pageHeight - footerHeight - 10) {
-                    doc.addPage();
-                    y = headerHeight; 
-                    addHeader(doc, headerHeight); 
-                  }
-            
-                  if (!value.includes('00DHo000002fpJX') && !value.includes('{"keyname":"casev2","fallback":"true","orgId":"00DHo000002fpJX","ts"')) {
-                    doc.setFont('helvetica', 'bold');
-                    doc.text(`${label}:`, 10, y); 
-                    
-                    doc.setFont('helvetica', 'normal');
-            
-                    const valueLines = doc.splitTextToSize(value, maxWidth);
-            
-                    valueLines.forEach(line => {
-                      if (y + lineHeight > pageHeight - footerHeight - 10) {
-                        doc.addPage();
-                        y = headerHeight; 
-                        addHeader(doc, headerHeight); 
-                      }
-                      doc.text(line, valueIndent, y);
-                      y += lineHeight; 
+
+                // Signature validation: Check if the signature pad is empty
+                if (signaturePad.isEmpty()) {
+                    formValid = false;
+                    alert('Please provide your signature.');
+                    $('html, body').animate({ scrollTop: $('#signature-pad').offset().top - 200 }, 500);
+                }
+
+                // reCAPTCHA validation
+                var captchaResponse = grecaptcha.getResponse();
+                if (!captchaResponse) {
+                    formValid = false;
+                    $('.g-recaptcha').css('border-color', 'red'); // Highlight reCAPTCHA area
+                    alert('Please complete the CAPTCHA');
+                } else {
+                    $('.g-recaptcha').css('border-color', 'green'); // Indicate valid reCAPTCHA
+                }
+
+                return formValid; // Return overall form validity
+            }
+
+            // Only proceed if the form passes validation
+            if (!validateTicketForm()) {
+                console.log('Form validation failed. PDF not generated.');
+                return; // Stop execution if validation fails
+            }
+
+            // --- PDF Generation Logic ---
+            try {
+                // Ensure jsPDF is available in the window scope
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                const pageHeight = doc.internal.pageSize.height || 297; // A4 page height (in mm)
+                const pageWidth = doc.internal.pageSize.width || 210; // A4 page width (in mm)
+                const headerHeight = 40;
+                const footerHeight = 30;
+
+                // Function to add the header with logo
+                async function addHeader(pdfDoc) {
+                    return new Promise((resolve, reject) => {
+                        const imgUrl = 'https://www.techunifi.com/assets/img/hero-img.png';
+                        const img = new Image();
+                        img.src = imgUrl;
+
+                        img.onload = function() {
+                            // Add image to PDF at specified coordinates and size
+                            pdfDoc.addImage(img, 'PNG', 60, 10, 90, 30);
+                            resolve();
+                        };
+
+                        img.onerror = function() {
+                            console.error('Failed to load header image:', imgUrl);
+                            reject('Image failed to load');
+                        };
                     });
-                  }
                 }
-            
-                return y; 
-              }
-            
-              function addTermsAndConditions(doc, y, pageHeight, footerHeight, headerHeight) {
-                if (y + 60 > pageHeight - footerHeight - 10) {
-                  doc.addPage();
-                  y = headerHeight; 
-                  addHeader(doc, headerHeight); 
+
+                // Function to add the footer with contact details
+                function addFooter(pdfDoc) {
+                    pdfDoc.setFontSize(12);
+                    pdfDoc.setTextColor(0, 0, 0); // Black color
+                    // Center text horizontally
+                    pdfDoc.text('2638 Willard Dairy Road, Suite 112 High Point, NC 27265', pageWidth / 2, pageHeight - footerHeight + 10, null, null, 'center');
+                    pdfDoc.text('+1 (336) 860-6061 | techunifi.com | Info@techunifi.com', pageWidth / 2, pageHeight - footerHeight + 20, null, null, 'center');
+                    pdfDoc.setLineWidth(0.5);
+                    // Draw a line above the footer text
+                    pdfDoc.line(10, pageHeight - footerHeight, pageWidth - 10, pageHeight - footerHeight);
                 }
-            
-                doc.setFontSize(14);
-                doc.setFont('helvetica', 'bold'); 
-                doc.text('Terms and Conditions', 10, y);
-                y += 10;
-                doc.setFont('helvetica', 'normal'); 
-                doc.text('1. Total payment due 30 days after completion of work.', 10, y);
-                y += 10;
-                doc.text('2. Refer to the W.O. # in all correspondence and in your payment.', 10, y);
-                y += 10;
-                doc.text('3. Please send correspondence regarding this work order to:', 10, y);
-                y += 10;
-                doc.text('   Suzanne Blair - suzanne.blair@techunifi.com.', 10, y);
-                y += 10;
-            
-                doc.setTextColor(6, 98, 187); 
-                doc.textWithLink('View full terms and conditions', 10, y, { url: 'https://www.techunifi.com/terms-conditions.html' });
-                y += 20; 
-            
-                return y; 
-              }
-            
-              // Main PDF generation and form submission logic
-              async function generatePDFAndSubmitForm() {
-                const submitButton = document.querySelector('.crmWebToEntityForm .formsubmit');
-                submitButton.setAttribute('disabled', true);
-                submitButton.value = 'Generating PDF...'; 
-            
-                try {
-                  const { jsPDF } = window.jspdf; // Get jsPDF here
-                  const doc = new jsPDF(); // Create a new jsPDF instance for each generation
-                  const pageHeight = doc.internal.pageSize.height || 297; 
-                  const pageWidth = doc.internal.pageSize.width || 210; 
-                  const headerHeight = 40;
-                  const footerHeight = 30;
 
-                  let y = headerHeight;
-            
-                  // Add header and wait for image to load
-                  await addHeader(doc, headerHeight);
-                  y += 25; 
-            
-                  // Add form content
-                  y = addContent(doc, y, pageHeight, footerHeight, pageWidth, headerHeight);
-                  y += 10; 
-            
-                  // Add Terms and Conditions
-                  y = addTermsAndConditions(doc, y, pageHeight, footerHeight, headerHeight);
-            
-                  // Add signature if available
-                  if (signaturePad && !signaturePad.isEmpty()) { // Check if signaturePad is initialized
-                    const signatureImage = signaturePad.toDataURL();
-                    if (y + 40 > pageHeight - footerHeight - 10) { 
-                      doc.addPage();
-                      y = headerHeight;
-                      await addHeader(doc, headerHeight); 
-                    }
-                    doc.addImage(signatureImage, 'PNG', 10, y, 190, 30);
-                    y += 40; 
-                  }
-            
-                  // Add footer to the last page
-                  addFooter(doc, pageHeight, footerHeight, pageWidth);
-            
-                  // Save the PDF
-                  doc.save('techunifi-changeOrder-data.pdf');
-                  console.log('PDF downloaded successfully.');
-            
-                  // Now submit the form to Zoho after PDF generation
-                  const form = document.forms['WebToCases6771280000000858023'];
-                  form.submit(); 
-            
-                } catch (error) {
-                  console.error('Error generating PDF:', error);
-                  submitButton.removeAttribute('disabled'); // Re-enable submit button if PDF generation fails
-                  submitButton.value = 'Submit & Download';
-                }
-              }
+                // Function to add form data content to the PDF
+                function addContent(pdfDoc, currentY) {
+                    const formData = $('#submitTicketForm').serializeArray();
+                    // Filter out hidden/internal form fields that shouldn't appear in the PDF
+                    const filteredFormData = formData.filter(field =>
+                        field.name !== 'orgId' &&
+                        field.name !== 'retURL' &&
+                        field.name !== 'mathSum' &&
+                        field.name !== '00NUm000009SCKP' &&
+                        field.name !== 'g-recaptcha-response' &&
+                        field.name !== 'captchaVerified' // Also exclude this if it's not a user entry
+                    );
 
-              function checkMandatory6771280000000858023(event) {
-                event.preventDefault(); // Prevent default form submission initially
+                    const lineHeight = 10; // Spacing between lines of text
+                    const valueIndent = 90; // X-coordinate for the start of the value text
+                    const maxWidth = pageWidth - valueIndent - 10; // Max width for wrapping long text
 
-                const form = document.forms['WebToCases6771280000000858023'];
+                    filteredFormData.forEach(field => {
+                        const label = $(`label[for='${field.name}']`).text(); // Get human-readable label
+                        let value = field.value;
 
-                // Original validation logic
-                var mndFileds = new Array ( 'Subject' );
-                var fldLangVal = new Array ( 'Subject' );
-                for ( i = 0; i < mndFileds.length; i++ ){
-                  var fieldObj = form[ mndFileds[ i ]];
-                  if ( fieldObj ){
-                    if (((fieldObj.value ).replace( /^\s+|\s+$/g,'' )).length == 0 ){
-                      if ( fieldObj.type == 'file' ){
-                        console.error ( 'Please select a file to upload.' ); 
-                        fieldObj.focus ();
-                        return false;
-                      }
-                      console.error ( fldLangVal[ i ] + ' cannot be empty.' ); 
-                      fieldObj.focus ();
-                      return false;
-                    }
-                    else if ( fieldObj.nodeName == 'SELECT' ){
-                      if ( fieldObj.options[fieldObj.selectedIndex].value == '-None-' ){
-                        console.error ( fldLangVal[ i ] + ' cannot be none.' ); 
-                        fieldObj.focus ();
-                        return false;
-                      }
-                    }
-                    else if ( fieldObj.type == 'checkbox' ){
-                        if (fieldObj.id === '00NUm000009SCKP' && fieldObj.checked === false) {
-                            console.error('Please accept the terms and conditions.');
-                            fieldObj.focus();
-                            return false;
+                        // Check for page break before adding new content
+                        if (currentY + lineHeight > pageHeight - footerHeight - 10) {
+                            pdfDoc.addPage();
+                            currentY = headerHeight; // Reset Y position for new page
+                            addHeader(pdfDoc); // Add header to the new page
                         }
+
+                        // Exclude specific internal values (like Zoho CRM fallback data)
+                        if (!value.includes('00DHo000002fpJX') && !value.includes('{"keyname":"casev2","fallback":"true","orgId":"00DHo000002fpJX","ts"')) {
+                            pdfDoc.setFont('helvetica', 'bold'); // Make labels bold
+                            pdfDoc.text(`${label}:`, 10, currentY); // Print label
+
+                            pdfDoc.setFont('helvetica', 'normal'); // Set value to normal font
+
+                            // Split long values into multiple lines to fit PDF width
+                            const valueLines = pdfDoc.splitTextToSize(value, maxWidth);
+
+                            valueLines.forEach(line => {
+                                // Check for page break for each line of wrapped text
+                                if (currentY + lineHeight > pageHeight - footerHeight - 10) {
+                                    pdfDoc.addPage();
+                                    currentY = headerHeight;
+                                    addHeader(pdfDoc);
+                                }
+                                pdfDoc.text(line, valueIndent, currentY); // Print each line of the value
+                                currentY += lineHeight; // Move Y down for the next line
+                            });
+                        }
+                    });
+                    return currentY; // Return the updated Y position
+                }
+
+                // Function to add Terms and Conditions to the PDF
+                function addTermsAndConditions(pdfDoc, currentY) {
+                    // Check for page break before adding T&C
+                    if (currentY + 60 > pageHeight - footerHeight - 10) {
+                        pdfDoc.addPage();
+                        currentY = headerHeight;
+                        addHeader(pdfDoc);
                     }
-                  }
+
+                    pdfDoc.setFontSize(14);
+                    pdfDoc.setFont('helvetica', 'bold');
+                    pdfDoc.text('Terms and Conditions', 10, currentY);
+                    currentY += 10;
+                    pdfDoc.setFont('helvetica', 'normal');
+                    pdfDoc.text('1. Total payment due 30 days after completion of work.', 10, currentY);
+                    currentY += 10;
+                    pdfDoc.text('2. Refer to the W.O. # in all correspondence and in your payment.', 10, currentY);
+                    currentY += 10;
+                    pdfDoc.text('3. Please send correspondence regarding this work order to:', 10, currentY);
+                    currentY += 10;
+                    pdfDoc.text('   Suzanne Blair - suzanne.blair@techunifi.com.', 10, currentY);
+                    currentY += 10;
+
+                    // Add hyperlink
+                    pdfDoc.setTextColor(6, 98, 187); // Set text color to #0662BB for the link
+                    pdfDoc.textWithLink('View full terms and conditions', 10, currentY, { url: 'https://www.techunifi.com/terms-conditions.html' });
+                    pdfDoc.setTextColor(0, 0, 0); // Reset text color to black
+                    currentY += 20; // Space after link
+
+                    return currentY;
                 }
 
-                if ( !validateEmail6771280000000858023()){
-                  return false;
+                // Main function to generate the PDF
+                async function generatePDF() {
+                    let currentY = headerHeight; // Starting Y position for content
+
+                    await addHeader(doc); // Add header to the first page
+
+                    currentY += 25; // Space after header
+
+                    currentY = addContent(doc, currentY); // Add form data
+
+                    currentY += 10; // Space before T&C
+
+                    currentY = addTermsAndConditions(doc, currentY); // Add terms and conditions
+
+                    // Add signature image if available
+                    if (!signaturePad.isEmpty()) {
+                        const signatureImage = signaturePad.toDataURL();
+                        // Check for page break before adding signature
+                        if (currentY + 40 > pageHeight - footerHeight - 10) {
+                            doc.addPage();
+                            currentY = headerHeight;
+                            await addHeader(doc); // Add header to the new page if new page is created
+                        }
+                        doc.addImage(signatureImage, 'PNG', 10, currentY, 190, 30); // Add signature image
+                        currentY += 40; // Adjust Y after signature
+                    }
+
+                    addFooter(doc); // Add footer to the last page
+
+                    // Save the PDF with a dynamic filename
+                    doc.save('techunifi-changeOrder-data.pdf');
+                    console.log('PDF downloaded successfully.');
                 }
 
-                if ( !reCaptchaAlert6771280000000858023()){
-                  return false;
+                await generatePDF(); // Execute PDF generation
+
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                alert('An error occurred while generating the PDF. Please try again.');
+            }
+
+            // --- Form Submission ---
+            // After PDF generation (or failure), submit the original form.
+            // A small delay can help ensure the PDF download prompt appears first.
+            setTimeout(() => {
+                const form = document.getElementById('submitTicketForm');
+                if (form && form.tagName === 'FORM') {
+                    // Use native form submission to avoid conflicts and ensure any
+                    // server-side processing (like Zoho CRM integration) occurs.
+                    HTMLFormElement.prototype.submit.call(form);
+                } else {
+                    console.error('Form not found or not a valid form element for submission.');
                 }
+            }, 1000); // 1-second delay
+        });
 
-                if ( !validateDateFormat6771280000000858023()){
-                  return false;
+        // --- Live Input Validation Styling ---
+        // This provides immediate visual feedback on required fields.
+        $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').on('input change blur', function() {
+            if (!$(this).hasClass('not-required')) { // Only apply to required fields
+                if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
+                    $(this).css('border-color', 'green'); // Valid input
+                } else {
+                    $(this).css('border-color', 'red'); // Invalid/empty input
                 }
-
-                // New logic for signature validation
-                if (!signaturePad || signaturePad.isEmpty()) { // Check if signaturePad is initialized and empty
-                    console.error('Please provide an e-signature.');
-                    return false;
-                }
-
-                // All validations passed, proceed with PDF generation and then form submission
-                generatePDFAndSubmitForm();
-
-                return false; 
-              }
-
-
-              function tooltipShow6771280000000858023 ( el ){
-
-                var tooltip = el.nextElementSibling;
-
-                var tooltipDisplay = tooltip.style.display;
-
-                if ( tooltipDisplay == 'none' ){
-
-                  var allTooltip = document.getElementsByClassName ( 'zcwf_tooltip_over' );
-
-                  for ( i = 0; i < allTooltip.length; i++ ){
-
-                    allTooltip[ i ].style.display = 'none';
-
-                  }
-
-                  tooltip.style.display = 'block';
-
-                }
-
-                else {
-
-                  tooltip.style.display = 'none';
-
-                }
-
-              }
-
-            </script>
+            }
+        });
+    });
+}
+						</script>
 
 	
 						<!-- Do not remove this --- Analytics Tracking code starts -->
 						<script id='wf_anal' src='https://crm.zohopublic.com/crm/WebFormAnalyticsServeServlet?rid=1c9a11584b5ce55dbeac6200d692f925ceb6a60076fceccb47738398653c0479eeadaee6ed5ece32ee3f2f6a0ea8bd07gided4413ae4b6b34e234b316be3f8a92f63a0e4bbaadfd3224fbe44c87352cb412gid4943cf7df9905d5b096529519ce80ed25060571dc0df73e2441eb824d267b573gid2b748179890689ce6610c7079b8b54e3407550d5b0db2c34b518a692ba139b2b&tw=7f84a6c803e9ff9e9a4555ec0f74a72d5020bdbac2e9192b2c294d1645135cc1'></script>
 						<!-- Do not remove this --- Analytics Tracking code ends. -->
-
 </body>
 </html>
