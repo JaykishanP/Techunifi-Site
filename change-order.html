@@ -722,12 +722,11 @@ function gtag(){dataLayer.push(arguments);}
   <script src="assets/js/main.js"></script>
 
   
-				 
-    <!-- Internal JavaScript for Form Logic -->
+ <!-- Internal JavaScript for Form Logic -->
     <script type='text/javascript'>
         // Custom message box functions to replace alerts
         function showMessage(message) {
-            console.log("Displaying message:", message); // Log messages
+            console.log("Displaying message:", message);
             document.getElementById('messageContent').innerText = message;
             document.getElementById('customMessageBox').style.display = 'block';
         }
@@ -736,7 +735,7 @@ function gtag(){dataLayer.push(arguments);}
             document.getElementById('customMessageBox').style.display = 'none';
         });
 
-        // Date picker related functions (unchanged from previous)
+        // Date picker related functions (from original code)
         var formCalender = {
             userPattern: 'YYYY-MM-DD',
             currDateObj: undefined, currMonth: undefined, currYear: undefined, currDate: undefined, currMonthEnd: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31], monthName: undefined, days: undefined, displayPanel: undefined, isHideToday: undefined, calDefColor: '#515CCB',
@@ -889,7 +888,7 @@ function gtag(){dataLayer.push(arguments);}
             }
         };
 
-        // Date format conversion and validation functions (unchanged from previous)
+        // Date format conversion and validation functions (from original code)
         var dateFormatConvert = {
             shortMon: [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec' ],
             longMon: [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ],
@@ -905,7 +904,7 @@ function gtag(){dataLayer.push(arguments);}
             nthconv: function ( e ){ if ( e > 3 && e < 21 ) return 'th'; switch ( e % 10 ){ case 1: return 'st'; case 2: return 'nd'; case 3: return 'rd'; default: return 'th' } },
             isLeap: function ( e ){ return 2 === ( e += '' ).length && ( e = this.getCorrectYear ( parseInt ( e ))), ( e = parseInt ( e )) % 4 == 0 && e % 100 != 0 || e % 400 == 0 },
             getCorrectYear: function ( e ){ var t = e + ''; if ( e = parseInt( e ),2 === t.length ){ var a = ( new Date ).getFullYear (), r = parseInt ( a / 100 ), n = a % 100, s = ( n-this.lLimit + 100 ) % 100; e = n > s ? e < s ? r + 1 + '' + this.crctLength ( e, 2 ): r + '' + this.crctLength ( e, 2 ): e < s ? r + '' + this.crctLength ( e, 2 ): r-1 + '' + this.crctLength ( e, 2 ) } return e },
-            valFormat: function ( e, t ){ for ( var a = {},r = new Date((new Date ).getFullYear(),0 ),n = this.parseFormat( t, !0 ),s = e,i = t = t.replace( /{{|}}/g,'' ),l = n.length,d = 0; d < l; d++ ){ var o, h = n[ d ].format; switch ( h.type ){ case 'date': case 'year': case 'week': case 'day': h.regex.test ( e ) ? ( o = 'year' === h.type ? e.match ( h.regex )[ h.match || 0]: parseInt ( e.match ( h.regex )[ h.match || 0]), a[ h.type ] = o, e = this.replaceVal ( e, h.regex, h.suff ), s = this.replaceVal ( s, h.regex, h.suff, h.val ), h.year && ( a.date = getDay ( a.date ).day )): a.year && a.week ? ( a[ h.type ] = this.wod, t = t.replace ( h.val, '' ), i = i.replace ( h.val, '' )): a[ h.type ] = 'Invalid', /date/i.test ( h.type ) && 0 === a[ h.type ] && ( a[ h.type ] = 'Invalid' ); break; case 'month': h.regex.test ( e ) ? ( o = this.getMonth ( e.match ( h.regex )[0], h.suff, h.str, h.long ), a.month = o.val, e = this.replaceVal ( e, o.mon || h.regex, h.suff ), s = this.replaceVal ( s, o.mon || h.regex, h.suff, h.val ): a.month = 'Invalid', a.month < 0 && ( a.month = 'Invalid' ); break; case 'longdate': h.regex.test ( e ) && ( o = h.str ? this.findVal ( h.array, e.match ( h.regex )[0]): parseInt ( e.match ( h.regex )[0]), a.longdate = this.isDef ( o.index ) ? o.index: o, e = this.replaceVal ( e, o.mon || o, h.suff ), s = this.replaceVal ( s, o.mon || o, h.suff, h.val )) } t = t.replace ( h.valForm || h.val, '' ) } if ( this.isDef( a.longdate ) && a.day && a.day !== a.longdate ? r.setFullYear( 'Invalid' ):this.isDef( a.year ) && r.setFullYear( this.getCorrectYear( a.year )),this.isDef( a.month ) && r.setMonth( a.month ),this.isDef( a.date ) && r.setDate( a.date <= this.dayArr[r.getMonth()] + ( 1 === r.getMonth() && this.isLeap( r.getFullYear()) ? 1:0 ) ? a.date:'Invalid' ),this._isCorrectFormat = e.length === t.length && i === s && this.validate( r )) return r },
+            valFormat: function ( e, t ){ for ( var a = {},r = new Date((new Date ).getFullYear(),0 ),n = this.parseFormat( t, !0 ),s = e,i = t = t.replace( /{{|}}/g,'' ),l = n.length,d = 0; d < l; d++ ){ var o, h = n[ d ].format; switch ( h.type ){ case 'date': case 'year': case 'week': case 'day': h.regex.test ( e ) ? ( o = 'year' === h.type ? e.match ( h.regex )[ h.match || 0]: parseInt ( e.match ( h.regex )[ h.match || 0]), a[ h.type ] = o, e = this.replaceVal ( e, h.regex, h.suff ), s = this.replaceVal ( s, h.regex, h.suff, h.val ), h.year && ( a.date = getDay ( a.date ).day )): a.year && a.week ? ( a[ h.type ] = this.wod, t = t.replace ( h.val, '' ), i = i.replace ( h.val, '' )): a[ h.type ] = 'Invalid', /date/i.test ( h.type ) && 0 === a[ h.type ] && ( a[ h.type ] = 'Invalid' ); break; case 'month': h.regex.test ( e ) ? ( o = this.getMonth ( e.match ( h.regex )[0], h.suff, h.str, h.long ), a.month = o.val, e = this.replaceVal ( e, o.mon || h.regex, h.suff ), s = this.replaceVal ( s, o.mon || h.regex, h.suff, h.val )): a.month = 'Invalid', a.month < 0 && ( a.month = 'Invalid' ); break; case 'longdate': h.regex.test ( e ) && ( o = h.str ? this.findVal ( h.array, e.match ( h.regex )[0]): parseInt ( e.match ( h.regex )[0]), a.longdate = this.isDef ( o.index ) ? o.index: o, e = this.replaceVal ( e, o.mon || o, h.suff ), s = this.replaceVal ( s, o.mon || o, h.suff, h.val )) } t = t.replace ( h.valForm || h.val, '' ) } if ( this.isDef( a.longdate ) && a.day && a.day !== a.longdate ? r.setFullYear( 'Invalid' ):this.isDef( a.year ) && r.setFullYear( this.getCorrectYear( a.year )),this.isDef( a.month ) && r.setMonth( a.month ),this.isDef( a.date ) && r.setDate( a.date <= this.dayArr[r.getMonth()] + ( 1 === r.getMonth() && this.isLeap( r.getFullYear()) ? 1:0 ) ? a.date:'Invalid' ),this._isCorrectFormat = e.length === t.length && i === s && this.validate( r )) return r },
             validate: function ( e, t ){ var a = e.constructor; if ( a === Date ) return this._dateObj = e, 'Invalid Date' !== e.toString (); if ( a === String && t ){ var r = this.valFormat ( e, t ); return r && this._isCorrectFormat && ( this._format = t ), r } },
             replaceVal: function ( e, t, a, r ){ return e = e.replace ( t, r || '' ), a && ( e = e.replace ( /st|nd|rd|th/, '' )), e },
             getMonth: function ( e, t, a, r ){ var n; if ( a ){ var s = this.findVal ( r ? this.longMon: this.shortMon, e ); n = s.mon, e = s.index, ( !n || e > 11 ) && ( e = 'Invalid' ) } else ( e = parseInt ( e )-1 ) > 11 && ( e = 'Invalid' ); return { val: e, mon: n } },
@@ -914,7 +913,7 @@ function gtag(){dataLayer.push(arguments);}
         };
 
         // ReCAPTCHA and form validation functions
-        function addAriaSelected6771280000000858023(event) { // Pass event explicitly
+        function addAriaSelected6771280000000858023(event) {
             var optionElem = event.target;
             const previouslySelectedOption = optionElem.querySelector('option[aria-selected="true"]');
             if (previouslySelectedOption) {
@@ -959,7 +958,7 @@ function gtag(){dataLayer.push(arguments);}
                     var atpos = emailVal.indexOf('@');
                     var dotpos = emailVal.lastIndexOf('.');
                     if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= emailVal.length) {
-                        showMessage('Please enter a valid email address. ');
+                        showMessage('Please enter a valid email address.');
                         emailFlds[i].focus();
                         return false;
                     }
@@ -990,12 +989,15 @@ function gtag(){dataLayer.push(arguments);}
             return true;
         }
 
-        // Signature Pad Initialization
+        // Signature Pad Initialization and resizing
         var canvas = document.getElementById("signature-pad");
-        var signaturePad = null; // Initialize as null, will be assigned on DOMContentLoaded
+        var signaturePad = null;
 
         function resizeCanvas() {
-            if (!canvas) return; // Ensure canvas exists
+            if (!canvas) {
+                console.warn("Canvas element not found for signature pad.");
+                return;
+            }
 
             var containerWidth = canvas.parentElement.offsetWidth;
             var ratio = Math.max(window.devicePixelRatio || 1, 1);
@@ -1003,7 +1005,6 @@ function gtag(){dataLayer.push(arguments);}
             canvas.height = 100 * ratio; /* fixed height for signature pad */
             canvas.getContext("2d").scale(ratio, ratio);
 
-            // Redraw signature if it exists
             if (signaturePad && !signaturePad.isEmpty()) {
                 const img = new Image();
                 img.onload = function() {
@@ -1012,99 +1013,98 @@ function gtag(){dataLayer.push(arguments);}
                 };
                 img.src = signaturePad.toDataURL();
             }
+            console.log("Signature canvas resized.");
         }
 
         // Main form submission logic
-        // Changed to async function for awaiting PDF generation
         async function checkMandatory6771280000000858023(event) {
             console.log("checkMandatory function invoked.");
-            event.preventDefault(); // Prevent default form submission initially
+            event.preventDefault(); // Prevent default browser submission immediately
 
             const form = document.forms['WebToCases6771280000000858023'];
             const submitButton = document.getElementById('formsubmit');
 
+            // Disable button and show loading overlay early
+            submitButton.setAttribute('disabled', 'true');
+            document.getElementById('loadingOverlay').style.display = 'flex';
+
             // --- Client-side validation ---
             const mndFileds = [
-                'CASECF5', // Category (select)
-                'Priority', // Urgency (select)
-                'CASECF12', // Property Reporting Issue (text)
-                'Phone', // Contact Phone (text)
-                'Case Reason', // New/Recurring (select) - Note: name has a space, accessed via form.elements['Case Reason']
-                'Reported_By', // Requested By (text)
-                'Email', // Email (text, ftype=email)
-                'Description', // Description (textarea)
-                'CASECF11', // Authorized by (text)
-                'CASECF116', // Date (text, ftype=date)
-                '00NUm000009SCKP' // I agree checkbox (checkbox)
+                'CASECF5', 'Priority', 'CASECF12', 'Phone', 'Case Reason', 'Reported_By',
+                'Email', 'Description', 'CASECF11', 'CASECF116', '00NUm000009SCKP'
             ];
 
             const fldLangVal = [
-                'Category',
-                'Urgency',
-                'Property Reporting Issue',
-                'Contact Phone',
-                'New/Recurring status',
-                'Requested By',
-                'Email',
-                'Description',
-                'Authorized by',
-                'Date',
-                'Agreement checkbox'
+                'Category', 'Urgency', 'Property Reporting Issue', 'Contact Phone', 'New/Recurring status',
+                'Requested By', 'Email', 'Description', 'Authorized by', 'Date', 'Agreement checkbox'
             ];
 
             for (let i = 0; i < mndFileds.length; i++) {
                 const fieldName = mndFileds[i];
-                let fieldObj = form.elements[fieldName]; // Access by name/ID using form.elements for reliability
+                let fieldObj = form.elements[fieldName];
 
                 if (!fieldObj) {
-                    console.error(`Mandatory field '${fieldName}' (labeled as '${fldLangVal[i]}') not found in form. Skipping validation for this field.`);
+                    console.error(`ERROR: Mandatory field '${fieldName}' (labeled as '${fldLangVal[i]}') not found in form.`);
                     showMessage(`A required field (${fldLangVal[i]}) is missing or improperly configured. Please check the console for details.`);
-                    return false; // Prevent submission if a required field is not found
+                    submitButton.removeAttribute('disabled');
+                    document.getElementById('loadingOverlay').style.display = 'none';
+                    return false;
                 }
 
-                console.log(`Validating field: ${fieldName} (${fldLangVal[i]})`);
+                console.log(`Validating field: ${fieldName} (${fldLangVal[i]}) - Current value: "${fieldObj.value}"`);
 
                 if (fieldObj.type === 'checkbox') {
                     if (!fieldObj.checked) {
                         showMessage('Please accept the "' + fldLangVal[i] + '" to proceed.');
                         fieldObj.focus();
+                        submitButton.removeAttribute('disabled');
+                        document.getElementById('loadingOverlay').style.display = 'none';
                         return false;
                     }
                 } else if (fieldObj.nodeName === 'SELECT') {
                     if (!fieldObj.value || fieldObj.value === '-None-') {
                         showMessage(fldLangVal[i] + ' cannot be empty or "-None-".');
                         fieldObj.focus();
+                        submitButton.removeAttribute('disabled');
+                        document.getElementById('loadingOverlay').style.display = 'none';
                         return false;
                     }
                 } else if (fieldObj.value.trim().length === 0) {
                     showMessage(fldLangVal[i] + ' cannot be empty.');
                     fieldObj.focus();
+                    submitButton.removeAttribute('disabled');
+                    document.getElementById('loadingOverlay').style.display = 'none';
                     return false;
                 }
             }
 
             if (!validateEmail6771280000000858023()) {
+                submitButton.removeAttribute('disabled');
+                document.getElementById('loadingOverlay').style.display = 'none';
                 return false;
             }
             if (!reCaptchaAlert6771280000000858023()) {
+                submitButton.removeAttribute('disabled');
+                document.getElementById('loadingOverlay').style.display = 'none';
                 return false;
             }
             if (!validateDateFormat6771280000000858023()) {
+                submitButton.removeAttribute('disabled');
+                document.getElementById('loadingOverlay').style.display = 'none';
                 return false;
             }
 
             if (!signaturePad || signaturePad.isEmpty()) {
                 showMessage('Please provide an E-Signature in the signature pad.');
+                submitButton.removeAttribute('disabled');
+                document.getElementById('loadingOverlay').style.display = 'none';
                 return false;
             }
-            console.log("All client-side validations passed.");
+            console.log("All client-side validations passed successfully.");
 
-            // --- All client-side validations passed. Proceed with PDF generation and then form submission. ---
-            submitButton.setAttribute('disabled', 'true');
-            document.getElementById('loadingOverlay').style.display = 'flex';
-
+            // --- PDF generation and then form submission ---
             try {
-                console.log("Starting PDF generation...");
+                console.log("Initiating PDF generation process...");
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
                 const pageHeight = doc.internal.pageSize.height || 297;
@@ -1113,6 +1113,7 @@ function gtag(){dataLayer.push(arguments);}
                 const footerHeight = 30;
 
                 async function addHeader(pdfDoc) {
+                    console.log("Adding PDF header...");
                     return new Promise((resolve) => {
                         const imgUrl = 'https://www.techunifi.com/assets/img/hero-img.png';
                         const img = new Image();
@@ -1132,6 +1133,7 @@ function gtag(){dataLayer.push(arguments);}
                 }
 
                 function addFooter(pdfDoc) {
+                    console.log("Adding PDF footer...");
                     pdfDoc.setFontSize(10);
                     pdfDoc.setTextColor(0, 0, 0);
                     pdfDoc.text('2638 Willard Dairy Road, Suite 112 High Point, NC 27265', pageWidth / 2, pageHeight - footerHeight + 10, null, null, 'center');
@@ -1141,11 +1143,11 @@ function gtag(){dataLayer.push(arguments);}
                 }
 
                 async function addContent(pdfDoc, currentY) {
-                    // Use jQuery to serialize the form. Ensure jQuery is loaded!
-                    const formData = $('#submitTicketForm').serializeArray();
+                    console.log("Adding form content to PDF...");
+                    const formData = $('#submitTicketForm').serializeArray(); // Using jQuery
                     const excludedFields = [
                         'xnQsjsdp', 'zc_gad', 'xmIwtLD', 'actionType', 'a-unqbdv4fyn0k', 'returnURL', 'Subject',
-                        '00NUm000009SCKP', 'g-recaptcha-response', 'g-recaptcha-token',
+                        '00NUm000009SCKP', 'g-recaptcha-response', // Exclude reCAPTCHA client-side token
                     ];
 
                     const fieldsToDisplay = [
@@ -1206,28 +1208,23 @@ function gtag(){dataLayer.push(arguments);}
                                 currentY += lineHeight;
                             }
                         }
-                        currentY += lineHeight / 2;
+                        currentY += lineHeight / 2; // Small gap between fields
                     }
                     return currentY;
                 }
 
                 function addTermsAndConditions(pdfDoc, currentY) {
+                    console.log("Adding terms and conditions to PDF...");
                     const termsModalContent = document.querySelector('.modal-body ol');
                     const preamble = document.querySelector('.modal-body .change-terms-para');
 
-                    let termsContent = '';
-                    if (termsModalContent) {
-                         termsContent = termsModalContent.innerText;
-                    }
-
-                    let preambleText = '';
-                    if (preamble) {
-                        preambleText = preamble.innerText;
-                    }
+                    let termsContent = termsModalContent ? termsModalContent.innerText : '';
+                    let preambleText = preamble ? preamble.innerText : '';
 
                     const lineHeight = 6;
                     const maxWidth = pageWidth - 20;
 
+                    // Ensure enough space for the title and preamble before adding a new page
                     if (currentY + 20 > pageHeight - footerHeight) {
                         pdfDoc.addPage();
                         currentY = headerHeight;
@@ -1295,6 +1292,7 @@ function gtag(){dataLayer.push(arguments);}
 
                 // Main function to generate and download the PDF
                 async function generatePDF() {
+                    console.log("Starting generatePDF function...");
                     let currentY = headerHeight;
                     await addHeader(doc);
                     currentY += 10;
@@ -1305,6 +1303,7 @@ function gtag(){dataLayer.push(arguments);}
                     currentY = addTermsAndConditions(doc, currentY);
 
                     if (!signaturePad.isEmpty()) {
+                        console.log("Adding signature to PDF...");
                         const signatureImage = signaturePad.toDataURL();
                         if (currentY + 40 > pageHeight - footerHeight - 10) {
                             doc.addPage();
@@ -1316,6 +1315,8 @@ function gtag(){dataLayer.push(arguments);}
                         doc.setFont('helvetica', 'normal');
                         doc.addImage(signatureImage, 'PNG', 10, currentY + 5, 100, 30);
                         currentY += 40;
+                    } else {
+                        console.log("Signature pad is empty, skipping signature in PDF.");
                     }
 
                     addFooter(doc);
@@ -1326,32 +1327,41 @@ function gtag(){dataLayer.push(arguments);}
                 await generatePDF(); // Execute PDF generation
 
                 // Programmatically submit the form to Zoho CRM after PDF download
-                console.log("PDF generated. Submitting form to Zoho CRM...");
-                form.submit();
+                console.log("PDF generated. Proceeding to submit form to Zoho CRM...");
+                form.submit(); // This will trigger the form's action
 
             } catch (error) {
-                console.error('Error during PDF generation or form submission:', error);
+                console.error('CRITICAL ERROR during PDF generation or form submission:', error);
                 showMessage('An error occurred during form processing. Please try again. If the issue persists, contact support. Details: ' + error.message);
+                // Re-enable button and hide loading on error
                 submitButton.removeAttribute('disabled');
             } finally {
-                document.getElementById('loadingOverlay').style.display = 'none';
+                document.getElementById('loadingOverlay').style.display = 'none'; // Always hide loading overlay
             }
 
-            return false; // Always return false from onsubmit to prevent default browser form submission
+            return false; // Crucial: Prevent default browser submission if all logic runs.
         }
 
         // Initialize SignaturePad after DOM is fully loaded
         document.addEventListener('DOMContentLoaded', function() {
             console.log("DOMContentLoaded: Initializing SignaturePad and setting up resize listener.");
-            signaturePad = new SignaturePad(canvas, {
-                backgroundColor: 'rgb(250,250,250)'
-            });
-            resizeCanvas(); // Initial resize
-            document.getElementById("clear").addEventListener('click', function() {
-                signaturePad.clear();
-                console.log("Signature pad cleared.");
-            });
+            // Ensure canvas is found
+            canvas = document.getElementById("signature-pad");
+            if (canvas) {
+                signaturePad = new SignaturePad(canvas, {
+                    backgroundColor: 'rgb(250,250,250)'
+                });
+                resizeCanvas(); // Initial resize
+                document.getElementById("clear").addEventListener('click', function() {
+                    signaturePad.clear();
+                    console.log("Signature pad cleared.");
+                });
+            } else {
+                console.error("ERROR: Canvas element with ID 'signature-pad' not found on DOMContentLoaded.");
+            }
         });
+
+        window.addEventListener('resize', resizeCanvas); // Attach resize listener
 
         // Tooltip function (from original code, not directly used in this improved form)
         function tooltipShow6771280000000858023(el) {
