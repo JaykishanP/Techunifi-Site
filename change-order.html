@@ -1526,11 +1526,11 @@ function gtag(){dataLayer.push(arguments);}
 
                 // 4. Run Zoho's specific validations if available
                 // Ensure your form name is 'WebToCases6771280000000858023' for these to work.
-                if (typeof checkMandatory6771280000000858023 === 'function') {
-                    if (!checkMandatory6771280000000858023()) {
-                        formValid = false;
-                    }
-                }
+                // if (typeof checkMandatory6771280000000858023 === 'function') {
+                //     if (!checkMandatory6771280000000858023()) {
+                //         formValid = false;
+                //     }
+                // }
 
                 return formValid;
             }
@@ -1709,16 +1709,7 @@ function gtag(){dataLayer.push(arguments);}
             }, 1000); // 1-second delay
         });
 
-        // --- Live Input Validation Styling ---
-        $('#submitTicketForm input, #submitTicketForm select, #submitTicketForm textarea').on('input change blur', function() {
-            if (!$(this).hasClass('not-required')) {
-                if ($(this).val() || ($(this).is('select[multiple]') && $(this).find('option:selected').length !== 0)) {
-                    $(this).css('border-color', 'green');
-                } else {
-                    $(this).css('border-color', 'red');
-                }
-            }
-        });
+        
     });
 </script>
 	
