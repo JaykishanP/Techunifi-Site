@@ -723,9 +723,11 @@ function gtag(){dataLayer.push(arguments);}
 
   
 				 <!-- Internal JavaScript for Form Logic -->
+    <!-- Internal JavaScript for Form Logic -->
     <script type='text/javascript'>
         // Custom message box functions to replace alerts
         function showMessage(message) {
+            console.log("Displaying message:", message); // Log messages
             document.getElementById('messageContent').innerText = message;
             document.getElementById('customMessageBox').style.display = 'block';
         }
@@ -912,7 +914,7 @@ function gtag(){dataLayer.push(arguments);}
         };
 
         // ReCAPTCHA and form validation functions
-        function addAriaSelected6771280000000858023() {
+        function addAriaSelected6771280000000858023(event) { // Pass event explicitly
             var optionElem = event.target;
             const previouslySelectedOption = optionElem.querySelector('option[aria-selected="true"]');
             if (previouslySelectedOption) {
@@ -925,6 +927,7 @@ function gtag(){dataLayer.push(arguments);}
 
         /* Do not remove this code. */
         function rccallback6771280000000858023() {
+            console.log("reCAPTCHA callback invoked.");
             var recap = document.getElementById('recap6771280000000858023');
             if (recap) {
                 recap.setAttribute('captcha-verified', true);
@@ -936,15 +939,18 @@ function gtag(){dataLayer.push(arguments);}
         }
 
         function reCaptchaAlert6771280000000858023() {
+            console.log("Checking reCAPTCHA status...");
             var recap = document.getElementById('recap6771280000000858023');
             if (recap && recap.getAttribute('captcha-verified') === 'false') {
                 showMessage('Captcha validation failed. Please check the "I\'m not a robot" box.');
                 return false;
             }
+            console.log("reCAPTCHA passed.");
             return true;
         }
 
         function validateEmail6771280000000858023() {
+            console.log("Validating email...");
             var form = document.forms['WebToCases6771280000000858023'];
             var emailFlds = form.querySelectorAll('[ftype=email]');
             for (var i = 0; i < emailFlds.length; i++) {
@@ -959,10 +965,12 @@ function gtag(){dataLayer.push(arguments);}
                     }
                 }
             }
+            console.log("Email validation passed.");
             return true;
         }
 
         function validateDateFormat6771280000000858023() {
+            console.log("Validating date format...");
             var form = document.forms['WebToCases6771280000000858023'];
             var dateFlds = form.querySelectorAll('[ftype=date]');
             for (var i = 0; i < dateFlds.length; i++) {
@@ -978,60 +986,50 @@ function gtag(){dataLayer.push(arguments);}
                     }
                 }
             }
+            console.log("Date format validation passed.");
             return true;
         }
 
         // Signature Pad Initialization
         var canvas = document.getElementById("signature-pad");
+        var signaturePad = null; // Initialize as null, will be assigned on DOMContentLoaded
 
         function resizeCanvas() {
-            // Get the width of the parent container
+            if (!canvas) return; // Ensure canvas exists
+
             var containerWidth = canvas.parentElement.offsetWidth;
-            // Set canvas width and height dynamically based on container, maintaining aspect ratio if desired
-            // Here, we maintain a fixed height but scale width
             var ratio = Math.max(window.devicePixelRatio || 1, 1);
             canvas.width = containerWidth * ratio;
             canvas.height = 100 * ratio; /* fixed height for signature pad */
             canvas.getContext("2d").scale(ratio, ratio);
 
-            // If signature pad already has content, redraw it to prevent loss
-            if (!signaturePad.isEmpty()) {
+            // Redraw signature if it exists
+            if (signaturePad && !signaturePad.isEmpty()) {
                 const img = new Image();
                 img.onload = function() {
-                    signaturePad.clear(); // Clear before redrawing
+                    signaturePad.clear();
                     signaturePad.fromDataURL(img.src);
                 };
                 img.src = signaturePad.toDataURL();
             }
         }
 
-        // Add event listener for window resize and call once on load
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        // Initialize SignaturePad
-        var signaturePad = new SignaturePad(canvas, {
-            backgroundColor: 'rgb(250,250,250)' // Background color for the canvas
-        });
-
-        // Event listener for the "Clear" button
-        document.getElementById("clear").addEventListener('click', function() {
-            signaturePad.clear(); // Clear the signature pad
-        });
-
         // Main form submission logic
-        async function checkMandatory6771280000000858023() {
+        // Changed to async function for awaiting PDF generation
+        async function checkMandatory6771280000000858023(event) {
+            console.log("checkMandatory function invoked.");
+            event.preventDefault(); // Prevent default form submission initially
+
             const form = document.forms['WebToCases6771280000000858023'];
             const submitButton = document.getElementById('formsubmit');
 
             // --- Client-side validation ---
-            // List of mandatory fields by their name attributes or IDs
             const mndFileds = [
                 'CASECF5', // Category (select)
                 'Priority', // Urgency (select)
                 'CASECF12', // Property Reporting Issue (text)
                 'Phone', // Contact Phone (text)
-                'Case Reason', // New/Recurring (select)
+                'Case Reason', // New/Recurring (select) - Note: name has a space, accessed via form.elements['Case Reason']
                 'Reported_By', // Requested By (text)
                 'Email', // Email (text, ftype=email)
                 'Description', // Description (textarea)
@@ -1039,7 +1037,7 @@ function gtag(){dataLayer.push(arguments);}
                 'CASECF116', // Date (text, ftype=date)
                 '00NUm000009SCKP' // I agree checkbox (checkbox)
             ];
-            // Corresponding user-friendly labels for mandatory fields
+
             const fldLangVal = [
                 'Category',
                 'Urgency',
@@ -1054,66 +1052,59 @@ function gtag(){dataLayer.push(arguments);}
                 'Agreement checkbox'
             ];
 
-            // Validate each mandatory field
             for (let i = 0; i < mndFileds.length; i++) {
                 const fieldName = mndFileds[i];
-                let fieldObj = form[fieldName];
+                let fieldObj = form.elements[fieldName]; // Access by name/ID using form.elements for reliability
 
-                // Special handling for elements accessed by ID if name isn't direct
-                if (!fieldObj && document.getElementById(fieldName)) {
-                    fieldObj = document.getElementById(fieldName);
+                if (!fieldObj) {
+                    console.error(`Mandatory field '${fieldName}' (labeled as '${fldLangVal[i]}') not found in form. Skipping validation for this field.`);
+                    showMessage(`A required field (${fldLangVal[i]}) is missing or improperly configured. Please check the console for details.`);
+                    return false; // Prevent submission if a required field is not found
                 }
 
-                if (fieldObj) {
-                    if (fieldObj.type === 'checkbox') {
-                        if (fieldObj.checked === false) {
-                            showMessage('Please accept the "' + fldLangVal[i] + '" to proceed.');
-                            fieldObj.focus();
-                            return false;
-                        }
-                    } else if (fieldObj.nodeName === 'SELECT') {
-                        // Check if the selected option's value is empty or "-None-"
-                        if (!fieldObj.value || fieldObj.value === '' || fieldObj.value === '-None-') {
-                            showMessage(fldLangVal[i] + ' cannot be empty or "-None-".');
-                            fieldObj.focus();
-                            return false;
-                        }
-                    } else if (fieldObj.value.trim().length === 0) { // Trim whitespace and check length for text/textarea
-                        showMessage(fldLangVal[i] + ' cannot be empty.');
+                console.log(`Validating field: ${fieldName} (${fldLangVal[i]})`);
+
+                if (fieldObj.type === 'checkbox') {
+                    if (!fieldObj.checked) {
+                        showMessage('Please accept the "' + fldLangVal[i] + '" to proceed.');
                         fieldObj.focus();
                         return false;
                     }
-                } else {
-                    console.warn(`Mandatory field '${fieldName}' (labeled as '${fldLangVal[i]}') not found in form.`);
-                    showMessage(`A required field (${fldLangVal[i]}) is missing or improperly configured.`);
-                    return false; // Prevent submission if a required field is not found
+                } else if (fieldObj.nodeName === 'SELECT') {
+                    if (!fieldObj.value || fieldObj.value === '-None-') {
+                        showMessage(fldLangVal[i] + ' cannot be empty or "-None-".');
+                        fieldObj.focus();
+                        return false;
+                    }
+                } else if (fieldObj.value.trim().length === 0) {
+                    showMessage(fldLangVal[i] + ' cannot be empty.');
+                    fieldObj.focus();
+                    return false;
                 }
             }
 
-            // Validate email format
             if (!validateEmail6771280000000858023()) {
                 return false;
             }
-            // Validate reCAPTCHA
             if (!reCaptchaAlert6771280000000858023()) {
                 return false;
             }
-            // Validate date format
             if (!validateDateFormat6771280000000858023()) {
                 return false;
             }
 
-            // Validate signature
-            if (signaturePad.isEmpty()) {
+            if (!signaturePad || signaturePad.isEmpty()) {
                 showMessage('Please provide an E-Signature in the signature pad.');
                 return false;
             }
+            console.log("All client-side validations passed.");
 
             // --- All client-side validations passed. Proceed with PDF generation and then form submission. ---
-            submitButton.setAttribute('disabled', 'true'); // Disable button to prevent double submission
-            document.getElementById('loadingOverlay').style.display = 'flex'; // Show loading overlay
+            submitButton.setAttribute('disabled', 'true');
+            document.getElementById('loadingOverlay').style.display = 'flex';
 
             try {
+                console.log("Starting PDF generation...");
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
                 const pageHeight = doc.internal.pageSize.height || 297;
@@ -1121,45 +1112,42 @@ function gtag(){dataLayer.push(arguments);}
                 const headerHeight = 40;
                 const footerHeight = 30;
 
-                // Function to add header to PDF page
                 async function addHeader(pdfDoc) {
                     return new Promise((resolve) => {
                         const imgUrl = 'https://www.techunifi.com/assets/img/hero-img.png';
                         const img = new Image();
                         img.src = imgUrl;
                         img.onload = function() {
-                            pdfDoc.addImage(img, 'PNG', 60, 10, 90, 30); // Add image to PDF
+                            pdfDoc.addImage(img, 'PNG', 60, 10, 90, 30);
                             resolve();
                         };
                         img.onerror = function() {
                             console.warn('Failed to load header image. Using text fallback.');
                             pdfDoc.setFontSize(20);
                             pdfDoc.setTextColor(0, 0, 0);
-                            pdfDoc.text('Techunifi LLC', pageWidth / 2, 25, null, null, 'center'); // Text fallback
+                            pdfDoc.text('Techunifi LLC', pageWidth / 2, 25, null, null, 'center');
                             resolve();
                         };
                     });
                 }
 
-                // Function to add footer to PDF page
                 function addFooter(pdfDoc) {
                     pdfDoc.setFontSize(10);
                     pdfDoc.setTextColor(0, 0, 0);
                     pdfDoc.text('2638 Willard Dairy Road, Suite 112 High Point, NC 27265', pageWidth / 2, pageHeight - footerHeight + 10, null, null, 'center');
                     pdfDoc.text('+1 (336) 860-6061 | techunifi.com | Info@techunifi.com', pageWidth / 2, pageHeight - footerHeight + 20, null, null, 'center');
                     pdfDoc.setLineWidth(0.5);
-                    pdfDoc.line(10, pageHeight - footerHeight, pageWidth - 10, pageHeight - footerHeight); // Separator line
+                    pdfDoc.line(10, pageHeight - footerHeight, pageWidth - 10, pageHeight - footerHeight);
                 }
 
-                // Function to add form content to PDF
                 async function addContent(pdfDoc, currentY) {
-                    const formData = $(form).serializeArray();
+                    // Use jQuery to serialize the form. Ensure jQuery is loaded!
+                    const formData = $('#submitTicketForm').serializeArray();
                     const excludedFields = [
                         'xnQsjsdp', 'zc_gad', 'xmIwtLD', 'actionType', 'a-unqbdv4fyn0k', 'returnURL', 'Subject',
                         '00NUm000009SCKP', 'g-recaptcha-response', 'g-recaptcha-token',
                     ];
 
-                    // Define the order and labels for fields to display in PDF
                     const fieldsToDisplay = [
                         { name: 'CASECF5', label: 'Category' },
                         { name: 'Priority', label: 'Urgency' },
@@ -1189,19 +1177,17 @@ function gtag(){dataLayer.push(arguments);}
                         let label = fieldConfig.label;
                         let value = field.value || 'N/A';
 
-                        // Handle multiline textareas or specific fields that might have numbered lists
                         if (['CASECF9', 'CASECF7', 'CASECF10', 'CASECF8'].includes(field.name)) {
                             value = value.split('\n').map(line => line.trim()).filter(line => line !== '');
                             if (value.length === 0) value = ['N/A'];
                         } else {
-                            value = [value]; // Ensure value is an array for consistent iteration
+                            value = [value];
                         }
 
-                        // Check if new page is needed before printing label
                         if (currentY + lineHeight > pageHeight - footerHeight - 10) {
                             pdfDoc.addPage();
                             currentY = headerHeight;
-                            await addHeader(pdfDoc); // Add header to new page
+                            await addHeader(pdfDoc);
                         }
 
                         pdfDoc.setFont('helvetica', 'bold');
@@ -1220,15 +1206,25 @@ function gtag(){dataLayer.push(arguments);}
                                 currentY += lineHeight;
                             }
                         }
-                        currentY += lineHeight / 2; // Small gap between fields
+                        currentY += lineHeight / 2;
                     }
                     return currentY;
                 }
 
-                // Function to add Terms and Conditions to PDF
                 function addTermsAndConditions(pdfDoc, currentY) {
-                    const termsContent = document.querySelector('.modal-body ol').innerText;
-                    const preamble = document.querySelector('.modal-body .change-terms-para').innerText;
+                    const termsModalContent = document.querySelector('.modal-body ol');
+                    const preamble = document.querySelector('.modal-body .change-terms-para');
+
+                    let termsContent = '';
+                    if (termsModalContent) {
+                         termsContent = termsModalContent.innerText;
+                    }
+
+                    let preambleText = '';
+                    if (preamble) {
+                        preambleText = preamble.innerText;
+                    }
+
                     const lineHeight = 6;
                     const maxWidth = pageWidth - 20;
 
@@ -1246,7 +1242,7 @@ function gtag(){dataLayer.push(arguments);}
                     pdfDoc.setFontSize(9);
                     pdfDoc.setFont('helvetica', 'normal');
 
-                    const preambleLines = pdfDoc.splitTextToSize(preamble, maxWidth);
+                    const preambleLines = doc.splitTextToSize(preambleText, maxWidth);
                     preambleLines.forEach(line => {
                         if (currentY + lineHeight > pageHeight - footerHeight) {
                             pdfDoc.addPage();
@@ -1258,7 +1254,7 @@ function gtag(){dataLayer.push(arguments);}
                     });
                     currentY += 5;
 
-                    const termsLines = pdfDoc.splitTextToSize(termsContent, maxWidth);
+                    const termsLines = doc.splitTextToSize(termsContent, maxWidth);
                     termsLines.forEach(line => {
                         if (currentY + lineHeight > pageHeight - footerHeight) {
                             pdfDoc.addPage();
@@ -1270,7 +1266,6 @@ function gtag(){dataLayer.push(arguments);}
                     });
                     currentY += 5;
 
-                    // Add the "I agree" checkbox statement if checked
                     const agreeCheckbox = document.getElementById('00NUm000009SCKP');
                     if (agreeCheckbox && agreeCheckbox.checked) {
                         const agreementTextLabel = document.querySelector('label[for="00NUm000009SCKP"]');
@@ -1285,15 +1280,14 @@ function gtag(){dataLayer.push(arguments);}
                         currentY += lineHeight;
                     }
 
-                    // Add the link to full terms and conditions
-                    pdfDoc.setTextColor(6, 98, 187); // Blue for link
+                    pdfDoc.setTextColor(6, 98, 187);
                     if (currentY + 10 > pageHeight - footerHeight) {
                         pdfDoc.addPage();
                         currentY = headerHeight;
                         addHeader(pdfDoc);
                     }
                     pdfDoc.textWithLink('View full terms and conditions online', 10, currentY, { url: 'https://www.techunifi.com/terms-conditions.html' });
-                    pdfDoc.setTextColor(0, 0, 0); // Reset color
+                    pdfDoc.setTextColor(0, 0, 0);
                     currentY += 15;
 
                     return currentY;
@@ -1302,18 +1296,17 @@ function gtag(){dataLayer.push(arguments);}
                 // Main function to generate and download the PDF
                 async function generatePDF() {
                     let currentY = headerHeight;
-                    await addHeader(doc); // Add header to the first page
+                    await addHeader(doc);
                     currentY += 10;
 
-                    currentY = await addContent(doc, currentY); // Add form content
+                    currentY = await addContent(doc, currentY);
                     currentY += 10;
 
-                    currentY = addTermsAndConditions(doc, currentY); // Add terms and conditions
+                    currentY = addTermsAndConditions(doc, currentY);
 
-                    // Add signature to PDF if present
                     if (!signaturePad.isEmpty()) {
-                        const signatureImage = signaturePad.toDataURL(); // Get signature as Data URL
-                        if (currentY + 40 > pageHeight - footerHeight - 10) { // Check for space for signature
+                        const signatureImage = signaturePad.toDataURL();
+                        if (currentY + 40 > pageHeight - footerHeight - 10) {
                             doc.addPage();
                             currentY = headerHeight;
                             await addHeader(doc);
@@ -1321,31 +1314,44 @@ function gtag(){dataLayer.push(arguments);}
                         doc.setFont('helvetica', 'bold');
                         doc.text('E-Signature:', 10, currentY);
                         doc.setFont('helvetica', 'normal');
-                        doc.addImage(signatureImage, 'PNG', 10, currentY + 5, 100, 30); // Add signature image
+                        doc.addImage(signatureImage, 'PNG', 10, currentY + 5, 100, 30);
                         currentY += 40;
                     }
 
-                    addFooter(doc); // Add footer to the last page
-                    doc.save('techunifi-changeOrder-data.pdf'); // Save the PDF
+                    addFooter(doc);
+                    doc.save('techunifi-changeOrder-data.pdf');
                     console.log('PDF downloaded successfully.');
                 }
 
                 await generatePDF(); // Execute PDF generation
 
                 // Programmatically submit the form to Zoho CRM after PDF download
-                form.removeAttribute('onsubmit'); // Remove onsubmit to prevent recursion
-                form.submit(); // Submit the form
+                console.log("PDF generated. Submitting form to Zoho CRM...");
+                form.submit();
 
             } catch (error) {
                 console.error('Error during PDF generation or form submission:', error);
                 showMessage('An error occurred during form processing. Please try again. If the issue persists, contact support. Details: ' + error.message);
-                submitButton.removeAttribute('disabled'); // Re-enable button on error
+                submitButton.removeAttribute('disabled');
             } finally {
-                document.getElementById('loadingOverlay').style.display = 'none'; // Always hide loading overlay
+                document.getElementById('loadingOverlay').style.display = 'none';
             }
 
-            return false; // Prevent default browser submission
+            return false; // Always return false from onsubmit to prevent default browser form submission
         }
+
+        // Initialize SignaturePad after DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOMContentLoaded: Initializing SignaturePad and setting up resize listener.");
+            signaturePad = new SignaturePad(canvas, {
+                backgroundColor: 'rgb(250,250,250)'
+            });
+            resizeCanvas(); // Initial resize
+            document.getElementById("clear").addEventListener('click', function() {
+                signaturePad.clear();
+                console.log("Signature pad cleared.");
+            });
+        });
 
         // Tooltip function (from original code, not directly used in this improved form)
         function tooltipShow6771280000000858023(el) {
