@@ -608,6 +608,11 @@ function tooltipShow6771280000000928341(el) {
 //    - This is the primary entry point for your form's behavior.
 // =========================================================
 
+// =========================================================
+// 3. Main Form Logic (DOMContentLoaded)
+//    - This is the primary entry point for your form's behavior.
+// =========================================================
+
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('timesheet-form'); // Ensure your form has this ID
     const reviewModal = new bootstrap.Modal(document.getElementById('reviewModal'));
@@ -771,7 +776,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // If you have a specific date field like `form.DATE_FIELD.value`, use it:
         // const formattedDate = currentFormData.date ? currentFormData.date.replace(/-/g,'_') : new Date().toISOString().slice(0,10).replace(/-/g,'_');
 
-        doc.save(`timesheet_${formattedDate}.pdf`);
+        doc.save(`timesheet.pdf`);
     }
 
     // Main form submission handler
