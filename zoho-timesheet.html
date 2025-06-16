@@ -1547,13 +1547,13 @@ document.addEventListener('DOMContentLoaded', () => {
         userName: 'COBJ1CF1',
         propertyName: 'COBJ1CF2',
         description: 'COBJ1CF4',
-        // date: 'Date', // <--- IMPORTANT: Assume your date input's name is 'Date'. If it's a COBJ field or something else, UPDATE THIS.
         travelHours: 'COBJ1CF3',
         laborHours: 'COBJ1CF5',
         timeIn: 'COBJ1CF116',
         timeOut: 'COBJ1CF117',
         receipt: 'COBJ1CF66',
-   
+        // 'theFile' is the name of your file input, but we primarily use its ID 'theFile6771280000000928341' for direct access.
+        // No need to map it here for `focus()` logic because we directly use its ID for that.
     };
     // -------------------------------------------------------------------------
 
@@ -1583,25 +1583,31 @@ document.addEventListener('DOMContentLoaded', () => {
     function populateReviewModal(data) {
         reviewDetails.innerHTML = '';
 
-        // Determine the actual names of your date and file input fields
         const dateInputName = fieldNameMapping.date;
-        const fileInputId = 'theFile6771280000000928341'; // Assuming this is the ID of your file input
+        const fileInputId = 'theFile6771280000000928341'; // ID of your file input
 
         Object.entries(data).forEach(([key, value]) => {
-            // Skip fileAttach if it's just the base64 string and not meant for direct edit in modal
-            if (key === 'fileAttach') return; // The base64 string itself shouldn't be edited
+            // No longer skip 'fileAttach' here if it's not a base64 string.
+            // However, the `data` for review modal doesn't contain the actual File object,
+            // so we still don't display a value for it directly.
+            if (key === 'fileAttachDisplayName') { // Using a new key for just display purposes
+                value = value || 'No file selected';
+            } else if (key === 'fileAttach') { // This key won't be in `data` anymore for direct display
+                return;
+            }
+
 
             const item = document.createElement('div');
             item.classList.add('list-group-item'); // Assuming Bootstrap list-group-item for styling
 
-            // Format key for display (e.g., "userName" to "User Name", "COBJ1CF1" to "Field 1CF1")
             let displayKey = key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase());
-            if (key.startsWith('COBJ1CF')) { // Adjust formatting for COBJ fields if desired in modal
+            if (key.startsWith('COBJ1CF')) {
                 displayKey = 'Field ' + key.replace('COBJ1CF', '').toUpperCase();
-            } else if (key === 'date' && dateInputName) { // Special handling for 'date' if its key is 'date' but name is different
+            } else if (key === 'date' && dateInputName) {
                 displayKey = 'Date';
+            } else if (key === 'fileAttachDisplayName') {
+                displayKey = 'Attached Receipt';
             }
-
 
             const label = document.createElement('div');
             label.innerHTML = `<strong>${displayKey}:</strong> ${value || 'N/A'}`;
@@ -1612,10 +1618,9 @@ document.addEventListener('DOMContentLoaded', () => {
             editIcon.title = `Edit ${displayKey}`;
 
             editIcon.addEventListener('click', () => {
-                let targetFieldName = fieldNameMapping[key]; // Get the HTML name from mapping
+                let targetFieldName = fieldNameMapping[key];
 
-                // Special handling for the file input if its ID is different from its name or it's accessed by ID
-                if (key === 'fileAttach' && fileInputId) {
+                if (key === 'fileAttachDisplayName' && fileInputId) { // Use the display name to target the actual file input
                     const fileField = document.getElementById(fileInputId);
                     if (fileField) {
                         reviewModal.hide();
@@ -1625,7 +1630,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 if (targetFieldName) {
-                    const field = form[targetFieldName] || document.getElementById(targetFieldName); // Try by name then by ID
+                    const field = form[targetFieldName] || document.getElementById(targetFieldName);
                     if (field) {
                         reviewModal.hide();
                         field.focus();
@@ -1642,7 +1647,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Function to generate PDF (already present and correct)
+    // Function to generate PDF
     function generatePDF(data) {
         const {
             jsPDF
@@ -1661,15 +1666,18 @@ document.addEventListener('DOMContentLoaded', () => {
             ['Name', data.userName],
             ['Property Name', data.propertyName],
             ['Description', data.description],
-            // ['Date', data.date], // Ensure data.date is populated
             ['Travel Hours', data.travelHours],
             ['Labor Hours', data.laborHours],
             ['Time In', data.timeIn],
             ['Time Out', data.timeOut],
             ['Receipt Amount', data.receipt],
         ];
+        // Add file attachment display to PDF if present
+        if (data.fileAttachDisplayName && data.fileAttachDisplayName !== 'No file selected') {
+            tableData.push(['Attached File', data.fileAttachDisplayName]);
+        }
 
-        if (doc.autoTable) { // Check if autoTable plugin is loaded
+        if (doc.autoTable) {
             doc.autoTable({
                 startY: 20,
                 head: [
@@ -1713,23 +1721,22 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Gather form data for review (before potentially modifying it for Zoho submission)
+        // Gather form data for review (CORRECTED REFERENCES)
+        const fileInputForValidation = document.getElementById('theFile6771280000000928341'); // Get file input here
         const formData = {
             userName: form.COBJ1CF1.value.trim(),
             propertyName: form.COBJ1CF2.value.trim(),
             description: form.COBJ1CF4.value.trim(),
-            // date: form[fieldNameMapping.date] ? form[fieldNameMapping.date].value.trim() : '', // Use mapping for date
             travelHours: form.COBJ1CF3.value.trim(),
             laborHours: form.COBJ1CF5.value.trim(),
             timeIn: form.COBJ1CF116.value.trim(),
             timeOut: form.COBJ1CF117.value.trim(),
             receipt: form.COBJ1CF66.value.trim(),
-            // The file itself won't be in formData for display directly, as it's a file object.
-            // We'll prepare it for Zoho submission after confirmation.
+            // Add a display name for the file, not the file object itself
+            fileAttachDisplayName: fileInputForValidation && fileInputForValidation.files[0] ? fileInputForValidation.files[0].name : '',
         };
 
         // Conditional check for receipt attachment
-        const fileInputForValidation = document.getElementById('theFile6771280000000928341'); // <--- CONFIRM THIS ID MATCHES YOUR FILE INPUT
         if (formData.receipt && (!fileInputForValidation || !fileInputForValidation.files[0])) {
             alert('Please attach the receipt image if a receipt amount is entered.');
             if (fileInputForValidation) {
@@ -1748,26 +1755,14 @@ document.addEventListener('DOMContentLoaded', () => {
         reviewModal.hide();
         showLoader(); // Show loader immediately upon confirm
 
-		const finalFormData = {
-    userName: form.COBJ1CF1.value.trim(),      // <--- CHANGE THIS LINE
-    propertyName: form.COBJ1CF2.value.trim(),  // <--- CHANGE THIS LINE
-    description: form.COBJ1CF4.value.trim(),
-    date: form[fieldNameMapping.date] ? form[fieldNameMapping.date].value.trim() : '',
-    travelHours: form.COBJ1CF3.value.trim(),
-    laborHours: form.COBJ1CF5.value.trim(),
-    timeIn: form.COBJ1CF116.value.trim(),
-    timeOut: form.COBJ1CF117.value.trim(),
-    receipt: form.COBJ1CF66.value.trim(),
-    fileAttach: fileBase64,
-};
+        // --- Prepare FormData for Zoho Submission ---
+        const zohoFormData = new FormData(form); // Creates FormData from the actual HTML form
 
-
-        const zohoFormData = new FormData(form);
         // --- Handle File Attachment for Zoho (if present) ---
         const fileInput = document.getElementById('theFile6771280000000928341'); // <--- CONFIRM THIS ID MATCHES YOUR FILE INPUT
         if (fileInput && fileInput.files[0]) {
-     
-            zohoFormData.append('theFile', fileInput.files[0]); // <--- IMPORTANT: Replace 'fileAttach' with Zoho's actual file field NAME
+            // Append the file directly to zohoFormData using its name attribute
+            zohoFormData.append('theFile', fileInput.files[0]);
         }
         // --- Add reCAPTCHA response to FormData ---
         const recaptchaResponse = typeof grecaptcha !== 'undefined' ? grecaptcha.getResponse() : null;
@@ -1779,15 +1774,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // --- Actual Form Submission to Zoho (Programmatic Submit) ---
         try {
-     
-           // Store original form attributes
+            // Store original form attributes
             const originalAction = form.action;
             const originalMethod = form.method;
             const originalTarget = form.target;
 
             // Set attributes for Zoho submission (Zoho usually expects POST)
             form.method = 'POST'; // Ensure it's POST
-    
+
             const iframe = document.createElement('iframe');
             iframe.name = 'zohoSubmitFrame';
             iframe.style.display = 'none'; // Hide the iframe
@@ -1804,10 +1798,40 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.body.removeChild(iframe);
                     // Reset form target
                     form.target = originalTarget;
+                    // Reset form method
+                    form.method = originalMethod; // Restore original method too
                 }, 1000); // Give it a moment to process
 
                 form.reset(); // Clear form fields
-                generatePDF(finalFormData); // Generate PDF locally
+
+                // We need to re-gather formData for PDF as original `formData` might be outdated
+                // and `finalFormData` was removed. Let's create a temporary object for PDF.
+                // This will use the values *after* form.reset() clears them, which is not ideal.
+                // Re-think this part:
+                // Option 1: Store values in a global variable before form.reset()
+                // Option 2: Pass data from the initial `formData` into this function.
+                // Let's pass the initial `formData` to `generatePDF`.
+
+                // To pass data to PDF, we need to capture it BEFORE the form submission clears it.
+                // The `finalFormData` object was removed, and we need the data that was confirmed in the modal.
+                // Let's reintroduce `finalFormData` or `dataForPdf` here, populated from the current form values *before* submit.
+
+                // Re-gather data for PDF generation ONLY if needed here, from the form.
+                // This data will be taken immediately before form.submit() is called.
+                const dataForPdf = {
+                    userName: form.COBJ1CF1.value.trim(),
+                    propertyName: form.COBJ1CF2.value.trim(),
+                    description: form.COBJ1CF4.value.trim(),
+                    travelHours: form.COBJ1CF3.value.trim(),
+                    laborHours: form.COBJ1CF5.value.trim(),
+                    timeIn: form.COBJ1CF116.value.trim(),
+                    timeOut: form.COBJ1CF117.value.trim(),
+                    receipt: form.COBJ1CF66.value.trim(),
+                    // Add display name for PDF
+                    fileAttachDisplayName: fileInput && fileInput.files[0] ? fileInput.files[0].name : '',
+                };
+
+                generatePDF(dataForPdf); // Generate PDF locally
                 if (typeof grecaptcha !== 'undefined' && grecaptcha.reset) {
                     grecaptcha.reset(); // Reset reCAPTCHA
                 }
@@ -1826,9 +1850,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             };
 
-            // Append the FormData content to the form (this is crucial for files)
-            // Note: Directly setting form.enctype = 'multipart/form-data'; is also important for files
-            form.enctype = 'multipart/form-data';
+            form.enctype = 'multipart/form-data'; // Crucial for file uploads
 
             form.submit();
 
@@ -1846,7 +1868,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // Handle 'smarturl' parameter for form pre-population (as per original script)
-    // This part remains mostly unchanged, ensures Zoho's smartURL feature works.
     var urlparams = new URLSearchParams(window.location.search);
     if (urlparams.has('service') && (urlparams.get('service') === 'smarturl')) {
         var webform = document.getElementById('webform6771280000000928341'); // Ensure this ID is correct for your form
@@ -1868,7 +1889,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-					
 					</script>
 						
 						<!-- Do not remove this --- Analytics Tracking code starts -->
