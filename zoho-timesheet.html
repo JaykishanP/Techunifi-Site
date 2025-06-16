@@ -1748,6 +1748,20 @@ document.addEventListener('DOMContentLoaded', () => {
         reviewModal.hide();
         showLoader(); // Show loader immediately upon confirm
 
+		const finalFormData = {
+    userName: form.COBJ1CF1.value.trim(),      // <--- CHANGE THIS LINE
+    propertyName: form.COBJ1CF2.value.trim(),  // <--- CHANGE THIS LINE
+    description: form.COBJ1CF4.value.trim(),
+    date: form[fieldNameMapping.date] ? form[fieldNameMapping.date].value.trim() : '',
+    travelHours: form.COBJ1CF3.value.trim(),
+    laborHours: form.COBJ1CF5.value.trim(),
+    timeIn: form.COBJ1CF116.value.trim(),
+    timeOut: form.COBJ1CF117.value.trim(),
+    receipt: form.COBJ1CF66.value.trim(),
+    fileAttach: fileBase64,
+};
+
+
         const zohoFormData = new FormData(form);
         // --- Handle File Attachment for Zoho (if present) ---
         const fileInput = document.getElementById('theFile6771280000000928341'); // <--- CONFIRM THIS ID MATCHES YOUR FILE INPUT
