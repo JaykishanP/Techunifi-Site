@@ -1543,6 +1543,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmSubmitButton = document.getElementById('confirmSubmit');
     const loader = document.getElementById('loader');
 
+    // --- IMPORTANT: Mapping between formData keys and actual HTML input names ---
+    // This mapping is crucial for the "Edit" icons to correctly focus on the fields.
+    // Replace 'yourDateInputName' with the actual 'name' attribute of your date input.
+    // Also, ensure 'fileAttach' (or 'theFile6771280000000928341') is correctly mapped if needed for focus.
+    const fieldNameMapping = {
+        userName: 'COBJ1CF1',
+        propertyName: 'COBJ1CF2',
+        description: 'COBJ1CF4',
+        // date: 'yourDateInputName', // <--- YOU MUST UPDATE THIS TO YOUR DATE INPUT'S 'NAME' ATTRIBUTE
+        travelHours: 'COBJ1CF3',
+        laborHours: 'COBJ1CF5',
+        timeIn: 'COBJ1CF116',
+        timeOut: 'COBJ1CF117',
+        receipt: 'COBJ1CF66',
+        // 'fileAttach' typically refers to the name of the file input.
+        // If you're using an ID to get it, you might need to map it to the ID or adjust the logic.
+        // For example: fileAttach: 'fileInputId'
+    };
+    // -------------------------------------------------------------------------
+
+
     if (!form || !reviewModal || !reviewDetails || !confirmSubmitButton || !loader) {
         console.error("One or more required DOM elements for the timesheet form are missing.");
         return; // Exit if critical elements are not found
@@ -1550,26 +1571,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showLoader() {
         loader.classList.remove('d-none');
-        form.classList.add('d-none');
+        form.classList.add('d-none'); // Hide the form
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         });
+        // Optional: Update loader text to show it's active
+        loader.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Submitting...';
     }
 
     function hideLoader() {
         loader.classList.add('d-none');
-        form.classList.remove('d-none');
+        form.classList.remove('d-none'); // Show the form again
     }
 
     function populateReviewModal(data) {
         reviewDetails.innerHTML = '';
+
         Object.entries(data).forEach(([key, value]) => {
+            // Skip fileAttach if it's just the base64 string and not meant for direct edit in modal
+            if (key === 'fileAttach') return;
+
             const item = document.createElement('div');
             item.classList.add('list-group-item'); // Assuming Bootstrap list-group-item for styling
 
-            // Format key for display (e.g., "userName" to "User Name")
-            const displayKey = key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase());
+            // Format key for display (e.g., "userName" to "User Name", "COBJ1CF1" to "Field 1CF1")
+            let displayKey = key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase());
+            if (key.startsWith('COBJ1CF')) { // Adjust formatting for COBJ fields if desired in modal
+                 // Example: COBJ1CF1 becomes "Cobj1cf1", then "Cobj 1cf1", then "Field 1CF1"
+                displayKey = 'Field ' + key.replace('COBJ1CF', '').toUpperCase();
+            }
+
 
             const label = document.createElement('div');
             label.innerHTML = `<strong>${displayKey}:</strong> ${value || 'N/A'}`;
@@ -1578,11 +1610,19 @@ document.addEventListener('DOMContentLoaded', () => {
             editIcon.classList.add('bi', 'bi-pencil-square', 'text-primary', 'ms-2'); // Assumes Bootstrap Icons
             editIcon.style.cursor = 'pointer';
             editIcon.title = `Edit ${displayKey}`;
+
             editIcon.addEventListener('click', () => {
-                const field = form[key];
-                if (field) {
-                    reviewModal.hide();
-                    field.focus();
+                const htmlFieldName = fieldNameMapping[key]; // Use the mapping to get the actual HTML name
+                if (htmlFieldName) {
+                    const field = form[htmlFieldName] || document.getElementById(htmlFieldName); // Try by name then by ID
+                    if (field) {
+                        reviewModal.hide();
+                        field.focus();
+                    } else {
+                        console.warn(`Edit icon: Could not find form element for key '${key}' with HTML name/ID '${htmlFieldName}'.`);
+                    }
+                } else {
+                    console.warn(`Edit icon: No mapping defined for form data key: '${key}'.`);
                 }
             });
             item.appendChild(label);
@@ -1610,7 +1650,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ['Name', data.userName],
             ['Property Name', data.propertyName],
             ['Description', data.description],
-            ['Date', data.date],
+            ['Date', data.date], // Ensure data.date is populated
             ['Travel Hours', data.travelHours],
             ['Labor Hours', data.laborHours],
             ['Time In', data.timeIn],
@@ -1641,6 +1681,8 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault(); // Prevent default HTML form submission
 
         // Run all client-side validations FIRST
+        // Ensure that checkMandatory6771280000000928341() and others internally
+        // correctly reference your input fields by their 'name' attributes (e.g., COBJ1CF1)
         if (!checkMandatory6771280000000928341()) {
             return;
         }
@@ -1667,18 +1709,24 @@ document.addEventListener('DOMContentLoaded', () => {
             userName: form.COBJ1CF1.value.trim(),
             propertyName: form.COBJ1CF2.value.trim(),
             description: form.COBJ1CF4.value.trim(),
-            // date: form.date.value,
+            // date: form[fieldNameMapping.date] ? form[fieldNameMapping.date].value.trim() : '', // Use mapping for date
             travelHours: form.COBJ1CF3.value.trim(),
             laborHours: form.COBJ1CF5.value.trim(),
             timeIn: form.COBJ1CF116.value.trim(),
             timeOut: form.COBJ1CF117.value.trim(),
             receipt: form.COBJ1CF66.value.trim(),
+            // fileAttach is handled separately as it's a File object, not directly a 'value'
+            // We'll get its Base64 later during final submission
         };
 
         // Conditional check for receipt attachment
-        if (formData.receipt && !form.fileAttach.files[0]) {
+        // Using getElementById for the file input for consistency if its ID is 'theFile6771280000000928341'
+        const fileInputForValidation = document.getElementById('theFile6771280000000928341'); // <--- CONFIRM THIS ID MATCHES YOUR FILE INPUT
+        if (formData.receipt && (!fileInputForValidation || !fileInputForValidation.files[0])) {
             alert('Please attach the receipt image if a receipt amount is entered.');
-            form.fileAttach.focus();
+            if (fileInputForValidation) {
+                fileInputForValidation.focus();
+            }
             return;
         }
 
@@ -1690,18 +1738,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Confirm submission from the review modal
     confirmSubmitButton.addEventListener('click', async () => {
         reviewModal.hide();
-        showLoader();
+        showLoader(); // Show loader immediately upon confirm
 
-        const fileInput = form.fileAttach;
+        // --- File processing for Base64 ---
+        // Get the file input by its ID (as used in validateFileUpload and for consistency)
+        const fileInput = document.getElementById('theFile6771280000000928341'); // <--- CONFIRM THIS ID MATCHES YOUR FILE INPUT
         let fileBase64 = '';
 
-        if (fileInput && fileInput.files[0]) { // Check if fileInput exists and has a file
+        if (fileInput && fileInput.files[0]) {
             try {
                 const file = fileInput.files[0];
                 const reader = new FileReader();
                 const base64Promise = new Promise((resolve, reject) => {
-                    reader.onload = () => resolve(reader.result.split(',')[1]);
-                    reader.onerror = () => reject(new Error('Failed to read file.'));
+                    reader.onload = () => resolve(reader.result.split(',')[1]); // Get only the base64 part
+                    reader.onerror = (error) => reject(new Error('Failed to read file: ' + error.target.error));
                 });
                 reader.readAsDataURL(file);
                 fileBase64 = await base64Promise;
@@ -1709,25 +1759,59 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Error converting file to Base64:', error);
                 alert('Failed to process the attached file. Please try again.');
                 hideLoader();
-                return;
+                return; // Stop submission if file processing fails
             }
         }
+        // ------------------------------------
 
+        // Re-gather form data to ensure latest values if any subtle changes occurred (less likely after modal confirm)
         const finalFormData = {
             userName: form.COBJ1CF1.value.trim(),
             propertyName: form.COBJ1CF2.value.trim(),
             description: form.COBJ1CF4.value.trim(),
-            // date: form.date.value,
+            // date: form[fieldNameMapping.date] ? form[fieldNameMapping.date].value.trim() : '', // Use mapping for date
             travelHours: form.COBJ1CF3.value.trim(),
             laborHours: form.COBJ1CF5.value.trim(),
             timeIn: form.COBJ1CF116.value.trim(),
             timeOut: form.COBJ1CF117.value.trim(),
             receipt: form.COBJ1CF66.value.trim(),
-            fileAttach: form.theFile.value.trim(),
+            fileAttach: theFile, // Pass the Base64 string here
         };
 
-        
+        console.log("Attempting to submit with data:", finalFormData); // Debugging: log data being sent
+
+        // --- Actual Form Submission (Fetch API) ---
+        try {
+            const response = await fetch('https://test-site-techunifi-q0im.onrender.com/submit-timesheet', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(finalFormData),
+            });
+
+            if (response.ok) {
+                alert('Form submitted successfully!');
+                form.reset(); // Clear the form after successful submission
+                generatePDF(finalFormData); // Download the PDF
+            } else {
+                const errorData = await response.json().catch(() => ({})); // Attempt to parse JSON error, fallback to empty object
+                console.error('Server response was not OK:', response.status, errorData);
+                alert('Error: ' + (errorData.error || `Server responded with status ${response.status}. Please try again.`));
+            }
+        } catch (error) {
+            console.error('Network or submission error:', error);
+            alert('Failed to submit the form. Please check your internet connection or try again later.');
+        } finally {
+            hideLoader(); // Hide loader regardless of success or failure
+            // Reset reCAPTCHA if it's available
+            if (typeof grecaptcha !== 'undefined' && grecaptcha.reset) {
+                grecaptcha.reset();
+            }
+        }
     });
+    // ---------------------------------------------
+
 
     // Handle 'smarturl' parameter for form pre-population (as per original script)
     var urlparams = new URLSearchParams(window.location.search);
@@ -1744,15 +1828,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Disable submit button initially (as per original script, though often done on successful submission)
-    // You might want to move this inside the form submit success or re-enable it on error/reset
     const submitButton = document.querySelector('.crmWebToEntityForm .formsubmit');
     if (submitButton) {
-        // Only disable on actual form submission (after validations) if you want user to try again
+        // You might consider enabling/disabling this based on form validity or other conditions
         // submitButton.setAttribute('disabled', true); // Removed as it conflicts with UX on initial load
     }
 });
-
-
 						</script>
 						
 						<!-- Do not remove this --- Analytics Tracking code starts -->
