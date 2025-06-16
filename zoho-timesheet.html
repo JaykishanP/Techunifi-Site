@@ -1587,9 +1587,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const fileInputId = 'theFile6771280000000928341'; // ID of your file input
 
         Object.entries(data).forEach(([key, value]) => {
-            // No longer skip 'fileAttach' here if it's not a base64 string.
-            // However, the `data` for review modal doesn't contain the actual File object,
-            // so we still don't display a value for it directly.
             if (key === 'fileAttachDisplayName') { // Using a new key for just display purposes
                 value = value || 'No file selected';
             } else if (key === 'fileAttach') { // This key won't be in `data` anymore for direct display
@@ -1721,11 +1718,11 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Gather form data for review (CORRECTED REFERENCES)
+        // Gather form data for review (CORRECTED REFERENCES for userName and propertyName)
         const fileInputForValidation = document.getElementById('theFile6771280000000928341'); // Get file input here
         const formData = {
-            userName: form.COBJ1CF1.value.trim(),
-            propertyName: form.COBJ1CF2.value.trim(),
+            userName: form.COBJ1CF1.value.trim(), // Corrected
+            propertyName: form.COBJ1CF2.value.trim(), // Corrected
             description: form.COBJ1CF4.value.trim(),
             travelHours: form.COBJ1CF3.value.trim(),
             laborHours: form.COBJ1CF5.value.trim(),
@@ -1804,30 +1801,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 form.reset(); // Clear form fields
 
-                // We need to re-gather formData for PDF as original `formData` might be outdated
-                // and `finalFormData` was removed. Let's create a temporary object for PDF.
-                // This will use the values *after* form.reset() clears them, which is not ideal.
-                // Re-think this part:
-                // Option 1: Store values in a global variable before form.reset()
-                // Option 2: Pass data from the initial `formData` into this function.
-                // Let's pass the initial `formData` to `generatePDF`.
-
-                // To pass data to PDF, we need to capture it BEFORE the form submission clears it.
-                // The `finalFormData` object was removed, and we need the data that was confirmed in the modal.
-                // Let's reintroduce `finalFormData` or `dataForPdf` here, populated from the current form values *before* submit.
-
-                // Re-gather data for PDF generation ONLY if needed here, from the form.
-                // This data will be taken immediately before form.submit() is called.
+                // Re-gather data for PDF generation (using the correct COBJ1CFx names and date mapping)
                 const dataForPdf = {
-                    userName: form.COBJ1CF1.value.trim(),
-                    propertyName: form.COBJ1CF2.value.trim(),
+                    userName: form.COBJ1CF1.value.trim(), // Corrected
+                    propertyName: form.COBJ1CF2.value.trim(), // Corrected
                     description: form.COBJ1CF4.value.trim(),
                     travelHours: form.COBJ1CF3.value.trim(),
                     laborHours: form.COBJ1CF5.value.trim(),
                     timeIn: form.COBJ1CF116.value.trim(),
                     timeOut: form.COBJ1CF117.value.trim(),
                     receipt: form.COBJ1CF66.value.trim(),
-                    // Add display name for PDF
                     fileAttachDisplayName: fileInput && fileInput.files[0] ? fileInput.files[0].name : '',
                 };
 
@@ -1852,7 +1835,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             form.enctype = 'multipart/form-data'; // Crucial for file uploads
 
-            form.submit();
+            form.submit(); // This is the line that causes the TypeError if 'submit' is an HTML element's name/id
 
         } catch (error) {
             console.error('Unexpected error during form submission setup:', error);
