@@ -1753,7 +1753,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const fileInput = document.getElementById('theFile6771280000000928341'); // <--- CONFIRM THIS ID MATCHES YOUR FILE INPUT
         if (fileInput && fileInput.files[0]) {
      
-            zohoFormData.append('fileAttach', fileInput.files[0]); // <--- IMPORTANT: Replace 'fileAttach' with Zoho's actual file field NAME
+            zohoFormData.append('theFile', fileInput.files[0]); // <--- IMPORTANT: Replace 'fileAttach' with Zoho's actual file field NAME
         }
         // --- Add reCAPTCHA response to FormData ---
         const recaptchaResponse = typeof grecaptcha !== 'undefined' ? grecaptcha.getResponse() : null;
