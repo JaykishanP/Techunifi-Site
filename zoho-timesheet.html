@@ -40,7 +40,7 @@
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="../assets/css/style.css" rel="stylesheet">
 
   <!-- Script JS  -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -1664,15 +1664,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Gather form data for review (before sending to server)
         const formData = {
-            userName: form.userName.value.trim(),
-            propertyName: form.propertyName.value.trim(),
-            description: form.description.value.trim(),
-            date: form.date.value,
-            travelHours: form.travelHours.value.trim(),
-            laborHours: form.laborHours.value.trim(),
-            timeIn: form.timeIn.value.trim(),
-            timeOut: form.timeOut.value.trim(),
-            receipt: form.receipt.value.trim(),
+            userName: form.COBJ1CF1.value.trim(),
+            propertyName: form.COBJ1CF2.value.trim(),
+            description: form.COBJ1CF4.value.trim(),
+            // date: form.date.value,
+            travelHours: form.COBJ1CF3.value.trim(),
+            laborHours: form.COBJ1CF5.value.trim(),
+            timeIn: form.COBJ1CF116.value.trim(),
+            timeOut: form.COBJ1CF117.value.trim(),
+            receipt: form.COBJ1CF66.value.trim(),
         };
 
         // Conditional check for receipt attachment
@@ -1714,46 +1714,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const finalFormData = {
-            userName: form.userName.value.trim(),
-            propertyName: form.propertyName.value.trim(),
-            description: form.description.value.trim(),
-            date: form.date.value,
-            travelHours: form.travelHours.value.trim(),
-            laborHours: form.laborHours.value.trim(),
-            timeIn: form.timeIn.value.trim(),
-            timeOut: form.timeOut.value.trim(),
-            receipt: form.receipt.value.trim(),
-            fileAttach: fileBase64, // Base64 string of the file
+            userName: form.COBJ1CF1.value.trim(),
+            propertyName: form.COBJ1CF2.value.trim(),
+            description: form.COBJ1CF4.value.trim(),
+            // date: form.date.value,
+            travelHours: form.COBJ1CF3.value.trim(),
+            laborHours: form.COBJ1CF5.value.trim(),
+            timeIn: form.COBJ1CF116.value.trim(),
+            timeOut: form.COBJ1CF117.value.trim(),
+            receipt: form.COBJ1CF66.value.trim(),
+            fileAttach: form.theFile.value.trim(),
         };
 
-        try {
-            const response = await fetch('https://test-site-techunifi-q0im.onrender.com/submit-timesheet', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(finalFormData),
-            });
-
-            if (response.ok) {
-                alert('Form submitted successfully!');
-                form.reset(); // Clear the form after successful submission
-                // Download the PDF
-                generatePDF(finalFormData);
-            } else {
-                const error = await response.json();
-                alert('Error: ' + (error.error || 'Unknown error occurred.'));
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Failed to submit the form. Please check your internet connection or try again later.');
-        } finally {
-            hideLoader();
-            // Reset reCAPTCHA if it's available
-            if (typeof grecaptcha !== 'undefined' && grecaptcha.reset) {
-                grecaptcha.reset();
-            }
-        }
+        
     });
 
     // Handle 'smarturl' parameter for form pre-population (as per original script)
