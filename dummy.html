@@ -1,0 +1,2084 @@
+
+<html><head><meta charset="UTF-8"><title>Test Change Order Zoho Form</title>
+<link href="css/form.css" rel="stylesheet" type="text/css"><script src="js/validation.js"></script>
+<script src="js/signature.js"></script>
+
+<style>
+	/* $Id: $ */
+@charset "UTF-8";
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,caption, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+body {
+	background-attachment: fixed;
+	color: #444444;
+	font: 75%/1.3 Arial, Helvetica, sans-serif;
+	margin: 0 auto;
+}
+
+input, input[type="text"], input[type="search"], isindex, textarea, button {
+	outline:none;
+	margin:0 auto;
+	padding:5px 10px;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+img, a {
+	border:0px;
+	outline:none;
+	color:#3a6cae;
+	text-decoration:none;
+}
+img, a:hover {
+	text-decoration:underline;
+}
+.zf-flLeft {
+	float:left;
+}
+.zf-flRight {
+	float:right;
+}
+.zf-clearBoth,.zf-eclearBoth {
+	clear:both;
+}
+ol, ul {
+	list-style: none outside none;
+}
+.zf-normalText {
+	font-size:13px;
+	line-height:1.5;
+}
+.zf-smallText {
+	font-size:0.9em;
+	font-weight:normal;
+}
+.zf-smallHeading {
+	font-size:18px;
+}
+.zf-heading {
+	font-size:2em;
+}
+.zf-subHeading {
+	font-size:1.5em;
+}
+.zf-boldText, .zf-boldText a {
+	font-weight:bold;
+	text-decoration:none;
+}
+.zf-italicText {
+	font-style:italic;
+}
+.zf-heading a {
+	text-decoration:underline;
+}
+.zf-heading a:hover {
+	text-decoration:none;
+}
+.zf-blodText {
+	font-weight:bold;
+}
+.zf-overAuto {
+	overflow:auto;
+}
+.zf-split {
+	color: #8B9193;
+	padding: 0 3px;
+}
+.zf-backgroundBg {
+	background:rgba(237, 239, 244, 1);
+}
+.zf-templateWidth {
+	margin:0 auto;	
+	padding: 30px 20px;
+	max-width: 800px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.zf-templateWrapper {
+	background: #fff;
+    -webkit-box-shadow: 0px 0px 22px 0px #d8dfed;
+    -moz-box-shadow: 0px 0px 22px 0px #d8dfed;
+    box-shadow: 0px 0px 22px 0px #d8dfed;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 10px;
+}
+
+.zf-tempContDiv input[type="text"], .zf-tempContDiv textarea, .zf-tempContDiv .zf-pdfTextArea {
+	background: #fff;
+    border: 1px solid rgba(184, 187, 211, 1);
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 15px;
+    color: rgb(37, 44, 62);
+    padding: 11px 10px 10px 10px;
+	height: 40px;
+	transition: 0.3s;
+}
+.zf-tempContDiv input[type="text"]::placeholder, .zf-tempContDiv textarea::placeholder, .zf-tempContDiv .zf-pdfTextArea::placeholder {
+	color: rgb(37,44,62);
+	opacity: 0.5;
+}
+.zf-tempContDiv input[type="text"]:hover,  .zf-tempContDiv textarea:hover{	
+	border: 1px solid rgba(184, 187, 211, 1);	
+	}	
+.zf-tempContDiv input[type="text"]:focus, .zf-tempContDiv textarea:focus{	
+	border: 1px solid #2eb79f;
+    box-shadow: 0px 0px 2px 0px #2eb79f;
+}
+
+	
+.zf-tempContDiv textarea {
+	min-height: 100px;
+    height: 100px;
+	font-family: Arial, Helvetica, sans-serif;
+	padding: 10px;
+}
+/* .arrangeAddress .zf-addrCont  span.zf-addtwo{ width: 100% !important;float: none !important;} 		 */
+/**********Error Message***********/	
+.zf-errorMessage {
+	font: 15px Arial, Helvetica, sans-serif;
+    color: #f41033;
+    padding-top: 10px;
+}
+
+/**********Mandatory Message***********/	
+.zf-important {
+	color: #ff0000 !important;
+    padding: 0;
+    font-size: 17px !important;
+    margin-left: 2px;
+    font-weight: bold;
+}
+
+/**********instruction Message***********/
+.zf-instruction {
+	color: #465475;
+    font-style: normal;
+    font-size: 13px;
+    overflow: visible !important;
+    word-break: break-all;
+    padding: 8px 0px 0px 0px;
+    font-weight: 500;
+	clear: both;
+}	
+.zf-symbols {
+	padding:0 5px;
+}
+
+.zf-overflow{ overflow:hidden;}
+
+/*****************template Header Starts Here****************/
+
+.zf-tempHeadBdr {
+	margin:0;
+	padding:0;
+	overflow:hidden;
+}
+
+.zf-tempHeadContBdr {
+	background: #ffffff;
+    border-bottom: 1px solid #ced3e0;
+    margin: 0;
+    padding: 28px 40px;
+    -webkit-border-radius: 2px 2px 0 0;
+    -moz-border-radius: 2px 2px 0 0;
+    border-radius: 10px 10px 0 0;
+}
+.zf-tempHeadContBdr .zf-frmTitle {
+	color: #252c3e;
+    margin: 0;
+    padding: 0;
+    font-size: 33px;
+    font-weight: 500;
+    text-align: center;
+}
+.zf-tempHeadContBdr .zf-frmDesc {
+	color: #667291;
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+    padding-top: 8px;
+    text-align: center;
+}
+
+/****************template Header Ends Here****************/
+.zf-subContWrap {
+	padding: 16px 0 16px 0;
+}
+
+.zf-tempFrmWrapper {
+	padding: 16px 40px 16px 40px;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.zf-tempFrmWrapper .zf-tempContDiv {
+	margin:0;
+	padding:0;
+}
+.zf-tempFrmWrapper .zf-labelName {
+	font-weight: 500;
+    font-size: 16px;
+    color: #252c3e;
+}
+.zf-form-sBox { 
+	padding: 9px 10px 10px 5px;
+	background: #fff;
+    border: 1px solid rgba(184, 187, 211, 1);
+    border-radius: 4px;
+    font-size: 16px;
+    height: 40px;
+    transition: 0.3s;
+    vertical-align: middle;
+    position: relative;
+    color: rgba(37, 44, 62, 1);
+}
+.zf-form-sBox:focus,.zf-form-sBox:focus:hover {
+	border: 1px solid #2eb79f;
+	box-shadow: 0px 0px 2px 0px #2eb79f;
+	outline: none;
+}
+.zf-form-sBox::after {
+	content: " ";
+	position: absolute;
+}
+.zf-name .zf-tempContDiv span, .zf-phone .zf-tempContDiv span, .zf-time .zf-tempContDiv span{
+	float: left;
+	display:block;
+}
+.zf-name .zf-tempContDiv span{ margin-left: 4%;}
+.zf-name .zf-tempContDiv span.last{ margin-right:0;}
+.zf-name .zf-tempContDiv span label{ display: block;padding-top:3px;}
+.zf-name .zf-tempContDiv input[type="text"] {width:100%;}
+.zf-phone .zf-tempContDiv span label, .zf-date .zf-tempContDiv span label, .zf-time .zf-tempContDiv span label, .zf-address .zf-tempContDiv span label, .zf-geolocation .zf-tempContDiv span label, .zf-name .zf-tempContDiv span label{ 
+	font-style: normal;
+    font-size: 13px;
+    overflow: visible !important;
+    word-break: break-all;
+    padding: 8px 0px 0px 0px;
+    font-weight: 500;
+	}
+.zf-phone .zf-tempContDiv label, .zf-date .zf-tempContDiv label, .zf-time .zf-tempContDiv label, .zf-address .zf-tempContDiv label, .zf-name .zf-tempContDiv span label {
+	color: #252c3e;
+    opacity: .8;
+}
+.zf-phone .zf-tempContDiv span label {
+	display: block;
+	padding-top:3px;
+	text-align:left;
+}
+.zf-phone .zf-tempContDiv .zf-symbols {
+	display: block;
+    margin: 9px 1%;
+    width: 2%;
+    text-align: center;
+    padding: 0;
+    padding-top: 3px;
+}
+.zf-currency .zf-tempContDiv span { 
+	display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+    color: #252c3e;
+    margin-right: 8px;
+	float: left;
+    margin-top: 10px;
+}
+.zf-currency .zf-tempContDiv input[type="text"] ~ span {
+	margin-left: 8px;
+	margin-right: 0;
+	float: none;
+}
+.zf-currency .zf-tempContDiv span label {
+	display: block;
+	padding-top:3px;
+	}
+.zf-currency .zf-tempContDiv .zf-symbol {
+	font-size: 14px;
+    margin-left:5px;
+    margin-top: 4px;
+	width:auto;
+	font-weight:bold;
+	}
+
+.zf-decesion .zf-tempContDiv{ 
+	width:100% !important; 
+	margin-top:4px;
+	}
+.zf-decesion input[type="checkbox"] {
+    display: block;
+    height: 13px;
+    margin: 0;
+    padding: 0;
+    width: 13px;
+	float:left;
+	margin-top:4px;
+}
+.zf-decesion label {
+    display: block;
+    margin: 0px 0 0 25px !important;
+    padding-bottom: 0 !important;
+	width:95% !important;
+	float:none !important;
+	line-height:21px !important;
+	text-align:left !important;
+} 
+.zf-tempContDiv input[type="file"]{
+	outline: none;
+    margin: 0 auto;
+    width: 50%;
+    border: 1px dashed rgba(184, 187, 211, 1);
+    border-radius: 4px;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 12px 12px;
+    font-size: 15px;
+    color: rgb(37, 44, 62);
+}
+.zf-address .zf-tempContDiv span, .zf-geolocation .zf-tempContDiv span {
+	display:block;
+	padding-top:15px;
+}
+
+.zf-address .address_row_1 .zf-addresCols {
+	padding-top: 0;
+}	
+.zf-address .zf-tempContDiv span label, .zf-geolocation .zf-tempContDiv span label{
+	display: block;
+	}	
+	
+.zf-address .zf-tempContDiv .zf-addOne, .zf-geolocation .zf-tempContDiv .zf-addOne{
+	float: none;
+	padding-bottom:15px;
+	margin-right:0;
+	padding-right: 0;
+	}
+
+.zf-address .zf-tempContDiv .zf-addOne input, .zf-geolocation .zf-tempContDiv .zf-addOne input{
+	width:100%;
+	}
+.zf-leftAlign .zf-address .zf-tempContDiv span.zf-addtwo, 
+.zf-leftAlign .zf-geolocation .zf-tempContDiv span.zf-addtwo,
+.zf-rightAlign .zf-address .zf-tempContDiv span.zf-addtwo, 
+.zf-rightAlign .zf-geolocation .zf-tempContDiv span.zf-addtwo {
+	width: 100%;
+}
+.zf-leftAlign .zf-address.zf-addrmedium .zf-tempContDiv span.zf-addtwo, 
+.zf-leftAlign.zf-addrmedium .zf-geolocation .zf-tempContDiv span.zf-addtwo,
+.zf-rightAlign .zf-address.zf-addrmedium .zf-tempContDiv span.zf-addtwo, 
+.zf-rightAlign.zf-addrmedium .zf-geolocation .zf-tempContDiv span.zf-addtwo
+{
+	width: 47%;
+	float: left;
+}
+.zf-leftAlign .zf-address.zf-addrlarge .zf-tempContDiv span.zf-addtwo, 
+.zf-leftAlign.zf-addrlarge .zf-geolocation .zf-tempContDiv span.zf-addtwo,
+.zf-rightAlign .zf-address.zf-addrlarge .zf-tempContDiv span.zf-addtwo, 
+.zf-rightAlign.zf-addrlarge .zf-geolocation .zf-tempContDiv span.zf-addtwo {
+	width: 48%;
+	float: left;
+}
+.zf-leftAlign .zf-address.zf-addrlarge .zf-tempContDiv span.zf-addtwo:nth-last-of-type(2), 
+.zf-leftAlign .zf-address.zf-addrmedium .zf-tempContDiv span.zf-addtwo:nth-last-of-type(2),
+.zf-rightAlign .zf-address.zf-addrlarge .zf-tempContDiv span.zf-addtwo:nth-last-of-type(2), 
+.zf-rightAlign .zf-address.zf-addrmedium .zf-tempContDiv span.zf-addtwo:nth-last-of-type(2) {
+	padding-bottom: 0;
+}
+.zf-address .zf-tempContDiv span.zf-addtwo:nth-child(even), .zf-geolocation .zf-tempContDiv span.zf-addtwo:nth-child(even) {
+	padding-right: 0;
+}
+.zf-address .zf-tempContDiv span.zf-addtwo input, .zf-geolocation .zf-tempContDiv span.zf-addtwo input{
+	width:100%;
+	}	
+.zf-address .zf-tempContDiv span.zf-addtwo .zf-form-sBox{
+	width:100%;
+	}
+	
+.zf-signContainer{ 
+	margin:0; 
+	padding:0; 
+	width:100%;
+	}
+.zf-signContainer canvas{ 
+	cursor: crosshair;
+    border: 1px solid rgba(184, 187, 211, 1);
+    background: #fff;
+    border-radius: 5px;
+    width: 100%;
+    height: 130px;
+	box-sizing: border-box;
+	}
+.zf-signContainer a{
+	font-size: 14px;
+    text-decoration: underline;
+    display: block;
+    color: #465475;
+    margin-top: 8px;
+	}	
+	
+.zf-section h2{
+	border-bottom: 1px solid #a7abb2;
+	font-size:22px; 
+	color:#000; 
+	font-weight:500; 
+	padding-bottom:10px;
+	}
+.zf-section p{ 
+	color: #465475;
+    margin-top: 10px;
+    font-size: 15px;
+}
+	
+.zf-note .zf-labelName{	
+	padding-top:7px;
+	}
+.zf-templateWrapper .zf-note{ 
+	overflow:hidden;
+	}
+
+.zf-date .zf-tempContDiv span label {
+	display: block;
+    text-align: left;
+    color: #252c3e;
+    padding-top: 8px;
+    font-size: 14px;
+    opacity: .8;
+}
+
+.zf-subDate{ margin-right:10px;}
+.zf-subDate label{ text-align:left !important;}
+
+.zf-time .zf-tempContDiv span label {
+	display: block;
+	padding-top:8px;
+	font-size: 13px;
+}
+
+.zf-time .zf-tempContDiv .zf-form-sBox{
+	min-width: 58px;
+    width: 72px;
+    padding: 9px 20px 10px 6px;
+}
+
+.zf-time .zf-tempContDiv .zf-symbols {
+	padding-top:12px;
+}
+
+.zf-tempContDiv input[type="checkbox"], .zf-tempContDiv input[type="radio"] {
+	display: block;
+	height: 13px;
+	margin: 4px 0 0;
+	padding: 0;
+	width: 13px;
+	cursor: pointer;
+	
+}
+.zf-tempContDiv input[type="radio"] {
+	-webkit-appearance: none;
+	border: 1.2px solid #47476b;
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+}
+.zf-tempContDiv input[type="radio"] ~ label {
+	cursor: pointer;
+}
+.zf-tempContDiv input[type="checkbox"] {
+	-webkit-appearance: none;
+	border-radius: 3px;
+    border: 1.2px solid #47476b;
+    transition: 0.5s ease all;
+	position: relative;
+	width: 20px;
+	height: 20px;
+}
+.zf-tempContDiv input[type="checkbox"] ~ label {
+	cursor: pointer;
+}
+.zf-tempContDiv .zf-termsAccept input[type="checkbox"] ~ label {
+	cursor: default;
+}
+.zf-tempContDiv input[type="radio"]:before {
+	content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-top: 3px;
+    margin-left: 3px;
+    box-sizing: border-box;
+}
+.zf-tempContDiv input[type="checkbox"]:before {
+	content: '';
+	display: block;
+	width: 60%;
+	height: 60%;
+	margin: 19% auto;
+}
+.zf-tempContDiv input[type="radio"]:checked:before {
+	background: rgba(46, 183, 159,1);
+}
+.zf-tempContDiv input[type="radio"]:checked {
+	border: 1.2px solid rgba(46, 183, 159,1);
+	box-shadow: 0px 0px 0px 0.5px rgba(46, 183, 159,1);
+	outline: none;
+}
+
+.zf-tempContDiv input[type="checkbox"]:checked {
+	border: 1.2px solid rgba(46, 183, 159,1);
+	box-shadow: 0px 0px 2px 0px rgba(46, 183, 159,1);
+	outline: none;
+}
+.zf-tempContDiv input[type="checkbox"]:checked:before {
+	content: " ";
+    display: inline-block;
+    transform: rotate(45deg);
+    height: 10px;
+    width: 4px;
+    border-bottom: 2px solid rgba(46, 183, 159, 1);
+    border-right: 2px solid rgba(46, 183, 159, 1);
+    position: absolute;
+    top: -2px;
+    left: 6px;
+}
+.zf-sideBySide .zf-tempContDiv span {
+	margin: 0 4% 16px 0;
+	padding:0;
+	width:auto;
+	float: left;
+	display:block;
+}
+.zf-sideBySide .zf-tempContDiv span input[type="checkbox"] {
+	display: block;
+	min-width: 20px;
+	width: 20px;
+	height: 20px;
+	padding: 0;
+	margin-top:1px;
+	float:left;
+	margin-left: 2px;
+}
+.zf-sideBySide .zf-tempContDiv span input[type="radio"] {
+	display: block;
+	width: 20px;
+	height: 20px;
+	margin-top: 1px;
+	padding: 0;
+	float:left;
+	margin-left: 1px;
+}
+.zf-sideBySide .zf-tempContDiv span label {
+	line-height: 21px;
+    display: block;
+    padding: 0 0 0 32px;
+    cursor: pointer;
+    font-size: 15px;
+    color: #47476b;
+}
+.zf-oneColumns .zf-tempContDiv span {
+	margin:0 0 16px 0;
+	padding:0;
+	width:100%;
+	display:block;
+	clear: both;
+}
+.zf-oneColumns .zf-multiAttType label ~ input[type="text"],
+.zf-twoColumns .zf-multiAttType label ~ input[type="text"],
+.zf-threeColumns .zf-multiAttType label ~ input[type="text"],
+.zf-sideBySide .zf-multiAttType label ~ input[type="text"] {
+	margin-top: 15px;
+	width: 100%;
+}
+.zf-oneColumns .zf-tempContDiv span:last-child { margin-bottom:0;}
+.zf-oneColumns .zf-tempContDiv span input[type="checkbox"] {
+	display: block;
+	min-width: 20px;
+	width: 20px;
+	height: 20px;
+	margin:0;
+	padding: 0;
+	margin-top:1px;
+	float:left;
+	margin-left: 2px;
+}
+.zf-oneColumns .zf-tempContDiv span input[type="radio"] {
+	display: block;
+	min-width: 20px;
+	width: 20px;
+	height: 20px;
+	margin-top:1px;
+	padding: 0;
+	float:left;
+	margin-left: 1px;
+}
+.zf-oneColumns .zf-tempContDiv span label {
+	line-height: 21px;
+    display: block;
+    margin: 0 0 0 32px;
+    padding: 0;
+    font-size: 15px;
+    color: #47476b;
+}
+.zf-twoColumns .zf-tempContDiv span {
+	margin: 0 4% 16px 0;
+	width: 48%;
+	float: left;
+	display:block;
+}
+.zf-twoColumns .zf-tempContDiv span:nth-child(even) {
+	margin-right: 0;
+}
+.zf-twoColumns .zf-tempContDiv span input[type="checkbox"] {
+	display: block;
+	min-width: 20px;
+	width: 20px;
+	height: 20px;
+	margin: 0;
+	padding: 0;
+	margin-top:1px;
+	float:left;
+	margin-left: 2px;
+}
+.zf-twoColumns .zf-tempContDiv span input[type="radio"] {
+	display: block;
+	min-width: 20px;
+	width: 20px;
+	height: 20px;
+	margin-top: 1px;
+	padding: 0;
+	float:left;
+	margin-left: 1px;
+}
+.zf-twoColumns .zf-tempContDiv span label {
+	line-height: 21px;
+    display: block;
+    margin: 0 0 0 32px;
+    padding: 0;
+    font-size: 15px;
+    color: #47476b;
+}
+.zf-threeColumns .zf-tempContDiv span {
+	margin: 0 4% 15px 0;
+    width: 30.6%;
+    float: left;
+    display: block;
+}
+.zf-threeColumns .zf-tempContDiv span:nth-child(3n) {
+	margin-right: 0;
+}
+.zf-threeColumns .zf-tempContDiv span input[type="checkbox"] {
+	display:block;
+	min-width: 20px;
+	width: 20px;
+	height: 20px;
+	padding: 0;
+	margin-top:1px;
+	float:left;
+	margin-left: 2px;
+}
+.zf-threeColumns .zf-tempContDiv span input[type="radio"] {
+	display:block;
+	min-width: 20px;
+	width: 20px;
+	height: 20px;
+	margin-top:1px;
+	padding: 0;
+	float:left;
+	margin-left: 1px;
+}
+.zf-threeColumns .zf-tempContDiv span label {
+	line-height: 21px;
+    display: block;
+    margin: 0 0 0 32px;
+    padding: 0;
+    font-size: 15px;
+    color: #47476b;
+}
+
+.zf-mSelect select { 
+	font-size: 15px;
+    border: 1px solid rgba(184, 187, 211, 1);
+    overflow: auto;
+    border-radius: 4px;
+    color: #47476b;
+    outline: none;
+    box-sizing: border-box;
+    height: 101px;
+}	
+.zf-mSelect select option {
+	padding: 8px 10px;
+    box-sizing: border-box;
+}
+
+.zf-fmFooter {
+	margin:0;
+	padding:10px 25px 40px 25px;
+	text-align:center;
+}
+
+.zf-fmFooter .zf-submitColor{ 
+	font-size: 16px;
+    padding: 13px 38px;
+}
+
+.zf-submitColor {
+	color: #fff;
+    border: 1px solid transparent;
+    background: rgba(46, 183, 159, 1);
+    border-radius: 150px;
+    min-width: 100px;
+    transition: transform .25s cubic-bezier(0.33, 0.04, 0.63, 0.93), -webkit-transform .25s cubic-bezier(0.33, 0.04, 0.63, 0.93), -o-transform .25s cubic-bezier(0.33, 0.04, 0.63, 0.93);
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    cursor: pointer;
+	}
+	
+.zf-submitColor:hover{
+	-webkit-transform: scale3d(1.03, 1.03, 1) translate3d(0, 0, 0) perspective(500px);
+    transform: scale3d(1.03, 1.03, 1) translate3d(0, 0, 0) perspective(500px);
+	}	   	
+
+/****************Field Small/Medium/Large Starts Here****************/
+
+.zf-small .zf-tempContDiv input[type="text"], .zf-small .zf-tempContDiv textarea, .zf-small .zf-mSelect select, .zf-small .zf-tempContDiv .zf-sliderCont, .zf-small .zf-tempContDiv .zf-pdfTextArea, .zf-small .zf-signContainer{
+	width:50%;
+	}
+.zf-medium .zf-tempContDiv input[type="text"], .zf-medium .zf-tempContDiv textarea, .zf-medium .zf-mSelect select, .zf-medium .zf-tempContDiv .zf-sliderCont, .zf-medium .zf-tempContDiv .zf-pdfTextArea, .zf-medium .zf-signContainer{
+	width:75%;
+	}
+.zf-large .zf-tempContDiv input[type="text"], .zf-large .zf-tempContDiv textarea, .zf-large .zf-mSelect select, .zf-large .zf-tempContDiv .zf-sliderCont, .zf-large .zf-tempContDiv .zf-pdfTextArea, .zf-large .zf-signContainer{
+	width:100%;
+	}
+.signContainer canvas{
+	width:100%;
+}
+.zf-small .zf-tempContDiv .zf-form-sBox{
+	width:50%;
+	}
+.zf-medium .zf-tempContDiv .zf-form-sBox{
+	width:75%;
+	}
+.zf-large .zf-tempContDiv .zf-form-sBox{
+	width:100%;
+	}
+.zf-name .zf-tempContDiv .zf-form-sBox{
+	width:100%;
+	padding: 8px 10px 10px 4px;
+}
+.zf-namesmall .zf-nameWrapper{ width: 50%;}
+.zf-namesmall .zf-tempContDiv span {
+    width: 49%;
+    margin-left: 2%;
+}
+.zf-namesmall .zf-oneType .zf-salutationWrapper span{width:63%; }
+.zf-namesmall .zf-oneType .zf-salutationWrapper .zf-salutation{ width: 33%;}
+.zf-namesmall .zf-twoType .zf-salutationWrapper span{width:34%;margin-left:3%;}
+.zf-namesmall .zf-twoType .zf-salutationWrapper .zf-salutation{ width:26%;}
+.zf-namesmall .zf-threeType .zf-nameWrapper span{width:32%; margin-left:2%;}
+.zf-namesmall .zf-threeType .zf-salutationWrapper span{ 
+	width: 25%;
+    float: left;
+    margin-left: 2%;
+	margin-bottom: 0;
+}
+.zf-namesmall .zf-threeType .zf-salutationWrapper .zf-salutation{ width:19%;}
+.zf-namesmall .zf-tempContDiv span:first-child{ margin-left:0;}
+
+.zf-leftAlign .zf-namesmall .zf-threeType .zf-salutationWrapper span, 
+.zf-rightAlign .zf-namesmall	.zf-threeType .zf-salutationWrapper span
+{     
+	float: left;
+    margin-left: 2%;
+    width: 25%;}
+.zf-leftAlign .zf-namesmall .zf-threeType .zf-salutationWrapper .zf-salutation, 
+.zf-rightAlign .zf-namesmall .zf-threeType .zf-salutationWrapper .zf-salutation{ width: 19%; }
+.zf-namemedium .zf-nameWrapper{ width: 75%;}
+.zf-namemedium .zf-tempContDiv span{width:49%; margin-left:2%;}  
+.zf-namemedium .zf-oneType .zf-salutationWrapper span{width:73%; }
+.zf-namemedium .zf-oneType .zf-salutationWrapper .zf-salutation{ width: 25%;}
+.zf-namemedium .zf-twoType .zf-salutationWrapper span{width:38%;margin-left:2%;}
+.zf-namemedium .zf-twoType .zf-salutationWrapper .zf-salutation{ width:20%;}
+.zf-namemedium .zf-threeType .zf-nameWrapper span{width:32%; margin-left:2%;}
+.zf-namemedium .zf-threeType .zf-salutationWrapper span{width:25%;margin-left:2%;}
+.zf-namemedium .zf-threeType .zf-salutationWrapper .zf-salutation{ width:19%;}
+.zf-namemedium .zf-tempContDiv span:first-child{ margin-left:0;}
+.zf-namelarge .zf-tempContDiv span{width:23.5%; margin-left:2%; margin-right: 0; margin-bottom: 0;}
+.zf-namelarge .zf-twoType .zf-nameWrapper span{width:49%; margin-left:2%;}
+.zf-namelarge .zf-threeType .zf-nameWrapper span{width:32%; margin-left:2%;}
+.zf-namelarge .zf-twoType .zf-salutationWrapper span{width:40%; margin-left:2%;}
+.zf-namelarge .zf-twoType .zf-salutationWrapper .zf-salutation{ width: 16%;}
+.zf-namelarge .zf-threeType .zf-salutationWrapper span{width:26%; margin-left:2%;}
+.zf-namelarge .zf-threeType .zf-salutationWrapper .zf-salutation{ width: 19.8%;}
+.zf-namelarge .zf-oneType .zf-salutationWrapper span{width:73%; margin-left:2%;}
+.zf-namelarge .zf-oneType .zf-salutationWrapper .zf-salutation{ width:25%;}
+.zf-namelarge .zf-tempContDiv span:first-child { margin-left:0 !important;}
+.zf-csmall .zf-tempContDiv input[type="text"] {
+	width:100%;
+}
+.zf-cmedium .zf-tempContDiv input[type="text"] {
+	width:100%;
+}
+.zf-clarge	 .zf-tempContDiv input[type="text"] {
+	width:100%;
+} 	
+.zf-nsmall .zf-tempContDiv input[type="text"] {	
+	width:50%;	
+	}
+.zf-nmedium .zf-tempContDiv input[type="text"] {
+	width:75%;
+	}
+.zf-nlarge .zf-tempContDiv input[type="text"] {
+	width:100%;
+	}
+
+.zf-signSmall .zf-tempContDiv .zf-signContainer .zf-signArea {	
+	width:49%;
+	}
+.zf-signMedium .zf-tempContDiv .zf-signContainer .zf-signArea {
+	width:60%;
+	}
+.zf-signLarge .zf-tempContDiv .zf-signContainer .zf-signArea {	
+	width:74%;
+	}	
+
+.zf-addrsmall .zf-tempContDiv .zf-addrCont{ 
+	width:50%;
+	}
+.zf-addrmedium .zf-tempContDiv .zf-addrCont{ 
+	width:75%;
+	}
+.zf-addrlarge .zf-tempContDiv .zf-addrCont{ 
+	width:100%;
+	}	
+	
+.zf-leftAlign .zf-currency .zf-tempContDiv input[type="text"],
+.zf-rightAlign .zf-currency .zf-tempContDiv input[type="text"] {
+	float: left;
+}
+.zf-leftAlign .zf-currency.zf-clarge .zf-tempContDiv input[type="text"],
+.zf-rightAlign .zf-currency.zf-clarge .zf-tempContDiv input[type="text"] {
+	float: left;
+}
+.zf-leftAlign .zf-currency.zf-clarge .zf-tempContDiv input[type="text"] ~ span,
+.zf-rightAlign .zf-currency.zf-clarge .zf-tempContDiv input[type="text"] ~ span {
+	margin-top: 9px;
+}	
+/****************Field Small/Medium/Large Ends Here****************/	
+
+.zf-topAlign .zf-tempFrmWrapper .zf-labelName {
+	padding-bottom: 10px;
+	display:block;
+}
+
+.zf-topAlign .zf-threeColumns .zf-labelName, .zf-topAlign .zf-twoColumns .zf-labelName, .zf-topAlign .zf-oneColumns .zf-labelName, .zf-topAlign .zf-sideBySide .zf-labelName{ padding-bottom:8px;}
+
+.zf-leftAlign {
+	display:block;
+}
+.zf-leftAlign .zf-tempFrmWrapper .zf-labelName {
+	float: left;
+    width: 30%;
+    line-height: 20px;
+    padding-right: 30px;
+    box-sizing: border-box;
+}
+.zf-leftAlign .zf-tempFrmWrapper .zf-tempContDiv {
+	float: right;
+    width: 70%;
+}
+.zf-leftAlign .zf-slider .zf-tempContDiv{ margin-top:6px;}
+.zf-leftAlign .zf-decesion .zf-tempContDiv, .zf-rightAlign .zf-decesion .zf-tempContDiv{ margin-left:0 !important;}
+.zf-rightAlign {
+	display:block;
+}
+.zf-rightAlign .zf-tempFrmWrapper .zf-labelName {
+	float: left;
+    width: 30%;
+    line-height: 20px;
+    text-align: right;
+    padding-right: 30px;
+    box-sizing: border-box;
+}
+.zf-rightAlign .zf-tempFrmWrapper .zf-tempContDiv {
+	float: right;
+    width: 70%;
+}
+.zf-matrixTable{ font-size:13px; overflow-x: auto;padding-bottom: 15px !important;}
+.zf-matrixTable table th, .zf-matrixTable table td{padding:10px;}
+.zf-matrixTable thead th, .zf-matrixTable table td{ text-align:center;}
+.zf-matrixTable table td input[type="radio"], .zf-matrixTable table td input[type="checkbox"]{ display:inline-block;}
+.zf-matrixTable tbody th{     
+	font-weight: normal;
+    font-size: 16px;
+    text-align: left;
+    padding: 12px 10px;
+    color: #252c3e;
+    width: 218px;
+    box-sizing: border-box;
+}
+.zf-matrixTable thead th {     word-break: normal;
+    font-weight: normal;
+    font-size: 16px;
+    padding: 12px 10px;
+    color: #252c3e;
+    text-align: center;}
+
+/****************Form Top Align Starts Here****************/	
+
+.zf-termsContainer{ margin:0; padding:0;}
+.zf-termsContainer .zf-termsMsg {
+	border: 1px solid #252c3e;
+    max-height: 250px;
+    overflow-y: auto;
+    padding: 12px 10px 12px;
+    margin-bottom: 12px;
+    border-radius: 4px;
+    min-height: 70px;
+    font-size: 13px;
+}
+.zf-termsContainer .zf-termScrollRemove { border: 1px solid #252c3e;
+    overflow-y: auto;
+    padding: 12px 10px 12px;
+    margin-bottom: 12px;
+    border-radius: 4px;
+    min-height: 70px;
+    font-size: 13px;}
+.zf-termsAccept{ 
+	margin-top: 0 !important;
+}
+.zf-termsAccept input[type="checkbox"]{ margin-top:0 !important; float:left;}
+.zf-termsAccept label{ 
+	margin-left: 30px;
+    font-size: 15px;
+    float: none;
+    display: block;
+    color: #252c3e;}
+.zf-termsWrapper .zf-tempContDiv{ margin-left:0 !important;}
+.zf-termsWrapper .zf-labelName{ width:100% !important; text-align:left !important; padding-bottom:8px !important;}
+.zf-medium .zf-phwrapper {
+    width: 75%;
+}
+.zf-phwrapper.zf-phNumber span {
+	width: 100% !important;
+}
+.zf-phwrapper span:first-child {
+    margin-left: 0;
+    width: 22%;
+}
+.zf-phwrapper label {
+	display: block;
+    color: #252c3e;
+    font-size: 13px;
+    padding-top: 8px;
+    opacity: 0.8;
+}
+.zf-medium .zf-phonefld input[type="text"], .zf-small .zf-phonefld input[type="text"] {
+    width: 100%;
+}
+.zf-small .zf-phwrapper {
+    width: 50%;
+}
+.zf-tempFrmWrapper.zf-phone span {
+	width: 30%;
+	margin: inherit;
+}
+.zf-tempFrmWrapper .zfPhoneUSA span {
+    width: 22.3%;
+    position: relative;
+}
+.zf-tempFrmWrapper.zf-phone span input[type="text"] {
+	width: 100%;
+}
+.zfMultiColGrid .zf-tempFrmWrapper.zf-phone .zf-symbols {
+    display: none;
+}
+.zf-tempFrmWrapper.zf-phone .zfPhoneUSA {
+	display: flex;
+}
+.zfMultiColGrid .zf-tempFrmWrapper.zf-phone .zfPhoneUSA span,
+.zfoneColumn .zf-tempFrmWrapper.zf-phone .zfPhoneUSA span {
+	width: 30%;
+	flex: 1 1 auto;
+	margin-left: 8px;
+}
+.zf-tempFrmWrapper.zf-phone .zfPhoneUSA span:first-of-type {
+	margin-left: 0;
+}
+.zf-phwrapper span {
+    float: left;
+    width: 76%;
+    margin-left: 2%;
+}
+.zf-descFld a { 
+	text-decoration:underline;
+	color: #252c3e;
+}
+.zf-descFld em{ font-style:italic;}
+.zf-descFld b{ font-weight:bold;}
+.zf-descFld i{ font-style: italic;}
+.zf-descFld u{ text-decoration:underline;}
+.zf-descFld ul{ margin:auto;}
+.zf-descFld ul{ list-style:disc;}
+.zf-descFld ol{ list-style:decimal;}
+.zf-descFld ul, .zf-descFld ol{margin: 10px 0;
+    padding-left: 20px;}
+
+.zf-descFld  ol.code {
+    list-style-position: outside;
+    list-style-type: decimal;
+    padding: 0 30px;
+}
+.zf-descFld  ol.code li {
+    background-color: #F5F5F5;
+    border-left: 2px solid #CCCCCC;
+    margin: 1px 0;
+    padding: 2px;
+}
+.zf-descFld  blockquote.zquote {
+    border-left: 3px solid #EFEFEF;
+    padding-left: 35px;
+}
+.zf-descFld  blockquote.zquote span.txt {
+    -moz-user-focus: ignore;
+    -moz-user-input: disabled;
+    -moz-user-select: none;
+    color: #058BC2;
+    float: left;
+    font: bold 50px Arial,Helvetica,sans-serif;
+    margin: -10px 0 0 -30px;
+}
+.zf-descFld  blockquote.block_quote {
+    background: url("../images/newQuote.gif") no-repeat scroll 12px 10px rgba(0, 0, 0, 0);
+    border-left: 3px solid #EFEFEF;
+    font: 13px/20px georgia,Arial,verdana,Helvetica,sans-serif;
+    margin: 15px 3px 15px 15px;
+    padding: 10px 10px 10px 40px;
+}
+.zf-descFld  body {
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    margin: 8px;
+}
+.note .noteCont{ overflow:hidden;}
+.note .zf-descFld{
+	overflow:hidden;
+	font-size: 13px;
+}
+
+.zf-descFld img {
+	width: auto;
+}
+/* New Css */
+.zf-date .zf-tempContDiv input[type="text"]{
+	width: 340px;
+}
+.zf-leftAlign .zf-date .zf-tempContDiv input[type="text"],
+.zf-rightAlign .zf-date .zf-tempContDiv input[type="text"] {
+	width: 238px;
+}
+.zf-leftAlign .zf-date.zf-time .zf-tempContDiv input[type="text"],
+.zf-rightAlign .zf-date.zf-time .zf-tempContDiv input[type="text"] {
+width: 223px;
+}
+.zf-decesion .zf-tempContDiv input[type="checkbox"] {
+	margin-top: 0;
+}
+.zf-tempFrmWrapper.zf-decesion .zf-labelName {
+	margin-left: 28px !important;
+}
+.zf-leftAlign .zf-tempFrmWrapper .zf-matrixTable,
+.zf-rightAlign .zf-tempFrmWrapper .zf-matrixTable {
+	width: 100%;
+	clear: both;
+	float: none;
+	padding-top: 10px;
+}
+.zf-leftAlign .zf-tempFrmWrapper.zf-termsandCond .zf-tempContDiv,
+.zf-rightAlign .zf-tempFrmWrapper.zf-termsandCond .zf-tempContDiv {
+	float: none;
+    width: 100%;
+    clear: both;
+    padding-top: 10px;
+}
+.zf-leftAlign .zf-tempFrmWrapper.zf-termsandCond .zf-labelName,
+.zf-rightAlign .zf-tempFrmWrapper.zf-termsandCond .zf-labelName {
+	width: 100%;
+	float: none;
+	text-align: left;
+	display: block;
+}
+
+.zf-leftAlign .zf-namesmall .zf-threeType .zf-salutationWrapper span:first-of-type, 
+.zf-rightAlign .zf-namesmall .zf-threeType .zf-salutationWrapper span:first-of-type {
+	margin-left: 0;
+}
+.zf-rightAlign .zf-tempFrmWrapper.zf-matrixTable .zf-labelName {
+	text-align: left;
+}
+.zfAddressTwoCol {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0 16px;
+}
+
+.zf-address .zf-tempContDiv .zfAddressTwoCol .zf-addOne {
+	width: 47%;
+}
+.zf-addrCont .zfAddressTwoCol ~ .zfAddressTwoCol span.zf-addtwo:last-of-type {
+    padding-bottom: 0;
+}
+.zf-csmall.zf-currency .zf-tempContDiv > div {
+	width: 50%;
+	display: inline-flex;
+}
+.zf-cmedium.zf-currency .zf-tempContDiv > div {
+	width: 75%;
+	display: inline-flex;
+}
+.zf-clarge.zf-currency .zf-tempContDiv > div {
+	width: 100%;
+	display: inline-flex;
+}
+.zf-nameWrapper.zf-salutationWrapper {
+    display: flex;
+}
+.zf-leftAlign .zf-tempFrmWrapper .zf-termsandCond {
+	float: none;
+	width: 100%;
+}
+.zf-tempContDiv span input[type="checkbox"]:focus {
+	border: 1.2px solid rgb(46, 183, 159, 1);
+    box-shadow: 0px 0px 2px 0px rgb(46, 183, 159, 1);
+}
+.zf-multiAttType.fullColWrap,
+.zf-twoColumns .zf-tempContDiv .zf-multiAttType.fullColWrap,
+.zf-threeColumns .zf-tempContDiv .zf-multiAttType.fullColWrap,
+.zf-sideBySide .zf-tempContDiv .zf-multiAttType.fullColWrap {
+	width: 100%;
+}
+.zf-address.zf-tempContDiv .zf-form-sBox,
+.zf-address.zf-tempContDiv input[type="text"] {
+	width: 100%;
+}
+.address_row_3, .address_row_4 {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0 16px;
+}
+.address_row_3 span.zf-addresCols,
+.address_row_4 span.zf-addresCols {
+	    width: 47%;
+		flex: 1 1 auto;
+}
+.address_row_1 .zf-addresCols,
+.address_row_2 .zf-addresCols,
+.address_row_3 .zf-addresCols,
+.address_row_4 .zf-addresCols  {
+	width: 100%;
+}
+.zf-tempFrmWrapper.gridName .zf-twoType .zf-nameWrapper span {
+	width: 100%;
+	margin-left: 0;
+	margin-bottom: 15px;
+}
+.zf-tempFrmWrapper.gridName .zf-threeType .zf-salutationWrapper .zf-salutation {
+	width: 100%;
+	margin-left: 0;
+}
+.zf-tempFrmWrapper.gridName .zf-threeType .zf-salutationWrapper span {
+	width: 100%;
+	margin-left: 0;
+	margin-bottom: 15px;
+}
+.zf-tempFrmWrapper.gridName  .zf-nameWrapper.zf-salutationWrapper {
+	display: block;
+}
+.zf-templateWrapper .zf-note table td {
+	word-break: break-all;
+}
+.zf-leftAlign .zf-tempFrmWrapper.zf-matrixTable .zf-labelName {
+	width: 100%;
+}
+
+/* Grid Related Css Start Here */
+.zfgrid_Wrapper {
+	padding: 0 40px 0 40px;
+	margin: 0;
+	box-sizing: border-box;
+}
+.zfgridLabelCont {
+	padding: 12px 0;
+}
+.zfgridLabelCont label {
+	font-size: 22px;
+	color: #252c3e;
+}
+.zfgridLabelCont span {
+	font-size: 14px;
+	color: #465474;
+	padding-top: 8px;
+	display: block;
+}
+.zftwoColumn,
+.zfthreeColumn {
+	display: flex;
+  	flex-wrap: nowrap;
+	gap: 32px;
+}
+.zfoneColumn .zfCol{
+	max-width: 100%;
+}
+.zftwoColumn .zfCol {
+	flex: 1 1;
+  	overflow-x: hidden;
+	max-width: 50%;
+}
+.zfthreeColumn .zfCol {
+	flex: 1 1;
+  	overflow-x: hidden;
+	max-width: 33%;
+}
+.zfgrid_Wrapper .zf-tempFrmWrapper {
+	padding-left: 0;
+  	padding-right: 0;
+}
+.zfMultiColGrid .zf-medium .zf-tempContDiv input[type="text"], .zfMultiColGrid .zf-medium .zf-tempContDiv textarea, .zfMultiColGrid .zf-medium .zf-mSelect select, .zfMultiColGrid .zf-medium .zf-tempContDiv .zf-sliderCont, .zfMultiColGrid .zf-medium .zf-tempContDiv .zf-pdfTextArea, 
+.zfMultiColGrid .zf-medium .zf-signContainer {
+	width: 100%;
+  }
+
+.zfMultiColGrid .zf-small .zf-tempContDiv input[type="text"], .zfMultiColGrid .zf-small .zf-tempContDiv textarea, .zfMultiColGrid .zf-small .zf-mSelect select, .zfMultiColGrid .zf-small .zf-tempContDiv .zf-sliderCont, .zfMultiColGrid .zf-small .zf-tempContDiv .zf-pdfTextArea, 
+.zfMultiColGrid .zf-small .zf-signContainer {
+	width: 100%;
+}
+.zfMultiColGrid .zf-medium .zf-phwrapper {
+	width: 100%;
+}
+.zfMultiColGrid .zf-small .zf-phwrapper {
+	width: 100%;
+}
+.zfMultiColGrid .zf-tempFrmWrapper.zf-phone span,
+.zfoneColumn .zf-tempFrmWrapper.zf-phone span{
+	width: 30.6%;
+}
+.zfoneColumn .zf-tempFrmWrapper.zf-phone span.zf-symbols {
+    display: none;
+}
+.zfMultiColGrid .zf-phone .zf-tempContDiv .zf-symbols {
+	margin: 9px 1%;
+  	width: 2%;
+}
+.zfMultiColGrid .zf-cmedium.zf-currency .zf-tempContDiv > div {
+	width: 100%;
+}
+.zfMultiColGrid .zf-csmall.zf-currency .zf-tempContDiv > div {
+	width: 100%;
+}
+.zfMultiColGrid .zf-medium .zf-tempContDiv .zf-form-sBox,.zfMultiColGrid .zf-small .zf-tempContDiv .zf-form-sBox {
+	width: 100%;
+}
+.zfMultiColGrid .zf-date .zf-tempContDiv input[type="text"],
+.zfMultiColGrid .zf-date.zf-time .zf-tempContDiv input[type="text"] {
+	width: 100%;
+}
+.zfMultiColGrid .zf-tempContDiv input[type="file"] {
+	width: 100%;
+}
+.zfMultiColGrid .zf-namemedium .zf-nameWrapper,.zfMultiColGrid .zf-namesmall .zf-nameWrapper {
+	width: 100%;
+  }
+.zfMultiColGrid .zf-addrmedium .zf-tempContDiv .zf-addrCont,.zfMultiColGrid .zf-addrsmall .zf-tempContDiv .zf-addrCont {
+	width: 100%;
+}
+
+.zftwoColumn .address_row_3, .zftwoColumn .address_row_4, .zfthreeColumn .address_row_3, .zfthreeColumn .address_row_4 {
+	flex-wrap: nowrap;
+	gap: 0 8px;
+}
+.zftwoColumn .gridAddress .address_row_3, .zftwoColumn .gridAddress .address_row_4, .zfthreeColumn .gridAddress .address_row_3, .zfthreeColumn .gridAddress .address_row_4 {
+	flex-wrap: wrap;
+	width: 100%;
+}
+.gridAddress .address_row_3 .zf-addresCols, .gridAddress .address_row_4 .zf-addresCols {
+	width: 100%;
+}
+.zfgrid_Wrapper .zf-time .zf-tempContDiv .zf-symbols {
+	display: none;
+}
+.zfMultiColGrid  .zf-time .zf-tempContDiv span {
+	width: 32%;
+	margin-right: 2%;
+}
+.zfMultiColGrid  .zf-time .zf-tempContDiv span:last-of-type {
+	margin-right: 0;
+}
+.zfMultiColGrid .zf-time .zf-tempContDiv .zf-form-sBox {
+	min-width: auto;
+	width: 100%;
+}
+.zfMultiColGrid .zf-date.zf-time .zf-tempContDiv .zf-subDate {
+	width: 25%;
+}
+.zfMultiColGrid .zf-date.zf-time .zf-tempContDiv span {
+	width: 23%;
+}
+.zfgrid_Wrapper .zf-oneColumns .zf-tempContDiv span label,.zfgrid_Wrapper .zf-twoColumns .zf-tempContDiv span label,.zfgrid_Wrapper .zf-threeColumns .zf-tempContDiv span label,.zfgrid_Wrapper .zf-sideBySide .zf-tempContDiv span label {
+	word-break: break-all;
+}
+.zf-leftAlign .zfMultiColGrid .zf-tempFrmWrapper .zf-labelName,
+.zf-rightAlign .zfMultiColGrid .zf-tempFrmWrapper .zf-labelName {
+	float: none;
+	display: block;
+	width: 100%;
+	padding-bottom: 10px;
+	text-align: left;
+}
+.zf-leftAlign .zfMultiColGrid .zf-tempFrmWrapper .zf-tempContDiv,
+.zf-rightAlign .zfMultiColGrid .zf-tempFrmWrapper .zf-tempContDiv {
+	float: none;
+	width: 100%;
+}
+.zfInstrucTop .zf-instruction {
+	padding: 0px 0px 10px 0px;
+}
+.zfInstrucTop .zf-decesion .zf-instruction {
+	padding: 10px 0px 0px 0px;
+}
+.zfInstrucTop.zf-topAlign .zf-tempFrmWrapper .zf-labelName {
+    padding-bottom: 6px;
+    display: block;
+}
+.zfoneColumn .zf-time .zf-tempContDiv {
+	width: 285px;
+}
+.zf-leftAlign .zfoneColumn .zf-time .zf-tempContDiv,
+.zf-rightAlign .zfoneColumn .zf-time .zf-tempContDiv,
+.zf-leftAlign .zfoneColumn .zf-time.zf-date .zf-tempContDiv,
+.zf-rightAlign .zfoneColumn .zf-time.zf-date .zf-tempContDiv {
+	width: 70%;
+}
+.zfoneColumn .zf-time .zf-tempContDiv span {
+	width: 25%;
+  	margin-right: 14px;
+}
+.zf-leftAlign .zfoneColumn .zf-time .zf-tempContDiv span,
+.zf-rightAlign .zfoneColumn .zf-time .zf-tempContDiv span {
+	width: 72px;
+}
+.zfoneColumn .zf-time.zf-date .zf-tempContDiv {
+	width: 100%;
+}
+.zfoneColumn .zf-time.zf-date .zf-tempContDiv span {
+	width: 72px;
+  	margin-right: 14px;
+}
+.zfoneColumn .zf-time.zf-date .zf-tempContDiv .zf-subDate {
+	width: 340px;
+}
+.zf-leftAlign .zfoneColumn .zf-time.zf-date .zf-tempContDiv .zf-subDate,
+.zf-rightAlign .zfoneColumn .zf-time.zf-date .zf-tempContDiv .zf-subDate {
+	width: 223px;
+	
+}
+.zf-leftAlign .zfoneColumn .zf-time.zf-date .zf-tempContDiv span,
+.zf-rightAlign .zfoneColumn .zf-time.zf-date .zf-tempContDiv span {
+	margin-right: 12px;
+}
+.zf-leftAlign .zfoneColumn .zf-time.zf-date .zf-tempContDiv span:last-of-type,
+.zf-rightAlign .zfoneColumn .zf-time.zf-date .zf-tempContDiv span:last-of-type {
+	margin-right: 0;
+}
+
+/* Grid Related Css Ends Here */
+
+
+/* New Css */
+
+</style>
+
+
+</head>
+
+<body class="zf-backgroundBg"><!-- Change or deletion of the name attributes in the input tag will lead to empty values on record submission-->
+<div class="zf-templateWidth">
+	<form action='https://forms.zohopublic.com/techunifillc1/form/TestChangeOrderZohoForm/formperma/R9ShS4pfPgTsGF0jDUFPCdcnjiwGuMvDc-xW3r6ratU/htmlRecords/submit' name='form'
+method='POST'
+onSubmit='javascript:document.charset="UTF-8"; return zf_ValidateAndSubmit();'
+accept-charset='UTF-8' enctype='multipart/form-data' id='form'>
+<input type="hidden" name="zf_referrer_name" value=""><!-- To Track referrals , place the referrer name within the " " in the above hidden input field -->
+<input type="hidden" name="zf_redirect_url" value=""><!-- To redirect to a specific page after record submission , place the respective url within the " " in the above hidden input field -->
+<input type="hidden" name="zc_gad" value=""><!-- If GCLID is enabled in Zoho CRM Integration, click details of AdWords Ads will be pushed to Zoho CRM -->
+<div class="zf-templateWrapper"><ul class="zf-tempHeadBdr"><li class="zf-tempHeadContBdr"><h2 class="zf-frmTitle">
+<em>Test Change Order Zoho Form</em>
+</h2>
+<p class="zf-frmDesc"></p>
+<div class="zf-clearBoth"></div></li></ul>
+<div class="zf-subContWrap zf-topAlign"><ul>	
+<div class="zf-tempFrmWrapper  zf-large "><label class="zf-labelName"> 
+Priority
+</label>
+<div class="zf-tempContDiv">
+<select class="zf-form-sBox" name="Dropdown2" checktype="c1"><option selected="true" value="-Select-">-Select-</option>
+<option value="High">High</option>
+<option value="Medium">Medium</option>
+<option value="Low">Low</option></select><p id="Dropdown2_error" class="zf-errorMessage" style="display:none;">Invalid value</p></div>
+<div class="zf-clearBoth"></div></div>
+<div class="zf-tempFrmWrapper  zf-large "><label class="zf-labelName">  
+Authorized By
+</label>
+<div class="zf-tempContDiv">
+<span> 
+<input type="text" name="SingleLine1" checktype="c1" value="" maxlength="255" fieldType=1 placeholder="" /> </span><p id="SingleLine1_error" class="zf-errorMessage" style="display: none;">Invalid value</p></div><div class="zf-clearBoth"></div></div>
+<div class="zf-tempFrmWrapper  zf-large "><label class="zf-labelName">  
+Property Reporting Issue
+</label>
+<div class="zf-tempContDiv">
+<span> 
+<input type="text" name="SingleLine2" checktype="c1" value="" maxlength="255" fieldType=1 placeholder="" /> </span><p id="SingleLine2_error" class="zf-errorMessage" style="display: none;">Invalid value</p></div><div class="zf-clearBoth"></div></div>  
+<div class="zf-tempFrmWrapper  zf-large "><label class="zf-labelName"> 
+Case Reason
+</label>
+<div class="zf-tempContDiv">
+<select class="zf-form-sBox" name="Dropdown3" checktype="c1"><option selected="true" value="-Select-">-Select-</option>
+<option value="User did not attend any training">User did not attend any training</option>
+<option value="Complex functionality">Complex functionality</option>
+<option value="Existing problem">Existing problem</option>
+<option value="Instructions not clear">Instructions not clear</option>
+<option value="New problem">New problem</option></select><p id="Dropdown3_error" class="zf-errorMessage" style="display:none;">Invalid value</p></div>
+<div class="zf-clearBoth"></div></div>
+<div class="zf-tempFrmWrapper  zf-large "><label class="zf-labelName">  
+Reported By
+</label>
+<div class="zf-tempContDiv">
+<span> 
+<input type="text" name="SingleLine3" checktype="c1" value="" maxlength="255" fieldType=1 placeholder="" /> </span><p id="SingleLine3_error" class="zf-errorMessage" style="display: none;">Invalid value</p></div><div class="zf-clearBoth"></div></div>
+<div class="zf-tempFrmWrapper  zf-large "><label class="zf-labelName">  
+Email
+</label>
+<div class="zf-tempContDiv">
+<span> 
+<input type="text" name="Email" checktype="c5" value="" maxlength="255" fieldType=9 placeholder="" /> </span><p id="Email_error" class="zf-errorMessage" style="display: none;">Invalid value</p></div><div class="zf-clearBoth"></div></div>
+<div  class="zf-tempFrmWrapper zf- zf-large "><label class="zf-labelName"> Phone
+</label>
+<div class="zf-tempContDiv zf-phonefld">
+<div
+class="zf-phwrapper zf-phNumber" 
+>
+<span> <input type="text" compname="PhoneNumber" name="PhoneNumber_countrycode" maxlength="20" checktype="c7" value="" phoneFormat="1" isCountryCodeEnabled=false fieldType="11" id="international_PhoneNumber_countrycode" valType="number" phoneFormatType="1" placeholder="" />
+<label>Number</label> </span>
+<div class="zf-clearBoth"></div></div><p id="PhoneNumber_error" class="zf-errorMessage" style="display:none;">Invalid value</p></div><div class="zf-clearBoth"></div></div>
+<div class="zf-tempFrmWrapper  zf-large "><label class="zf-labelName">  
+Ship To
+</label>
+<div class="zf-tempContDiv">
+<span> 
+<textarea name="MultiLine" checktype="c1" maxlength="65535" placeholder=""></textarea> </span><p id="MultiLine_error" class="zf-errorMessage" style="display: none;">Invalid value</p></div><div class="zf-clearBoth"></div></div>
+<div class="zf-tempFrmWrapper  zf-large "><label class="zf-labelName">  
+Description
+</label>
+<div class="zf-tempContDiv">
+<span> 
+<textarea name="MultiLine1" checktype="c1" maxlength="65535" placeholder=""></textarea> </span><p id="MultiLine1_error" class="zf-errorMessage" style="display: none;">Invalid value</p></div><div class="zf-clearBoth"></div></div>
+<div class="zf-tempFrmWrapper  zf-date"><label class="zf-labelName"> Date
+</label>
+<div class="zf-tempContDiv">
+<span> <input type="text" name="Date" checktype="c4" value="" maxlength="25" placeholder="" />
+<label>dd-MMM-yyyy</label> </span><div class="zf-clearBoth"></div><p id="Date_error" class="zf-errorMessage" style="display: none;">Invalid value</p></div><div class="zf-clearBoth"></div></div>  
+<div class="zf-tempFrmWrapper  zf-large "><label class="zf-labelName"> 
+Category
+</label>
+<div class="zf-tempContDiv">
+<select class="zf-form-sBox" name="Dropdown4" checktype="c1"><option selected="true" value="-Select-">-Select-</option>
+<option value="Phone">Phone</option>
+<option value="Wifi">Wifi</option>
+<option value="EV Charging">EV Charging</option>
+<option value="IT">IT</option>
+<option value="Surveillance">Surveillance</option>
+<option value="Speakers">Speakers</option>
+<option value="Others">Others</option></select><p id="Dropdown4_error" class="zf-errorMessage" style="display:none;">Invalid value</p></div>
+<div class="zf-clearBoth"></div></div>
+<div class="zf-tempFrmWrapper  zf-large "><label class="zf-labelName">  
+Hours
+</label>
+<div class="zf-tempContDiv">
+<span> 
+<textarea name="MultiLine2" checktype="c1" maxlength="65535" placeholder=""></textarea> </span><p id="MultiLine2_error" class="zf-errorMessage" style="display: none;">Invalid value</p></div><div class="zf-clearBoth"></div></div>
+<div class="zf-tempFrmWrapper  zf-large "><label class="zf-labelName">  
+Service and Labor
+</label>
+<div class="zf-tempContDiv">
+<span> 
+<textarea name="MultiLine3" checktype="c1" maxlength="65535" placeholder=""></textarea> </span><p id="MultiLine3_error" class="zf-errorMessage" style="display: none;">Invalid value</p></div><div class="zf-clearBoth"></div></div>
+<div class="zf-tempFrmWrapper  zf-large "><label class="zf-labelName">  
+QTY
+</label>
+<div class="zf-tempContDiv">
+<span> 
+<textarea name="MultiLine4" checktype="c1" maxlength="65535" placeholder=""></textarea> </span><p id="MultiLine4_error" class="zf-errorMessage" style="display: none;">Invalid value</p></div><div class="zf-clearBoth"></div></div>
+<div class="zf-tempFrmWrapper  zf-large "><label class="zf-labelName">  
+Parts and Materials
+</label>
+<div class="zf-tempContDiv">
+<span> 
+<textarea name="MultiLine5" checktype="c1" maxlength="65535" placeholder=""></textarea> </span><p id="MultiLine5_error" class="zf-errorMessage" style="display: none;">Invalid value</p></div><div class="zf-clearBoth"></div></div>
+<div class="zf-sign zf-tempFrmWrapper zf-large"><label class="zf-labelName">
+Signature
+</label>
+<div class="zf-tempContDiv">
+<div class="zf-signContainer" id="signContainer-Signature"><object name="Signature_obj" checktype="c8" compname="Signature">						
+<canvas id="drawingCanvas-Signature" tabindex="-1"></canvas>  
+<input type="hidden" id="hiddenSignInput-Signature" name="Signature" value=""><div class="zf-signArea" id="sign-area-Signature" style="display:none"></div><a id="clearSign" href="javascript:void(0);" onClick="zf_ClearSignature('drawingCanvas-Signature');">Clear</a>
+</object></div><p id="Signature_error" class="zf-errorMessage" style="display:none;">Invalid value</p></div><div class="zf-clearBoth"></div><script>zf_SetCanvasElemWidth("Signature");// No I18N
+var canvasElemEvntListener = document.getElementById("drawingCanvas-Signature"); // No I18	   		
+zf_AddEventListenersToCanvas(canvasElemEvntListener);</script></div>
+</ul></div><ul><li class="zf-fmFooter"><button class="zf-submitColor">Submit</button></li></ul></div></form></div>
+
+
+<script type="text/javascript">var dateAndMonthRegexFormateArray = zf_SetDateAndMonthRegexBasedOnDateFormate('dd-MMM-yyyy');
+var zf_DateRegex = new RegExp(dateAndMonthRegexFormateArray[0]);
+var zf_MonthYearRegex = new RegExp(dateAndMonthRegexFormateArray[1]);
+var zf_MandArray = []; 
+var zf_FieldArray = [ "Dropdown2", "SingleLine1", "SingleLine2", "Dropdown3", "SingleLine3", "Email", "PhoneNumber_countrycode", "MultiLine", "MultiLine1", "Date", "Dropdown4", "MultiLine2", "MultiLine3", "MultiLine4", "MultiLine5", "Signature_obj"]; 
+var isSalesIQIntegrationEnabled = false;
+var salesIQFieldsArray = [];
+</script>
+
+<script>
+	// $Id: $
+	function zf_SetCanvasElemWidth(linkName){
+    	var canvasElem = document.getElementById("drawingCanvas-"+linkName);
+		if(canvasElem !== null && canvasElem.nodeName=='CANVAS')
+		{
+			var imgElem  = document.getElementById("img-"+linkName);
+			var signContainerSignature = document.getElementById("signContainer-"+linkName);
+			canvasElem.width = signContainerSignature.offsetWidth;
+			if(imgElem){				        		
+				imgElem.setAttribute("class","signImg");// No I18N
+			}
+		}
+	}
+
+	function zf_AddEventListenersToCanvas(canvasElem){
+			canvasElem.addEventListener("mousedown",function (event) {					       
+		        var context = canvasElem.getContext("2d");// No I18N
+				var position = zf_GetXYCoords(event, canvasElem,false);
+				context.moveTo(position.X, position.Y);
+				context.beginPath();
+				var startScribble = function (event) {
+					zf_StartScribbling(event, canvasElem, context,false);
+				}
+				var endScribble = function (event) {
+					zf_EndScribbling(event, canvasElem, context,startScribble,endScribble);
+				}
+				this.addEventListener("mousemove",startScribble,false);
+				this.addEventListener("mouseup",endScribble,false);
+				this.addEventListener("mouseout",endScribble,false);
+				this.addEventListener('touchstart', function(event){
+					position = zf_GetXYCoords(event, canvasElem,true);
+					context.moveTo(position.X, position.Y);
+					context.beginPath();
+					event.preventDefault();
+				}, false);
+				this.addEventListener('touchmove', function(event){
+					zf_StartScribbling(event, canvasElem, context,true);
+					event.preventDefault();
+				}, false);
+		    });
+                            
+        var userAgent = window.navigator.userAgent;
+        var msie = userAgent.indexOf("MSIE ");
+        if (msie > 0) {
+        	this.addEventListener("keypress",function (event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                }
+            });
+        }
+	}
+	
+	function zf_ClearSignature(signElemID){
+        var signatureElem = document.getElementById(signElemID);
+        var signContext = signatureElem.getContext("2d");// No I18N
+		signContext.clearRect(0, 0, signatureElem.width, signatureElem.height);
+	}
+	
+	function zf_GetXYCoords(event, signatureElem,isTouchEvent) {
+		var xCoordinate, yCoordinate;
+		var signElemLeftPos = zf_GetOffsetLeft(signatureElem);
+		var signElemTopPos  = zf_GetOffsetTop(signatureElem);
+
+		var xPosition,yPosition;
+		if(!isTouchEvent){
+			xPosition = event.clientX;
+			yPosition = event.clientY;
+		}else{
+			xPosition = event.changedTouches[0].clientX;
+			yPosition = event.changedTouches[0].clientY;
+		}
+		
+		if (!isTouchEvent && (event.pageX || event.pageY)) {
+			xCoordinate = event.pageX;
+			yCoordinate = event.pageY;
+		} else if (isTouchEvent && (event.changedTouches[0].pageX || event.changedTouches[0].pageY)) {
+			xCoordinate = event.changedTouches[0].pageX;
+			yCoordinate = event.changedTouches[0].pageY;
+		}else {
+			xCoordinate = xPosition + document.body.scrollLeft + document.documentElement.scrollLeft;
+			yCoordinate = yPosition + document.body.scrollTop + document.documentElement.scrollTop;
+		}
+		var xVal = xCoordinate - signElemLeftPos;
+		var yVal = yCoordinate - signElemTopPos;
+		return { X: xVal, Y: yVal};
+	}
+
+	function zf_GetOffsetLeft(signElem){
+		var rect = signElem.getBoundingClientRect();
+		var offSetLeft = document.body.scrollLeft;
+		if( offSetLeft == 0 ){
+			offSetLeft = offSetLeft + rect.left + document.documentElement.scrollLeft;
+		}else{
+			offSetLeft = offSetLeft + rect.left;
+		}
+		return offSetLeft;
+	}
+
+	function zf_GetOffsetTop(signElem){
+		var rect = signElem.getBoundingClientRect();
+		var offSetTop = document.body.scrollTop;
+		if( offSetTop == 0 ){
+			offSetTop = offSetTop +rect.top + document.documentElement.scrollTop;
+		}else{
+			offSetTop = offSetTop + rect.top;
+		}
+		return offSetTop;
+	}	
+
+	function zf_StartScribbling(event, canvasElem, context,isTouchEvent) {
+		var position = zf_GetXYCoords(event, canvasElem,isTouchEvent);
+		context.lineTo(position.X, position.Y);
+		context.stroke();
+		context.strokeStyle="#000000"; // No I18N
+	}
+	function zf_EndScribbling(event, canvasElem, context,startScribleEventListn,endScribleEventListn) {
+		context.closePath();
+		canvasElem.removeEventListener("mousemove",startScribleEventListn);
+		canvasElem.removeEventListener("mouseup",endScribleEventListn);
+		canvasElem.removeEventListener("mouseout",endScribleEventListn);
+	}
+	     
+
+</script>
+
+<script>
+	// $Id: $
+function zf_ValidateAndSubmit(){
+		if(zf_CheckMandatory()){
+			if(zf_ValidCheck()){
+				if(isSalesIQIntegrationEnabled){
+					zf_addDataToSalesIQ();
+				}
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
+		function zf_CheckMandatory(){
+		for(i = 0 ; i < zf_MandArray.length ; i ++) {
+		  	var fieldObj=document.forms.form[zf_MandArray[i]];
+		  	if(fieldObj) {
+				  	if(fieldObj.nodeName != null ){
+				  		if ( fieldObj.nodeName=='OBJECT' ) {
+								if(!zf_MandatoryCheckSignature(fieldObj)){
+									zf_ShowErrorMsg(zf_MandArray[i]);
+								 	return false;
+								}
+							}else if (((fieldObj.value).replace(/^\s+|\s+$/g, '')).length==0) {
+							 if(fieldObj.type =='file')
+								{
+								 fieldObj.focus();
+								 zf_ShowErrorMsg(zf_MandArray[i]);
+								 return false;
+								}
+				   	   	  	  fieldObj.focus();
+				   	   	  	  zf_ShowErrorMsg(zf_MandArray[i]);
+				   	   	  	  return false;
+							}  else if( fieldObj.nodeName=='SELECT' ) {// No I18N
+				  	   	   	 if(fieldObj.options[fieldObj.selectedIndex].value=='-Select-') {
+								fieldObj.focus();
+								zf_ShowErrorMsg(zf_MandArray[i]);
+								return false;
+							   }
+							} else if( fieldObj.type =='checkbox' || fieldObj.type =='radio' ){
+								if(fieldObj.checked == false){
+									fieldObj.focus();
+									zf_ShowErrorMsg(zf_MandArray[i]);
+									return false;
+			   					}
+							}
+				  	}else{
+				  		var checkedValsCount = 0;
+						var inpChoiceElems = fieldObj;
+							for(var ii = 0; ii < inpChoiceElems.length ; ii ++ ){
+						      	if(inpChoiceElems[ii].checked === true ){
+						      		checkedValsCount ++;
+						      	}
+							}
+							if ( checkedValsCount == 0) {
+									inpChoiceElems[0].focus();
+									zf_ShowErrorMsg(zf_MandArray[i]);
+									return false;
+							 	}
+					}
+			}
+		}
+		return true;
+	}
+	function zf_ValidCheck(){
+		var isValid = true;
+		for(ind = 0 ; ind < zf_FieldArray.length ; ind++ ) {
+			var fieldObj=document.forms.form[zf_FieldArray[ind]];
+		  	if(fieldObj) {
+		  		if(fieldObj.nodeName != null ){
+			  		var checkType = fieldObj.getAttribute("checktype");
+			  		if( checkType == "c2" ){// No I18N
+			  			if( !zf_ValidateNumber(fieldObj)){
+							isValid = false;
+							fieldObj.focus();
+							zf_ShowErrorMsg(zf_FieldArray[ind]);
+							return false;
+						}
+			  		}else if( checkType == "c3" ){// No I18N
+			  			if (!zf_ValidateCurrency(fieldObj) || !zf_ValidateDecimalLength(fieldObj,10) ) {
+							isValid = false;
+							fieldObj.focus();
+							zf_ShowErrorMsg(zf_FieldArray[ind]);
+							return false;
+						}
+			  		}else if( checkType == "c4" ){// No I18N
+			  			if( !zf_ValidateDateFormat(fieldObj)){
+							isValid = false;
+							fieldObj.focus();
+							zf_ShowErrorMsg(zf_FieldArray[ind]);
+							return false;
+						}
+			  		}else if( checkType == "c5" ){// No I18N
+			  			if (!zf_ValidateEmailID(fieldObj)) {
+							isValid = false;
+							fieldObj.focus();
+							zf_ShowErrorMsg(zf_FieldArray[ind]);
+							return false;
+						}
+			  		}else if( checkType == "c6" ){// No I18N
+			  			if (!zf_ValidateLiveUrl(fieldObj)) {
+							isValid = false;
+							fieldObj.focus();
+							zf_ShowErrorMsg(zf_FieldArray[ind]);
+							return false;
+							}
+			  		}else if( checkType == "c7" ){// No I18N
+			  			if (!zf_ValidatePhone(fieldObj)) {
+							isValid = false;
+							fieldObj.focus();
+							zf_ShowErrorMsg(zf_FieldArray[ind]);
+							return false;
+							}
+			  		}else if( checkType == "c8" ){// No I18N
+			  			zf_ValidateSignature(fieldObj);
+			  		}else if( checkType == "c9" ){// No I18N
+						if( !zf_ValidateMonthYearFormat(fieldObj)){
+							isValid = false;
+							fieldObj.focus();
+							zf_ShowErrorMsg(zf_FieldArray[ind]);
+							return false;
+						}
+			  		}
+			  	}
+		  	}
+		}
+         	return isValid;
+	}
+	function zf_ShowErrorMsg(uniqName){
+		var fldLinkName;
+		for( errInd = 0 ; errInd < zf_FieldArray.length ; errInd ++ ) {
+			fldLinkName = zf_FieldArray[errInd].split('_')[0];
+			document.getElementById(fldLinkName+"_error").style.display = 'none';
+		}
+		var linkName = uniqName.split('_')[0];
+		document.getElementById(linkName+"_error").style.display = 'block';
+	}
+	function zf_ValidateNumber(elem) {
+	 	var validChars = "-0123456789";
+	 	var numValue = elem.value.replace(/^\s+|\s+$/g, '');
+	 	if (numValue != null && !numValue == "") {
+	 		var strChar;
+	 		var result = true;
+	 		if (numValue.charAt(0) == "-" && numValue.length == 1) {
+	 			return false;
+	 		}
+	 		for (i = 0; i < numValue.length && result == true; i++) {
+	 			strChar = numValue.charAt(i);
+	 			if ((strChar == "-") && (i != 0)) {
+	 				return false;
+	 			}
+	 			if (validChars.indexOf(strChar) == -1) {
+	 				result = false;
+	 			}
+	 		}
+	 		return result;
+	 	} else {
+	 		return true;
+	 	}
+	 }
+	 function zf_ValidateDateFormat(inpElem){
+	 	var dateValue = inpElem.value.replace(/^\s+|\s+$/g, '');
+	 	if( dateValue == "" ){
+	 		return true;
+	 	}else{
+			return( zf_DateRegex.test(dateValue) );
+		}
+	 }
+	 function zf_ValidateCurrency(elem) {
+	 	var validChars = "0123456789.";
+	 	var numValue = elem.value.replace(/^\s+|\s+$/g, '');
+	 	if(numValue.charAt(0) == '-'){
+	 		numValue = numValue.substring(1,numValue.length);
+	 	}
+	 	if (numValue != null && !numValue == "") {
+	 		var strChar;
+	 		var result = true;
+	 		for (i = 0; i < numValue.length && result == true; i++) {
+	 			strChar = numValue.charAt(i);
+	 			if (validChars.indexOf(strChar) == -1) {
+	 				result = false;
+	 			}
+	 		}
+	 		return result;
+	 	} else {
+	 		return true;
+	 	}
+	 }
+	 function zf_ValidateDecimalLength(elem,decimalLen) {
+	 	var numValue = elem.value;
+	 	if (numValue.indexOf('.') >= 0) {
+	 		var decimalLength = numValue.substring(numValue.indexOf('.') + 1).length;
+	 		if (decimalLength > decimalLen) {
+	 			return false;
+	 		} else {
+	 			return true;
+	 		}
+	 	}
+	 	return true;
+	 }
+	 function zf_ValidateEmailID(elem) {
+        var check = 0;
+        var emailValue = elem.value;
+        if (emailValue != null && !emailValue == "") {
+            var emailArray = emailValue.split(",");
+            for (i = 0; i < emailArray.length; i++) {
+                var emailExp = /^[\w]([\w\-.+&'/]*)@([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,22}$/;
+                if (!emailExp.test(emailArray[i].replace(/^\s+|\s+$/g, ''))) {
+                    check = 1;
+                }
+            }
+            if (check == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+    function zf_ValidateLiveUrl(elem) {
+    	var urlValue = elem.value;
+		if(urlValue !== null && typeof(urlValue) !== "undefined") {
+			urlValue = urlValue.replace(/^\s+|\s+$/g, '');
+			if(urlValue !== "") {
+      			var urlregex = new RegExp("^(((https|http|ftps|ftp)://[a-zA-Z\\d]+((_|-|@)[a-zA-Z\\d]+)*(\\.[a-zA-Z\\d]+((_|-|@)[a-zA-Z\\d]+)*)+(:\\d{1,5})?)|((w|W){3}(\\.[a-zA-Z\\d]+((_|-|@)[a-zA-Z\\d]+)*){2,}(:\\d{1,5})?)|([a-zA-Z\\d]+((_|-)[a-zA-Z\\d]+)*(\\.[a-zA-Z\\d]+((_|-)[a-zA-Z\\d]+)*)+(:\\d{1,5})?))(/[-\\w.?,:'/\\\\+=&;%$#@()!~]*)?$", "i"); // This regex is taken from LiveFieldsUtil.isValidWebSiteFieldURL() method. Changes: i) Add ^ at the beginning and $ at the end. ii) Remove ?i before https and adjust () around https. iii) Add "i" in the RegExp constructor. // No I18N
+				return(urlregex.test(urlValue));
+			}
+        }
+        return true;
+    }
+    function zf_ValidatePhone(inpElem){
+
+        var ZFPhoneRegex = {
+            PHONE_INTE_ALL_REG: /^[+]{0,1}[()0-9-. ]+$/,
+            PHONE_INTE_NUMERIC_REG: /^[0-9]+$/,
+            PHONE_INTE_CONT_CODE_ENABLED_REG: /^[(0-9-.][()0-9-. ]*$/,
+            PHONE_USA_REG: /^[0-9]+$/,
+            PHONE_CONT_CODE_REG: /^[+][0-9]{1,4}$/
+        }
+    	var phoneFormat = parseInt(inpElem.getAttribute("phoneFormat"));
+    	var fieldInpVal = inpElem.value.replace(/^\s+|\s+$/g, '');
+    	var toReturn = true ;
+    	if( phoneFormat === 1 ){
+    		if(inpElem.getAttribute("valType") == 'code'){
+                var codeRexp = ZFPhoneRegex.PHONE_CONT_CODE_REG;
+                if(fieldInpVal != "" && !codeRexp.test(fieldInpVal)){
+		           return false;
+				}
+    		}else{
+				var IRexp = ZFPhoneRegex.PHONE_INTE_ALL_REG;
+				if(inpElem.getAttribute("phoneFormatType") == '2'){
+					IRexp = ZFPhoneRegex.PHONE_INTE_NUMERIC_REG;
+				}
+	 			if (fieldInpVal != "" && !IRexp.test(fieldInpVal)) {
+	 				toReturn = false;
+	 				return toReturn;
+	 			}
+ 		    }
+ 			return toReturn;
+    	}else if( phoneFormat === 2 ){
+    		var InpMaxlength = inpElem.getAttribute("maxlength");
+    		var USARexp = ZFPhoneRegex.PHONE_USA_REG;
+    		if  ( fieldInpVal != "" && USARexp.test(fieldInpVal) &&  fieldInpVal.length == InpMaxlength ) {
+				toReturn = true;
+			}else if( fieldInpVal == "" ){
+				toReturn = true;
+			}else{
+				toReturn = false;
+			}
+			return toReturn;
+    	}
+    }
+
+  function zf_ValidateSignature(objElem) {
+  		var linkName = objElem.getAttribute("compname");
+  		var canvasElem = document.getElementById("drawingCanvas-"+linkName);
+  		var isValidSign = zf_IsSignaturePresent(objElem,linkName,canvasElem);
+   		var hiddenSignInputElem = document.getElementById("hiddenSignInput-"+linkName);
+		if(isValidSign){
+			hiddenSignInputElem.value = canvasElem.toDataURL();
+		}else{
+			hiddenSignInputElem.value = "";// No I18N
+		}
+		return isValidSign;
+  	}
+
+  	function zf_MandatoryCheckSignature(objElem){
+  		var linkName = objElem.getAttribute("compname");
+  		var canvasElem = document.getElementById("drawingCanvas-"+linkName);
+  		var isValid = zf_IsSignaturePresent(objElem,linkName,canvasElem);
+		return isValid;
+  	}
+
+  	function zf_IsSignaturePresent(objElem,linkName,canvasElem){
+   		var context = canvasElem.getContext('2d'); // No I18N
+   		var canvasWidth = canvasElem.width;
+   		var canvasHeight = canvasElem.height;
+   		var canvasData = context.getImageData(0, 0, canvasWidth, canvasHeight);
+   		var signLen = canvasData.data.length;
+   		var flag = false;
+   		for(var index =0; index< signLen; index++) {
+   	     	if(!canvasData.data[index]) {
+   	       		flag =  false;
+   	     	}else if(canvasData.data[index]) {
+   		   		flag = true;
+   		   		break;
+   	     	}
+   		}
+		return flag;
+  	}
+
+	function zf_FocusNext(elem,event) {
+	 	if(event.keyCode == 9 || event.keyCode == 16){
+	      return;
+	    }
+	    if(event.keyCode >=37 && event.keyCode <=40){
+	       return;
+	    }
+	    var compname = elem.getAttribute("compname");
+	    var inpElemName = elem.getAttribute("name");
+	 	if (inpElemName == compname+"_countrycode") {
+	 		if (elem.value.length == 3) {
+	 			document.getElementsByName(compname+"_first")[0].focus();
+	 		}
+	 	} else if (inpElemName == compname+"_first" ) {
+	 		if (elem.value.length == 3) {
+	 			document.getElementsByName(compname+"_second")[0].focus();
+	 		}
+	 	}
+	}
+	function zf_ValidateMonthYearFormat(inpElem){
+		var monthYearValue = inpElem.value.replace(/^\s+|\s+$/g, '');
+		if( monthYearValue == "" ){
+			return true;
+		}else{
+		   return (zf_MonthYearRegex.test(monthYearValue));
+	   }
+	}
+	
+	function zf_SetDateAndMonthRegexBasedOnDateFormate(dateFormat){
+		
+		var dateAndMonthRegexFormateArray = new Array();
+		var dateFormatRegExp;
+        var monthYearFormatRegExp;
+		if(dateFormat === "dd-MMM-yyyy"){
+			
+    	     dateFormatRegExp = "^(([0][1-9])|([1-2][0-9])|([3][0-1]))[-](Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)[-](?:(?:19|20)[0-9]{2})$";
+    	     monthYearFormatRegExp = "^(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)[-](?:(?:19|20)[0-9]{2})$";// No I18N
+    	  
+    	  }else if(dateFormat === "dd-MMMM-yyyy"){// No I18N
+    	     dateFormatRegExp = "^(([0][1-9])|([1-2][0-9])|([3][0-1]))[-](January|February|March|April|May|June|July|August|September|October|November|December|JANUARY|FEBRUARY|MARCH|APRIL|MAY|JUNE|JULY|AUGUST|SEPTEMBER|OCTOBER|NOVEMBER|DECEMBER)[-](?:(?:19|20)[0-9]{2})$";
+    	     monthYearFormatRegExp = "^(January|February|March|April|May|June|July|August|September|October|November|December|JANUARY|FEBRUARY|MARCH|APRIL|MAY|JUNE|JULY|AUGUST|SEPTEMBER|OCTOBER|NOVEMBER|DECEMBER)[-](?:(?:19|20)[0-9]{2})$";// No I18N
+    	  
+    	  }else if(dateFormat === "MMMM-dd-yyyy"){// No I18N
+    	  	dateFormatRegExp = "^(January|February|March|April|May|June|July|August|September|October|November|December|JANUARY|FEBRUARY|MARCH|APRIL|MAY|JUNE|JULY|AUGUST|SEPTEMBER|OCTOBER|NOVEMBER|DECEMBER)[-](([0][1-9])|([1-2][0-9])|([3][0-1]))[-](?:(?:19|20)[0-9]{2})$";
+    	    monthYearFormatRegExp ="^(January|February|March|April|May|June|July|August|September|October|November|December|JANUARY|FEBRUARY|MARCH|APRIL|MAY|JUNE|JULY|AUGUST|SEPTEMBER|OCTOBER|NOVEMBER|DECEMBER)[-](?:(?:19|20)[0-9]{2})$";// No I18N
+    	  
+    	  }else if(dateFormat === "dd/MM/yyyy"){// No I18N
+    	  	dateFormatRegExp ="^(([0][1-9])|([1-2][0-9])|([3][0-1]))[\/]([0][1-9]|1[012])[\/](?:(?:19|20)[0-9]{2})$";
+    	    monthYearFormatRegExp ="^([0][1-9]|1[012])[\/](?:(?:19|20)[0-9]{2})$";
+    	  
+    	  }else if(dateFormat === "dd-MM-yyyy"){// No I18N
+    	  	dateFormatRegExp = "^(([0][1-9])|([1-2][0-9])|([3][0-1]))[-]([0][1-9]|1[012])[-](?:(?:19|20)[0-9]{2})$";
+    	    monthYearFormatRegExp = "^([0][1-9]|1[012])[-](?:(?:19|20)[0-9]{2})$";
+    	  
+    	  }else if(dateFormat === "MM/dd/yyyy"){// No I18N
+    	  	dateFormatRegExp = "^([0][1-9]|1[012])[\/](([0][1-9])|([1-2][0-9])|([3][0-1]))[\/](?:(?:19|20)[0-9]{2})$";
+    	    monthYearFormatRegExp = "^([0][1-9]|1[012])[\/](?:(?:19|20)[0-9]{2})$";
+    	  
+    	  }else if(dateFormat === "yyyy-MM-dd"){// No I18N
+    	  	dateFormatRegExp = "^(?:(?:19|20)[0-9]{2})[-]([0][1-9]|1[012])[-](([0][1-9])|([1-2][0-9])|([3][0-1]))$";
+    	    monthYearFormatRegExp = "^(?:(?:19|20)[0-9]{2})[-]([0][1-9]|1[012])$";
+    	  
+    	  }else if(dateFormat === "yyyy/MM/dd"){// No I18N
+    	  	dateFormatRegExp = "^(?:(?:19|20)[0-9]{2})[\/]([0][1-9]|1[012])[\/](([0][1-9])|([1-2][0-9])|([3][0-1]))$";
+    	    monthYearFormatRegExp = "^(?:(?:19|20)[0-9]{2})[\/]([0][1-9]|1[012])$";
+    	  
+    	  }else if(dateFormat === "dd.MM.yyyy"){// No I18N
+    	  	dateFormatRegExp = "^(([0][1-9])|([1-2][0-9])|([3][0-1]))[.]([0][1-9]|1[012])[.](?:(?:19|20)[0-9]{2})$";
+    	    monthYearFormatRegExp = "^([0][1-9]|1[012])[.](?:(?:19|20)[0-9]{2})$";
+    	  
+    	  }else if(dateFormat === "MM-dd-yyyy"){// No I18N
+    	  	dateFormatRegExp = "^([0][1-9]|1[012])[-](([0][1-9])|([1-2][0-9])|([3][0-1]))[-](?:(?:19|20)[0-9]{2})$";
+    	    monthYearFormatRegExp = "^([0][1-9]|1[012])[-](?:(?:19|20)[0-9]{2})$";
+    	  }
+    	  dateAndMonthRegexFormateArray.push(dateFormatRegExp);
+    	  dateAndMonthRegexFormateArray.push(monthYearFormatRegExp);
+    	  
+    	  return dateAndMonthRegexFormateArray;
+    	  
+    	
+    }
+
+</script>
+
+
+</body>
