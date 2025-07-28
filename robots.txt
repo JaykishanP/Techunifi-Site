@@ -2,7 +2,7 @@
 User-agent: *
 Disallow:
 
-# Directives for specific crawlers
+# Directives for Googlebot
 User-agent: Googlebot
 Disallow: /not-for-google/
 Allow: /google-only/
