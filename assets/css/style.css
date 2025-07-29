@@ -2,3 +2,6 @@ a,body,button{color:#000}#nav-menu,body{background-color:#ededed}.coming-soon,.c
 .chat-bubble.bot a {
     padding: 0 0 0 4px;
 }
+.productPage .footer {
+    position: relative;
+}
