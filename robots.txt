@@ -1,11 +1,8 @@
-# Allowing all robots complete access
 User-agent: *
 Disallow:
 
-# Directives for Googlebot
 User-agent: Googlebot
 Disallow: /not-for-google/
 Allow: /google-only/
 
-# Sitemap location
 Sitemap: https://www.techunifi.com/sitemap.xml
