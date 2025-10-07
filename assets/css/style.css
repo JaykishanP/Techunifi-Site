@@ -5,3 +5,9 @@ a,body,button{color:#000}#nav-menu,body{background-color:#ededed}.coming-soon,.c
 .productPage .footer {
     position: relative;
 }
+@media only screen and (max-width: 767.9px) {
+  #chatPopup{
+    right: 12px;
+    position: fixed;
+  }
+}
