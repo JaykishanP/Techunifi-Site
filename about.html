@@ -173,6 +173,32 @@ At Techunifi, our journey is marked by continuous growth and expansion, both in 
 </span>
 </div>
 </div>
+
+                  <!-- 36 -->
+                  <div class="news-rows">
+                    <div class="news-date">Published: 02.12.25</div>
+                    <div class="news-company">Motto by Hilton</div>
+                    <div class="news-location">Nashville, TN</div>
+                    <div class="news-content">
+                      <p style="padding-bottom: 0;">
+                        Techunifi is thrilled to announce the successful implementation of a comprehensive technology package at the Motto by Hilton Nashville Downtown, TN! Guests can now enjoy fast, reliable internet and a full suite of modern amenities, all powered by Techunifi’s cutting-edge solutions. We're proud to enhance the guest experience at this dynamic hotel in Nashville and look forward to supporting unforgettable stays!
+                      </p>
+                                          
+                      <div class="aahoacon-images" style="padding-bottom: 20px;">
+  
+                        <div class="row">
+                          <div class="col-md-12">        
+                            <br>              
+                            <img src="assets/img/about-images/news/motto.jpg" title="techunifi" alt="techunifi" loading="lazy">
+                          </div>
+                        </div>
+  
+                      
+                      </div>
+  
+                    </div>
+                    
+                </div>
    <!-- 35 -->
                    <div class="news-rows">
                     <div class="news-date">Published: 01.12.25</div>
@@ -1556,6 +1582,7 @@ Hi, I'm the chatbot. How can I help you today? Would you like to know more about
 <script>$(document).scroll((function(){$(".tab").offset().top+$(".tab").height()>=$("footer").offset().top-5&&$(".tab").css({position:"absolute",bottom:0,top:"auto"}),$(document).scrollTop()+$(".tab").height()<$("footer").offset().top&&$(".tab").css({position:"fixed",bottom:"auto",height:450})})),document.addEventListener("DOMContentLoaded",function(){function e(e){for(var t=document.querySelectorAll(".news-rows"),n=document.querySelectorAll(".news-pagination button"),o=0;o<t.length;o++)t[o].style.display=o<4*e&&o>=4*(e-1)?"block":"none";n.forEach((function(e){e.classList.remove("active")})),n[e-1]&&n[e-1].classList.add("active"),document.getElementById("tab2").scrollIntoView({behavior:"smooth"})}function t(){var t=document.querySelectorAll(".news-rows"),n=Math.ceil(t.length/4),o=document.getElementById("news-pagination");o.innerHTML="";for(var c=1;c<=n;c++){var l=document.createElement("button");l.textContent=c,l.addEventListener("click",(function(){e(parseInt(this.textContent))})),o.appendChild(l)}e(1)}const n=document.getElementById("newsInput"),o=document.getElementById("clearIcon");n&&n.addEventListener("keyup",(function(){const e=document.getElementById("newsInput"),n=e.value.toLowerCase(),o=document.querySelectorAll(".news-rows"),c=document.getElementById("clearIcon");let l=0;""!==e.value.trim()?c.style.display="inline":c.style.display="none",o.forEach((function(e){const t=e.querySelector(".news-company"),o=e.querySelector(".news-location"),c=e.querySelector(".news-content");t&&o&&c&&(t.textContent.toLowerCase().includes(n)||o.textContent.toLowerCase().includes(n)||c.textContent.toLowerCase().includes(n))?(e.style.display="block",l++):e.style.display="none"})),l===o.length&&""===e.value.trim()?t():document.getElementById("news-pagination").innerHTML=""})),o&&o.addEventListener("click",(function(){const e=document.getElementById("newsInput"),n=document.getElementById("clearIcon");e.value="",n.style.display="none",t()})),document.getElementById("news-pagination")&&t()}())</script>
 </body>
 </html>
+
 
 
 
