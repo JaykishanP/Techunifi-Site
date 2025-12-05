@@ -111,10 +111,10 @@
 <div class=row>
 <div class=col-md-2>
 <div class=tab>
-<button class=tablinks onclick='openTab(event,"tab1")' id=defaultOpen>Our Story</button>
-<button class=tablinks onclick='openTab(event,"tab2")'>News</button>
-<button class="tablinks d-none" onclick='openTab(event,"tab3")'>Testimonals</button>
-<button class=tablinks onclick='openTab(event,"tab4")'>Clients List</button>
+<button class=tablinks data-tab=tab1 onclick='openTab(event,"tab1")' id=defaultOpen>Our Story</button>
+<button class=tablinks data-tab=tab2 onclick='openTab(event,"tab2")'>News</button>
+<button class="tablinks d-none" data-tab=tab3 onclick='openTab(event,"tab3")'>Testimonals</button>
+<button class=tablinks data-tab=tab4 onclick='openTab(event,"tab4")'>Clients List</button>
 </div>
 </div>
 <div class=col-md-10>
@@ -173,57 +173,42 @@ At Techunifi, our journey is marked by continuous growth and expansion, both in 
 </span>
 </div>
 </div>
-
-                  <!-- 36 -->
-                  <div class="news-rows">
-                    <div class="news-date">Published: 02.12.25</div>
-                    <div class="news-company">Motto by Hilton</div>
-                    <div class="news-location">Nashville, TN</div>
-                    <div class="news-content">
-                      <p style="padding-bottom: 0;">
-                        Techunifi is thrilled to announce the successful implementation of a comprehensive technology package at the Motto by Hilton Nashville Downtown, TN! Guests can now enjoy fast, reliable internet and a full suite of modern amenities, all powered by Techunifi’s cutting-edge solutions. We're proud to enhance the guest experience at this dynamic hotel in Nashville and look forward to supporting unforgettable stays!
-                      </p>
-                                          
-                      <div class="aahoacon-images" style="padding-bottom: 20px;">
-  
-                        <div class="row">
-                          <div class="col-md-12">        
-                            <br>              
-                            <img src="assets/img/about-images/news/motto.jpg" title="techunifi" alt="techunifi" loading="lazy">
-                          </div>
-                        </div>
-  
-                      
-                      </div>
-  
-                    </div>
-                    
-                </div>
-   <!-- 35 -->
-                   <div class="news-rows">
-                    <div class="news-date">Published: 01.12.25</div>
-                    <div class="news-company">Hampton Inn & Suites</div>
-                    <div class="news-location">Hopkinsville, KY</div>
-                    <div class="news-content">
-                      <p style="padding-bottom: 0;">
-                        Techunifi is thrilled to announce the successful implementation of a comprehensive technology package at the Hampton Inn & Suites Hopkinsville, KY! Guests can now enjoy fast, reliable internet and a full suite of modern amenities, all powered by Techunifi’s cutting-edge solutions. We're proud to enhance the guest experience at this dynamic hotel in Hopkinsville and look forward to supporting unforgettable stays!
-                      </p>
-                                          
-                      <div class="aahoacon-images" style="padding-bottom: 20px;">
-  
-                        <div class="row">
-                          <div class="col-md-12">        
-                            <br>              
-                            <img src="assets/img/about-images/news/Hampton-inn.webp" title="techunifi" alt="techunifi" loading="lazy">
-                          </div>
-                        </div>
-  
-                      
-                      </div>
-  
-                    </div>
-                    
-                </div> 
+<div class=news-rows>
+<div class=news-date>Published: 02.12.25</div>
+<div class=news-company>Motto by Hilton</div>
+<div class=news-location>Nashville, TN</div>
+<div class=news-content>
+<p style=padding-bottom:0>
+Techunifi is thrilled to announce the successful implementation of a comprehensive technology package at the Motto by Hilton Nashville Downtown, TN! Guests can now enjoy fast, reliable internet and a full suite of modern amenities, all powered by Techunifi’s cutting-edge solutions. We're proud to enhance the guest experience at this dynamic hotel in Nashville and look forward to supporting unforgettable stays!
+</p>
+<div class=aahoacon-images style=padding-bottom:20px>
+<div class=row>
+<div class=col-md-12>
+<br>
+<img src=assets/img/about-images/news/motto.jpg title=techunifi alt=techunifi loading=lazy>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class=news-rows>
+<div class=news-date>Published: 01.12.25</div>
+<div class=news-company>Hampton Inn & Suites</div>
+<div class=news-location>Hopkinsville, KY</div>
+<div class=news-content>
+<p style=padding-bottom:0>
+Techunifi is thrilled to announce the successful implementation of a comprehensive technology package at the Hampton Inn & Suites Hopkinsville, KY! Guests can now enjoy fast, reliable internet and a full suite of modern amenities, all powered by Techunifi’s cutting-edge solutions. We're proud to enhance the guest experience at this dynamic hotel in Hopkinsville and look forward to supporting unforgettable stays!
+</p>
+<div class=aahoacon-images style=padding-bottom:20px>
+<div class=row>
+<div class=col-md-12>
+<br>
+<img src=assets/img/about-images/news/Hampton-inn.webp title=techunifi alt=techunifi loading=lazy>
+</div>
+</div>
+</div>
+</div>
+</div>
 <div class=news-rows>
 <div class=news-date>Published: 28.11.25</div>
 <div class=news-company>TownePlace Suites by Marriott</div>
@@ -1194,6 +1179,11 @@ Techunifi stands as a prominent figure in the realm of low voltage and telecom p
 <p>Hampton Inn Roanoke <br>Rapids, NC</p>
 <p>Hilton Garden Inn <br>Aberdeen, MD</p>
 <p>Hampton Inn & Suites <br>Hopkinsville, KY</p>
+<p>Hampton Inn <br>Chesapeake, VA</p>
+<p>Hampton Inn Jupiter <br>Juno Beach, FL</p>
+<p>Hampton Inn & Suites <br>Port St. Lucie, FL</p>
+<p>Hampton Inn <br>Titusville, FL</p>
+<p>Hampton Inn Melbourne-Viera <br>Melbourne, FL</p>
 </div>
 <div class="col-md-4 client-col">
 <p>Motto by Hilton <br>Nashville, TN</p>
@@ -1228,8 +1218,15 @@ Techunifi stands as a prominent figure in the realm of low voltage and telecom p
 <p>Spark Winston <br>Salem, NC</p>
 <p>Spark <br>Sumter , SC</p>
 <p>Spark Crystal <br>Lake, NC</p>
+<p>Spark <br>Roanoke, VA</p>
+<p>Spark <br>Charlotte, NC</p>
+<p>Spark <br>Smyrna, GA</p>
+<p>Spark <br>Wilmington, NC</p>
+<p>Spark <br>Garland, TX</p>
+<p>Spark <br>Carlisle, PA</p>
 <p>Tempo/Homewood Suites <br>Raleigh, NC</p>
 <p>Tempo & Homewood <br>Raleigh, Downtown </p>
+<p>Homewood Suites <br>Chesapeake, VA</p>
 <p>Tru Amarillo, <br>TX</p>
 <p>Tru Charleston, <br>SC</p>
 <p>Tru Charlotte, <br>NC</p>
@@ -1390,24 +1387,36 @@ Techunifi stands as a prominent figure in the realm of low voltage and telecom p
 <p>Best Western <br>Greensboro, NC</p>
 <p>Best Western <br>Wilmington, NC</p>
 <p>Cambria Suites <br>Rock Hill, SC</p>
+<p>SureStay by Best Western <br>Christiansburg, VA</p>
+<p></p>
 </div>
 <div class="col-md-4 client-col">
 <p>Comfort Suites <br>Sanford, NC</p>
 <p>Comfort Suites <br>Roanoke, VA</p>
+<p>Comfort Inn <br>McLeansville, NC</p>
 <p>Country Inn and Suites <br>Aberdeen, MD</p>
 <p>Country Inn and Suites <br>Cape Canaveral, FL</p>
 <p>Country Inn and Suites <br>Charlotte, NC</p>
 <p>Country Inn and Suites <br>Concord, NC</p>
 <p>Country Inn and <br>Suites VA</p>
 <p>Days Inn Greensboro, <br>NC</p>
+<p>Mountain Valley Inn, Dillard, GA</p>
 </div>
 <div class="col-md-4 client-col">
 <p>Days Inn Haw <br>River, NC</p>
 <p>Days Inn <br>Kodak, TN</p>
 <p>Days Inn <br>Yadkinville, NC</p>
+<p>Days Inn <br>Shorter, AL</p>
 <p>Wingate Greensboro, <br>NC</p>
 <p>Wyndham Garden <br>Greensboro, NC</p>
+<p>Microtel Inn & Suites by Wyndham <br>Cornelius, NC</p>
+<p>La Quinta Inn & Suites by Wyndham <br>Angleton, TX</p>
 <p>Wingate High <br>Point, NC</p>
+<p>Super 8 by Wyndham <br>High Point, NC</p>
+<p>Grant Street Inn <br>Bloomington, IN</p>
+<p>3s Hospitality Group</p>
+<p>Bittel Americas <br>San Jose, CA</p>
+<p>Knights Inn <br>Chattanooga, TN</p>
 </div>
 </div>
 </div>
@@ -1429,6 +1438,7 @@ Techunifi stands as a prominent figure in the realm of low voltage and telecom p
 <p>The Hotel Zags <br>Portland, OR</p>
 <p>The Inn @ Blackstone <br>Resort VA</p>
 <p>Newport Beach Hotel & Resort Sunny <br>Isles Beach, FL</p>
+<p>Opal Hotel <br>Raleigh, NC</p>
 </div>
 </div>
 </div>
@@ -1582,7 +1592,3 @@ Hi, I'm the chatbot. How can I help you today? Would you like to know more about
 <script>$(document).scroll((function(){$(".tab").offset().top+$(".tab").height()>=$("footer").offset().top-5&&$(".tab").css({position:"absolute",bottom:0,top:"auto"}),$(document).scrollTop()+$(".tab").height()<$("footer").offset().top&&$(".tab").css({position:"fixed",bottom:"auto",height:450})})),document.addEventListener("DOMContentLoaded",function(){function e(e){for(var t=document.querySelectorAll(".news-rows"),n=document.querySelectorAll(".news-pagination button"),o=0;o<t.length;o++)t[o].style.display=o<4*e&&o>=4*(e-1)?"block":"none";n.forEach((function(e){e.classList.remove("active")})),n[e-1]&&n[e-1].classList.add("active"),document.getElementById("tab2").scrollIntoView({behavior:"smooth"})}function t(){var t=document.querySelectorAll(".news-rows"),n=Math.ceil(t.length/4),o=document.getElementById("news-pagination");o.innerHTML="";for(var c=1;c<=n;c++){var l=document.createElement("button");l.textContent=c,l.addEventListener("click",(function(){e(parseInt(this.textContent))})),o.appendChild(l)}e(1)}const n=document.getElementById("newsInput"),o=document.getElementById("clearIcon");n&&n.addEventListener("keyup",(function(){const e=document.getElementById("newsInput"),n=e.value.toLowerCase(),o=document.querySelectorAll(".news-rows"),c=document.getElementById("clearIcon");let l=0;""!==e.value.trim()?c.style.display="inline":c.style.display="none",o.forEach((function(e){const t=e.querySelector(".news-company"),o=e.querySelector(".news-location"),c=e.querySelector(".news-content");t&&o&&c&&(t.textContent.toLowerCase().includes(n)||o.textContent.toLowerCase().includes(n)||c.textContent.toLowerCase().includes(n))?(e.style.display="block",l++):e.style.display="none"})),l===o.length&&""===e.value.trim()?t():document.getElementById("news-pagination").innerHTML=""})),o&&o.addEventListener("click",(function(){const e=document.getElementById("newsInput"),n=document.getElementById("clearIcon");e.value="",n.style.display="none",t()})),document.getElementById("news-pagination")&&t()}())</script>
 </body>
 </html>
-
-
-
-
