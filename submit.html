@@ -444,46 +444,59 @@ function zsShowCaptcha() {
     }
     // Otherwise let the form submit normally to Zoho
   });
-});</script><script>const buttons = document.querySelectorAll(".tab-btn");
-const slider = document.getElementById("slidering");
-let activeBtn = document.querySelector(".tab-btn.active");
+});</script><script>(function () {
+  const slider = document.getElementById("slidering");
+  const container = document.querySelector(".action-group");
+  const buttons = document.querySelectorAll(".tab-btn");
 
-function updateSlider(element) {
-  slider.style.width = element.offsetWidth + "px";
-  slider.style.left = element.offsetLeft + "px";
-}
+  let activeBtn = document.querySelector(".tab-btn.active");
+  let isNavigating = false;
 
-// Click navigation
-function navigate(url, el) {
-  if (!el.hasAttribute("data-no-active")) {
-    updateSlider(el);
+  // 🔥 Core function
+  function updateSlider(el, animate = true) {
+    if (!el || !slider) return;
+
+    slider.style.transition = animate
+      ? "all 0.35s cubic-bezier(0.4, 0, 0.2, 1)"
+      : "none";
+
+    slider.style.width = el.offsetWidth + "px";
+    slider.style.left = el.offsetLeft + "px";
   }
 
-  setTimeout(() => {
-    window.location.href = url;
-  }, 150);
-}
+  // ✅ Run AFTER DOM is ready (IMPORTANT)
+  function initSlider() {
+    activeBtn = document.querySelector(".tab-btn.active");
 
-// ✅ Disable hover on touch devices
-const isTouchDevice = window.matchMedia("(hover: none)").matches;
-
-if (!isTouchDevice) {
-  buttons.forEach(btn => {
-    btn.addEventListener("mouseenter", () => {
-      if (!btn.hasAttribute("data-no-active")) {
-        updateSlider(btn);
-      }
-    });
-  });
-
-  document.querySelector(".action-group").addEventListener("mouseleave", () => {
     if (activeBtn) {
-      updateSlider(activeBtn);
+      updateSlider(activeBtn, false);
     }
-  });
-}
+  }
 
-// Init
-document.addEventListener("DOMContentLoaded", () => {
-  if (activeBtn) updateSlider(activeBtn);
-});</script></body></html>
+  // 🚀 This fixes “background not appearing”
+  document.addEventListener("DOMContentLoaded", initSlider);
+
+  // Also fix layout shifts (fonts etc.)
+  window.addEventListener("load", initSlider);
+
+  // ✅ Hover interactions
+  if (window.matchMedia("(hover: hover)").matches) {
+    buttons.forEach((btn) => {
+      btn.addEventListener("mouseenter", () => {
+        if (isNavigating) return;
+        updateSlider(btn, true);
+      });
+    });
+
+    container?.addEventListener("mouseleave", () => {
+      if (isNavigating) return;
+      if (activeBtn) updateSlider(activeBtn, true);
+    });
+  }
+
+  // ✅ Navigation
+  window.navigate = function (url) {
+    isNavigating = true;
+    window.location.href = url;
+  };
+})();</script></body></html>
