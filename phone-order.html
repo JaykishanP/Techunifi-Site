@@ -339,7 +339,10 @@ function gtag(){dataLayer.push(arguments);}
                   </div>
                   <!--  -->
 
- <form  id="phoneSystemForm">
+ <form   id="phoneSystemForm"
+  action="https://flow.zoho.com/888056554/flow/webhook/incoming?zapikey=1001.3cfefff7b411663d436b3ae71b76e4b0.9ea79a0f78e2a4552184932564d1e8d4"
+  method="POST"
+  target="hidden_iframe">
 
     <!-- <div class="section-title">Property Information</div> -->
 
@@ -1096,6 +1099,12 @@ function gtag(){dataLayer.push(arguments);}
       <input type="file" name="floorplans[]" multiple>
     </div>
 
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+<script>
+function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500); 
+</script>
+    <div class="g-recaptcha" data-sitekey="6Ld3bioqAAAAAJKQX4ICgn_gLMtqYRC7w8T4RadK"></div>
+
     <div class="submit-btn-container">
       <button type="submit" class="submit-btn">Submit Request Form</button>
     </div>
@@ -1401,49 +1410,61 @@ function gtag(){dataLayer.push(arguments);}
   });
 
   // ========= zoho connect ================= //
-   document.getElementById('phoneSystemForm').addEventListener('submit', function(e) {
-  e.preventDefault(); // Stop the standard page reload
 
-  const formData = new FormData(this);
+document.getElementById('phoneSystemForm').addEventListener('submit', function(e) {
 
+  // ================= CAPTCHA VALIDATION ================= //
 
-  // Handle the 'common_areas[]' checkboxes arrays cleanly
+  const captchaResponse = grecaptcha.getResponse();
+
+  if (captchaResponse.length === 0) {
+
+    e.preventDefault();
+
+    alert("Please complete the CAPTCHA before submitting the form.");
+
+    return false;
+
+  }
+
+  // ================= COMMON AREAS ================= //
+
   const checkedAreas = [];
-  document.querySelectorAll('input[name="common_areas[]"]:checked').forEach(cb => {
-    checkedAreas.push(cb.value);
-  });
-  
-  // Remove the old multi-key entries and append as a clean comma-separated string or JSON string
-  formData.delete('common_areas[]');
-  formData.append('common_areas', checkedAreas.join(', '));
 
-  // Your specific Zoho Flow URL
-  const webhookUrl = "https://flow.zoho.com/888056554/flow/webhook/incoming?zapikey=1001.3cfefff7b411663d436b3ae71b76e4b0.9ea79a0f78e2a4552184932564d1e8d4";
+  document.querySelectorAll('input[name="common_areas[]"]:checked')
+    .forEach(cb => {
+      checkedAreas.push(cb.value);
+    });
 
-  // Send using standard URL encoding (Bypasses CORS Preflight entirely)
-  const jsonData = {};
+  let hidden = document.getElementById('common_areas_hidden');
 
-formData.forEach((value, key) => {
-  jsonData[key] = value;
-});
+  if (!hidden) {
 
-  // Send using plain text to bypass CORS restrictions while preserving data strings
-fetch(webhookUrl, {
-  method: 'POST',
-  mode: 'no-cors', // Tells the browser to skip the preflight CORS security check
-  headers: {
-    'Content-Type': 'text/plain' // Must be text/plain for no-cors to permit a body string
-  },
-  body: JSON.stringify(jsonData) // The actual JSON payload goes here as text
-})
-.then(() => {
-  alert('Your phone system order request has been submitted successfully!');
-  this.reset();
-})
-.catch(error => {
-  console.error('Submission Error:', error);
-  alert('An unexpected error occurred. Please try again.');
-});
+    hidden = document.createElement('input');
+
+    hidden.type = 'hidden';
+
+    hidden.name = 'common_areas';
+
+    hidden.id = 'common_areas_hidden';
+
+    this.appendChild(hidden);
+
+  }
+
+  hidden.value = checkedAreas.join(', ');
+
+  // ================= SUCCESS MESSAGE ================= //
+
+  setTimeout(() => {
+
+    alert("Form submitted successfully!");
+
+    document.getElementById('phoneSystemForm').reset();
+
+    grecaptcha.reset();
+
+  }, 500);
 
 });
 
