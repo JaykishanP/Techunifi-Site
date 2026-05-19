@@ -339,17 +339,12 @@ function gtag(){dataLayer.push(arguments);}
                   </div>
                   <!--  -->
 
-<iframe
-  name="hidden_iframe"
-  id="hidden_iframe"
-  style="display:none;">
-</iframe>
+
 
  <form  id="phoneSystemForm"
   action="https://flow.zoho.com/888056554/flow/webhook/incoming?zapikey=1001.3cfefff7b411663d436b3ae71b76e4b0.9ea79a0f78e2a4552184932564d1e8d4"
   method="POST"
-  enctype="multipart/form-data"
-  target="hidden_iframe">
+  enctype="multipart/form-data">
 
     <!-- <div class="section-title">Property Information</div> -->
 
@@ -1439,71 +1434,63 @@ document.addEventListener("DOMContentLoaded", generateMathCaptcha);
 
 
 // ================= FORM SUBMIT =================
+
 document.getElementById('phoneSystemForm').addEventListener('submit', function(e) {
+  // Prevent the default browser form submission redirect
+  e.preventDefault();
 
   // ================= CAPTCHA VALIDATION =================
-  const userAnswer = parseInt(
-    document.getElementById('math-answer').value,
-    10
-  );
+  const userAnswer = parseInt(document.getElementById('math-answer').value, 10);
 
   if (userAnswer !== currentCorrectAnswer) {
-
-    e.preventDefault();
-
     alert("Incorrect security verification answer.");
-
     generateMathCaptcha();
-
     document.getElementById('math-answer').focus();
-
     return;
   }
 
   // ================= CHECKBOX HANDLING =================
   const checkedAreas = [];
-
-  document.querySelectorAll(
-    'input[name="common_areas[]"]:checked'
-  ).forEach(cb => {
+  document.querySelectorAll('input[name="common_areas[]"]:checked').forEach(cb => {
     checkedAreas.push(cb.value);
   });
 
   let hidden = document.getElementById('common_areas_hidden');
-
   if (!hidden) {
-
     hidden = document.createElement('input');
-
     hidden.type = 'hidden';
-
     hidden.name = 'common_areas';
-
     hidden.id = 'common_areas_hidden';
-
     this.appendChild(hidden);
   }
-
   hidden.value = checkedAreas.join(', ');
 
-  // SUCCESS MESSAGE
-  setTimeout(() => {
+  // ================= AJAX TRANSMISSION TO ZOHO =================
+  // Gather all form fields automatically (including hidden inputs & files)
+  const formData = new FormData(this);
+  const targetUrl = this.getAttribute('action');
 
+  fetch(targetUrl, {
+    method: 'POST',
+    body: formData,
+    mode: 'no-cors' // Crucial: bypasses strict cross-origin browser validation rules for webhooks
+  })
+  .then(() => {
+    // SUCCESS ACTIONS
     alert("Form submitted successfully!");
-
     this.reset();
-
     generateMathCaptcha();
-
-    document.querySelectorAll('.conditional-field')
-      .forEach(el => {
-        el.style.display = 'none';
-      });
-
-  }, 1000);
-
+    
+    // Hide all dynamic layout pieces
+    document.querySelectorAll('.conditional-field').forEach(el => {
+      el.style.display = 'none';
+    });
+  })
+  .catch(error => {
+    console.error("Submission error details:", error);
+    alert("An error occurred while transmitting your request. Please try again.");
+  });
 });
-
 </script>
 
 
