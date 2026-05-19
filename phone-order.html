@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Phone System Order Request Form</title>
+
+  <style>
+    *{
+      box-sizing:border-box;
+      font-family:Arial, sans-serif;
+    }
+
+    body{
+      margin:0;
+      padding:30px;
+      background:#f4f6f9;
+    }
+
+    .container{
+      max-width:1100px;
+      margin:auto;
+      background:#fff;
+      padding:30px;
+      border-radius:10px;
+      box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    h1{
+      text-align:center;
+      margin-bottom:30px;
+      color:#222;
+    }
+
+    .section-title{
+      margin-top:40px;
+      margin-bottom:20px;
+      font-size:22px;
+      color:#333;
+      border-bottom:2px solid #ddd;
+      padding-bottom:10px;
+    }
+
+    .form-group{
+      margin-bottom:20px;
+    }
+
+    .row{
+      display:flex;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .col{
+      flex:1;
+      min-width:250px;
+    }
+
+    label{
+      display:block;
+      margin-bottom:8px;
+      font-weight:600;
+      color:#444;
+    }
+
+    input,
+    select,
+    textarea{
+      width:100%;
+      padding:12px;
+      border:1px solid #ccc;
+      border-radius:6px;
+      font-size:14px;
+    }
+
+    textarea{
+      min-height:100px;
+      resize:vertical;
+    }
+
+    .checkbox-group{
+      display:flex;
+      flex-direction: column;
+      gap:10px;
+      margin-top:10px;
+      margin-bottom: 20px;
+    }
+
+    .checkbox-group label{
+      font-weight:normal;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: auto;
+    }
+
+    .note{
+      margin-top:5px;
+      font-size:13px;
+      color:#666;
+    }
+
+    .submit-btn-container {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .submit-btn{
+      background:#007bff;
+      color:#fff;
+      border:none;
+      padding:14px 30px;
+      font-size:16px;
+      border-radius:6px;
+      cursor:pointer;
+      transition: background 0.2s ease;
+    }
+
+    .submit-btn:hover{
+      background:#0056b3;
+    }
+
+    /* Conditional fields helper class */
+    .conditional-field {
+      display: none;
+      margin-top: 15px;
+      padding-left: 15px;
+      border-left: 3px solid #007bff;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>Phone System Order Request Form</h1>
+
+  <form id="phoneSystemForm">
+
+    <div class="section-title">Property Information</div>
+
+    <div class="form-group">
+      <label>Hotel Name <span>*</span></label>
+      <input type="text" name="hotel_name" required>
+    </div>
+
+    <div class="form-group">
+      <label>Street Address <span>*</span></label>
+      <input type="text" name="street_address" required>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label>City <span>*</span></label>
+        <input type="text" name="city" required>
+      </div>
+
+      <div class="col">
+        <label>State <span>*</span></label>
+        <input type="text" name="state" required>
+      </div>
+
+      <div class="col">
+        <label>Zip Code <span>*</span></label>
+        <input type="text" name="zip_code" required>
+      </div>
+    </div>
+
+   <div class="row">
+      <div class="col">
+        <label>Hotel Phone Number <span>*</span></label>
+        <input type="tel" name="hotel_phone" required>
+      </div>
+
+      <div class="col">
+        <label>Hotel Fax Number <span>*</span></label>
+        <input type="tel" name="hotel_fax" required>
+      </div>
+    </div>
+
+    <div class="section-title">Property Contact Information</div>
+
+    <div class="row">
+      <div class="col">
+        <label>Title <span>*</span></label>
+        <input type="text" name="title" required>
+      </div>
+
+      <div class="col">
+        <label>Full Name <span>*</span></label>
+        <input type="text" name="full_name" required>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label>Email Address <span>*</span></label>
+        <input type="email" name="email" required>
+      </div>
+
+      <div class="col">
+        <label>Contact Phone Number <span>*</span></label>
+        <input type="tel" name="contact_phone" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Property Time Zone <span>*</span></label>
+      <select name="time_zone" id="time_zone" required>
+        <option value="">Select Time Zone</option>
+        <option value="Eastern Time Zone">Eastern Time Zone</option>
+        <option value="Central Time Zone">Central Time Zone</option>
+        <option value="Mountain Time Zone">Mountain Time Zone</option>
+        <option value="Pacific Time Zone">Pacific Time Zone</option>
+        <option value="Alaskan Time Zone">Alaskan Time Zone</option>
+        <option value="Hawaiian Time Zone">Hawaiian Time Zone</option>
+        <option value="Other">Other</option> 
+      </select>
+
+      <div class="form-group conditional-field" id="conditional_other_time_zone">
+          <label>Other Time Zone <span>*</span></label>
+          <input type="text" name="other_time_zone">
+      </div>
+    </div>
+
+    <div class="section-title">Network Information</div>
+
+    <div class="form-group">
+      <label>Is the internet available in the phone room or where your new equipment will be located? <span>*</span></label>
+      <select name="internet_available" required>
+        <option value="">Choose One</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+        <option value="I don't know">I don't know</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Who is your Internet Service Provider? <span>*</span></label>
+      <input type="text" name="isp" required>
+      <div class="note">
+        Note: We've encountered instances where some ISPs are blocking port 5060, which is essential for SIP-based voice services. If this port is blocked, your phones may not function correctly. If you're using AT&T or Spectrum, we recommend contacting them directly to confirm that port 5060 is open and not being restricted.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Do you have upload and download speeds of at least 20 Mbps? <span>*</span></label>
+      <select name="internet_speed" required>
+        <option value="">Choose One</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+        <option value="I don't know">I don't know</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Do you have more than one data circuit? <span>*</span></label>
+       <div class="note">
+        ie- separate bills for your admin and guest networks
+      </div>
+      <select name="data_circuit" id="data_circuit" required>
+        <option value="">Choose One</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+        <option value="I don't know">I don't know</option>
+      </select>
+
+      <div class="form-group conditional-field" id="conditional_explain_data_circuit">
+          <label>Please Explain <span>*</span></label>
+          <textarea name="explain_data_circuit"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>We have technical questions about your network. Who should we reach out for these questions? <span>*</span></label>
+      <select name="network_questions_contact" id="network_questions_contact" required>
+        <option value="">Choose One</option>
+        <option value="Myself">Myself</option>
+        <option value="IT Contact">IT Contact</option>
+      </select>
+
+      <div class="form-group conditional-field" id="conditional_it_contact">
+          <label>Please provide IT contact information. <span>*</span></label>
+          <div class="note">name, phone number, email</div>
+          <textarea name="it_contact" placeholder="Name, Contact Number, Email"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Who manages your Admin network? <span>*</span></label>
+      <div class="note">name, phone number, email</div>
+      <textarea name="admin_network_manager" placeholder="Name, Contact Number, Email" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Who manages your Guest network? <span>*</span></label>
+      <div class="note">name, phone number, email</div>
+      <textarea name="guest_network_manager" placeholder="Name, Contact Number, Email" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>If you have ordered WIFI phones, who manages your WIFI?</label>
+      <div class="note">name, phone number, email</div>
+      <textarea name="wifi_manager" placeholder="Name, Contact Number, Email"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Who at the property should be notified if your primary internet fails and you roll over to cell backup?</label>
+      <div class="note">Please provide email address. This email will receive an alert when you roll on to cellular and when you hit data usage thresholds.</div>
+      <input type="email" name="internet_fails" placeholder="Email address">    
+    </div>
+
+    <div class="form-group">
+      <label>Are there any brand restrictions that exclude having the new IP phones on your Admin network? <span>*</span></label>
+      <select name="brand_restriction" id="brand_restriction" required>
+        <option value="">Choose One</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+        <option value="I don't know">I don't know</option>
+      </select>
+
+      <div class="form-group conditional-field" id="conditional_separate_network">
+          <label>How are you providing an internet connection to your ISP to create the separate network? <span>*</span></label>
+          <textarea name="separate_network" placeholder="Enter your answer"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Are there computer or network jacks where all of the new SIP Admin phones are located? <span>*</span></label>
+      <select name="phone_location" required>
+        <option value="">Choose One</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+        <option value="I don't know">I don't know</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>How would you like to send and receive faxes? <span>*</span></label>
+      <select name="send_receive_faxes" id="send_receive_faxes" required>
+        <option value="">Choose one</option>
+        <option value="Traditional (Fax Machine)">Traditional (Fax Machine)</option>
+        <option value="Efax">Efax</option>
+        <option value="Hybrid (tradition & Efax)">Hybrid (tradition & Efax)</option>
+        <option value="N/A - No Fax">N/A - No Fax</option>
+      </select>
+
+       <div class="form-group conditional-field" id="conditional_faxes_email">
+          <label>What email would you like to send and receive faxes? <span>*</span></label>
+          <input type="email" name="faxes_email">
+      </div>
+    </div>
+
+    <div class="section-title">Phone System Information</div>
+
+    <div class="form-group">
+      <label>What is the brand of your property management system? <span>*</span></label>
+      <input type="text" name="pms_brand" required>
+    </div>
+
+    <div class="form-group">
+      <label>Does your property management system currently have PBX integration ie. do you see guest's name display on your front desk console? <span>*</span></label>
+      <div class="note">Example: *52=Occupied/Clean</div>
+      <select name="pbx_integration" id="pbx_integration" required>
+        <option value="">Choose One</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+        <option value="I don't know">I don't know</option>
+      </select>
+
+      <div class="form-group conditional-field" id="conditional_status_code">
+          <label>Please provide the PMS room status codes <span>*</span></label>
+          <textarea name="status_code" placeholder="Enter your answer"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>What is the make and model of your current phone system? <span>*</span></label>
+      <input type="text" name="phone_system_model" required>
+    </div>
+
+    <div class="form-group">
+      <label>What common areas currently have phones? <span>*</span></label>
+
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="common_areas[]" value="Elevator" data-target="elevator"> Elevator</label>
+        <label><input type="checkbox" name="common_areas[]" value="Housekeeping" data-target="houseKeeping"> Housekeeping</label>
+        <label><input type="checkbox" name="common_areas[]" value="Guest Laundry" data-target="guestLaundry"> Guest Laundry</label>
+        <label><input type="checkbox" name="common_areas[]" value="Housekeeping Laundry" data-target="hkLaundry"> Housekeeping Laundry</label>
+        <label><input type="checkbox" name="common_areas[]" value="Kitchen" data-target="kitchenExtension"> Kitchen</label>
+        <label><input type="checkbox" name="common_areas[]" value="Business Center" data-target="businessExtension"> Business Center</label>
+        <label><input type="checkbox" name="common_areas[]" value="Meeting Room" data-target="meetingExtension"> Meeting Room</label>
+        <label><input type="checkbox" name="common_areas[]" value="Pool" data-target="poolExtension"> Pool</label>
+        <label><input type="checkbox" name="common_areas[]" value="Vestibule" data-target="vestibuleExtension"> Vestibule</label>
+        <label><input type="checkbox" name="common_areas[]" value="Lobby" data-target="lobbyExtension"> Lobby</label>
+        <label><input type="checkbox" name="common_areas[]" value="Fitness" data-target="fitnessExtension"> Fitness</label>
+        <label><input type="checkbox" name="common_areas[]" value="Landing" data-target="landingPhones"> Landing</label>
+        <label><input type="checkbox" name="common_areas[]" value="Overhead bells, paging, or entry phones" data-target="bellExtension"> Overhead bells, paging, or entry phones</label>
+        <label><input type="checkbox" name="common_areas[]" value="Other" data-target="otherPhones"> Other</label>
+        <label><input type="checkbox" name="common_areas[]" value="None" data-target="nonePhones"> None</label>
+      </div>
+
+      <div id="elevator" class="conditional-field">
+          <div class="form-group">
+            <label>How many elevators do you have? <span>*</span></label>
+            <input type="number" name="elevators" placeholder="Enter your answer"/>
+          </div>
+          <div class="form-group">
+            <label>What are their extension(s)? <span>*</span></label>
+            <input type="text" name="extensions" placeholder="Enter your answer"/>
+          </div>
+          <div class="form-group">
+            <label>How do your elevator(s) get dial tone? <span>*</span></label>
+            <select name="dialTone">
+              <option value="">Select an option</option>
+              <option value="Circuit">Circuit</option>
+              <option value="Cellular">Cellular</option>
+              <option value="PBX">PBX</option>
+              <option value="POTS/Analog Line">POTS/Analog Line</option>
+              <option value="I don't know">I don't know</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Where does your elevator ring? <span>*</span></label>
+            <div class="note">To test press the call button from inside the elevator.</div>
+            <select name="ringLocation">
+              <option value="">Select location</option>
+              <option value="Elevator Company">Elevator Company</option>
+              <option value="Front Desk">Front Desk</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Does your elevator company require... <span>*</span></label>
+            <select name="companyRequired">
+              <option value="">Select an option</option>
+              <option value="Phone Number">Phone Number</option>
+              <option value="Dial Tone">Dial Tone</option>
+              <option value="I don't know">I don't know</option>
+            </select>
+          </div>
+       </div>
+     
+      <div id="houseKeeping" class="conditional-field">
+        <div class="form-group">
+          <label>Housekeeping Extension <span>*</span></label>
+          <input type="number" name="house_keeping" placeholder="Enter your answer"/>
+        </div>
+      </div>
+
+      <div id="guestLaundry" class="conditional-field">
+        <div class="form-group">
+          <label>Guest Laundry Extension <span>*</span></label>
+          <input type="number" name="guest_laundry" placeholder="Enter your answer"/>
+        </div>
+      </div>
+
+       <div id="hkLaundry" class="conditional-field">
+         <div class="form-group">
+           <label>Housekeeping Laundry Extension <span>*</span></label>
+           <input type="number" name="hk_guest_laundry" placeholder="Enter your answer"/>
+         </div>
+       </div>
+
+        <div id="kitchenExtension" class="conditional-field">
+          <div class="form-group">
+            <label>Kitchen Extension <span>*</span></label>
+            <input type="number" name="kitchen_extension" placeholder="Enter your answer"/>
+          </div>
+        </div>
+
+        <div id="businessExtension" class="conditional-field">
+          <div class="form-group">
+            <label>Business Center Extension <span>*</span></label>
+            <input type="number" name="business_extension" placeholder="Enter your answer"/>
+          </div>
+        </div>
+
+        <div id="meetingExtension" class="conditional-field">
+          <div class="form-group">
+            <label>Meeting Room Extension <span>*</span></label>
+            <input type="number" name="meeting_extension" placeholder="Enter your answer"/>
+          </div>
+        </div>
+
+        <div id="poolExtension" class="conditional-field">
+          <div class="form-group">
+            <label>Pool Extension <span>*</span></label>
+            <input type="number" name="pool_extension" placeholder="Enter your answer"/>
+          </div>
+        </div>
+
+        <div id="vestibuleExtension" class="conditional-field">
+          <div class="form-group">
+            <label>Vestibule Extension <span>*</span></label>
+            <input type="number" name="vestibule_extension" placeholder="Enter your answer"/>
+          </div>
+        </div>
+
+        <div id="lobbyExtension" class="conditional-field">
+          <div class="form-group">
+            <label>Lobby Extension <span>*</span></label>
+            <input type="number" name="lobby_extension" placeholder="Enter your answer"/>
+          </div>
+        </div>
+
+        <div id="fitnessExtension" class="conditional-field">
+          <div class="form-group">
+            <label>Fitness Extension <span>*</span></label>
+            <input type="number" name="fitness_extension" placeholder="Enter your answer"/>
+          </div>
+        </div>
+
+        <div id="landingPhones" class="conditional-field">
+          <div class="form-group">
+            <label>How many Landing phones? <span>*</span></label>
+            <input type="number" name="landing_phones_count" placeholder="Enter your answer"/>
+          </div>
+          <div class="form-group">
+            <label>What are their Extension(s)? <span>*</span></label>
+            <input type="text" name="landing_phones_extensions" placeholder="Enter your answer"/>
+          </div>
+        </div>
+
+        <div id="bellExtension" class="conditional-field">
+          <div class="form-group">
+            <label>Bells, Paging or Entry Phone Extension <span>*</span></label>
+            <input type="number" name="bell_extension" placeholder="Enter your answer"/>
+          </div>
+        </div>
+
+        <div id="otherPhones" class="conditional-field">
+          <div class="form-group">
+            <label>Please list any other common area phone(s) and their extension numbers <span>*</span></label>
+            <textarea name="other_phones" placeholder="Enter your answer"></textarea>
+          </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label>How many Admin phones? <span>*</span></label>
+      <select name="admin_phones" id="admin_phones" required>
+        <option value="">Choose One</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="Other">Other</option>
+      </select>
+     
+      <div class="form-group conditional-field admin-ext-group" id="admin_ext_1">
+          <label>Title/ Extension - Admin Phone #1 <span>*</span></label>
+          <input type="text" name="one_extension" placeholder="Enter your answer">
+      </div>
+
+      <div class="form-group conditional-field admin-ext-group" id="admin_ext_2">
+          <label>Title/ Extension - Admin Phone #2 <span>*</span></label>
+          <input type="text" name="two_extension" placeholder="Enter your answer">
+      </div>
+
+      <div class="form-group conditional-field admin-ext-group" id="admin_ext_3">
+          <label>Title/ Extension - Admin Phone #3 <span>*</span></label>
+          <input type="text" name="three_extension" placeholder="Enter your answer">
+      </div>
+
+      <div class="form-group conditional-field admin-ext-group" id="admin_ext_4">
+          <label>Title/ Extension - Admin Phone #4 <span>*</span></label>
+          <input type="text" name="four_extension" placeholder="Enter your answer">
+      </div>
+
+      <div class="form-group conditional-field admin-ext-group" id="admin_ext_5">
+          <label>Title/ Extension - Admin Phone #5 <span>*</span></label>
+          <input type="text" name="five_extension" placeholder="Enter your answer">
+      </div>
+
+      <div class="form-group conditional-field admin-ext-group" id="admin_ext_6">
+          <label>Title/ Extension - Admin Phone #6 <span>*</span></label>
+          <input type="text" name="six_extension" placeholder="Enter your answer">
+      </div>
+
+      <div class="form-group conditional-field admin-ext-group" id="admin_ext_7">
+          <label>Title/ Extension - Admin Phone #7 <span>*</span></label>
+          <input type="text" name="seven_extension" placeholder="Enter your answer">
+      </div>
+
+      <div class="form-group conditional-field" id="admin_ext_other">
+          <label>How many Admin phones? Please list their title & extension? <span>*</span></label>
+          <textarea name="other_extension" placeholder="Enter your answer"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>As a standard, we will match the extension(s) you have provided for common area and admin phones. If extensions are not provided, are you okay with us assigning extensions in the 700 series? (guest will dial "0" for the front desk) <span>*</span></label>
+      <select name="extension_places" id="extension_places" required>
+        <option value="">Choose one</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+
+       <div class="form-group conditional-field" id="conditional_extension_prefer">
+          <label>What do you prefer? <span>*</span></label>
+          <input type="text" name="extension_prefer">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>How many floors do you have? <span>*</span></label>
+      <input type="text" name="floors" required>
+    </div>
+
+    <div class="form-group">
+      <label>Do you have multiple buildings? <span>*</span></label>
+      <select name="multiple_buildings" required>
+        <option value="">Choose One</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Where does the internet come into the building? <span>*</span></label>
+      <input type="text" name="internet_source" required>
+    </div>
+
+    <div class="form-group">
+      <label>When trying to reach a guest room, do you dial the room number? <span>*</span></label>
+      <select name="dial_number" id="dial_number" required>
+        <option value="">Choose One</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+        <option value="I don't know">I don't know</option>
+      </select>
+
+      <div class="form-group conditional-field" id="conditional_no_number">
+          <label>Please explain <span>*</span></label>
+          <textarea name="no_number" placeholder="Enter your answer"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Do any of your guestrooms have more than one phone? <span>*</span></label>
+      <select name="guests_phones" id="guests_phones" required>
+        <option value="">Choose One</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+
+      <div class="form-group conditional-field" id="conditional_more_phones">
+          <label>Which rooms have more than one phone? <span>*</span></label>
+          <textarea name="more_phones" placeholder="Enter your answer"></textarea>
+      </div>
+    </div>
+
+   <div class="form-group">
+      <label>Are you reusing your guestroom phones? <span>*</span></label>
+      <select name="reusing_phones" id="reusing_phones" required>
+        <option value="">Choose One</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+
+      <div class="conditional-field" id="conditional_reusing_subfields">
+          <label>Do you have more than one model of guestroom phone? <span>*</span></label>
+          <select name="more_model" id="more_model">
+            <option value="">Choose One</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+
+          <div class="form-group conditional-field" id="conditional_qty_model">
+              <label>Please provide the Qty and Make/Model per model <span>*</span></label>
+              <textarea name="qty_model" placeholder="Enter your answer"></textarea>
+          </div>
+
+          <div class="form-group conditional-field" id="conditional_make_model">
+            <label>Please provide the Make/Model <span>*</span></label>
+            <input type="text" name="make_model">
+          </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>After cutover, we ask that you retest all of your guestroom phones. When would you like this testing done? <span>*</span></label>
+      <select name="cutover_testing" id="cutover_testing" required>
+        <option value="">Choose one</option>
+        <option value="While tech is onsite at cutover -- accruing tech time cost">While tech is onsite at cutover -- accruing tech time cost</option>
+        <option value="After cutover at hotels convenience">After cutover at hotels convenience</option>
+      </select>
+
+       <div class="form-group conditional-field" id="conditional_onsite_cutover">
+          <label>Who from the hotel will be assigned to test each room? <span>*</span></label>
+          <input type="text" name="onsite_cutover" placeholder="Enter your answer">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Would you like guestrooms to have voicemail? <span>*</span></label>
+      <div class="note">If this changes in the future and requires reprovisioning, you may incur a fee.</div>
+      <select name="guestroom_voicemail" id="guestroom_voicemail" required>
+        <option value="">Choose One</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+
+       <div class="form-group conditional-field" id="conditional_retrieval_btn">
+         <label>Does your guestroom phone have a button to press to retrieve voicemail? <span>*</span></label>
+         <select name="guestroom_voicemail_btn">
+           <option value="">Choose One</option>
+           <option value="Yes">Yes</option>
+           <option value="No">No</option>
+         </select>
+       </div>
+    </div>
+
+    <div class="form-group">
+      <label>Do you utilize an offsite Reservations Call Center? <span>*</span></label>
+      <select name="offsite_center" id="offsite_center" required>
+        <option value="">Choose one</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+
+       <div class="form-group conditional-field" id="conditional_offsite_number">
+          <label>Please provide that number? <span>*</span></label>
+          <input type="text" name="offsite_number" placeholder="Enter your answer">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Do you have a customer pre-recorded music on hold (MOH) recording you would like us to play to callers on hold? <span>*</span></label>
+      <div class="note">If yes, please attach a copy of that file in .wav or.MP3 to your onboarding ticket.</div>
+      <select name="moh" required>
+        <option value="">Choose One</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Would you like to use Automated Auto Attendant to answer your incoming calls from outside callers? <span>*</span></label>
+      <select name="outsider_callers" id="outsider_callers" required>
+        <option value="">Choose One</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+
+       <div class="form-group conditional-field" id="conditional_auto_outsiders">
+         <label>With Auto Attendant do you want outside callers to be able to dial room numbers to reach guests? <span>*</span></label>
+         <div class="note">If "YES" this can open guest up to fraudulent calls.</div>
+         <select name="auto_outsiders">
+           <option value="">Choose One</option>
+           <option value="Yes">Yes</option>
+           <option value="No">No</option>
+         </select>
+       </div>
+    </div>
+
+    <div class="form-group">
+      <label>Who is your current phone service provider? <span>*</span></label>
+      <input type="text" name="phone_provider" required>
+    </div>
+
+    <div class="form-group">
+      <label>Who is the authorized user for your existing telephone carrier(s) and can make changes / billing? <span>*</span></label>
+      <input type="text" name="telephone_carrier" required>
+    </div>
+
+    <div class="form-group">
+      <label>Other than main and fax are there any other numbers that you would like to port over to VSR? <span>*</span></label>
+      <textarea name="fax_vsr" placeholder="Enter your answer" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Do you have the call forwarding feature enabled/activated with your current phone provider? <span>*</span></label>
+      <div class="note">Note: Call forwarding on T1 or T1 PRI circuits can be particularly complex and requires coordination with the losing carrier before dispatching a technician to the site.</div>
+      <select name="call_forwarding_enabled" id="call_forwarding_enabled" required>
+        <option value="">Choose one</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+
+       <div class="form-group conditional-field" id="conditional_forward_number">
+          <label>How do you forward your numbers? ie. codes <span>*</span></label>
+          <input type="text" name="forward_number" placeholder="Enter your answer">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Are you charged long distance? <span>*</span></label>
+      <div class="note">Note: we will try our best to find a local area code for your temp number for call forwarding, but if that is not available you may incur long distance charges for all incoming calls to the hotel after cutover until your number ports</div>
+      <select name="charge_distance" required>
+        <option value="">Choose One</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Do you want your old PBX phone system removed as part of the installation? <span>*</span></label>
+      <select name="pbx_installation" required>
+        <option value="">Choose One</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+    </div>
+
+    <div class="section-title">Emergency Information</div>
+
+    <div class="form-group">
+      <label>Please provide an Emergency Reroute Number: <span>*</span></label>
+      <div class="note">In case of an internet outage, power outage, or other disaster that precludes us from delivering inbound calls to the front desk, please provide an alternate destination to forward your front desk calls to.</div>
+      <input type="text" name="emergency_reroute" required>
+    </div>
+
+    <div class="form-group">
+      <label>For Emergency 911 call notification, which phones would you like notified? <span>*</span></label>
+      <div class="note">ie. front desk, front desk and GM?</div>
+      <input type="text" name="notification_phones" required>
+    </div>
+
+    <div class="form-group">
+      <label>For Emergency 911 call notification, would you like an email notification? <span>*</span></label>
+      <select name="email_notification" id="email_notification" required>
+        <option value="">Choose One</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+      
+      <div class="form-group conditional-field" id="conditional_email_notified">
+        <label>Please provide email address that you would like notified. <span>*</span></label>
+        <input type="text" name="email_notified">
+      </div>
+    </div>
+
+    <div class="section-title">Accounting / Finance</div>
+
+    <div class="form-group">
+      <label>How would you like to pay your monthly service? <span>*</span></label>
+      <select name="payment_method" required>
+        <option value="">Choose One</option>
+        <option value="ACH / e-check">ACH / e-check</option>
+        <option value="Credit Card (additional convenience fee applies)">Credit Card (additional convenience fee applies)</option>
+        <option value="Company Check (Subject to credit approval)">Company Check (Subject to credit approval)</option>
+      </select>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label>Billing Company Name</label>
+        <input type="text" name="billing_company">
+      </div>
+
+      <div class="col">
+        <label>Billing Contact Name <span>*</span></label>
+        <input type="text" name="billing_contact_name" required>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label>Billing Contact Phone <span>*</span></label>
+        <input type="tel" name="billing_phone" required>
+      </div>
+
+      <div class="col">
+        <label>Billing Contact Email <span>*</span></label>
+        <input type="email" name="billing_email" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Billing Contact Address</label>
+      <textarea name="billing_address"></textarea>
+    </div>
+
+    <div class="section-title">Pictures from Site</div>
+
+    <div class="form-group">
+      <label>If you haven't already provided, please attach pictures of your phone room, phone equipment (with cover removed), network equipment, wiring blocks on the wall</label>
+      <input type="file" name="equipment_pictures[]" multiple>
+    </div>
+
+    <div class="form-group">
+      <label>If you haven't already provided, please attach pictures of your guestroom phones front & back.</label>
+      <input type="file" name="guestroom_phone_pictures[]" multiple>
+    </div>
+
+    <div class="form-group">
+      <label>If you haven't already provided, please attach your floorplans with room numbers. This can be the fire escape plan on the back of your guestroom door. If room numbers are not listed on the floorplan, please provide a PMS tape/ report.</label>
+      <input type="file" name="floorplans[]" multiple>
+    </div>
+
+    <div class="submit-btn-container">
+      <button type="submit" class="submit-btn">Submit Request Form</button>
+    </div>
+
+  </form>
+</div>
+
+<script>
+  // Helper functions to manage conditional visibility and fields validation toggle
+  function toggleField(elementId, show) {
+    const element = document.getElementById(elementId);
+    if (!element) return;
+    
+    if (show) {
+      element.style.display = 'block';
+      // Make internal dynamic elements required if they are visible
+      element.querySelectorAll('input, select, textarea').forEach(el => {
+        // Only apply standard required mapping if it's not structural subfields handled separately
+        if(!el.hasAttribute('data-no-auto-req')) {
+           el.setAttribute('required', 'true');
+        }
+      });
+    } else {
+      element.style.display = 'none';
+      element.querySelectorAll('input, select, textarea').forEach(el => {
+        el.removeAttribute('required');
+      });
+    }
+  }
+
+  // Question 6: Time zone setup
+  document.getElementById('time_zone').addEventListener('change', function() {
+    toggleField('conditional_other_time_zone', this.value === 'Other');
+  });
+
+  // Question 10: Data circuit explanation setup
+  document.getElementById('data_circuit').addEventListener('change', function() {
+    toggleField('conditional_explain_data_circuit', this.value === 'Yes');
+  });
+
+  // Question 11: IT Contact information layout setup
+  document.getElementById('network_questions_contact').addEventListener('change', function() {
+    toggleField('conditional_it_contact', this.value === 'IT Contact');
+  });
+
+  // Question 16: Brand Restriction Layout setup
+  document.getElementById('brand_restriction').addEventListener('change', function() {
+    toggleField('conditional_separate_network', this.value === 'Yes');
+  });
+
+  // Question 18: Send & Receive faxes setup
+  document.getElementById('send_receive_faxes').addEventListener('change', function() {
+    const value = this.value;
+    const isMatched = (value === 'Efax' || value === 'Hybrid (tradition & Efax)');
+    toggleField('conditional_faxes_email', isMatched);
+  });
+
+  // Question 20: PBX Integration status code logic setup
+  document.getElementById('pbx_integration').addEventListener('change', function() {
+    toggleField('conditional_status_code', this.value === 'Yes');
+  });
+
+  // Question 22: Checkbox configurations layout mapping 
+  document.querySelectorAll('.checkbox-group input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+      const targetId = this.getAttribute('data-target');
+      if (targetId) {
+        toggleField(targetId, this.checked);
+      }
+    });
+  });
+
+  // Question 23: Admin Phones Dynamic Count Engine Selection Setup
+  document.getElementById('admin_phones').addEventListener('change', function() {
+    const value = this.value;
+    
+    // Reset all Admin phone elements first
+    document.querySelectorAll('.admin-ext-group').forEach(el => toggleField(el.id, false));
+    toggleField('admin_ext_other', false);
+
+    if (value === 'Other') {
+      toggleField('admin_ext_other', true);
+    } else if (value !== "") {
+      const maxCount = parseInt(value, 10);
+      for (let i = 1; i <= maxCount; i++) {
+        toggleField(`admin_ext_${i}`, true);
+      }
+    }
+  });
+
+  // Question 24: Extension Assign Pref preference setup
+  document.getElementById('extension_places').addEventListener('change', function() {
+    toggleField('conditional_extension_prefer', this.value === 'No');
+  });
+
+  // Question 28: Dial layout explanation setup
+  document.getElementById('dial_number').addEventListener('change', function() {
+    toggleField('conditional_no_number', this.value === 'No');
+  });
+
+  // Question 29: Guest Phone configuration layouts setup
+  document.getElementById('guests_phones').addEventListener('change', function() {
+    toggleField('conditional_more_phones', this.value === 'Yes');
+  });
+
+  // Question 30: Guestphone Reuse models setups
+  document.getElementById('reusing_phones').addEventListener('change', function() {
+    const showSub = this.value === 'Yes';
+    toggleField('conditional_reusing_subfields', showSub);
+    if(!showSub) {
+      toggleField('conditional_qty_model', false);
+      toggleField('conditional_make_model', false);
+      document.getElementById('more_model').value = '';
+    }
+  });
+
+  document.getElementById('more_model').addEventListener('change', function() {
+    const val = this.value;
+    toggleField('conditional_qty_model', val === 'Yes');
+    toggleField('conditional_make_model', val === 'No');
+  });
+
+  // Question 31: Tech Cutover testing parameters setup
+  document.getElementById('cutover_testing').addEventListener('change', function() {
+    const matchStr = "While tech is onsite at cutover -- accruing tech time cost";
+    toggleField('conditional_onsite_cutover', this.value === matchStr);
+  });
+
+  // Question 32: Guestroom Voicemail setups
+  document.getElementById('guestroom_voicemail').addEventListener('change', function() {
+    toggleField('conditional_retrieval_btn', this.value === 'Yes');
+  });
+
+  // Question 33: Reservations Call Center configs
+  document.getElementById('offsite_center').addEventListener('change', function() {
+    toggleField('conditional_offsite_number', this.value === 'Yes');
+  });
+
+  // Question 35: Auto attendant configs setup
+  document.getElementById('outsider_callers').addEventListener('change', function() {
+    toggleField('conditional_auto_outsiders', this.value === 'Yes');
+  });
+
+  // Question 39: Call forwarding engine toggle setups
+  document.getElementById('call_forwarding_enabled').addEventListener('change', function() {
+    toggleField('conditional_forward_number', this.value === 'Yes');
+  });
+
+  // Question 44: Emergency 911 email notification toggle setup
+  document.getElementById('email_notification').addEventListener('change', function() {
+    toggleField('conditional_email_notified', this.value === 'Yes');
+  });
+
+  // zoho connect
+  document.getElementById('phoneSystemForm').addEventListener('submit', function(e) {
+  e.preventDefault(); // Stop page from reloading
+
+  // 1. Gather all standard form fields into a FormData object
+  const formData = new FormData(this);
+  const data = Object.fromEntries(formData.entries());
+
+  // 2. Explicitly handle the 'common_areas[]' array checkboxes
+  const checkedAreas = [];
+  document.querySelectorAll('input[name="common_areas[]"]:checked').forEach(cb => {
+    checkedAreas.push(cb.value);
+  });
+  data.common_areas = checkedAreas;
+
+  // 3. Define your Zoho Flow Webhook URL (You will generate this in Step 2)
+  const webhookUrl = "https://flow.zoho.com/888056554/flow/webhook/incoming?zapikey=1001.3cfefff7b411663d436b3ae71b76e4b0.9ea79a0f78e2a4552184932564d1e8d4&isdebug=false";
+
+  // 4. Send the payload securely via Fetch API
+  fetch(webhookUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => {
+    if (response.ok) {
+      alert('Your order request has been submitted successfully!');
+      this.reset();
+      // Optionally hide any remaining open conditional fields manually here
+    } else {
+      alert('There was an issue submitting your request. Please try again.');
+    }
+  })
+  .catch(error => {
+    console.error('Submission Error:', error);
+    alert('An unexpected error occurred. Please check your connection.');
+  });
+});
+
+</script>
+
+</body>
+</html>
