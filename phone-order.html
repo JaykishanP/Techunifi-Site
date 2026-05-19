@@ -13,12 +13,12 @@
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="200">
   <meta property="og:image:height" content="200">
-  <meta property="og:url" content="https://www.techunifi.com/submit.html"/>
+  <meta property="og:url" content="https://www.techunifi.com/phone-order.html"/>
    <meta property="og:title" content="Techunifi | Nationwide Low Voltage & IT Solutions | High Point, NC" />
    <meta property="og:description" content="Techunifi upgrades your business with smart thermostats, lighting, EV chargers, Wi-Fi & speakers across USA." />
    <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8"> 
-    <title>Submit A Ticket | Techunifi</title>
-    <link rel="canonical" href="https://www.techunifi.com/submit.html">
+    <title>Phone System Order | Techunifi</title>
+    <link rel="canonical" href="https://www.techunifi.com/phone-order.html">
 
      <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
@@ -86,13 +86,14 @@ function gtag(){dataLayer.push(arguments);}
 
 <style>
   
-    .section-title{
-      margin-top:40px;
-      margin-bottom:20px;
+    .phonePage .section-title{
+      /* margin-top:40px; */
+      margin-bottom:10px;
       font-size:22px;
       color:#333;
-      border-bottom:2px solid #ddd;
+      border-bottom:1px solid #eb6d47;
       padding-bottom:10px;
+      text-align: left;
     }
 
     .form-group{
@@ -110,12 +111,16 @@ function gtag(){dataLayer.push(arguments);}
       min-width:250px;
     }
 
-    label{
-      display:block;
-      margin-bottom:8px;
-      font-weight:600;
-      color:#444;
+     .phonePage .ticket-form form label {
+       margin: 0 0 6px 0;
     }
+
+    .phonePage .ticket-form form label span{
+      color:red;
+      /* font-size: 16px; */
+      font-weight: 600;
+    }
+
 
     /* input,
     select,
@@ -132,15 +137,15 @@ function gtag(){dataLayer.push(arguments);}
       resize:vertical;
     } */
 
-    .checkbox-group{
+    .ticket-form form .checkbox-group{
       display:flex;
-      flex-direction: custom-column;
+      flex-direction: column;
       gap:10px;
       margin-top:10px;
       margin-bottom: 20px;
     }
 
-    .checkbox-group label{
+    .ticket-form form .checkbox-group label{
       font-weight:normal;
       display: flex;
       align-items: center;
@@ -150,6 +155,7 @@ function gtag(){dataLayer.push(arguments);}
 
     .checkbox-group input[type="checkbox"] {
       width: auto;
+      margin: 0;
     }
 
     .note{
@@ -163,28 +169,34 @@ function gtag(){dataLayer.push(arguments);}
       text-align: center;
     }
 
-    .submit-btn{
-      background:#007bff;
-      color:#fff;
-      border:none;
-      padding:14px 30px;
-      font-size:16px;
-      border-radius:6px;
-      cursor:pointer;
-      transition: background 0.2s ease;
-    }
+    .ticket-form form button.submit-btn {
+    background: #eb6d47;
+    color: #fff;
+    border: none;
+    padding: 14px 30px;
+    font-size: 16px;
+    border-radius: 32px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    max-width: fit-content;
+    margin: 0 auto;
+}
 
-    .submit-btn:hover{
+    /* .submit-btn:hover{
       background:#0056b3;
-    }
+    } */
 
     /* Conditional fields helper class */
     .conditional-field {
       display: none;
       margin-top: 15px;
       padding-left: 15px;
-      border-left: 3px solid #007bff;
+      border-left: 3px solid #eb6d47;
     }
+
+  .phonePage .sub-tab2-section .ticket-form form select {
+    min-height: auto;
+   }
   </style>
 
 </head>
@@ -329,7 +341,7 @@ function gtag(){dataLayer.push(arguments);}
 
  <form id="phoneSystemForm">
 
-    <div class="section-title">Property Information</div>
+    <!-- <div class="section-title">Property Information</div> -->
 
     <div class="form-group">
       <label>Hotel Name <span>*</span></label>
@@ -370,28 +382,28 @@ function gtag(){dataLayer.push(arguments);}
       </div>
     </div>
 
-    <div class="section-title">Property Contact Information</div>
+    <!-- <div class="section-title">Property Contact Information</div> -->
 
     <div class="row">
       <div class="custom-col">
-        <label>Title <span>*</span></label>
+        <label>Property Contact Title <span>*</span></label>
         <input type="text" name="title" required>
       </div>
 
       <div class="custom-col">
-        <label>Full Name <span>*</span></label>
+        <label>Property Contact Full Name <span>*</span></label>
         <input type="text" name="full_name" required>
       </div>
     </div>
 
     <div class="row">
       <div class="custom-col">
-        <label>Email Address <span>*</span></label>
+        <label>Property Contact Email Address <span>*</span></label>
         <input type="email" name="email" required>
       </div>
 
       <div class="custom-col">
-        <label>Contact Phone Number <span>*</span></label>
+        <label>Property Contact Phone Number <span>*</span></label>
         <input type="tel" name="contact_phone" required>
       </div>
     </div>
@@ -415,7 +427,7 @@ function gtag(){dataLayer.push(arguments);}
       </div>
     </div>
 
-    <div class="section-title">Network Information</div>
+    <!-- <div class="section-title">Network Information</div> -->
 
     <div class="form-group">
       <label>Is the internet available in the phone room or where your new equipment will be located? <span>*</span></label>
@@ -543,7 +555,7 @@ function gtag(){dataLayer.push(arguments);}
       </div>
     </div>
 
-    <div class="section-title">Phone System Information</div>
+    <!-- <div class="section-title">Phone System Information</div> -->
 
     <div class="form-group">
       <label>What is the brand of your property management system? <span>*</span></label>
@@ -998,7 +1010,7 @@ function gtag(){dataLayer.push(arguments);}
       </select>
     </div>
 
-    <div class="section-title">Emergency Information</div>
+    <!-- <div class="section-title">Emergency Information</div> -->
 
     <div class="form-group">
       <label>Please provide an Emergency Reroute Number: <span>*</span></label>
@@ -1026,7 +1038,7 @@ function gtag(){dataLayer.push(arguments);}
       </div>
     </div>
 
-    <div class="section-title">Accounting / Finance</div>
+    <!-- <div class="section-title">Accounting / Finance</div> -->
 
     <div class="form-group">
       <label>How would you like to pay your monthly service? <span>*</span></label>
