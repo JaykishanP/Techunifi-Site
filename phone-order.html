@@ -1099,11 +1099,13 @@ function gtag(){dataLayer.push(arguments);}
       <input type="file" name="floorplans[]" multiple>
     </div>
 
-    <script src="https://www.google.com/recaptcha/api.js"></script>
-<script>
-function timestamp() { var response = document.getElementById("g-recaptcha-response"); if (response == null || response.value.trim() == "") {var elems = JSON.parse(document.getElementsByName("captcha_settings")[0].value);elems["ts"] = JSON.stringify(new Date().getTime());document.getElementsByName("captcha_settings")[0].value = JSON.stringify(elems); } } setInterval(timestamp, 500); 
-</script>
-    <div class="g-recaptcha" data-sitekey="6Ld3bioqAAAAAJKQX4ICgn_gLMtqYRC7w8T4RadK"></div>
+    <div class="form-group" style="margin-top: 20px;">
+  <label style="font-weight: bold; display: block; margin-bottom: 5px;">Security Verification</label>
+  <div style="display: flex; gap: 10px; align-items: center;">
+    <span id="math-question" style="font-size: 16px; background: #eee; padding: 8px 12px; border-radius: 4px;"></span>
+    <input type="number" id="math-answer" placeholder="Your answer" required style="width: 120px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+  </div>
+</div>
 
     <div class="submit-btn-container">
       <button type="submit" class="submit-btn">Submit Request Form</button>
@@ -1410,90 +1412,109 @@ function timestamp() { var response = document.getElementById("g-recaptcha-respo
   });
 
   // ========= zoho connect ================= //
+  // Variable to store the correct answer globally within the script scope
+let currentCorrectAnswer = 0;
 
+// Function to generate a new randomized math question
+function generateMathCaptcha() {
+  // Generates two random numbers between 1 and 10
+  const num1 = Math.floor(Math.random() * 10) + 1;
+  const num2 = Math.floor(Math.random() * 10) + 1;
+  
+  // Save the sum to the global tracking variable
+  currentCorrectAnswer = num1 + num2;
+  
+  // Inject the question text into your HTML span element
+  document.getElementById('math-question').innerText = `What is ${num1} + ${num2}?`;
+  
+  // Clear any previous values left in the input box
+  document.getElementById('math-answer').value = '';
+}
+
+// Generate the first math question right when the page finishes loading
+document.addEventListener("DOMContentLoaded", generateMathCaptcha);
+
+
+// Complete Form Submission Event Handler
 document.getElementById('phoneSystemForm').addEventListener('submit', function(e) {
+  e.preventDefault(); // Stop the standard page refresh reload
 
-  // ================= CAPTCHA VALIDATION ================= //
-
-/* ==== Captcha Implementation==== */
-function timestamp() {
-    var response = document.getElementById("g-recaptcha-response");
-    if (!response) {
-        
-        console.warn("g-recaptcha-response element not found within timestamp function.");
-        return;
-    }
-
-    if (response.value.trim() === "") {
-        var captchaSettingsElem = document.getElementsByName("captcha_settings")[0];
-        if (captchaSettingsElem) {
-            var elems = JSON.parse(captchaSettingsElem.value);
-            elems["ts"] = new Date().getTime();
-            captchaSettingsElem.value = JSON.stringify(elems);
-        }
-    }
-}
-
-// Function to check for reCAPTCHA presence and initialize the timestamp function
-function initializeRecaptchaTimestamp() {
-    var recaptchaContainer = document.querySelector('.g-recaptcha');
-    var recaptchaResponseElement = document.getElementById('g-recaptcha-response');
-
-    if (recaptchaContainer || recaptchaResponseElement) {
-        setInterval(timestamp, 500);
-        console.log("reCAPTCHA detected. Timestamp function initialized.");
-    } else {
-        console.log("reCAPTCHA not found on this page. Timestamp function not initialized.");
-    }
-}
-
-if (document.readyState === 'loading') {
-    // Loading hasn't finished yet
-    document.addEventListener('DOMContentLoaded', initializeRecaptchaTimestamp);
-} else {
-    // `DOMContentLoaded` has already fired
-    initializeRecaptchaTimestamp();
-}
-
-  // ================= COMMON AREAS ================= //
-
-  const checkedAreas = [];
-
-  document.querySelectorAll('input[name="common_areas[]"]:checked')
-    .forEach(cb => {
-      checkedAreas.push(cb.value);
-    });
-
-  let hidden = document.getElementById('common_areas_hidden');
-
-  if (!hidden) {
-
-    hidden = document.createElement('input');
-
-    hidden.type = 'hidden';
-
-    hidden.name = 'common_areas';
-
-    hidden.id = 'common_areas_hidden';
-
-    this.appendChild(hidden);
-
+  // 1. SECURITY VALIDATION: Verify the math CAPTCHA answer
+  const userAnswer = parseInt(document.getElementById('math-answer').value, 10);
+  
+  if (userAnswer !== currentCorrectAnswer) {
+    alert("Incorrect security verification answer. Please try again.");
+    generateMathCaptcha(); // Generate a brand new question so bots can't guess repeatedly
+    document.getElementById('math-answer').focus();
+    return; // Kill execution immediately; nothing gets sent to Zoho Flow
   }
 
-  hidden.value = checkedAreas.join(', ');
+  // 2. DATA PROCESSING: Collect all elements inside the form fields
+  const formData = new FormData(this);
 
-  // ================= SUCCESS MESSAGE ================= //
+  // Handle the 'common_areas[]' checkboxes arrays cleanly
+  const checkedAreas = [];
+  document.querySelectorAll('input[name="common_areas[]"]:checked').forEach(cb => {
+    checkedAreas.push(cb.value);
+  });
+  
+  // Remove the old raw array key and append as a clean comma-separated string
+  formData.delete('common_areas[]');
+  formData.append('common_areas', checkedAreas.join(', '));
 
-  setTimeout(() => {
+  // Construct the JSON object payload from FormData
+ // Construct the JSON object payload from FormData
+const formPayload = {};
 
-    alert("Form submitted successfully!");
+formData.forEach((value, key) => {
+  
+  // Handle multiple file uploads properly
+  if (formPayload[key]) {
 
-    document.getElementById('phoneSystemForm').reset();
+    // Convert existing value to array if needed
+    if (!Array.isArray(formPayload[key])) {
+      formPayload[key] = [formPayload[key]];
+    }
 
-    grecaptcha.reset();
+    formPayload[key].push(value);
 
-  }, 500);
+  } else {
+    formPayload[key] = value;
+  }
+});
 
+// Final structure expected by Zoho Flow
+const jsonData = {
+  webhookTrigger: {
+    payload: formPayload
+  }
+};
+
+  // Your exact target Zoho Flow Hook URL endpoint destination
+  const webhookUrl = "https://flow.zoho.com/888056554/flow/webhook/incoming?zapikey=1001.3cfefff7b411663d436b3ae71b76e4b0.9ea79a0f78e2a4552184932564d1e8d4";
+
+  // 3. API TRANSMISSION: Send using plain text to safely bypass CORS preflight restrictions
+  fetch(webhookUrl, {
+    method: 'POST',
+    mode: 'no-cors', // Directs the browser to pass the payload cross-domain without preflight validation blocks
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(jsonData) // Delivers your clean form JSON structure inside the body string
+  })
+  .then(() => {
+    alert('Your phone system order request has been submitted successfully!');
+    
+    // Clear the form fields upon a successful post response
+    this.reset();
+    
+    // Refresh the math question for future submissions
+    generateMathCaptcha();
+  })
+  .catch(error => {
+    console.error('Submission Error Context:', error);
+    alert('An unexpected network error occurred. Please verify your connection and try again.');
+  });
 });
 
 </script>
