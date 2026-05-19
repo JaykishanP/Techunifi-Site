@@ -339,10 +339,10 @@ function gtag(){dataLayer.push(arguments);}
                   </div>
                   <!--  -->
 
- <form   id="phoneSystemForm"
-  action="https://flow.zoho.com/888056554/flow/webhook/incoming?zapikey=1001.3cfefff7b411663d436b3ae71b76e4b0.9ea79a0f78e2a4552184932564d1e8d4"
+ <form  id="phoneSystemForm"
+  action="https://flow.zoho.com/888056554/flow/webhook/incoming?zapikey=YOUR_KEY"
   method="POST"
-  target="hidden_iframe">
+  enctype="application/x-www-form-urlencoded">
 
     <!-- <div class="section-title">Property Information</div> -->
 
@@ -1100,10 +1100,10 @@ function gtag(){dataLayer.push(arguments);}
     </div>
 
     <div class="form-group" style="margin-top: 20px;">
-  <label style="font-weight: bold; display: block; margin-bottom: 5px;">Security Verification</label>
-  <div style="display: flex; gap: 10px; align-items: center;">
-    <span id="math-question" style="font-size: 16px; background: #eee; padding: 8px 12px; border-radius: 4px;"></span>
-    <input type="number" id="math-answer" placeholder="Your answer" required style="width: 120px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+  <label style="font-weight: bold; display: block; margin-bottom: 15px;">Security Verification</label>
+  <div style="display: flex; gap: 15px; align-items: center;">
+    <span id="math-question" style="font-size: 16px;"></span>
+    <input type="number" id="math-answer" placeholder="Your answer" required style="width: 300px; margin: 0;">
   </div>
 </div>
 
@@ -1450,72 +1450,40 @@ document.getElementById('phoneSystemForm').addEventListener('submit', function(e
   }
 
   // 2. DATA PROCESSING: Collect all elements inside the form fields
-  const formData = new FormData(this);
+   
 
-  // Handle the 'common_areas[]' checkboxes arrays cleanly
+});
+
+document.getElementById('phoneSystemForm').addEventListener('submit', function() {
+
+  // Handle checkbox values
   const checkedAreas = [];
-  document.querySelectorAll('input[name="common_areas[]"]:checked').forEach(cb => {
-    checkedAreas.push(cb.value);
-  });
-  
-  // Remove the old raw array key and append as a clean comma-separated string
-  formData.delete('common_areas[]');
-  formData.append('common_areas', checkedAreas.join(', '));
 
-  // Construct the JSON object payload from FormData
- // Construct the JSON object payload from FormData
-const formPayload = {};
+  document.querySelectorAll('input[name="common_areas[]"]:checked')
+    .forEach(cb => {
+      checkedAreas.push(cb.value);
+    });
 
-formData.forEach((value, key) => {
-  
-  // Handle multiple file uploads properly
-  if (formPayload[key]) {
+  // Create hidden field
+  let hidden = document.getElementById('common_areas_hidden');
 
-    // Convert existing value to array if needed
-    if (!Array.isArray(formPayload[key])) {
-      formPayload[key] = [formPayload[key]];
-    }
+  if (!hidden) {
 
-    formPayload[key].push(value);
+    hidden = document.createElement('input');
 
-  } else {
-    formPayload[key] = value;
+    hidden.type = 'hidden';
+
+    hidden.name = 'common_areas';
+
+    hidden.id = 'common_areas_hidden';
+
+    this.appendChild(hidden);
+
   }
-});
 
-// Final structure expected by Zoho Flow
-const jsonData = {
-  webhookTrigger: {
-    payload: formPayload
-  }
-};
+  hidden.value = checkedAreas.join(', ');
 
-  // Your exact target Zoho Flow Hook URL endpoint destination
-  const webhookUrl = "https://flow.zoho.com/888056554/flow/webhook/incoming?zapikey=1001.3cfefff7b411663d436b3ae71b76e4b0.9ea79a0f78e2a4552184932564d1e8d4";
-
-  // 3. API TRANSMISSION: Send using plain text to safely bypass CORS preflight restrictions
-  fetch(webhookUrl, {
-    method: 'POST',
-    mode: 'no-cors', // Directs the browser to pass the payload cross-domain without preflight validation blocks
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(jsonData) // Delivers your clean form JSON structure inside the body string
-  })
-  .then(() => {
-    alert('Your phone system order request has been submitted successfully!');
-    
-    // Clear the form fields upon a successful post response
-    this.reset();
-    
-    // Refresh the math question for future submissions
-    generateMathCaptcha();
-  })
-  .catch(error => {
-    console.error('Submission Error Context:', error);
-    alert('An unexpected network error occurred. Please verify your connection and try again.');
-  });
-});
+}); 
 
 </script>
 
