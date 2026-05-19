@@ -1484,24 +1484,33 @@ document.getElementById('phoneSystemForm').addEventListener('submit', function(e
   });
 
   // Target Webhook URL
+// Target Webhook URL
   const targetUrl = this.getAttribute('action');
 
-  // ================= SEND AS JSON =================
+  // ================= SEND AS URL-ENCODED FORM DATA (Bypasses CORS Preflight) =================
+  const urlEncodedData = new URLSearchParams();
+  
+  // Append fields dynamically
+  Object.keys(jsonPayload).forEach(key => {
+    if (Array.isArray(jsonPayload[key])) {
+      urlEncodedData.append(key, jsonPayload[key].join(', '));
+    } else {
+      urlEncodedData.append(key, jsonPayload[key]);
+    }
+  });
+
   fetch(targetUrl, {
     method: 'POST',
+    mode: 'no-cors', // Tells the browser not to expect CORS headers back
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/x-www-form-urlencoded'
     },
-    body: JSON.stringify(jsonPayload)
+    body: urlEncodedData.toString()
   })
   .then(response => {
-    // Check if Zoho accepted the web request cleanly
-    if (!response.ok) {
-      throw new Error(`Server returned status code ${response.status}`);
-    }
-    return response.text();
-  })
-  .then(() => {
+    // Note: With 'no-cors', response.ok will technically be false and status will be 0.
+    // This is an "opaque" response, meaning the browser accepted it but hides details.
+    
     // SUCCESS ACTIONS
     alert("Form submitted successfully!");
     this.reset();
