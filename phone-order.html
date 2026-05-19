@@ -340,9 +340,9 @@ function gtag(){dataLayer.push(arguments);}
                   <!--  -->
 
  <form  id="phoneSystemForm"
-  action="https://flow.zoho.com/888056554/flow/webhook/incoming?zapikey=YOUR_KEY"
+  action="https://flow.zoho.com/888056554/flow/webhook/incoming?zapikey=1001.3cfefff7b411663d436b3ae71b76e4b0.9ea79a0f78e2a4552184932564d1e8d4"
   method="POST"
-  enctype="application/x-www-form-urlencoded">
+  enctype="multipart/form-data">
 
     <!-- <div class="section-title">Property Information</div> -->
 
@@ -1266,158 +1266,239 @@ function gtag(){dataLayer.push(arguments);}
 
   <!-- =============== Form validation/Submission =================== -->
 <script>
-  // Helper functions to manage conditional visibility and fields validation toggle
-  function toggleField(elementId, show) {
-    const element = document.getElementById(elementId);
-    if (!element) return;
-    
-    if (show) {
-      element.style.display = 'block';
-      // Make internal dynamic elements required if they are visible
-      element.querySelectorAll('input, select, textarea').forEach(el => {
-        // Only apply standard required mapping if it's not structural subfields handled separately
-        if(!el.hasAttribute('data-no-auto-req')) {
-           el.setAttribute('required', 'true');
+
+// =============================
+// CONDITIONAL FIELD TOGGLER
+// =============================
+function toggleField(elementId, show) {
+
+  const element = document.getElementById(elementId);
+
+  if (!element) return;
+
+  if (show) {
+
+    element.style.display = 'block';
+
+    element.querySelectorAll('input, select, textarea')
+      .forEach(el => {
+
+        if (el.dataset.required === "true") {
+          el.required = true;
         }
+
       });
-    } else {
-      element.style.display = 'none';
-      element.querySelectorAll('input, select, textarea').forEach(el => {
-        el.removeAttribute('required');
+
+  } else {
+
+    element.style.display = 'none';
+
+    element.querySelectorAll('input, select, textarea')
+      .forEach(el => {
+
+        el.required = false;
+
+        // Optional cleanup
+        if (el.type !== 'file') {
+          el.value = '';
+        }
+
       });
-    }
+
   }
 
-  // Question 6: Time zone setup
-  document.getElementById('time_zone').addEventListener('change', function() {
-    toggleField('conditional_other_time_zone', this.value === 'Other');
-  });
+}
 
-  // Question 10: Data circuit explanation setup
-  document.getElementById('data_circuit').addEventListener('change', function() {
-    toggleField('conditional_explain_data_circuit', this.value === 'Yes');
-  });
 
-  // Question 11: IT Contact information layout setup
-  document.getElementById('network_questions_contact').addEventListener('change', function() {
-    toggleField('conditional_it_contact', this.value === 'IT Contact');
-  });
+// =============================
+// DOM READY
+// =============================
+document.addEventListener("DOMContentLoaded", function () {
 
-  // Question 16: Brand Restriction Layout setup
-  document.getElementById('brand_restriction').addEventListener('change', function() {
-    toggleField('conditional_separate_network', this.value === 'Yes');
-  });
-
-  // Question 18: Send & Receive faxes setup
-  document.getElementById('send_receive_faxes').addEventListener('change', function() {
-    const value = this.value;
-    const isMatched = (value === 'Efax' || value === 'Hybrid (tradition & Efax)');
-    toggleField('conditional_faxes_email', isMatched);
-  });
-
-  // Question 20: PBX Integration status code logic setup
-  document.getElementById('pbx_integration').addEventListener('change', function() {
-    toggleField('conditional_status_code', this.value === 'Yes');
-  });
-
-  // Question 22: Checkbox configurations layout mapping 
-  document.querySelectorAll('.checkbox-group input[type="checkbox"]').forEach(checkbox => {
-    checkbox.addEventListener('change', function() {
-      const targetId = this.getAttribute('data-target');
-      if (targetId) {
-        toggleField(targetId, this.checked);
-      }
+  // Hide all conditional fields initially
+  document.querySelectorAll('.conditional-field')
+    .forEach(el => {
+      el.style.display = 'none';
     });
-  });
 
-  // Question 23: Admin Phones Dynamic Count Engine Selection Setup
-  document.getElementById('admin_phones').addEventListener('change', function() {
-    const value = this.value;
-    
-    // Reset all Admin phone elements first
-    document.querySelectorAll('.admin-ext-group').forEach(el => toggleField(el.id, false));
-    toggleField('admin_ext_other', false);
+  // =============================
+  // QUESTION CONDITIONAL EVENTS
+  // =============================
 
-    if (value === 'Other') {
-      toggleField('admin_ext_other', true);
-    } else if (value !== "") {
-      const maxCount = parseInt(value, 10);
-      for (let i = 1; i <= maxCount; i++) {
-        toggleField(`admin_ext_${i}`, true);
+  document.getElementById('time_zone')
+    ?.addEventListener('change', function () {
+      toggleField('conditional_other_time_zone', this.value === 'Other');
+    });
+
+  document.getElementById('data_circuit')
+    ?.addEventListener('change', function () {
+      toggleField('conditional_explain_data_circuit', this.value === 'Yes');
+    });
+
+  document.getElementById('network_questions_contact')
+    ?.addEventListener('change', function () {
+      toggleField('conditional_it_contact', this.value === 'IT Contact');
+    });
+
+  document.getElementById('brand_restriction')
+    ?.addEventListener('change', function () {
+      toggleField('conditional_separate_network', this.value === 'Yes');
+    });
+
+  document.getElementById('send_receive_faxes')
+    ?.addEventListener('change', function () {
+
+      const isMatched =
+        this.value === 'Efax' ||
+        this.value === 'Hybrid (tradition & Efax)';
+
+      toggleField('conditional_faxes_email', isMatched);
+
+    });
+
+  document.getElementById('pbx_integration')
+    ?.addEventListener('change', function () {
+      toggleField('conditional_status_code', this.value === 'Yes');
+    });
+
+  // Checkbox groups
+  document.querySelectorAll('.checkbox-group input[type="checkbox"]')
+    .forEach(checkbox => {
+
+      checkbox.addEventListener('change', function () {
+
+        const targetId = this.getAttribute('data-target');
+
+        if (targetId) {
+          toggleField(targetId, this.checked);
+        }
+
+      });
+
+    });
+
+  // Admin Phones
+  document.getElementById('admin_phones')
+    ?.addEventListener('change', function () {
+
+      const value = this.value;
+
+      document.querySelectorAll('.admin-ext-group')
+        .forEach(el => toggleField(el.id, false));
+
+      toggleField('admin_ext_other', false);
+
+      if (value === 'Other') {
+
+        toggleField('admin_ext_other', true);
+
+      } else if (value !== "") {
+
+        const maxCount = parseInt(value, 10);
+
+        for (let i = 1; i <= maxCount; i++) {
+          toggleField(`admin_ext_${i}`, true);
+        }
+
       }
-    }
-  });
 
-  // Question 24: Extension Assign Pref preference setup
-  document.getElementById('extension_places').addEventListener('change', function() {
-    toggleField('conditional_extension_prefer', this.value === 'No');
-  });
+    });
 
-  // Question 28: Dial layout explanation setup
-  document.getElementById('dial_number').addEventListener('change', function() {
-    toggleField('conditional_no_number', this.value === 'No');
-  });
+  document.getElementById('extension_places')
+    ?.addEventListener('change', function () {
+      toggleField('conditional_extension_prefer', this.value === 'No');
+    });
 
-  // Question 29: Guest Phone configuration layouts setup
-  document.getElementById('guests_phones').addEventListener('change', function() {
-    toggleField('conditional_more_phones', this.value === 'Yes');
-  });
+  document.getElementById('dial_number')
+    ?.addEventListener('change', function () {
+      toggleField('conditional_no_number', this.value === 'No');
+    });
 
-  // Question 30: Guestphone Reuse models setups
-  document.getElementById('reusing_phones').addEventListener('change', function() {
-    const showSub = this.value === 'Yes';
-    toggleField('conditional_reusing_subfields', showSub);
-    if(!showSub) {
-      toggleField('conditional_qty_model', false);
-      toggleField('conditional_make_model', false);
-      document.getElementById('more_model').value = '';
-    }
-  });
+  document.getElementById('guests_phones')
+    ?.addEventListener('change', function () {
+      toggleField('conditional_more_phones', this.value === 'Yes');
+    });
 
-  document.getElementById('more_model').addEventListener('change', function() {
-    const val = this.value;
-    toggleField('conditional_qty_model', val === 'Yes');
-    toggleField('conditional_make_model', val === 'No');
-  });
+  document.getElementById('reusing_phones')
+    ?.addEventListener('change', function () {
 
-  // Question 31: Tech Cutover testing parameters setup
-  document.getElementById('cutover_testing').addEventListener('change', function() {
-    const matchStr = "While tech is onsite at cutover -- accruing tech time cost";
-    toggleField('conditional_onsite_cutover', this.value === matchStr);
-  });
+      const showSub = this.value === 'Yes';
 
-  // Question 32: Guestroom Voicemail setups
-  document.getElementById('guestroom_voicemail').addEventListener('change', function() {
-    toggleField('conditional_retrieval_btn', this.value === 'Yes');
-  });
+      toggleField('conditional_reusing_subfields', showSub);
 
-  // Question 33: Reservations Call Center configs
-  document.getElementById('offsite_center').addEventListener('change', function() {
-    toggleField('conditional_offsite_number', this.value === 'Yes');
-  });
+      if (!showSub) {
 
-  // Question 35: Auto attendant configs setup
-  document.getElementById('outsider_callers').addEventListener('change', function() {
-    toggleField('conditional_auto_outsiders', this.value === 'Yes');
-  });
+        toggleField('conditional_qty_model', false);
 
-  // Question 39: Call forwarding engine toggle setups
-  document.getElementById('call_forwarding_enabled').addEventListener('change', function() {
-    toggleField('conditional_forward_number', this.value === 'Yes');
-  });
+        toggleField('conditional_make_model', false);
 
-  // Question 44: Emergency 911 email notification toggle setup
-  document.getElementById('email_notification').addEventListener('change', function() {
-    toggleField('conditional_email_notified', this.value === 'Yes');
-  });
+        document.getElementById('more_model').value = '';
 
-  // ========= zoho connect ================= //
- 
-   let currentCorrectAnswer = 0;
+      }
 
-// ================= CAPTCHA =================
+    });
+
+  document.getElementById('more_model')
+    ?.addEventListener('change', function () {
+
+      const val = this.value;
+
+      toggleField('conditional_qty_model', val === 'Yes');
+
+      toggleField('conditional_make_model', val === 'No');
+
+    });
+
+  document.getElementById('cutover_testing')
+    ?.addEventListener('change', function () {
+
+      const matchStr =
+        "While tech is onsite at cutover -- accruing tech time cost";
+
+      toggleField(
+        'conditional_onsite_cutover',
+        this.value === matchStr
+      );
+
+    });
+
+  document.getElementById('guestroom_voicemail')
+    ?.addEventListener('change', function () {
+      toggleField('conditional_retrieval_btn', this.value === 'Yes');
+    });
+
+  document.getElementById('offsite_center')
+    ?.addEventListener('change', function () {
+      toggleField('conditional_offsite_number', this.value === 'Yes');
+    });
+
+  document.getElementById('outsider_callers')
+    ?.addEventListener('change', function () {
+      toggleField('conditional_auto_outsiders', this.value === 'Yes');
+    });
+
+  document.getElementById('call_forwarding_enabled')
+    ?.addEventListener('change', function () {
+      toggleField('conditional_forward_number', this.value === 'Yes');
+    });
+
+  document.getElementById('email_notification')
+    ?.addEventListener('change', function () {
+      toggleField('conditional_email_notified', this.value === 'Yes');
+    });
+
+});
+
+
+// =============================
+// CAPTCHA
+// =============================
+let currentCorrectAnswer = 0;
+
 function generateMathCaptcha() {
+
   const num1 = Math.floor(Math.random() * 10) + 1;
+
   const num2 = Math.floor(Math.random() * 10) + 1;
 
   currentCorrectAnswer = num1 + num2;
@@ -1426,101 +1507,158 @@ function generateMathCaptcha() {
     `What is ${num1} + ${num2}?`;
 
   document.getElementById('math-answer').value = '';
+
 }
 
-document.addEventListener("DOMContentLoaded", generateMathCaptcha);
+document.addEventListener(
+  "DOMContentLoaded",
+  generateMathCaptcha
+);
 
 
-// ================= FORM SUBMIT =================
-document.getElementById('phoneSystemForm').addEventListener('submit', async function(e) {
+// =============================
+// FORM SUBMIT
+// =============================
+document.getElementById('phoneSystemForm')
+  .addEventListener('submit', async function (e) {
 
-  e.preventDefault();
+    e.preventDefault();
 
-  // ================= CAPTCHA VALIDATION =================
-  const userAnswer = parseInt(
-    document.getElementById('math-answer').value,
-    10
-  );
+    // =============================
+    // VALIDATION
+    // =============================
+    if (!this.checkValidity()) {
 
-  if (userAnswer !== currentCorrectAnswer) {
+      this.reportValidity();
 
-    alert("Incorrect security verification answer.");
-
-    generateMathCaptcha();
-
-    document.getElementById('math-answer').focus();
-
-    return;
-  }
-
-  // ================= CHECKBOX HANDLING =================
-  const checkedAreas = [];
-
-  document.querySelectorAll(
-    'input[name="common_areas[]"]:checked'
-  ).forEach(cb => {
-    checkedAreas.push(cb.value);
-  });
-
-  let hidden = document.getElementById('common_areas_hidden');
-
-  if (!hidden) {
-
-    hidden = document.createElement('input');
-
-    hidden.type = 'hidden';
-
-    hidden.name = 'common_areas';
-
-    hidden.id = 'common_areas_hidden';
-
-    this.appendChild(hidden);
-  }
-
-  hidden.value = checkedAreas.join(', ');
-
-  // ================= CREATE FORM DATA =================
-  const formData = new FormData(this);
-
-  try {
-
-    const response = await fetch(
-      "https://flow.zoho.com/888056554/flow/webhook/incoming?zapikey=YOUR_KEY",
-      {
-        method: "POST",
-        body: formData
-      }
-    );
-
-    if (response.ok) {
-
-      alert("Form submitted successfully!");
-
-      this.reset();
-
-      generateMathCaptcha();
-
-      // Hide conditional fields again
-      document.querySelectorAll('.conditional-field')
-        .forEach(el => {
-          el.style.display = 'none';
-        });
-
-    } else {
-
-      alert("Submission failed.");
+      return;
 
     }
 
-  } catch (error) {
+    // =============================
+    // CAPTCHA CHECK
+    // =============================
+    const userAnswer = parseInt(
+      document.getElementById('math-answer').value,
+      10
+    );
 
-    console.error(error);
+    if (userAnswer !== currentCorrectAnswer) {
 
-    alert("An error occurred.");
+      alert("Incorrect security verification answer.");
 
-  }
+      generateMathCaptcha();
 
-});
+      document.getElementById('math-answer').focus();
+
+      return;
+
+    }
+
+    // =============================
+    // CHECKBOX VALUES
+    // =============================
+    const checkedAreas = [];
+
+    document.querySelectorAll(
+      'input[name="common_areas[]"]:checked'
+    ).forEach(cb => {
+
+      checkedAreas.push(cb.value);
+
+    });
+
+    let hidden = document.getElementById('common_areas_hidden');
+
+    if (!hidden) {
+
+      hidden = document.createElement('input');
+
+      hidden.type = 'hidden';
+
+      hidden.name = 'common_areas';
+
+      hidden.id = 'common_areas_hidden';
+
+      this.appendChild(hidden);
+
+    }
+
+    hidden.value = checkedAreas.join(', ');
+
+    // =============================
+    // SUBMIT BUTTON LOADING
+    // =============================
+    const submitBtn = this.querySelector('button[type="submit"]');
+
+    submitBtn.disabled = true;
+
+    submitBtn.innerText = "Submitting...";
+
+    // =============================
+    // FORM DATA
+    // =============================
+    const formData = new FormData(this);
+
+    try {
+
+      // =============================
+      // ZOHO WEBHOOK
+      // =============================
+      const response = await fetch(
+        "https://flow.zoho.com/888056554/flow/webhook/incoming?zapikey=1001.3cfefff7b411663d436b3ae71b76e4b0.9ea79a0f78e2a4552184932564d1e8d4",
+        {
+          method: "POST",
+          body: formData
+        }
+      );
+
+      // =============================
+      // SUCCESS
+      // =============================
+      if (response.ok) {
+
+        alert("Form submitted successfully!");
+
+        this.reset();
+
+        generateMathCaptcha();
+
+        // Hide all conditionals
+        document.querySelectorAll('.conditional-field')
+          .forEach(el => {
+            el.style.display = 'none';
+          });
+
+      } else {
+
+        const errorText = await response.text();
+
+        console.error(errorText);
+
+        alert(
+          "Submission failed. Status: " + response.status
+        );
+
+      }
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert(
+        "An unexpected error occurred. Check console."
+      );
+
+    } finally {
+
+      submitBtn.disabled = false;
+
+      submitBtn.innerText = "Submit Request Form";
+
+    }
+
+  });
 
 </script>
 
