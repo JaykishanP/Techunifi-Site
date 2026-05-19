@@ -339,10 +339,17 @@ function gtag(){dataLayer.push(arguments);}
                   </div>
                   <!--  -->
 
+<iframe
+  name="hidden_iframe"
+  id="hidden_iframe"
+  style="display:none;">
+</iframe>
+
  <form  id="phoneSystemForm"
   action="https://flow.zoho.com/888056554/flow/webhook/incoming?zapikey=1001.3cfefff7b411663d436b3ae71b76e4b0.9ea79a0f78e2a4552184932564d1e8d4"
   method="POST"
-  enctype="multipart/form-data">
+  enctype="multipart/form-data"
+  target="hidden_iframe">
 
     <!-- <div class="section-title">Property Information</div> -->
 
@@ -1432,7 +1439,7 @@ document.addEventListener("DOMContentLoaded", generateMathCaptcha);
 
 
 // ================= FORM SUBMIT =================
- document.getElementById('phoneSystemForm').addEventListener('submit', function(e) {
+document.getElementById('phoneSystemForm').addEventListener('submit', function(e) {
 
   // ================= CAPTCHA VALIDATION =================
   const userAnswer = parseInt(
@@ -1479,9 +1486,23 @@ document.addEventListener("DOMContentLoaded", generateMathCaptcha);
 
   hidden.value = checkedAreas.join(', ');
 
-  // FORM WILL SUBMIT NORMALLY
-});
+  // SUCCESS MESSAGE
+  setTimeout(() => {
 
+    alert("Form submitted successfully!");
+
+    this.reset();
+
+    generateMathCaptcha();
+
+    document.querySelectorAll('.conditional-field')
+      .forEach(el => {
+        el.style.display = 'none';
+      });
+
+  }, 1000);
+
+});
 
 </script>
 
