@@ -1050,47 +1050,42 @@
     toggleField('conditional_email_notified', this.value === 'Yes');
   });
 
-  // zoho connect
+  // ========= zoho connect ================= //
   document.getElementById('phoneSystemForm').addEventListener('submit', function(e) {
-  e.preventDefault(); // Stop page from reloading
+  e.preventDefault(); // Stop the standard page reload
 
-  // 1. Gather all standard form fields into a FormData object
   const formData = new FormData(this);
-  const data = Object.fromEntries(formData.entries());
 
-  // 2. Explicitly handle the 'common_areas[]' array checkboxes
+  // Handle the 'common_areas[]' checkboxes arrays cleanly
   const checkedAreas = [];
   document.querySelectorAll('input[name="common_areas[]"]:checked').forEach(cb => {
     checkedAreas.push(cb.value);
   });
-  data.common_areas = checkedAreas;
+  
+  // Remove the old multi-key entries and append as a clean comma-separated string or JSON string
+  formData.delete('common_areas[]');
+  formData.append('common_areas', checkedAreas.join(', '));
 
-  // 3. Define your Zoho Flow Webhook URL (You will generate this in Step 2)
-  const webhookUrl = "https://flow.zoho.com/888056554/flow/webhook/incoming?zapikey=1001.3cfefff7b411663d436b3ae71b76e4b0.9ea79a0f78e2a4552184932564d1e8d4&isdebug=false";
+  // Your specific Zoho Flow URL
+  const webhookUrl = "https://flow.zoho.com/888056554/flow/webhook/incoming?zapikey=1001.3cfefff7b411663d436b3ae71b76e4b0.9ea79a0f78e2a4552184932564d1e8d4";
 
-  // 4. Send the payload securely via Fetch API
+  // Send using standard URL encoding (Bypasses CORS Preflight entirely)
   fetch(webhookUrl, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
+    mode: 'no-cors', // Force the browser to bypass security preflight
+    body: new URLSearchParams(formData) // Format data as standard form parameters
   })
-  .then(response => {
-    if (response.ok) {
-      alert('Your order request has been submitted successfully!');
-      this.reset();
-      // Optionally hide any remaining open conditional fields manually here
-    } else {
-      alert('There was an issue submitting your request. Please try again.');
-    }
+  .then(() => {
+    // Note: 'no-cors' treats the response as opaque, so it will always drop into .then()
+    alert('Your phone system order request has been submitted successfully!');
+    this.reset();
   })
   .catch(error => {
     console.error('Submission Error:', error);
-    alert('An unexpected error occurred. Please check your connection.');
+    alert('An unexpected error occurred. Please try again.');
   });
 });
-
+  
 </script>
 
 </body>
