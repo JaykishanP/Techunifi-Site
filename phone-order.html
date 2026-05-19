@@ -1434,8 +1434,7 @@ document.addEventListener("DOMContentLoaded", generateMathCaptcha);
 
 
 // ================= FORM SUBMIT =================
-
-// ================= FORM SUBMIT =================
+    // ================= FORM SUBMIT =================
 document.getElementById('phoneSystemForm').addEventListener('submit', function(e) {
   // Prevent the default browser form submission redirect
   e.preventDefault();
@@ -1466,40 +1465,28 @@ document.getElementById('phoneSystemForm').addEventListener('submit', function(e
   }
   hidden.value = checkedAreas.join(', ');
 
-  // ================= CONVERT DATA TO JSON =================
-  // Extract all fields dynamically from the form
+  // ================= CONVERT DATA TO URL-ENCODED STRING =================
+  // Using URLSearchParams formats data as a simple form string, completely bypassing CORS preflight checks.
   const rawData = new FormData(this);
-  const jsonPayload = {};
+  const urlEncodedData = new URLSearchParams();
   
   rawData.forEach((value, key) => {
-    // If multiple values exist for the same key name (like arrays), handle them safely
-    if (jsonPayload[key]) {
-      if (!Array.isArray(jsonPayload[key])) {
-        jsonPayload[key] = [jsonPayload[key]];
-      }
-      jsonPayload[key].push(value);
-    } else {
-      jsonPayload[key] = value;
-    }
+    // Skip file objects as we can't send raw file binaries via URL encoding
+    if (value instanceof File) return; 
+    urlEncodedData.append(key, value);
   });
 
   // Target Webhook URL
   const targetUrl = this.getAttribute('action');
 
-  // ================= SEND AS JSON =================
+  // ================= SEND SECURE AJAX PAYLOAD =================
   fetch(targetUrl, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/x-www-form-urlencoded'
     },
-    body: JSON.stringify(jsonPayload)
-  })
-  .then(response => {
-    // Check if Zoho accepted the web request cleanly
-    if (!response.ok) {
-      throw new Error(`Server returned status code ${response.status}`);
-    }
-    return response.text();
+    body: urlEncodedData.toString(),
+    mode: 'no-cors' // Allows the request to go through silently even if Zoho doesn't send CORS headers back
   })
   .then(() => {
     // SUCCESS ACTIONS
@@ -1507,14 +1494,14 @@ document.getElementById('phoneSystemForm').addEventListener('submit', function(e
     this.reset();
     generateMathCaptcha();
     
-    // Hide all dynamic layout pieces
+    // Hide all dynamic layout sections
     document.querySelectorAll('.conditional-field').forEach(el => {
       el.style.display = 'none';
     });
   })
   .catch(error => {
     console.error("Submission error details:", error);
-    alert("An error occurred while transmitting your request. Please check your network and try again.");
+    alert("An error occurred while transmitting your request. Please check your connection.");
   });
 });
 
