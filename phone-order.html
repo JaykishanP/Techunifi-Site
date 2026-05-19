@@ -1402,50 +1402,57 @@ function gtag(){dataLayer.push(arguments);}
 
   // ========= zoho connect ================= //
   document.getElementById('phoneSystemForm').addEventListener('submit', function(e) {
-  e.preventDefault(); // Stop the standard page reload
+
+  e.preventDefault();
 
   const formData = new FormData(this);
 
-
-  // Handle the 'common_areas[]' checkboxes arrays cleanly
+  // Handle checkbox array
   const checkedAreas = [];
-  document.querySelectorAll('input[name="common_areas[]"]:checked').forEach(cb => {
-    checkedAreas.push(cb.value);
-  });
-  
-  // Remove the old multi-key entries and append as a clean comma-separated string or JSON string
+
+  document.querySelectorAll('input[name="common_areas[]"]:checked')
+    .forEach(cb => {
+      checkedAreas.push(cb.value);
+    });
+
   formData.delete('common_areas[]');
+
   formData.append('common_areas', checkedAreas.join(', '));
 
-  // Your specific Zoho Flow URL
-  const webhookUrl = "https://flow.zoho.com/888056554/flow/webhook/incoming?zapikey=1001.3cfefff7b411663d436b3ae71b76e4b0.9ea79a0f78e2a4552184932564d1e8d4";
+  // Convert to URL encoded params
+  const params = new URLSearchParams();
 
-  // Send using standard URL encoding (Bypasses CORS Preflight entirely)
-  const jsonData = {};
+  formData.forEach((value, key) => {
+    params.append(key, value);
+  });
 
-formData.forEach((value, key) => {
-  jsonData[key] = value;
-});
+  const webhookUrl = "YOUR_ZOHO_FLOW_WEBHOOK_URL";
 
   fetch(webhookUrl, {
     method: 'POST',
-    mode: 'no-cors', // Force the browser to bypass security preflight
-     headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify(jsonData)
+    body: params
   })
-  .then(() => {
-    // Note: 'no-cors' treats the response as opaque, so it will always drop into .then()
+  .then(response => response.text())
+  .then(data => {
+
+    console.log("SUCCESS:", data);
+
     alert('Your phone system order request has been submitted successfully!');
-    this.reset();
+
+    document.getElementById('phoneSystemForm').reset();
+
   })
   .catch(error => {
+
     console.error('Submission Error:', error);
+
     alert('An unexpected error occurred. Please try again.');
+
   });
+
 });
-  
+
+
 </script>
 
 
