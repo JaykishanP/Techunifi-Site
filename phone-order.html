@@ -1435,6 +1435,7 @@ document.addEventListener("DOMContentLoaded", generateMathCaptcha);
 
 // ================= FORM SUBMIT =================
 
+// ================= FORM SUBMIT =================
 document.getElementById('phoneSystemForm').addEventListener('submit', function(e) {
   // Prevent the default browser form submission redirect
   e.preventDefault();
@@ -1465,15 +1466,40 @@ document.getElementById('phoneSystemForm').addEventListener('submit', function(e
   }
   hidden.value = checkedAreas.join(', ');
 
-  // ================= AJAX TRANSMISSION TO ZOHO =================
-  // Gather all form fields automatically (including hidden inputs & files)
-  const formData = new FormData(this);
+  // ================= CONVERT DATA TO JSON =================
+  // Extract all fields dynamically from the form
+  const rawData = new FormData(this);
+  const jsonPayload = {};
+  
+  rawData.forEach((value, key) => {
+    // If multiple values exist for the same key name (like arrays), handle them safely
+    if (jsonPayload[key]) {
+      if (!Array.isArray(jsonPayload[key])) {
+        jsonPayload[key] = [jsonPayload[key]];
+      }
+      jsonPayload[key].push(value);
+    } else {
+      jsonPayload[key] = value;
+    }
+  });
+
+  // Target Webhook URL
   const targetUrl = this.getAttribute('action');
 
+  // ================= SEND AS JSON =================
   fetch(targetUrl, {
     method: 'POST',
-    body: formData,
-    mode: 'no-cors' // Crucial: bypasses strict cross-origin browser validation rules for webhooks
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(jsonPayload)
+  })
+  .then(response => {
+    // Check if Zoho accepted the web request cleanly
+    if (!response.ok) {
+      throw new Error(`Server returned status code ${response.status}`);
+    }
+    return response.text();
   })
   .then(() => {
     // SUCCESS ACTIONS
@@ -1488,9 +1514,10 @@ document.getElementById('phoneSystemForm').addEventListener('submit', function(e
   })
   .catch(error => {
     console.error("Submission error details:", error);
-    alert("An error occurred while transmitting your request. Please try again.");
+    alert("An error occurred while transmitting your request. Please check your network and try again.");
   });
 });
+
 </script>
 
 
