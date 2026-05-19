@@ -1415,17 +1415,45 @@ document.getElementById('phoneSystemForm').addEventListener('submit', function(e
 
   // ================= CAPTCHA VALIDATION ================= //
 
-  const captchaResponse = grecaptcha.getResponse();
+/* ==== Captcha Implementation==== */
+function timestamp() {
+    var response = document.getElementById("g-recaptcha-response");
+    if (!response) {
+        
+        console.warn("g-recaptcha-response element not found within timestamp function.");
+        return;
+    }
 
-  if (captchaResponse.length === 0) {
+    if (response.value.trim() === "") {
+        var captchaSettingsElem = document.getElementsByName("captcha_settings")[0];
+        if (captchaSettingsElem) {
+            var elems = JSON.parse(captchaSettingsElem.value);
+            elems["ts"] = new Date().getTime();
+            captchaSettingsElem.value = JSON.stringify(elems);
+        }
+    }
+}
 
-    e.preventDefault();
+// Function to check for reCAPTCHA presence and initialize the timestamp function
+function initializeRecaptchaTimestamp() {
+    var recaptchaContainer = document.querySelector('.g-recaptcha');
+    var recaptchaResponseElement = document.getElementById('g-recaptcha-response');
 
-    alert("Please complete the CAPTCHA before submitting the form.");
+    if (recaptchaContainer || recaptchaResponseElement) {
+        setInterval(timestamp, 500);
+        console.log("reCAPTCHA detected. Timestamp function initialized.");
+    } else {
+        console.log("reCAPTCHA not found on this page. Timestamp function not initialized.");
+    }
+}
 
-    return false;
-
-  }
+if (document.readyState === 'loading') {
+    // Loading hasn't finished yet
+    document.addEventListener('DOMContentLoaded', initializeRecaptchaTimestamp);
+} else {
+    // `DOMContentLoaded` has already fired
+    initializeRecaptchaTimestamp();
+}
 
   // ================= COMMON AREAS ================= //
 
