@@ -350,10 +350,7 @@ function gtag(){dataLayer.push(arguments);}
                <div class="phone-order-form">
 
                 <!-- Change or deletion of the name attributes in the input tag will lead to empty values on record submission-->
-<div class="zf-templateWidth"><form action='https://forms.zohopublic.com/techunifillc1/form/PhoneSystemOrderRequestForm/formperma/we9AGz4uuC1zWKUWYV8U9ZvugbbcyoUY5WrERxUtVY4/htmlRecords/submit' name='form'
-method='POST'
-onSubmit='javascript:document.charset="UTF-8"; return zf_ValidateAndSubmit();'
-accept-charset='UTF-8' enctype='multipart/form-data' id='form'>
+<div class="zf-templateWidth"><form action='https://forms.zohopublic.com/techunifillc1/form/PhoneSystemOrderRequestForm/htmlRecords/submit' name='form' method='POST' onSubmit='document.charset="UTF-8"; return validateFormSubmissionWithCaptcha(window.event);' accept-charset='UTF-8' enctype='multipart/form-data' id='form'>
 <input type="hidden" name="zf_referrer_name" value=""><!-- To Track referrals , place the referrer name within the " " in the above hidden input field -->
 <input type="hidden" name="zf_redirect_url" value=""><!-- To redirect to a specific page after record submission , place the respective url within the " " in the above hidden input field -->
 <input type="hidden" name="zc_gad" value=""><!-- If GCLID is enabled in Zoho CRM Integration, click details of AdWords Ads will be pushed to Zoho CRM -->
@@ -1407,12 +1404,12 @@ function generateMathCaptcha() {
 
 document.addEventListener("DOMContentLoaded", function () {
   
-  // Initialize security challenge parameters
+  // Initialize captcha challenge values
   generateMathCaptcha();
   
   /**
-   * Core Helper: Safely toggles field visibility, adds styling class markers,
-   * AND toggles field suspension attributes so Zoho's engine drops hidden fields.
+   * Core Helper: Toggles field visibility, adds styling hooks,
+   * and modifies elements so hidden items don't trip Zoho's validation.
    */
   function toggleZohoField(fieldName, shouldShow) {
     const targetInput = document.forms['form'][fieldName];
@@ -1422,11 +1419,11 @@ document.addEventListener("DOMContentLoaded", function () {
         if (shouldShow) {
           wrapper.style.display = 'block';
           wrapper.classList.add('zf-conditional-accent');
-          targetInput.disabled = false; // Re-enable so it validates and posts successfully
+          targetInput.disabled = false;
         } else {
           wrapper.style.display = 'none';
           wrapper.classList.remove('zf-conditional-accent');
-          targetInput.disabled = true;  // UNBLOCKS SUBMISSION: Stops Zoho's engine from parsing this field
+          targetInput.disabled = true;  
         }
       }
     }
@@ -1435,8 +1432,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // ==========================================
   // 1. PROPERTY PROFILE & INTERNET CONDITIONS
   // ==========================================
-
-  // Property Time Zone Trigger -> Other Time Zone
   const timezoneDropdown = document.forms['form']['Dropdown'];
   if (timezoneDropdown) {
     const checkTimezone = () => toggleZohoField('SingleLine13', timezoneDropdown.value === 'Other');
@@ -1444,7 +1439,6 @@ document.addEventListener("DOMContentLoaded", function () {
     checkTimezone();
   }
 
-  // Data Circuit Trigger -> Please Explain
   const circuitDropdown = document.forms['form']['Dropdown3'];
   if (circuitDropdown) {
     const checkCircuit = () => toggleZohoField('MultiLine5', circuitDropdown.value === 'Yes');
@@ -1452,7 +1446,6 @@ document.addEventListener("DOMContentLoaded", function () {
     checkCircuit();
   }
 
-  // Technical Questions Contact Trigger -> IT Contact info
   const networkDropdown = document.forms['form']['Dropdown4'];
   if (networkDropdown) {
     const checkNetworkContact = () => toggleZohoField('MultiLine6', networkDropdown.value === 'IT Contact');
@@ -1460,7 +1453,6 @@ document.addEventListener("DOMContentLoaded", function () {
     checkNetworkContact();
   }
 
-  // Brand Restrictions Trigger -> How are you providing an internet connection...
   const adminRestrictionDropdown = document.forms['form']['Dropdown5'];
   if (adminRestrictionDropdown) {
     const checkRestrictions = () => toggleZohoField('MultiLine7', adminRestrictionDropdown.value === 'Yes');
@@ -1468,7 +1460,6 @@ document.addEventListener("DOMContentLoaded", function () {
     checkRestrictions();
   }
 
-  // Fax Handling Method Trigger -> Fax Email field
   const faxDropdown = document.forms['form']['Dropdown8'];
   if (faxDropdown) {
     const checkFaxEmail = () => {
@@ -1480,7 +1471,6 @@ document.addEventListener("DOMContentLoaded", function () {
     checkFaxEmail();
   }
 
-  // PBX Integration Status -> Room Status Codes
   const pmsPbxDropdown = document.forms['form']['Dropdown7'];
   if (pmsPbxDropdown) {
     const checkPmsCodes = () => toggleZohoField('MultiLine8', pmsPbxDropdown.value === 'Yes');
@@ -1499,7 +1489,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (cb.checked) checkedValues.push(cb.value);
       });
 
-      // Elevator related group dependencies
       const hasElevator = checkedValues.includes('Elevator');
       toggleZohoField('SingleLine14', hasElevator); 
       toggleZohoField('SingleLine15', hasElevator); 
@@ -1507,7 +1496,6 @@ document.addEventListener("DOMContentLoaded", function () {
       toggleZohoField('Dropdown26', hasElevator);  
       toggleZohoField('Dropdown27', hasElevator);  
 
-      // Single Line matching values for common areas
       toggleZohoField('SingleLine16', checkedValues.includes('Housekeeping'));
       toggleZohoField('SingleLine17', checkedValues.includes('Guest Laundry'));
       toggleZohoField('SingleLine18', checkedValues.includes('Housekeeping Laundry'));
@@ -1519,15 +1507,11 @@ document.addEventListener("DOMContentLoaded", function () {
       toggleZohoField('SingleLine24', checkedValues.includes('Lobby'));
       toggleZohoField('SingleLine25', checkedValues.includes('Fitness'));
 
-      // Landing Group dependencies
       const hasLanding = checkedValues.includes('Landing');
       toggleZohoField('SingleLine26', hasLanding); 
       toggleZohoField('SingleLine27', hasLanding); 
 
-      // Overhead/Bells paging allocation
       toggleZohoField('SingleLine28', checkedValues.includes('Overhead bells, paging, or entry phones'));
-      
-      // Miscellaneous 'Other' text container
       toggleZohoField('MultiLine9', checkedValues.includes('Other'));
     };
 
@@ -1560,8 +1544,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // ==========================================
   // 4. GUESTROOM CALL ROUTING SCHEMES
   // ==========================================
-
-  // Dialing Extension Discrepancies -> Alternate Mapping Field
   const extensionMatchDropdown = document.forms['form']['Dropdown12'];
   if (extensionMatchDropdown) {
     const checkExtMatch = () => toggleZohoField('SingleLine37', extensionMatchDropdown.value === 'No');
@@ -1569,7 +1551,6 @@ document.addEventListener("DOMContentLoaded", function () {
     checkExtMatch();
   }
 
-  // Multi-phone suites presence -> Configuration textarea
   const multiPhoneDropdown = document.forms['form']['Dropdown13'];
   if (multiPhoneDropdown) {
     const checkMultiRooms = () => toggleZohoField('MultiLine11', multiPhoneDropdown.value === 'Yes');
@@ -1577,7 +1558,6 @@ document.addEventListener("DOMContentLoaded", function () {
     checkMultiRooms();
   }
 
-  // Offsite Centralized Call Center Routing -> Associated details
   const offsiteCenterDropdown = document.forms['form']['Dropdown17'];
   if (offsiteCenterDropdown) {
     const checkOffsiteFields = () => {
@@ -1589,7 +1569,6 @@ document.addEventListener("DOMContentLoaded", function () {
     checkOffsiteFields();
   }
 
-  // Emergency Alerting Email notifications -> Target email parameter
   const emergencyEmailDropdown = document.forms['form']['Dropdown23'];
   if (emergencyEmailDropdown) {
     const checkEmergencyEmail = () => toggleZohoField('SingleLine42', emergencyEmailDropdown.value === 'Yes');
@@ -1600,35 +1579,50 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // ================= GLOBAL SECURITY CAPTCHA VALIDATION SHIELD =================
-function validateFormSubmissionWithCaptcha() {
+function validateFormSubmissionWithCaptcha(event) {
   const answerInput = document.getElementById('math-answer');
-  if (!answerInput) return false;
+  if (!answerInput) {
+    if (event) event.preventDefault();
+    return false;
+  }
 
   const userAnswer = parseInt(answerInput.value, 10);
 
-  // 1. Run explicit verification over the math solution input value
+  // Explicitly check for invalid mathematical entry values
   if (isNaN(userAnswer) || userAnswer !== currentCorrectAnswer) {
     alert("Incorrect security verification answer.");
     generateMathCaptcha();
     answerInput.focus();
+    
+    // Hard block standard event routing cascades completely
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
     return false;
   }
 
-  // 2. Safely return execution control handling back to Zoho native routines 
-  return typeof zf_ValidateAndSubmit === "function" ? zf_ValidateAndSubmit() : true;
+  // Captcha passed. Hand control back to Zoho validation matrix.
+  if (typeof zf_ValidateAndSubmit === "function") {
+    var isZohoValid = zf_ValidateAndSubmit();
+    if (!isZohoValid && event) {
+      event.preventDefault();
+    }
+    return isZohoValid;
+  }
+  
+  return true;
 }
 
-// ================= CUSTOM VISUAL STEP VALIDATION FUNCTION =================
+// Custom step checking validation logic
 function validateCurrentStepFields(fieldNamesArray) {
   let isStepValid = true;
   
   fieldNamesArray.forEach(fieldName => {
     const fieldObj = document.forms['form'][fieldName];
     if (fieldObj) {
-      // Skips tracking checks entirely if the field is invisible or suspended/disabled
       if (fieldObj.style.display !== 'none' && !fieldObj.disabled && (!fieldObj.value || fieldObj.value.trim() === "" || fieldObj.value === "-Select-")) {
         isStepValid = false;
-        
         const errorMsg = document.getElementById(fieldName + '_error');
         if (errorMsg) {
           errorMsg.style.display = 'block';
