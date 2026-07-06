@@ -5,16 +5,9 @@
     Grand Opening
   </body>
 
-  <script>
-    console.log("Redirect script loaded");
-
-document.addEventListener("DOMContentLoaded", function () {
-    console.log(window.location.pathname);
-
-    if (window.location.pathname === "/GrandOpening") {
-        console.log("Redirecting...");
-        window.location.replace("https://partiful.com/e/sZQjwYjxAcQdhy8MxDgr");
-    }
-});
-  </script>
+ <script>
+if (window.location.pathname.replace(/\/$/, "") === "/GrandOpening") {
+    window.location.replace("https://partiful.com/e/sZQjwYjxAcQdhy8MxDgr");
+}
+</script>
 </html>
