@@ -39,8 +39,13 @@ const checkFields = () => {
         }
     });
 
-    const progressHeight = (filledCount / sections.length) * 100;
-    document.querySelector('.progress').style.height = progressHeight + '%';
+     const progressHeight = (filledCount / sections.length) * 104;
+
+    document.querySelector('.progress').style.setProperty(
+    '--progress-height',
+    progressHeight + '%'
+);
+
 };
 
 // Scroll to the section when a checkpoint is clicked
