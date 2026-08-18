@@ -1,66 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <style>
-        .loader-overlay {
-            position: fixed;
-            inset: 0;
-            background: #fff;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 999999;
-            font-family: Arial, sans-serif;
-        }
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Redirecting...</title><style>.loader-overlay{position:fixed;inset:0;background:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:999999;font-family:Arial,sans-serif}.spinner{width:50px;height:50px;border:5px solid #e5e5e5;border-top:5px solid #007bff;border-radius:50%;animation:spin .8s linear infinite}.loader-overlay p{margin-top:15px;font-size:16px;color:#333}@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}</style></head><body><div class="loader-overlay"><div class="spinner"></div><p>Redirecting...</p></div><script>const path = window.location.pathname
+        .toLowerCase()
+        .replace(/\/$/, "");
 
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #e5e5e5;
-            border-top: 5px solid #007bff;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
-        .loader-overlay p {
-            margin-top: 15px;
-            font-size: 16px;
-            color: #333;
-        }
-
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-<script>
-(function () {
-    const path = window.location.pathname.replace(/\/$/, "");
-
-    if (path === "/GrandOpening.html") {
-
-        document.body.innerHTML = `
-            <div class="loader-overlay">
-                <div class="spinner"></div>
-                <p>Redirecting...</p>
-            </div>
-        `;
-
-        setTimeout(function () {
-            window.location.href = "https://partiful.com/e/sZQjwYjxAcQdhy8MxDgr";
-        }, 100);
-    }
-})();
-</script>
-
-</body>
-</html>
+    if (path === "/grandopening" || path === "/grandopening.html") {
+        window.location.replace(
+            "https://partiful.com/e/sZQjwYjxAcQdhy8MxDgr"
+        );
+    }</script></body></html>
