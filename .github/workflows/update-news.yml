@@ -1,0 +1,134 @@
+name: Update Techunifi News
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    - cron: "*/15 * * * *"
+
+permissions:
+  contents: write
+
+jobs:
+
+  update-news:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+
+      - name: Download Zoho News
+        run: |
+          curl -sSL --fail \
+            "https://sheet.zohopublic.com/sheet/publishedsheet/48f60d5b3608100bc6803103d7a0194e06f70d55b8e845cecd0c5c28387df267?type=grid&download=csv" \
+            -o zoho-news.csv
+
+
+      - name: Check downloaded Zoho CSV
+        run: |
+          echo "===== FILE SIZE ====="
+          wc -c zoho-news.csv
+
+          echo ""
+          echo "===== FIRST 20 LINES ====="
+          head -20 zoho-news.csv
+
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+
+      - name: Convert CSV to JSON
+        run: |
+          python - <<'PY'
+          import csv
+          import json
+          import sys
+
+          try:
+
+              with open(
+                  "zoho-news.csv",
+                  "r",
+                  encoding="utf-8-sig"
+              ) as f:
+
+                  reader = csv.DictReader(f)
+
+                  print("CSV headers:")
+                  print(reader.fieldnames)
+
+                  data = list(reader)
+
+
+              print("News records:", len(data))
+
+
+              if len(data) == 0:
+
+                  print(
+                      "ERROR: Zoho CSV contains zero news records."
+                  )
+
+                  sys.exit(1)
+
+
+              with open(
+                  "news.json",
+                  "w",
+                  encoding="utf-8"
+              ) as f:
+
+                  json.dump(
+                      data,
+                      f,
+                      indent=2,
+                      ensure_ascii=False
+                  )
+
+
+              print("news.json created successfully.")
+
+
+          except Exception as e:
+
+              print(
+                  "Failed to convert CSV to JSON:",
+                  e
+              )
+
+              sys.exit(1)
+
+          PY
+
+
+      - name: Commit updated news
+        run: |
+
+          git config user.name "github-actions[bot]"
+
+          git config user.email \
+            "41898282+github-actions[bot]@users.noreply.github.com"
+
+
+          git add news.json
+
+
+          if ! git diff --cached --quiet; then
+
+            git commit \
+              -m "Update news from Zoho Sheet"
+
+            git push
+
+          else
+
+            echo "No changes detected in news.json."
+
+          fi
