@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "ID": "NEWS-001",
+    "Status": "Published",
+    "Publish_Date": "46249",
+    "Company": "Tru by Hilton Meridian",
+    "Location": "Meridian, MS",
+    "Category": "",
+    "Description": "Our Techunifi team recently finished deploying a modern Unonet network at Tru by Hilton Meridian, significantly upgrading the property's digital infrastructure for peak performance.",
+    "Main_image": "assets/img/about-images/news/tru-meridian.jpg",
+    "Gallery_Images": "",
+    "Video_URL": "",
+    "Article_Type": "Standard",
+    "Sort_Order": ""
+  }
+]
