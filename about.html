@@ -76,7 +76,15 @@ async function loadNews() {
         if (response.ok) {
             const contentType = response.headers.get("content-type");
             if (!contentType || !contentType.includes("text/html")) {
-                sheetNews = await response.json();
+                const rawData = await response.json();
+
+                // 1. Filter out Drafts (Only keep Published items)
+                sheetNews = rawData.filter(item => {
+                    const status = (item.Status || "").toString().trim().toLowerCase();
+                    return status === "published" || status === "";
+                });
+
+                // 2. Sort by date
                 sheetNews.sort((a, b) => new Date(b.Publish_Date || b.date) - new Date(a.Publish_Date || a.date));
             }
         }
@@ -92,17 +100,29 @@ async function loadNews() {
     }
 }
 
+// Utility function to escape raw strings safely
+function sanitize(str) {
+    if (!str) return "";
+    return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+// STANDARD TEMPLATE
 function createStandardNews(news) {
     if (news.isStatic) return news.elementHTML;
 
-    const sanitize = (str) => str ? String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;") : "";
     const rawImage = (news.Main_image || news.Main_Image || "").toString().trim();
     const isValidImage = rawImage && rawImage !== "undefined" && rawImage !== "null";
 
     const company = sanitize(news.Company);
     const location = sanitize(news.Location);
-    const description = news.Description || ""; 
+    const description = news.Description || news.description || ""; 
     const altText = company ? `${company} image` : "News image";
+
     const imageHTML = isValidImage ? `<img src="${rawImage}" alt="${altText}" loading="lazy">` : "";
 
     return `
@@ -118,14 +138,153 @@ function createStandardNews(news) {
     `;
 }
 
+// GALLERY TEMPLATE
+function createGalleryNews(news) {
+    if (news.isStatic) return news.elementHTML;
+
+    const company = sanitize(news.Company);
+    const location = sanitize(news.Location);
+    const description = news.Description || news.description || "";
+    
+    // Support comma-separated URLs or JSON array format
+    let images = [];
+    const rawGallery = news.Gallery_Images || news.gallery_images || news.Gallery || "";
+    if (typeof rawGallery === "string" && rawGallery.trim().length > 0) {
+        images = rawGallery.split(",").map(img => img.trim()).filter(Boolean);
+    } else if (Array.isArray(rawGallery)) {
+        images = rawGallery;
+    }
+
+    // Fallback to Main_image if Gallery_Images is empty
+    const mainImg = (news.Main_image || news.Main_Image || "").toString().trim();
+    if (images.length === 0 && mainImg) {
+        images.push(mainImg);
+    }
+
+    const galleryHTML = images.map(imgUrl => 
+        `<img src="${imgUrl}" alt="${company || 'Gallery'} image" loading="lazy" style="max-width: 100%; height: auto; object-fit: cover;">`
+    ).join("");
+
+    return `
+        <div class="news-rows news-gallery">
+            <div class="news-date">Published: ${formatNewsDate(news.Publish_Date)}</div>
+            <div class="news-company">${company}</div>
+            <div class="news-location">${location}</div>
+            <div class="news-content">
+                <p>${description}</p>
+                <div class="gallery-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 10px;">
+                    ${galleryHTML}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// VIDEO TEMPLATE
+function createVideoNews(news) {
+    if (news.isStatic) return news.elementHTML;
+
+    const company = sanitize(news.Company);
+    const location = sanitize(news.Location);
+    const description = news.Description || news.description || "";
+    
+    // Look up video URL from any common key name in news.json
+    let videoUrl = (
+        news.Video_URL || 
+        news.video_url || 
+        news.Video_Url || 
+        news.Video_URLS || 
+        news.Video || 
+        news.video || 
+        news.Video_Link || 
+        ""
+    ).toString().trim();
+
+    let videoHTML = "";
+
+    if (videoUrl) {
+        // 1. YOUTUBE
+        if (videoUrl.includes("youtube.com") || videoUrl.includes("youtu.be")) {
+            let videoId = "";
+            
+            if (videoUrl.includes("shorts/")) {
+                videoId = videoUrl.split("shorts/")[1].split("?")[0].split("/")[0];
+            } else if (videoUrl.includes("youtu.be/")) {
+                videoId = videoUrl.split("youtu.be/")[1].split("?")[0].split("/")[0];
+            } else if (videoUrl.includes("v=")) {
+                videoId = videoUrl.split("v=")[1].split("&")[0].split("#")[0];
+            } else if (videoUrl.includes("embed/")) {
+                videoId = videoUrl.split("embed/")[1].split("?")[0].split("/")[0];
+            }
+
+            if (videoId) {
+                videoHTML = `
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin-top: 10px; border-radius: 6px;">
+                        <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position: absolute; top:0; left:0; width:100%; height:100%;"></iframe>
+                    </div>`;
+            }
+        } 
+        // 2. VIMEO
+        else if (videoUrl.includes("vimeo.com")) {
+            const vimeoId = videoUrl.split("/").pop().split("?")[0];
+            if (vimeoId) {
+                videoHTML = `
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin-top: 10px; border-radius: 6px;">
+                        <iframe src="https://player.vimeo.com/video/${vimeoId}" frameborder="0" allowfullscreen style="position: absolute; top:0; left:0; width:100%; height:100%;"></iframe>
+                    </div>`;
+            }
+        }
+        // 3. GOOGLE DRIVE VIDEO LINK
+        else if (videoUrl.includes("drive.google.com")) {
+            const embedUrl = videoUrl.replace(/\/view.*$/, "/preview").replace(/\/edit.*$/, "/preview");
+            videoHTML = `
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin-top: 10px; border-radius: 6px;">
+                    <iframe src="${embedUrl}" width="100%" height="100%" allow="autoplay" style="position: absolute; top:0; left:0; width:100%; height:100%; border:none;"></iframe>
+                </div>`;
+        }
+        // 4. DIRECT VIDEO FILE OR UNKNOWN URL (Fallback iframe or video tag)
+        else if (videoUrl.endsWith(".mp4") || videoUrl.endsWith(".webm") || videoUrl.endsWith(".ogg")) {
+            videoHTML = `
+                <div style="margin-top: 10px;">
+                    <video controls style="width: 100%; max-height: 400px; border-radius: 6px;">
+                        <source src="${videoUrl}">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>`;
+        } else {
+            // Standard iframe fallback for general video links
+            videoHTML = `
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; margin-top: 10px; border-radius: 6px;">
+                    <iframe src="${videoUrl}" frameborder="0" allowfullscreen style="position: absolute; top:0; left:0; width:100%; height:100%;"></iframe>
+                </div>`;
+        }
+    }
+
+    return `
+        <div class="news-rows news-video">
+            <div class="news-date">Published: ${formatNewsDate(news.Publish_Date)}</div>
+            <div class="news-company">${company}</div>
+            <div class="news-location">${location}</div>
+            <div class="news-content">
+                <p>${description}</p>
+                ${videoHTML}
+            </div>
+        </div>
+    `;
+}
+
+// ROUTER FUNCTION
 function createNewsHTML(news) {
     if (news.isStatic) return news.elementHTML;
-    const articleType = news.Article_Type || news.article_type || news.Type;
+
+    const articleType = (news.Article_Type || news.article_type || news.Type || "").toString().trim();
+
     switch (articleType) {
         case "Gallery":
-            return (typeof createGalleryNews === "function") ? createGalleryNews(news) : createStandardNews(news);
+            return createGalleryNews(news);
         case "Video":
-            return (typeof createVideoNews === "function") ? createVideoNews(news) : createStandardNews(news);
+            return createVideoNews(news);
+        case "Standard":
         default:
             return createStandardNews(news);
     }
@@ -181,7 +340,6 @@ function formatNewsDate(dateVal) {
     return `${month}.${day}.${year.slice(-2)}`;
 }
 
-// Single initialization handler
 document.addEventListener("DOMContentLoaded", function () {
     const input = document.getElementById("newsInput");
     const clearIcon = document.getElementById("clearIcon");
@@ -202,6 +360,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 ${news.Location || ""}
                 ${news.Category || ""}
                 ${news.Description || news.description || ""}
+                ${news.Article_Type || ""}
             `.toLowerCase();
 
             return text.includes(search);
