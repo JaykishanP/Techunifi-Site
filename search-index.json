@@ -41,6 +41,11 @@
     "content": "Phone, Phone System, Telecom, Order, Request, Voice Mail, Mail, Admin Phones, Phones"
   },
   {
+    "title": "Guest Room Phone",
+    "url": "guest-room.html",
+    "content": "Guest Room Phone, Phone System, Telecom, Order, Dial, Voice Mail, Mail, Admin Phones, Phones, faceplate"
+  },
+  {
     "title": "Submit A Ticket",
     "url": "submit.html",
     "content": "Ticket Form, Service Ticket"
