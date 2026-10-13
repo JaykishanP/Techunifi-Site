@@ -2,7 +2,7 @@
   {
     "ID": "NEWS-001",
     "Status": "Published",
-    "Publish_Date": "2026-08-15",
+    "Publish_Date": "46249",
     "Company": "Tru by Hilton Meridian",
     "Location": "Meridian, MS",
     "Category": "",
@@ -16,7 +16,7 @@
   {
     "ID": "NEWS-002",
     "Status": "Published",
-    "Publish_Date": "2026-10-10",
+    "Publish_Date": "46305",
     "Company": "Springhill Suites by Marriott Dawsonville",
     "Location": "Dawsonville, GA",
     "Category": "",
@@ -30,7 +30,7 @@
   {
     "ID": "NEWS-003",
     "Status": "Published",
-    "Publish_Date": "2026-10-9",
+    "Publish_Date": "46304",
     "Company": "SpringHill Suites by Marriott Boone",
     "Location": "Boone, NC",
     "Category": "",
@@ -44,7 +44,7 @@
   {
     "ID": "NEWS-004",
     "Status": "Published",
-    "Publish_Date": "2026-10-6",
+    "Publish_Date": "46301",
     "Company": "Home2 Suites by Hilton",
     "Location": "Pittsburg, CA",
     "Category": "",
