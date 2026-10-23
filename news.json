@@ -54,5 +54,19 @@
     "Video_URL": "",
     "Article_Type": "Standard",
     "Sort_Order": ""
+  },
+  {
+    "ID": "NEWS-005",
+    "Status": "Published",
+    "Publish_Date": "46317",
+    "Company": "AVID Hotel",
+    "Location": "Hermitage, TN",
+    "Category": "",
+    "Description": "Techunifi team successfully completed AVID Hotel in Hermitage, TN, delivering reliable infrastructure across low-voltage, security, telecom, TV, audio-video, lighting, IT technologies, network, and energy solutions. \n\nWe’re proud to support the AVID Hotel team with comprehensive technology solutions designed to keep their property connected, secure, efficient.",
+    "Main_image": "assets/img/about-images/news/avid-hermi.webp",
+    "Gallery_Images": "",
+    "Video_URL": "",
+    "Article_Type": "Standard",
+    "Sort_Order": ""
   }
 ]
