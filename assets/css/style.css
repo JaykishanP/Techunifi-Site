@@ -11,4 +11,7 @@ a,body,button{color:#000}#nav-menu,body{background-color:#ededed}*,.nav-end a.ex
     right: 12px;
     position: fixed;
   }
+      .aboutUsPage .tab-section .tab {
+        margin: -7px 0 8px;
+    }
 }
